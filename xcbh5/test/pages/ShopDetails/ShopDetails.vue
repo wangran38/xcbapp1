@@ -6,18 +6,6 @@
 				<image class="logo" :src="shopDetails.logo" mode="aspectFill"></image>
 			</view>
 
-			<!-- <view class="uni-margin-wrap">
-				<scroll-view class="swiper" scroll-x="true" scroll-y="false" show-scrollbar="false">
-					<view class="swiper-item">
-						<view class="item-title">
-							<image mode="aspectFit" src="/static/OIP.jpg" @error="imageError"
-								style="width: 100%; height: 100%;-webkit-mask-repeat: no-repeat;">
-							</image>
-						</view>
-						
-					</view>
-				</scroll-view>
-			</view> -->
 
 			<view class="time">
 				<view class="business-hours">
@@ -26,7 +14,7 @@
 				</view>
 
 				<view class="phone">
-					<uni-icons type="person-filled" size="20" style="height: 30rpx;"></uni-icons>
+					<uni-icons type="person-filled" size="20" style="height: 30rpx;" @click="openAvater1"></uni-icons>
 					<!-- <text>时间</text> -->
 				</view>
 			</view>
@@ -51,13 +39,23 @@
 
 				<view class="phone">
 					<uni-icons type="calendar-filled" size="20" style="height: 30rpx;"></uni-icons>
-					<!-- <text>时间</text> -->
+				</view>
+			</view>
+			
+			<view class="time">
+				<view class="business-hours">
+					<view>营业执照:</view>
+					<view class="hour"@click="openAvater2">点击查看摊位营业执照</view>
+				</view>
+			
+				<view class="phone">
+					<uni-icons type="map-filled" size="20" style="height: 30rpx;"></uni-icons>
 				</view>
 			</view>
 
 			<view class="address">
 				<!-- <text>地址：{{ shopDetails.address}}</text> -->
-				<text>地址：{{ shopDetails.address ? shopDetails.address : '' }}</text>
+				<text>地址：{{ shopDetails.market_address ? shopDetails.market_address : '' }}</text>
 				<uni-icons type="location-filled" size="20" style="margin-right: 10rpx;"></uni-icons>
 			</view>
 
@@ -124,6 +122,7 @@
 		api
 	} from '@/api/index'
 	import usePage from '@/hooks/usePage';
+import ShopDetailsVue from './ShopDetails.vue';
 
 	export default {
 		data() {
@@ -134,7 +133,9 @@
 				cartItems: [],
 				pageData: [],
 				shopDetails: {},
-				shop_id:""
+				shop_id:"",
+				urls1:[], // 摊主照片
+				urls2:[] // 营业执照图片
 			}
 		},
 		mixins: [usePage],
@@ -149,6 +150,30 @@
 			this.loadPageData()
 		},
 		methods: {
+			// 查看摊主照片
+			openAvater1(){
+				uni.previewImage({
+					count: 1,
+					urls:this.urls1,
+					sizeType: ['original', 'compressed'],
+					sourceType: ['album'],
+					success:(res)=>{
+						console.log(res)
+					}
+				})
+			},
+			// 查看营业执照
+			openAvater2(){
+				uni.previewImage({
+					count: 1,
+					urls:this.urls2,
+					sizeType: ['original', 'compressed'],
+					sourceType: ['album'],
+					success:(res)=>{
+						console.log(res)
+					}
+				})
+			},
 			...mapMutations('cart', ['addItem', 'subItem']),
 			async loadShopDetails() {
 				try {
@@ -161,6 +186,9 @@
 					const response = await api.shopDetail(shopId);
 					this.shop_id = shopId;
 					this.shopDetails = response.data.listdata[0];
+					this.urls1.push(this.shopDetails.facelogo)
+					this.urls2.push(this.shopDetails.businesslogo)
+					console.log(this.shopDetails)
 					return response
 				} catch (error) {
 					console.error('获取摊主详情失败', error);

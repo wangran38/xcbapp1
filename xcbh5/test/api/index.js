@@ -9,20 +9,45 @@ const BASE_URL = 'https://api.xcbdsc.com'
 // const UPLOAD_URL = 'http://121.196.234.102:8080'
 export const UPLOAD_URL = 'https://image.xcbdsc.com'
 
+// 创建白名单，默认所有接口都需要传token，白名单中的接口不需要传token
+const whiteList = [
+	// '/api/cglist',
+	// '/api/citytree',
+	// '/api/citylist',
+	// '/api/marketlist',
+	// '/group1/upload',
+	// '/api/countrylist',
+	// '/api/user/rs',
+	// '/api/user/login',
+	// '/api/user/sign',
+	// '/api/market/commodity/list',
+	// '/api/shop/list',
+	// '/api/shop/lottery'
+] // 白名单
+
+/**
+ * 检查是否需要token，如果需要就从本地获取返回，不需要则返回空
+*/
+const checkToken = (url)=>{
+	let status = whiteList.includes(url)
+	if (!status){
+		// 需要传token
+		const token = uni.getStorageSync('token');
+		return {'Content-Type': 'application/json','Authorization': token}
+	}else{
+		return {'Content-Type': 'application/json'}
+	}
+}
+
 // 通用的请求函数
 const fetch = (url, method, data = {}, headers = {}) => {
 	return new Promise((resolve, reject) => {
-		const token = uni.getStorageSync('token');
 		uni.request({
 			url: `${BASE_URL}${url}`,
 			method: method,
 			data: data,
-			header: {
-				'Content-Type': 'application/json',
-				'Authorization': token
-			},
+			header: checkToken(url),
 			success: (res) => {
-				// console.log('response:', res); // 打印res
 				const {
 					code,
 					message
@@ -30,7 +55,6 @@ const fetch = (url, method, data = {}, headers = {}) => {
 				if (res.statusCode === 200 || code === 200) {
 					resolve(res.data)
 				} else if (res.statusCode === 201 || code === 201 || message === '你没有登录！') {
-					// uni.clearStorageSync('token')
 					uni.showModal({
 						title: '提示',
 						content: '登录状态失效',
@@ -100,17 +124,19 @@ export const api = {
 		return fetch('/api/user/login', 'POST', {phone,psw});
 	},
 	//用户修改我的资料接口
-	editUserProfile(token, data) {
+	editUserProfile(data) {
 		return fetch('/api/user/myedit', 'POST', data)
 	},
 	//用户我的资料接口
-	getUserProfile(token) {
+	getUserProfile() {
 		return fetch('/api/user/my', 'POST')
 	},
 	// 用户申请摊主接口
-	addshop(token, {contactpeople,contactphone,area_id,title,logo,phone,market_id,category_id,content}) {
+	addshop({contactpeople,contactphone,area_id,title,logo,phone,market_id,category_id,content}) {
 		return fetch('/api/shop/addshop', 'POST', {area_id,title,market_id,category_id,contactpeople,contactphone,logo,phone,content});
 	},
+	
+	
 	// 获取菜市场摊主列表接口
 	marketShopList(data) {
 		return fetch('/api/shop/list', 'POST', data)
@@ -119,6 +145,9 @@ export const api = {
 	getCommdityList(data) {
 		return fetch('/api/user/mygoods', 'POST', data)
 	},
+	
+	
+	
 	// 获取摊位列表接口
 	getMyShops(data) {
 		return fetch('/api/shop/myshop', 'POST', data)
@@ -128,8 +157,8 @@ export const api = {
 		return fetch('/api/market/commodity/list', 'POST', data)
 	},
 	// 添加菜品接口
-	addgoods(token, {category_id,goodsname,imglogo,price}) {
-		return fetch('/api/user/addgoods', 'POST', {category_id,goodsname,imglogo,price}, {'Authorization': token});
+	addgoods({category_id,goodsname,imglogo,price}) {
+		return fetch('/api/user/addgoods', 'POST', {category_id,goodsname,imglogo,price});
 	},
 	// 获取海外地区列表接口
 	countrylist(pid, limit, page) {
@@ -206,6 +235,10 @@ export const api = {
 	// 积分结算申请记录接口
 	shopsorcelist(data) {
 	    return fetch('/api/shop/shopsorcelist', 'POST', data);
+	},
+	// 摊位资料补充
+	editshop(data) {
+	    return fetch('/api/shop/editshop', 'POST', data);
 	}
 }
 export default {fetch,BASE_URL,UPLOAD_URL};

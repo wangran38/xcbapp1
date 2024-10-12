@@ -4,11 +4,11 @@
 			<text style="margin: 0rpx 20rpx;">基本信息</text>
 			<view class="item-info">
 				<view class="name">
-					<text>联系人</text>
+					<text>联系人:</text>
 					<input v-model="contactpeople" type="text" placeholder="请填写联系人" />
 				</view>
 				<view class="phone">
-					<text>联系电话</text>
+					<text>联系电话:</text>
 					<input v-model="contactphone" type="text" placeholder="请填写联系人电话" />
 				</view>
 			</view>
@@ -17,11 +17,11 @@
 		<view class="store">
 			<text style="margin: 10rpx 20rpx;">摊铺信息</text>
 			<view class="storename">
-				<text>摊铺名称</text>
+				<text>摊铺名称:</text>
 				<input v-model="title" type="text" placeholder="请填写摊铺名称" />
 			</view>
 			<view class="area">
-				<text>所在地区</text>
+				<text>所在地区:</text>
 				<picker class="picker" mode="multiSelector" :range="multiArray" :value="multiIndex"
 					@change="bindMultiPickerChange" @columnchange="bindMultiPickerColumnChange">
 					<view class="picker-text">
@@ -31,30 +31,23 @@
 				</picker>
 			</view>
 			<view class="Address">
-				<text>选择菜市场</text>
+				<text>选择菜市场:</text>
 				<picker class="picker" mode="selector" :range="marketList" :value="selectedMarketIndex"
 					@change="bindMarketChange">
 					<view class="picker-text">{{ marketList[selectedMarketIndex]  }}</view>
 				</picker>
 			</view>
 			<view class="Category">
-				<text>所售类目</text>
+				<text>所售类目:</text>
 				<picker class="Categorypicker" mode="selector" :range="categoryList" @change="bindCategoryChange">
 					<view >{{ selectedCategory }}</view>
 				</picker>
 			</view>
 			<view class="stallphone">
-				<text>摊主电话</text>
+				<text>摊主电话:</text>
 				<input v-model="phone" type="text" placeholder="请填写摊主电话" />
 			</view>
-			<!-- <view class="BL">
-				<text>营业执照</text>
-				<uni-file-picker class="BLpicker" v-model="imageValue" fileMediatype="image" mode="grid"
-					file-extname="png,jpg" :limit="9" @select="select" @progress="progress" @success="success"
-					@fail="fail" 点击上传图片
-					/>       //这里不要
-				<button class="BLpicker" @tap="chooseImage">选择图片</button>
-			</view> -->
+
 
 			<!-- <view class="BL">
 				<text>相关行业许可证</text>
@@ -65,18 +58,19 @@
 				<button class="BLpicker" @tap="chooseImage">选择图片</button>
 			</view> -->
 			<view class="BL1">
-				<text>摊主图片</text>
-				<!-- <uni-file-picker class="BLpicker" v-model="imageValue" fileMediatype="image" mode="grid"
-					file-extname="png,jpg" :limit="9" @select="select" @progress="progress" @success="success"
-					@fail="fail" 点击上传图片
-					/> -->
+				<text>摊位图片:</text>
 				<view class="BLpicker" @tap="chooseImage">{{ isImageSelected ? '已选择' : '选择图片' }}</view>
 			</view>
-
+			
+<!-- 			<view class="BL">
+				<text>营业执照:</text>
+				<view class="BLpicker" @tap="chooseImage2">{{ isImageSelected2 ? '已选择' : '选择图片' }}</view>
+			</view> -->
+<!-- 
 			<view class="illustrate">
 				<text>摊位的详细内容说明</text>
 				<textarea v-model="content" placeholder-style="color:#666666" placeholder="请输入详细内容说明" />
-			</view>
+			</view> -->
 
 		</view>
 
@@ -103,8 +97,8 @@
 				categoryList: ['请选择分类'],
 				categoryIdMap: {}, // 分类名称到ID的映射
 				selectedCategory: '请选择分类',
-				// imageValue: [],
-				isImageSelected: false, // 用于标记是否选择了图片
+				isImageSelected: false, // 用于标记是否选择了摊位图片
+				isImageSelected2: false, // 用于标记是否选择了营业执照图片
 				provinceList: [],
 				cityList: [],
 				districtList: [],
@@ -114,13 +108,14 @@
 				contactpeople: '',
 				contactphone: '',
 				title: '',
-				logo: '',
+				logo: '', // 摊位图片
 				phone: '',
 				content: '',
 				area_id: null,
 				market_id: null,
 				category_id: null,
 				isSubmitting: false,
+				businessLicense:'' // 营业执照
 			};
 		},
 		mounted() {
@@ -129,6 +124,16 @@
 			this.fetchMarkets(); // 获取市场列表
 		},
 		methods: {
+			// 返回上一页
+			 async customizeBack(){  
+			  let canNavBack = await getCurrentPages()
+			  console.log(canNavBack)
+			  if( canNavBack && canNavBack.length>1) {  
+			      uni.navigateBack() 
+			  } else {  
+			      history.back();  
+			  }
+			},
 			async initializePicker() {
 				try {
 					const provinces = await this.fetchProvinces();
@@ -142,6 +147,7 @@
 					console.error('Failed to initialize picker:', error);
 				}
 			},
+
 			async fetchProvinces() {
 				try {
 					const response = await api.citylist({
@@ -234,6 +240,7 @@
 						this.marketList = response.data.listdata.map(item => item.marketname);
 						this.marketIdMap = this.marketData.reduce((map, item) => {
 							map[item.marketname] = item.id;
+							
 							return map;
 						}, {});
 
@@ -273,15 +280,14 @@
 				this.selectedCategory = this.categoryList[selectedIndex];
 				this.category_id = this.categoryIdMap[this.selectedCategory]; // 设置分类ID
 			},
+			
+			// 摊位图片上传
 			chooseImage() {
 				uni.chooseImage({
 					count: 1,
 					sizeType: ['compressed','original'],
 					sourceType: ['album', 'camera'],
 					success: (res) => {
-						// const tempFilePaths = res.tempFilePaths;
-						// this.uploadImage(tempFilePaths[0]);
-						// this.isImageSelected = true; // 更新图片选择状态
 						const tempFilePaths = res.tempFilePaths;
 						if (tempFilePaths.length > 0) {
 							console.log(tempFilePaths);
@@ -293,27 +299,40 @@
 								tempFilePaths: tempFilePaths[0]
 							})
 
-							// upload().then((res) => {
-							// 	console.log(res);
-							// 	this.logo = res;
-							// 	this.isImageSelected = true;
-							// })
 							upload().then((res) => {
 								var obj = JSON.parse(res);
 								// console.log(obj.data);
 								this.logo = UPLOAD_URL+obj.data.path;
 									this.isImageSelected = true;
 							})
-							// api.uploadImage(tempFilePaths[0])
-							// 	.then(data => {
-							// 		this.user.headimgurl = data.url; // 更新头像 URL
-							// 	})
-							// 	.catch(error => {
-							// 		uni.showToast({
-							// 			title: '上传失败',
-							// 			icon: 'none'
-							// 		});
-							// 	});
+						}
+					}
+				});
+			},
+			
+			// 营业执照图片上传
+			chooseImage2() {
+				uni.chooseImage({
+					count: 1,
+					sizeType: ['compressed','original'],
+					sourceType: ['album', 'camera'],
+					success: (res) => {
+						const tempFilePaths = res.tempFilePaths;
+						if (tempFilePaths.length > 0) {
+							console.log(tempFilePaths);
+							const {
+								upload,
+								request
+							} = useUpload({
+								uploadPath: '/group1/upload',
+								tempFilePaths: tempFilePaths[0]
+							})
+			
+							upload().then((res) => {
+								var obj = JSON.parse(res);
+								this.businessLicense = UPLOAD_URL+obj.data.path;
+									this.isImageSelected2 = true;
+							})
 						}
 					}
 				});
@@ -323,7 +342,7 @@
 
 			async submitForm() {
 				if (this.isSubmitting) return; // 如果正在提交，直接返回
-				if (!this.contactpeople || !this.contactphone || !this.title || !this.phone || !this.content || !this
+				if (!this.contactpeople || !this.contactphone || !this.title || !this.phone  || !this
 					.area_id || !this.market_id || !this.category_id) {
 					uni.showToast({
 						title: '请填写完整的信息',
@@ -334,7 +353,6 @@
 				
 				this.isSubmitting = true; // 设置为正在提交状态
 				try {
-					const token = uni.getStorageSync('token'); // 读取token
 					const formData = {
 						contactpeople: this.contactpeople,
 						contactphone: this.contactphone,
@@ -344,17 +362,24 @@
 						content: this.content,
 						area_id: this.area_id,
 						market_id: this.market_id,
-						category_id: this.category_id
+						category_id: this.category_id,
+						
 					};
 
-					const response = await api.addshop(token, formData);
+					const response = await api.addshop(formData);
 
 					if (response.code === 200) {
 						uni.showToast({
-							title: '提交成功',
-							icon: 'success'
-						});
+							title: '摊位申请成功',
+							icon: 'success',
+							duration:2000
+						})
 						// 清空表单或进行其他操作
+						// 返回上一页
+						setTimeout(()=>{
+							this.customizeBack()
+						},2000)
+						
 					} else {
 						uni.showToast({
 							title: response.msg || '提交失败',
@@ -458,7 +483,7 @@
 	}
 
 	.store {
-		height: 885rpx;
+		height: 685rpx;
 		width: 100%;
 		display: flex;
 		flex-direction: column;

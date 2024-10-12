@@ -232,9 +232,7 @@
 			// 	}
 			// },
 			async fetchUserProfile() {
-				const token = uni.getStorageSync('token');
-				if (token) {
-					const response = await api.getUserProfile(token);
+					const response = await api.getUserProfile();
 
 					// 仅在成功时更新 score
 					if (response.code === 200) {
@@ -243,7 +241,6 @@
 						} = response.data;
 						this.score = score;
 					}
-				}
 			},
 
 
@@ -306,7 +303,7 @@
 					const token = uni.getStorageSync('token');
 
 					// 调用提交订单接口
-					const response = await api.addorder(orderData, token);
+					const response = await api.addorder(orderData);
 
 					if (response.code === 200) {
 						uni.showToast({

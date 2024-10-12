@@ -204,6 +204,14 @@
     	{
     		"navigationBarTitleText" : "积分结算记录"
     	}
+    },
+    {
+    	"path" : "pages/editshop/editshop",
+    	"style" : 
+    	{
+    		"navigationBarTitleText" : "",
+    		"enablePullDownRefresh" : false
+    	}
     }
   ],
   "globalStyle": {

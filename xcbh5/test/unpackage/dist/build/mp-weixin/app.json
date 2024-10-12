@@ -24,7 +24,13 @@
     "pages/usecoupons/usecoupons",
     "pages/Clock/Clock",
     "pages/clock-records/clock-records",
-    "pages/MyPoints-records/MyPoints-records"
+    "pages/MyPoints-records/MyPoints-records",
+    "pages/Ownerorders/Ownerorders",
+    "pages/wallet/wallet",
+    "pages/Points/Points",
+    "pages/pointspayouts/pointspayouts",
+    "pages/Settrecords/Settrecords",
+    "pages/editshop/editshop"
   ],
   "subPackages": [],
   "window": {

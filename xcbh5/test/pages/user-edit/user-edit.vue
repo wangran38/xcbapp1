@@ -137,18 +137,8 @@
 
 
 			submitForm() {
-				// 从 storage 中获取 token
-				const token = uni.getStorageSync('token');
-
-				if (!token) {
-					uni.showToast({
-						title: '请先登录',
-						icon: 'none'
-					});
-					return;
-				}
 				this.isSubmitting = true;
-				api.editUserProfile(token, this.user)
+				api.editUserProfile(this.user)
 					.then(response => {
 						console.log('修改成功', response);
 						uni.showToast({

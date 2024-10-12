@@ -5,7 +5,7 @@
 			:style="{ height: '100vh' }">
 			<view class="disheslist">
 				<view class="type" v-for="item in pageData" :key="item.id">
-					<image class="type-image" v-if="isloaded"  lazy-load  :src="item.imglogo " mode="scaleToFill"></image>
+					<image class="type-image" v-if="isloaded" lazy-load :src="item.imglogo " mode="scaleToFill"></image>
 
 					<view class="regard">
 						<view class="typetitle">
@@ -46,7 +46,7 @@
 					<view class="content">
 						<view class="cuisine">
 							<view class="title">菜名</view>
-								<view class="shuru"><input class="shurucon" type="text" v-model="currentItem.goodsname" />
+							<view class="shuru"><input class="shurucon" type="text" v-model="currentItem.goodsname" />
 							</view>
 						</view>
 						<view class="class">
@@ -74,15 +74,15 @@
 			<view class="popup" @click.stop>
 				<view class="close-button" @click="closePopup">×</view>
 				<!-- <view class="popup-header">修改商品信息</view> -->
-		
+
 				<!-- 在这里添加你的表单内容 -->
 				<view class="popup-content">
 					<!-- 表单或其他内容 -->
-		
+
 					<view class="content">
 						<view class="cuisine">
 							<view class="title">选择摊位</view>
-							
+
 							<picker class="picker1" :range="pickerRange1" :value="selectedCategoryIndex1"
 								@change="onMarketChange">
 								<view class="picker-text">{{ pickerRange1[selectedCategoryIndex1]}}</view>
@@ -90,20 +90,33 @@
 						</view>
 						<view class="editimg">
 							<view class="title">菜品价格</view>
-							<view class="shuru"><input class="shurucon" type="text" placeholder="请输入价格" v-model="itemPrice" /></view>
-							<view class="example-body">
-								<uni-combox :candidates="candidates" placeholder="单位" v-model="unit"></uni-combox>
+							<view class="shuru"><input class="shurucon" type="text" placeholder="请输入价格"
+									v-model="itemPrice"/></view>
+									<view>元/</view>
+							<view class="example-body" @click="clicKexampleBody">
+									<view class="unit">{{unit?unit:'单位'}}</view>
+									<view class="icon"><uni-icons :type="iconStatus ? 'up':'down'" size="20"></uni-icons></view>
+							</view>
+							<view class="items"v-show="isShowItems">
+								<view class="item" v-for="pop in candidates"@click="selectItem(pop)">
+									{{pop}}
+								</view>
 							</view>
 						</view>
-						
+<!-- 
 						<view class="class">
-							<view class="title">详细说明</view>
-							<view class="shuru"><input class="shurucon" type="text" placeholder="请输入详细说明" v-model="itemDescription" /></view>
-						</view>
+							<view class="title">规格单位</view>
+							<view class="example-body" @click="clicKexampleBody">
+									<view class="unit">{{unit2?unit2:'单位'}}</view>
+									<view class="icon"><uni-icons :type="iconStatus ? 'up':'down'" size="20"></uni-icons></view>
+							</view>
+							<view class="items"v-show="isShowItems">
+								<view class="item" v-for="pop in candidate2"@click="selectItem(pop)">
+									{{pop}}
+								</view>
+							</view>
+						</view> -->
 					</view>
-		
-		
-		
 				</view>
 				<view class="popup-footer">
 					<button @click="closePopup">取消</button>
@@ -111,8 +124,6 @@
 				</view>
 			</view>
 		</view>
-
-
 	</view>
 </template>
 
@@ -139,11 +150,20 @@
 				pickerRange1: [],
 				selectedCategoryIndex1: 0,
 				itemDescription: '', // 上架时的详细说明
+				
+				
 				itemPrice: '', // 上架时的价格
 				marketList: [], // 存储摊位列表
-				candidates: ['斤', '两'], 
-				unit: '', 
-				isloaded:false
+				candidates: ['斤', '两'],
+				candidate2: ['元'],
+				unit: '',
+				unit2: '',
+				tijiaoPrice:'',
+				
+				
+				isloaded: false,
+				iconStatus: true,
+				isShowItems:false
 			}
 		},
 		mixins: [usePage],
@@ -153,7 +173,19 @@
 		onShow() {
 			this.reloadData()
 		},
+		
 		methods: {
+			// 打开选择单位
+			clicKexampleBody(){
+				this.iconStatus = !this.iconStatus
+				this.isShowItems = !this.isShowItems
+			},
+			// 选择单位
+			selectItem(val){
+				this.unit = val
+				this.iconStatus = !this.iconStatus
+				this.isShowItems = !this.isShowItems
+			},
 			fetchCategories() {
 				api.cglist().then(res => {
 					if (res.code === 200) {
@@ -170,27 +202,30 @@
 				})
 			},
 			async fetchMarketList() {
-			        try {
-			            const token = uni.getStorageSync('token'); // 请根据实际情况获取 token
-			            const params = {
-			                limit: 100, // 设置你需要的 limit
-			                page: 1 // 设置你需要的 page
-			            };
-			            const res = await api.getMyShops({ token: this.token, ...params });
-			            if (res.code === 200) {
-			                const marketList = res.data.listdata.map(item => ({
-			                    id: item.id,
-			                    title: item.title
-			                }));
-			                this.marketList = marketList;
-			                this.pickerRange1 = [...marketList.map(market => market.title)];
-			            } else {
-			                console.error('Failed to fetch market list:', res.msg);
-			            }
-			        } catch (error) {
-			            console.error('Error fetching market list:', error);
-			        }
-			    },
+				try {
+					const token = uni.getStorageSync('token'); // 请根据实际情况获取 token
+					const params = {
+						limit: 100, // 设置你需要的 limit
+						page: 1 // 设置你需要的 page
+					};
+					const res = await api.getMyShops({
+						token: this.token,
+						...params
+					});
+					if (res.code === 200) {
+						const marketList = res.data.listdata.map(item => ({
+							id: item.id,
+							title: item.title
+						}));
+						this.marketList = marketList;
+						this.pickerRange1 = [...marketList.map(market => market.title)];
+					} else {
+						console.error('Failed to fetch market list:', res.msg);
+					}
+				} catch (error) {
+					console.error('Error fetching market list:', error);
+				}
+			},
 			onCategoryChange(e) {
 				this.selectedCategoryIndex = e.detail.value;
 				this.currentItem.category_id = this.categories[this.selectedCategoryIndex].id;
@@ -211,7 +246,9 @@
 				});
 			},
 			edit(item) {
-				this.currentItem = {...item};
+				this.currentItem = {
+					...item
+				};
 				this.fetchCategories(); // 获取分类数据
 				this.showEditPopup = true; // 显示弹出层
 				// 调用获取菜品详情的方法
@@ -274,9 +311,11 @@
 					}
 				});
 			},
-			
+
 			shelves(item) {
-				this.currentItem = {...item};
+				this.currentItem = {
+					...item
+				};
 				this.showEditPopup1 = true; // 显示弹出层
 				this.fetchMarketList(); // 获取摊位列表
 			},
@@ -306,8 +345,18 @@
 				}
 
 				// 调用 editGoods API 进行修改
-				const {id,category_id,goodsname,imglogo} = this.currentItem;
-				api.editGoods({id,category_id,goodsname,imglogo}).then(res => {
+				const {
+					id,
+					category_id,
+					goodsname,
+					imglogo
+				} = this.currentItem;
+				api.editGoods({
+					id,
+					category_id,
+					goodsname,
+					imglogo
+				}).then(res => {
 					if (res.code === 200) {
 						uni.showToast({
 							title: '商品修改成功',
@@ -323,39 +372,65 @@
 					}
 				})
 			},
-			
+
 			confirmShelves() {
 				console.log('Goods ID:', this.currentItem.id);
-							
-							if (!this.itemPrice) {
-								uni.showToast({ title: '请填写价格', icon: 'none' });
-								return;
-							}
-							if (!this.unit) {
-								uni.showToast({ title: '请选择单位', icon: 'none' });
-								return;
-							}
-							api.addCommodityToShop({
-								goods_id: this.currentItem.id,
-								shop_id: this.marketList[this.selectedCategoryIndex1].id,
-								content: this.itemDescription,
-								price: parseFloat(this.itemPrice),
-								weight_name: this.unit
-							}).then(res => {
-								if (res.code === 200) {
-									uni.showToast({ title: '上架成功' });
-									this.closePopup();
-									this.reloadData();
-								} else {
-									uni.showToast({ title: '上架失败', icon: 'none' });
-								}
-							});
-						},
+
+				if (!this.itemPrice) {
+					uni.showToast({
+						title: '请填写价格',
+						icon: 'none'
+					});
+					return;
+				}
+				if (!this.unit) {
+					uni.showToast({
+						title: '请选择单位',
+						icon: 'none'
+					});
+					return;
+				}
+				api.addCommodityToShop({
+					goods_id: this.currentItem.id,
+					shop_id: this.marketList[this.selectedCategoryIndex1].id,
+					content: this.itemDescription,
+					price: parseFloat(this.itemPrice),
+					weight_name: this.unit
+				}).then(res => {
+					if (res.code === 200) {
+						uni.showToast({
+							title: '上架成功'
+						});
+						this.closePopup();
+						this.reloadData();
+					} else {
+						uni.showToast({
+							title: '上架失败',
+							icon: 'none'
+						});
+					}
+				});
+			},
 		}
 	}
 </script>
 
 <style>
+	.items{
+		border-radius: 5rpx;
+		z-index: 10000;
+		position: absolute;
+		top: 232rpx;
+		left: 468rpx;
+		width: 15%;
+		padding: 10rpx;
+		background-color: white;
+		border: 1px solid gray;
+	}
+	.item{
+		width: 100%;
+		border-bottom: 1px dashed gray;
+	}
 	.me-container {
 		overflow: hidden;
 		width: 100%;
@@ -431,7 +506,7 @@
 
 	}
 
-	
+
 
 	/* .price {
 		align-self: self-start;
@@ -577,24 +652,34 @@
 		justify-content: end;
 		align-items: center;
 	}
-	.example-body{
-		width: 32%;
+
+	.example-body {
+		border-radius: 10rpx;
+		padding: 10rpx;
+		margin: 10rpx 0 0 20rpx;
+		border: 1px solid gray;
+		background-color: white;
+		display: flex;
+		justify-content: space-between;
+		width: 30%;
 	}
+
 	.shurucon {
 		text-align: end;
-		font-size: 35rpx;
+		font-size: 30rpx;
 	}
 
 	.title {
 		width: 40%;
-		font-size: 35rpx;
+		font-size: 30rpx;
 	}
-	.picker1{
+
+	.picker1 {
 		width: 300rpx;
 		height: 100rpx;
 		display: flex;
 		justify-content: end;
 		align-items: center;
-		font-size: 35rpx;
+		font-size: 30rpx;
 	}
 </style>

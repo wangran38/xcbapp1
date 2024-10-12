@@ -79,6 +79,15 @@
 			this.fetchCategories();
 		},
 		methods: {
+			async customizeBack(){
+			  let canNavBack = await getCurrentPages()
+			  console.log(canNavBack)
+			  if( canNavBack && canNavBack.length>1) {  
+			      uni.navigateBack() 
+			  } else {  
+			      history.back();  
+			  }
+			},
 			// 请求菜品分类数据
 			fetchCategories() {
 				api.cglist().then(res => {
@@ -169,15 +178,6 @@
 				}
 			},
 			submit() {
-				const token = uni.getStorageSync('token');
-				if (!token) {
-					uni.showToast({
-						title: '用户未登录，请重新登录',
-						icon: 'none'
-					});
-					return;
-				}
-
 				if (!this.goodsname || !this.category_id ) {
 					uni.showToast({
 						title: '请填写完整信息',
@@ -186,7 +186,7 @@
 					return;
 				}
 
-				api.addgoods(token, {
+				api.addgoods({
 					// market_id: this.market_id,
 					// shop_id: this.shop_id,
 					category_id: this.category_id,
@@ -197,13 +197,44 @@
 					if (res.code === 200) {
 						uni.showToast({
 							title: '菜品添加成功',
-							icon: 'success'
-						});
+							icon: 'success',
+							duration:2000
+						}).then(()=>{
+							setTimeout(()=>{
+								// 是否继续添加菜品
+								uni.showModal({
+									title:"是否继续添加菜品",
+									cancelText:'否',
+									confirmText:'是',
+									success:(res)=>{
+										if (res.confirm){
+											console.log("继续添加")
+										}else{
+											this.customizeBack()
+										}
+									},
+								})
+							},1000)
+						})
 						this.goodsname = '';
 						// this.price = '';
 						this.category_id = '';
 						this.imglogo = '';
 						this.imageUploaded = false;
+						
+						
+						// // 是否继续添加菜品
+						// uni.showModal({
+						// 	title:"是否继续添加菜品",
+						// 	success:(res)=>{
+						// 		if (res.confirm){
+						// 			console.log("继续添加")
+						// 		}else{
+						// 			console.log("不添加")
+						// 		}
+						// 	},
+						// })
+						
 					} else {
 						uni.showToast({
 							title: res.msg || '添加失败',

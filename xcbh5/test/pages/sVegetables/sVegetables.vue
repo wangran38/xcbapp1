@@ -17,6 +17,13 @@
 						摊位列表
 					</view>
 				</view>
+				
+				<view class="item" @click="gotoEditshop">
+					<uni-icons type="plus" size="30"></uni-icons>
+					<view class="add-dishes">
+						摊位资料补充
+					</view>
+				</view>
 				<!-- <view class="item">
 					<uni-icons type="plus" size="30"></uni-icons>
 					<view class="add-dishes">
@@ -241,6 +248,11 @@
 				uni.navigateTo({
 					url: '/pages/pointspayouts/pointspayouts'
 				});
+			},
+			gotoEditshop(){
+				uni.navigateTo({
+					url: '/pages/editshop/editshop'
+				});
 			}
 		}
 	}
@@ -312,7 +324,7 @@
 	}
 
 	.item {
-		width: 140rpx;
+		width: 180rpx;
 		height: 120rpx;
 		display: flex;
 		flex-direction: column;
