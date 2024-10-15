@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4711368 */
-  src: url('iconfont.woff2?t=1728983687076') format('woff2'),
-       url('iconfont.woff?t=1728983687076') format('woff'),
-       url('iconfont.ttf?t=1728983687076') format('truetype');
+  src: url('~@/static/maicai/iconfont.woff2') format('woff2'),
+       url('~@iconfont.woff') format('woff'),
+       url('~@iconfont.ttf') format('ttf');
 }
 
 .iconfont {

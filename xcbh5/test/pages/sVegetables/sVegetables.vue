@@ -6,35 +6,26 @@
 			</view>
 			<view class="content">
 				<view class="item" @click="goToapply">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-shenqing"></use>
-					</svg>
+					<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe61a'}}</uni-icons>
 					<view class="add-dishes">
 						申请固定摊位
 					</view>
 				</view>
 				<view class="item" @click="goToapply">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-wangshangshenqing
-"></use>
-					</svg>
+					<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe601;'}}</uni-icons>
 					<view class="add-dishes">
 						申请网络摊位
 					</view>
 				</view>
 				<view class="item" @click="gotostalllist">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-shangpu"></use>
-					</svg>
+					<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe602;'}}</uni-icons>
 						<view class="add-dishes">
 							摊位列表
 						</view>
 				</view>
 
 				<view class="item" @click="gotoEditshop">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-keylinetubiao-26"></use>
-					</svg>
+					<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe61e;'}}</uni-icons>
 					<view class="add-dishes">
 						摊位资料补充
 					</view>
@@ -71,25 +62,19 @@
 			</view>
 			<view class="content">
 				<view class="item" @click="goTorelePage">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-tianjiacaipin"></use>
-					</svg>
+					<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe6ee;'}}</uni-icons>
 					<view class="add-dishes">
 						添加菜品
 					</view>
 				</view>
 				<view class="item" @click="gotopublish">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-caipinliebiao"></use>
-					</svg>
+					<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe603;'}}</uni-icons>
 					<view class="add-dishes">
 						菜品列表
 					</view>
 				</view>
 				<view class="item" @click="gotoListDis">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-yishangjia"></use>
-					</svg>
+					<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe689;'}}</uni-icons>
 					<view class="add-dishes">
 						已上架菜品
 					</view>
@@ -122,33 +107,25 @@
 			</view>
 			<view class="content">
 				<view class="item" @click="gotoOwneroders(1)">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-dengdaizhifu"></use>
-					</svg>
+					<uni-icons fontFamily="CustomFont" :size="26" color="red">{{'&#xe626;'}}</uni-icons>
 					<view class="add-dishes">
 						待支付
 					</view>
 				</view>
 				<view class="item" @click="gotoOwneroders(3)">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-daishouhuo"></use>
-					</svg>
+					<uni-icons fontFamily="CustomFont" :size="26" color="red">{{'&#xe600;'}}</uni-icons>
 					<view class="add-dishes">
 						待收货
 					</view>
 				</view>
 				<view class="item" @click="gotoOwneroders(5)">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-daijiesuan"></use>
-					</svg>
+					<uni-icons fontFamily="CustomFont" :size="26" color="red">{{'&#xe689;'}}</uni-icons>
 					<view class="add-dishes">
 						待结算
 					</view>
 				</view>
 				<view class="item" @click="gotoOwneroders(6)">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-yijiesuan"></use>
-					</svg>
+					<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe60f;'}}</uni-icons>
 					<view class="add-dishes">
 						已结算
 					</view>
@@ -173,34 +150,26 @@
 			</view>
 			<view class="content">
 				<view class="item" @click="gotowallet">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-qianbao"></use>
-					</svg>
+					<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe613;'}}</uni-icons>
 					<view class="add-dishes">
 						钱包
 					</view>
 				</view>
 				<view class="item" @click="gotoPoints">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-jifen"></use>
-					</svg>
+					<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe673;'}}</uni-icons>
 					<view class="add-dishes">
 						积分钱包
 					</view>
 				</view>
 				<view class="item" @click="gotoPointspayouts">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-jifenjiesuan"></use>
-					</svg>
+					<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe682;'}}</uni-icons>
 					<view class="add-dishes">
 						积分结算
 					</view>
 				</view>
 
 				<view class="item" @click="gotoBankCard">
-					<svg class="icon" aria-hidden="true">
-						<use xlink:href="#icon-yinhangqia"></use>
-					</svg>
+					<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe936;'}}</uni-icons>
 					<view class="add-dishes">
 						银行卡
 					</view>
@@ -310,6 +279,10 @@
 </script>
 
 <style>
+	@font-face {
+		font-family: CustomFont;
+		src: url('../../static/maicai/iconfont.ttf');
+	}
 	.me-container {
 		overflow: hidden;
 		width: 100%;

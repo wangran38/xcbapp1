@@ -7,6 +7,8 @@ import store from './store';
 import Share from '@/utils/Share.js'
 
 
+
+
 Vue.config.productionTip = false
 
 Vue.mixin(Share)

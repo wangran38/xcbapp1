@@ -1,6 +1,5 @@
 <script>
 	import Vue from 'vue'
-	import './static/maicai/iconfont.js'
 	export default {
 		onLaunch: function() {
 			console.warn('当前组件仅支持 uni_modules 目录结构 ，请升级 HBuilderX 到 3.1.0 版本以上！')
@@ -23,7 +22,8 @@
 	// 设置整个项目的背景色
 	@import "@/static/iconfont.css";
 	
-	@import "@/static/iconfont.css";
+	
+	
 	page {
 		background-color: #f5f5f5;
 	}
@@ -42,6 +42,13 @@
 	::-webkit-scrollbar {
 	  width: 0 !important;
 	  height: 0;
+	}
+	.icon {
+	  width: 1em;
+	  height: 1em;
+	  vertical-align: -0.15em;
+	  fill: currentColor;
+	  overflow: hidden;
 	}
 
 </style>

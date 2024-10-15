@@ -104,7 +104,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 25));
-__webpack_require__(/*! ./static/maicai/iconfont.js */ 30);
 var _default = {
   onLaunch: function onLaunch() {
     console.warn('当前组件仅支持 uni_modules 目录结构 ，请升级 HBuilderX 到 3.1.0 版本以上！');
