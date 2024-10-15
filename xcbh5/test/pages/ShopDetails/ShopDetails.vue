@@ -152,27 +152,47 @@ import ShopDetailsVue from './ShopDetails.vue';
 		methods: {
 			// 查看摊主照片
 			openAvater1(){
-				uni.previewImage({
-					count: 1,
-					urls:this.urls1,
-					sizeType: ['original', 'compressed'],
-					sourceType: ['album'],
-					success:(res)=>{
-						console.log(res)
-					}
-				})
+				if (this.urls1[0].length>1){
+					uni.previewImage({
+						count: 1,
+						urls:this.urls1,
+						sizeType: ['original', 'compressed'],
+						sourceType: ['album'],
+						success:(res)=>{
+							console.log(res)
+						}
+					})
+				}else{
+					uni.showToast({
+						title:'该摊主并没有上传个人照片，无法查看',
+						icon:'error'
+					})
+					// 如果没有图片,则关闭图片预览
+					uni.closePreviewImage()
+				}
+				
 			},
 			// 查看营业执照
 			openAvater2(){
-				uni.previewImage({
-					count: 1,
-					urls:this.urls2,
-					sizeType: ['original', 'compressed'],
-					sourceType: ['album'],
-					success:(res)=>{
-						console.log(res)
-					}
-				})
+				if (this.urls2[0].length>1){
+					uni.previewImage({
+						count: 1,
+						urls:this.urls2,
+						sizeType: ['original', 'compressed'],
+						sourceType: ['album'],
+						success:(res)=>{
+							console.log(res)
+						}
+					})
+				}else{
+					uni.showToast({
+						title:'该摊主并没有上传营业执照照片，无法查看',
+						icon:'error'
+					})
+					// 如果没有图片,则关闭图片预览
+					uni.closePreviewImage()
+				}
+				
 			},
 			...mapMutations('cart', ['addItem', 'subItem']),
 			async loadShopDetails() {

@@ -18,8 +18,6 @@
 			<scroll-view class="swiper" scroll-x="true" scroll-y="false" show-scrollbar="false">
 				<view v-for="item in categories" :key="item.id"  class="swiper-item" @click="filterByCategory(item.id)">
 					<view class="item-title">
-						<!-- <uni-icons type="cart" size="35"></uni-icons> -->
-						<!-- <text class="classify">{{ item.title }}</text> -->
 						<text
 							:class="['classify', { 'selected': item.id === selectedCategoryId }]">{{ item.title }}</text>
 					</view>
@@ -59,8 +57,8 @@
 			return {
 				selectedCategoryId: '',
 				categories: [],
-				pageData: [],
-				 currentMarketName: '' ,// 当前菜市场名称
+				pageData: [], // 
+				currentMarketName: '' ,// 当前菜市场名称
 				searchParams: {
 					title: '',
 					category_id: '',

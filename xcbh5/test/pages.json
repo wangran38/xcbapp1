@@ -209,7 +209,23 @@
     	"path" : "pages/editshop/editshop",
     	"style" : 
     	{
-    		"navigationBarTitleText" : "",
+    		"navigationBarTitleText" : "补充摊铺信息",
+    		"enablePullDownRefresh" : false
+    	}
+    },
+    {
+    	"path" : "pages/bankCard/bankCard",
+    	"style" : 
+    	{
+    		"navigationBarTitleText" : "银行卡",
+    		"enablePullDownRefresh" : false
+    	}
+    },
+    {
+    	"path" : "pages/addCard/addCard",
+    	"style" : 
+    	{
+    		"navigationBarTitleText" : "添加银行卡",
     		"enablePullDownRefresh" : false
     	}
     }

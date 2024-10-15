@@ -384,7 +384,7 @@
 	.top {	
 		margin: 10% auto;
 		position: absolute;
-		font-size: 56px;
+		font-size: 100rpx;
 		font-weight: bold;
 		text-align: center;
 		/*字体粗细*/

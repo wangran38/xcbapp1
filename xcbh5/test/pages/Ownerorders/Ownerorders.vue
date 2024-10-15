@@ -165,6 +165,8 @@
 	}
 
 	.title {
+		position: absolute;
+		right: 0;
 		height: 50rpx;
 		line-height: 50rpx;
 		display: flex;

@@ -2,8 +2,6 @@
 	<view class="me-container">
 		<view class="store">
 			<text style="margin: 10rpx 20rpx;">补充摊铺信息</text>
-			
-			
 			<view class="Address">
 				<text>选择摊位:</text>
 				
@@ -64,94 +62,8 @@
 			},
 			onMarketChange(e) {
 				this.selectedCategoryIndex1 = e.detail.value;
-				// this.currentItem.market_id = this.marketList[this.selectedCategoryIndex1].id;
-			},
-			async initializePicker() {
-				try {
-					const provinces = await this.fetchProvinces();
-					this.multiArray[0] = provinces.map(item => item.name);
-					const cities = await this.fetchCities(provinces[0].id);
-					this.multiArray[1] = cities.map(item => item.name);
-					const areas = await this.fetchAreas(cities[0].id);
-					this.multiArray[2] = areas.map(item => item.name);
-					this.multiIndex = [0, 0, 0];
-				} catch (error) {
-					console.error('Failed to initialize picker:', error);
-				}
 			},
 
-			async fetchProvinces() {
-				try {
-					const response = await api.citylist({
-						level: 1,
-						limit: 100
-					});
-					if (response.code === 200) {
-						this.provinceList = response.data.listdata;
-						return this.provinceList;
-					}
-					throw new Error('Failed to fetch provinces');
-				} catch (error) {
-					console.error('Failed to fetch provinces:', error);
-					throw error;
-				}
-			},
-			async fetchCities(provinceId) {
-				// console.log('Fetching cities for provinceId:', provinceId);
-				try {
-					const response = await api.citytree(provinceId);
-					// console.log('Cities API response:', response);
-					if (response.code === 200 && Array.isArray(response.data)) {
-						return response.data; // Assuming response.data is the array of cities
-					} else {
-						console.error('No cities data found');
-						return [];
-					}
-				} catch (error) {
-					console.error('Failed to fetch cities:', error);
-					return [];
-				}
-			},
-			async fetchAreas(cityId) {
-				// console.log('Fetching areas for cityId:', cityId);
-				try {
-					const response = await api.citytree(cityId);
-					// console.log('Areas API response:', response);
-					if (response.code === 200 && Array.isArray(response.data)) {
-						return response.data; // Assuming response.data is the array of areas
-					} else {
-						console.error('No areas data found');
-						return [];
-					}
-				} catch (error) {
-					console.error('Failed to fetch areas:', error);
-					return [];
-				}
-			},
-
-			async bindMultiPickerColumnChange(e) {
-				const column = e.detail.column;
-				const value = e.detail.value;
-				this.multiIndex[column] = value;
-
-				if (column === 0) {
-					const provinceId = this.provinceList[value].id;
-					const cities = await this.fetchCities(provinceId);
-					this.cityList = cities;
-					this.multiArray[1] = cities.map(item => item.name);
-					this.multiArray[2] = [];
-					this.multiIndex[1] = 0;
-					this.multiIndex[2] = 0;
-				} else if (column === 1) {
-					const cityId = this.cityList[value].id;
-					const areas = await this.fetchAreas(cityId);
-					this.districtList = areas;
-					this.multiArray[2] = areas.map(item => item.name);
-					this.multiIndex[2] = 0;
-				}
-
-				this.multiIndex = [...this.multiIndex];
-			},
 			
 			
 			// 获取摊位列表
@@ -265,10 +177,8 @@
 
 						
 					};
-					// console.log(this.marketList[this.selectedCategoryIndex1],this.facelogo,this.businesslogo)
 					// 发送请求
 					const response = await api.editshop(formData);
-					console.log(response)
 
 					if (response.code === 200) {
 						uni.showToast({

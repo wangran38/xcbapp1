@@ -3,7 +3,8 @@
 		<view class="user">
 			<view class="user-info">
 				<view class="user-img">
-					<image :src="userAvatar || 'http://h5.xcbdsc.com/static/morentouxiang.jpg'" mode="aspectFill"></image>
+					<image :src="userAvatar || 'http://h5.xcbdsc.com/static/morentouxiang.jpg'" mode="aspectFill">
+					</image>
 					<!-- <open-data wx:else type="userAvatarUrl" data-url="{{userInfo.avatar}}"></open-data> -->
 				</view>
 				<view class="user-name">
@@ -20,24 +21,24 @@
 		</view>
 
 		<!-- 其他视图保持不变 -->
-		
+
 		<view class="Integral">
 			<view class="Total-spending">
-				<view >消费总额</view>
-				<view >0元</view>
+				<view>消费总额</view>
+				<view>0元</view>
 			</view>
 			<view class="Points-available">
-				<view >可用积分</view>
-				<view >{{score}}分</view>
+				<view>可用积分</view>
+				<view>{{score}}分</view>
 			</view>
 			<view class="Freeze-points">
-				<view >冻结积分</view>
-				<view >0分</view>
+				<view>冻结积分</view>
+				<view>0分</view>
 			</view>
 		</view>
-		
+
 		<view class="lottery" @click="lottery">
-			<view class="lottery-info" >
+			<view class="lottery-info">
 				<uni-icons type="auth" size="30" color="#00ff00"></uni-icons>
 				<text style="margin: auto 40rpx; text-align: center;">打卡抽奖</text>
 				<text style="font-size: 24rpx;color: #708090;">累计打卡{{totalnum}}次</text>
@@ -68,14 +69,14 @@
 			</view>
 		</view>
 
-		<view class="My-Order" >
-			<view class="Order-top"  @click="toorders(0)">
+		<view class="My-Order">
+			<view class="Order-top" @click="toorders(0)">
 				<view style="margin: auto 20rpx; text-align: center;">我的订单</view>
 				<view style=" margin: auto 20rpx; text-align: center;color: #ccc;">全部<uni-icons type="right" size="14"
 						color="#ccc"></uni-icons></view>
 			</view>
 			<view class="Order-bottom">
-				<view class="item-title"  @click="toorders(1)">
+				<view class="item-title" @click="toorders(1)">
 					<uni-icons custom-prefix="iconfont" type="icon-zhifuguanli" size="30"></uni-icons>
 					<text style="margin-top: 10rpx;">待支付</text>
 				</view>
@@ -94,7 +95,7 @@
 			</view>
 		</view>
 
-	
+
 
 		<view class="tool">
 			<!-- <view class="Check" @click="Check">
@@ -109,6 +110,10 @@
 				<view>我的信息</view>
 				<uni-icons type="right" size="20"></uni-icons>
 			</view>
+			<view class="user-edit" @click="bindingWechat">
+				<view>绑定微信</view>
+				<uni-icons type="right" size="20"></uni-icons>
+			</view>
 		</view>
 
 		<view v-if="isLoggedIn">
@@ -119,7 +124,9 @@
 </template>
 
 <script>
-	import {api} from '../../api/index.js';
+	import {
+		api
+	} from '../../api/index.js';
 
 	export default {
 		data() {
@@ -127,7 +134,7 @@
 				isLoggedIn: false,
 				userName: '',
 				userAvatar: '',
-				score:'',
+				score: '',
 				// 添加你需要的数据属性
 				totalnum: 0
 			};
@@ -151,9 +158,13 @@
 			async fetchUserProfile() {
 				try {
 					const token = uni.getStorageSync('token');
-					const response = await api.getUserProfile(token);
+					const response = await api.getUserProfile();
 					if (response.code === 200) {
-						const {name,Headimgurl,score} = response.data;
+						const {
+							name,
+							Headimgurl,
+							score
+						} = response.data;
 						this.userName = name;
 						this.userAvatar = Headimgurl;
 						this.score = score;
@@ -172,14 +183,13 @@
 					});
 				}
 			},
-			
-			async signlist(data) {			
-				const token = uni.getStorageSync('token');     
-				const response = await api.signlist(token);		
-				this.totalnum = response.data.totalnum,
-				console.log(this.totalnum)
+
+			async signlist(data) {
+				const token = uni.getStorageSync('token');
+				const response = await api.signlist(token);
+				this.totalnum = response.data.totalnum
 			},
-			
+
 			login() {
 				// 跳转到登录页面
 				uni.navigateTo({
@@ -241,6 +251,30 @@
 				uni.redirectTo({
 					url: '/pages/login/login'
 				});
+			},
+
+			// 绑定微信
+			async bindingWechat() {
+				let systemInfo = await uni.getSystemInfo()
+				
+				// 判断是否是小程序端，如果不是就提示用户到小程序端进行绑定
+				if (systemInfo[1].host && systemInfo[1].host.env == 'WeChat') {
+					uni.login({
+						provider: 'true',
+						success: res => {
+							console.log(res.code, "这是用户唯一标识")
+							// 
+						},
+						fail: () => {},
+						complete: () => {}
+					});
+				}else{
+					uni.showToast({
+						title:'浏览器不支持调用api,请前往小程序端进行账号绑定',
+						duration:3000,
+						icon:'error'
+					})
+				}
 			}
 		}
 	};
@@ -387,7 +421,7 @@
 		/* border-bottom-left-radius: 20rpx; */
 		/* border-bottom-right-radius: 20rpx; */
 	}
-	
+
 	.prize-info {
 		display: flex;
 		align-items: center;
@@ -402,7 +436,8 @@
 		color: rgb(229, 229, 229);
 		margin-right: 12rpx;
 	}
-	.MyPoints{
+
+	.MyPoints {
 		width: 100%;
 		height: 100rpx;
 		display: flex;
@@ -418,12 +453,13 @@
 		border-bottom-left-radius: 20rpx;
 		border-bottom-right-radius: 20rpx;
 	}
+
 	.MyPoints-info {
 		display: flex;
 		align-items: center;
 		margin-left: 20rpx;
 	}
-	
+
 	.MyPoints>.item {
 		width: 40rpx;
 		height: 100rpx;
@@ -432,6 +468,7 @@
 		color: rgb(229, 229, 229);
 		margin-right: 12rpx;
 	}
+
 	.My-Order {
 		height: 200rpx;
 		width: 100%;
@@ -527,8 +564,9 @@
 		max-width: 100%;
 		overflow: visible;
 	}
-	.Integral{
-		color: rgb(58,58,60);
+
+	.Integral {
+		color: rgb(58, 58, 60);
 		width: 100%;
 		height: 100rpx;
 		background-color: white;
@@ -538,7 +576,8 @@
 		border-radius: 20rpx;
 		border: 1px solid #ccc;
 	}
-	.Total-spending{
+
+	.Total-spending {
 		width: 33%;
 		height: 100%;
 		display: flex;
@@ -547,7 +586,8 @@
 		align-items: center;
 		border-right: 1px solid #ccc;
 	}
-	.Points-available{
+
+	.Points-available {
 		width: 34%;
 		height: 100%;
 		display: flex;
@@ -556,7 +596,8 @@
 		align-items: center;
 		border-right: 1px solid #ccc;
 	}
-	.Freeze-points{
+
+	.Freeze-points {
 		width: 33%;
 		height: 100%;
 		display: flex;

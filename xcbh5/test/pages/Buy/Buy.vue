@@ -362,7 +362,8 @@
 				// }
 			},
 			showActionSheet() {
-				const paymentMethods = ['积分支付', '微信支付', '支付宝支付'];
+				// const paymentMethods = ['积分支付', '微信支付', '支付宝支付'];
+				const paymentMethods = ['积分支付'];
 				uni.showActionSheet({
 					itemList: paymentMethods,
 					success: async (res) => {

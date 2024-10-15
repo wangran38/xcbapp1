@@ -7,11 +7,10 @@
   "setting": {
     "urlCheck": false,
     "es6": false,
-    "postcss": true,
-    "minified": true,
+    "postcss": false,
+    "minified": false,
     "newFeature": true,
     "bigPackageSizeSupport": true,
-    "ignoreUploadUnusedFiles": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -19,7 +18,7 @@
     }
   },
   "compileType": "miniprogram",
-  "libVersion": "3.5.1",
+  "libVersion": "3.6.1",
   "appid": "wx6823c63b646d3ca3",
   "projectname": "乡愁宝内测",
   "condition": {},

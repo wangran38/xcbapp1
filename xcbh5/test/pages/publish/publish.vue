@@ -91,19 +91,20 @@
 						<view class="editimg">
 							<view class="title">菜品价格</view>
 							<view class="shuru"><input class="shurucon" type="text" placeholder="请输入价格"
-									v-model="itemPrice"/></view>
-									<view>元/</view>
+									v-model="itemPrice" /></view>
+							<view>元/</view>
 							<view class="example-body" @click="clicKexampleBody">
-									<view class="unit">{{unit?unit:'单位'}}</view>
-									<view class="icon"><uni-icons :type="iconStatus ? 'up':'down'" size="20"></uni-icons></view>
+								<view class="unit">{{unit?unit:'单位'}}</view>
+								<view class="icon"><uni-icons :type="iconStatus ? 'up':'down'" size="20"></uni-icons>
+								</view>
 							</view>
-							<view class="items"v-show="isShowItems">
-								<view class="item" v-for="pop in candidates"@click="selectItem(pop)">
+							<view class="items" v-show="isShowItems">
+								<view class="item" v-for="pop in candidates" @click="selectItem(pop)">
 									{{pop}}
 								</view>
 							</view>
 						</view>
-<!-- 
+						<!-- 
 						<view class="class">
 							<view class="title">规格单位</view>
 							<view class="example-body" @click="clicKexampleBody">
@@ -150,20 +151,20 @@
 				pickerRange1: [],
 				selectedCategoryIndex1: 0,
 				itemDescription: '', // 上架时的详细说明
-				
-				
+
+
 				itemPrice: '', // 上架时的价格
 				marketList: [], // 存储摊位列表
 				candidates: ['斤', '两'],
 				candidate2: ['元'],
 				unit: '',
 				unit2: '',
-				tijiaoPrice:'',
-				
-				
+				tijiaoPrice: '',
+
+
 				isloaded: false,
 				iconStatus: true,
-				isShowItems:false
+				isShowItems: false
 			}
 		},
 		mixins: [usePage],
@@ -173,15 +174,15 @@
 		onShow() {
 			this.reloadData()
 		},
-		
+
 		methods: {
 			// 打开选择单位
-			clicKexampleBody(){
+			clicKexampleBody() {
 				this.iconStatus = !this.iconStatus
 				this.isShowItems = !this.isShowItems
 			},
 			// 选择单位
-			selectItem(val){
+			selectItem(val) {
 				this.unit = val
 				this.iconStatus = !this.iconStatus
 				this.isShowItems = !this.isShowItems
@@ -416,7 +417,7 @@
 </script>
 
 <style>
-	.items{
+	.items {
 		border-radius: 5rpx;
 		z-index: 10000;
 		position: absolute;
@@ -427,10 +428,12 @@
 		background-color: white;
 		border: 1px solid gray;
 	}
-	.item{
+
+	.item {
 		width: 100%;
 		border-bottom: 1px dashed gray;
 	}
+
 	.me-container {
 		overflow: hidden;
 		width: 100%;
@@ -442,32 +445,27 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
-		/* 从顶部开始布局 */
 		position: relative;
-		/* 确保子元素的绝对定位是相对于这个容器 */
 		height: calc(100vh -10rpx);
-		/* 确保容器占满整个视口高度 */
 	}
 
 	.butt {
-		background-color: #007aff;
-		height: 100rpx;
-		width: calc(100% - 80rpx);
-		/* 减去左右的 padding */
-		border-radius: 20rpx;
-		text-align: center;
-		line-height: 100rpx;
-		font-size: 30rpx;
-		position: absolute;
-		bottom: 10rpx;
-		/* 距离底部的距离 */
-		left: 40rpx;
-		/* 距离左侧的距离，和me-container的padding一致 */
+		position: fixed;
+		bottom: 20rpx;
+		right: 20rpx;
+		padding: 30rpx 30rpx;
+		background-color: #007BFF;
+		color: white;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		z-index: 1000;
 	}
 
 	.disheslist {
 		width: 100%;
-		height: 100vh;
+		height: 1200rpx;
 		display: flex;
 		flex-direction: column;
 		margin-top: 20rpx;
@@ -485,8 +483,8 @@
 	}
 
 	.type-image {
-		height: 180rpx;
-		width: 30%;
+		height: 130rpx;
+		width: 130rpx;
 		border-radius: 20rpx;
 		background-color: #007aff;
 	}
@@ -496,14 +494,9 @@
 		height: 180rpx;
 		color: black;
 		font-size: 30rpx;
-		font-weight: 600;
-		/* display: flex; */
-		/* flex-direction: column; */
-		/* background-color: bisque; */
-		/* justify-content: space-around; */
-		margin-left: 20rpx;
-		/* 将子元素放置在容器的顶部和底部 */
-
+		position: relative;
+		top: 60rpx;
+		left: 20rpx;
 	}
 
 
@@ -661,7 +654,7 @@
 		background-color: white;
 		display: flex;
 		justify-content: space-between;
-		width: 30%;
+		width: 180rpx;
 	}
 
 	.shurucon {

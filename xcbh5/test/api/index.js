@@ -239,6 +239,16 @@ export const api = {
 	// 摊位资料补充
 	editshop(data) {
 	    return fetch('/api/shop/editshop', 'POST', data);
+	},
+	
+	// 我的银行卡
+	mybank(data){
+		return fetch('/api/shop/mybank', 'POST', data);
+	},
+	
+	// 添加银行卡
+	addbank(data){
+		return fetch('/api/shop/addbank', 'POST', data);
 	}
 }
 export default {fetch,BASE_URL,UPLOAD_URL};

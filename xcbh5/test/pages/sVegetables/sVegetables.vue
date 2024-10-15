@@ -6,20 +6,35 @@
 			</view>
 			<view class="content">
 				<view class="item" @click="goToapply">
-					<uni-icons type="compose " size="30"></uni-icons>
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-shenqing"></use>
+					</svg>
 					<view class="add-dishes">
-						申请摊位
+						申请固定摊位
+					</view>
+				</view>
+				<view class="item" @click="goToapply">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-wangshangshenqing
+"></use>
+					</svg>
+					<view class="add-dishes">
+						申请网络摊位
 					</view>
 				</view>
 				<view class="item" @click="gotostalllist">
-					<uni-icons type="bars" size="30"></uni-icons>
-					<view class="add-dishes" >
-						摊位列表
-					</view>
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-shangpu"></use>
+					</svg>
+						<view class="add-dishes">
+							摊位列表
+						</view>
 				</view>
-				
+
 				<view class="item" @click="gotoEditshop">
-					<uni-icons type="plus" size="30"></uni-icons>
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-keylinetubiao-26"></use>
+					</svg>
 					<view class="add-dishes">
 						摊位资料补充
 					</view>
@@ -56,19 +71,25 @@
 			</view>
 			<view class="content">
 				<view class="item" @click="goTorelePage">
-					<uni-icons type="plus" size="30"></uni-icons>
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-tianjiacaipin"></use>
+					</svg>
 					<view class="add-dishes">
 						添加菜品
 					</view>
 				</view>
 				<view class="item" @click="gotopublish">
-					<uni-icons type="list" size="30"></uni-icons>
-					<view class="add-dishes" >
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-caipinliebiao"></use>
+					</svg>
+					<view class="add-dishes">
 						菜品列表
 					</view>
 				</view>
 				<view class="item" @click="gotoListDis">
-					<uni-icons type="paperplane" size="30"></uni-icons>
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-yishangjia"></use>
+					</svg>
 					<view class="add-dishes">
 						已上架菜品
 					</view>
@@ -94,32 +115,40 @@
 			</view>
 
 		</view>
-		
-		<view class="orders" >
+
+		<view class="orders">
 			<view class="title" @click="gotoOwneroders(0)">
 				我的订单
 			</view>
 			<view class="content">
 				<view class="item" @click="gotoOwneroders(1)">
-					<uni-icons type="wallet" size="30"></uni-icons>
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-dengdaizhifu"></use>
+					</svg>
 					<view class="add-dishes">
 						待支付
 					</view>
 				</view>
 				<view class="item" @click="gotoOwneroders(3)">
-					<uni-icons type="gift" size="30"></uni-icons>
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-daishouhuo"></use>
+					</svg>
 					<view class="add-dishes">
 						待收货
 					</view>
 				</view>
 				<view class="item" @click="gotoOwneroders(5)">
-					<uni-icons type="link" size="30"></uni-icons>
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-daijiesuan"></use>
+					</svg>
 					<view class="add-dishes">
 						待结算
 					</view>
 				</view>
 				<view class="item" @click="gotoOwneroders(6)">
-					<uni-icons type="starhalf" size="30"></uni-icons>
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-yijiesuan"></use>
+					</svg>
 					<view class="add-dishes">
 						已结算
 					</view>
@@ -144,21 +173,36 @@
 			</view>
 			<view class="content">
 				<view class="item" @click="gotowallet">
-					<uni-icons type="wallet" size="30"></uni-icons>
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-qianbao"></use>
+					</svg>
 					<view class="add-dishes">
 						钱包
 					</view>
 				</view>
 				<view class="item" @click="gotoPoints">
-					<uni-icons type="vip" size="30"></uni-icons>
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-jifen"></use>
+					</svg>
 					<view class="add-dishes">
 						积分钱包
 					</view>
 				</view>
 				<view class="item" @click="gotoPointspayouts">
-					<uni-icons type="checkbox" size="30"></uni-icons>
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-jifenjiesuan"></use>
+					</svg>
 					<view class="add-dishes">
 						积分结算
+					</view>
+				</view>
+
+				<view class="item" @click="gotoBankCard">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-yinhangqia"></use>
+					</svg>
+					<view class="add-dishes">
+						银行卡
 					</view>
 				</view>
 				<!-- <view class="item">
@@ -230,10 +274,10 @@
 				});
 			},
 			gotoOwneroders(orderStatus) {
-			    uni.navigateTo({
-			      url: `/pages/Ownerorders/Ownerorders?orderStatus=${orderStatus}`
-			    });
-			  },
+				uni.navigateTo({
+					url: `/pages/Ownerorders/Ownerorders?orderStatus=${orderStatus}`
+				});
+			},
 			gotowallet() {
 				uni.navigateTo({
 					url: '/pages/wallet/wallet'
@@ -249,9 +293,16 @@
 					url: '/pages/pointspayouts/pointspayouts'
 				});
 			},
-			gotoEditshop(){
+			// 补充摊位资料页面
+			gotoEditshop() {
 				uni.navigateTo({
 					url: '/pages/editshop/editshop'
+				});
+			},
+			// 银行卡
+			gotoBankCard() {
+				uni.navigateTo({
+					url: '/pages/bankCard/bankCard'
 				});
 			}
 		}
@@ -332,7 +383,8 @@
 		align-items: center;
 
 	}
-	.add-dishes{
+
+	.add-dishes {
 		width: 100%;
 		color: black;
 		display: flex;
@@ -340,5 +392,4 @@
 		align-items: center;
 		font-size: 28rpx;
 	}
-	
 </style>

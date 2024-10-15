@@ -30,7 +30,9 @@
     "pages/Points/Points",
     "pages/pointspayouts/pointspayouts",
     "pages/Settrecords/Settrecords",
-    "pages/editshop/editshop"
+    "pages/editshop/editshop",
+    "pages/bankCard/bankCard",
+    "pages/addCard/addCard"
   ],
   "subPackages": [],
   "window": {
