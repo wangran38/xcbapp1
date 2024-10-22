@@ -21,7 +21,7 @@
 
 			<view class="time">
 				<view class="business-hours">
-					<view>电话:</view>
+					<view @click="handleScrollToLower">电话:</view>
 					<view class="hour">{{ shopDetails.contactphone}}</view>
 				</view>
 
@@ -41,13 +41,13 @@
 					<uni-icons type="calendar-filled" size="20" style="height: 30rpx;"></uni-icons>
 				</view>
 			</view>
-			
+
 			<view class="time">
 				<view class="business-hours">
 					<view>营业执照:</view>
-					<view class="hour"@click="openAvater2">点击查看摊位营业执照</view>
+					<view class="hour" @click="openAvater2">点击查看摊位营业执照</view>
 				</view>
-			
+
 				<view class="phone">
 					<uni-icons type="map-filled" size="20" style="height: 30rpx;"></uni-icons>
 				</view>
@@ -78,7 +78,7 @@
 				<text>菜品种类</text>
 
 				<view class="type" v-for="item in pageData" :key="item.id">
-					<image :src="item.imglogo" mode="aspectFit"></image>
+					<image :src="item.imglogo" mode="aspectFill"></image>
 					<view class="regard">
 						<view class="typetitle">
 							<text class="ellipsis">{{item.commodity_name}}</text>
@@ -122,7 +122,7 @@
 		api
 	} from '@/api/index'
 	import usePage from '@/hooks/usePage';
-import ShopDetailsVue from './ShopDetails.vue';
+	import ShopDetailsVue from './ShopDetails.vue';
 
 	export default {
 		data() {
@@ -133,9 +133,9 @@ import ShopDetailsVue from './ShopDetails.vue';
 				cartItems: [],
 				pageData: [],
 				shopDetails: {},
-				shop_id:"",
-				urls1:[], // 摊主照片
-				urls2:[] // 营业执照图片
+				shop_id: "",
+				urls1: [], // 摊主照片
+				urls2: [] // 营业执照图片
 			}
 		},
 		mixins: [usePage],
@@ -151,50 +151,51 @@ import ShopDetailsVue from './ShopDetails.vue';
 		},
 		methods: {
 			// 查看摊主照片
-			openAvater1(){
-				if (this.urls1[0].length>1){
+			openAvater1() {
+				if (this.urls1[0].length > 1) {
 					uni.previewImage({
 						count: 1,
-						urls:this.urls1,
+						urls: this.urls1,
 						sizeType: ['original', 'compressed'],
 						sourceType: ['album'],
-						success:(res)=>{
-							console.log(res)
+						success: (res) => {
 						}
 					})
-				}else{
+				} else {
 					uni.showToast({
-						title:'该摊主并没有上传个人照片，无法查看',
-						icon:'error'
+						title: '该摊主并没有上传个人照片，无法查看',
+						icon: 'error'
 					})
 					// 如果没有图片,则关闭图片预览
 					uni.closePreviewImage()
 				}
-				
+
 			},
 			// 查看营业执照
-			openAvater2(){
-				if (this.urls2[0].length>1){
+			openAvater2() {
+				if (this.urls2[0].length > 1) {
 					uni.previewImage({
 						count: 1,
-						urls:this.urls2,
+						urls: this.urls2,
 						sizeType: ['original', 'compressed'],
 						sourceType: ['album'],
-						success:(res)=>{
-							console.log(res)
+						success: (res) => {
 						}
 					})
-				}else{
+				} else {
 					uni.showToast({
-						title:'该摊主并没有上传营业执照照片，无法查看',
-						icon:'error'
+						title: '该摊主并没有上传营业执照',
+						icon: 'error'
 					})
 					// 如果没有图片,则关闭图片预览
 					uni.closePreviewImage()
 				}
-				
+
 			},
 			...mapMutations('cart', ['addItem', 'subItem']),
+
+			
+			// 首次加载，初始化
 			async loadShopDetails() {
 				try {
 					// 获取当前页面
@@ -208,7 +209,6 @@ import ShopDetailsVue from './ShopDetails.vue';
 					this.shopDetails = response.data.listdata[0];
 					this.urls1.push(this.shopDetails.facelogo)
 					this.urls2.push(this.shopDetails.businesslogo)
-					console.log(this.shopDetails)
 					return response
 				} catch (error) {
 					console.error('获取摊主详情失败', error);
@@ -222,31 +222,34 @@ import ShopDetailsVue from './ShopDetails.vue';
 
 			async fetchData(params) {
 				const res = await this.loadShopDetails();
-				const { title} =  res.data.listdata[0]
+				const {
+					title
+				} = res.data.listdata[0]
 				const pages = getCurrentPages();
 				const currentPage = pages[pages.length - 1];
 				const query = currentPage.options;
-
+				
+				
 				params = {
 					...params,
 					shop_id: Number(query.id) || null,
 				};
-
+				
 				const response = await api.getmarketCommdityList({
 					...params,
 					isshow: 1,
 				});
 				
-				response.data.listdata = response.data.listdata.map(e=>{
-					return{
+				response.data.listdata = response.data.listdata.map(e => {
+					return {
 						...e,
-						shopTitle:title
+						shopTitle: title
 					}
 				})
 				return response.data;
 			},
 
-			
+
 			goTorules() {
 				uni.navigateTo({
 					url: '/pages/rules/rules'
@@ -364,6 +367,9 @@ import ShopDetailsVue from './ShopDetails.vue';
 	}
 
 	.address>text {
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
 		color: black;
 		font-size: 30rpx;
 		font-weight: 600;

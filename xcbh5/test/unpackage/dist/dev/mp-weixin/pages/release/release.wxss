@@ -74,7 +74,7 @@
 	align-items: center;
 	/* background-color: #007aff; */
 }
-.picker-text{
+.picker-text {
 	/* width: 250rpx; */
 	height: 100%;
 	color: #808080;

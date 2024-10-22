@@ -96,6 +96,9 @@
 	border-bottom: 1px solid #ccc;
 }
 .address>text.data-v-d1da77c0 {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 	color: black;
 	font-size: 30rpx;
 	font-weight: 600;

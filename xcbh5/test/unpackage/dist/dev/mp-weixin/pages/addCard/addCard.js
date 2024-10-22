@@ -34,7 +34,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _addCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addCard.vue?vue&type=script&lang=js& */ 314);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _addCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _addCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _addCard_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./addCard.vue?vue&type=style&index=0&lang=css& */ 316);
-/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 33);
+/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 32);
 
 var renderjs
 
@@ -142,9 +142,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 45));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 47));
-var _index = __webpack_require__(/*! ../../api/index.js */ 48);
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 46));
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
+var _index = __webpack_require__(/*! ../../api/index.js */ 47);
+//
 //
 //
 //
@@ -199,45 +201,95 @@ var _default = {
         // 开户行
         bankaddress: '',
         // 开户行地址
-        isuse: 2
+        isuse: 1
       }
     };
   },
+  onShow: function onShow() {
+    if (this.checkToken()) {
+      uni.navigateTo({
+        url: '/pages/login/login'
+      });
+    }
+  },
   methods: {
+    // 检查是否token存在，存在则已登陆
+    checkToken: function checkToken() {
+      var token = uni.getStorageSync('token');
+      if (!token) {
+        return true;
+      }
+      return false;
+    },
+    copyObj: function (_copyObj) {
+      function copyObj(_x) {
+        return _copyObj.apply(this, arguments);
+      }
+      copyObj.toString = function () {
+        return _copyObj.toString();
+      };
+      return copyObj;
+    }(function (obj) {
+      var newObj = {};
+      for (var key in obj) {
+        if ((0, _typeof2.default)(obj[key]) == 'object') {
+          //如:key是wife,引用类型,那就递归
+          newObj[key] = copyObj(obj[key]);
+        } else {
+          //基本类型,直接赋值
+          newObj[key] = obj[key];
+        }
+      }
+      return newObj;
+    }),
+    isNumber: function isNumber(str) {
+      return !isNaN(str) && !isNaN(parseFloat(str));
+    },
+    settleCardChange: function settleCardChange(val) {
+      // if (val.detail.value && this.isNumber(val)){
+      // 	this.info.banknumber = parseInt(val.detail.value);
+      // }
+    },
     changeValue: function changeValue(val) {
       this.info.isuse = parseInt(val.detail.value);
     },
     submit: function submit() {
       var _this = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-        var _yield$api$addbank, data;
+        var _copyObj2, data;
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(_this.info.bankname && _this.info.bankusername && _this.info.bankaddress && _this.info.banknumber.toString().length == 19)) {
-                  _context.next = 8;
+                if (!(_this.info.bankname && _this.info.bankusername && _this.info.bankaddress && _this.info.banknumber.toString().length == 19 && _this.isNumber(_this.info.banknumber))) {
+                  _context.next = 9;
                   break;
                 }
-                _context.next = 3;
-                return _index.api.addbank(_this.info);
-              case 3:
-                _yield$api$addbank = _context.sent;
-                data = _yield$api$addbank.data;
+                _copyObj2 = _this.copyObj(_this.info);
+                _copyObj2.banknumber = String(BigInt(_copyObj2.banknumber));
+                _context.next = 5;
+                return _index.api.addbank(_copyObj2);
+              case 5:
+                data = _context.sent;
                 if (data.code == 200) {
                   uni.showToast({
                     title: '添加成功',
                     icon: 'success'
                   });
+                } else {
+                  uni.showToast({
+                    title: data.msg,
+                    icon: 'error'
+                  });
                 }
-                _context.next = 9;
+                _context.next = 10;
                 break;
-              case 8:
+              case 9:
                 uni.showToast({
                   title: '填写信息有误',
                   icon: 'error'
                 });
-              case 9:
+              case 10:
               case "end":
                 return _context.stop();
             }

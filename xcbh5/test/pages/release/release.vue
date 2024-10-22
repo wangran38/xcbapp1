@@ -7,20 +7,12 @@
 					<view class="picture">
 						<input class="input-text" type="text" placeholder="请输入菜名" v-model="goodsname" />
 					</view>
-					
+
 					<uni-icons class="rigicon" type="right" size="14" color="rgb(229, 229, 229)"></uni-icons>
 				</view>
 
 			</view>
 
-			<!-- <view class="price">
-				<text class="title">价格</text>
-				<view class="item">
-					<input class="input-text" type="text" placeholder="请输入价格" v-model="price" />
-					<uni-icons class="rigicon" type="right" size="14" color="rgb(229, 229, 229)"></uni-icons>
-				</view>
-
-			</view> -->
 
 			<view class="price">
 				<text class="title">分类</text>
@@ -35,11 +27,11 @@
 
 			</view>
 
-			<view class="img">
+			<view class="img" @tap="uploadcuisine">
 				<text class="title">图片</text>
 				<view class="item">
-					<view class="picture" @tap="uploadcuisine">
-						<view  v-if="!imglogo">请上传图片</view>
+					<view class="picture">
+						<view v-if="!imglogo">请上传图片</view>
 						<image v-else :src="imglogo" class="uploaded-image" mode="aspectFit"></image>
 						<!-- {{ imageUploaded ? '已上传' : '请上传图片' }} -->
 					</view>
@@ -57,11 +49,14 @@
 
 <script>
 	import {
-		api,UPLOAD_URL 
+		api,
+		UPLOAD_URL
 	} from '../../api/index.js';
 	import {
-		useUpload
+		useUpload,
+		compressPictures
 	} from "@/hooks/useUpload"
+	import Compressor from 'compressorjs';
 	export default {
 		data() {
 			return {
@@ -79,14 +74,15 @@
 			this.fetchCategories();
 		},
 		methods: {
-			async customizeBack(){
-			  let canNavBack = await getCurrentPages()
-			  console.log(canNavBack)
-			  if( canNavBack && canNavBack.length>1) {  
-			      uni.navigateBack() 
-			  } else {  
-			      history.back();  
-			  }
+			
+			// 返回上一页
+			async customizeBack() {
+				let canNavBack = await getCurrentPages()
+				if (canNavBack && canNavBack.length > 1) {
+					uni.navigateBack()
+				} else {
+					history.back();
+				}
 			},
 			// 请求菜品分类数据
 			fetchCategories() {
@@ -118,40 +114,36 @@
 					});
 				});
 			},
+			
+			// 上传菜品图片
 			uploadcuisine() {
 				uni.chooseImage({
 					count: 1,
-					sizeType: ['compressed','original'],
+					sizeType: ['compressed', 'original'],
 					sourceType: ['album', 'camera'],
-					success: (res) => {
-						// const tempFilePaths = res.tempFilePaths;
-						// this.uploadImage(tempFilePaths[0]);
-						// this.isImageSelected = true; // 更新图片选择状态
+					success: async (res) => {
 						const tempFilePaths = res.tempFilePaths;
 						if (tempFilePaths.length > 0) {
-							console.log(tempFilePaths);
 							const {
 								upload,
 								request
 							} = useUpload({
 								uploadPath: '/group1/upload',
-								tempFilePaths: tempFilePaths[0]
+								file: res.tempFiles[0],  // 传输文件对象
+								tempFilePaths: tempFilePaths[0] // 传输文件路径
 							})
-							
-							// upload().then((res) => {
-							// 	console.log(res);
-							// 	this.imglogo = res;
-							// 	this.isImageSelected = true;
-							// 	this.imageUploaded = true; // 更新图片上传状态
-							// })
 							
 							upload().then((res) => {
 								var obj = JSON.parse(res);
-								// console.log(obj.data);
-								this.imglogo = UPLOAD_URL +obj.data.path
+								this.imglogo = UPLOAD_URL + obj.data.path
 								this.isImageSelected = true;
 								this.imageUploaded = true; // 更新图片上传状态
 							})
+
+
+
+
+
 							// api.uploadImage(tempFilePaths[0])
 							// 	.then(data => {
 							// 		this.user.headimgurl = data.url; // 更新头像 URL
@@ -178,7 +170,8 @@
 				}
 			},
 			submit() {
-				if (!this.goodsname || !this.category_id ) {
+				console.log(this.goodsname,this.category_id)
+				if (!this.goodsname || !this.category_id || !this.imglogo) {
 					uni.showToast({
 						title: '请填写完整信息',
 						icon: 'none'
@@ -187,8 +180,6 @@
 				}
 
 				api.addgoods({
-					// market_id: this.market_id,
-					// shop_id: this.shop_id,
 					category_id: this.category_id,
 					goodsname: this.goodsname,
 					imglogo: this.imglogo, // 直接传递图片地址
@@ -198,43 +189,29 @@
 						uni.showToast({
 							title: '菜品添加成功',
 							icon: 'success',
-							duration:2000
-						}).then(()=>{
-							setTimeout(()=>{
+							duration: 1000
+						}).then(() => {
+							setTimeout(() => {
 								// 是否继续添加菜品
 								uni.showModal({
-									title:"是否继续添加菜品",
-									cancelText:'否',
-									confirmText:'是',
-									success:(res)=>{
-										if (res.confirm){
+									title: "是否继续添加菜品",
+									cancelText: '否',
+									confirmText: '是',
+									success: (res) => {
+										if (res.confirm) {
 											console.log("继续添加")
-										}else{
+										} else {
 											this.customizeBack()
 										}
 									},
 								})
-							},1000)
+							}, 1000)
 						})
+
+						// 蔬菜名字清空
 						this.goodsname = '';
-						// this.price = '';
-						this.category_id = '';
 						this.imglogo = '';
 						this.imageUploaded = false;
-						
-						
-						// // 是否继续添加菜品
-						// uni.showModal({
-						// 	title:"是否继续添加菜品",
-						// 	success:(res)=>{
-						// 		if (res.confirm){
-						// 			console.log("继续添加")
-						// 		}else{
-						// 			console.log("不添加")
-						// 		}
-						// 	},
-						// })
-						
 					} else {
 						uni.showToast({
 							title: res.msg || '添加失败',
@@ -338,12 +315,14 @@
 		align-items: center;
 		/* background-color: #007aff; */
 	}
-	.picker-text{
+
+	.picker-text {
 		/* width: 250rpx; */
 		height: 100%;
 		color: #808080;
 		font-size: 25rpx;
 	}
+
 	.picture {
 		width: 250rpx;
 		text-align: center;

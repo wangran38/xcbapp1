@@ -108,13 +108,13 @@
 					success: (res) => {
 						const tempFilePaths = res.tempFilePaths;
 						if (tempFilePaths.length > 0) {
-							console.log(tempFilePaths);
 							const {
 								upload,
 								request
 							} = useUpload({
 								uploadPath: '/group1/upload',
-								tempFilePaths: tempFilePaths[0]
+								tempFilePaths: tempFilePaths[0],
+								file:res.tempFiles[0]
 							})
 
 							upload().then((res) => {
@@ -137,13 +137,13 @@
 					success: (res) => {
 						const tempFilePaths = res.tempFilePaths;
 						if (tempFilePaths.length > 0) {
-							console.log(tempFilePaths);
 							const {
 								upload,
 								request
 							} = useUpload({
 								uploadPath: '/group1/upload',
-								tempFilePaths: tempFilePaths[0]
+								tempFilePaths: tempFilePaths[0],
+								file:res.tempFiles[0]
 							})
 			
 							upload().then((res) => {

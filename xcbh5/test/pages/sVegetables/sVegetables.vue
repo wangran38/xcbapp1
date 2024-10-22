@@ -19,9 +19,9 @@
 				</view>
 				<view class="item" @click="gotostalllist">
 					<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe602;'}}</uni-icons>
-						<view class="add-dishes">
-							摊位列表
-						</view>
+					<view class="add-dishes">
+						摊位列表
+					</view>
 				</view>
 
 				<view class="item" @click="gotoEditshop">
@@ -216,7 +216,22 @@
 
 			}
 		},
+		onShow() {
+			if (this.checkToken()){
+				uni.navigateTo({
+					url:'/pages/login/login'
+				})
+			}
+		},
 		methods: {
+			// 检查是否token存在，存在则已登陆
+			checkToken() {
+				const token = uni.getStorageSync('token');
+				if (!token){
+					return true
+				}
+				return false
+			},
 			gotopublish() {
 				uni.navigateTo({
 					url: '/pages/publish/publish'
@@ -283,6 +298,7 @@
 		font-family: CustomFont;
 		src: url('../../static/maicai/iconfont.ttf');
 	}
+
 	.me-container {
 		overflow: hidden;
 		width: 100%;

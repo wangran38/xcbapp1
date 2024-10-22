@@ -102,12 +102,12 @@
 				score: '',
 				inputScore: '',
 				isEditingScore: false,
-				shop_id:''
+				shop_id: ''
 			}
 		},
 		computed: {
 			...mapState('cart', ['carts']),
-			...mapGetters('cart', ['cartTotalByShopId', 'getTempCount', 'cartsLengthByShopId','getCartsByShopId']),
+			...mapGetters('cart', ['cartTotalByShopId', 'getTempCount', 'cartsLengthByShopId', 'getCartsByShopId']),
 			// 计算积分金额
 			usableScoreAmount() {
 				return parseFloat(this.inputScore / 10) || 0; // 使用输入的积分数量作为金额
@@ -148,14 +148,14 @@
 			// 	return this.carts.filter(item => item.shop_id === parseInt(this.currentShopId));
 			// },
 		},
-		
+
 
 		mounted() {
 			const pages = getCurrentPages();
 			const currentPage = pages[pages.length - 1];
 			// 从页面查询参数中获取 shop_id
 			const query = currentPage.options;
-			
+
 			this.shop_id = query.id;
 			// this.loadCartItems();
 			// this.reloadData()
@@ -232,29 +232,21 @@
 			// 	}
 			// },
 			async fetchUserProfile() {
-					const response = await api.getUserProfile();
+				const response = await api.getUserProfile();
 
-					// 仅在成功时更新 score
-					if (response.code === 200) {
-						const {
-							score
-						} = response.data;
-						this.score = score;
-					}
+				// 仅在成功时更新 score
+				if (response.code === 200) {
+					const {
+						score
+					} = response.data;
+					this.score = score;
+				}
 			},
 
 
 
 			async addorder(data) {
 				try {
-					// 检查是否选择了支付方式
-					        if (this.paymentMethod === '请选择') {
-					            uni.showToast({
-					                title: '请选择支付方式',
-					                icon: 'none'
-					            });
-					            return; // 阻止订单提交
-					        }
 
 					//实际支付金额
 					const remainingAmount = parseFloat(this.cartTotalByShopId(this.shop_id));
@@ -269,14 +261,14 @@
 					if (this.paymentMethod.startsWith('积分支付') && Totalpoints < remainingAmount) {
 						console.log('积分不足，阻止订单提交');
 						uni.showToast({
-							title: '积分不足以支付全部金额，',
+							title: '积分不足以支付全部金额',
 							icon: 'none'
 						});
 						return; // 阻止订单提交
 					}
 					// console.log('开始提交订单');
 
-					
+
 					// console.log(cart)
 					// 将 cart 数据转换成后端要求的格式
 					const orderItems = this.getCartsByShopId(this.shop_id).map(item => ({
@@ -289,18 +281,37 @@
 					console.log(orderItems)
 
 
+					if (!orderItems.length) {
+						uni.showToast({
+							title: '您还未选购商品,无法提交订单!!!!',
+							icon:'error',
+							duration: 5000,
+						})
+						// uni.navigateBack()
+						return;
+					}
+
+					// 检查是否选择了支付方式
+					if (this.paymentMethod === '请选择') {
+						uni.showToast({
+							title: '请选择支付方式',
+							icon: 'none'
+						});
+						return; // 阻止订单提交
+					}
+					
+					
 					// 生成订单数据
 					const orderData = {
 						shop_id: Number(this.shop_id),
 						goods_num: this.cartsLengthByShopId(this.shop_id), // 商品数量
 						price: this.cartTotalByShopId(this.shop_id), // 订单合计金额
-						payprice: this.cartTotalByShopId(this.shop_id),  // 实际支付金额
+						payprice: this.cartTotalByShopId(this.shop_id), // 实际支付金额
 						payway: this.payway,
 						goods_arr: orderItems // 商品数组
 					};
 					console.log('提交的订单数据:', orderData);
-					// 获取 token
-					const token = uni.getStorageSync('token');
+
 
 					// 调用提交订单接口
 					const response = await api.addorder(orderData);
@@ -319,8 +330,6 @@
 								}, 1500);
 							}
 						});
-
-
 					} else if (response.code === 201) {
 						uni.showToast({
 							title: response.msg || '积分余额不足',
@@ -358,7 +367,7 @@
 				// 		this.paymentMethod = `使用积分: ${this.inputScore}`;
 				// 	}
 				// } else {
-					this.showActionSheet();
+				this.showActionSheet();
 				// }
 			},
 			showActionSheet() {
@@ -367,7 +376,7 @@
 				uni.showActionSheet({
 					itemList: paymentMethods,
 					success: async (res) => {
-						console.log('选择了' + paymentMethods[res.tapIndex] + '支付方式');
+						// console.log('选择了' + paymentMethods[res.tapIndex] + '支付方式');
 						const selectedMethod = paymentMethods[res.tapIndex]; // 更新为用户选择的支付方式
 						this.paymentMethod = selectedMethod;
 						// 如果用户选择了积分支付，调用 fetchUserProfile

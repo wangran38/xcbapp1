@@ -2,34 +2,28 @@
 	<view class="me-container">
 		<!-- 其他内容 -->
 		<scroll-view class="Stallholder" scroll-y="true" @scrolltolower="handleScrollToLower"
-			:style="{ height: '100vh' }">
+			:style="{ height: '100vh' }" lower-threshold="10">
 			<view class="disheslist">
 				<view class="type" v-for="item in pageData" :key="item.id">
 					<image class="type-image" v-if="isloaded" lazy-load :src="item.imglogo " mode="scaleToFill"></image>
-
 					<view class="regard">
 						<view class="typetitle">
 							{{item.goodsname}}
 						</view>
-						<!-- <view class="price"> -->
-						<!-- ¥{{parseFloat(item.price).toFixed(2) }}/斤 -->
-						<!-- <button @click="goToBuyPage">购买</button> -->
-						<!-- </view> -->
 					</view>
-
 
 					<view class="function">
 						<view class="rigicon" @click="edit(item)">修改</view>
-						<view class="rigicon" @click="shelves(item)">上架</view>
-						<!-- <view class="rigicon" @click="off">下架</view> -->
+						<view class="rigicon"  style="background-color: #67c23a" @click="shelves(item)">上架</view>
+						<view class="rigicon" style="background-color: #f56c6c" @click="removeItem(item)">删除</view>
 					</view>
-
 				</view>
+				<view v-if="pageLoading" class="loading">加载中...</view>
+				<view v-if="!hasMore" class="loading">没有更多了</view>
 			</view>
 
-			<view v-if="pageLoading" class="loading">加载中...</view>
-			<view v-if="!hasMore" class="loading">没有更多了</view>
 		</scroll-view>
+		
 		<view class="butt" @click="goTorelePage">
 			点击新增菜品
 		</view>
@@ -73,8 +67,7 @@
 		<view v-if="showEditPopup1" class="popup-overlay" @click="closePopup">
 			<view class="popup" @click.stop>
 				<view class="close-button" @click="closePopup">×</view>
-				<!-- <view class="popup-header">修改商品信息</view> -->
-
+				<view class="popup-header">{{currentItem.goodsname}}</view>
 				<!-- 在这里添加你的表单内容 -->
 				<view class="popup-content">
 					<!-- 表单或其他内容 -->
@@ -92,11 +85,12 @@
 							<view class="title">菜品价格</view>
 							<view class="shuru"><input class="shurucon" type="text" placeholder="请输入价格"
 									v-model="itemPrice" /></view>
-							<view>元/</view>
+							<view class="unit">元/</view>
 							<view class="example-body" @click="clicKexampleBody">
 								<view class="unit">{{unit?unit:'单位'}}</view>
 								<view class="icon"><uni-icons :type="iconStatus ? 'up':'down'" size="20"></uni-icons>
 								</view>
+								
 							</view>
 							<view class="items" v-show="isShowItems">
 								<view class="item" v-for="pop in candidates" @click="selectItem(pop)">
@@ -104,19 +98,6 @@
 								</view>
 							</view>
 						</view>
-						<!-- 
-						<view class="class">
-							<view class="title">规格单位</view>
-							<view class="example-body" @click="clicKexampleBody">
-									<view class="unit">{{unit2?unit2:'单位'}}</view>
-									<view class="icon"><uni-icons :type="iconStatus ? 'up':'down'" size="20"></uni-icons></view>
-							</view>
-							<view class="items"v-show="isShowItems">
-								<view class="item" v-for="pop in candidate2"@click="selectItem(pop)">
-									{{pop}}
-								</view>
-							</view>
-						</view> -->
 					</view>
 				</view>
 				<view class="popup-footer">
@@ -151,17 +132,13 @@
 				pickerRange1: [],
 				selectedCategoryIndex1: 0,
 				itemDescription: '', // 上架时的详细说明
-
-
 				itemPrice: '', // 上架时的价格
 				marketList: [], // 存储摊位列表
-				candidates: ['斤', '两'],
+				candidates: ['斤', '两','瓶','桶','个'],
 				candidate2: ['元'],
 				unit: '',
 				unit2: '',
 				tijiaoPrice: '',
-
-
 				isloaded: false,
 				iconStatus: true,
 				isShowItems: false
@@ -176,6 +153,28 @@
 		},
 
 		methods: {
+			async removeItem(item){
+				let requestsData = {
+					id:item.id,
+					isshow:2
+				}
+				console.log(item,requestsData)
+				let res = await api.editgoods(requestsData)
+				if (res.code == 200){
+					uni.showToast({
+						title:'删除成功',
+						icon:'success'
+					})
+					// 重新加载数据
+					this.reloadData()
+				}else{
+					uni.showToast({
+						title:'删除失败',
+						icon:'error'
+					})
+				}
+				
+			},
 			// 打开选择单位
 			clicKexampleBody() {
 				this.iconStatus = !this.iconStatus
@@ -317,12 +316,16 @@
 				this.currentItem = {
 					...item
 				};
+				console.log(this.currentItem)
 				this.showEditPopup1 = true; // 显示弹出层
 				this.fetchMarketList(); // 获取摊位列表
 			},
 			closePopup() {
 				this.showEditPopup = false; // 隐藏弹出层
 				this.showEditPopup1 = false;
+				
+				// 清空值
+				this.itemPrice = ''
 			},
 			//确认事件
 			confirmEdit() {
@@ -435,7 +438,7 @@
 	}
 
 	.me-container {
-		overflow: hidden;
+		/* overflow: hidden; */
 		width: 100%;
 		box-sizing: border-box;
 		padding: 0rpx 40rpx 0 40rpx;
@@ -472,14 +475,17 @@
 	}
 
 	.type {
+		padding: 10rpx;
 		height: 12%;
-		width: 100%;
+		/* width: 90%; */
 		display: flex;
 		flex-direction: row;
 		background-color: white;
 		justify-content: flex-start;
 		align-items: center;
 		margin-bottom: 30rpx;
+		box-shadow: 5rpx 5rpx  5rpx rgba(0, 0, 0, .3);
+		border-radius: 10rpx;
 	}
 
 	.type-image {
@@ -507,20 +513,23 @@
 	.function {
 		display: flex;
 		height: 100%;
-		width: 220rpx;
+		width: 250rpx;
 		margin-left: auto;
 		justify-content: space-around;
 		align-items: center;
 	}
 
 	.rigicon {
-		height: 50%;
-		width: 100rpx;
+		font-weight: bold;
+		font-size: 25rpx;
+		height: 70rpx;
+		width: 150rpx;
 		background-color: #007aff;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		border-radius: 30rpx;
+		border-radius: 20rpx;
+		margin-left: 5rpx;
 	}
 
 	.loading {
@@ -578,18 +587,18 @@
 	}
 
 	.close-button {
+		padding: 10rpx;
 		position: absolute;
-		top: 5rpx;
-		right: 5rpx;
-		font-size: 40rpx;
+		top: 10rpx;
+		right: 10rpx;
+		font-size: 50rpx;
 		color: black;
 		cursor: pointer;
 		z-index: 10;
 		width: 50rpx;
 		height: 50rpx;
-		display: flex;
-		justify-content: center;
-		align-items: center;
+		text-align: center;
+		line-height: 45rpx;
 		background-color: #ffffff;
 		border-radius: 50%;
 		box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
@@ -654,7 +663,11 @@
 		background-color: white;
 		display: flex;
 		justify-content: space-between;
-		width: 180rpx;
+		min-width: 100rpx;
+	}
+	
+	.unit{
+		font-size: 28rpx;
 	}
 
 	.shurucon {

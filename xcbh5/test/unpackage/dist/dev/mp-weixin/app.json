@@ -72,6 +72,8 @@
       }
     ]
   },
+  "__usePrivacyCheck__": true,
   "lazyCodeLoading": "requiredComponents",
+  "permission": {},
   "usingComponents": {}
 }

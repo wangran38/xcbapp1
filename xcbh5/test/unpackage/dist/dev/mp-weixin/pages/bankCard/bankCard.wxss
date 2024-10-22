@@ -64,6 +64,7 @@
 	color: white;
 }
 .add {
+	margin: 20rpx 0 0 0;
 	line-height: 18rpx;
 	height: 20rpx;
 	background-color: white;

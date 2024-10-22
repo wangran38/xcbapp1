@@ -95,6 +95,8 @@
 					url: `/pages/Buy/Buy?id=${this.shop_id}`
 				});
 			},
+			
+			// 清空购物车
 			clearCart() {
 				// this.clearCart();
 				this.$store.commit('cart/clearCart');

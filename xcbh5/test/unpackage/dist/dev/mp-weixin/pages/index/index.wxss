@@ -1,5 +1,7 @@
 
 .container {
+	overflow: hidden;
+	overflow-y: hidden;
 	display: flex;
 	flex-direction: column;
 	margin: 2rpx 10rpx;
@@ -58,13 +60,11 @@
 	/* background-color: #FF3030; */
 }
 .searchbt {
-	/* position: absolute; */
-	/* right: 95rpx; */
-	margin-left: ;
+
 	height: 60rpx;
-	line-height: 60rpx;
+	/* line-height: 60rpx; */
 	text-align: center;
-	width: 120rpx;
+	width: 150rpx;
 	border: none;
 	background-color: #FF3030;
 	color: white;
@@ -81,14 +81,13 @@
 	text-align: center;
 }
 .uni-margin-wrap {
-	height: 120rpx;
+	/* height: 110rpx; */
 }
 .swiper {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	overflow-x: scroll;
 	height: 100%;
 	white-space: nowrap;
 }
@@ -96,7 +95,6 @@
 	display: inline-block;
 	height: 100%;
 	width: 120rpx;
-	/* line-height: 100%; */
 	margin: 0 20rpx;
 	text-align: center;
 	vertical-align: middle;
@@ -118,7 +116,7 @@
 .Stallholder {
 	display: flex;
 	flex-direction: column;
-	height: 100vh;
+	height: 70vh;
 	overflow-y: auto;
 }
 .Stallholder-content {

@@ -13,7 +13,7 @@
 				</view>
 				<view class="interface">
 					<view class="edit" @click="editShop(item)">编辑</view>
-					<view class="delete" @click="deleteShop">删除</view>
+					<view class="delete" @click="deleteShop(item)">删除</view>
 				</view>
 
 			</view>
@@ -68,7 +68,6 @@
 				pageData: [],
 				shopList: [], // 用于存储摊位列表数据
 				// marketList: [], // 用于存储市场列表数据
-				token: '', // 用户的 token，需要在实际应用中获取
 				imageUploaded: false,
 				showEditPopup: false,
 				currentShopTitle: '',
@@ -81,18 +80,29 @@
 			this.isloaded = true;
 		},
 		created() {
-			this.token = uni.getStorageSync('token');
 			this.reloadData()
 			// this.fetchMarketList(); // 获取市场列表
 			// this.fetchShopList();	
 		},
 		methods: {
-
+			async deleteShop(item){
+				let res = await api.editshop({
+					id:item.id,
+					isshow:2
+				})
+				if (res.code == 200){
+					uni.showToast({
+						title:'删除成功',
+						icon:'success'
+					})
+					this.reloadData()
+				}
+			},
+			
 			// 获取摊位列表
 			async fetchData(params) {
 				try {
 					const response = await api.getMyShops({
-						token: this.token,
 						...params
 					});
 					// this.querySuccess(response.data);

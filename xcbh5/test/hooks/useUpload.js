@@ -1,4 +1,7 @@
-import request, { UPLOAD_URL } from '@/api/index'
+import request, {
+	UPLOAD_URL
+} from '@/api/index'
+import Compressor from 'compressorjs';
 
 export const useUpload = (opts) => {
 	const {
@@ -7,10 +10,6 @@ export const useUpload = (opts) => {
 		FormData,
 		file
 	} = opts;
-	
-				// const body = {
-				// 	"output": "json2"
-				// };
 	const upload = () => {
 		return new Promise(async (resolve, reject) => {
 			uni.showLoading({
@@ -20,12 +19,10 @@ export const useUpload = (opts) => {
 			uni.uploadFile({
 				url: request.UPLOAD_URL + uploadPath,
 				name: 'file',
-				file: file,
-				// FormData.output: 'json2',
+				file: await compressPictures(file),  // 压缩照片
 				filePath: tempFilePaths,
-				formData: { output: 'json2'},
-				header: {
-					// 'token': getToken()
+				formData: {
+					output: 'json2'
 				},
 				success: (res) => {
 					uni.showToast({
@@ -50,3 +47,25 @@ export const useUpload = (opts) => {
 		upload
 	}
 }
+
+
+
+/**
+ * 兼容h5的图片压缩
+*/
+export const compressPictures = (file) => {
+	return new Promise((resolve, reject)=>{
+		let obj = new Compressor(file, {
+		  quality: 0.6, // 压缩质量
+		  convertSize:false,
+		  success: (result) => {
+		    const fileA = new File([result], result.name, { type: result.type })
+			resolve(fileA)
+		  },
+		  error: (error) => {
+			reject("图片压缩失败")
+		  },
+		});
+	})
+}
+				

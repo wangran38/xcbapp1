@@ -43,6 +43,8 @@
 	  width: 0 !important;
 	  height: 0;
 	}
+	
+	
 	.icon {
 	  width: 1em;
 	  height: 1em;

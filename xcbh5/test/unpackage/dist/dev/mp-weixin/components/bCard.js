@@ -13,7 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bCard.vue?vue&type=script&lang=js& */ 386);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _bCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _bCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _bCard_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bCard.vue?vue&type=style&index=0&lang=css& */ 388);
-/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 33);
+/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 32);
 
 var renderjs
 
@@ -142,10 +142,14 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {
 
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 46));
+var _index = __webpack_require__(/*! ../api/index.js */ 47);
 //
 //
 //
@@ -188,13 +192,43 @@ var _default = {
         title: "真的要解除绑定吗??",
         cancelText: '否',
         confirmText: '是',
-        success: function success(res) {
-          if (res.confirm) {
-            // 发送解绑接口
-          } else {
-            _this.moreStatus = false;
+        success: function () {
+          var _success = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(res) {
+            var requestsData, _res;
+            return _regenerator.default.wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    if (!res.confirm) {
+                      _context.next = 8;
+                      break;
+                    }
+                    console.log(_this.info);
+                    requestsData = {
+                      id: _this.info.Id,
+                      status: 1
+                    };
+                    _context.next = 5;
+                    return _index.api.editshopbank(requestsData);
+                  case 5:
+                    _res = _context.sent;
+                    console.log(_res);
+                    // 发送解绑接口,执行父组件的更新方法重新请求数据
+                    _this.$emit('remove');
+                  case 8:
+                    _this.moreStatus = false;
+                  case 9:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee);
+          }));
+          function success(_x) {
+            return _success.apply(this, arguments);
           }
-        }
+          return success;
+        }()
       });
     }
   }

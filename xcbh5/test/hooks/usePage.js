@@ -2,12 +2,12 @@ export default {
 	data() {
 		return {
 			page: 1,
-			limit: 8,
+			limit: 10,
 			totalnum: 0,
 			pageData: [],
 			pageLoading: false,
 			hasMore: true,
-			searchParams:{}
+			searchParams: {}
 		};
 	},
 	computed: {
@@ -18,6 +18,7 @@ export default {
 			return {
 				page: this.page,
 				limit: this.limit,
+				isshow: 1,
 				...filteredSearchParams
 			};
 		}
@@ -25,7 +26,6 @@ export default {
 	methods: {
 		async loadPageData() {
 			if (!this.hasMore || this.pageLoading) return;
-
 			this.pageLoading = true;
 			try {
 				const response = await this.fetchData(this.queryParams);
@@ -39,6 +39,8 @@ export default {
 		async fetchData(params) {
 			throw new Error('fetchData 方法未实现');
 		},
+
+		// 检测还有没有下一页
 		querySuccess(data) {
 			if (data?.listdata) {
 				this.pageData = this.page === 1 ? data.listdata : this.pageData.concat(data.listdata);
@@ -46,6 +48,10 @@ export default {
 				this.hasMore = this.pageData.length < this.totalnum;
 			}
 		},
+
+		/**
+		 * 分页加载
+		 */
 		handleScrollToLower() {
 			if (!this.pageLoading && this.hasMore) {
 				this.page += 1;
@@ -55,6 +61,8 @@ export default {
 		handleFetchError(error) {
 			console.error('Error loading data:', error);
 		},
+
+		// 初始化
 		resetPagination() {
 			this.page = 1;
 			this.pageData = [];

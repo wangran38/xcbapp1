@@ -97,8 +97,6 @@
 				categoryList: ['请选择分类'],
 				categoryIdMap: {}, // 分类名称到ID的映射
 				selectedCategory: '请选择分类',
-				isImageSelected: false, // 用于标记是否选择了摊位图片
-				isImageSelected2: false, // 用于标记是否选择了营业执照图片
 				provinceList: [],
 				cityList: [],
 				districtList: [],
@@ -115,7 +113,8 @@
 				market_id: null,
 				category_id: null,
 				isSubmitting: false,
-				businessLicense:'' // 营业执照
+				businessLicense:'', // 营业执照
+				isImageSelected:false
 			};
 		},
 		mounted() {
@@ -123,11 +122,25 @@
 			this.fetchCategories();
 			this.fetchMarkets(); // 获取市场列表
 		},
+		onShow() {
+			if (this.checkToken()){
+				uni.navigateTo({
+					url:'/pages/login/login'
+				})
+			}
+		},
 		methods: {
+			// 检查是否token存在，存在则已登陆
+			checkToken() {
+				const token = uni.getStorageSync('token');
+				if (!token){
+					return true
+				}
+				return false
+			},
 			// 返回上一页
 			 async customizeBack(){  
 			  let canNavBack = await getCurrentPages()
-			  console.log(canNavBack)
 			  if( canNavBack && canNavBack.length>1) {  
 			      uni.navigateBack() 
 			  } else {  
@@ -234,7 +247,7 @@
 				try {
 					const Limit = 100;
 					const response = await api.marketlist(areaId,Limit); // 传递实际的 areaId
-					console.log('Market API response:', response); // 打印响应数据
+					// console.log('Market API response:', response); // 打印响应数据
 					if (response.code === 200) {
 						this.marketData = response.data.listdata;
 						this.marketList = response.data.listdata.map(item => item.marketname);
@@ -290,13 +303,13 @@
 					success: (res) => {
 						const tempFilePaths = res.tempFilePaths;
 						if (tempFilePaths.length > 0) {
-							console.log(tempFilePaths);
 							const {
 								upload,
 								request
 							} = useUpload({
 								uploadPath: '/group1/upload',
-								tempFilePaths: tempFilePaths[0]
+								tempFilePaths: tempFilePaths[0],
+								file:res.tempFiles[0]
 							})
 
 							upload().then((res) => {
@@ -310,40 +323,12 @@
 				});
 			},
 			
-			// 营业执照图片上传
-			chooseImage2() {
-				uni.chooseImage({
-					count: 1,
-					sizeType: ['compressed','original'],
-					sourceType: ['album', 'camera'],
-					success: (res) => {
-						const tempFilePaths = res.tempFilePaths;
-						if (tempFilePaths.length > 0) {
-							console.log(tempFilePaths);
-							const {
-								upload,
-								request
-							} = useUpload({
-								uploadPath: '/group1/upload',
-								tempFilePaths: tempFilePaths[0]
-							})
-			
-							upload().then((res) => {
-								var obj = JSON.parse(res);
-								this.businessLicense = UPLOAD_URL+obj.data.path;
-									this.isImageSelected2 = true;
-							})
-						}
-					}
-				});
-			},
-
 
 
 			async submitForm() {
 				if (this.isSubmitting) return; // 如果正在提交，直接返回
 				if (!this.contactpeople || !this.contactphone || !this.title || !this.phone  || !this
-					.area_id || !this.market_id || !this.category_id) {
+					.area_id || !this.market_id || !this.category_id || !this.logo) {
 					uni.showToast({
 						title: '请填写完整的信息',
 						icon: 'none'

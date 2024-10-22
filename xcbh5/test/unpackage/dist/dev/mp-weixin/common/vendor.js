@@ -84,7 +84,7 @@ module.exports = _defineProperty, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
-/***/ 113:
+/***/ 112:
 /*!**********************************************!*\
   !*** E:/xcbh5/xcbh5/test/hooks/useUpload.js ***!
   \**********************************************/
@@ -99,10 +99,11 @@ var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ 13);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.useUpload = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 45));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 47));
-var _index = _interopRequireWildcard(__webpack_require__(/*! @/api/index */ 48));
+exports.useUpload = exports.compressPictures = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 46));
+var _index = _interopRequireWildcard(__webpack_require__(/*! @/api/index */ 47));
+var _compressorjs = _interopRequireDefault(__webpack_require__(/*! compressorjs */ 113));
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 var useUpload = function useUpload(opts) {
@@ -110,10 +111,6 @@ var useUpload = function useUpload(opts) {
     tempFilePaths = opts.tempFilePaths,
     FormData = opts.FormData,
     file = opts.file;
-
-  // const body = {
-  // 	"output": "json2"
-  // };
   var upload = function upload() {
     return new Promise( /*#__PURE__*/function () {
       var _ref = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(resolve, reject) {
@@ -125,35 +122,42 @@ var useUpload = function useUpload(opts) {
                   title: '上传中',
                   mask: true
                 });
-                uni.uploadFile({
-                  url: _index.default.UPLOAD_URL + uploadPath,
+                _context.t0 = uni;
+                _context.t1 = _index.default.UPLOAD_URL + uploadPath;
+                _context.next = 5;
+                return compressPictures(file);
+              case 5:
+                _context.t2 = _context.sent;
+                _context.t3 = tempFilePaths;
+                _context.t4 = {
+                  output: 'json2'
+                };
+                _context.t5 = function success(res) {
+                  uni.showToast({
+                    title: '上传成功'
+                  });
+                  uni.hideLoading();
+                  resolve(res === null || res === void 0 ? void 0 : res.data);
+                };
+                _context.t6 = function fail(err) {
+                  console.log(err);
+                  uni.showToast({
+                    title: '上传失败',
+                    icon: 'error'
+                  });
+                  uni.hideLoading();
+                };
+                _context.t7 = {
+                  url: _context.t1,
                   name: 'file',
-                  file: file,
-                  // FormData.output: 'json2',
-                  filePath: tempFilePaths,
-                  formData: {
-                    output: 'json2'
-                  },
-                  header: {
-                    // 'token': getToken()
-                  },
-                  success: function success(res) {
-                    uni.showToast({
-                      title: '上传成功'
-                    });
-                    uni.hideLoading();
-                    resolve(res === null || res === void 0 ? void 0 : res.data);
-                  },
-                  fail: function fail(err) {
-                    console.log(err);
-                    uni.showToast({
-                      title: '上传失败',
-                      icon: 'error'
-                    });
-                    uni.hideLoading();
-                  }
-                });
-              case 2:
+                  file: _context.t2,
+                  filePath: _context.t3,
+                  formData: _context.t4,
+                  success: _context.t5,
+                  fail: _context.t6
+                };
+                _context.t0.uploadFile.call(_context.t0, _context.t7);
+              case 12:
               case "end":
                 return _context.stop();
             }
@@ -169,8 +173,1102 @@ var useUpload = function useUpload(opts) {
     upload: upload
   };
 };
+
+/**
+ * 兼容h5的图片压缩
+*/
 exports.useUpload = useUpload;
+var compressPictures = function compressPictures(file) {
+  return new Promise(function (resolve, reject) {
+    var obj = new _compressorjs.default(file, {
+      quality: 0.6,
+      // 压缩质量
+      convertSize: false,
+      success: function success(result) {
+        var fileA = new File([result], result.name, {
+          type: result.type
+        });
+        resolve(fileA);
+      },
+      error: function error(_error) {
+        reject("图片压缩失败");
+      }
+    });
+  });
+};
+exports.compressPictures = compressPictures;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+
+/***/ 113:
+/*!************************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/node_modules/compressorjs/dist/compressor.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ 13);
+/*!
+ * Compressor.js v1.2.1
+ * https://fengyuanchen.github.io/compressorjs
+ *
+ * Copyright 2018-present Chen Fengyuan
+ * Released under the MIT license
+ *
+ * Date: 2023-02-28T14:09:41.732Z
+ */
+
+(function (global, factory) {
+  ( false ? undefined : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = factory() :  true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : (undefined);
+})(this, function () {
+  'use strict';
+
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      enumerableOnly && (symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })), keys.push.apply(keys, symbols);
+    }
+    return keys;
+  }
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = null != arguments[i] ? arguments[i] : {};
+      i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+    return target;
+  }
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+  function _defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
+    }
+  }
+  function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    Object.defineProperty(Constructor, "prototype", {
+      writable: false
+    });
+    return Constructor;
+  }
+  function _defineProperty(obj, key, value) {
+    key = _toPropertyKey(key);
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+  function _extends() {
+    _extends = Object.assign ? Object.assign.bind() : function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+    return _extends.apply(this, arguments);
+  }
+  function _toPrimitive(input, hint) {
+    if (_typeof(input) !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (_typeof(res) !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+  function _toPropertyKey(arg) {
+    var key = _toPrimitive(arg, "string");
+    return _typeof(key) === "symbol" ? key : String(key);
+  }
+  var canvasToBlob = {
+    exports: {}
+  };
+
+  /*
+   * JavaScript Canvas to Blob
+   * https://github.com/blueimp/JavaScript-Canvas-to-Blob
+   *
+   * Copyright 2012, Sebastian Tschan
+   * https://blueimp.net
+   *
+   * Licensed under the MIT license:
+   * https://opensource.org/licenses/MIT
+   *
+   * Based on stackoverflow user Stoive's code snippet:
+   * http://stackoverflow.com/q/4998908
+   */
+  (function (module) {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    (function (window) {
+      var CanvasPrototype = window.HTMLCanvasElement && window.HTMLCanvasElement.prototype;
+      var hasBlobConstructor = window.Blob && function () {
+        try {
+          return Boolean(new Blob());
+        } catch (e) {
+          return false;
+        }
+      }();
+      var hasArrayBufferViewSupport = hasBlobConstructor && window.Uint8Array && function () {
+        try {
+          return new Blob([new Uint8Array(100)]).size === 100;
+        } catch (e) {
+          return false;
+        }
+      }();
+      var BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder;
+      var dataURIPattern = /^data:((.*?)(;charset=.*?)?)(;base64)?,/;
+      var dataURLtoBlob = (hasBlobConstructor || BlobBuilder) && window.atob && window.ArrayBuffer && window.Uint8Array && function (dataURI) {
+        var matches, mediaType, isBase64, dataString, byteString, arrayBuffer, intArray, i, bb;
+        // Parse the dataURI components as per RFC 2397
+        matches = dataURI.match(dataURIPattern);
+        if (!matches) {
+          throw new Error('invalid data URI');
+        }
+        // Default to text/plain;charset=US-ASCII
+        mediaType = matches[2] ? matches[1] : 'text/plain' + (matches[3] || ';charset=US-ASCII');
+        isBase64 = !!matches[4];
+        dataString = dataURI.slice(matches[0].length);
+        if (isBase64) {
+          // Convert base64 to raw binary data held in a string:
+          byteString = atob(dataString);
+        } else {
+          // Convert base64/URLEncoded data component to raw binary:
+          byteString = decodeURIComponent(dataString);
+        }
+        // Write the bytes of the string to an ArrayBuffer:
+        arrayBuffer = new ArrayBuffer(byteString.length);
+        intArray = new Uint8Array(arrayBuffer);
+        for (i = 0; i < byteString.length; i += 1) {
+          intArray[i] = byteString.charCodeAt(i);
+        }
+        // Write the ArrayBuffer (or ArrayBufferView) to a blob:
+        if (hasBlobConstructor) {
+          return new Blob([hasArrayBufferViewSupport ? intArray : arrayBuffer], {
+            type: mediaType
+          });
+        }
+        bb = new BlobBuilder();
+        bb.append(arrayBuffer);
+        return bb.getBlob(mediaType);
+      };
+      if (window.HTMLCanvasElement && !CanvasPrototype.toBlob) {
+        if (CanvasPrototype.mozGetAsFile) {
+          CanvasPrototype.toBlob = function (callback, type, quality) {
+            var self = this;
+            setTimeout(function () {
+              if (quality && CanvasPrototype.toDataURL && dataURLtoBlob) {
+                callback(dataURLtoBlob(self.toDataURL(type, quality)));
+              } else {
+                callback(self.mozGetAsFile('blob', type));
+              }
+            });
+          };
+        } else if (CanvasPrototype.toDataURL && dataURLtoBlob) {
+          if (CanvasPrototype.msToBlob) {
+            CanvasPrototype.toBlob = function (callback, type, quality) {
+              var self = this;
+              setTimeout(function () {
+                if ((type && type !== 'image/png' || quality) && CanvasPrototype.toDataURL && dataURLtoBlob) {
+                  callback(dataURLtoBlob(self.toDataURL(type, quality)));
+                } else {
+                  callback(self.msToBlob(type));
+                }
+              });
+            };
+          } else {
+            CanvasPrototype.toBlob = function (callback, type, quality) {
+              var self = this;
+              setTimeout(function () {
+                callback(dataURLtoBlob(self.toDataURL(type, quality)));
+              });
+            };
+          }
+        }
+      }
+      if (module.exports) {
+        module.exports = dataURLtoBlob;
+      } else {
+        window.dataURLtoBlob = dataURLtoBlob;
+      }
+    })(window);
+  })(canvasToBlob);
+  var toBlob = canvasToBlob.exports;
+  var isBlob = function isBlob(value) {
+    if (typeof Blob === 'undefined') {
+      return false;
+    }
+    return value instanceof Blob || Object.prototype.toString.call(value) === '[object Blob]';
+  };
+  var DEFAULTS = {
+    /**
+     * Indicates if output the original image instead of the compressed one
+     * when the size of the compressed image is greater than the original one's
+     * @type {boolean}
+     */
+    strict: true,
+    /**
+     * Indicates if read the image's Exif Orientation information,
+     * and then rotate or flip the image automatically.
+     * @type {boolean}
+     */
+    checkOrientation: true,
+    /**
+     * Indicates if retain the image's Exif information after compressed.
+     * @type {boolean}
+    */
+    retainExif: false,
+    /**
+     * The max width of the output image.
+     * @type {number}
+     */
+    maxWidth: Infinity,
+    /**
+     * The max height of the output image.
+     * @type {number}
+     */
+    maxHeight: Infinity,
+    /**
+     * The min width of the output image.
+     * @type {number}
+     */
+    minWidth: 0,
+    /**
+     * The min height of the output image.
+     * @type {number}
+     */
+    minHeight: 0,
+    /**
+     * The width of the output image.
+     * If not specified, the natural width of the source image will be used.
+     * @type {number}
+     */
+    width: undefined,
+    /**
+     * The height of the output image.
+     * If not specified, the natural height of the source image will be used.
+     * @type {number}
+     */
+    height: undefined,
+    /**
+     * Sets how the size of the image should be resized to the container
+     * specified by the `width` and `height` options.
+     * @type {string}
+     */
+    resize: 'none',
+    /**
+     * The quality of the output image.
+     * It must be a number between `0` and `1`,
+     * and only available for `image/jpeg` and `image/webp` images.
+     * Check out {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob canvas.toBlob}.
+     * @type {number}
+     */
+    quality: 0.8,
+    /**
+     * The mime type of the output image.
+     * By default, the original mime type of the source image file will be used.
+     * @type {string}
+     */
+    mimeType: 'auto',
+    /**
+     * Files whose file type is included in this list,
+     * and whose file size exceeds the `convertSize` value will be converted to JPEGs.
+     * @type {string｜Array}
+     */
+    convertTypes: ['image/png'],
+    /**
+     * PNG files over this size (5 MB by default) will be converted to JPEGs.
+     * To disable this, just set the value to `Infinity`.
+     * @type {number}
+     */
+    convertSize: 5000000,
+    /**
+     * The hook function to execute before draw the image into the canvas for compression.
+     * @type {Function}
+     * @param {CanvasRenderingContext2D} context - The 2d rendering context of the canvas.
+     * @param {HTMLCanvasElement} canvas - The canvas for compression.
+     * @example
+     * function (context, canvas) {
+     *   context.fillStyle = '#fff';
+     * }
+     */
+    beforeDraw: null,
+    /**
+     * The hook function to execute after drew the image into the canvas for compression.
+     * @type {Function}
+     * @param {CanvasRenderingContext2D} context - The 2d rendering context of the canvas.
+     * @param {HTMLCanvasElement} canvas - The canvas for compression.
+     * @example
+     * function (context, canvas) {
+     *   context.filter = 'grayscale(100%)';
+     * }
+     */
+    drew: null,
+    /**
+     * The hook function to execute when success to compress the image.
+     * @type {Function}
+     * @param {File} file - The compressed image File object.
+     * @example
+     * function (file) {
+     *   console.log(file);
+     * }
+     */
+    success: null,
+    /**
+     * The hook function to execute when fail to compress the image.
+     * @type {Function}
+     * @param {Error} err - An Error object.
+     * @example
+     * function (err) {
+     *   console.log(err.message);
+     * }
+     */
+    error: null
+  };
+  var IS_BROWSER = typeof window !== 'undefined' && typeof window.document !== 'undefined';
+  var WINDOW = IS_BROWSER ? window : {};
+
+  /**
+   * Check if the given value is a positive number.
+   * @param {*} value - The value to check.
+   * @returns {boolean} Returns `true` if the given value is a positive number, else `false`.
+   */
+  var isPositiveNumber = function isPositiveNumber(value) {
+    return value > 0 && value < Infinity;
+  };
+  var slice = Array.prototype.slice;
+
+  /**
+   * Convert array-like or iterable object to an array.
+   * @param {*} value - The value to convert.
+   * @returns {Array} Returns a new array.
+   */
+  function toArray(value) {
+    return Array.from ? Array.from(value) : slice.call(value);
+  }
+  var REGEXP_IMAGE_TYPE = /^image\/.+$/;
+
+  /**
+   * Check if the given value is a mime type of image.
+   * @param {*} value - The value to check.
+   * @returns {boolean} Returns `true` if the given is a mime type of image, else `false`.
+   */
+  function isImageType(value) {
+    return REGEXP_IMAGE_TYPE.test(value);
+  }
+
+  /**
+   * Convert image type to extension.
+   * @param {string} value - The image type to convert.
+   * @returns {boolean} Returns the image extension.
+   */
+  function imageTypeToExtension(value) {
+    var extension = isImageType(value) ? value.substr(6) : '';
+    if (extension === 'jpeg') {
+      extension = 'jpg';
+    }
+    return ".".concat(extension);
+  }
+  var fromCharCode = String.fromCharCode;
+
+  /**
+   * Get string from char code in data view.
+   * @param {DataView} dataView - The data view for read.
+   * @param {number} start - The start index.
+   * @param {number} length - The read length.
+   * @returns {string} The read result.
+   */
+  function getStringFromCharCode(dataView, start, length) {
+    var str = '';
+    var i;
+    length += start;
+    for (i = start; i < length; i += 1) {
+      str += fromCharCode(dataView.getUint8(i));
+    }
+    return str;
+  }
+  var btoa = WINDOW.btoa;
+
+  /**
+   * Transform array buffer to Data URL.
+   * @param {ArrayBuffer} arrayBuffer - The array buffer to transform.
+   * @param {string} mimeType - The mime type of the Data URL.
+   * @returns {string} The result Data URL.
+   */
+  function arrayBufferToDataURL(arrayBuffer, mimeType) {
+    var chunks = [];
+    var chunkSize = 8192;
+    var uint8 = new Uint8Array(arrayBuffer);
+    while (uint8.length > 0) {
+      // XXX: Babel's `toConsumableArray` helper will throw error in IE or Safari 9
+      // eslint-disable-next-line prefer-spread
+      chunks.push(fromCharCode.apply(null, toArray(uint8.subarray(0, chunkSize))));
+      uint8 = uint8.subarray(chunkSize);
+    }
+    return "data:".concat(mimeType, ";base64,").concat(btoa(chunks.join('')));
+  }
+
+  /**
+   * Get orientation value from given array buffer.
+   * @param {ArrayBuffer} arrayBuffer - The array buffer to read.
+   * @returns {number} The read orientation value.
+   */
+  function resetAndGetOrientation(arrayBuffer) {
+    var dataView = new DataView(arrayBuffer);
+    var orientation;
+
+    // Ignores range error when the image does not have correct Exif information
+    try {
+      var littleEndian;
+      var app1Start;
+      var ifdStart;
+
+      // Only handle JPEG image (start by 0xFFD8)
+      if (dataView.getUint8(0) === 0xFF && dataView.getUint8(1) === 0xD8) {
+        var length = dataView.byteLength;
+        var offset = 2;
+        while (offset + 1 < length) {
+          if (dataView.getUint8(offset) === 0xFF && dataView.getUint8(offset + 1) === 0xE1) {
+            app1Start = offset;
+            break;
+          }
+          offset += 1;
+        }
+      }
+      if (app1Start) {
+        var exifIDCode = app1Start + 4;
+        var tiffOffset = app1Start + 10;
+        if (getStringFromCharCode(dataView, exifIDCode, 4) === 'Exif') {
+          var endianness = dataView.getUint16(tiffOffset);
+          littleEndian = endianness === 0x4949;
+          if (littleEndian || endianness === 0x4D4D /* bigEndian */) {
+            if (dataView.getUint16(tiffOffset + 2, littleEndian) === 0x002A) {
+              var firstIFDOffset = dataView.getUint32(tiffOffset + 4, littleEndian);
+              if (firstIFDOffset >= 0x00000008) {
+                ifdStart = tiffOffset + firstIFDOffset;
+              }
+            }
+          }
+        }
+      }
+      if (ifdStart) {
+        var _length = dataView.getUint16(ifdStart, littleEndian);
+        var _offset;
+        var i;
+        for (i = 0; i < _length; i += 1) {
+          _offset = ifdStart + i * 12 + 2;
+          if (dataView.getUint16(_offset, littleEndian) === 0x0112 /* Orientation */) {
+            // 8 is the offset of the current tag's value
+            _offset += 8;
+
+            // Get the original orientation value
+            orientation = dataView.getUint16(_offset, littleEndian);
+
+            // Override the orientation with its default value
+            dataView.setUint16(_offset, 1, littleEndian);
+            break;
+          }
+        }
+      }
+    } catch (e) {
+      orientation = 1;
+    }
+    return orientation;
+  }
+
+  /**
+   * Parse Exif Orientation value.
+   * @param {number} orientation - The orientation to parse.
+   * @returns {Object} The parsed result.
+   */
+  function parseOrientation(orientation) {
+    var rotate = 0;
+    var scaleX = 1;
+    var scaleY = 1;
+    switch (orientation) {
+      // Flip horizontal
+      case 2:
+        scaleX = -1;
+        break;
+
+      // Rotate left 180°
+      case 3:
+        rotate = -180;
+        break;
+
+      // Flip vertical
+      case 4:
+        scaleY = -1;
+        break;
+
+      // Flip vertical and rotate right 90°
+      case 5:
+        rotate = 90;
+        scaleY = -1;
+        break;
+
+      // Rotate right 90°
+      case 6:
+        rotate = 90;
+        break;
+
+      // Flip horizontal and rotate right 90°
+      case 7:
+        rotate = 90;
+        scaleX = -1;
+        break;
+
+      // Rotate left 90°
+      case 8:
+        rotate = -90;
+        break;
+    }
+    return {
+      rotate: rotate,
+      scaleX: scaleX,
+      scaleY: scaleY
+    };
+  }
+  var REGEXP_DECIMALS = /\.\d*(?:0|9){12}\d*$/;
+
+  /**
+   * Normalize decimal number.
+   * Check out {@link https://0.30000000000000004.com/}
+   * @param {number} value - The value to normalize.
+   * @param {number} [times=100000000000] - The times for normalizing.
+   * @returns {number} Returns the normalized number.
+   */
+  function normalizeDecimalNumber(value) {
+    var times = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 100000000000;
+    return REGEXP_DECIMALS.test(value) ? Math.round(value * times) / times : value;
+  }
+
+  /**
+   * Get the max sizes in a rectangle under the given aspect ratio.
+   * @param {Object} data - The original sizes.
+   * @param {string} [type='contain'] - The adjust type.
+   * @returns {Object} The result sizes.
+   */
+  function getAdjustedSizes(_ref) {
+    var aspectRatio = _ref.aspectRatio,
+      height = _ref.height,
+      width = _ref.width;
+    var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'none';
+    var isValidWidth = isPositiveNumber(width);
+    var isValidHeight = isPositiveNumber(height);
+    if (isValidWidth && isValidHeight) {
+      var adjustedWidth = height * aspectRatio;
+      if ((type === 'contain' || type === 'none') && adjustedWidth > width || type === 'cover' && adjustedWidth < width) {
+        height = width / aspectRatio;
+      } else {
+        width = height * aspectRatio;
+      }
+    } else if (isValidWidth) {
+      height = width / aspectRatio;
+    } else if (isValidHeight) {
+      width = height * aspectRatio;
+    }
+    return {
+      width: width,
+      height: height
+    };
+  }
+
+  /**
+   * Get Exif information from the given array buffer.
+   * @param {ArrayBuffer} arrayBuffer - The array buffer to read.
+   * @returns {Array} The read Exif information.
+   */
+  function getExif(arrayBuffer) {
+    var array = toArray(new Uint8Array(arrayBuffer));
+    var length = array.length;
+    var segments = [];
+    var start = 0;
+    while (start + 3 < length) {
+      var value = array[start];
+      var next = array[start + 1];
+
+      // SOS (Start of Scan)
+      if (value === 0xFF && next === 0xDA) {
+        break;
+      }
+
+      // SOI (Start of Image)
+      if (value === 0xFF && next === 0xD8) {
+        start += 2;
+      } else {
+        var offset = array[start + 2] * 256 + array[start + 3];
+        var end = start + offset + 2;
+        var segment = array.slice(start, end);
+        segments.push(segment);
+        start = end;
+      }
+    }
+    return segments.reduce(function (exifArray, current) {
+      if (current[0] === 0xFF && current[1] === 0xE1) {
+        return exifArray.concat(current);
+      }
+      return exifArray;
+    }, []);
+  }
+
+  /**
+   * Insert Exif information into the given array buffer.
+   * @param {ArrayBuffer} arrayBuffer - The array buffer to transform.
+   * @param {Array} exifArray - The Exif information to insert.
+   * @returns {ArrayBuffer} The transformed array buffer.
+   */
+  function insertExif(arrayBuffer, exifArray) {
+    var array = toArray(new Uint8Array(arrayBuffer));
+    if (array[2] !== 0xFF || array[3] !== 0xE0) {
+      return arrayBuffer;
+    }
+    var app0Length = array[4] * 256 + array[5];
+    var newArrayBuffer = [0xFF, 0xD8].concat(exifArray, array.slice(4 + app0Length));
+    return new Uint8Array(newArrayBuffer);
+  }
+  var ArrayBuffer$1 = WINDOW.ArrayBuffer,
+    FileReader = WINDOW.FileReader;
+  var URL = WINDOW.URL || WINDOW.webkitURL;
+  var REGEXP_EXTENSION = /\.\w+$/;
+  var AnotherCompressor = WINDOW.Compressor;
+
+  /**
+   * Creates a new image compressor.
+   * @class
+   */
+  var Compressor = /*#__PURE__*/function () {
+    /**
+     * The constructor of Compressor.
+     * @param {File|Blob} file - The target image file for compressing.
+     * @param {Object} [options] - The options for compressing.
+     */
+    function Compressor(file, options) {
+      _classCallCheck(this, Compressor);
+      this.file = file;
+      this.exif = [];
+      this.image = new Image();
+      this.options = _objectSpread2(_objectSpread2({}, DEFAULTS), options);
+      this.aborted = false;
+      this.result = null;
+      this.init();
+    }
+    _createClass(Compressor, [{
+      key: "init",
+      value: function init() {
+        var _this = this;
+        var file = this.file,
+          options = this.options;
+        if (!isBlob(file)) {
+          this.fail(new Error('The first argument must be a File or Blob object.'));
+          return;
+        }
+        var mimeType = file.type;
+        if (!isImageType(mimeType)) {
+          this.fail(new Error('The first argument must be an image File or Blob object.'));
+          return;
+        }
+        if (!URL || !FileReader) {
+          this.fail(new Error('The current browser does not support image compression.'));
+          return;
+        }
+        if (!ArrayBuffer$1) {
+          options.checkOrientation = false;
+          options.retainExif = false;
+        }
+        var isJPEGImage = mimeType === 'image/jpeg';
+        var checkOrientation = isJPEGImage && options.checkOrientation;
+        var retainExif = isJPEGImage && options.retainExif;
+        if (URL && !checkOrientation && !retainExif) {
+          this.load({
+            url: URL.createObjectURL(file)
+          });
+        } else {
+          var reader = new FileReader();
+          this.reader = reader;
+          reader.onload = function (_ref) {
+            var target = _ref.target;
+            var result = target.result;
+            var data = {};
+            var orientation = 1;
+            if (checkOrientation) {
+              // Reset the orientation value to its default value 1
+              // as some iOS browsers will render image with its orientation
+              orientation = resetAndGetOrientation(result);
+              if (orientation > 1) {
+                _extends(data, parseOrientation(orientation));
+              }
+            }
+            if (retainExif) {
+              _this.exif = getExif(result);
+            }
+            if (checkOrientation || retainExif) {
+              if (!URL
+
+              // Generate a new URL with the default orientation value 1.
+              || orientation > 1) {
+                data.url = arrayBufferToDataURL(result, mimeType);
+              } else {
+                data.url = URL.createObjectURL(file);
+              }
+            } else {
+              data.url = result;
+            }
+            _this.load(data);
+          };
+          reader.onabort = function () {
+            _this.fail(new Error('Aborted to read the image with FileReader.'));
+          };
+          reader.onerror = function () {
+            _this.fail(new Error('Failed to read the image with FileReader.'));
+          };
+          reader.onloadend = function () {
+            _this.reader = null;
+          };
+          if (checkOrientation || retainExif) {
+            reader.readAsArrayBuffer(file);
+          } else {
+            reader.readAsDataURL(file);
+          }
+        }
+      }
+    }, {
+      key: "load",
+      value: function load(data) {
+        var _this2 = this;
+        var file = this.file,
+          image = this.image;
+        image.onload = function () {
+          _this2.draw(_objectSpread2(_objectSpread2({}, data), {}, {
+            naturalWidth: image.naturalWidth,
+            naturalHeight: image.naturalHeight
+          }));
+        };
+        image.onabort = function () {
+          _this2.fail(new Error('Aborted to load the image.'));
+        };
+        image.onerror = function () {
+          _this2.fail(new Error('Failed to load the image.'));
+        };
+
+        // Match all browsers that use WebKit as the layout engine in iOS devices,
+        // such as Safari for iOS, Chrome for iOS, and in-app browsers.
+        if (WINDOW.navigator && /(?:iPad|iPhone|iPod).*?AppleWebKit/i.test(WINDOW.navigator.userAgent)) {
+          // Fix the `The operation is insecure` error (#57)
+          image.crossOrigin = 'anonymous';
+        }
+        image.alt = file.name;
+        image.src = data.url;
+      }
+    }, {
+      key: "draw",
+      value: function draw(_ref2) {
+        var _this3 = this;
+        var naturalWidth = _ref2.naturalWidth,
+          naturalHeight = _ref2.naturalHeight,
+          _ref2$rotate = _ref2.rotate,
+          rotate = _ref2$rotate === void 0 ? 0 : _ref2$rotate,
+          _ref2$scaleX = _ref2.scaleX,
+          scaleX = _ref2$scaleX === void 0 ? 1 : _ref2$scaleX,
+          _ref2$scaleY = _ref2.scaleY,
+          scaleY = _ref2$scaleY === void 0 ? 1 : _ref2$scaleY;
+        var file = this.file,
+          image = this.image,
+          options = this.options;
+        var canvas = document.createElement('canvas');
+        var context = canvas.getContext('2d');
+        var is90DegreesRotated = Math.abs(rotate) % 180 === 90;
+        var resizable = (options.resize === 'contain' || options.resize === 'cover') && isPositiveNumber(options.width) && isPositiveNumber(options.height);
+        var maxWidth = Math.max(options.maxWidth, 0) || Infinity;
+        var maxHeight = Math.max(options.maxHeight, 0) || Infinity;
+        var minWidth = Math.max(options.minWidth, 0) || 0;
+        var minHeight = Math.max(options.minHeight, 0) || 0;
+        var aspectRatio = naturalWidth / naturalHeight;
+        var width = options.width,
+          height = options.height;
+        if (is90DegreesRotated) {
+          var _ref3 = [maxHeight, maxWidth];
+          maxWidth = _ref3[0];
+          maxHeight = _ref3[1];
+          var _ref4 = [minHeight, minWidth];
+          minWidth = _ref4[0];
+          minHeight = _ref4[1];
+          var _ref5 = [height, width];
+          width = _ref5[0];
+          height = _ref5[1];
+        }
+        if (resizable) {
+          aspectRatio = width / height;
+        }
+        var _getAdjustedSizes = getAdjustedSizes({
+          aspectRatio: aspectRatio,
+          width: maxWidth,
+          height: maxHeight
+        }, 'contain');
+        maxWidth = _getAdjustedSizes.width;
+        maxHeight = _getAdjustedSizes.height;
+        var _getAdjustedSizes2 = getAdjustedSizes({
+          aspectRatio: aspectRatio,
+          width: minWidth,
+          height: minHeight
+        }, 'cover');
+        minWidth = _getAdjustedSizes2.width;
+        minHeight = _getAdjustedSizes2.height;
+        if (resizable) {
+          var _getAdjustedSizes3 = getAdjustedSizes({
+            aspectRatio: aspectRatio,
+            width: width,
+            height: height
+          }, options.resize);
+          width = _getAdjustedSizes3.width;
+          height = _getAdjustedSizes3.height;
+        } else {
+          var _getAdjustedSizes4 = getAdjustedSizes({
+            aspectRatio: aspectRatio,
+            width: width,
+            height: height
+          });
+          var _getAdjustedSizes4$wi = _getAdjustedSizes4.width;
+          width = _getAdjustedSizes4$wi === void 0 ? naturalWidth : _getAdjustedSizes4$wi;
+          var _getAdjustedSizes4$he = _getAdjustedSizes4.height;
+          height = _getAdjustedSizes4$he === void 0 ? naturalHeight : _getAdjustedSizes4$he;
+        }
+        width = Math.floor(normalizeDecimalNumber(Math.min(Math.max(width, minWidth), maxWidth)));
+        height = Math.floor(normalizeDecimalNumber(Math.min(Math.max(height, minHeight), maxHeight)));
+        var destX = -width / 2;
+        var destY = -height / 2;
+        var destWidth = width;
+        var destHeight = height;
+        var params = [];
+        if (resizable) {
+          var srcX = 0;
+          var srcY = 0;
+          var srcWidth = naturalWidth;
+          var srcHeight = naturalHeight;
+          var _getAdjustedSizes5 = getAdjustedSizes({
+            aspectRatio: aspectRatio,
+            width: naturalWidth,
+            height: naturalHeight
+          }, {
+            contain: 'cover',
+            cover: 'contain'
+          }[options.resize]);
+          srcWidth = _getAdjustedSizes5.width;
+          srcHeight = _getAdjustedSizes5.height;
+          srcX = (naturalWidth - srcWidth) / 2;
+          srcY = (naturalHeight - srcHeight) / 2;
+          params.push(srcX, srcY, srcWidth, srcHeight);
+        }
+        params.push(destX, destY, destWidth, destHeight);
+        if (is90DegreesRotated) {
+          var _ref6 = [height, width];
+          width = _ref6[0];
+          height = _ref6[1];
+        }
+        canvas.width = width;
+        canvas.height = height;
+        if (!isImageType(options.mimeType)) {
+          options.mimeType = file.type;
+        }
+        var fillStyle = 'transparent';
+
+        // Converts PNG files over the `convertSize` to JPEGs.
+        if (file.size > options.convertSize && options.convertTypes.indexOf(options.mimeType) >= 0) {
+          options.mimeType = 'image/jpeg';
+        }
+        var isJPEGImage = options.mimeType === 'image/jpeg';
+        if (isJPEGImage) {
+          fillStyle = '#fff';
+        }
+
+        // Override the default fill color (#000, black)
+        context.fillStyle = fillStyle;
+        context.fillRect(0, 0, width, height);
+        if (options.beforeDraw) {
+          options.beforeDraw.call(this, context, canvas);
+        }
+        if (this.aborted) {
+          return;
+        }
+        context.save();
+        context.translate(width / 2, height / 2);
+        context.rotate(rotate * Math.PI / 180);
+        context.scale(scaleX, scaleY);
+        context.drawImage.apply(context, [image].concat(params));
+        context.restore();
+        if (options.drew) {
+          options.drew.call(this, context, canvas);
+        }
+        if (this.aborted) {
+          return;
+        }
+        var callback = function callback(blob) {
+          if (!_this3.aborted) {
+            var done = function done(result) {
+              return _this3.done({
+                naturalWidth: naturalWidth,
+                naturalHeight: naturalHeight,
+                result: result
+              });
+            };
+            if (blob && isJPEGImage && options.retainExif && _this3.exif && _this3.exif.length > 0) {
+              var next = function next(arrayBuffer) {
+                return done(toBlob(arrayBufferToDataURL(insertExif(arrayBuffer, _this3.exif), options.mimeType)));
+              };
+              if (blob.arrayBuffer) {
+                blob.arrayBuffer().then(next).catch(function () {
+                  _this3.fail(new Error('Failed to read the compressed image with Blob.arrayBuffer().'));
+                });
+              } else {
+                var reader = new FileReader();
+                _this3.reader = reader;
+                reader.onload = function (_ref7) {
+                  var target = _ref7.target;
+                  next(target.result);
+                };
+                reader.onabort = function () {
+                  _this3.fail(new Error('Aborted to read the compressed image with FileReader.'));
+                };
+                reader.onerror = function () {
+                  _this3.fail(new Error('Failed to read the compressed image with FileReader.'));
+                };
+                reader.onloadend = function () {
+                  _this3.reader = null;
+                };
+                reader.readAsArrayBuffer(blob);
+              }
+            } else {
+              done(blob);
+            }
+          }
+        };
+        if (canvas.toBlob) {
+          canvas.toBlob(callback, options.mimeType, options.quality);
+        } else {
+          callback(toBlob(canvas.toDataURL(options.mimeType, options.quality)));
+        }
+      }
+    }, {
+      key: "done",
+      value: function done(_ref8) {
+        var naturalWidth = _ref8.naturalWidth,
+          naturalHeight = _ref8.naturalHeight,
+          result = _ref8.result;
+        var file = this.file,
+          image = this.image,
+          options = this.options;
+        if (URL && image.src.indexOf('blob:') === 0) {
+          URL.revokeObjectURL(image.src);
+        }
+        if (result) {
+          // Returns original file if the result is greater than it and without size related options
+          if (options.strict && !options.retainExif && result.size > file.size && options.mimeType === file.type && !(options.width > naturalWidth || options.height > naturalHeight || options.minWidth > naturalWidth || options.minHeight > naturalHeight || options.maxWidth < naturalWidth || options.maxHeight < naturalHeight)) {
+            result = file;
+          } else {
+            var date = new Date();
+            result.lastModified = date.getTime();
+            result.lastModifiedDate = date;
+            result.name = file.name;
+
+            // Convert the extension to match its type
+            if (result.name && result.type !== file.type) {
+              result.name = result.name.replace(REGEXP_EXTENSION, imageTypeToExtension(result.type));
+            }
+          }
+        } else {
+          // Returns original file if the result is null in some cases.
+          result = file;
+        }
+        this.result = result;
+        if (options.success) {
+          options.success.call(this, result);
+        }
+      }
+    }, {
+      key: "fail",
+      value: function fail(err) {
+        var options = this.options;
+        if (options.error) {
+          options.error.call(this, err);
+        } else {
+          throw err;
+        }
+      }
+    }, {
+      key: "abort",
+      value: function abort() {
+        if (!this.aborted) {
+          this.aborted = true;
+          if (this.reader) {
+            this.reader.abort();
+          } else if (!this.image.complete) {
+            this.image.onload = null;
+            this.image.onabort();
+          } else {
+            this.fail(new Error('The compression process has been aborted.'));
+          }
+        }
+      }
+
+      /**
+       * Get the no conflict compressor class.
+       * @returns {Compressor} The compressor class.
+       */
+    }], [{
+      key: "noConflict",
+      value: function noConflict() {
+        window.Compressor = AnotherCompressor;
+        return Compressor;
+      }
+
+      /**
+       * Change the default options.
+       * @param {Object} options - The new default options.
+       */
+    }, {
+      key: "setDefaults",
+      value: function setDefaults(options) {
+        _extends(DEFAULTS, options);
+      }
+    }]);
+    return Compressor;
+  }();
+  return Compressor;
+});
 
 /***/ }),
 
@@ -9526,6 +10624,138 @@ module.exports = g;
 
 /***/ }),
 
+/***/ 32:
+/*!**********************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
+  \**********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode, /* vue-cli only */
+  components, // fixed by xxxxxx auto components
+  renderjs // fixed by xxxxxx renderjs
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // fixed by xxxxxx auto components
+  if (components) {
+    if (!options.components) {
+      options.components = {}
+    }
+    var hasOwn = Object.prototype.hasOwnProperty
+    for (var name in components) {
+      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
+        options.components[name] = components[name]
+      }
+    }
+  }
+  // fixed by xxxxxx renderjs
+  if (renderjs) {
+    if(typeof renderjs.beforeCreate === 'function'){
+			renderjs.beforeCreate = [renderjs.beforeCreate]
+		}
+    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
+      this[renderjs.__module] = this
+    });
+    (options.mixins || (options.mixins = [])).push(renderjs)
+  }
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+
 /***/ 323:
 /*!*******************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-icons/components/uni-icons/uniicons_file_vue.js ***!
@@ -10031,134 +11261,47 @@ exports.fontData = fontData;
 /***/ }),
 
 /***/ 33:
-/*!**********************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
-  \**********************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*!******************************************!*\
+  !*** E:/xcbh5/xcbh5/test/store/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
-/* globals __VUE_SSR_CONTEXT__ */
+/* WEBPACK VAR INJECTION */(function(uni) {
 
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent (
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier, /* server only */
-  shadowMode, /* vue-cli only */
-  components, // fixed by xxxxxx auto components
-  renderjs // fixed by xxxxxx renderjs
-) {
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // fixed by xxxxxx auto components
-  if (components) {
-    if (!options.components) {
-      options.components = {}
-    }
-    var hasOwn = Object.prototype.hasOwnProperty
-    for (var name in components) {
-      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
-        options.components[name] = components[name]
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 25));
+var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 34));
+var _vuexPersistedstate = _interopRequireDefault(__webpack_require__(/*! vuex-persistedstate */ 35));
+var _cart = _interopRequireDefault(__webpack_require__(/*! ./modules/cart.js */ 36));
+_vue.default.use(_vuex.default);
+var _default = new _vuex.default.Store({
+  modules: {
+    cart: _cart.default
+  },
+  plugins: [(0, _vuexPersistedstate.default)({
+    // 指定需要持久化的模块
+    paths: ['cart'],
+    storage: {
+      getItem: function getItem(key) {
+        return uni.getStorageSync(key);
+      },
+      setItem: function setItem(key, val) {
+        return uni.setStorageSync(key, val);
+      },
+      removeItem: function removeItem(key) {
+        return uni.removeStorageSync(key);
       }
     }
-  }
-  // fixed by xxxxxx renderjs
-  if (renderjs) {
-    if(typeof renderjs.beforeCreate === 'function'){
-			renderjs.beforeCreate = [renderjs.beforeCreate]
-		}
-    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
-      this[renderjs.__module] = this
-    });
-    (options.mixins || (options.mixins = [])).push(renderjs)
-  }
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
-
+  })]
+});
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 
@@ -10177,11 +11320,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 45));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
 var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 332));
 var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 333));
 var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 335));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 47));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 46));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
@@ -11274,51 +12417,6 @@ exports.isEqual = isEqual;
 /***/ }),
 
 /***/ 34:
-/*!******************************************!*\
-  !*** E:/xcbh5/xcbh5/test/store/index.js ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 25));
-var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 35));
-var _vuexPersistedstate = _interopRequireDefault(__webpack_require__(/*! vuex-persistedstate */ 36));
-var _cart = _interopRequireDefault(__webpack_require__(/*! ./modules/cart.js */ 37));
-_vue.default.use(_vuex.default);
-var _default = new _vuex.default.Store({
-  modules: {
-    cart: _cart.default
-  },
-  plugins: [(0, _vuexPersistedstate.default)({
-    // 指定需要持久化的模块
-    paths: ['cart'],
-    storage: {
-      getItem: function getItem(key) {
-        return uni.getStorageSync(key);
-      },
-      setItem: function setItem(key, val) {
-        return uni.setStorageSync(key, val);
-      },
-      removeItem: function removeItem(key) {
-        return uni.removeStorageSync(key);
-      }
-    }
-  })]
-});
-exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-
-/***/ 35:
 /*!**************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vuex3/dist/vuex.common.js ***!
   \**************************************************************************************/
@@ -12575,6 +13673,135 @@ module.exports = index_cjs;
 
 /***/ }),
 
+/***/ 35:
+/*!*******************************************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
+var r = function r(_r) {
+    return function (r) {
+      return !!r && "object" == (0, _typeof2.default)(r);
+    }(_r) && !function (r) {
+      var t = Object.prototype.toString.call(r);
+      return "[object RegExp]" === t || "[object Date]" === t || function (r) {
+        return r.$$typeof === e;
+      }(r);
+    }(_r);
+  },
+  e = "function" == typeof Symbol && Symbol.for ? Symbol.for("react.element") : 60103;
+function t(r, e) {
+  return !1 !== e.clone && e.isMergeableObject(r) ? u(Array.isArray(r) ? [] : {}, r, e) : r;
+}
+function n(r, e, n) {
+  return r.concat(e).map(function (r) {
+    return t(r, n);
+  });
+}
+function o(r) {
+  return Object.keys(r).concat(function (r) {
+    return Object.getOwnPropertySymbols ? Object.getOwnPropertySymbols(r).filter(function (e) {
+      return r.propertyIsEnumerable(e);
+    }) : [];
+  }(r));
+}
+function c(r, e) {
+  try {
+    return e in r;
+  } catch (r) {
+    return !1;
+  }
+}
+function u(e, i, a) {
+  (a = a || {}).arrayMerge = a.arrayMerge || n, a.isMergeableObject = a.isMergeableObject || r, a.cloneUnlessOtherwiseSpecified = t;
+  var f = Array.isArray(i);
+  return f === Array.isArray(e) ? f ? a.arrayMerge(e, i, a) : function (r, e, n) {
+    var i = {};
+    return n.isMergeableObject(r) && o(r).forEach(function (e) {
+      i[e] = t(r[e], n);
+    }), o(e).forEach(function (o) {
+      (function (r, e) {
+        return c(r, e) && !(Object.hasOwnProperty.call(r, e) && Object.propertyIsEnumerable.call(r, e));
+      })(r, o) || (i[o] = c(r, o) && n.isMergeableObject(e[o]) ? function (r, e) {
+        if (!e.customMerge) return u;
+        var t = e.customMerge(r);
+        return "function" == typeof t ? t : u;
+      }(o, n)(r[o], e[o], n) : t(e[o], n));
+    }), i;
+  }(e, i, a) : t(i, a);
+}
+u.all = function (r, e) {
+  if (!Array.isArray(r)) throw new Error("first argument should be an array");
+  return r.reduce(function (r, t) {
+    return u(r, t, e);
+  }, {});
+};
+var i = u;
+function a(r) {
+  var e = (r = r || {}).storage || window && window.localStorage,
+    t = r.key || "vuex";
+  function n(r, e) {
+    var t = e.getItem(r);
+    try {
+      return "string" == typeof t ? JSON.parse(t) : "object" == (0, _typeof2.default)(t) ? t : void 0;
+    } catch (r) {}
+  }
+  function o() {
+    return !0;
+  }
+  function c(r, e, t) {
+    return t.setItem(r, JSON.stringify(e));
+  }
+  function u(r, e) {
+    return Array.isArray(e) ? e.reduce(function (e, t) {
+      return function (r, e, t, n) {
+        return !/^(__proto__|constructor|prototype)$/.test(e) && ((e = e.split ? e.split(".") : e.slice(0)).slice(0, -1).reduce(function (r, e) {
+          return r[e] = r[e] || {};
+        }, r)[e.pop()] = t), r;
+      }(e, t, (n = r, void 0 === (n = ((o = t).split ? o.split(".") : o).reduce(function (r, e) {
+        return r && r[e];
+      }, n)) ? void 0 : n));
+      var n, o;
+    }, {}) : r;
+  }
+  function a(r) {
+    return function (e) {
+      return r.subscribe(e);
+    };
+  }
+  (r.assertStorage || function () {
+    e.setItem("@@", 1), e.removeItem("@@");
+  })(e);
+  var f,
+    s = function s() {
+      return (r.getState || n)(t, e);
+    };
+  return r.fetchBeforeUse && (f = s()), function (n) {
+    r.fetchBeforeUse || (f = s()), "object" == (0, _typeof2.default)(f) && null !== f && (n.replaceState(r.overwrite ? f : i(n.state, f, {
+      arrayMerge: r.arrayMerger || function (r, e) {
+        return e;
+      },
+      clone: !1
+    })), (r.rehydrated || function () {})(n)), (r.subscriber || a)(n)(function (n, i) {
+      (r.filter || o)(n) && (r.setState || c)(t, (r.reducer || u)(i, r.paths), e);
+    });
+  };
+}
+var _default = a;
+exports.default = _default;
+
+/***/ }),
+
 /***/ 358:
 /*!***********************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/node_modules/@dcloudio/uni-ui/lib/uni-forms/validate.js ***!
@@ -12590,11 +13817,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 45));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
 var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 332));
 var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 333));
 var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 335));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 47));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 46));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
@@ -13604,135 +14831,6 @@ exports.isEqual = isEqual;
 /***/ }),
 
 /***/ 36:
-/*!*******************************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js ***!
-  \*******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
-var r = function r(_r) {
-    return function (r) {
-      return !!r && "object" == (0, _typeof2.default)(r);
-    }(_r) && !function (r) {
-      var t = Object.prototype.toString.call(r);
-      return "[object RegExp]" === t || "[object Date]" === t || function (r) {
-        return r.$$typeof === e;
-      }(r);
-    }(_r);
-  },
-  e = "function" == typeof Symbol && Symbol.for ? Symbol.for("react.element") : 60103;
-function t(r, e) {
-  return !1 !== e.clone && e.isMergeableObject(r) ? u(Array.isArray(r) ? [] : {}, r, e) : r;
-}
-function n(r, e, n) {
-  return r.concat(e).map(function (r) {
-    return t(r, n);
-  });
-}
-function o(r) {
-  return Object.keys(r).concat(function (r) {
-    return Object.getOwnPropertySymbols ? Object.getOwnPropertySymbols(r).filter(function (e) {
-      return r.propertyIsEnumerable(e);
-    }) : [];
-  }(r));
-}
-function c(r, e) {
-  try {
-    return e in r;
-  } catch (r) {
-    return !1;
-  }
-}
-function u(e, i, a) {
-  (a = a || {}).arrayMerge = a.arrayMerge || n, a.isMergeableObject = a.isMergeableObject || r, a.cloneUnlessOtherwiseSpecified = t;
-  var f = Array.isArray(i);
-  return f === Array.isArray(e) ? f ? a.arrayMerge(e, i, a) : function (r, e, n) {
-    var i = {};
-    return n.isMergeableObject(r) && o(r).forEach(function (e) {
-      i[e] = t(r[e], n);
-    }), o(e).forEach(function (o) {
-      (function (r, e) {
-        return c(r, e) && !(Object.hasOwnProperty.call(r, e) && Object.propertyIsEnumerable.call(r, e));
-      })(r, o) || (i[o] = c(r, o) && n.isMergeableObject(e[o]) ? function (r, e) {
-        if (!e.customMerge) return u;
-        var t = e.customMerge(r);
-        return "function" == typeof t ? t : u;
-      }(o, n)(r[o], e[o], n) : t(e[o], n));
-    }), i;
-  }(e, i, a) : t(i, a);
-}
-u.all = function (r, e) {
-  if (!Array.isArray(r)) throw new Error("first argument should be an array");
-  return r.reduce(function (r, t) {
-    return u(r, t, e);
-  }, {});
-};
-var i = u;
-function a(r) {
-  var e = (r = r || {}).storage || window && window.localStorage,
-    t = r.key || "vuex";
-  function n(r, e) {
-    var t = e.getItem(r);
-    try {
-      return "string" == typeof t ? JSON.parse(t) : "object" == (0, _typeof2.default)(t) ? t : void 0;
-    } catch (r) {}
-  }
-  function o() {
-    return !0;
-  }
-  function c(r, e, t) {
-    return t.setItem(r, JSON.stringify(e));
-  }
-  function u(r, e) {
-    return Array.isArray(e) ? e.reduce(function (e, t) {
-      return function (r, e, t, n) {
-        return !/^(__proto__|constructor|prototype)$/.test(e) && ((e = e.split ? e.split(".") : e.slice(0)).slice(0, -1).reduce(function (r, e) {
-          return r[e] = r[e] || {};
-        }, r)[e.pop()] = t), r;
-      }(e, t, (n = r, void 0 === (n = ((o = t).split ? o.split(".") : o).reduce(function (r, e) {
-        return r && r[e];
-      }, n)) ? void 0 : n));
-      var n, o;
-    }, {}) : r;
-  }
-  function a(r) {
-    return function (e) {
-      return r.subscribe(e);
-    };
-  }
-  (r.assertStorage || function () {
-    e.setItem("@@", 1), e.removeItem("@@");
-  })(e);
-  var f,
-    s = function s() {
-      return (r.getState || n)(t, e);
-    };
-  return r.fetchBeforeUse && (f = s()), function (n) {
-    r.fetchBeforeUse || (f = s()), "object" == (0, _typeof2.default)(f) && null !== f && (n.replaceState(r.overwrite ? f : i(n.state, f, {
-      arrayMerge: r.arrayMerger || function (r, e) {
-        return e;
-      },
-      clone: !1
-    })), (r.rehydrated || function () {})(n)), (r.subscriber || a)(n)(function (n, i) {
-      (r.filter || o)(n) && (r.setState || c)(t, (r.reducer || u)(i, r.paths), e);
-    });
-  };
-}
-var _default = a;
-exports.default = _default;
-
-/***/ }),
-
-/***/ 37:
 /*!*************************************************!*\
   !*** E:/xcbh5/xcbh5/test/store/modules/cart.js ***!
   \*************************************************/
@@ -13748,9 +14846,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+var _decimal = _interopRequireDefault(__webpack_require__(/*! decimal */ 441));
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-// store/modules/cart.js
 var state = {
   carts: []
 };
@@ -13779,6 +14877,7 @@ var mutations = {
       }
     }
   },
+  // 清空购物车
   clearCart: function clearCart(state) {
     console.log('clearCart mutation triggered');
     state.carts = [];
@@ -13787,12 +14886,15 @@ var mutations = {
 var getters = {
   cartTotalByShopId: function cartTotalByShopId(state) {
     return function (shopId) {
+      console.log(new _decimal.default(0.6).mul(3).toNumber());
+      console.log(state);
+      // return shopId ? state.carts.filter(i => i.shop_id == shopId).reduce((sum, item) => sum + item.tempCount * item.price, 0) :  state.carts.reduce((sum, item) => sum + item.tempCount * item.price, 0);
       return shopId ? state.carts.filter(function (i) {
         return i.shop_id == shopId;
       }).reduce(function (sum, item) {
-        return sum + item.tempCount * item.price;
+        return new _decimal.default(item.price).mul(item.tempCount).add(sum).toNumber();
       }, 0) : state.carts.reduce(function (sum, item) {
-        return sum + item.tempCount * item.price;
+        return sum + new _decimal.default(item.price).mul(item.tempCount).add(sum).toNumber();
       }, 0);
     };
   },
@@ -13829,7 +14931,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 38:
+/***/ 37:
 /*!******************************************!*\
   !*** E:/xcbh5/xcbh5/test/utils/Share.js ***!
   \******************************************/
@@ -13923,7 +15025,7 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
 
 /***/ }),
 
-/***/ 45:
+/***/ 44:
 /*!************************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/@babel/runtime/regenerator/index.js ***!
   \************************************************************************************************/
@@ -13932,12 +15034,170 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
 
 // TODO(Babel 8): Remove this file.
 
-var runtime = __webpack_require__(/*! @babel/runtime/helpers/regeneratorRuntime */ 46)();
+var runtime = __webpack_require__(/*! @babel/runtime/helpers/regeneratorRuntime */ 45)();
 module.exports = runtime;
 
 /***/ }),
 
-/***/ 46:
+/***/ 441:
+/*!***************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/node_modules/decimal/lib/decimal.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*!
+ * decimal-js: Decimal Javascript Library v0.0.2
+ * https://github.com/shinuza/decimal-js/
+*/
+/*
+Copyright (c) 2011 Samori Gorse, http://github.com/shinuza/decimal-js
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+*/
+
+(function () {
+  var ROOT = this;
+  var DECIMAL_SEPARATOR = '.';
+
+  // Decimal
+  var Decimal = function Decimal(num) {
+    if (this.constructor != Decimal) {
+      return new Decimal(num);
+    }
+    if (num instanceof Decimal) {
+      return num;
+    }
+    this.internal = String(num);
+    this.as_int = as_integer(this.internal);
+    this.add = function (target) {
+      var operands = [this, new Decimal(target)];
+      operands.sort(function (x, y) {
+        return x.as_int.exp - y.as_int.exp;
+      });
+      var smallest = operands[0].as_int.exp;
+      var biggest = operands[1].as_int.exp;
+      var x = Number(format(operands[1].as_int.value, biggest - smallest));
+      var y = Number(operands[0].as_int.value);
+      var result = String(x + y);
+      return Decimal(format(result, smallest));
+    };
+    this.sub = function (target) {
+      return Decimal(this.add(target * -1));
+    };
+    this.mul = function (target) {
+      target = new Decimal(target);
+      var result = String(this.as_int.value * target.as_int.value);
+      var exp = this.as_int.exp + target.as_int.exp;
+      return Decimal(format(result, exp));
+    };
+    this.div = function (target) {
+      target = new Decimal(target);
+      var smallest = Math.min(this.as_int.exp, target.as_int.exp);
+      var x = Decimal.mul(Math.pow(10, Math.abs(smallest)), this);
+      var y = Decimal.mul(Math.pow(10, Math.abs(smallest)), target);
+      return Decimal(x / y);
+    };
+    this.toString = function () {
+      return this.internal;
+    };
+    this.toNumber = function () {
+      return Number(this.internal);
+    };
+  };
+  var as_integer = function as_integer(number) {
+    number = String(number);
+    var value,
+      exp,
+      tokens = number.split(DECIMAL_SEPARATOR),
+      integer = tokens[0],
+      fractional = tokens[1];
+    if (!fractional) {
+      var trailing_zeros = integer.match(/0+$/);
+      if (trailing_zeros) {
+        var length = trailing_zeros[0].length;
+        value = integer.substr(0, integer.length - length);
+        exp = length;
+      } else {
+        value = integer;
+        exp = 0;
+      }
+    } else {
+      value = parseInt(number.split(DECIMAL_SEPARATOR).join(''), 10);
+      exp = fractional.length * -1;
+    }
+    return {
+      'value': value,
+      'exp': exp
+    };
+  };
+
+  // Helpers
+  var neg_exp = function neg_exp(str, position) {
+    position = Math.abs(position);
+    var offset = position - str.length;
+    var sep = DECIMAL_SEPARATOR;
+    if (offset >= 0) {
+      str = zero(offset) + str;
+      sep = '0.';
+    }
+    var length = str.length;
+    var head = str.substr(0, length - position);
+    var tail = str.substring(length - position, length);
+    return head + sep + tail;
+  };
+  var pos_exp = function pos_exp(str, exp) {
+    var zeros = zero(exp);
+    return String(str + zeros);
+  };
+  var format = function format(num, exp) {
+    num = String(num);
+    var func = exp >= 0 ? pos_exp : neg_exp;
+    return func(num, exp);
+  };
+  var zero = function zero(exp) {
+    return new Array(exp + 1).join('0');
+  };
+
+  // Generics
+  var methods = ['add', 'mul', 'sub', 'div'];
+  for (var i = 0; i < methods.length; i++) {
+    (function (method) {
+      Decimal[method] = function (a, b) {
+        return new Decimal(a)[method](b);
+      };
+    })(methods[i]);
+  }
+
+  // Module
+  if ( true && module.exports) {
+    module.exports = Decimal;
+  } else {
+    ROOT.Decimal = Decimal;
+  }
+})();
+
+/***/ }),
+
+/***/ 45:
 /*!*******************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/regeneratorRuntime.js ***!
   \*******************************************************************/
@@ -14259,7 +15519,7 @@ module.exports = _regeneratorRuntime, module.exports.__esModule = true, module.e
 
 /***/ }),
 
-/***/ 47:
+/***/ 46:
 /*!*****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/asyncToGenerator.js ***!
   \*****************************************************************/
@@ -14300,7 +15560,7 @@ module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exp
 
 /***/ }),
 
-/***/ 48:
+/***/ 47:
 /*!****************************************!*\
   !*** E:/xcbh5/xcbh5/test/api/index.js ***!
   \****************************************/
@@ -14316,7 +15576,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = exports.api = exports.UPLOAD_URL = void 0;
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var _uniApp = __webpack_require__(/*! @dcloudio/uni-app */ 49);
+var _uniApp = __webpack_require__(/*! @dcloudio/uni-app */ 48);
 var _api;
 // 定义基础URL
 // const BASE_URL = 'http://api.988cj.com'
@@ -14561,7 +15821,7 @@ var api = (_api = {
   xiajiashop: function xiajiashop(data) {
     return fetch('/api/shop/editcommodity', 'POST', data);
   },
-  // 编辑我的摊位接口
+  // 编辑|删除 我的摊位接口
   editshop: function editshop(data) {
     return fetch('/api/shop/editshop', 'POST', data);
   },
@@ -14615,6 +15875,8 @@ var api = (_api = {
   return fetch('/api/shop/mybank', 'POST', data);
 }), (0, _defineProperty2.default)(_api, "addbank", function addbank(data) {
   return fetch('/api/shop/addbank', 'POST', data);
+}), (0, _defineProperty2.default)(_api, "editshopbank", function editshopbank(data) {
+  return fetch('/api/shop/editshopbank', 'POST', data);
 }), _api);
 exports.api = api;
 var _default = {
@@ -14627,7 +15889,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 49:
+/***/ 48:
 /*!******************************************************!*\
   !*** ./node_modules/@dcloudio/uni-app/dist/index.js ***!
   \******************************************************/
@@ -14638,10 +15900,10 @@ exports.default = _default;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.onNavigationBarSearchInputClicked = exports.onNavigationBarSearchInputConfirmed = exports.onNavigationBarSearchInputChanged = exports.onBackPress = exports.onNavigationBarButtonTap = exports.onTabItemTap = exports.onResize = exports.onPageScroll = exports.onAddToFavorites = exports.onShareTimeline = exports.onShareAppMessage = exports.onReachBottom = exports.onPullDownRefresh = exports.onUnload = exports.onReady = exports.onLoad = exports.onInit = exports.onUniNViewMessage = exports.onThemeChange = exports.onUnhandledRejection = exports.onPageNotFound = exports.onError = exports.onLaunch = exports.onHide = exports.onShow = exports.initUtsPackageName = exports.initUtsClassName = exports.initUtsIndexClassName = exports.initUtsProxyFunction = exports.initUtsProxyClass = void 0;
-var composition_api_1 = __webpack_require__(/*! @vue/composition-api */ 50);
-var app = __webpack_require__(/*! ./app */ 52);
-var mp = __webpack_require__(/*! ./mp */ 53);
-var uts_1 = __webpack_require__(/*! ./uts */ 54);
+var composition_api_1 = __webpack_require__(/*! @vue/composition-api */ 49);
+var app = __webpack_require__(/*! ./app */ 51);
+var mp = __webpack_require__(/*! ./mp */ 52);
+var uts_1 = __webpack_require__(/*! ./uts */ 53);
 Object.defineProperty(exports, "initUtsProxyClass", { enumerable: true, get: function () { return uts_1.initUtsProxyClass; } });
 Object.defineProperty(exports, "initUtsProxyFunction", { enumerable: true, get: function () { return uts_1.initUtsProxyFunction; } });
 Object.defineProperty(exports, "initUtsIndexClassName", { enumerable: true, get: function () { return uts_1.initUtsIndexClassName; } });
@@ -14692,6 +15954,23 @@ exports.onNavigationBarSearchInputClicked = createLifeCycle('onNavigationBarSear
 
 /***/ }),
 
+/***/ 49:
+/*!******************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/@vue/composition-api/index.js ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+if (false) {} else {
+  module.exports = __webpack_require__(/*! ./dist/vue-composition-api.common.js */ 50)
+}
+
+
+/***/ }),
+
 /***/ 5:
 /*!**************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/slicedToArray.js ***!
@@ -14711,23 +15990,6 @@ module.exports = _slicedToArray, module.exports.__esModule = true, module.export
 /***/ }),
 
 /***/ 50:
-/*!******************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/@vue/composition-api/index.js ***!
-  \******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-if (false) {} else {
-  module.exports = __webpack_require__(/*! ./dist/vue-composition-api.common.js */ 51)
-}
-
-
-/***/ }),
-
-/***/ 51:
 /*!********************************************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/@vue/composition-api/dist/vue-composition-api.common.js ***!
   \********************************************************************************************************************/
@@ -17042,7 +18304,7 @@ exports.watchSyncEffect = watchSyncEffect;
 
 /***/ }),
 
-/***/ 52:
+/***/ 51:
 /*!****************************************************!*\
   !*** ./node_modules/@dcloudio/uni-app/dist/app.js ***!
   \****************************************************/
@@ -17082,7 +18344,7 @@ exports.init = init;
 
 /***/ }),
 
-/***/ 53:
+/***/ 52:
 /*!***************************************************!*\
   !*** ./node_modules/@dcloudio/uni-app/dist/mp.js ***!
   \***************************************************/
@@ -17149,7 +18411,7 @@ exports.init = init;
 
 /***/ }),
 
-/***/ 54:
+/***/ 53:
 /*!****************************************************!*\
   !*** ./node_modules/@dcloudio/uni-app/dist/uts.js ***!
   \****************************************************/
@@ -17160,7 +18422,7 @@ exports.init = init;
 /* WEBPACK VAR INJECTION */(function(uni) {
 exports.__esModule = true;
 exports.initUtsClassName = exports.initUtsIndexClassName = exports.initUtsPackageName = exports.initUtsProxyClass = exports.initUtsProxyFunction = exports.normalizeArg = void 0;
-var utils_1 = __webpack_require__(/*! ./utils */ 55);
+var utils_1 = __webpack_require__(/*! ./utils */ 54);
 var callbackId = 1;
 var proxy;
 var callbacks = {};
@@ -17370,7 +18632,7 @@ exports.initUtsClassName = initUtsClassName;
 
 /***/ }),
 
-/***/ 55:
+/***/ 54:
 /*!******************************************************!*\
   !*** ./node_modules/@dcloudio/uni-app/dist/utils.js ***!
   \******************************************************/
@@ -17405,7 +18667,7 @@ exports.capitalize = cacheStringFunction(function (str) { return str.charAt(0).t
 
 /***/ }),
 
-/***/ 56:
+/***/ 55:
 /*!********************************************!*\
   !*** E:/xcbh5/xcbh5/test/hooks/usePage.js ***!
   \********************************************/
@@ -17420,8 +18682,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 45));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 47));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 46));
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -17430,7 +18692,7 @@ var _default = {
   data: function data() {
     return {
       page: 1,
-      limit: 8,
+      limit: 10,
       totalnum: 0,
       pageData: [],
       pageLoading: false,
@@ -17448,7 +18710,8 @@ var _default = {
       }));
       return _objectSpread({
         page: this.page,
-        limit: this.limit
+        limit: this.limit,
+        isshow: 1
       }, filteredSearchParams);
     }
   },
@@ -17507,6 +18770,7 @@ var _default = {
         }, _callee2);
       }))();
     },
+    // 检测还有没有下一页
     querySuccess: function querySuccess(data) {
       if (data !== null && data !== void 0 && data.listdata) {
         this.pageData = this.page === 1 ? data.listdata : this.pageData.concat(data.listdata);
@@ -17514,6 +18778,9 @@ var _default = {
         this.hasMore = this.pageData.length < this.totalnum;
       }
     },
+    /**
+     * 分页加载
+     */
     handleScrollToLower: function handleScrollToLower() {
       if (!this.pageLoading && this.hasMore) {
         this.page += 1;
@@ -17523,6 +18790,7 @@ var _default = {
     handleFetchError: function handleFetchError(error) {
       console.error('Error loading data:', error);
     },
+    // 初始化
     resetPagination: function resetPagination() {
       this.page = 1;
       this.pageData = [];

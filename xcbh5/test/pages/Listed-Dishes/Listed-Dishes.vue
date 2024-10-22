@@ -5,14 +5,14 @@
 			:style="{ height: '100vh' }">
 			<view class="disheslist">
 				<view class="type" v-for="item in pageData" :key="item.id">
-					<image class="type-image" v-if="isloaded"  lazy-load :src="item.imglogo " mode="scaleToFill"></image>
+					<image class="type-image" v-if="isloaded"  lazy-load :src="item.imglogo "></image>
 
 					<view class="regard">
 						<view class="typetitle">
 							{{item.commodity_name}}
 						</view>
 						<view class="typetitle">
-							{{item.price.toFixed(2)}} 元/斤
+							{{item.price.toFixed(2)}} 元/{{item.weight_name}}
 						</view>
 					</view>
 					<view class="function">
@@ -104,18 +104,15 @@
 		overflow: hidden;
 		width: 100%;
 		box-sizing: border-box;
-		padding: 0rpx 40rpx 0 40rpx;
+		padding: 0rpx 40rpx 0 10rpx;
 		color: white;
 		z-index: 1;
 		background-color: #f8f8f8;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
-		/* 从顶部开始布局 */
 		position: relative;
-		/* 确保子元素的绝对定位是相对于这个容器 */
 		height: calc(100vh -10rpx);
-		/* 确保容器占满整个视口高度 */
 	}
 
 	.disheslist {
@@ -127,19 +124,24 @@
 	}
 
 	.type {
-		height: 12%;
-		width: 100%;
+		margin-left: 30rpx;
+		padding: 20rpx;
+		height: 200rpx;
+		width: 90%;
 		display: flex;
 		flex-direction: row;
 		background-color: white;
 		justify-content: flex-start;
 		align-items: center;
 		margin-bottom: 30rpx;
+		border-radius: 10rpx;
+		box-shadow: 5rpx 5rpx 5rpx 5rpx rgba(0, 0, 0, .3);
 	}
 
 	.type-image {
-		height: 180rpx;
-		width: 30%;
+		border: 1px solid aqua;
+		width: 200rpx;
+		height: 200rpx;
 		border-radius: 20rpx;
 		background-color: #007aff;
 	}
@@ -171,8 +173,8 @@
 	}
 
 	.rigicon {
-		height: 50%;
-		width: 100%;
+		height: 70rpx;
+		width: 110rpx;
 		background-color: #007aff;
 		display: flex;
 		justify-content: center;

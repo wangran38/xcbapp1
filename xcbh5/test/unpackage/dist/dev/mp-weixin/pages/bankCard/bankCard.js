@@ -34,7 +34,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bankCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bankCard.vue?vue&type=script&lang=js& */ 306);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _bankCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _bankCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _bankCard_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bankCard.vue?vue&type=style&index=0&lang=css& */ 308);
-/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 33);
+/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 32);
 
 var renderjs
 
@@ -174,9 +174,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 45));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 47));
-var _index = __webpack_require__(/*! ../../api/index.js */ 48);
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 46));
+var _index = __webpack_require__(/*! ../../api/index.js */ 47);
 //
 //
 //
@@ -206,7 +206,7 @@ var _default = {
   components: {
     'bCard': bCard
   },
-  onLoad: function onLoad() {
+  onShow: function onShow() {
     this.getCardDataList();
   },
   methods: {
@@ -216,9 +216,6 @@ var _default = {
       // 适配三端
 
       if (event.type === 'touchstart' || event.type === 'click' || event.type === 'tap') {
-        // 循环将所有组件的状态修改
-        // this.moreStatus = false
-
         var count = 0;
         var ele = this.$refs[count];
         while (ele) {
@@ -244,6 +241,7 @@ var _default = {
             switch (_context.prev = _context.next) {
               case 0:
                 params = {
+                  status: 2,
                   page: 1,
                   limit: 100
                 };

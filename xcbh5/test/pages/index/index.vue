@@ -28,12 +28,11 @@
 		
 		
 		
-		<scroll-view class="Stallholder" scroll-y="true" @scrolltolower="handleScrollToLower"
-			:style="{ height: '100vh' }">
+		<scroll-view class="Stallholder" scroll-y="true"  scroll-x="false" @scrolltolower="handleScrollToLower">
 			<view class="Stallholder-content">
 				<view v-for="item in pageData" :key="item.id" class="Stallholder-item"
 					@click="navigateToShopDetails(item.id)">
-					<image class="standimg"  v-if="isloaded"  lazy-load :src="item.logo" mode="aspectFill"></image>
+					<image class="standimg"  v-if="isloaded"  lazy-load :src="item.logo" mode="widthFix"></image>
 					<view class="standtitle">地区名称：{{ item.area_name }}</view>
 					<view class="standtitle">摊位名称：{{ item.title }}</view>
 					<view class="standtitle">所售类目：{{ item.category_name || '未知类目' }}</view>
@@ -71,14 +70,16 @@
 			this.isloaded = true;
 		},
 		onShow() {
-			  this.fetchMarketName();
+			
+			// 默认是全选
+			this.selectedCategoryId = 0;
+			this.fetchMarketName();
 			this.fetchCategories()
 			// 先设置 marketId
 			this.setDefaultMarketId();
 			this.reloadData()
 		},
 		onPullDownRefresh() {
-				// console.log('refresh');
 				setTimeout(function () {
 					uni.stopPullDownRefresh();
 				}, 1000);
@@ -103,6 +104,7 @@
 				          id: 0, // 特殊值表示全选
 				          title: '全选'
 				        }, ...response.data.listdata || []] 
+				console.log(this.categories)
 			},
 			async filterByCategory(categoryId) {
 				this.searchParams.category_id = categoryId;
@@ -196,6 +198,8 @@
 
 <style>
 	.container {
+		overflow: hidden;
+		overflow-y: hidden;
 		display: flex;
 		flex-direction: column;
 		margin: 2rpx 10rpx;
@@ -259,13 +263,11 @@
 	}
 
 	.searchbt {
-		/* position: absolute; */
-		/* right: 95rpx; */
-		margin-left: ;
+
 		height: 60rpx;
-		line-height: 60rpx;
+		/* line-height: 60rpx; */
 		text-align: center;
-		width: 120rpx;
+		width: 150rpx;
 		border: none;
 		background-color: #FF3030;
 		color: white;
@@ -284,7 +286,7 @@
 	}
 
 	.uni-margin-wrap {
-		height: 120rpx;
+		/* height: 110rpx; */
 	}
 
 	.swiper {
@@ -292,7 +294,6 @@
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		overflow-x: scroll;
 		height: 100%;
 		white-space: nowrap;
 	}
@@ -301,7 +302,6 @@
 		display: inline-block;
 		height: 100%;
 		width: 120rpx;
-		/* line-height: 100%; */
 		margin: 0 20rpx;
 		text-align: center;
 		vertical-align: middle;
@@ -325,10 +325,11 @@
 	}
 
 	.Stallholder {
+		/* background-color: red; */
 		display: flex;
 		flex-direction: column;
-		height: 100vh;
-		overflow-y: auto;
+		height: 75vh;
+		/* overflow-y: auto; */
 	}
 
 	.Stallholder-content {

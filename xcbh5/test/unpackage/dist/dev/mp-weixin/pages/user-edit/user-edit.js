@@ -34,7 +34,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user_edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user-edit.vue?vue&type=script&lang=js& */ 144);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _user_edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _user_edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _user_edit_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user-edit.vue?vue&type=style&index=0&lang=css& */ 146);
-/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 33);
+/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 32);
 
 var renderjs
 
@@ -164,8 +164,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _index = __webpack_require__(/*! ../../api/index.js */ 48);
-var _useUpload2 = __webpack_require__(/*! @/hooks/useUpload */ 113);
+var _index = __webpack_require__(/*! ../../api/index.js */ 47);
+var _useUpload2 = __webpack_require__(/*! @/hooks/useUpload */ 112);
 //
 //
 //
@@ -223,9 +223,15 @@ var _default = {
       isSubmitting: false
     };
   },
+  onShow: function onShow() {
+    if (this.checkToken()) {
+      uni.navigateTo({
+        url: '/pages/login/login'
+      });
+    }
+  },
   onLoad: function onLoad() {
     var _this = this;
-    console.log('UPLOAD_URL:', _index.UPLOAD_URL);
     // 从本地存储中获取 token
     var token = uni.getStorageSync('token');
     if (!token) {
@@ -251,6 +257,14 @@ var _default = {
     });
   },
   methods: {
+    // 检查是否token存在，存在则已登陆
+    checkToken: function checkToken() {
+      var token = uni.getStorageSync('token');
+      if (!token) {
+        return true;
+      }
+      return false;
+    },
     handleSexChange: function handleSexChange(e) {
       this.user.sex = Number(e.detail.value); // 更新性别
     },
@@ -274,7 +288,8 @@ var _default = {
             console.log(tempFilePaths);
             var _useUpload = (0, _useUpload2.useUpload)({
                 uploadPath: '/group1/upload',
-                tempFilePaths: tempFilePaths[0]
+                tempFilePaths: tempFilePaths[0],
+                file: res.tempFiles[0]
               }),
               upload = _useUpload.upload,
               request = _useUpload.request;

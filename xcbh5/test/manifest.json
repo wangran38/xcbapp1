@@ -101,7 +101,9 @@
             "urlCheck" : false
         },
         "usingComponents" : true,
-        "lazyCodeLoading" : "requiredComponents"
+        "__usePrivacyCheck__" : true,
+        "lazyCodeLoading" : "requiredComponents",
+        "permission" : {}
     },
     "vueVersion" : "2",
     "h5" : {

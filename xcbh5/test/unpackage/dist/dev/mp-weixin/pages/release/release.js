@@ -34,7 +34,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _release_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./release.vue?vue&type=script&lang=js& */ 136);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _release_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _release_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _release_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./release.vue?vue&type=style&index=0&lang=css& */ 138);
-/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 33);
+/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 32);
 
 var renderjs
 
@@ -165,11 +165,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 45));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
 var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 47));
-var _index = __webpack_require__(/*! ../../api/index.js */ 48);
-var _useUpload2 = __webpack_require__(/*! @/hooks/useUpload */ 113);
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 46));
+var _index = __webpack_require__(/*! ../../api/index.js */ 47);
+var _useUpload2 = __webpack_require__(/*! @/hooks/useUpload */ 112);
+var _compressorjs = _interopRequireDefault(__webpack_require__(/*! compressorjs */ 113));
 //
 //
 //
@@ -306,52 +307,59 @@ var _default = {
         });
       });
     },
+    // 上传图片
     uploadcuisine: function uploadcuisine() {
       var _this2 = this;
+      console.log(1);
       uni.chooseImage({
         count: 1,
         sizeType: ['compressed', 'original'],
         sourceType: ['album', 'camera'],
-        success: function success(res) {
-          // const tempFilePaths = res.tempFilePaths;
-          // this.uploadImage(tempFilePaths[0]);
-          // this.isImageSelected = true; // 更新图片选择状态
-          var tempFilePaths = res.tempFilePaths;
-          if (tempFilePaths.length > 0) {
-            console.log(tempFilePaths);
-            var _useUpload = (0, _useUpload2.useUpload)({
-                uploadPath: '/group1/upload',
-                tempFilePaths: tempFilePaths[0]
-              }),
-              upload = _useUpload.upload,
-              request = _useUpload.request;
+        success: function () {
+          var _success = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2(res) {
+            var tempFilePaths, _useUpload, upload, request;
+            return _regenerator.default.wrap(function _callee2$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    tempFilePaths = res.tempFilePaths;
+                    if (tempFilePaths.length > 0) {
+                      _useUpload = (0, _useUpload2.useUpload)({
+                        uploadPath: '/group1/upload',
+                        file: res.tempFiles[0],
+                        // 传输文件对象
+                        tempFilePaths: tempFilePaths[0] // 传输文件路径
+                      }), upload = _useUpload.upload, request = _useUpload.request; //   
+                      upload().then(function (res) {
+                        var obj = JSON.parse(res);
+                        _this2.imglogo = _index.UPLOAD_URL + obj.data.path;
+                        _this2.isImageSelected = true;
+                        _this2.imageUploaded = true; // 更新图片上传状态
+                      });
 
-            // upload().then((res) => {
-            // 	console.log(res);
-            // 	this.imglogo = res;
-            // 	this.isImageSelected = true;
-            // 	this.imageUploaded = true; // 更新图片上传状态
-            // })
-
-            upload().then(function (res) {
-              var obj = JSON.parse(res);
-              // console.log(obj.data);
-              _this2.imglogo = _index.UPLOAD_URL + obj.data.path;
-              _this2.isImageSelected = true;
-              _this2.imageUploaded = true; // 更新图片上传状态
-            });
-            // api.uploadImage(tempFilePaths[0])
-            // 	.then(data => {
-            // 		this.user.headimgurl = data.url; // 更新头像 URL
-            // 	})
-            // 	.catch(error => {
-            // 		uni.showToast({
-            // 			title: '上传失败',
-            // 			icon: 'none'
-            // 		});
-            // 	});
+                      // api.uploadImage(tempFilePaths[0])
+                      // 	.then(data => {
+                      // 		this.user.headimgurl = data.url; // 更新头像 URL
+                      // 	})
+                      // 	.catch(error => {
+                      // 		uni.showToast({
+                      // 			title: '上传失败',
+                      // 			icon: 'none'
+                      // 		});
+                      // 	});
+                    }
+                  case 2:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
+            }, _callee2);
+          }));
+          function success(_x) {
+            return _success.apply(this, arguments);
           }
-        }
+          return success;
+        }()
       });
     },
     onCategoryChange: function onCategoryChange(e) {
@@ -386,7 +394,7 @@ var _default = {
           uni.showToast({
             title: '菜品添加成功',
             icon: 'success',
-            duration: 2000
+            duration: 1000
           }).then(function () {
             setTimeout(function () {
               // 是否继续添加菜品
@@ -404,9 +412,9 @@ var _default = {
               });
             }, 1000);
           });
+
+          // 蔬菜名字更新
           _this3.goodsname = '';
-          // this.price = '';
-          _this3.category_id = '';
           _this3.imglogo = '';
           _this3.imageUploaded = false;
 

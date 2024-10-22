@@ -34,7 +34,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Buy_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Buy.vue?vue&type=script&lang=js& */ 120);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Buy_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Buy_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _Buy_vue_vue_type_style_index_0_id_d63f0f58_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Buy.vue?vue&type=style&index=0&id=d63f0f58&scoped=true&lang=css& */ 122);
-/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 33);
+/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 32);
 
 var renderjs
 
@@ -208,11 +208,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 45));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 47));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 46));
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var _vuex = __webpack_require__(/*! vuex */ 35);
-var _api = __webpack_require__(/*! @/api */ 48);
+var _vuex = __webpack_require__(/*! vuex */ 34);
+var _api = __webpack_require__(/*! @/api */ 47);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var _default = {
@@ -381,22 +381,12 @@ var _default = {
     addorder: function addorder(data) {
       var _this2 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
-        var remainingAmount, Totalpoints, orderItems, orderData, token, response;
+        var remainingAmount, Totalpoints, orderItems, orderData, response;
         return _regenerator.default.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
-                if (!(_this2.paymentMethod === '请选择')) {
-                  _context2.next = 4;
-                  break;
-                }
-                uni.showToast({
-                  title: '请选择支付方式',
-                  icon: 'none'
-                });
-                return _context2.abrupt("return");
-              case 4:
                 //实际支付金额
                 remainingAmount = parseFloat(_this2.cartTotalByShopId(_this2.shop_id));
                 Totalpoints = parseFloat(_this2.score) / 10; //总积分
@@ -407,16 +397,16 @@ var _default = {
 
                 // 检查积分余额是否足够支付订单
                 if (!(_this2.paymentMethod.startsWith('积分支付') && Totalpoints < remainingAmount)) {
-                  _context2.next = 13;
+                  _context2.next = 10;
                   break;
                 }
                 console.log('积分不足，阻止订单提交');
                 uni.showToast({
-                  title: '积分不足以支付全部金额，',
+                  title: '积分不足以支付全部金额',
                   icon: 'none'
                 });
                 return _context2.abrupt("return");
-              case 13:
+              case 10:
                 // console.log('开始提交订单');
                 // console.log(cart)
                 // 将 cart 数据转换成后端要求的格式
@@ -429,7 +419,28 @@ var _default = {
                   };
                 });
                 console.log(orderItems);
-
+                if (orderItems.length) {
+                  _context2.next = 15;
+                  break;
+                }
+                uni.showToast({
+                  title: '您还未选购商品,无法提交订单!!!!',
+                  icon: 'error',
+                  duration: 5000
+                });
+                // uni.navigateBack()
+                return _context2.abrupt("return");
+              case 15:
+                if (!(_this2.paymentMethod === '请选择')) {
+                  _context2.next = 18;
+                  break;
+                }
+                uni.showToast({
+                  title: '请选择支付方式',
+                  icon: 'none'
+                });
+                return _context2.abrupt("return");
+              case 18:
                 // 生成订单数据
                 orderData = {
                   shop_id: Number(_this2.shop_id),
@@ -444,11 +455,11 @@ var _default = {
                 };
 
                 console.log('提交的订单数据:', orderData);
-                // 获取 token
-                token = uni.getStorageSync('token'); // 调用提交订单接口
-                _context2.next = 20;
+
+                // 调用提交订单接口
+                _context2.next = 22;
                 return _api.api.addorder(orderData);
-              case 20:
+              case 22:
                 response = _context2.sent;
                 if (response.code === 200) {
                   uni.showToast({
@@ -475,22 +486,22 @@ var _default = {
                     icon: 'none'
                   });
                 }
-                _context2.next = 28;
+                _context2.next = 30;
                 break;
-              case 24:
-                _context2.prev = 24;
+              case 26:
+                _context2.prev = 26;
                 _context2.t0 = _context2["catch"](0);
                 console.error('提交订单失败:', _context2.t0);
                 uni.showToast({
                   title: '订单提交失败',
                   icon: 'none'
                 });
-              case 28:
+              case 30:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 24]]);
+        }, _callee2, null, [[0, 26]]);
       }))();
     },
     updatePaymentMethodOnBlur: function updatePaymentMethodOnBlur() {
@@ -527,33 +538,33 @@ var _default = {
               while (1) {
                 switch (_context3.prev = _context3.next) {
                   case 0:
-                    console.log('选择了' + paymentMethods[res.tapIndex] + '支付方式');
+                    // console.log('选择了' + paymentMethods[res.tapIndex] + '支付方式');
                     selectedMethod = paymentMethods[res.tapIndex]; // 更新为用户选择的支付方式
                     _this3.paymentMethod = selectedMethod;
                     // 如果用户选择了积分支付，调用 fetchUserProfile
                     // 设置对应的 payway 值
                     if (!(selectedMethod === '积分支付')) {
-                      _context3.next = 9;
+                      _context3.next = 8;
                       break;
                     }
-                    _context3.next = 6;
+                    _context3.next = 5;
                     return _this3.fetchUserProfile();
-                  case 6:
+                  case 5:
                     // 获取积分余额
                     _this3.payway = 1; // 积分支付对应的 payway 值
-                    _context3.next = 10;
+                    _context3.next = 9;
                     break;
-                  case 9:
+                  case 8:
                     if (selectedMethod === '微信支付') {
                       _this3.payway = 2; // 微信支付对应的 payway 值
                     } else if (selectedMethod === '支付宝支付') {
                       _this3.payway = 3; // 支付宝支付对应的 payway 值
                     }
-                  case 10:
+                  case 9:
                     // 更新支付方式，并显示积分余额
                     console.log('更新后的支付方式:', _this3.paymentMethod);
                     _this3.paymentMethod += selectedMethod === '积分支付' ? " (\u79EF\u5206\u4F59\u989D: ".concat(_this3.score, ")") : '';
-                  case 12:
+                  case 11:
                   case "end":
                     return _context3.stop();
                 }

@@ -4,7 +4,7 @@
 			<text>我的卡</text>
 			<text>({{cardList.length}}张)</text>
 		</view>
-		<bCard v-for="(item,index) in cardList" :ref="index" :key="index"  :info="item"></bCard>
+		<bCard v-for="(item,index) in cardList" :ref="index" :key="index"  :info="item" @remove="getCardDataList"></bCard>
 
 		<view class="card add" @click="gotoAddCard">
 			<uni-icons type="plusempty" size="20"></uni-icons>
@@ -26,7 +26,7 @@
 		components: {
 			'bCard': bCard
 		},
-		onLoad(){
+		onShow(){
 			this.getCardDataList()
 		},
 		methods: {
@@ -36,9 +36,6 @@
 				// 适配三端
 				
 				if ((event.type === 'touchstart' || event.type === 'click' || event.type === 'tap')) {
-					// 循环将所有组件的状态修改
-					// this.moreStatus = false
-					
 					let count = 0
 					let ele = this.$refs[count]
 					while (ele){
@@ -58,6 +55,7 @@
 			// 获取当前账号所有的银行卡信息
 			async getCardDataList(){
 				let params = {
+					status:2,
 					page:1,
 					limit:100
 				}
@@ -146,6 +144,7 @@
 	}
 
 	.add {
+		margin: 20rpx 0 0 0;
 		line-height: 18rpx;
 		height: 20rpx;
 		background-color: white;

@@ -34,7 +34,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stalllist_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stalllist.vue?vue&type=script&lang=js& */ 152);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _stalllist_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _stalllist_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _stalllist_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./stalllist.vue?vue&type=style&index=0&lang=css& */ 154);
-/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 33);
+/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 32);
 
 var renderjs
 
@@ -142,12 +142,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 45));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 47));
-var _api = __webpack_require__(/*! @/api */ 48);
-var _usePage = _interopRequireDefault(__webpack_require__(/*! @/hooks/usePage */ 56));
-var _useUpload2 = __webpack_require__(/*! @/hooks/useUpload */ 113);
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 46));
+var _api = __webpack_require__(/*! @/api */ 47);
+var _usePage = _interopRequireDefault(__webpack_require__(/*! @/hooks/usePage */ 55));
+var _useUpload2 = __webpack_require__(/*! @/hooks/useUpload */ 112);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var _default = {
@@ -157,8 +157,6 @@ var _default = {
       shopList: [],
       // 用于存储摊位列表数据
       // marketList: [], // 用于存储市场列表数据
-      token: '',
-      // 用户的 token，需要在实际应用中获取
       imageUploaded: false,
       showEditPopup: false,
       currentShopTitle: '',
@@ -171,44 +169,70 @@ var _default = {
     this.isloaded = true;
   },
   created: function created() {
-    this.token = uni.getStorageSync('token');
     this.reloadData();
     // this.fetchMarketList(); // 获取市场列表
     // this.fetchShopList();	
   },
 
   methods: {
-    // 获取摊位列表
-    fetchData: function fetchData(params) {
+    deleteShop: function deleteShop(item) {
       var _this = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-        var response;
+        var res;
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return _api.api.getMyShops(_objectSpread({
-                  token: _this.token
-                }, params));
+                _context.next = 2;
+                return _api.api.editshop({
+                  id: item.id,
+                  isshow: 2
+                });
+              case 2:
+                res = _context.sent;
+                if (res.code == 200) {
+                  uni.showToast({
+                    title: '删除成功',
+                    icon: 'success'
+                  });
+                  _this.reloadData();
+                }
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    // 获取摊位列表
+    fetchData: function fetchData(params) {
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+        var response;
+        return _regenerator.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return _api.api.getMyShops(_objectSpread({}, params));
               case 3:
-                response = _context.sent;
-                return _context.abrupt("return", response.data);
+                response = _context2.sent;
+                return _context2.abrupt("return", response.data);
               case 7:
-                _context.prev = 7;
-                _context.t0 = _context["catch"](0);
-                console.error('获取摊位列表失败', _context.t0);
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
+                console.error('获取摊位列表失败', _context2.t0);
                 uni.showToast({
                   title: '获取摊位列表失败',
                   icon: 'none'
                 });
               case 11:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee2, null, [[0, 7]]);
       }))();
     },
     // 编辑
@@ -224,42 +248,42 @@ var _default = {
     //确认事件
     confirmEdit: function confirmEdit(data) {
       var _this2 = this;
-      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
         var response;
-        return _regenerator.default.wrap(function _callee2$(_context2) {
+        return _regenerator.default.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
                 if (_this2.currentShopTitle) {
-                  _context2.next = 3;
+                  _context3.next = 3;
                   break;
                 }
                 uni.showToast({
                   title: '请输入摊位名称',
                   icon: 'none'
                 });
-                return _context2.abrupt("return");
+                return _context3.abrupt("return");
               case 3:
                 if (!(!_this2.imageUploaded && !_this2.currentShopLogo)) {
-                  _context2.next = 6;
+                  _context3.next = 6;
                   break;
                 }
                 uni.showToast({
                   title: '请上传图片',
                   icon: 'none'
                 });
-                return _context2.abrupt("return");
+                return _context3.abrupt("return");
               case 6:
-                _context2.prev = 6;
+                _context3.prev = 6;
                 console.log('Calling editshop API');
-                _context2.next = 10;
+                _context3.next = 10;
                 return _api.api.editshop({
                   id: _this2.currentShopId,
                   title: _this2.currentShopTitle,
                   logo: _this2.currentShopLogo
                 });
               case 10:
-                response = _context2.sent;
+                response = _context3.sent;
                 if (response.code === 200) {
                   uni.showToast({
                     title: '摊位信息修改成功',
@@ -273,21 +297,21 @@ var _default = {
                     icon: 'none'
                   });
                 }
-                _context2.next = 17;
+                _context3.next = 17;
                 break;
               case 14:
-                _context2.prev = 14;
-                _context2.t0 = _context2["catch"](6);
+                _context3.prev = 14;
+                _context3.t0 = _context3["catch"](6);
                 uni.showToast({
                   title: '修改失败，请稍后重试',
                   icon: 'none'
                 });
               case 17:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, null, [[6, 14]]);
+        }, _callee3, null, [[6, 14]]);
       }))();
     },
     // 上传图片

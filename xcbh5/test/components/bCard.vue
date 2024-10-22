@@ -5,7 +5,7 @@
 			<view class="num">
 				<view>{{info.banknumber}}</view>
 			</view>
-			<uni-tag text="默认" type="success"  class="tag" v-show="info.isuse" inverted="true"/>
+			<uni-tag text="默认使用" type="success"  class="tag" v-show="info.isuse==2" inverted="true"/>
 			<view class="edit">
 				<uni-icons type="more-filled" size="20" @click.native.stop="onLift"></uni-icons>
 			</view>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+	import {api} from '../api/index.js'
 	export default {
 		name:"bCard",
 		data() {
@@ -40,12 +41,20 @@
 					title:"真的要解除绑定吗??",
 					cancelText:'否',
 					confirmText:'是',
-					success:(res)=>{
+					success:async (res)=>{
 						if (res.confirm){
-							// 发送解绑接口
-						}else{
-							this.moreStatus = false
+							console.log(this.info)
+							let requestsData = {
+								id:this.info.Id,
+								status:1
+							}
+							let res = await api.editshopbank(requestsData)
+							
+							console.log(res)
+							// 发送解绑接口,执行父组件的更新方法重新请求数据
+							this.$emit('remove')
 						}
+						this.moreStatus = false
 					},
 				})
 			}

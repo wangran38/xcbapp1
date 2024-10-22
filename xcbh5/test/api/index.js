@@ -188,7 +188,7 @@ export const api = {
 	xiajiashop(data) {
 	    return fetch('/api/shop/editcommodity', 'POST', data);
 	},
-	// 编辑我的摊位接口
+	// 编辑|删除 我的摊位接口
 	editshop(data) {
 	    return fetch('/api/shop/editshop', 'POST', data);
 	},
@@ -249,6 +249,15 @@ export const api = {
 	// 添加银行卡
 	addbank(data){
 		return fetch('/api/shop/addbank', 'POST', data);
+	},
+	// 解除银行卡
+	editshopbank(data){
+		return fetch('/api/shop/editshopbank', 'POST', data);
+	},
+	// 删除菜品
+	editgoods(data){
+		return fetch('/api/user/editgoods', 'POST', data);
 	}
+	
 }
 export default {fetch,BASE_URL,UPLOAD_URL};

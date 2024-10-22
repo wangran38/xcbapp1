@@ -61,8 +61,14 @@
 				isSubmitting: false
 			}
 		},
+		onShow() {
+			if (this.checkToken()){
+				uni.navigateTo({
+					url:'/pages/login/login'
+				})
+			}
+		},
 		onLoad() {
-			console.log('UPLOAD_URL:', UPLOAD_URL);
 			// 从本地存储中获取 token
 			const token = uni.getStorageSync('token');
 			if (!token) {
@@ -90,6 +96,14 @@
 				});
 		},
 		methods: {
+			// 检查是否token存在，存在则已登陆
+			checkToken() {
+				const token = uni.getStorageSync('token');
+				if (!token){
+					return true
+				}
+				return false
+			},
 			handleSexChange(e) {
 				this.user.sex = Number(e.detail.value); // 更新性别
 			},
@@ -112,7 +126,8 @@
 							console.log(tempFilePaths);
 							const {upload,request} = useUpload({
 								uploadPath: '/group1/upload',
-								tempFilePaths: tempFilePaths[0]
+								tempFilePaths: tempFilePaths[0],
+								file:res.tempFiles[0]
 							})
 
 							upload().then((res) => {

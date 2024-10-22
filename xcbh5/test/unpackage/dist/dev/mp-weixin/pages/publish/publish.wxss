@@ -15,7 +15,7 @@
 	border-bottom: 1px dashed gray;
 }
 .me-container {
-	overflow: hidden;
+	/* overflow: hidden; */
 	width: 100%;
 	box-sizing: border-box;
 	padding: 0rpx 40rpx 0 40rpx;
@@ -210,7 +210,10 @@
 	background-color: white;
 	display: flex;
 	justify-content: space-between;
-	width: 180rpx;
+	min-width: 100rpx;
+}
+.unit{
+	font-size: 28rpx;
 }
 .shurucon {
 	text-align: end;
