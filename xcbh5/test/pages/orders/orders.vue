@@ -147,6 +147,7 @@
 	}
 
 	.list {
+		position: relative;
 		/* height: 450rpx; */
 		margin-top: 20rpx;
 		padding: 20rpx 20rpx;
@@ -168,10 +169,11 @@
 	}
 
 	.title {
+		position: absolute;
+		right: 10rpx;
 		height: 50rpx;
 		line-height: 50rpx;
 		display: flex;
-		flex-direction: row;
 	}
 
 	.state {
