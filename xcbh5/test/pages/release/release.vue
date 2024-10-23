@@ -60,6 +60,7 @@
 	export default {
 		data() {
 			return {
+				Image:'',
 				goodsname: '',
 				category_id: '',
 				// price: '',

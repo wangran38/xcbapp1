@@ -194,12 +194,13 @@
 								request
 							} = useUpload({
 								uploadPath: '/group1/upload',
+								file: res.tempFiles[0],
 								tempFilePaths: tempFilePaths[0]
 							})
 
 							upload().then((res) => {
-								console.log(res);
-								this.currentShopLogo = res;
+								res = JSON.parse(res)
+								this.currentShopLogo = res.data.url;
 								console.log('更新后的图片路径:', this.currentShopLogo);
 								this.isImageSelected = true;
 								this.imageUploaded = true; // 更新图片上传状态

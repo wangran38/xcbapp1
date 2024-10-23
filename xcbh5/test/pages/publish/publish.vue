@@ -281,21 +281,22 @@
 						// this.isImageSelected = true; // 更新图片选择状态
 						const tempFilePaths = res.tempFilePaths;
 						if (tempFilePaths.length > 0) {
-							// console.log(tempFilePaths);
+							console.log(66676,res.tempFiles[0]);
 							const {
 								upload,
 								request
 							} = useUpload({
 								uploadPath: '/group1/upload',
-								tempFilePaths: tempFilePaths[0]
+								tempFilePaths: tempFilePaths[0],
+								file:res.tempFiles[0]
 							})
 
 							upload().then((res) => {
-								console.log(res);
-								this.currentItem.imglogo = res;
-								console.log('更新后的图片路径:', this.currentItem.imglogo);
-								this.isImageSelected = true;
-								this.imageUploaded = true; // 更新图片上传状态
+								res  = JSON.parse(res)
+								this.currentItem.imglogo = res.data.url;
+								// console.log('更新后的图片路径:', this.currentItem.imglogo);
+								// this.isImageSelected = true;
+								// this.imageUploaded = true; // 更新图片上传状态
 							})
 							// api.uploadImage(tempFilePaths[0])
 							// 	.then(data => {
@@ -485,7 +486,7 @@
 		align-items: center;
 		margin-bottom: 30rpx;
 		box-shadow: 5rpx 5rpx  5rpx rgba(0, 0, 0, .3);
-		border-radius: 10rpx;
+		border-radius: 5rpx;
 	}
 
 	.type-image {

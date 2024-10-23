@@ -84,7 +84,7 @@ module.exports = _defineProperty, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
-/***/ 112:
+/***/ 113:
 /*!**********************************************!*\
   !*** E:/xcbh5/xcbh5/test/hooks/useUpload.js ***!
   \**********************************************/
@@ -100,10 +100,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.useUpload = exports.compressPictures = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 46));
-var _index = _interopRequireWildcard(__webpack_require__(/*! @/api/index */ 47));
-var _compressorjs = _interopRequireDefault(__webpack_require__(/*! compressorjs */ 113));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 45));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 47));
+var _index = _interopRequireWildcard(__webpack_require__(/*! @/api/index */ 48));
+var _compressorjs = _interopRequireDefault(__webpack_require__(/*! compressorjs */ 114));
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 var useUpload = function useUpload(opts) {
@@ -122,13 +122,18 @@ var useUpload = function useUpload(opts) {
                   title: '上传中',
                   mask: true
                 });
-                _context.t0 = uni;
-                _context.t1 = _index.default.UPLOAD_URL + uploadPath;
-                _context.next = 5;
-                return compressPictures(file);
+                _context.t0 = getPlatform();
+                _context.next = _context.t0 === 1 ? 4 : _context.t0 === 2 ? 5 : _context.t0 === 3 ? 16 : 27;
+                break;
+              case 4:
+                return _context.abrupt("break", 27);
               case 5:
-                _context.t2 = _context.sent;
-                _context.t3 = tempFilePaths;
+                _context.t1 = uni;
+                _context.t2 = _index.default.UPLOAD_URL + uploadPath;
+                _context.next = 9;
+                return compressPictures(file);
+              case 9:
+                _context.t3 = _context.sent;
                 _context.t4 = {
                   output: 'json2'
                 };
@@ -148,16 +153,51 @@ var useUpload = function useUpload(opts) {
                   uni.hideLoading();
                 };
                 _context.t7 = {
-                  url: _context.t1,
+                  url: _context.t2,
                   name: 'file',
-                  file: _context.t2,
-                  filePath: _context.t3,
+                  file: _context.t3,
                   formData: _context.t4,
                   success: _context.t5,
                   fail: _context.t6
                 };
-                _context.t0.uploadFile.call(_context.t0, _context.t7);
-              case 12:
+                _context.t1.uploadFile.call(_context.t1, _context.t7);
+                return _context.abrupt("break", 27);
+              case 16:
+                _context.t8 = uni;
+                _context.t9 = _index.default.UPLOAD_URL + uploadPath;
+                _context.next = 20;
+                return compressPictures(file);
+              case 20:
+                _context.t10 = _context.sent;
+                _context.t11 = {
+                  output: 'json2'
+                };
+                _context.t12 = function success(res) {
+                  uni.showToast({
+                    title: '上传成功'
+                  });
+                  uni.hideLoading();
+                  resolve(res === null || res === void 0 ? void 0 : res.data);
+                };
+                _context.t13 = function fail(err) {
+                  console.log(err);
+                  uni.showToast({
+                    title: '上传失败',
+                    icon: 'error'
+                  });
+                  uni.hideLoading();
+                };
+                _context.t14 = {
+                  url: _context.t9,
+                  name: 'file',
+                  filePath: _context.t10,
+                  formData: _context.t11,
+                  success: _context.t12,
+                  fail: _context.t13
+                };
+                _context.t8.uploadFile.call(_context.t8, _context.t14);
+                return _context.abrupt("break", 27);
+              case 27:
               case "end":
                 return _context.stop();
             }
@@ -173,35 +213,58 @@ var useUpload = function useUpload(opts) {
     upload: upload
   };
 };
+exports.useUpload = useUpload;
+function getPlatform() {
+  // 微信小程序端执行的逻辑
+  return 3;
+}
 
 /**
  * 兼容h5的图片压缩
 */
-exports.useUpload = useUpload;
 var compressPictures = function compressPictures(file) {
-  return new Promise(function (resolve, reject) {
-    var obj = new _compressorjs.default(file, {
-      quality: 0.6,
-      // 压缩质量
-      convertSize: false,
-      success: function success(result) {
-        var fileA = new File([result], result.name, {
-          type: result.type
+  // 判断是h5端还是小程序端
+  switch (getPlatform()) {
+    case 1:
+      break;
+    case 2:
+      return new Promise(function (resolve, reject) {
+        var obj = new _compressorjs.default(file, {
+          quality: 0.6,
+          // 压缩质量
+          convertSize: false,
+          success: function success(result) {
+            var fileA = new File([result], result.name, {
+              type: result.type
+            });
+            console.log(fileA);
+            resolve(fileA);
+          },
+          error: function error(_error) {
+            reject("图片压缩失败");
+          }
         });
-        resolve(fileA);
-      },
-      error: function error(_error) {
-        reject("图片压缩失败");
-      }
-    });
-  });
+      });
+      break;
+    case 3:
+      return new Promise(function (resolve, reject) {
+        uni.compressImage({
+          src: file.path,
+          quality: 30,
+          success: function success(res) {
+            // console.log(res.tempFilePath,"压缩完毕")
+            resolve(res.tempFilePath);
+          }
+        });
+      });
+  }
 };
 exports.compressPictures = compressPictures;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 
-/***/ 113:
+/***/ 114:
 /*!************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/node_modules/compressorjs/dist/compressor.js ***!
   \************************************************************************/
@@ -1432,14 +1495,14 @@ module.exports = _arrayWithoutHoles, module.exports.__esModule = true, module.ex
 
 /***/ }),
 
-/***/ 194:
+/***/ 195:
 /*!************************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/objectWithoutProperties.js ***!
   \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var objectWithoutPropertiesLoose = __webpack_require__(/*! ./objectWithoutPropertiesLoose.js */ 195);
+var objectWithoutPropertiesLoose = __webpack_require__(/*! ./objectWithoutPropertiesLoose.js */ 196);
 function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
   var target = objectWithoutPropertiesLoose(source, excluded);
@@ -1459,7 +1522,7 @@ module.exports = _objectWithoutProperties, module.exports.__esModule = true, mod
 
 /***/ }),
 
-/***/ 195:
+/***/ 196:
 /*!*****************************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js ***!
   \*****************************************************************************/
@@ -10756,7 +10819,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 323:
+/***/ 324:
 /*!*******************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-icons/components/uni-icons/uniicons_file_vue.js ***!
   \*******************************************************************************************/
@@ -11305,7 +11368,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 331:
+/***/ 332:
 /*!**********************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-forms/components/uni-forms/validate.js ***!
   \**********************************************************************************/
@@ -11320,11 +11383,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 332));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 333));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 335));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 46));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 45));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 333));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 334));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 336));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 47));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
@@ -11997,7 +12060,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 332:
+/***/ 333:
 /*!*********************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/inherits.js ***!
   \*********************************************************/
@@ -12025,7 +12088,7 @@ module.exports = _inherits, module.exports.__esModule = true, module.exports["de
 
 /***/ }),
 
-/***/ 333:
+/***/ 334:
 /*!**************************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
   \**************************************************************************/
@@ -12033,7 +12096,7 @@ module.exports = _inherits, module.exports.__esModule = true, module.exports["de
 /***/ (function(module, exports, __webpack_require__) {
 
 var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
-var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized.js */ 334);
+var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized.js */ 335);
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
     return call;
@@ -12046,7 +12109,7 @@ module.exports = _possibleConstructorReturn, module.exports.__esModule = true, m
 
 /***/ }),
 
-/***/ 334:
+/***/ 335:
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
   \**********************************************************************/
@@ -12063,7 +12126,7 @@ module.exports = _assertThisInitialized, module.exports.__esModule = true, modul
 
 /***/ }),
 
-/***/ 335:
+/***/ 336:
 /*!***************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
   \***************************************************************/
@@ -12080,7 +12143,7 @@ module.exports = _getPrototypeOf, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
-/***/ 336:
+/***/ 337:
 /*!*******************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-forms/components/uni-forms/utils.js ***!
   \*******************************************************************************/
@@ -13802,7 +13865,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 358:
+/***/ 359:
 /*!***********************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/node_modules/@dcloudio/uni-ui/lib/uni-forms/validate.js ***!
   \***********************************************************************************/
@@ -13817,11 +13880,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 332));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 333));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 335));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 46));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 45));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 333));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 334));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 336));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 47));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
@@ -14494,7 +14557,106 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 359:
+/***/ 36:
+/*!*************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/store/modules/cart.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+var _decimal = _interopRequireDefault(__webpack_require__(/*! decimal */ 37));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+var state = {
+  carts: []
+};
+var mutations = {
+  addItem: function addItem(state, item) {
+    var index = state.carts.findIndex(function (i) {
+      return i.id === item.id;
+    });
+    if (index !== -1) {
+      state.carts[index].tempCount += 1;
+    } else {
+      state.carts.push(_objectSpread(_objectSpread({}, item), {}, {
+        tempCount: 1
+      }));
+    }
+  },
+  subItem: function subItem(state, item) {
+    var index = state.carts.findIndex(function (i) {
+      return i.id === item.id;
+    });
+    if (index !== -1) {
+      if (state.carts[index].tempCount > 1) {
+        state.carts[index].tempCount -= 1;
+      } else {
+        state.carts.splice(index, 1);
+      }
+    }
+  },
+  // 清空购物车
+  clearCart: function clearCart(state) {
+    console.log('clearCart mutation triggered');
+    state.carts = [];
+  }
+};
+var getters = {
+  cartTotalByShopId: function cartTotalByShopId(state) {
+    return function (shopId) {
+      // return shopId ? state.carts.filter(i => i.shop_id == shopId).reduce((sum, item) => sum + item.tempCount * item.price, 0) :  state.carts.reduce((sum, item) => sum + item.tempCount * item.price, 0);
+      return shopId ? state.carts.filter(function (i) {
+        return i.shop_id == shopId;
+      }).reduce(function (sum, item) {
+        return new _decimal.default(item.price).mul(item.tempCount).add(sum).toNumber();
+      }, 0) : state.carts.reduce(function (sum, item) {
+        return sum + new _decimal.default(item.price).mul(item.tempCount).add(sum).toNumber();
+      }, 0);
+    };
+  },
+  getTempCount: function getTempCount(state) {
+    return function (id) {
+      var item = state.carts.find(function (i) {
+        return i.id === id;
+      });
+      return item ? item.tempCount : 0;
+    };
+  },
+  cartsLengthByShopId: function cartsLengthByShopId(state) {
+    return function (shopId) {
+      return shopId ? state.carts.filter(function (i) {
+        return i.shop_id == shopId;
+      }).length : state.carts.length || 0;
+    };
+  },
+  getCartsByShopId: function getCartsByShopId(state) {
+    return function (shopId) {
+      return shopId ? state.carts.filter(function (i) {
+        return i.shop_id == shopId;
+      }) : state.carts;
+    };
+  }
+};
+var _default = {
+  namespaced: true,
+  state: state,
+  mutations: mutations,
+  getters: getters
+};
+exports.default = _default;
+
+/***/ }),
+
+/***/ 360:
 /*!********************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/node_modules/@dcloudio/uni-ui/lib/uni-forms/utils.js ***!
   \********************************************************************************/
@@ -14830,216 +14992,7 @@ exports.isEqual = isEqual;
 
 /***/ }),
 
-/***/ 36:
-/*!*************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/store/modules/cart.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var _decimal = _interopRequireDefault(__webpack_require__(/*! decimal */ 441));
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-var state = {
-  carts: []
-};
-var mutations = {
-  addItem: function addItem(state, item) {
-    var index = state.carts.findIndex(function (i) {
-      return i.id === item.id;
-    });
-    if (index !== -1) {
-      state.carts[index].tempCount += 1;
-    } else {
-      state.carts.push(_objectSpread(_objectSpread({}, item), {}, {
-        tempCount: 1
-      }));
-    }
-  },
-  subItem: function subItem(state, item) {
-    var index = state.carts.findIndex(function (i) {
-      return i.id === item.id;
-    });
-    if (index !== -1) {
-      if (state.carts[index].tempCount > 1) {
-        state.carts[index].tempCount -= 1;
-      } else {
-        state.carts.splice(index, 1);
-      }
-    }
-  },
-  // 清空购物车
-  clearCart: function clearCart(state) {
-    console.log('clearCart mutation triggered');
-    state.carts = [];
-  }
-};
-var getters = {
-  cartTotalByShopId: function cartTotalByShopId(state) {
-    return function (shopId) {
-      console.log(new _decimal.default(0.6).mul(3).toNumber());
-      console.log(state);
-      // return shopId ? state.carts.filter(i => i.shop_id == shopId).reduce((sum, item) => sum + item.tempCount * item.price, 0) :  state.carts.reduce((sum, item) => sum + item.tempCount * item.price, 0);
-      return shopId ? state.carts.filter(function (i) {
-        return i.shop_id == shopId;
-      }).reduce(function (sum, item) {
-        return new _decimal.default(item.price).mul(item.tempCount).add(sum).toNumber();
-      }, 0) : state.carts.reduce(function (sum, item) {
-        return sum + new _decimal.default(item.price).mul(item.tempCount).add(sum).toNumber();
-      }, 0);
-    };
-  },
-  getTempCount: function getTempCount(state) {
-    return function (id) {
-      var item = state.carts.find(function (i) {
-        return i.id === id;
-      });
-      return item ? item.tempCount : 0;
-    };
-  },
-  cartsLengthByShopId: function cartsLengthByShopId(state) {
-    return function (shopId) {
-      return shopId ? state.carts.filter(function (i) {
-        return i.shop_id == shopId;
-      }).length : state.carts.length || 0;
-    };
-  },
-  getCartsByShopId: function getCartsByShopId(state) {
-    return function (shopId) {
-      return shopId ? state.carts.filter(function (i) {
-        return i.shop_id == shopId;
-      }) : state.carts;
-    };
-  }
-};
-var _default = {
-  namespaced: true,
-  state: state,
-  mutations: mutations,
-  getters: getters
-};
-exports.default = _default;
-
-/***/ }),
-
 /***/ 37:
-/*!******************************************!*\
-  !*** E:/xcbh5/xcbh5/test/utils/Share.js ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  data: function data() {
-    return {
-      shareParams: {
-        path: '/pages/index/index',
-        title: '分享给朋友',
-        imageUrl: '',
-        desc: '',
-        content: ''
-      }
-    };
-  },
-  //分享给朋友
-  onShareAppMessage: function onShareAppMessage(res) {
-    return {
-      title: this.shareParams.title,
-      // 标题
-      path: this.shareParams.path,
-      // 分享路径
-      imageUrl: this.shareParams.imageUrl,
-      // 分享图
-      desc: this.shareParams.desc,
-      content: this.shareParams.content,
-      success: function success(res) {
-        uni.showToast({
-          title: '分享成功'
-        });
-      },
-      fail: function fail(res) {
-        uni.showToast({
-          title: '分享失败',
-          icon: 'none'
-        });
-      }
-    };
-  },
-  //分享到朋友圈
-  onShareTimeline: function onShareTimeline(res) {
-    return {
-      title: this.shareParams.title,
-      // 标题
-      path: this.shareParams.path,
-      // 分享路径
-      imageUrl: this.shareParams.imageUrl,
-      // 分享图
-      success: function success(res) {
-        uni.showToast({
-          title: '分享成功'
-        });
-      },
-      fail: function fail(res) {
-        uni.showToast({
-          title: '分享失败',
-          icon: 'none'
-        });
-      }
-    };
-  }
-};
-exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-
-/***/ 4:
-/*!**********************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    "default": obj
-  };
-}
-module.exports = _interopRequireDefault, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 44:
-/*!************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/@babel/runtime/regenerator/index.js ***!
-  \************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// TODO(Babel 8): Remove this file.
-
-var runtime = __webpack_require__(/*! @babel/runtime/helpers/regeneratorRuntime */ 45)();
-module.exports = runtime;
-
-/***/ }),
-
-/***/ 441:
 /*!***************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/node_modules/decimal/lib/decimal.js ***!
   \***************************************************************/
@@ -15197,7 +15150,115 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 /***/ }),
 
+/***/ 38:
+/*!******************************************!*\
+  !*** E:/xcbh5/xcbh5/test/utils/Share.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  data: function data() {
+    return {
+      shareParams: {
+        path: '/pages/index/index',
+        title: '分享给朋友',
+        imageUrl: '',
+        desc: '',
+        content: ''
+      }
+    };
+  },
+  //分享给朋友
+  onShareAppMessage: function onShareAppMessage(res) {
+    return {
+      title: this.shareParams.title,
+      // 标题
+      path: this.shareParams.path,
+      // 分享路径
+      imageUrl: this.shareParams.imageUrl,
+      // 分享图
+      desc: this.shareParams.desc,
+      content: this.shareParams.content,
+      success: function success(res) {
+        uni.showToast({
+          title: '分享成功'
+        });
+      },
+      fail: function fail(res) {
+        uni.showToast({
+          title: '分享失败',
+          icon: 'none'
+        });
+      }
+    };
+  },
+  //分享到朋友圈
+  onShareTimeline: function onShareTimeline(res) {
+    return {
+      title: this.shareParams.title,
+      // 标题
+      path: this.shareParams.path,
+      // 分享路径
+      imageUrl: this.shareParams.imageUrl,
+      // 分享图
+      success: function success(res) {
+        uni.showToast({
+          title: '分享成功'
+        });
+      },
+      fail: function fail(res) {
+        uni.showToast({
+          title: '分享失败',
+          icon: 'none'
+        });
+      }
+    };
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+
+/***/ 4:
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    "default": obj
+  };
+}
+module.exports = _interopRequireDefault, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
 /***/ 45:
+/*!************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/@babel/runtime/regenerator/index.js ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// TODO(Babel 8): Remove this file.
+
+var runtime = __webpack_require__(/*! @babel/runtime/helpers/regeneratorRuntime */ 46)();
+module.exports = runtime;
+
+/***/ }),
+
+/***/ 46:
 /*!*******************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/regeneratorRuntime.js ***!
   \*******************************************************************/
@@ -15519,7 +15580,7 @@ module.exports = _regeneratorRuntime, module.exports.__esModule = true, module.e
 
 /***/ }),
 
-/***/ 46:
+/***/ 47:
 /*!*****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/asyncToGenerator.js ***!
   \*****************************************************************/
@@ -15560,7 +15621,7 @@ module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exp
 
 /***/ }),
 
-/***/ 47:
+/***/ 48:
 /*!****************************************!*\
   !*** E:/xcbh5/xcbh5/test/api/index.js ***!
   \****************************************/
@@ -15576,7 +15637,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = exports.api = exports.UPLOAD_URL = void 0;
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var _uniApp = __webpack_require__(/*! @dcloudio/uni-app */ 48);
+var _uniApp = __webpack_require__(/*! @dcloudio/uni-app */ 49);
 var _api;
 // 定义基础URL
 // const BASE_URL = 'http://api.988cj.com'
@@ -15877,6 +15938,8 @@ var api = (_api = {
   return fetch('/api/shop/addbank', 'POST', data);
 }), (0, _defineProperty2.default)(_api, "editshopbank", function editshopbank(data) {
   return fetch('/api/shop/editshopbank', 'POST', data);
+}), (0, _defineProperty2.default)(_api, "editgoods", function editgoods(data) {
+  return fetch('/api/user/editgoods', 'POST', data);
 }), _api);
 exports.api = api;
 var _default = {
@@ -15889,7 +15952,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 48:
+/***/ 49:
 /*!******************************************************!*\
   !*** ./node_modules/@dcloudio/uni-app/dist/index.js ***!
   \******************************************************/
@@ -15900,10 +15963,10 @@ exports.default = _default;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.onNavigationBarSearchInputClicked = exports.onNavigationBarSearchInputConfirmed = exports.onNavigationBarSearchInputChanged = exports.onBackPress = exports.onNavigationBarButtonTap = exports.onTabItemTap = exports.onResize = exports.onPageScroll = exports.onAddToFavorites = exports.onShareTimeline = exports.onShareAppMessage = exports.onReachBottom = exports.onPullDownRefresh = exports.onUnload = exports.onReady = exports.onLoad = exports.onInit = exports.onUniNViewMessage = exports.onThemeChange = exports.onUnhandledRejection = exports.onPageNotFound = exports.onError = exports.onLaunch = exports.onHide = exports.onShow = exports.initUtsPackageName = exports.initUtsClassName = exports.initUtsIndexClassName = exports.initUtsProxyFunction = exports.initUtsProxyClass = void 0;
-var composition_api_1 = __webpack_require__(/*! @vue/composition-api */ 49);
-var app = __webpack_require__(/*! ./app */ 51);
-var mp = __webpack_require__(/*! ./mp */ 52);
-var uts_1 = __webpack_require__(/*! ./uts */ 53);
+var composition_api_1 = __webpack_require__(/*! @vue/composition-api */ 50);
+var app = __webpack_require__(/*! ./app */ 52);
+var mp = __webpack_require__(/*! ./mp */ 53);
+var uts_1 = __webpack_require__(/*! ./uts */ 54);
 Object.defineProperty(exports, "initUtsProxyClass", { enumerable: true, get: function () { return uts_1.initUtsProxyClass; } });
 Object.defineProperty(exports, "initUtsProxyFunction", { enumerable: true, get: function () { return uts_1.initUtsProxyFunction; } });
 Object.defineProperty(exports, "initUtsIndexClassName", { enumerable: true, get: function () { return uts_1.initUtsIndexClassName; } });
@@ -15954,23 +16017,6 @@ exports.onNavigationBarSearchInputClicked = createLifeCycle('onNavigationBarSear
 
 /***/ }),
 
-/***/ 49:
-/*!******************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/@vue/composition-api/index.js ***!
-  \******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-if (false) {} else {
-  module.exports = __webpack_require__(/*! ./dist/vue-composition-api.common.js */ 50)
-}
-
-
-/***/ }),
-
 /***/ 5:
 /*!**************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/slicedToArray.js ***!
@@ -15990,6 +16036,23 @@ module.exports = _slicedToArray, module.exports.__esModule = true, module.export
 /***/ }),
 
 /***/ 50:
+/*!******************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/@vue/composition-api/index.js ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+if (false) {} else {
+  module.exports = __webpack_require__(/*! ./dist/vue-composition-api.common.js */ 51)
+}
+
+
+/***/ }),
+
+/***/ 51:
 /*!********************************************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/@vue/composition-api/dist/vue-composition-api.common.js ***!
   \********************************************************************************************************************/
@@ -18304,7 +18367,7 @@ exports.watchSyncEffect = watchSyncEffect;
 
 /***/ }),
 
-/***/ 51:
+/***/ 52:
 /*!****************************************************!*\
   !*** ./node_modules/@dcloudio/uni-app/dist/app.js ***!
   \****************************************************/
@@ -18344,7 +18407,7 @@ exports.init = init;
 
 /***/ }),
 
-/***/ 52:
+/***/ 53:
 /*!***************************************************!*\
   !*** ./node_modules/@dcloudio/uni-app/dist/mp.js ***!
   \***************************************************/
@@ -18411,7 +18474,7 @@ exports.init = init;
 
 /***/ }),
 
-/***/ 53:
+/***/ 54:
 /*!****************************************************!*\
   !*** ./node_modules/@dcloudio/uni-app/dist/uts.js ***!
   \****************************************************/
@@ -18422,7 +18485,7 @@ exports.init = init;
 /* WEBPACK VAR INJECTION */(function(uni) {
 exports.__esModule = true;
 exports.initUtsClassName = exports.initUtsIndexClassName = exports.initUtsPackageName = exports.initUtsProxyClass = exports.initUtsProxyFunction = exports.normalizeArg = void 0;
-var utils_1 = __webpack_require__(/*! ./utils */ 54);
+var utils_1 = __webpack_require__(/*! ./utils */ 55);
 var callbackId = 1;
 var proxy;
 var callbacks = {};
@@ -18632,7 +18695,7 @@ exports.initUtsClassName = initUtsClassName;
 
 /***/ }),
 
-/***/ 54:
+/***/ 55:
 /*!******************************************************!*\
   !*** ./node_modules/@dcloudio/uni-app/dist/utils.js ***!
   \******************************************************/
@@ -18667,7 +18730,7 @@ exports.capitalize = cacheStringFunction(function (str) { return str.charAt(0).t
 
 /***/ }),
 
-/***/ 55:
+/***/ 56:
 /*!********************************************!*\
   !*** E:/xcbh5/xcbh5/test/hooks/usePage.js ***!
   \********************************************/
@@ -18682,8 +18745,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 44));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 46));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 45));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 47));
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }

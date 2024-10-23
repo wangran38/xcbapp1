@@ -49,14 +49,17 @@
 	margin-top: 20rpx;
 }
 .type {
+	padding: 10rpx;
 	height: 12%;
-	width: 100%;
+	/* width: 90%; */
 	display: flex;
 	flex-direction: row;
 	background-color: white;
 	justify-content: flex-start;
 	align-items: center;
 	margin-bottom: 30rpx;
+	box-shadow: 5rpx 5rpx  5rpx rgba(0, 0, 0, .3);
+	border-radius: 5rpx;
 }
 .type-image {
 	height: 130rpx;
@@ -80,19 +83,22 @@
 .function {
 	display: flex;
 	height: 100%;
-	width: 220rpx;
+	width: 250rpx;
 	margin-left: auto;
 	justify-content: space-around;
 	align-items: center;
 }
 .rigicon {
-	height: 50%;
-	width: 100rpx;
+	font-weight: bold;
+	font-size: 25rpx;
+	height: 70rpx;
+	width: 150rpx;
 	background-color: #007aff;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border-radius: 30rpx;
+	border-radius: 20rpx;
+	margin-left: 5rpx;
 }
 .loading {
 	text-align: center;
@@ -142,18 +148,18 @@
 	margin-top: 10rpx;
 }
 .close-button {
+	padding: 10rpx;
 	position: absolute;
-	top: 5rpx;
-	right: 5rpx;
-	font-size: 40rpx;
+	top: 10rpx;
+	right: 10rpx;
+	font-size: 50rpx;
 	color: black;
 	cursor: pointer;
 	z-index: 10;
 	width: 50rpx;
 	height: 50rpx;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	text-align: center;
+	line-height: 45rpx;
 	background-color: #ffffff;
 	border-radius: 50%;
 	box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
