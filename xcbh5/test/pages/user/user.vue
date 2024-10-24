@@ -106,7 +106,7 @@
 				<view>摊主申请</view>
 				<uni-icons type="right" size="20"></uni-icons>
 			</view>
-			<view class="user-edit" @click="useredit">
+			<view class="Apply" @click="useredit">
 				<view>我的信息</view>
 				<uni-icons type="right" size="20"></uni-icons>
 			</view>

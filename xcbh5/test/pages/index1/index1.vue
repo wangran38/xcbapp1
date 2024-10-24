@@ -35,6 +35,9 @@
 	import {
 		api
 	} from '../../api/index.js';
+	import {
+		mapMutations
+	} from 'vuex';
 
 	export default {
 		data() {
@@ -58,6 +61,7 @@
 				overseasCities: [],
 				overseasCountryId: null,
 				overseasCityId: null,
+				// marketName:'' // 市场名
 			};
 		},
 		computed: {
@@ -83,6 +87,7 @@
 			await this.initializePicker(); // 组件加载时初始化数据
 		},
 		methods: {
+			...mapMutations('location', ['setStatus']),
 			async initializePicker() {
 				try {
 					if (this.selectedCountry === 'china') {
@@ -276,7 +281,7 @@
 				}
 			},
 			async fetchMarkets(areaId) {
-				console.log('请求市场数据的 areaId:', areaId); // 确认 areaId 是否正确
+				// console.log('请求市场数据的 areaId:', areaId); // 确认 areaId 是否正确
 				try {
 					const Limit = 100;
 					const response = await api.marketlist(areaId, Limit);
@@ -286,7 +291,6 @@
 							map[item.marketname] = item.id;
 							return map;
 						}, {});
-						console.log(this.marketList);
 					} else {
 						console.error('No market data found');
 						this.marketList = [];
@@ -307,9 +311,14 @@
 				const savedData = {
 					multiIndex: this.multiIndex,
 					area_id: this.area_id,
-					market_id: this.market_id,
+					market_id: this.marketIdMap[this.displayMarketList[this.selectedMarketIndex]],
 					selectedMarketIndex: this.selectedMarketIndex,
+					marketName:this.displayMarketList[this.selectedMarketIndex]
 				};
+				
+				
+				this.setStatus()
+				// console.log(this.displayMarketList[this.selectedMarketIndex])
 				// console.log('Saving data:', savedData); // 这行可以帮助你调试
 				uni.setStorageSync('userSelection', savedData);
 				uni.showToast({
@@ -317,7 +326,7 @@
 					icon: 'success'
 				});
 				uni.switchTab({
-					url: '/pages/index/index'
+					url: '/pages/index/index',
 				});
 
 			},

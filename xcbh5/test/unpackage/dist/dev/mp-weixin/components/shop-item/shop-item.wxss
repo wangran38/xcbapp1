@@ -1,4 +1,7 @@
 
+.delete.data-v-365da9da{
+	font-size: 33rpx;
+}
 .shoplist.data-v-365da9da {
 	position: fixed;
 	bottom: 0;

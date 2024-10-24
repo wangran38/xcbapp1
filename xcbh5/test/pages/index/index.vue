@@ -2,7 +2,7 @@
 	<view class="container">
 		<view class="locating">
 			<view class="targeting" @click="toindex1"><uni-icons type="location-filled" size="25" color="#007aff"></uni-icons></view>
-			<view class="current ">{{ currentMarketName }}</view>
+			<view class="current ">{{marketName? marketName:'暂未选中市场'}}</view>
 		</view>
 		<view class="search">
 			<view class="sousuokuang">
@@ -11,7 +11,7 @@
 				<button class="searchbt" @click="reloadData">搜索</button>
 			</view>
 			
-			<uni-icons class="buycar" type="scan" size="30" @click="scan"></uni-icons>
+			<uni-icons class="buycar" type="scan" size="75rpx" @click="scan"></uni-icons>
 		</view>
 
 		<view class="uni-margin-wrap">
@@ -32,7 +32,7 @@
 			<view class="Stallholder-content">
 				<view v-for="item in pageData" :key="item.id" class="Stallholder-item"
 					@click="navigateToShopDetails(item.id)">
-					<image class="standimg"  v-if="isloaded"  lazy-load :src="item.logo" mode="widthFix"></image>
+					<image class="standimg"  v-if="isloaded"  lazy-load :src="item.logo?item.logo:'../../static/defaultLogo.png'" mode="aspectFill"></image>
 					<view class="standtitle">地区名称：{{ item.area_name }}</view>
 					<view class="standtitle">摊位名称：{{ item.title }}</view>
 					<view class="standtitle">所售类目：{{ item.category_name || '未知类目' }}</view>
@@ -50,6 +50,10 @@
 	} from '../../api/index.js'
 
 	import usePage from '@/hooks/usePage';
+	import {
+		mapMutations,
+		mapState
+	} from 'vuex';
 
 	export default {
 		data() {
@@ -63,21 +67,23 @@
 					category_id: '',
 					market_id: ''
 				},
-				isloaded:false
+				isloaded:false,
+				marketName:'' ,// 市场名
+				initReques:false
 			}
 		},
-		onLoad() {
-			this.isloaded = true;
+		computed:{
+			...mapState('location', ['selectStatus']),
 		},
-		onShow() {
-			
-			// 默认是全选
-			this.selectedCategoryId = 0;
-			this.fetchMarketName();
-			this.fetchCategories()
-			// 先设置 marketId
-			this.setDefaultMarketId();
-			this.reloadData()
+		onLoad() {
+			// 初始化页面
+			this.initPage()
+		},
+		async onShow() {
+			if (this.selectStatus){
+				this.initPage()
+				this.setStatus()
+			}
 		},
 		onPullDownRefresh() {
 				setTimeout(function () {
@@ -86,10 +92,25 @@
 			},
 		mixins: [usePage],
 		methods: {
+			...mapMutations('location', ['setStatus']),
 			async fetchData(params) {
 				const response = await api.marketShopList(params)
 				return response.data
 				
+			},
+			initPage(){
+				this.isloaded = true;
+				// 默认是全选
+				this.selectedCategoryId = 0;
+				this.fetchMarketName();
+				this.fetchCategories()
+				// 先设置 marketId
+				this.setDefaultMarketId();
+				this.reloadData()
+				
+				// 选中市场
+				let res = uni.getStorageSync('userSelection')
+				this.marketName = res.marketName
 			},
 			setDefaultMarketId() {
 				const {
@@ -104,7 +125,7 @@
 				          id: 0, // 特殊值表示全选
 				          title: '全选'
 				        }, ...response.data.listdata || []] 
-				console.log(this.categories)
+				// console.log(this.categories)
 			},
 			async filterByCategory(categoryId) {
 				this.searchParams.category_id = categoryId;
@@ -158,9 +179,8 @@
 			  uni.scanCode({
 			    onlyFromCamera: true,
 			    success: function (res) {
-				  console.log(1);
-			      console.log('条码类型：' + res.scanType);
-			      console.log('条码内容：' + res.result);
+			      // console.log('条码类型：' + res.scanType);
+			      // console.log('条码内容：' + res.result);
 			
 			      // 检查是否是 URL，如果是 URL，则跳转
 			      const scannedUrl = res.result;
@@ -333,14 +353,10 @@
 	}
 
 	.Stallholder-content {
-		/* display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between; */
 		padding: 10rpx;
 		box-sizing: border-box;
 		column-count: 2;
 		column-gap: 20rpx;
-		/* background-color: #FF3030; */
 	}
 
 	.Stallholder-item {
@@ -348,8 +364,6 @@
 		height: 480rpx;
 		break-inside: avoid;
 		margin-bottom: 20rpx;
-		/* line-height: 100%;
-		text-align: center; */
 		background-color: white;
 		display: flex;
 		flex-direction: column;

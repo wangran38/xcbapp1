@@ -178,7 +178,7 @@ var shopItem = function shopItem() {
 };
 var _default = {
   data: function data() {
-    return {
+    return (0, _defineProperty2.default)({
       cart: [],
       totalPrice: 0,
       showCartLayer: false,
@@ -188,10 +188,9 @@ var _default = {
       shop_id: "",
       urls1: [],
       // 摊主照片
-      urls2: [] // 营业执照图片
-    };
+      urls2: []
+    }, "cart", false);
   },
-
   mixins: [_usePage.default],
   components: {
     shopItem: shopItem
@@ -201,6 +200,12 @@ var _default = {
     this.loadPageData();
   },
   methods: _objectSpread(_objectSpread({
+    // 收起购物车
+    closeTan: function closeTan() {
+      if (this.$refs.shopitem.showCartLayer) {
+        this.$refs.shopitem.showCartLayer = false;
+      }
+    },
     // 查看摊主照片
     openAvater1: function openAvater1() {
       if (this.urls1[0].length > 1) {
@@ -213,11 +218,11 @@ var _default = {
         });
       } else {
         uni.showToast({
-          title: '该摊主并没有上传个人照片，无法查看',
+          title: '暂无图片',
           icon: 'error'
         });
         // 如果没有图片,则关闭图片预览
-        uni.closePreviewImage();
+        // uni.closePreviewImage()
       }
     },
     // 查看营业执照
@@ -232,11 +237,11 @@ var _default = {
         });
       } else {
         uni.showToast({
-          title: '该摊主并没有上传营业执照',
+          title: '暂无图片',
           icon: 'error'
         });
         // 如果没有图片,则关闭图片预览
-        uni.closePreviewImage();
+        // uni.closePreviewImage()
       }
     }
   }, (0, _vuex.mapMutations)('cart', ['addItem', 'subItem'])), {}, {

@@ -220,7 +220,7 @@ function getPlatform() {
 }
 
 /**
- * 兼容h5的图片压缩
+ * 同时兼容h5和小程序的图片压缩
 */
 var compressPictures = function compressPictures(file) {
   // 判断是h5端还是小程序端
@@ -11342,10 +11342,12 @@ var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 25));
 var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 34));
 var _vuexPersistedstate = _interopRequireDefault(__webpack_require__(/*! vuex-persistedstate */ 35));
 var _cart = _interopRequireDefault(__webpack_require__(/*! ./modules/cart.js */ 36));
+var _location = _interopRequireDefault(__webpack_require__(/*! ./modules/location.js */ 442));
 _vue.default.use(_vuex.default);
 var _default = new _vuex.default.Store({
   modules: {
-    cart: _cart.default
+    cart: _cart.default,
+    location: _location.default
   },
   plugins: [(0, _vuexPersistedstate.default)({
     // 指定需要持久化的模块
@@ -15241,6 +15243,38 @@ function _interopRequireDefault(obj) {
   };
 }
 module.exports = _interopRequireDefault, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 442:
+/*!*****************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/store/modules/location.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var state = {
+  selectStatus: false // 菜市场是否更新
+};
+
+var mutations = {
+  setStatus: function setStatus() {
+    state.selectStatus = !state.selectStatus;
+  }
+};
+var _default = {
+  namespaced: true,
+  state: state,
+  mutations: mutations
+};
+exports.default = _default;
 
 /***/ }),
 

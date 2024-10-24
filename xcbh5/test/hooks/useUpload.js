@@ -20,6 +20,7 @@ export const useUpload = (opts) => {
 				case 1:
 					break
 				case 2:
+				    // h5上传file对象
 					uni.uploadFile({
 						url: request.UPLOAD_URL + uploadPath,
 						name: 'file',
@@ -45,10 +46,10 @@ export const useUpload = (opts) => {
 					})
 					break
 				case 3:
+					// 小程序上传临时地址
 					uni.uploadFile({
 						url: request.UPLOAD_URL + uploadPath,
 						name: 'file',
-						// file: await compressPictures(file),  // 压缩照片
 						filePath: await compressPictures(file),
 						formData: {
 							output: 'json2'
@@ -74,7 +75,6 @@ export const useUpload = (opts) => {
 			
 		})
 	}
-
 	return {
 		upload
 	}
@@ -98,7 +98,7 @@ function getPlatform() {
 }
 
 /**
- * 兼容h5的图片压缩
+ * 同时兼容h5和小程序的图片压缩
 */
 export const compressPictures = (file) => {
 	// 判断是h5端还是小程序端

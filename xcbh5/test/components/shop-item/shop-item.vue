@@ -1,7 +1,7 @@
 <template>
 	<view class="shoplist">
 		<view class="fixed">
-			<view class="car" @click="clickCart">
+			<view class="car" @click.stop="clickCart">
 				<view class="cart-icon-wrapper">
 					<uni-icons type="cart" size="40" color="white"></uni-icons>
 					<view class="badge">{{ cartsLengthByShopId(shop_id) }}</view>
@@ -21,8 +21,8 @@
 					<view class="shopcontent">
 						<view class="top">
 							<view class="delete" @click="clearCart">
-								<uni-icons type="trash" size="20"></uni-icons>
-								<view class="">清空购物车</view>
+								<uni-icons type="trash" size="40rpx"></uni-icons>
+								<view class="clear">清空购物车</view>
 							</view>
 						</view>
 
@@ -108,6 +108,9 @@
 </script>
 
 <style scoped>
+	.delete{
+		font-size: 33rpx;
+	}
 	.shoplist {
 		position: fixed;
 		bottom: 0;

@@ -1,5 +1,6 @@
 <template>
-	<scroll-view class="Stallholder" scroll-y="true" @scrolltolower="handleScrollToLower" :style="{ height: '100vh' }">
+	<scroll-view class="Stallholder" scroll-y="true" @scrolltolower="handleScrollToLower" :style="{ height: '100vh' }"
+		@click="closeTan">
 		<view class="container">
 			<view class="StoreName">
 				<text>{{ shopDetails.title}}</text>
@@ -105,7 +106,7 @@
 			</view>
 		</view>
 
-		<shopItem :shop_id="shop_id"></shopItem>
+		<shopItem :shop_id="shop_id" ref="shopitem"></shopItem>
 	</scroll-view>
 
 </template>
@@ -135,7 +136,8 @@
 				shopDetails: {},
 				shop_id: "",
 				urls1: [], // 摊主照片
-				urls2: [] // 营业执照图片
+				urls2: [], // 营业执照图片
+				cart: false // 购物车初始化弹窗,锁
 			}
 		},
 		mixins: [usePage],
@@ -150,6 +152,12 @@
 			this.loadPageData()
 		},
 		methods: {
+			// 收起购物车
+			closeTan() {
+				if (this.$refs.shopitem.showCartLayer){
+					this.$refs.shopitem.showCartLayer = false
+				}
+			},
 			// 查看摊主照片
 			openAvater1() {
 				if (this.urls1[0].length > 1) {
@@ -158,16 +166,15 @@
 						urls: this.urls1,
 						sizeType: ['original', 'compressed'],
 						sourceType: ['album'],
-						success: (res) => {
-						}
+						success: (res) => {}
 					})
 				} else {
 					uni.showToast({
-						title: '该摊主并没有上传个人照片，无法查看',
+						title: '暂无图片',
 						icon: 'error'
 					})
 					// 如果没有图片,则关闭图片预览
-					uni.closePreviewImage()
+					// uni.closePreviewImage()
 				}
 
 			},
@@ -179,22 +186,21 @@
 						urls: this.urls2,
 						sizeType: ['original', 'compressed'],
 						sourceType: ['album'],
-						success: (res) => {
-						}
+						success: (res) => {}
 					})
 				} else {
 					uni.showToast({
-						title: '该摊主并没有上传营业执照',
+						title: '暂无图片',
 						icon: 'error'
 					})
 					// 如果没有图片,则关闭图片预览
-					uni.closePreviewImage()
+					// uni.closePreviewImage()
 				}
 
 			},
 			...mapMutations('cart', ['addItem', 'subItem']),
 
-			
+
 			// 首次加载，初始化
 			async loadShopDetails() {
 				try {
@@ -228,18 +234,18 @@
 				const pages = getCurrentPages();
 				const currentPage = pages[pages.length - 1];
 				const query = currentPage.options;
-				
-				
+
+
 				params = {
 					...params,
 					shop_id: Number(query.id) || null,
 				};
-				
+
 				const response = await api.getmarketCommdityList({
 					...params,
 					isshow: 1,
 				});
-				
+
 				response.data.listdata = response.data.listdata.map(e => {
 					return {
 						...e,

@@ -168,54 +168,12 @@ exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 45));
 var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 47));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
 var _index = __webpack_require__(/*! ../../api/index.js */ 48);
 var _usePage = _interopRequireDefault(__webpack_require__(/*! @/hooks/usePage */ 56));
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+var _vuex = __webpack_require__(/*! vuex */ 34);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var _default = {
   data: function data() {
     return {
@@ -230,20 +188,35 @@ var _default = {
         category_id: '',
         market_id: ''
       },
-      isloaded: false
+      isloaded: false,
+      marketName: '',
+      // 市场名
+      initReques: false
     };
   },
+  computed: _objectSpread({}, (0, _vuex.mapState)('location', ['selectStatus'])),
   onLoad: function onLoad() {
-    this.isloaded = true;
+    // 初始化页面
+    this.initPage();
   },
   onShow: function onShow() {
-    // 默认是全选
-    this.selectedCategoryId = 0;
-    this.fetchMarketName();
-    this.fetchCategories();
-    // 先设置 marketId
-    this.setDefaultMarketId();
-    this.reloadData();
+    var _this = this;
+    return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+      return _regenerator.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              if (_this.selectStatus) {
+                _this.initPage();
+                _this.setStatus();
+              }
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   },
   onPullDownRefresh: function onPullDownRefresh() {
     setTimeout(function () {
@@ -251,34 +224,8 @@ var _default = {
     }, 1000);
   },
   mixins: [_usePage.default],
-  methods: {
+  methods: _objectSpread(_objectSpread({}, (0, _vuex.mapMutations)('location', ['setStatus'])), {}, {
     fetchData: function fetchData(params) {
-      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-        var response;
-        return _regenerator.default.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return _index.api.marketShopList(params);
-              case 2:
-                response = _context.sent;
-                return _context.abrupt("return", response.data);
-              case 4:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    setDefaultMarketId: function setDefaultMarketId() {
-      var _uni$getStorageSync = uni.getStorageSync('userSelection'),
-        market_id = _uni$getStorageSync.market_id;
-      this.searchParams.market_id = market_id;
-    },
-    fetchCategories: function fetchCategories() {
-      var _this = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
         var response;
         return _regenerator.default.wrap(function _callee2$(_context2) {
@@ -286,17 +233,11 @@ var _default = {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _index.api.cglist();
+                return _index.api.marketShopList(params);
               case 2:
                 response = _context2.sent;
-                // this.categories = response.data.listdata || []
-                _this.categories = [{
-                  id: 0,
-                  // 特殊值表示全选
-                  title: '全选'
-                }].concat((0, _toConsumableArray2.default)(response.data.listdata || []));
-                console.log(_this.categories);
-              case 5:
+                return _context2.abrupt("return", response.data);
+              case 4:
               case "end":
                 return _context2.stop();
             }
@@ -304,17 +245,45 @@ var _default = {
         }, _callee2);
       }))();
     },
-    filterByCategory: function filterByCategory(categoryId) {
+    initPage: function initPage() {
+      this.isloaded = true;
+      // 默认是全选
+      this.selectedCategoryId = 0;
+      this.fetchMarketName();
+      this.fetchCategories();
+      // 先设置 marketId
+      this.setDefaultMarketId();
+      this.reloadData();
+
+      // 选中市场
+      var res = uni.getStorageSync('userSelection');
+      this.marketName = res.marketName;
+    },
+    setDefaultMarketId: function setDefaultMarketId() {
+      var _uni$getStorageSync = uni.getStorageSync('userSelection'),
+        market_id = _uni$getStorageSync.market_id;
+      this.searchParams.market_id = market_id;
+    },
+    fetchCategories: function fetchCategories() {
       var _this2 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
+        var response;
         return _regenerator.default.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _this2.searchParams.category_id = categoryId;
-                _this2.selectedCategoryId = categoryId;
-                _this2.reloadData();
-              case 3:
+                _context3.next = 2;
+                return _index.api.cglist();
+              case 2:
+                response = _context3.sent;
+                // this.categories = response.data.listdata || []
+                _this2.categories = [{
+                  id: 0,
+                  // 特殊值表示全选
+                  title: '全选'
+                }].concat((0, _toConsumableArray2.default)(response.data.listdata || []));
+                // console.log(this.categories)
+              case 4:
               case "end":
                 return _context3.stop();
             }
@@ -322,58 +291,76 @@ var _default = {
         }, _callee3);
       }))();
     },
-    fetchMarketName: function fetchMarketName() {
+    filterByCategory: function filterByCategory(categoryId) {
       var _this3 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4() {
-        var userSelection, market_id, area_id, response, marketData;
         return _regenerator.default.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _context4.prev = 0;
-                // 从 storage 中获取 userSelection
-                userSelection = uni.getStorageSync('userSelection');
-                if (userSelection) {
-                  _context4.next = 5;
-                  break;
-                }
-                console.warn('未找到 userSelection');
-                return _context4.abrupt("return");
-              case 5:
-                // 解析 userSelection 中的 market_id 和 area_id
-                market_id = userSelection.market_id, area_id = userSelection.area_id;
-                if (!(!market_id || !area_id)) {
-                  _context4.next = 9;
-                  break;
-                }
-                console.warn('未找到市场 ID 或区域 ID');
-                return _context4.abrupt("return");
-              case 9:
-                _context4.next = 11;
-                return _index.api.marketlist(parseInt(area_id));
-              case 11:
-                response = _context4.sent;
-                marketData = response.data.listdata.find(function (item) {
-                  return item.id === parseInt(market_id);
-                });
-                if (marketData) {
-                  _this3.currentMarketName = marketData.marketname || '未知市场';
-                } else {
-                  console.warn('未找到对应的市场');
-                  _this3.currentMarketName = '未知市场';
-                }
-                _context4.next = 19;
-                break;
-              case 16:
-                _context4.prev = 16;
-                _context4.t0 = _context4["catch"](0);
-                console.error('获取市场名称失败:', _context4.t0);
-              case 19:
+                _this3.searchParams.category_id = categoryId;
+                _this3.selectedCategoryId = categoryId;
+                _this3.reloadData();
+              case 3:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[0, 16]]);
+        }, _callee4);
+      }))();
+    },
+    fetchMarketName: function fetchMarketName() {
+      var _this4 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee5() {
+        var userSelection, market_id, area_id, response, marketData;
+        return _regenerator.default.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                // 从 storage 中获取 userSelection
+                userSelection = uni.getStorageSync('userSelection');
+                if (userSelection) {
+                  _context5.next = 5;
+                  break;
+                }
+                console.warn('未找到 userSelection');
+                return _context5.abrupt("return");
+              case 5:
+                // 解析 userSelection 中的 market_id 和 area_id
+                market_id = userSelection.market_id, area_id = userSelection.area_id;
+                if (!(!market_id || !area_id)) {
+                  _context5.next = 9;
+                  break;
+                }
+                console.warn('未找到市场 ID 或区域 ID');
+                return _context5.abrupt("return");
+              case 9:
+                _context5.next = 11;
+                return _index.api.marketlist(parseInt(area_id));
+              case 11:
+                response = _context5.sent;
+                marketData = response.data.listdata.find(function (item) {
+                  return item.id === parseInt(market_id);
+                });
+                if (marketData) {
+                  _this4.currentMarketName = marketData.marketname || '未知市场';
+                } else {
+                  console.warn('未找到对应的市场');
+                  _this4.currentMarketName = '未知市场';
+                }
+                _context5.next = 19;
+                break;
+              case 16:
+                _context5.prev = 16;
+                _context5.t0 = _context5["catch"](0);
+                console.error('获取市场名称失败:', _context5.t0);
+              case 19:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, null, [[0, 16]]);
       }))();
     },
     navigateToShopDetails: function navigateToShopDetails(id) {
@@ -391,9 +378,8 @@ var _default = {
       uni.scanCode({
         onlyFromCamera: true,
         success: function success(res) {
-          console.log(1);
-          console.log('条码类型：' + res.scanType);
-          console.log('条码内容：' + res.result);
+          // console.log('条码类型：' + res.scanType);
+          // console.log('条码内容：' + res.result);
 
           // 检查是否是 URL，如果是 URL，则跳转
           var scannedUrl = res.result;
@@ -424,7 +410,7 @@ var _default = {
         }
       });
     }
-  }
+  })
 };
 exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))

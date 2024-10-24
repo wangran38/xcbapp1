@@ -144,41 +144,12 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 45));
 var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 47));
 var _index = __webpack_require__(/*! ../../api/index.js */ 48);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+var _vuex = __webpack_require__(/*! vuex */ 34);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var _default = {
   data: function data() {
     return {
@@ -197,8 +168,10 @@ var _default = {
       overseasCities: [],
       overseasCountryId: null,
       overseasCityId: null
+      // marketName:'' // 市场名
     };
   },
+
   computed: {
     displayArray: function displayArray() {
       if (this.selectedCountry === 'china') {
@@ -233,7 +206,7 @@ var _default = {
       }, _callee);
     }))();
   },
-  methods: {
+  methods: _objectSpread(_objectSpread({}, (0, _vuex.mapMutations)('location', ['setStatus'])), {}, {
     initializePicker: function initializePicker() {
       var _this2 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
@@ -720,12 +693,11 @@ var _default = {
           while (1) {
             switch (_context11.prev = _context11.next) {
               case 0:
-                console.log('请求市场数据的 areaId:', areaId); // 确认 areaId 是否正确
-                _context11.prev = 1;
+                _context11.prev = 0;
                 Limit = 100;
-                _context11.next = 5;
+                _context11.next = 4;
                 return _index.api.marketlist(areaId, Limit);
-              case 5:
+              case 4:
                 response = _context11.sent;
                 if (response.code === 200 && Array.isArray(response.data.listdata)) {
                   _this11.marketList = response.data.listdata.map(function (item) {
@@ -735,26 +707,25 @@ var _default = {
                     map[item.marketname] = item.id;
                     return map;
                   }, {});
-                  console.log(_this11.marketList);
                 } else {
                   console.error('No market data found');
                   _this11.marketList = [];
                   _this11.marketIdMap = {};
                 }
-                _context11.next = 14;
+                _context11.next = 13;
                 break;
-              case 9:
-                _context11.prev = 9;
-                _context11.t0 = _context11["catch"](1);
+              case 8:
+                _context11.prev = 8;
+                _context11.t0 = _context11["catch"](0);
                 console.error('Failed to fetch markets:', _context11.t0);
                 _this11.marketList = [];
                 _this11.marketIdMap = {};
-              case 14:
+              case 13:
               case "end":
                 return _context11.stop();
             }
           }
-        }, _callee11, null, [[1, 9]]);
+        }, _callee11, null, [[0, 8]]);
       }))();
     },
     bindMarketChange: function bindMarketChange(e) {
@@ -766,9 +737,12 @@ var _default = {
       var savedData = {
         multiIndex: this.multiIndex,
         area_id: this.area_id,
-        market_id: this.market_id,
-        selectedMarketIndex: this.selectedMarketIndex
+        market_id: this.marketIdMap[this.displayMarketList[this.selectedMarketIndex]],
+        selectedMarketIndex: this.selectedMarketIndex,
+        marketName: this.displayMarketList[this.selectedMarketIndex]
       };
+      this.setStatus();
+      // console.log(this.displayMarketList[this.selectedMarketIndex])
       // console.log('Saving data:', savedData); // 这行可以帮助你调试
       uni.setStorageSync('userSelection', savedData);
       uni.showToast({
@@ -800,7 +774,7 @@ var _default = {
         this.initializePicker();
       }
     }
-  }
+  })
 };
 exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
