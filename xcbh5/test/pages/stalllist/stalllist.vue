@@ -417,7 +417,6 @@
 	}
 
 	.cuisine {
-		width: 100%;
 		height: 100rpx;
 		display: flex;
 		justify-content: space-between;
@@ -445,7 +444,7 @@
 	}
 
 	.shurucon {
-		text-align: end;
+		text-align: right;
 		font-size: 35rpx;
 	}
 </style>

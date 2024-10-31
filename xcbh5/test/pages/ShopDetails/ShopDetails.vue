@@ -10,7 +10,7 @@
 
 			<view class="time">
 				<view class="business-hours">
-					<view>名字:</view>
+					<view>摊主名称:</view>
 					<view class="hour">{{ shopDetails.contactpeople}}</view>
 				</view>
 
@@ -67,7 +67,7 @@
 				</view>
 				<view class="ncen" @click="goTorules">
 					<swiper class="swiper" vertical autoplay interval="1500" duration="300" circular>
-						<swiper-item class="swiitem" v-for="item in 4">免费买菜</swiper-item>
+						<swiper-item class="swiitem" v-for="item in 4">赠送积分说明</swiper-item>
 					</swiper>
 				</view>
 				<view class="nrig" @click="goTorules">
@@ -97,7 +97,11 @@
 							<text>¥ {{item.price.toFixed(2)}} 元/{{item.weight_name}}</text>
 							<view class="quantity">
 								<view class="btn1" @click="subItem(item)">-</view>
-								<view class="count">{{ getTempCount(item.id) }}</view>
+								<view class="count">
+									{{getTempCount(item.id)}}
+									
+									
+								</view>
 								<view class="btn2" @click="addItem(item)">+</view>
 							</view>
 						</view>

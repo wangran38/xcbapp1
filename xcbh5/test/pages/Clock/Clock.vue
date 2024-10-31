@@ -80,10 +80,10 @@
 					const evening = Math.floor(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate
 						.getDate(), 20, 30, 0).getTime() / 1000);
 
-					console.log(timestamp)
-					console.log(morning)
-					console.log(noon)
-					console.log(this.time)
+					// console.log(timestamp)
+					// console.log(morning)
+					// console.log(noon)
+					// console.log(this.time)
 
 					const result = await api.sign(data);
 					console.log(result.code)

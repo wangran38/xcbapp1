@@ -16,7 +16,12 @@
     <view class="button-group">
       <button class="login-button" @click="login">登录</button>
     </view>
-    <navigator url="/pages/register/register" style="margin: 30rpx 0;color: deepskyblue;">前往注册</navigator>
+	
+	<view class="bottom">
+		<navigator url="/pages/register/register" style="margin: 30rpx 0;color: deepskyblue;">前往注册</navigator>
+		<navigator url="/pages/updatePwd/updatePwd" style="margin: 30rpx 0;color: deepskyblue;">忘记了密码?</navigator>
+	</view>
+
   </view>
 </template>
 
@@ -67,7 +72,7 @@ export default {
           uni.switchTab({ url: '/pages/index/index' });
         } else {
           uni.showToast({
-            title: response.msg || '登录失败',
+            title: response.message,
             icon: 'none'
           });
         }
@@ -138,4 +143,11 @@ export default {
   border-radius: 10rpx;
   cursor: pointer;
 }
+.bottom{
+	width: 350rpx;
+	display: flex;
+	justify-content: space-between;
+}
+
+
 </style>

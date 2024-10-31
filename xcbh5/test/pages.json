@@ -111,7 +111,7 @@
     	"path" : "pages/rules/rules",
     	"style" : 
     	{
-    		"navigationBarTitleText" : "抽奖规则"
+    		"navigationBarTitleText" : "积分活动说明"
     	}
     },
     {
@@ -226,6 +226,22 @@
     	"style" : 
     	{
     		"navigationBarTitleText" : "添加银行卡",
+    		"enablePullDownRefresh" : false
+    	}
+    },
+    {
+    	"path" : "pages/onlineBooth/onlineBooth",
+    	"style" : 
+    	{
+    		"navigationBarTitleText" : "网络摊位",
+    		"enablePullDownRefresh" : false
+    	}
+    },
+    {
+    	"path" : "pages/updatePwd/updatePwd",
+    	"style" : 
+    	{
+    		"navigationBarTitleText" : "",
     		"enablePullDownRefresh" : false
     	}
     }

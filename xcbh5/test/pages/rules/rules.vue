@@ -1,25 +1,37 @@
 <template>
 	<view class="me-container">
 		<view class="title">
-			抽奖规则
+			喜讯
 		</view>
 		<view class="content">
-			<ul>一.抽奖时间:</ul>
-			<li>1、每月的最后一天,一年12个月共12次.月抽</li>
-			<li>2.每年的12月3日抽一次.年奖 </li>
-			<li>3、每年的最为一天,奖和年奖同时进行.</li>
-			<ul>二.抽奖规则:</ul>
-			<li>1、膜:采用顾客打卡的方式;制作打长二维码:
-				张贴在市场的东西南北的口,要顾客进入市场时
-				制作载有菜佳主信息的二维码、顾客年在一摊位买荣就把一次(打卡一次),每天的次数不复限(买荣越多,打长越多.中奖概率就越大.),以一个完整月的数量为基数进行抽参与抽奖.
-				C椎主二维码信息内容,要求每天更新卖荣的信息.为下步查让更多的顾齐观注、增加流量度,为下一步平系统台升级,走线上预约买菜,增加摊它的销售渠道打好基础).</li>
-			<li>2.年奖::后台自动流斗.一年在打长达到300次
-				的假客,可以参加抽奖、顾
-				(对权信主的奖励励,可以统计出流第一名的奖励注室物联配(曲)</li>
-			<ul>三.奖励办法:</ul>
-			<li>1、奖和年奖均为固定奖项,分为一、二、六、四、续月膜:一等奖一名:奖动猪肉10斤.二等奖王名:笑动猪内4斤2三年0名:芙励烧肉2斤20</li>
-			<li>2.年奖:一等奖一各.动猪肉.150斤=等奖.汤猪肉200斤三年奖二叶,各壁劲猪肉10斤.200斤</li>
-			<li>3.奖励美物、计量并位为市介.顾客凭电子奖系,任意由摊免费领取，可一次性领收.补可多次领收.期限为一气.摊主通过二维码执码进行核销,并以当日的肉价进行评价,近月未到物业公司进行申请取肉钱。</li>
+			<view class="one">为了营造一个轻松,愉悦,有趣味的购物消费场景,我们塔岭农贸市场管理处从2024年11月1日开始,开展购物消费，系统随机摇号产生幸运者,获赠消费积分活动.具体规定如下:</view>
+			<view class="one">一、凡是到塔岭农贸市场购物消费的市民,都可以扫打卡二维码,同一个电话号码一天可以扫码打卡两次：上午一次.时间:6:00-12:00,下午一次.时间:12:00-21:00。</view>
+			<view class="one">
+				二、每周日晚上23.00,根据市民上一周每一次的打卡记录信息,自动随机摇号抽选出一、二、三档共十名幸运者。打卡次数越多,选中的几率越大。
+				一档：1名,获赠1000个积分。
+				二档：3名,分别获赠500个积分。
+				三档：8名,分别获赠300个分。
+			</view>
+			<view class="one">三、1个积分等同于0.1元现金价值.积分不能兑换现金.也不能转赠,获赠积分的凭被抽选中的手机号,在塔岭农贸市场购物消费使用(由于系统还在建设升级的原因，仅限在“乡愁宝”小程序加盟商户进行消费使用)。</view>
+			<view class="one">四、积分可以单独使用,也可以和现金同时使用。</view>
+			<view class="one">五、积分有效期为180个日历天数,从获赠积分即时算起，超时不使用，剩余的积分全部清零。</view>
+			<view class="one">
+				六、每次抽选结果及个人积分信息，在“乡愁宝”小程序中都可以查询。
+			</view>
+			<view class="one">
+				七、参与积分活动的行为都属于个人自愿行为，无任何强迫因素在内。
+			</view>
+			<view class="one">
+				八.本活动的解释权由塔岭农贸市场管理处负责。
+			</view>
+		</view>
+		<view class="luokuan">
+			<view class="bomen">
+				塔岭农贸市场办公室
+			</view>
+			<view class="dateTime">2024.11.01
+			</view>
+
 		</view>
 		<view class="fixd" @click="scan">
 			<view >立即签到</view>
@@ -79,10 +91,13 @@
 </script>
 
 <style>
+	.one,.two,.three,.four{
+		text-indent: 30rpx;
+	}
 	.me-container {
-		overflow: hidden;
+		position: relative;
 		width: 100%;
-		height: 100vh;
+		height: 200vh;
 		box-sizing: border-box;
 		padding: 0rpx 50rpx 00rpx 50rpx;
 		color: white;
@@ -108,8 +123,8 @@
 		width: 80%;
 		color: white;
 		font-size: 30rpx;
-		position: fixed;
-		bottom: 50rpx;
+		position: relative;
+		top: 30rpx;
 		left: 50%; /* 使元素相对于视口宽度居中 */
 		transform: translateX(-50%); /* 将元素向左移动一半的自身宽度，实现居中对齐 */
 		display: flex;
@@ -117,5 +132,11 @@
 		align-items: center;
 		background-color: #007aff;
 		border-radius: 20rpx;
+	}
+	.luokuan{
+		margin-top: 20rpx;
+		text-align: right;
+		font-size: 25rpx;
+
 	}
 </style>

@@ -1,0 +1,70 @@
+
+.bixBox.data-v-34fd0f64{
+		padding: 20rpx 20rpx 20rpx 20rpx;
+		text-align: center;
+}
+.title.data-v-34fd0f64{
+		font-weight: 700;
+		font-size: 30rpx;
+		color: limegreen;
+}
+.steps.data-v-34fd0f64{
+		margin-top: 20rpx;
+}
+.tip.data-v-34fd0f64{
+/* 		text-indent: 30rpx; */
+		font-weight: 800;
+		text-align: left;
+		margin: 20rpx 0 20rpx 0;
+		height: 200rpx;
+		border-radius: 10rpx;
+		background-color: white;
+}
+.info.data-v-34fd0f64{
+		margin-top: 30rpx;
+}
+.label.data-v-34fd0f64{
+		font-weight: 300;
+		font-size: 25rpx;
+		margin-bottom: 20rpx;
+}
+.btn.data-v-34fd0f64{
+		background-color: lightgreen;
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+}
+.uni-easyinput.data-v-34fd0f64{
+		height: 500rpx;
+}
+.hr.data-v-34fd0f64{
+		background-color: #e8e8e8;
+		height: 1rpx;
+}
+.form.data-v-34fd0f64{
+		background-color: white;
+		position: relative;
+		text-align: left;
+		line-height: 30rpx;
+		border: 1rpx solid #e8e8e8;
+		padding: 20rpx 0rpx 20rpx 0rpx;
+		margin-top: 20rpx;
+		border-radius: 10rpx;
+}
+.form input.data-v-34fd0f64{
+		position: absolute;
+		left: 150rpx;
+		font-size: 30rpx;
+}
+.form .label.data-v-34fd0f64{
+		line-height: 40rpx;
+		font-size: 30rpx;
+		font-weight: 600;
+}
+.form .card.data-v-34fd0f64{
+		padding: 10rpx 10rpx 10rpx 10rpx;
+		display: flex;
+}
+
+

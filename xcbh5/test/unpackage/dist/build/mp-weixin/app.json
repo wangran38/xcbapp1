@@ -32,7 +32,9 @@
     "pages/Settrecords/Settrecords",
     "pages/editshop/editshop",
     "pages/bankCard/bankCard",
-    "pages/addCard/addCard"
+    "pages/addCard/addCard",
+    "pages/onlineBooth/onlineBooth",
+    "pages/updatePwd/updatePwd"
   ],
   "subPackages": [],
   "window": {

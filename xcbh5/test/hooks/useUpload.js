@@ -80,7 +80,7 @@ export const useUpload = (opts) => {
 	}
 }
 
-function getPlatform() {
+export function getPlatform() {
 	/*#ifdef APP-PLUS*/
 	  // App端特有的逻辑
 	  return 1

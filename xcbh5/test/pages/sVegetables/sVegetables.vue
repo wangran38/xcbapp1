@@ -11,7 +11,7 @@
 						申请固定摊位
 					</view>
 				</view>
-				<view class="item" @click="goToapply">
+				<view class="item" @click="goToOnlineBooth">
 					<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe601;'}}</uni-icons>
 					<view class="add-dishes">
 						申请网络摊位
@@ -246,6 +246,11 @@
 				uni.navigateTo({
 					url: '/pages/Apply/Apply'
 				});
+			},
+			goToOnlineBooth(){
+				uni.navigateTo({
+					url:'/pages/onlineBooth/onlineBooth'
+				})
 			},
 			gotostalllist() {
 				uni.navigateTo({

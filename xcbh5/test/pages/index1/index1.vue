@@ -14,8 +14,8 @@
 				<text>所在的地区</text>
 				<picker class="picker" mode="multiSelector" :range="multiArray" :value="multiIndex"
 					@change="bindMultiPickerChange" @columnchange="bindMultiPickerColumnChange">
-					<view class="picker-text">{{ multiArray[0][multiIndex[0]] }} - {{ multiArray[1][multiIndex[1]] }} -{{ selectedCountry === 'overseas' ? '' : multiArray[2][multiIndex[2]] }}
-						<!-- {{ multiArray[2][multiIndex[2]] }} -->
+					<view class="picker-text">
+						{{ multiArray[0][multiIndex[0]] }} - {{ multiArray[1][multiIndex[1]] }} -{{ selectedCountry === 'overseas' ? '' : multiArray[2][multiIndex[2]] }}
 					</view>
 				</picker>
 			</view>
@@ -27,6 +27,21 @@
 				</picker>
 			</view>
 			<button class="save" @click="saveData">立即逛</button>
+		</view>
+		
+		<view class="notice" @click="goTorules">
+			<view class="nleft">
+				<uni-icons type="sound-filled" size="20" color="#007aff"></uni-icons>
+				<text class="ntext">公告</text>
+			</view>
+			<view class="ncen" >
+				<swiper class="swiper" vertical autoplay interval="1500" duration="300" circular>
+					<swiper-item class="swiitem" v-for="item in 4">赠送积分说明</swiper-item>
+				</swiper>
+			</view>
+			<view class="nrig">
+				<uni-icons type="right" size="16" color="#333"></uni-icons>
+			</view>
 		</view>
 	</view>
 </template>
@@ -88,20 +103,37 @@
 		},
 		methods: {
 			...mapMutations('location', ['setStatus']),
+			
+			goTorules() {
+				uni.navigateTo({
+					url: '/pages/rules/rules'
+				});
+			},
+			// 默认选中海南省定安县塔岭市场
 			async initializePicker() {
 				try {
 					if (this.selectedCountry === 'china') {
 						const provinces = await this.fetchProvinces();
 						this.multiArray[0] = provinces.map(item => item.name);
 						if (provinces.length > 0) {
-							const cities = await this.fetchCities(provinces[0].id);
+							
+							
+							
+							// const cities = await this.fetchCities(provinces[0].id);
+							const cities = await this.fetchCities(provinces[20].id);
+							
+							
+							
 							this.multiArray[1] = cities.map(item => item.name);
 							if (cities.length > 0) {
-								const areas = await this.fetchAreas(cities[0].id);
+								const areas = await this.fetchAreas(2306);
+								
 								this.multiArray[2] = areas.map(item => item.name);
 							}
 						}
-						this.multiIndex = [0, 0, 0];
+						this.multiIndex = [20, 3, 6];
+						
+						
 					} else if (this.selectedCountry === 'overseas') {
 						const countries = await this.fetchOverseas();
 						this.multiArray[0] = countries.map(c => c.shortname);
@@ -112,7 +144,15 @@
 				} catch (error) {
 					console.error('Failed to initialize picker:', error);
 				}
+				this.fetchMarkets(2313)
+				this.selectedMarketIndex = 1
 			},
+			
+			
+			
+			
+			
+			
 			async fetchProvinces() {
 				try {
 					const response = await api.citylist({
@@ -362,6 +402,73 @@
 
 
 <style>
+	.notice {
+		margin-top: 20rpx;
+		width: 100%;
+		height: 80rpx;
+		line-height: 80rpx;
+		background-color: white;
+		margin: 20rpx auto;
+		border-radius: 80rpx;
+		display: flex;
+		/* justify-content: center; */
+		align-items: center;
+		box-sizing: border-box;
+		padding: 0 20rpx;
+	}
+	
+	.nlef {
+		width: 140rpx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.ntext {
+		color: #007aff;
+		font-weight: 600;
+		font-size: 28rpx;
+	}
+	
+	.nrig {
+		width: 50rpx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.ncen {
+		height: 100%;
+		flex: 1;
+	}
+	
+	.swiper {
+		height: 100%;
+		/* background-color: #007aff; */
+	}
+	
+	.swiitem {
+		height: 100%;
+		text-align: center;
+		font-size: 30rpx;
+		color: #666;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	
+	.dishes {
+		display: flex;
+		flex-direction: column;
+		/* margin-top: 20rpx; */
+		margin-bottom: 180rpx;
+	}
+	
+	.dishes>text {
+		color: black;
+		font-size: 30rpx;
+		font-weight: 600;
+	}
 	.me-container {
 		height: 100vh;
 		overflow: hidden;

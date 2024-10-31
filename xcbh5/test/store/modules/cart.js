@@ -32,6 +32,19 @@ const mutations = {
 	clearCart(state) {
 		console.log('clearCart mutation triggered');
 		state.carts = [];
+	},
+	
+	
+	//  任意输入数量
+	anyNumber(state,item,value){
+		const index = state.carts.findIndex(i => i.id === item.id);
+		if (index !== -1) {
+			if (state.carts[index].tempCount > 1) {
+				state.carts[index].tempCount = value;
+			} else {
+				state.carts.splice(index, 1);
+			}
+		}
 	}
 };
 

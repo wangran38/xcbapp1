@@ -1,5 +1,6 @@
 <template>
 	<view class="me-container">
+		<view class="checkUpdate" @click="checkUpdate">检查更新</view>
 		<view class="user">
 			<view class="user-info">
 				<view class="user-img">
@@ -69,6 +70,10 @@
 			</view>
 		</view>
 
+		<view class="Notice">
+			今日打卡次数: &nbsp;{{signTotal.todayusernum}}<br>
+			历史打卡累计: &nbsp;{{signTotal.allnum}}
+		</view>
 		<view class="My-Order">
 			<view class="Order-top" @click="toorders(0)">
 				<view style="margin: auto 20rpx; text-align: center;">我的订单</view>
@@ -127,6 +132,7 @@
 	import {
 		api
 	} from '../../api/index.js';
+	import {getPlatform} from '../../hooks/useUpload.js'
 
 	export default {
 		data() {
@@ -136,10 +142,13 @@
 				userAvatar: '',
 				score: '',
 				// 添加你需要的数据属性
-				totalnum: 0
+				totalnum: 0,
+				signTotal: {}
 			};
 		},
-		onShow() {
+		async onShow() {
+			let res = await api.signTotal({})
+			this.signTotal = res.data
 			this.checkLoginStatus();
 			if (this.isLoggedIn) {
 				this.fetchUserProfile();
@@ -147,6 +156,53 @@
 			this.signlist()
 		},
 		methods: {
+			/**
+			 * 
+			 * 检查更新
+			 */
+			checkUpdate() {
+				if (getPlatform() == 3){
+					// 小程序支持检查更新其他的提示不兼容
+					if (wx.canIUse('getUpdateManager')) {
+						const updateManager = uni.getUpdateManager()
+						updateManager.onCheckForUpdate(function(res) {
+							if (res.hasUpdate) {
+								updateManager.onUpdateReady(function() {
+									uni.showModal({
+										title: '更新提示',
+										content: '新版本已经准备好，是否重启应用？',
+										success: function(res) {
+											if (res.confirm) {
+												updateManager.applyUpdate()
+											}
+										}
+									})
+								})
+							}else{
+								uni.showToast({
+									title:'已经是最新版了',
+									icon:'success'
+								})
+							}
+						})
+					} else {
+						uni.showModal({
+							title: '提示',
+							content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+						})
+					}
+				}else{
+					uni.showToast({
+						title:'当前客户端不支持检查更新',
+						icon:'error'
+					})
+				}
+				
+			},
+
+			/**
+			 * 检查登录状态
+			 */
 			checkLoginStatus() {
 				const token = uni.getStorageSync('token');
 				if (token) {
@@ -256,23 +312,27 @@
 			// 绑定微信
 			async bindingWechat() {
 				let systemInfo = await uni.getSystemInfo()
-				
+
 				// 判断是否是小程序端，如果不是就提示用户到小程序端进行绑定
 				if (systemInfo[1].host && systemInfo[1].host.env == 'WeChat') {
 					uni.login({
 						provider: 'true',
-						success: res => {
+						success: async res => {
 							console.log(res.code, "这是用户唯一标识")
-							// 
+							发送code
+							let data = await api.bindingOpenid({
+								code:res.code
+							})
+							console.log(data)
 						},
 						fail: () => {},
 						complete: () => {}
 					});
-				}else{
+				} else {
 					uni.showToast({
-						title:'浏览器不支持调用api,请前往小程序端进行账号绑定',
-						duration:3000,
-						icon:'error'
+						title: '浏览器不支持调用api,请前往小程序端进行账号绑定',
+						duration: 3000,
+						icon: 'error'
 					})
 				}
 			}
@@ -282,6 +342,23 @@
 
 
 <style>
+	.checkUpdate {
+		font-size: 20rpx;
+		position: absolute;
+		top: 10rpx;
+		right: 10rpx;
+		color: black;
+		padding: 10rpx;
+		background-color: #f8f8f8;
+		box-shadow: 1rpx 1rpx 1rpx 1rpx gray;
+	}
+
+	.Notice {
+		margin: 50rpx;
+		text-align: center;
+		color: black;
+	}
+
 	.me-container {
 		overflow: hidden;
 		width: 100%;

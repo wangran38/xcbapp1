@@ -1,4 +1,19 @@
 
+.checkUpdate {
+	font-size: 20rpx;
+	position: absolute;
+	top: 10rpx;
+	right: 10rpx;
+	color: black;
+	padding: 10rpx;
+	background-color: #f8f8f8;
+	box-shadow: 1rpx 1rpx 1rpx 1rpx gray;
+}
+.Notice {
+	margin: 50rpx;
+	text-align: center;
+	color: black;
+}
 .me-container {
 	overflow: hidden;
 	width: 100%;

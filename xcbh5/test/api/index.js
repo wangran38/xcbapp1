@@ -257,6 +257,13 @@ export const api = {
 	// 删除菜品
 	editgoods(data){
 		return fetch('/api/user/editgoods', 'POST', data);
+	},
+	// 绑定微信
+	bindingOpenid(data){
+		return fetch('/api/wx/getopenid', 'GET', data);
+	},
+	signTotal(data){
+		return fetch('/api/sign/total', 'POST', data);
 	}
 	
 }
