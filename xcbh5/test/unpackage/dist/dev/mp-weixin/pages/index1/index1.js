@@ -34,7 +34,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index1_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index1.vue?vue&type=script&lang=js& */ 162);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _index1_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _index1_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _index1_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index1.vue?vue&type=style&index=0&lang=css& */ 164);
-/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 32);
+/* harmony import */ var _index1_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./index1.vue?vue&type=style&index=1&lang=css& */ 166);
+/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 32);
 
 var renderjs
 
@@ -42,9 +43,10 @@ var renderjs
 
 
 
+
 /* normalize component */
 
-var component = Object(_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
   _index1_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _index1_vue_vue_type_template_id_30cac634___WEBPACK_IMPORTED_MODULE_0__["render"],
   _index1_vue_vue_type_template_id_30cac634___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -98,6 +100,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uniIcons: function () {
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 338))
+    },
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function () {
   var _vm = this
   var _h = _vm.$createElement
@@ -167,11 +192,33 @@ var _default = {
       overseasCountries: [],
       overseasCities: [],
       overseasCountryId: null,
-      overseasCityId: null
+      overseasCityId: null,
       // marketName:'' // 市场名
+
+      signTotal: {}
     };
   },
-
+  onShow: function onShow() {
+    var _this = this;
+    return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+      var res;
+      return _regenerator.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _index.api.signTotal({});
+            case 2:
+              res = _context.sent;
+              _this.signTotal = res.data;
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
   computed: {
     displayArray: function displayArray() {
       if (this.selectedCountry === 'china') {
@@ -190,137 +237,109 @@ var _default = {
     }
   },
   mounted: function mounted() {
-    var _this = this;
-    return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-      return _regenerator.default.wrap(function _callee$(_context) {
+    var _this2 = this;
+    return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+      return _regenerator.default.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
-              _context.next = 2;
-              return _this.initializePicker();
+              _context2.next = 2;
+              return _this2.initializePicker();
             case 2:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee);
+      }, _callee2);
     }))();
   },
   methods: _objectSpread(_objectSpread({}, (0, _vuex.mapMutations)('location', ['setStatus'])), {}, {
-    initializePicker: function initializePicker() {
-      var _this2 = this;
-      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
-        var provinces, cities, areas, countries;
-        return _regenerator.default.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.prev = 0;
-                if (!(_this2.selectedCountry === 'china')) {
-                  _context2.next = 19;
-                  break;
-                }
-                _context2.next = 4;
-                return _this2.fetchProvinces();
-              case 4:
-                provinces = _context2.sent;
-                _this2.multiArray[0] = provinces.map(function (item) {
-                  return item.name;
-                });
-                if (!(provinces.length > 0)) {
-                  _context2.next = 16;
-                  break;
-                }
-                _context2.next = 9;
-                return _this2.fetchCities(provinces[0].id);
-              case 9:
-                cities = _context2.sent;
-                _this2.multiArray[1] = cities.map(function (item) {
-                  return item.name;
-                });
-                if (!(cities.length > 0)) {
-                  _context2.next = 16;
-                  break;
-                }
-                _context2.next = 14;
-                return _this2.fetchAreas(cities[0].id);
-              case 14:
-                areas = _context2.sent;
-                _this2.multiArray[2] = areas.map(function (item) {
-                  return item.name;
-                });
-              case 16:
-                _this2.multiIndex = [0, 0, 0];
-                _context2.next = 27;
-                break;
-              case 19:
-                if (!(_this2.selectedCountry === 'overseas')) {
-                  _context2.next = 27;
-                  break;
-                }
-                _context2.next = 22;
-                return _this2.fetchOverseas();
-              case 22:
-                countries = _context2.sent;
-                _this2.multiArray[0] = countries.map(function (c) {
-                  return c.shortname;
-                });
-                _this2.multiArray[1] = [];
-                _this2.multiArray[2] = [];
-                _this2.multiIndex = [0, 0, 0];
-              case 27:
-                _context2.next = 32;
-                break;
-              case 29:
-                _context2.prev = 29;
-                _context2.t0 = _context2["catch"](0);
-                console.error('Failed to initialize picker:', _context2.t0);
-              case 32:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, null, [[0, 29]]);
-      }))();
+    goTorules: function goTorules() {
+      uni.navigateTo({
+        url: '/pages/rules/rules'
+      });
     },
-    fetchProvinces: function fetchProvinces() {
+    // 默认选中海南省定安县塔岭市场
+    initializePicker: function initializePicker() {
       var _this3 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
-        var response;
+        var provinces, cities, areas, countries;
         return _regenerator.default.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.prev = 0;
-                _context3.next = 3;
-                return _index.api.citylist({
-                  level: 1,
-                  limit: 100
-                });
-              case 3:
-                response = _context3.sent;
-                if (!(response.code === 200)) {
-                  _context3.next = 7;
+                if (!(_this3.selectedCountry === 'china')) {
+                  _context3.next = 19;
                   break;
                 }
-                _this3.provinceList = response.data.listdata;
-                return _context3.abrupt("return", _this3.provinceList);
-              case 7:
-                throw new Error('Failed to fetch provinces');
-              case 10:
-                _context3.prev = 10;
-                _context3.t0 = _context3["catch"](0);
-                console.error('Failed to fetch provinces:', _context3.t0);
-                throw _context3.t0;
+                _context3.next = 4;
+                return _this3.fetchProvinces();
+              case 4:
+                provinces = _context3.sent;
+                _this3.multiArray[0] = provinces.map(function (item) {
+                  return item.name;
+                });
+                if (!(provinces.length > 0)) {
+                  _context3.next = 16;
+                  break;
+                }
+                _context3.next = 9;
+                return _this3.fetchCities(provinces[20].id);
+              case 9:
+                cities = _context3.sent;
+                _this3.multiArray[1] = cities.map(function (item) {
+                  return item.name;
+                });
+                if (!(cities.length > 0)) {
+                  _context3.next = 16;
+                  break;
+                }
+                _context3.next = 14;
+                return _this3.fetchAreas(2306);
               case 14:
+                areas = _context3.sent;
+                _this3.multiArray[2] = areas.map(function (item) {
+                  return item.name;
+                });
+              case 16:
+                _this3.multiIndex = [20, 3, 6];
+                _context3.next = 27;
+                break;
+              case 19:
+                if (!(_this3.selectedCountry === 'overseas')) {
+                  _context3.next = 27;
+                  break;
+                }
+                _context3.next = 22;
+                return _this3.fetchOverseas();
+              case 22:
+                countries = _context3.sent;
+                _this3.multiArray[0] = countries.map(function (c) {
+                  return c.shortname;
+                });
+                _this3.multiArray[1] = [];
+                _this3.multiArray[2] = [];
+                _this3.multiIndex = [0, 0, 0];
+              case 27:
+                _context3.next = 32;
+                break;
+              case 29:
+                _context3.prev = 29;
+                _context3.t0 = _context3["catch"](0);
+                console.error('Failed to initialize picker:', _context3.t0);
+              case 32:
+                _this3.fetchMarkets(2313);
+                _this3.selectedMarketIndex = 1;
+              case 34:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 10]]);
+        }, _callee3, null, [[0, 29]]);
       }))();
     },
-    fetchCities: function fetchCities(provinceId) {
+    fetchProvinces: function fetchProvinces() {
       var _this4 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4() {
         var response;
@@ -330,35 +349,34 @@ var _default = {
               case 0:
                 _context4.prev = 0;
                 _context4.next = 3;
-                return _index.api.citytree(provinceId);
+                return _index.api.citylist({
+                  level: 1,
+                  limit: 100
+                });
               case 3:
                 response = _context4.sent;
-                if (!(response.code === 200 && Array.isArray(response.data))) {
-                  _context4.next = 9;
+                if (!(response.code === 200)) {
+                  _context4.next = 7;
                   break;
                 }
-                _this4.cityList = response.data;
-                return _context4.abrupt("return", response.data);
-              case 9:
-                console.error('No cities data found');
-                return _context4.abrupt("return", []);
-              case 11:
-                _context4.next = 17;
-                break;
-              case 13:
-                _context4.prev = 13;
+                _this4.provinceList = response.data.listdata;
+                return _context4.abrupt("return", _this4.provinceList);
+              case 7:
+                throw new Error('Failed to fetch provinces');
+              case 10:
+                _context4.prev = 10;
                 _context4.t0 = _context4["catch"](0);
-                console.error('Failed to fetch cities:', _context4.t0);
-                return _context4.abrupt("return", []);
-              case 17:
+                console.error('Failed to fetch provinces:', _context4.t0);
+                throw _context4.t0;
+              case 14:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[0, 13]]);
+        }, _callee4, null, [[0, 10]]);
       }))();
     },
-    fetchAreas: function fetchAreas(cityId) {
+    fetchCities: function fetchCities(provinceId) {
       var _this5 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee5() {
         var response;
@@ -368,17 +386,17 @@ var _default = {
               case 0:
                 _context5.prev = 0;
                 _context5.next = 3;
-                return _index.api.citytree(cityId);
+                return _index.api.citytree(provinceId);
               case 3:
                 response = _context5.sent;
                 if (!(response.code === 200 && Array.isArray(response.data))) {
                   _context5.next = 9;
                   break;
                 }
-                _this5.districtList = response.data;
+                _this5.cityList = response.data;
                 return _context5.abrupt("return", response.data);
               case 9:
-                console.error('No areas data found');
+                console.error('No cities data found');
                 return _context5.abrupt("return", []);
               case 11:
                 _context5.next = 17;
@@ -386,7 +404,7 @@ var _default = {
               case 13:
                 _context5.prev = 13;
                 _context5.t0 = _context5["catch"](0);
-                console.error('Failed to fetch areas:', _context5.t0);
+                console.error('Failed to fetch cities:', _context5.t0);
                 return _context5.abrupt("return", []);
               case 17:
               case "end":
@@ -396,7 +414,7 @@ var _default = {
         }, _callee5, null, [[0, 13]]);
       }))();
     },
-    fetchOverseas: function fetchOverseas() {
+    fetchAreas: function fetchAreas(cityId) {
       var _this6 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee6() {
         var response;
@@ -406,40 +424,35 @@ var _default = {
               case 0:
                 _context6.prev = 0;
                 _context6.next = 3;
-                return _index.api.countrylist(0, 200, 1);
+                return _index.api.citytree(cityId);
               case 3:
                 response = _context6.sent;
-                if (!(response.code === 200)) {
-                  _context6.next = 13;
+                if (!(response.code === 200 && Array.isArray(response.data))) {
+                  _context6.next = 9;
                   break;
                 }
-                _this6.overseasCountries = response.data.listdata;
-                _this6.multiArray[0] = _this6.overseasCountries.map(function (c) {
-                  return c.shortname;
-                });
-                _this6.multiArray[1] = [];
-                _this6.multiArray[2] = [];
-                _this6.multiIndex = [0, 0, 0];
-                return _context6.abrupt("return", _this6.overseasCountries);
-              case 13:
-                throw new Error('Failed to fetch overseas continents');
-              case 14:
-                _context6.next = 20;
+                _this6.districtList = response.data;
+                return _context6.abrupt("return", response.data);
+              case 9:
+                console.error('No areas data found');
+                return _context6.abrupt("return", []);
+              case 11:
+                _context6.next = 17;
                 break;
-              case 16:
-                _context6.prev = 16;
+              case 13:
+                _context6.prev = 13;
                 _context6.t0 = _context6["catch"](0);
-                console.error('Failed to fetch overseas continents:', _context6.t0);
-                throw _context6.t0;
-              case 20:
+                console.error('Failed to fetch areas:', _context6.t0);
+                return _context6.abrupt("return", []);
+              case 17:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[0, 16]]);
+        }, _callee6, null, [[0, 13]]);
       }))();
     },
-    fetchOverseasCities: function fetchOverseasCities(continentId) {
+    fetchOverseas: function fetchOverseas() {
       var _this7 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee7() {
         var response;
@@ -449,30 +462,30 @@ var _default = {
               case 0:
                 _context7.prev = 0;
                 _context7.next = 3;
-                return _index.api.countrylist(continentId, 100, 1);
+                return _index.api.countrylist(0, 200, 1);
               case 3:
                 response = _context7.sent;
                 if (!(response.code === 200)) {
                   _context7.next = 13;
                   break;
                 }
-                _this7.overseasCities = response.data.listdata;
-                _this7.multiArray[1] = _this7.overseasCities.map(function (c) {
+                _this7.overseasCountries = response.data.listdata;
+                _this7.multiArray[0] = _this7.overseasCountries.map(function (c) {
                   return c.shortname;
                 });
+                _this7.multiArray[1] = [];
                 _this7.multiArray[2] = [];
-                _this7.multiIndex[1] = 0;
-                _this7.multiIndex[2] = 0;
-                return _context7.abrupt("return", _this7.overseasCities);
+                _this7.multiIndex = [0, 0, 0];
+                return _context7.abrupt("return", _this7.overseasCountries);
               case 13:
-                throw new Error('Failed to fetch overseas countries');
+                throw new Error('Failed to fetch overseas continents');
               case 14:
                 _context7.next = 20;
                 break;
               case 16:
                 _context7.prev = 16;
                 _context7.t0 = _context7["catch"](0);
-                console.error('Failed to fetch overseas countries:', _context7.t0);
+                console.error('Failed to fetch overseas continents:', _context7.t0);
                 throw _context7.t0;
               case 20:
               case "end":
@@ -482,150 +495,79 @@ var _default = {
         }, _callee7, null, [[0, 16]]);
       }))();
     },
-    selectCountry: function selectCountry(country) {
+    fetchOverseasCities: function fetchOverseasCities(continentId) {
       var _this8 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee8() {
+        var response;
         return _regenerator.default.wrap(function _callee8$(_context8) {
           while (1) {
             switch (_context8.prev = _context8.next) {
               case 0:
-                _this8.selectedCountry = country;
-                _this8.multiArray = [[], [], []];
-                _this8.marketList = [];
-                _this8.selectedMarketIndex = 0;
-                _this8.area_id = null;
-                _this8.market_id = null;
-                if (!(country === 'china')) {
-                  _context8.next = 11;
+                _context8.prev = 0;
+                _context8.next = 3;
+                return _index.api.countrylist(continentId, 100, 1);
+              case 3:
+                response = _context8.sent;
+                if (!(response.code === 200)) {
+                  _context8.next = 13;
                   break;
                 }
-                _context8.next = 9;
-                return _this8.initializePicker();
-              case 9:
-                _context8.next = 14;
-                break;
-              case 11:
-                if (!(country === 'overseas')) {
-                  _context8.next = 14;
-                  break;
-                }
-                _context8.next = 14;
-                return _this8.fetchOverseas();
+                _this8.overseasCities = response.data.listdata;
+                _this8.multiArray[1] = _this8.overseasCities.map(function (c) {
+                  return c.shortname;
+                });
+                _this8.multiArray[2] = [];
+                _this8.multiIndex[1] = 0;
+                _this8.multiIndex[2] = 0;
+                return _context8.abrupt("return", _this8.overseasCities);
+              case 13:
+                throw new Error('Failed to fetch overseas countries');
               case 14:
+                _context8.next = 20;
+                break;
+              case 16:
+                _context8.prev = 16;
+                _context8.t0 = _context8["catch"](0);
+                console.error('Failed to fetch overseas countries:', _context8.t0);
+                throw _context8.t0;
+              case 20:
               case "end":
                 return _context8.stop();
             }
           }
-        }, _callee8);
+        }, _callee8, null, [[0, 16]]);
       }))();
     },
-    bindMultiPickerColumnChange: function bindMultiPickerColumnChange(e) {
+    selectCountry: function selectCountry(country) {
       var _this9 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee9() {
-        var column, value, selectedProvince, cities, areas, selectedCity, _areas, selectedContinent;
         return _regenerator.default.wrap(function _callee9$(_context9) {
           while (1) {
             switch (_context9.prev = _context9.next) {
               case 0:
-                column = e.detail.column;
-                value = e.detail.value;
-                if (!(_this9.selectedCountry === 'china')) {
-                  _context9.next = 35;
+                _this9.selectedCountry = country;
+                _this9.multiArray = [[], [], []];
+                _this9.marketList = [];
+                _this9.selectedMarketIndex = 0;
+                _this9.area_id = null;
+                _this9.market_id = null;
+                if (!(country === 'china')) {
+                  _context9.next = 11;
                   break;
                 }
-                if (!(column === 0)) {
-                  _context9.next = 22;
-                  break;
-                }
-                selectedProvince = _this9.provinceList[value];
-                if (!(selectedProvince && selectedProvince.id !== undefined)) {
-                  _context9.next = 18;
-                  break;
-                }
-                _context9.next = 8;
-                return _this9.fetchCities(selectedProvince.id);
-              case 8:
-                cities = _context9.sent;
-                _this9.multiArray[1] = cities.map(function (item) {
-                  return item.name;
-                });
-                if (!(cities.length > 0)) {
-                  _context9.next = 17;
-                  break;
-                }
-                _context9.next = 13;
-                return _this9.fetchAreas(cities[0].id);
-              case 13:
-                areas = _context9.sent;
-                _this9.multiArray[2] = areas.map(function (item) {
-                  return item.name;
-                });
-                _context9.next = 18;
+                _context9.next = 9;
+                return _this9.initializePicker();
+              case 9:
+                _context9.next = 14;
                 break;
-              case 17:
-                _this9.multiArray[2] = [];
-              case 18:
-                _this9.multiIndex[1] = 0;
-                _this9.multiIndex[2] = 0;
-                _context9.next = 33;
-                break;
-              case 22:
-                if (!(column === 1)) {
-                  _context9.next = 33;
+              case 11:
+                if (!(country === 'overseas')) {
+                  _context9.next = 14;
                   break;
                 }
-                selectedCity = _this9.cityList[value];
-                if (!(selectedCity && selectedCity.id !== undefined)) {
-                  _context9.next = 31;
-                  break;
-                }
-                _context9.next = 27;
-                return _this9.fetchAreas(selectedCity.id);
-              case 27:
-                _areas = _context9.sent;
-                _this9.multiArray[2] = _areas.map(function (item) {
-                  return item.name;
-                });
-                _context9.next = 32;
-                break;
-              case 31:
-                _this9.multiArray[2] = [];
-              case 32:
-                _this9.multiIndex[2] = 0;
-              case 33:
-                _context9.next = 47;
-                break;
-              case 35:
-                if (!(_this9.selectedCountry === 'overseas')) {
-                  _context9.next = 47;
-                  break;
-                }
-                if (!(column === 0)) {
-                  _context9.next = 46;
-                  break;
-                }
-                selectedContinent = _this9.overseasCountries[value];
-                if (!(selectedContinent && selectedContinent.id !== undefined)) {
-                  _context9.next = 41;
-                  break;
-                }
-                _context9.next = 41;
-                return _this9.fetchOverseasCities(selectedContinent.id);
-              case 41:
-                _this9.multiArray[2] = [];
-                _this9.multiIndex[1] = 0;
-                _this9.multiIndex[2] = 0;
-                _context9.next = 47;
-                break;
-              case 46:
-                if (column === 1) {
-                  _this9.multiArray[2] = [];
-                  _this9.multiIndex[2] = 0;
-                }
-              case 47:
-                _this9.multiIndex[column] = value;
-                _this9.multiIndex = (0, _toConsumableArray2.default)(_this9.multiIndex);
-              case 49:
+                _context9.next = 14;
+                return _this9.fetchOverseas();
+              case 14:
               case "end":
                 return _context9.stop();
             }
@@ -633,51 +575,113 @@ var _default = {
         }, _callee9);
       }))();
     },
-    bindMultiPickerChange: function bindMultiPickerChange(e) {
+    bindMultiPickerColumnChange: function bindMultiPickerColumnChange(e) {
       var _this10 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee10() {
-        var _this10$cityList$sele, selectedCityIndex, selectedCityId, _this10$districtList$, _this10$overseasCount, selectedCountryIndex, _selectedCityIndex, _this10$overseasCitie;
+        var column, value, selectedProvince, cities, areas, selectedCity, _areas, selectedContinent;
         return _regenerator.default.wrap(function _callee10$(_context10) {
           while (1) {
             switch (_context10.prev = _context10.next) {
               case 0:
-                _this10.multiIndex = e.detail.value;
+                column = e.detail.column;
+                value = e.detail.value;
                 if (!(_this10.selectedCountry === 'china')) {
-                  _context10.next = 12;
+                  _context10.next = 35;
                   break;
                 }
-                selectedCityIndex = _this10.multiIndex[1];
-                selectedCityId = ((_this10$cityList$sele = _this10.cityList[selectedCityIndex]) === null || _this10$cityList$sele === void 0 ? void 0 : _this10$cityList$sele.id) || null;
-                if (!selectedCityId) {
-                  _context10.next = 10;
+                if (!(column === 0)) {
+                  _context10.next = 22;
                   break;
                 }
-                _context10.next = 7;
-                return _this10.fetchAreas(selectedCityId);
-              case 7:
-                _this10.area_id = ((_this10$districtList$ = _this10.districtList[_this10.multiIndex[2]]) === null || _this10$districtList$ === void 0 ? void 0 : _this10$districtList$.id) || null;
-                _context10.next = 10;
-                return _this10.fetchMarkets(_this10.area_id);
-              case 10:
-                _context10.next = 20;
+                selectedProvince = _this10.provinceList[value];
+                if (!(selectedProvince && selectedProvince.id !== undefined)) {
+                  _context10.next = 18;
+                  break;
+                }
+                _context10.next = 8;
+                return _this10.fetchCities(selectedProvince.id);
+              case 8:
+                cities = _context10.sent;
+                _this10.multiArray[1] = cities.map(function (item) {
+                  return item.name;
+                });
+                if (!(cities.length > 0)) {
+                  _context10.next = 17;
+                  break;
+                }
+                _context10.next = 13;
+                return _this10.fetchAreas(cities[0].id);
+              case 13:
+                areas = _context10.sent;
+                _this10.multiArray[2] = areas.map(function (item) {
+                  return item.name;
+                });
+                _context10.next = 18;
                 break;
-              case 12:
+              case 17:
+                _this10.multiArray[2] = [];
+              case 18:
+                _this10.multiIndex[1] = 0;
+                _this10.multiIndex[2] = 0;
+                _context10.next = 33;
+                break;
+              case 22:
+                if (!(column === 1)) {
+                  _context10.next = 33;
+                  break;
+                }
+                selectedCity = _this10.cityList[value];
+                if (!(selectedCity && selectedCity.id !== undefined)) {
+                  _context10.next = 31;
+                  break;
+                }
+                _context10.next = 27;
+                return _this10.fetchAreas(selectedCity.id);
+              case 27:
+                _areas = _context10.sent;
+                _this10.multiArray[2] = _areas.map(function (item) {
+                  return item.name;
+                });
+                _context10.next = 32;
+                break;
+              case 31:
+                _this10.multiArray[2] = [];
+              case 32:
+                _this10.multiIndex[2] = 0;
+              case 33:
+                _context10.next = 47;
+                break;
+              case 35:
                 if (!(_this10.selectedCountry === 'overseas')) {
-                  _context10.next = 20;
+                  _context10.next = 47;
                   break;
                 }
-                selectedCountryIndex = _this10.multiIndex[0];
-                _this10.overseasCountryId = ((_this10$overseasCount = _this10.overseasCountries[selectedCountryIndex]) === null || _this10$overseasCount === void 0 ? void 0 : _this10$overseasCount.id) || null;
-                _selectedCityIndex = _this10.multiIndex[1];
-                if (!_this10.overseasCountryId) {
-                  _context10.next = 20;
+                if (!(column === 0)) {
+                  _context10.next = 46;
                   break;
                 }
-                _context10.next = 19;
-                return _this10.fetchOverseasCities(_this10.overseasCountryId);
-              case 19:
-                _this10.overseasCityId = ((_this10$overseasCitie = _this10.overseasCities[_selectedCityIndex]) === null || _this10$overseasCitie === void 0 ? void 0 : _this10$overseasCitie.id) || null;
-              case 20:
+                selectedContinent = _this10.overseasCountries[value];
+                if (!(selectedContinent && selectedContinent.id !== undefined)) {
+                  _context10.next = 41;
+                  break;
+                }
+                _context10.next = 41;
+                return _this10.fetchOverseasCities(selectedContinent.id);
+              case 41:
+                _this10.multiArray[2] = [];
+                _this10.multiIndex[1] = 0;
+                _this10.multiIndex[2] = 0;
+                _context10.next = 47;
+                break;
+              case 46:
+                if (column === 1) {
+                  _this10.multiArray[2] = [];
+                  _this10.multiIndex[2] = 0;
+                }
+              case 47:
+                _this10.multiIndex[column] = value;
+                _this10.multiIndex = (0, _toConsumableArray2.default)(_this10.multiIndex);
+              case 49:
               case "end":
                 return _context10.stop();
             }
@@ -685,47 +689,99 @@ var _default = {
         }, _callee10);
       }))();
     },
-    fetchMarkets: function fetchMarkets(areaId) {
+    bindMultiPickerChange: function bindMultiPickerChange(e) {
       var _this11 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee11() {
-        var Limit, response;
+        var _this11$cityList$sele, selectedCityIndex, selectedCityId, _this11$districtList$, _this11$overseasCount, selectedCountryIndex, _selectedCityIndex, _this11$overseasCitie;
         return _regenerator.default.wrap(function _callee11$(_context11) {
           while (1) {
             switch (_context11.prev = _context11.next) {
               case 0:
-                _context11.prev = 0;
+                _this11.multiIndex = e.detail.value;
+                if (!(_this11.selectedCountry === 'china')) {
+                  _context11.next = 12;
+                  break;
+                }
+                selectedCityIndex = _this11.multiIndex[1];
+                selectedCityId = ((_this11$cityList$sele = _this11.cityList[selectedCityIndex]) === null || _this11$cityList$sele === void 0 ? void 0 : _this11$cityList$sele.id) || null;
+                if (!selectedCityId) {
+                  _context11.next = 10;
+                  break;
+                }
+                _context11.next = 7;
+                return _this11.fetchAreas(selectedCityId);
+              case 7:
+                _this11.area_id = ((_this11$districtList$ = _this11.districtList[_this11.multiIndex[2]]) === null || _this11$districtList$ === void 0 ? void 0 : _this11$districtList$.id) || null;
+                _context11.next = 10;
+                return _this11.fetchMarkets(_this11.area_id);
+              case 10:
+                _context11.next = 20;
+                break;
+              case 12:
+                if (!(_this11.selectedCountry === 'overseas')) {
+                  _context11.next = 20;
+                  break;
+                }
+                selectedCountryIndex = _this11.multiIndex[0];
+                _this11.overseasCountryId = ((_this11$overseasCount = _this11.overseasCountries[selectedCountryIndex]) === null || _this11$overseasCount === void 0 ? void 0 : _this11$overseasCount.id) || null;
+                _selectedCityIndex = _this11.multiIndex[1];
+                if (!_this11.overseasCountryId) {
+                  _context11.next = 20;
+                  break;
+                }
+                _context11.next = 19;
+                return _this11.fetchOverseasCities(_this11.overseasCountryId);
+              case 19:
+                _this11.overseasCityId = ((_this11$overseasCitie = _this11.overseasCities[_selectedCityIndex]) === null || _this11$overseasCitie === void 0 ? void 0 : _this11$overseasCitie.id) || null;
+              case 20:
+              case "end":
+                return _context11.stop();
+            }
+          }
+        }, _callee11);
+      }))();
+    },
+    fetchMarkets: function fetchMarkets(areaId) {
+      var _this12 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee12() {
+        var Limit, response;
+        return _regenerator.default.wrap(function _callee12$(_context12) {
+          while (1) {
+            switch (_context12.prev = _context12.next) {
+              case 0:
+                _context12.prev = 0;
                 Limit = 100;
-                _context11.next = 4;
+                _context12.next = 4;
                 return _index.api.marketlist(areaId, Limit);
               case 4:
-                response = _context11.sent;
+                response = _context12.sent;
                 if (response.code === 200 && Array.isArray(response.data.listdata)) {
-                  _this11.marketList = response.data.listdata.map(function (item) {
+                  _this12.marketList = response.data.listdata.map(function (item) {
                     return item.marketname;
                   });
-                  _this11.marketIdMap = response.data.listdata.reduce(function (map, item) {
+                  _this12.marketIdMap = response.data.listdata.reduce(function (map, item) {
                     map[item.marketname] = item.id;
                     return map;
                   }, {});
                 } else {
                   console.error('No market data found');
-                  _this11.marketList = [];
-                  _this11.marketIdMap = {};
+                  _this12.marketList = [];
+                  _this12.marketIdMap = {};
                 }
-                _context11.next = 13;
+                _context12.next = 13;
                 break;
               case 8:
-                _context11.prev = 8;
-                _context11.t0 = _context11["catch"](0);
-                console.error('Failed to fetch markets:', _context11.t0);
-                _this11.marketList = [];
-                _this11.marketIdMap = {};
+                _context12.prev = 8;
+                _context12.t0 = _context12["catch"](0);
+                console.error('Failed to fetch markets:', _context12.t0);
+                _this12.marketList = [];
+                _this12.marketIdMap = {};
               case 13:
               case "end":
-                return _context11.stop();
+                return _context12.stop();
             }
           }
-        }, _callee11, null, [[0, 8]]);
+        }, _callee12, null, [[0, 8]]);
       }))();
     },
     bindMarketChange: function bindMarketChange(e) {
@@ -754,7 +810,7 @@ var _default = {
       });
     },
     loadSavedData: function loadSavedData() {
-      var _this12 = this;
+      var _this13 = this;
       // 加载保存的数据
       var savedData = uni.getStorageSync('userSelection');
       if (savedData) {
@@ -765,8 +821,8 @@ var _default = {
 
         // 重新初始化选择器数据
         this.initializePicker().then(function () {
-          if (_this12.area_id && _this12.selectedCountry === 'china') {
-            _this12.fetchMarkets(_this12.area_id);
+          if (_this13.area_id && _this13.selectedCountry === 'china') {
+            _this13.fetchMarkets(_this13.area_id);
           }
         });
       } else {
@@ -800,6 +856,35 @@ __webpack_require__.r(__webpack_exports__);
 /***/ 165:
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/xcbh5/xcbh5/test/pages/index1/index1.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+    if(false) { var cssReload; }
+  
+
+/***/ }),
+
+/***/ 166:
+/*!************************************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/pages/index1/index1.vue?vue&type=style&index=1&lang=css& ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_D_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_loaders_stylePostLoader_js_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_2_D_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_index1_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!./index1.vue?vue&type=style&index=1&lang=css& */ 167);
+/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_D_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_loaders_stylePostLoader_js_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_2_D_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_index1_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_D_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_D_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_loaders_stylePostLoader_js_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_2_D_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_index1_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _D_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_D_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_loaders_stylePostLoader_js_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_2_D_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_index1_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _D_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_D_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_loaders_stylePostLoader_js_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_2_D_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_index1_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_D_HBuilderX_plugins_uniapp_cli_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_D_HBuilderX_plugins_uniapp_cli_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_loaders_stylePostLoader_js_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_6_oneOf_1_2_D_HBuilderX_plugins_uniapp_cli_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_3_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_index_js_vue_loader_options_D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_index1_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ 167:
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/xcbh5/xcbh5/test/pages/index1/index1.vue?vue&type=style&index=1&lang=css& ***!
   \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {

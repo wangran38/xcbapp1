@@ -43,6 +43,12 @@
 				<uni-icons type="right" size="16" color="#333"></uni-icons>
 			</view>
 		</view>
+		<view class="Notice">
+			今日打卡次数: &nbsp;{{signTotal.todaynum}}<br>
+			历史打卡累计: &nbsp;{{signTotal.allnum}}
+		</view>
+		
+
 	</view>
 </template>
 
@@ -77,7 +83,13 @@
 				overseasCountryId: null,
 				overseasCityId: null,
 				// marketName:'' // 市场名
+				
+				signTotal: {}
 			};
+		},
+		async onShow() {
+			let res = await api.signTotal({})
+			this.signTotal = res.data
 		},
 		computed: {
 			displayArray() {
@@ -397,6 +409,13 @@
 	};
 </script>
 
+<style>
+	.Notice {
+		margin: 50rpx;
+		text-align: center;
+		color: black;
+	}
+</style>
 
 
 
@@ -411,7 +430,6 @@
 		margin: 20rpx auto;
 		border-radius: 80rpx;
 		display: flex;
-		/* justify-content: center; */
 		align-items: center;
 		box-sizing: border-box;
 		padding: 0 20rpx;
@@ -471,7 +489,7 @@
 	}
 	.me-container {
 		height: 100vh;
-		overflow: hidden;
+		/* overflow: hidden; */
 		width: 100%;
 		box-sizing: border-box;
 		padding: 0rpx 40rpx 0 40rpx;

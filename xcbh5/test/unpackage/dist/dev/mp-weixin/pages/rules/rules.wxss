@@ -1,5 +1,9 @@
 
+.one,.two,.three,.four{
+	text-indent: 30rpx;
+}
 .me-container {
+	position: relative;
 	width: 100%;
 	height: 200vh;
 	box-sizing: border-box;
@@ -36,5 +40,10 @@
 	align-items: center;
 	background-color: #007aff;
 	border-radius: 20rpx;
+}
+.luokuan{
+	margin-top: 20rpx;
+	text-align: right;
+	font-size: 25rpx;
 }
 

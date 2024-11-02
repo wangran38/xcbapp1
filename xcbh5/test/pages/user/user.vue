@@ -70,10 +70,10 @@
 			</view>
 		</view>
 
-		<view class="Notice">
+<!-- 		<view class="Notice">
 			今日打卡次数: &nbsp;{{signTotal.todayusernum}}<br>
 			历史打卡累计: &nbsp;{{signTotal.allnum}}
-		</view>
+		</view> -->
 		<view class="My-Order">
 			<view class="Order-top" @click="toorders(0)">
 				<view style="margin: auto 20rpx; text-align: center;">我的订单</view>

@@ -28,7 +28,7 @@
 				</view> -->
 				<view class="usejifen">
 					<view class="judgment" :class="item.isadd === 1 ? 'green-text' : 'red-text'">
-						{{item.isadd === 1 ? '+' : ''}}
+						{{item.isadd === 1 ? '+' : '-'}}
 						{{item.isadd === 1 ? (item.after - item.before) : (item.before - item.after)}}
 					</view>
 					<!-- <view class="balance">
@@ -41,7 +41,7 @@
 				</view>
 			</view>
 			<view v-if="pageLoading" class="loading">加载中...</view>
-			<view v-if="!hasMore" class="loading">没有更多了</view>
+			<view v-if="!hasMore" class="loading">剩余积分:{{sum}}</view>
 		</scroll-view>
 		<view class="lottery" @click="gotojackpot">
 			免费抽奖
@@ -59,6 +59,19 @@
 		data() {
 			return {
 				pageData: [],
+			}
+		},
+		computed:{
+			sum(){
+				let res  = 0
+				this.pageData.forEach((item)=>{
+					if (item.isadd==1){
+						res+= item.score
+					}else{
+						res-= item.score
+					}
+				})
+				return res
 			}
 		},
 		onShow() {

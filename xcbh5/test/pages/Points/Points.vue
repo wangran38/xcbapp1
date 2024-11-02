@@ -22,7 +22,7 @@
 						</view>
 					</view>
 					<view class="Not-received">
-						<text>未到账</text>
+						<text>已结算</text>
 						<view class="Cumulative-top-ups">
 							{{ pagedata.truemoney }}
 						</view>

@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 336))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 338))
     },
   }
 } catch (e) {
@@ -378,9 +378,6 @@ var _default = {
       uni.scanCode({
         onlyFromCamera: true,
         success: function success(res) {
-          // console.log('条码类型：' + res.scanType);
-          // console.log('条码内容：' + res.result);
-
           // 检查是否是 URL，如果是 URL，则跳转
           var scannedUrl = res.result;
           if (scannedUrl.startsWith('http')) {
@@ -395,7 +392,7 @@ var _default = {
               console.log('提取到的页面路径:', pagesPath);
               // 执行页面跳转
               uni.navigateTo({
-                url: pagesPath // 跳转到指定页面并带上参数
+                url: '/' + pagesPath // 跳转到指定页面并带上参数
               });
             } else {
               console.warn('未能解析到有效的页面路径');

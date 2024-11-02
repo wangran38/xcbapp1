@@ -101,13 +101,13 @@ var components
 try {
   components = {
     uniForms: function () {
-      return Promise.all(/*! import() | uni_modules/uni-forms/components/uni-forms/uni-forms */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-forms/components/uni-forms/uni-forms")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms/uni-forms.vue */ 344))
+      return Promise.all(/*! import() | uni_modules/uni-forms/components/uni-forms/uni-forms */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-forms/components/uni-forms/uni-forms")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms/uni-forms.vue */ 346))
     },
     uniFormsItem: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-forms/components/uni-forms-item/uni-forms-item */ "uni_modules/uni-forms/components/uni-forms-item/uni-forms-item").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue */ 357))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-forms/components/uni-forms-item/uni-forms-item */ "uni_modules/uni-forms/components/uni-forms-item/uni-forms-item").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue */ 359))
     },
     uniEasyinput: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput */ "uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue */ 364))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput */ "uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue */ 366))
     },
   }
 } catch (e) {
@@ -176,17 +176,17 @@ var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/r
 var _index = __webpack_require__(/*! ../../api/index.js */ 49);
 var uniForms = function uniForms() {
   Promise.all(/*! require.ensure | node-modules/@dcloudio/uni-ui/lib/uni-forms/uni-forms */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/@dcloudio/uni-ui/lib/uni-forms/uni-forms")]).then((function () {
-    return resolve(__webpack_require__(/*! @dcloudio/uni-ui/lib/uni-forms/uni-forms.vue */ 371));
+    return resolve(__webpack_require__(/*! @dcloudio/uni-ui/lib/uni-forms/uni-forms.vue */ 373));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var uniFormsItem = function uniFormsItem() {
   __webpack_require__.e(/*! require.ensure | node-modules/@dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item */ "node-modules/@dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item").then((function () {
-    return resolve(__webpack_require__(/*! @dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item.vue */ 380));
+    return resolve(__webpack_require__(/*! @dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item.vue */ 382));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var uniEasyinput = function uniEasyinput() {
   __webpack_require__.e(/*! require.ensure | node-modules/@dcloudio/uni-ui/lib/uni-easyinput/uni-easyinput */ "node-modules/@dcloudio/uni-ui/lib/uni-easyinput/uni-easyinput").then((function () {
-    return resolve(__webpack_require__(/*! @dcloudio/uni-ui/lib/uni-easyinput/uni-easyinput.vue */ 387));
+    return resolve(__webpack_require__(/*! @dcloudio/uni-ui/lib/uni-easyinput/uni-easyinput.vue */ 389));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 // 确保路径正确
@@ -253,7 +253,7 @@ var _default = {
                   });
                 } else {
                   uni.showToast({
-                    title: response.msg || '登录失败',
+                    title: response.message,
                     icon: 'none'
                   });
                 }

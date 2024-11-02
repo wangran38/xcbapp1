@@ -1,7 +1,8 @@
 <template>
 	<view class="container">
 		<view class="locating">
-			<view class="targeting" @click="toindex1"><uni-icons type="location-filled" size="25" color="#007aff"></uni-icons></view>
+			<view class="targeting" @click="toindex1"><uni-icons type="location-filled" size="25"
+					color="#007aff"></uni-icons></view>
 			<view class="current ">{{marketName? marketName:'暂未选中市场'}}</view>
 		</view>
 		<view class="search">
@@ -10,13 +11,13 @@
 				<input class="uni-input" placeholder="请输入搜索条件" v-model="searchParams.title">
 				<button class="searchbt" @click="reloadData">搜索</button>
 			</view>
-			
+
 			<uni-icons class="buycar" type="scan" size="75rpx" @click="scan"></uni-icons>
 		</view>
 
 		<view class="uni-margin-wrap">
 			<scroll-view class="swiper" scroll-x="true" scroll-y="false" show-scrollbar="false">
-				<view v-for="item in categories" :key="item.id"  class="swiper-item" @click="filterByCategory(item.id)">
+				<view v-for="item in categories" :key="item.id" class="swiper-item" @click="filterByCategory(item.id)">
 					<view class="item-title">
 						<text
 							:class="['classify', { 'selected': item.id === selectedCategoryId }]">{{ item.title }}</text>
@@ -24,15 +25,16 @@
 				</view>
 			</scroll-view>
 		</view>
-		
-		
-		
-		
-		<scroll-view class="Stallholder" scroll-y="true"  scroll-x="false" @scrolltolower="handleScrollToLower">
+
+
+
+
+		<scroll-view class="Stallholder" scroll-y="true" scroll-x="false" @scrolltolower="handleScrollToLower">
 			<view class="Stallholder-content">
 				<view v-for="item in pageData" :key="item.id" class="Stallholder-item"
 					@click="navigateToShopDetails(item.id)">
-					<image class="standimg"  v-if="isloaded"  lazy-load :src="item.logo?item.logo:'../../static/defaultLogo.png'" mode="aspectFill"></image>
+					<image class="standimg" v-if="isloaded" lazy-load
+						:src="item.logo?item.logo:'../../static/defaultLogo.png'" mode="aspectFill"></image>
 					<view class="standtitle">地区名称：{{ item.area_name }}</view>
 					<view class="standtitle">摊位名称：{{ item.title }}</view>
 					<view class="standtitle">所售类目：{{ item.category_name || '未知类目' }}</view>
@@ -61,18 +63,18 @@
 				selectedCategoryId: '',
 				categories: [],
 				pageData: [], // 
-				currentMarketName: '' ,// 当前菜市场名称
+				currentMarketName: '', // 当前菜市场名称
 				searchParams: {
 					title: '',
 					category_id: '',
 					market_id: ''
 				},
-				isloaded:false,
-				marketName:'' ,// 市场名
-				initReques:false
+				isloaded: false,
+				marketName: '', // 市场名
+				initReques: false
 			}
 		},
-		computed:{
+		computed: {
 			...mapState('location', ['selectStatus']),
 		},
 		onLoad() {
@@ -80,25 +82,25 @@
 			this.initPage()
 		},
 		async onShow() {
-			if (this.selectStatus){
+			if (this.selectStatus) {
 				this.initPage()
 				this.setStatus()
 			}
 		},
 		onPullDownRefresh() {
-				setTimeout(function () {
-					uni.stopPullDownRefresh();
-				}, 1000);
-			},
+			setTimeout(function() {
+				uni.stopPullDownRefresh();
+			}, 1000);
+		},
 		mixins: [usePage],
 		methods: {
 			...mapMutations('location', ['setStatus']),
 			async fetchData(params) {
 				const response = await api.marketShopList(params)
 				return response.data
-				
+
 			},
-			initPage(){
+			initPage() {
 				this.isloaded = true;
 				// 默认是全选
 				this.selectedCategoryId = 0;
@@ -107,7 +109,7 @@
 				// 先设置 marketId
 				this.setDefaultMarketId();
 				this.reloadData()
-				
+
 				// 选中市场
 				let res = uni.getStorageSync('userSelection')
 				this.marketName = res.marketName
@@ -122,9 +124,9 @@
 				const response = await api.cglist()
 				// this.categories = response.data.listdata || []
 				this.categories = [{
-				          id: 0, // 特殊值表示全选
-				          title: '全选'
-				        }, ...response.data.listdata || []] 
+					id: 0, // 特殊值表示全选
+					title: '全选'
+				}, ...response.data.listdata || []]
 				// console.log(this.categories)
 			},
 			async filterByCategory(categoryId) {
@@ -133,83 +135,85 @@
 				this.reloadData()
 			},
 			async fetchMarketName() {
-			  try {
-			    // 从 storage 中获取 userSelection
-			    const userSelection = uni.getStorageSync('userSelection');
-			    
-			    if (!userSelection) {
-			      console.warn('未找到 userSelection');
-			      return;
-			    }
-			
-			    // 解析 userSelection 中的 market_id 和 area_id
-			    const { market_id, area_id } = userSelection;
-			    
-			    if (!market_id || !area_id) {
-			      console.warn('未找到市场 ID 或区域 ID');
-			      return;
-			    }
-			
-			    // 调用 marketlist 接口
-			    const response = await api.marketlist(parseInt(area_id) );
-			    const marketData = response.data.listdata.find(item => item.id === parseInt(market_id));
-			
-			    if (marketData) {
-			      this.currentMarketName = marketData.marketname || '未知市场';
-			    } else {
-			      console.warn('未找到对应的市场');
-			      this.currentMarketName = '未知市场';
-			    }
-			  } catch (error) {
-			    console.error('获取市场名称失败:', error);
-			  }
+				try {
+					// 从 storage 中获取 userSelection
+					const userSelection = uni.getStorageSync('userSelection');
+
+					if (!userSelection) {
+						console.warn('未找到 userSelection');
+						return;
+					}
+
+					// 解析 userSelection 中的 market_id 和 area_id
+					const {
+						market_id,
+						area_id
+					} = userSelection;
+
+					if (!market_id || !area_id) {
+						console.warn('未找到市场 ID 或区域 ID');
+						return;
+					}
+
+					// 调用 marketlist 接口
+					const response = await api.marketlist(parseInt(area_id));
+					const marketData = response.data.listdata.find(item => item.id === parseInt(market_id));
+
+					if (marketData) {
+						this.currentMarketName = marketData.marketname || '未知市场';
+					} else {
+						console.warn('未找到对应的市场');
+						this.currentMarketName = '未知市场';
+					}
+				} catch (error) {
+					console.error('获取市场名称失败:', error);
+				}
 			},
 			navigateToShopDetails(id) {
 				uni.navigateTo({
 					url: `/pages/ShopDetails/ShopDetails?id=${id}`
 				})
 			},
-			toindex1(){
+			toindex1() {
 				uni.switchTab({
 					url: '/pages/index1/index1'
 				});
 			},
 			scan() {
-			  // 只允许通过相机扫码
-			  uni.scanCode({
-			    onlyFromCamera: true,
-			    success: function (res) {
-			      // console.log('条码类型：' + res.scanType);
-			      // console.log('条码内容：' + res.result);
-			
-			      // 检查是否是 URL，如果是 URL，则跳转
-			      const scannedUrl = res.result;
-			      if (scannedUrl.startsWith('http')) {
-					  console.log('这是一个有效的 URL');
-			        // 解码 URL
-			        const decodedUrl = decodeURIComponent(scannedUrl);
-					console.log('解码后的 URL:', decodedUrl);
-			        // 提取 hash 部分（即 # 后面的部分）
-			        const hashIndex = decodedUrl.indexOf('#');
-			        if (hashIndex !== -1) {
-			          const pagesPath = decodedUrl.substring(hashIndex + 1); // 例如 "/pages/Clock/Clock?time=1725806224"
-						console.log('提取到的页面路径:', pagesPath);
-			          // 执行页面跳转
-			          uni.navigateTo({
-			            url: pagesPath // 跳转到指定页面并带上参数
-			          });
-			        } else {
-			          console.warn('未能解析到有效的页面路径');
-			        }
-			      } else {
-			        // 处理非 URL 的结果
-			        console.warn('扫码结果不是有效的链接:', scannedUrl);
-			      }
-			    },
-			    fail: function (error) {
-			      console.error('扫码失败:', error);
-			    }
-			  });
+				// 只允许通过相机扫码
+				uni.scanCode({
+					onlyFromCamera: true,
+					success: function(res) {
+
+						// 检查是否是 URL，如果是 URL，则跳转
+						const scannedUrl = res.result;
+						if (scannedUrl.startsWith('http')) {
+							console.log('这是一个有效的 URL');
+							// 解码 URL
+							const decodedUrl = decodeURIComponent(scannedUrl);
+							console.log('解码后的 URL:', decodedUrl);
+							// 提取 hash 部分（即 # 后面的部分）
+							const hashIndex = decodedUrl.indexOf('#');
+							if (hashIndex !== -1) {
+								const pagesPath = decodedUrl.substring(hashIndex +
+								1); // 例如 "/pages/Clock/Clock?time=1725806224"
+								console.log('提取到的页面路径:', pagesPath);
+								// 执行页面跳转
+								uni.navigateTo({
+									url: '/'+pagesPath // 跳转到指定页面并带上参数
+								});
+							} else {
+								console.warn('未能解析到有效的页面路径');
+							}
+						} else {
+							// 处理非 URL 的结果
+							console.warn('扫码结果不是有效的链接:', scannedUrl);
+						}
+					},
+					fail: function(error) {
+						console.error('扫码失败:', error);
+					}
+				});
 			}
 
 		}
@@ -234,24 +238,26 @@
 		font-weight: 600;
 		line-height: 70rpx;
 	}
-	
-	.targeting{
+
+	.targeting {
 		margin-left: 30rpx;
 		color: #1296db;
 	}
-	.current{
+
+	.current {
 		margin-left: auto;
 		color: black;
 		margin-right: 30rpx;
 	}
-	
+
 	.search {
 		width: 100%;
 		/* position: relative; */
 		display: flex;
 		align-items: center;
 	}
-	.sousuokuang{
+
+	.sousuokuang {
 		width: 86%;
 		/* position: relative; */
 		display: flex;
@@ -262,6 +268,7 @@
 		border-radius: 20rpx;
 		padding: 10rpx 10rpx;
 	}
+
 	.search-icon {
 		height: 60rpx;
 		width: 10%;
@@ -272,7 +279,7 @@
 	}
 
 	.uni-input {
-		width: 70% ;
+		width: 70%;
 		height: 60rpx;
 		line-height: 60rpx;
 		/* height: 80rpx; */
@@ -331,7 +338,7 @@
 		display: inline-block;
 		box-sizing: border-box;
 		vertical-align: middle;
-		line-height: 120rpx; 
+		line-height: 120rpx;
 	}
 
 	.classify {
@@ -391,12 +398,15 @@
 		line-height: 70rpx;
 		/* background-color: white; */
 		/* background-color: antiquewhite; */
-		overflow: hidden; /* 隐藏超出的内容 */
-		white-space: nowrap; /* 强制不换行 */
-		text-overflow: ellipsis; /* 显示省略号 */
+		overflow: hidden;
+		/* 隐藏超出的内容 */
+		white-space: nowrap;
+		/* 强制不换行 */
+		text-overflow: ellipsis;
+		/* 显示省略号 */
 		font-size: 30rpx;
 		/* background-color: aqua; */
-		
+
 	}
 
 	.loading {

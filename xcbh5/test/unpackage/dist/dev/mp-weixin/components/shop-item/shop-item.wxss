@@ -1,8 +1,9 @@
 
-.delete.data-v-365da9da{
+.delete1.data-v-365da9da {
 	font-size: 33rpx;
 }
 .shoplist.data-v-365da9da {
+	
 	position: fixed;
 	bottom: 0;
 	width: 100%;
@@ -16,22 +17,20 @@
 	flex-direction: column;
 	border-bottom: 1rpx solid #ccc;
 }
-.Stallholder.data-v-365da9da {
+.Stallholder1.data-v-365da9da {
 	margin-bottom: 150rpx;
 }
-.biaoti.data-v-365da9da {
+.biaoti1.data-v-365da9da {
 	color: black;
 	width: 100%;
 	height: 40rpx;
 	line-height: 40rpx;
 	font-weight: 600;
-	/* padding: 10rpx; */
 	margin-bottom: 10rpx;
 	display: flex;
 	flex-direction: row;
-	/* background-color: #007aff; */
 }
-.neirong.data-v-365da9da {
+.neirong1.data-v-365da9da {
 	width: 100%;
 	height: 160rpx;
 	display: flex;
@@ -47,7 +46,7 @@
 	height: 100%;
 	border-radius: 20rpx;
 }
-.content.data-v-365da9da {
+.content1.data-v-365da9da {
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -57,7 +56,6 @@
 .right.data-v-365da9da {
 	width: 25%;
 	height: 100%;
-	/* background-color: cadetblue; */
 	display: flex;
 	justify-content: flex-end;
 	/* 将子元素推到容器底部 */
@@ -152,10 +150,10 @@
 	text-align: center;
 	line-height: 100rpx;
 }
-.overlay.data-v-365da9da {
+.overlay1.data-v-365da9da {
 	position: fixed;
 	width: 100%;
-	/* height: 100vh; */
+	border-radius: 30rpx 30rpx 0 0;
 	background-color: white;
 	display: flex;
 	justify-content: center;
@@ -170,26 +168,23 @@
 	pointer-events: auto;
 	/* 激活状态下可点击 */
 }
-.cart-layer.data-v-365da9da {}
-.cart-layer-active.data-v-365da9da {
-	/* transform: translateY(0); */
-	/* 激活状态下弹出层回到视口内 */
-}
-.Topmost.data-v-365da9da {
+.Topmost1.data-v-365da9da {
 	height: 50rpx;
 	width: 100%;
 	line-height: 50rpx;
-	border-radius: 50rpx 50rpx 0 0;
+	border-radius: 30rpx 30rpx 0 0;
 	background-color: #007aff;
 	color: white;
 	text-align: center;
+	position: fixed;
+	z-index: 1000;
 }
-.shopcontent.data-v-365da9da {
+.shopcontent1.data-v-365da9da {
 	width: 100%;
 	padding: 20rpx;
 	box-sizing: border-box;
 }
-.top.data-v-365da9da {
+.top1.data-v-365da9da {
 	width: 100%;
 	height: 100rpx;
 	line-height: 100rpx;
@@ -197,7 +192,7 @@
 	margin: 0rpx auto;
 	border-bottom: 1rpx solid #ccc;
 }
-.delete.data-v-365da9da {
+.delete1.data-v-365da9da {
 	width: 30%;
 	height: 70%;
 	display: flex;
@@ -206,27 +201,25 @@
 	justify-content: center;
 	align-items: center;
 }
-.shopimg.data-v-365da9da {
+.shopimg1.data-v-365da9da {
 
 	width: 100%;
 	height: 100%;
 	border-radius: 20rpx;
 }
-.shoptitle.data-v-365da9da {
+.shoptitle1.data-v-365da9da {
 	font-size: 35rpx;
 	font-weight: 600;
 }
-.shopprice.data-v-365da9da {
+.shopprice1.data-v-365da9da {
 	color: red;
 	font-size: 35rpx;
 	font-weight: 600;
 }
 .item.data-v-365da9da {
-	/* position: relative; */
 	width: 100%;
 	height: 220rpx;
 	padding: 5rpx;
-	/* background-color: aqua; */
 	display: flex;
 	flex-direction: column;
 	border-bottom: 1rpx solid #ccc;

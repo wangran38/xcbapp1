@@ -8,10 +8,12 @@ const state = {
 
 const mutations = {
 	addItem(state, item) {
+		// 查找购物车中是否存在该商品
 		const index = state.carts.findIndex(i => i.id === item.id)
-		if (index !== -1) {
+		if (index !== -1) { // 不等于-1就相当于存在，就商品数量就自增1
 			state.carts[index].tempCount += 1;
 		} else {
+			// 反之不存在就新增
 			state.carts.push({
 				...item,
 				tempCount: 1
@@ -33,17 +35,22 @@ const mutations = {
 		console.log('clearCart mutation triggered');
 		state.carts = [];
 	},
-	
-	
+
+
 	//  任意输入数量
-	anyNumber(state,item,value){
+	anyNumber(state, item) {
 		const index = state.carts.findIndex(i => i.id === item.id);
+		
+		// 不等于-1就相当于存在，就商品数量就修改数量
 		if (index !== -1) {
-			if (state.carts[index].tempCount > 1) {
-				state.carts[index].tempCount = value;
-			} else {
-				state.carts.splice(index, 1);
-			}
+			state.carts[index].tempCount = item.count;
+		}
+		 else {
+			// 反之不存在就新增
+			state.carts.push({
+				...item,
+				tempCount: item.count
+			});
 		}
 	}
 };

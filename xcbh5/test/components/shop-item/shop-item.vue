@@ -1,65 +1,69 @@
 <template>
 	<view class="shoplist">
-		<view class="fixed">
-			<view class="car" @click.stop="clickCart">
-				<view class="cart-icon-wrapper">
-					<uni-icons type="cart" size="40" color="white"></uni-icons>
-					<view class="badge">{{ cartsLengthByShopId(shop_id) }}</view>
-				</view>
-				<view class="pri">¥ {{ cartTotalByShopId(shop_id) }}</view>
-			</view>
-			<view class="sett" @click="goToBuyPage">
-				去结算
-			</view>
-		</view>
+		<!-- #ifdef MP-WEIXIN -->
+		<view class="overlay1" v-if="showCartLayer1">
+		<!-- #endif -->
+			<!-- #ifndef MP-WEIXIN -->
+			<view class="overlay1" v-if="showCartLayer1">
+			<!-- #endif -->
 
-		<view class="overlay" v-if="showCartLayer">
-			<scroll-view class="Stallholder" scroll-y @click.stop :style="{ height: '53vh' }">
-				<view class="cart-layer" ref="cartLayer" @click.stop>
-					<view class="Topmost">乡愁宝大市场</view>
-
-					<view class="shopcontent">
-						<view class="top">
-							<view class="delete" @click="clearCart">
-								<uni-icons type="trash" size="40rpx"></uni-icons>
-								<view class="clear">清空购物车</view>
-							</view>
-						</view>
-
-						<view class="content">
-							<view class="item" v-for="item in getCartsByShopId(shop_id)" :key="item.id">
-								<view class="biaoti">
-									<view>{{item.shopTitle}}</view>
-									<!-- <uni-icons type="right" size="14"color="#ccc"></uni-icons> -->
-									<view><uni-icons type="right" size="14" color="#ccc"></uni-icons></view>
+				<scroll-view class="Stallholder1" scroll-y :style="{ height: '53vh' }">
+					<view ref="cartLayer" @click.stop>
+						<view class="Topmost1">乡愁宝大市场</view>
+						<view class="shopcontent1">
+							<view class="top1">
+								<view class="delete1" @click="clearCart">
+									<uni-icons type="trash" size="40rpx"></uni-icons>
+									<view class="clear">清空购物车</view>
 								</view>
-								<view class="neirong">
-									<view class="left">
-										<image class="shopimg" :src="item.imglogo" mode="aspectFill"></image>
+							</view>
+							<view class="content1">
+								<view class="item" v-for="item in getCartsByShopId(shop_id)" :key="item.id">
+									<view class="biaoti1">
+										<view>{{item.shopTitle}}</view>
+										<!-- <uni-icons type="right" size="14"color="#ccc"></uni-icons> -->
+										<view><uni-icons type="right" size="14" color="#ccc"></uni-icons></view>
 									</view>
+									<view class="neirong1">
+										<view class="left">
+											<image class="shopimg1" :src="item.imglogo" mode="aspectFill"></image>
+										</view>
 
-									<view class="content">
-										<!-- <text>标题</text> -->
-										<view class="shoptitle">{{item.commodity_name}}</view>
-										<!-- <view class="">价格</view> -->
-										<view class="shopprice">¥ {{item.price.toFixed(2)}}</view>
-									</view>
+										<view class="content1">
+											<!-- <text>标题</text> -->
+											<view class="shoptitle1">{{item.commodity_name}}</view>
+											<!-- <view class="">价格</view> -->
+											<view class="shopprice1">¥ {{item.price.toFixed(2)}}</view>
+										</view>
 
-									<view class="right">
-										<view class="btn1" @click="subItem(item)">-</view>
-										<view class="count">{{ getTempCount(item.id) }}</view>
-										<view class="btn2" @click="addItem(item)">+</view>
+										<view class="right">
+											<view class="btn1" @click="subItem(item)">-</view>
+											<view class="count">{{ getTempCount(item.id) }}</view>
+											<view class="btn2" @click="addItem(item)">+</view>
+										</view>
 									</view>
 								</view>
 							</view>
+
 						</view>
 
 					</view>
+				</scroll-view>
+			</view>
 
+			<view class="fixed">
+				<view class="car" @click.stop="clickCart">
+					<view class="cart-icon-wrapper">
+						<uni-icons type="cart" size="40" color="white"></uni-icons>
+						<view class="badge">{{ cartsLengthByShopId(shop_id) }}</view>
+					</view>
+					<view class="pri">¥ {{ cartTotalByShopId(shop_id) }}</view>
 				</view>
-			</scroll-view>
+				<view class="sett" @click="goToBuyPage">
+					去结算
+				</view>
+			</view>
 		</view>
-	</view>
 </template>
 
 <script>
@@ -78,24 +82,25 @@
 		},
 		data() {
 			return {
-				showCartLayer: false
+				showCartLayer1: false
 			};
 		},
 		computed: {
 			...mapState('cart', ['carts']),
-			...mapGetters('cart', ['cartTotalByShopId', 'getTempCount', 'cartsLengthByShopId','getCartsByShopId']),
+			...mapGetters('cart', ['cartTotalByShopId', 'getTempCount', 'cartsLengthByShopId', 'getCartsByShopId']),
 		},
 		methods: {
 			...mapMutations('cart', ['addItem', 'subItem', 'clearCart']),
 			clickCart() {
-				this.showCartLayer = !this.showCartLayer
+				console.log(this.showCartLayer1)
+				this.showCartLayer1 = !this.showCartLayer1
 			},
 			goToBuyPage() {
 				uni.navigateTo({
 					url: `/pages/Buy/Buy?id=${this.shop_id}`
 				});
 			},
-			
+
 			// 清空购物车
 			clearCart() {
 				// this.clearCart();
@@ -108,10 +113,12 @@
 </script>
 
 <style scoped>
-	.delete{
+	.delete1 {
 		font-size: 33rpx;
 	}
+
 	.shoplist {
+		
 		position: fixed;
 		bottom: 0;
 		width: 100%;
@@ -127,24 +134,22 @@
 		border-bottom: 1rpx solid #ccc;
 	}
 
-	.Stallholder {
+	.Stallholder1 {
 		margin-bottom: 150rpx;
 	}
 
-	.biaoti {
+	.biaoti1 {
 		color: black;
 		width: 100%;
 		height: 40rpx;
 		line-height: 40rpx;
 		font-weight: 600;
-		/* padding: 10rpx; */
 		margin-bottom: 10rpx;
 		display: flex;
 		flex-direction: row;
-		/* background-color: #007aff; */
 	}
 
-	.neirong {
+	.neirong1 {
 		width: 100%;
 		height: 160rpx;
 		display: flex;
@@ -163,7 +168,7 @@
 		border-radius: 20rpx;
 	}
 
-	.content {
+	.content1 {
 		width: 100%;
 		height: 100%;
 		display: flex;
@@ -174,7 +179,6 @@
 	.right {
 		width: 25%;
 		height: 100%;
-		/* background-color: cadetblue; */
 		display: flex;
 		justify-content: flex-end;
 		/* 将子元素推到容器底部 */
@@ -277,10 +281,10 @@
 		line-height: 100rpx;
 	}
 
-	.overlay {
+	.overlay1 {
 		position: fixed;
 		width: 100%;
-		/* height: 100vh; */
+		border-radius: 30rpx 30rpx 0 0;
 		background-color: white;
 		display: flex;
 		justify-content: center;
@@ -289,6 +293,7 @@
 		z-index: 100;
 		left: 0;
 		bottom: 0;
+
 	}
 
 	.overlay-active {
@@ -297,30 +302,27 @@
 		/* 激活状态下可点击 */
 	}
 
-	.cart-layer {}
 
-	.cart-layer-active {
-		/* transform: translateY(0); */
-		/* 激活状态下弹出层回到视口内 */
-	}
-
-	.Topmost {
+	.Topmost1 {
 		height: 50rpx;
 		width: 100%;
 		line-height: 50rpx;
-		border-radius: 50rpx 50rpx 0 0;
+		border-radius: 30rpx 30rpx 0 0;
 		background-color: #007aff;
 		color: white;
 		text-align: center;
+		position: fixed;
+		z-index: 1000;
 	}
 
-	.shopcontent {
+	.shopcontent1 {
 		width: 100%;
 		padding: 20rpx;
 		box-sizing: border-box;
+		
 	}
 
-	.top {
+	.top1 {
 		width: 100%;
 		height: 100rpx;
 		line-height: 100rpx;
@@ -330,7 +332,7 @@
 	}
 
 
-	.delete {
+	.delete1 {
 		width: 30%;
 		height: 70%;
 		display: flex;
@@ -341,7 +343,7 @@
 
 	}
 
-	.shopimg {
+	.shopimg1 {
 
 		width: 100%;
 		height: 100%;
@@ -349,23 +351,21 @@
 
 	}
 
-	.shoptitle {
+	.shoptitle1 {
 		font-size: 35rpx;
 		font-weight: 600;
 	}
 
-	.shopprice {
+	.shopprice1 {
 		color: red;
 		font-size: 35rpx;
 		font-weight: 600;
 	}
 
 	.item {
-		/* position: relative; */
 		width: 100%;
 		height: 220rpx;
 		padding: 5rpx;
-		/* background-color: aqua; */
 		display: flex;
 		flex-direction: column;
 		border-bottom: 1rpx solid #ccc;

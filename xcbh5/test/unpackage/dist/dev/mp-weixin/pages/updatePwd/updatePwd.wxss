@@ -1,4 +1,28 @@
 
+.form.data-v-073fd3b0{
+		background-color: white;
+		position: relative;
+		text-align: left;
+		line-height: 30rpx;
+		border: 1rpx solid #e8e8e8;
+		padding: 20rpx 0rpx 20rpx 0rpx;
+		margin-top: 20rpx;
+		border-radius: 10rpx;
+}
+.form input.data-v-073fd3b0{
+		position: absolute;
+		left: 150rpx;
+		font-size: 30rpx;
+}
+.form .label.data-v-073fd3b0{
+		line-height: 40rpx;
+		font-size: 30rpx;
+		font-weight: 600;
+}
+.form .card.data-v-073fd3b0{
+		padding: 10rpx 10rpx 10rpx 10rpx;
+		display: flex;
+}
 .container.data-v-073fd3b0 {  
   padding: 20px;  
   background-color: #fff;  

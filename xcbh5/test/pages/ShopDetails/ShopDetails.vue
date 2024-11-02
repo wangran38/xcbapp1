@@ -7,7 +7,6 @@
 				<image class="logo" :src="shopDetails.logo" mode="aspectFill"></image>
 			</view>
 
-
 			<view class="time">
 				<view class="business-hours">
 					<view>摊主名称:</view>
@@ -67,7 +66,7 @@
 				</view>
 				<view class="ncen" @click="goTorules">
 					<swiper class="swiper" vertical autoplay interval="1500" duration="300" circular>
-						<swiper-item class="swiitem" v-for="item in 4">赠送积分说明</swiper-item>
+						<swiper-item class="swiitem" v-for="item in 4" :key="item">赠送积分说明</swiper-item>
 					</swiper>
 				</view>
 				<view class="nrig" @click="goTorules">
@@ -77,40 +76,18 @@
 
 			<view class="dishes">
 				<text>菜品种类</text>
-
 				<view class="type" v-for="item in pageData" :key="item.id">
-					<image :src="item.imglogo" mode="aspectFill"></image>
-					<view class="regard">
-						<view class="typetitle">
-							<text class="ellipsis">{{item.commodity_name}}</text>
-							<uni-icons type="right" size="14" color="#ccc"></uni-icons>
-						</view>
-						<view class="label">
-							<view class="one">
-								可溯源
-							</view>
-							<view class="one">
-								已检测
-							</view>
-						</view>
-						<view class="price">
-							<text>¥ {{item.price.toFixed(2)}} 元/{{item.weight_name}}</text>
-							<view class="quantity">
-								<view class="btn1" @click="subItem(item)">-</view>
-								<view class="count">
-									{{getTempCount(item.id)}}
-									
-									
-								</view>
-								<view class="btn2" @click="addItem(item)">+</view>
-							</view>
-						</view>
-					</view>
+					<menuVue :item="item" class="count"></menuVue>
 				</view>
 			</view>
+			
+				<shopItem :shop_id="shop_id" ref="shopitem"></shopItem>
+			
 		</view>
-
-		<shopItem :shop_id="shop_id" ref="shopitem"></shopItem>
+		
+			
+		
+		
 	</scroll-view>
 
 </template>
@@ -123,6 +100,7 @@
 		mapGetters
 	} from 'vuex';
 	import shopItem from '@/components/shop-item/shop-item.vue'
+	import menuVue from '../../components/menu.vue';
 	import {
 		api
 	} from '@/api/index'
@@ -141,12 +119,14 @@
 				shop_id: "",
 				urls1: [], // 摊主照片
 				urls2: [], // 营业执照图片
-				cart: false // 购物车初始化弹窗,锁
+				cart: false, // 购物车初始化弹窗,锁
+				show: false
 			}
 		},
 		mixins: [usePage],
 		components: {
-			shopItem
+			shopItem,
+			menuVue
 		},
 		computed: {
 			...mapState('cart', ['carts']),
@@ -158,8 +138,8 @@
 		methods: {
 			// 收起购物车
 			closeTan() {
-				if (this.$refs.shopitem.showCartLayer){
-					this.$refs.shopitem.showCartLayer = false
+				if (this.$refs.shopitem.showCartLayer1) {
+					this.$refs.shopitem.showCartLayer1 = false
 				}
 			},
 			// 查看摊主照片
@@ -270,7 +250,7 @@
 </script>
 
 
-<style scoped>
+<style>
 	.container {
 		display: flex;
 		flex-direction: column;
@@ -297,36 +277,8 @@
 		border-radius: 20rpx;
 	}
 
-	/* .uni-margin-wrap {
-		height: 280rpx;
-		margin-top: 20rpx;
-	} */
 
-	/* .swiper {
-		display: flex;
-		flex-direction: row;
-		overflow-x: scroll;
-		height: 280rpx;
-		white-space: nowrap;
-		-webkit-overflow-scrolling: touch;
-	} */
 
-	/* .swiper-item {
-		display: inline-block;
-		height: 280rpx;
-		width: 400rpx;
-		margin: 0rpx 5rpx;
-		margin-left: 0;
-		text-align: center;
-	} */
-
-	/* .item-title {
-		display: inline-block;
-		margin-right: 5rpx;
-		box-sizing: border-box;
-		height: 100%;
-		width: 100%;
-	} */
 
 	.time {
 		/* margin-top: 20rpx; */
@@ -464,15 +416,6 @@
 		background-color: white;
 	}
 
-	.dishes>.type>image {
-		height: 180rpx;
-		width: 27%;
-		line-height: 180rpx;
-		border-radius: 15rpx;
-		/* margin-right: 2%; */
-		/* background-color: red; */
-		margin: auto 2%;
-	}
 
 	.regard {
 		height: 100%;
@@ -564,28 +507,8 @@
 	}
 
 	.count {
-		width: 20rpx;
-		font-size: 30rpx;
-		color: black;
-		margin: 0 10rpx;
-		display: flex;
-		justify-content: center;
-		align-items: center;
+		width: 100%;
 	}
-
-	/* .price>button {
-		height: 50rpx;
-		width: auto;
-		margin-right: 10rpx;
-		background: #007aff;
-		border: none;
-		border-radius: 25rpx;
-		font-size: 30rpx;
-		color: white;
-		text-align: center;
-		line-height: 50rpx;
-		margin-bottom: 8rpx;
-	} */
 	.fixed {
 		height: 100rpx;
 		width: 90%;
