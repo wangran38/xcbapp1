@@ -77,7 +77,7 @@
 			<view class="dishes">
 				<text>菜品种类</text>
 				<view class="type" v-for="item in pageData" :key="item.id">
-					<menuVue :item="item" class="count"></menuVue>
+					<menuBarVue :item="item" class="count"></menuBarVue>
 				</view>
 			</view>
 			
@@ -100,7 +100,7 @@
 		mapGetters
 	} from 'vuex';
 	import shopItem from '@/components/shop-item/shop-item.vue'
-	import menuVue from '../../components/menu.vue';
+	import menuBarVue from '../../components/menuBar.vue';
 	import {
 		api
 	} from '@/api/index'
@@ -126,7 +126,7 @@
 		mixins: [usePage],
 		components: {
 			shopItem,
-			menuVue
+			menuBarVue
 		},
 		computed: {
 			...mapState('cart', ['carts']),

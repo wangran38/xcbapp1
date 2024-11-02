@@ -38,7 +38,7 @@
 
 										<view class="right">
 											<view class="btn1" @click="subItem(item)">-</view>
-											<view class="count">{{ getTempCount(item.id) }}</view>
+											<view class="count1">{{ getTempCount(item.id) }}</view>
 											<view class="btn2" @click="addItem(item)">+</view>
 										</view>
 									</view>
@@ -181,7 +181,6 @@
 		height: 100%;
 		display: flex;
 		justify-content: flex-end;
-		/* 将子元素推到容器底部 */
 		align-items: flex-end;
 		/* 水平居中对齐 */
 	}
@@ -198,7 +197,9 @@
 		margin: 0 10rpx;
 	}
 
-	.count {
+	.count1 {
+		position: relative;
+		top: -10rpx;
 		width: 20rpx;
 		font-size: 30rpx;
 		color: black;

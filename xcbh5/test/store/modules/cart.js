@@ -40,17 +40,25 @@ const mutations = {
 	//  任意输入数量
 	anyNumber(state, item) {
 		const index = state.carts.findIndex(i => i.id === item.id);
-		
 		// 不等于-1就相当于存在，就商品数量就修改数量
 		if (index !== -1) {
-			state.carts[index].tempCount = item.count;
+			// 如果输入数量小于1就删除数组
+			if (item.count < 1){
+				state.carts.splice(index, 1);
+			}else{
+				// 反之就++
+				state.carts[index].tempCount = item.count;
+			}
 		}
 		 else {
-			// 反之不存在就新增
-			state.carts.push({
-				...item,
-				tempCount: item.count
-			});
+			 // 数量要大于1才能push进去
+			 if (item.count>=1){
+				 // 反之不存在就新增
+				 state.carts.push({
+				 	...item,
+				 	tempCount: item.count
+				 });
+			 }
 		}
 	}
 };

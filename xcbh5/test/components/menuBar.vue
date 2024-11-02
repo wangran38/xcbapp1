@@ -17,13 +17,13 @@
 			<view class="price">
 				<text>¥ {{item.price.toFixed(2)}} 元/{{item.weight_name}}</text>
 				<view class="quantity">
-					<view class="btn1" @click="subItem(item)">-</view>
+					<view class="btn1" @click="reduce">-</view>
 					<view class="count" @click="showInput">
 						<text v-show="!show">{{getTempCount(item.id)}}</text>
-						<input class="count" type="text" v-show="show" :value="count" :focus="true" confirm-type="done"
+						<input class="count" type="text" v-show="show" v-model="count" :focus="true" confirm-type="done"
 							@blur="overInput" />
 					</view>
-					<view class="btn2" @click="addItem(item)">+</view>
+					<view class="btn2" @click="add">+</view>
 				</view>
 			</view>
 		</view>
@@ -38,35 +38,49 @@
 	} from 'vuex';
 
 	export default {
-		name: "menu",
+		name: "menuBarVue",
 		data() {
 			return {
 				show: false,
 				count: ''
 			};
 		},
-
+		// mounted() {
+		// 	this.count = this.getTempCount(this.item.id)
+		// },
 		methods: {
+			// 加一
+			add(){
+				this.addItem(this.item)
+				this.count = this.getTempCount(this.item.id)
+			},
+			// 减一
+			reduce(){
+				this.subItem(this.item)
+				this.count = this.getTempCount(this.item.id)
+			},
 			isNumeric(str) {
 			    return /^\d+$/.test(str);
 			},
 			// 结束输入值
 			overInput(e) {
+				// 判断是否是正确数值
 				if (this.isNumeric(e.detail.value)){
 					let value = parseInt(e.detail.value)
 					this.item.count = value
-					this.anyNumber(this.item)
+					this.anyNumber(this.item) // store保存数量
+					this.count = value  // input表单保存备份
 				}else{
 					uni.showToast({
 						title:'数值有误',
 						icon:'error'
 					})
+					this.count = this.getTempCount(this.item.id)
 				}
-
 				this.show = false
 			},
 			showInput() {
-				this.count = this.getTempCount(this.item.id)
+				this.count = ''
 				this.show = true
 			},
 			...mapMutations('cart', ['addItem', 'subItem', 'anyNumber']),
