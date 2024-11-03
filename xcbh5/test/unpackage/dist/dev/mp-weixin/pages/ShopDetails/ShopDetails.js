@@ -179,9 +179,9 @@ var shopItem = function shopItem() {
     return resolve(__webpack_require__(/*! @/components/shop-item/shop-item.vue */ 396));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
-var menuVue = function menuVue() {
-  __webpack_require__.e(/*! require.ensure | components/menu */ "components/menu").then((function () {
-    return resolve(__webpack_require__(/*! ../../components/menu.vue */ 403));
+var menuBarVue = function menuBarVue() {
+  __webpack_require__.e(/*! require.ensure | components/menuBar */ "components/menuBar").then((function () {
+    return resolve(__webpack_require__(/*! ../../components/menuBar.vue */ 403));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {
@@ -203,7 +203,7 @@ var _default = {
   mixins: [_usePage.default],
   components: {
     shopItem: shopItem,
-    menuVue: menuVue
+    menuBarVue: menuBarVue
   },
   computed: _objectSpread(_objectSpread({}, (0, _vuex.mapState)('cart', ['carts'])), (0, _vuex.mapGetters)('cart', ['getTempCount'])),
   onShow: function onShow() {

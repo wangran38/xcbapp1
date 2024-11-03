@@ -41,7 +41,10 @@
     	"path" : "pages/ShopDetails/ShopDetails",
     	"style" : 
     	{
-    		"navigationBarTitleText" : "摊主详情"
+    		"navigationBarTitleText" : "摊主详情",
+			"app-plus": {
+				"softinputMode": "adjustResize"
+			}
     	}
     },
     {

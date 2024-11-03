@@ -199,7 +199,7 @@
 
 	.count1 {
 		position: relative;
-		top: -10rpx;
+		top: -8rpx;
 		width: 20rpx;
 		font-size: 30rpx;
 		color: black;

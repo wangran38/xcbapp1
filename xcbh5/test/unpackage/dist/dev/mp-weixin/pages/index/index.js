@@ -376,7 +376,7 @@ var _default = {
     scan: function scan() {
       // 只允许通过相机扫码
       uni.scanCode({
-        onlyFromCamera: true,
+        onlyFromCamera: false,
         success: function success(res) {
           // 检查是否是 URL，如果是 URL，则跳转
           var scannedUrl = res.result;

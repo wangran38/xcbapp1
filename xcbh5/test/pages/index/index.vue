@@ -182,7 +182,7 @@
 			scan() {
 				// 只允许通过相机扫码
 				uni.scanCode({
-					onlyFromCamera: true,
+					onlyFromCamera: false,
 					success: function(res) {
 
 						// 检查是否是 URL，如果是 URL，则跳转

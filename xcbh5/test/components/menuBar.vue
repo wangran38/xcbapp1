@@ -1,5 +1,5 @@
 <template>
-	<view class="box">
+	<view class="box" @click="show=false">
 		<image :src="item.imglogo" mode="aspectFill"></image>
 		<view class="regard">
 			<view class="typetitle">
@@ -18,10 +18,9 @@
 				<text>¥ {{item.price.toFixed(2)}} 元/{{item.weight_name}}</text>
 				<view class="quantity">
 					<view class="btn1" @click="reduce">-</view>
-					<view class="count" @click="showInput">
-						<text v-show="!show">{{getTempCount(item.id)}}</text>
-						<input class="count" type="text" v-show="show" v-model="count" :focus="true" confirm-type="done"
-							@blur="overInput" />
+					<view class="count1" @click.stop="showInput" :catchtouchmove="null">
+						<text v-if="!show">{{getTempCount(item.id)}}</text>
+						<textarea  adjust-position="false" v-if="show" v-model="count" @blur="overInput"  :auto-height="false" fixed class="input"  :focus="show"></textarea>
 					</view>
 					<view class="btn2" @click="add">+</view>
 				</view>
@@ -52,12 +51,12 @@
 			// 加一
 			add(){
 				this.addItem(this.item)
-				this.count = this.getTempCount(this.item.id)
+				this.count = ''
 			},
 			// 减一
 			reduce(){
 				this.subItem(this.item)
-				this.count = this.getTempCount(this.item.id)
+				this.count = ''
 			},
 			isNumeric(str) {
 			    return /^\d+$/.test(str);
@@ -75,7 +74,7 @@
 						title:'数值有误',
 						icon:'error'
 					})
-					this.count = this.getTempCount(this.item.id)
+					this.count = ''
 				}
 				this.show = false
 			},
@@ -94,6 +93,11 @@
 </script>
 
 <style>
+	.input{
+		border: 1rpx solid #007aff;
+		text-align: center;
+		height: 39rpx;
+	}
 	.box {
 		width: 100%;
 		display: flex;
@@ -186,6 +190,7 @@
 
 	.btn1,
 	.btn2 {
+		font-size: 30rpx;
 		width: 50rpx;
 		height: 50rpx;
 		background-color: #007aff;
@@ -196,7 +201,7 @@
 		margin: 0 10rpx;
 	}
 
-	.count {
+	.count1 {
 		width: 80rpx;
 		font-size: 30rpx;
 		color: black;
@@ -204,18 +209,16 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		
 	}
 
-	.count input {
-		text-align: center;
-	}
 
 	.fixed {
 		height: 100rpx;
 		width: 90%;
 		background-color: black;
 		border-radius: 100rpx;
-		position: fixed;
+		/* position: fixed; */
 		/* box-sizing: border-box; */
 		bottom: 30rpx;
 		left: 50%;
@@ -246,12 +249,12 @@
 
 	.cart-icon-wrapper {
 
-		position: relative;
+		/* position: relative; */
 		display: inline-block;
 	}
 
 	.badge {
-		position: absolute;
+		/* position: absolute; */
 		top: -10rpx;
 		/* Adjust to position the badge vertically */
 		right: -10rpx;
@@ -283,7 +286,7 @@
 	}
 
 	.overlay {
-		position: fixed;
+		/* position: fixed; */
 		width: 100%;
 		height: 100%;
 		background-color: rgba(0, 0, 0, 0.5);

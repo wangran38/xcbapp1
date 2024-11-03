@@ -1,4 +1,9 @@
 
+.input{
+	border: 1rpx solid #007aff;
+	text-align: center;
+	height: 39rpx;
+}
 .box {
 	width: 100%;
 	display: flex;
@@ -80,6 +85,7 @@ image {
 }
 .btn1,
 .btn2 {
+	font-size: 30rpx;
 	width: 50rpx;
 	height: 50rpx;
 	background-color: #007aff;
@@ -89,7 +95,7 @@ image {
 	border-radius: 50%;
 	margin: 0 10rpx;
 }
-.count {
+.count1 {
 	width: 80rpx;
 	font-size: 30rpx;
 	color: black;
@@ -98,15 +104,12 @@ image {
 	justify-content: center;
 	align-items: center;
 }
-.count input {
-	text-align: center;
-}
 .fixed {
 	height: 100rpx;
 	width: 90%;
 	background-color: black;
 	border-radius: 100rpx;
-	position: fixed;
+	/* position: fixed; */
 	/* box-sizing: border-box; */
 	bottom: 30rpx;
 	left: 50%;
@@ -135,11 +138,11 @@ image {
 }
 .cart-icon-wrapper {
 
-	position: relative;
+	/* position: relative; */
 	display: inline-block;
 }
 .badge {
-	position: absolute;
+	/* position: absolute; */
 	top: -10rpx;
 	/* Adjust to position the badge vertically */
 	right: -10rpx;
@@ -169,7 +172,7 @@ image {
 	line-height: 100rpx;
 }
 .overlay {
-	position: fixed;
+	/* position: fixed; */
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.5);
