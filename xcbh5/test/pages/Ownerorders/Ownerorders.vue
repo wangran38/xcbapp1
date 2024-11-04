@@ -33,6 +33,7 @@
 						<view>× {{goods.goodsnum}}</view>
 					</view>
 				</view>
+				<view class="orderTime">下单时间:{{initTime(item.createtime)}}</view>
 				<view class="pay">
 					<view class="paydetail">
 						<view v-if="item.payway === 1">积分支付 </view>
@@ -59,7 +60,7 @@
 	export default {
 		data() {
 			return {
-				tabs1: ["全部", "待支付","待收货", "待结算", "已结算"],
+				tabs1: ["全部", "待支付", "待收货", "待结算", "已结算"],
 				stastatus: [0, 1, 3, 5, 6],
 				tabs1Current: 0,
 				pageData: [],
@@ -69,28 +70,59 @@
 		// onShow() {
 		// 	this.reloadData()
 		// },
-		 onLoad(options) {
-		     // 在页面首次加载时接收参数
-		     this.orderStatus = options.orderStatus;
-		     
-		     // 根据传入的 orderStatus 进行处理（比如更新 tabs1Current）
-		     if (this.orderStatus) {
-		       // 假设你要根据 orderStatus 来选择 tab 的 index
-		       const index = this.stastatus.indexOf(Number(this.orderStatus));
-		       if (index !== -1) {
-		         this.tabs1Current = index;
-		       }
-		     }
-		     
-		     // 初次加载时请求数据
-		     this.reloadData();
-		   },
+		onLoad(options) {
+			// 在页面首次加载时接收参数
+			this.orderStatus = options.orderStatus;
+
+			// 根据传入的 orderStatus 进行处理（比如更新 tabs1Current）
+			if (this.orderStatus) {
+				// 假设你要根据 orderStatus 来选择 tab 的 index
+				const index = this.stastatus.indexOf(Number(this.orderStatus));
+				if (index !== -1) {
+					this.tabs1Current = index;
+				}
+			}
+
+			// 初次加载时请求数据
+			this.reloadData();
+		},
 		methods: {
+			/**
+			 * 格式化时间
+			 */
+			initTime(str){
+				let timestamp = new Date(str).getTime()
+				var time = String(timestamp).length === 10 ? new Date(parseInt(timestamp) * 1000) : new Date(parseInt(
+					timestamp))
+				var y = time.getFullYear() // 年
+				var m = time.getMonth() + 1 // 月
+				if (m < 10) {
+					m = '0' + m
+				}
+				var d = time.getDate() // 日
+				if (d < 10) {
+					d = '0' + d
+				}
+				var h = time.getHours() // 时
+				if (h < 10) {
+					h = '0' + h
+				}
+				var mm = time.getMinutes() // 分
+				if (mm < 10) {
+					mm = '0' + mm
+				}
+				var s = time.getSeconds() // 秒
+				if (s < 10) {
+					s = '0' + s
+				}
+				var timeStr = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s
+				return timeStr
+			},
 			handleTabChange(index) {
 				this.tabs1Current = index;
 				this.reloadData(); // 切换 tab 后重新加载数据
 			},
-			
+
 			async fetchData(params) {
 				const requestParams = {
 					...params
@@ -109,6 +141,13 @@
 </script>
 
 <style>
+	.orderTime {
+		position: relative;
+		right: 0;
+		top: 150rpx;
+		font-size: 25rpx;
+	}
+
 	.me-container {
 		overflow: hidden;
 		width: 100%;
@@ -159,7 +198,8 @@
 		color: #007aff;
 		/* margin-top: 20rpx; */
 	}
-	.orderstitle{
+
+	.orderstitle {
 		color: black;
 		margin-right: 10rpx;
 	}

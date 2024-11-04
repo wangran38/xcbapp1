@@ -92,7 +92,7 @@
 						const evening = Math.floor(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate
 							.getDate(), 20, 30, 0).getTime() / 1000);
 						const result = await api.sign(data);
-						console.log(result.code)
+						
 						
 						if (result.code === 200) {
 							this.isSignedIn = true;

@@ -237,7 +237,6 @@ var _default = {
                 return _index.api.sign(data);
               case 20:
                 result = _context.sent;
-                console.log(result.code);
                 if (result.code === 200) {
                   _this.isSignedIn = true;
                   if (timestamp >= morning && timestamp < noon) {
@@ -298,10 +297,10 @@ var _default = {
                     showCancel: false
                   });
                 }
-                _context.next = 29;
+                _context.next = 28;
                 break;
-              case 25:
-                _context.prev = 25;
+              case 24:
+                _context.prev = 24;
                 _context.t0 = _context["catch"](0);
                 console.error('请求打卡接口出错:', _context.t0);
                 uni.showModal({
@@ -309,12 +308,12 @@ var _default = {
                   content: '打卡失败，请稍后重试。',
                   showCancel: false
                 });
-              case 29:
+              case 28:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 25]]);
+        }, _callee, null, [[0, 24]]);
       }))();
     }
   }

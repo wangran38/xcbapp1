@@ -20,7 +20,7 @@
 					<view class="btn1" @click="reduce">-</view>
 					<view class="count1" @click.stop="showInput" :catchtouchmove="null">
 						<text v-if="!show">{{getTempCount(item.id)}}</text>
-						<textarea  adjust-position="false" v-if="show" v-model="count" @blur="overInput"  :auto-height="false" fixed class="input"  :focus="show"></textarea>
+						<textarea  :adjust-position="false" v-if="show" v-model="count" @blur="overInput"  :auto-height="false" fixed class="input"  :focus="show"></textarea>
 					</view>
 					<view class="btn2" @click="add">+</view>
 				</view>
