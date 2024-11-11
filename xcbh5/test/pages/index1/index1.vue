@@ -44,9 +44,7 @@
 			</view>
 		</view>
 		<view class="Notice">
-			今日打卡: &nbsp;{{signTotal.todaynum}}次<br>
-			历史打卡累计: &nbsp;{{signTotal.allnum}}次
-			<button @click="goToJackpot" style="margin-top: 10rpx; font-size: 30rpx;">查看摇号结果</button>
+			<button @click="goToJackpot" style="margin-top: 10rpx; font-size: 30rpx; color: #ff3030;">查看摇号结果</button>
 		</view>
 		
 		

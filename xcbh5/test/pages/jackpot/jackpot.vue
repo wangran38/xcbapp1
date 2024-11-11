@@ -2,18 +2,18 @@
 	<view class="me-container">
 		<view class="item">
 			<view class="top">
-				<view class="consequence">开奖公告</view>
+				<view class="consequence">摇号结果</view>
 			</view>
 			
 			<view class="nci">
-				<view class="draw-time">开奖时间：{{initTime(Created)}}</view>
+				<view class="draw-time">摇号时间：{{initTime(Created)}}</view>
 				<view class="Position">
 					<view class="grades">
 						<view class="grade"></view>
 						<view class="middle">
 							<!-- 一等奖：1个号码，左对齐 -->
 							<view class="title one">
-								<view class="dengji">一等奖</view>
+								<view class="dengji">一档幸运儿</view>
 								<view class="pailie">
 									<view v-for="item in yideng">
 										{{ formatPhoneNumber(item.phone) }}
@@ -23,7 +23,7 @@
 
 							<!-- 二等奖：2个号码，使用Grid布局，左和中位置 -->
 							<view class="title two">
-								<view class="dengji">二等奖</view>
+								<view class="dengji">二档幸运儿</view>
 								<view class="pailie grid">
 									<view v-for="item in erdeng">
 										{{ formatPhoneNumber(item.phone) }}
@@ -34,7 +34,7 @@
 
 							<!-- 三等奖：3个号码，左中右对齐 -->
 							<view class="title three">
-								<view class="dengji">三等奖</view>
+								<view class="dengji">三档幸运儿</view>
 								<view class="pailie">
 									<view v-for="item in sandeng">
 											{{ formatPhoneNumber(item.phone) }}
