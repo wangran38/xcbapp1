@@ -233,56 +233,6 @@ module.exports = _arrayWithoutHoles, module.exports.__esModule = true, module.ex
 
 /***/ }),
 
-/***/ 198:
-/*!************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/objectWithoutProperties.js ***!
-  \************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var objectWithoutPropertiesLoose = __webpack_require__(/*! ./objectWithoutPropertiesLoose.js */ 199);
-function _objectWithoutProperties(source, excluded) {
-  if (source == null) return {};
-  var target = objectWithoutPropertiesLoose(source, excluded);
-  var key, i;
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-module.exports = _objectWithoutProperties, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 199:
-/*!*****************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js ***!
-  \*****************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-  return target;
-}
-module.exports = _objectWithoutPropertiesLoose, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
 /***/ 2:
 /*!************************************************************!*\
   !*** ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js ***!
@@ -1797,7 +1747,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝内测","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝内测","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -8840,7 +8790,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝内测","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝内测","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8861,14 +8811,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝内测","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝内测","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝内测","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝内测","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8964,7 +8914,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝内测","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝内测","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -10861,7 +10811,7 @@ module.exports = index_cjs;
 
 /***/ }),
 
-/***/ 343:
+/***/ 341:
 /*!*******************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-icons/components/uni-icons/uniicons_file_vue.js ***!
   \*******************************************************************************************/
@@ -11365,136 +11315,7 @@ exports.fontData = fontData;
 
 /***/ }),
 
-/***/ 35:
-/*!*******************************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js ***!
-  \*******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
-var r = function r(_r) {
-    return function (r) {
-      return !!r && "object" == (0, _typeof2.default)(r);
-    }(_r) && !function (r) {
-      var t = Object.prototype.toString.call(r);
-      return "[object RegExp]" === t || "[object Date]" === t || function (r) {
-        return r.$$typeof === e;
-      }(r);
-    }(_r);
-  },
-  e = "function" == typeof Symbol && Symbol.for ? Symbol.for("react.element") : 60103;
-function t(r, e) {
-  return !1 !== e.clone && e.isMergeableObject(r) ? u(Array.isArray(r) ? [] : {}, r, e) : r;
-}
-function n(r, e, n) {
-  return r.concat(e).map(function (r) {
-    return t(r, n);
-  });
-}
-function o(r) {
-  return Object.keys(r).concat(function (r) {
-    return Object.getOwnPropertySymbols ? Object.getOwnPropertySymbols(r).filter(function (e) {
-      return r.propertyIsEnumerable(e);
-    }) : [];
-  }(r));
-}
-function c(r, e) {
-  try {
-    return e in r;
-  } catch (r) {
-    return !1;
-  }
-}
-function u(e, i, a) {
-  (a = a || {}).arrayMerge = a.arrayMerge || n, a.isMergeableObject = a.isMergeableObject || r, a.cloneUnlessOtherwiseSpecified = t;
-  var f = Array.isArray(i);
-  return f === Array.isArray(e) ? f ? a.arrayMerge(e, i, a) : function (r, e, n) {
-    var i = {};
-    return n.isMergeableObject(r) && o(r).forEach(function (e) {
-      i[e] = t(r[e], n);
-    }), o(e).forEach(function (o) {
-      (function (r, e) {
-        return c(r, e) && !(Object.hasOwnProperty.call(r, e) && Object.propertyIsEnumerable.call(r, e));
-      })(r, o) || (i[o] = c(r, o) && n.isMergeableObject(e[o]) ? function (r, e) {
-        if (!e.customMerge) return u;
-        var t = e.customMerge(r);
-        return "function" == typeof t ? t : u;
-      }(o, n)(r[o], e[o], n) : t(e[o], n));
-    }), i;
-  }(e, i, a) : t(i, a);
-}
-u.all = function (r, e) {
-  if (!Array.isArray(r)) throw new Error("first argument should be an array");
-  return r.reduce(function (r, t) {
-    return u(r, t, e);
-  }, {});
-};
-var i = u;
-function a(r) {
-  var e = (r = r || {}).storage || window && window.localStorage,
-    t = r.key || "vuex";
-  function n(r, e) {
-    var t = e.getItem(r);
-    try {
-      return "string" == typeof t ? JSON.parse(t) : "object" == (0, _typeof2.default)(t) ? t : void 0;
-    } catch (r) {}
-  }
-  function o() {
-    return !0;
-  }
-  function c(r, e, t) {
-    return t.setItem(r, JSON.stringify(e));
-  }
-  function u(r, e) {
-    return Array.isArray(e) ? e.reduce(function (e, t) {
-      return function (r, e, t, n) {
-        return !/^(__proto__|constructor|prototype)$/.test(e) && ((e = e.split ? e.split(".") : e.slice(0)).slice(0, -1).reduce(function (r, e) {
-          return r[e] = r[e] || {};
-        }, r)[e.pop()] = t), r;
-      }(e, t, (n = r, void 0 === (n = ((o = t).split ? o.split(".") : o).reduce(function (r, e) {
-        return r && r[e];
-      }, n)) ? void 0 : n));
-      var n, o;
-    }, {}) : r;
-  }
-  function a(r) {
-    return function (e) {
-      return r.subscribe(e);
-    };
-  }
-  (r.assertStorage || function () {
-    e.setItem("@@", 1), e.removeItem("@@");
-  })(e);
-  var f,
-    s = function s() {
-      return (r.getState || n)(t, e);
-    };
-  return r.fetchBeforeUse && (f = s()), function (n) {
-    r.fetchBeforeUse || (f = s()), "object" == (0, _typeof2.default)(f) && null !== f && (n.replaceState(r.overwrite ? f : i(n.state, f, {
-      arrayMerge: r.arrayMerger || function (r, e) {
-        return e;
-      },
-      clone: !1
-    })), (r.rehydrated || function () {})(n)), (r.subscriber || a)(n)(function (n, i) {
-      (r.filter || o)(n) && (r.setState || c)(t, (r.reducer || u)(i, r.paths), e);
-    });
-  };
-}
-var _default = a;
-exports.default = _default;
-
-/***/ }),
-
-/***/ 351:
+/***/ 349:
 /*!**********************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-forms/components/uni-forms/validate.js ***!
   \**********************************************************************************/
@@ -11510,9 +11331,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 46));
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 352));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 353));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 355));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 350));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 351));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 353));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 48));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
@@ -12186,7 +12007,136 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 352:
+/***/ 35:
+/*!*******************************************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
+var r = function r(_r) {
+    return function (r) {
+      return !!r && "object" == (0, _typeof2.default)(r);
+    }(_r) && !function (r) {
+      var t = Object.prototype.toString.call(r);
+      return "[object RegExp]" === t || "[object Date]" === t || function (r) {
+        return r.$$typeof === e;
+      }(r);
+    }(_r);
+  },
+  e = "function" == typeof Symbol && Symbol.for ? Symbol.for("react.element") : 60103;
+function t(r, e) {
+  return !1 !== e.clone && e.isMergeableObject(r) ? u(Array.isArray(r) ? [] : {}, r, e) : r;
+}
+function n(r, e, n) {
+  return r.concat(e).map(function (r) {
+    return t(r, n);
+  });
+}
+function o(r) {
+  return Object.keys(r).concat(function (r) {
+    return Object.getOwnPropertySymbols ? Object.getOwnPropertySymbols(r).filter(function (e) {
+      return r.propertyIsEnumerable(e);
+    }) : [];
+  }(r));
+}
+function c(r, e) {
+  try {
+    return e in r;
+  } catch (r) {
+    return !1;
+  }
+}
+function u(e, i, a) {
+  (a = a || {}).arrayMerge = a.arrayMerge || n, a.isMergeableObject = a.isMergeableObject || r, a.cloneUnlessOtherwiseSpecified = t;
+  var f = Array.isArray(i);
+  return f === Array.isArray(e) ? f ? a.arrayMerge(e, i, a) : function (r, e, n) {
+    var i = {};
+    return n.isMergeableObject(r) && o(r).forEach(function (e) {
+      i[e] = t(r[e], n);
+    }), o(e).forEach(function (o) {
+      (function (r, e) {
+        return c(r, e) && !(Object.hasOwnProperty.call(r, e) && Object.propertyIsEnumerable.call(r, e));
+      })(r, o) || (i[o] = c(r, o) && n.isMergeableObject(e[o]) ? function (r, e) {
+        if (!e.customMerge) return u;
+        var t = e.customMerge(r);
+        return "function" == typeof t ? t : u;
+      }(o, n)(r[o], e[o], n) : t(e[o], n));
+    }), i;
+  }(e, i, a) : t(i, a);
+}
+u.all = function (r, e) {
+  if (!Array.isArray(r)) throw new Error("first argument should be an array");
+  return r.reduce(function (r, t) {
+    return u(r, t, e);
+  }, {});
+};
+var i = u;
+function a(r) {
+  var e = (r = r || {}).storage || window && window.localStorage,
+    t = r.key || "vuex";
+  function n(r, e) {
+    var t = e.getItem(r);
+    try {
+      return "string" == typeof t ? JSON.parse(t) : "object" == (0, _typeof2.default)(t) ? t : void 0;
+    } catch (r) {}
+  }
+  function o() {
+    return !0;
+  }
+  function c(r, e, t) {
+    return t.setItem(r, JSON.stringify(e));
+  }
+  function u(r, e) {
+    return Array.isArray(e) ? e.reduce(function (e, t) {
+      return function (r, e, t, n) {
+        return !/^(__proto__|constructor|prototype)$/.test(e) && ((e = e.split ? e.split(".") : e.slice(0)).slice(0, -1).reduce(function (r, e) {
+          return r[e] = r[e] || {};
+        }, r)[e.pop()] = t), r;
+      }(e, t, (n = r, void 0 === (n = ((o = t).split ? o.split(".") : o).reduce(function (r, e) {
+        return r && r[e];
+      }, n)) ? void 0 : n));
+      var n, o;
+    }, {}) : r;
+  }
+  function a(r) {
+    return function (e) {
+      return r.subscribe(e);
+    };
+  }
+  (r.assertStorage || function () {
+    e.setItem("@@", 1), e.removeItem("@@");
+  })(e);
+  var f,
+    s = function s() {
+      return (r.getState || n)(t, e);
+    };
+  return r.fetchBeforeUse && (f = s()), function (n) {
+    r.fetchBeforeUse || (f = s()), "object" == (0, _typeof2.default)(f) && null !== f && (n.replaceState(r.overwrite ? f : i(n.state, f, {
+      arrayMerge: r.arrayMerger || function (r, e) {
+        return e;
+      },
+      clone: !1
+    })), (r.rehydrated || function () {})(n)), (r.subscriber || a)(n)(function (n, i) {
+      (r.filter || o)(n) && (r.setState || c)(t, (r.reducer || u)(i, r.paths), e);
+    });
+  };
+}
+var _default = a;
+exports.default = _default;
+
+/***/ }),
+
+/***/ 350:
 /*!*********************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/inherits.js ***!
   \*********************************************************/
@@ -12214,7 +12164,7 @@ module.exports = _inherits, module.exports.__esModule = true, module.exports["de
 
 /***/ }),
 
-/***/ 353:
+/***/ 351:
 /*!**************************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
   \**************************************************************************/
@@ -12222,7 +12172,7 @@ module.exports = _inherits, module.exports.__esModule = true, module.exports["de
 /***/ (function(module, exports, __webpack_require__) {
 
 var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
-var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized.js */ 354);
+var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized.js */ 352);
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
     return call;
@@ -12235,7 +12185,7 @@ module.exports = _possibleConstructorReturn, module.exports.__esModule = true, m
 
 /***/ }),
 
-/***/ 354:
+/***/ 352:
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
   \**********************************************************************/
@@ -12252,7 +12202,7 @@ module.exports = _assertThisInitialized, module.exports.__esModule = true, modul
 
 /***/ }),
 
-/***/ 355:
+/***/ 353:
 /*!***************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
   \***************************************************************/
@@ -12269,7 +12219,7 @@ module.exports = _getPrototypeOf, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
-/***/ 356:
+/***/ 354:
 /*!*******************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-forms/components/uni-forms/utils.js ***!
   \*******************************************************************************/
@@ -12628,6 +12578,7 @@ var state = {
   carts: []
 };
 var mutations = {
+  // 数量加1
   addItem: function addItem(state, item) {
     // 查找购物车中是否存在该商品
     var index = state.carts.findIndex(function (i) {
@@ -12635,22 +12586,29 @@ var mutations = {
     });
     if (index !== -1) {
       // 不等于-1就相当于存在，就商品数量就自增1
-      state.carts[index].tempCount += 1;
+      state.carts[index].tempCount = new _decimal.default(state.carts[index].tempCount).add(new _decimal.default(1)).toNumber();
+      // state.carts[index].tempCount += 1;
     } else {
-      // 反之不存在就新增
+      // 不存在就新增
       state.carts.push(_objectSpread(_objectSpread({}, item), {}, {
         tempCount: 1
       }));
     }
   },
+  // 数量减一
   subItem: function subItem(state, item) {
     var index = state.carts.findIndex(function (i) {
       return i.id === item.id;
     });
     if (index !== -1) {
+      // 检查购物车里是否有订单
+
+      // 大于1就减掉1
       if (state.carts[index].tempCount > 1) {
-        state.carts[index].tempCount -= 1;
+        state.carts[index].tempCount = new _decimal.default(state.carts[index].tempCount).sub(new _decimal.default(1)).toNumber();
+        // state.carts[index].tempCount -= 1;
       } else {
+        // 删除数组项
         state.carts.splice(index, 1);
       }
     }
@@ -12667,16 +12625,15 @@ var mutations = {
     });
     // 不等于-1就相当于存在，就商品数量就修改数量
     if (index !== -1) {
-      // 如果输入数量小于1就删除数组
-      if (item.count < 1) {
+      // 如果输入数量小于0.1就删除数组
+      if (item.count < 0.1) {
         state.carts.splice(index, 1);
       } else {
-        // 反之就++
         state.carts[index].tempCount = item.count;
       }
     } else {
-      // 数量要大于1才能push进去
-      if (item.count >= 1) {
+      // 数量要大于0.1才能push进去
+      if (item.count >= 0.1) {
         // 反之不存在就新增
         state.carts.push(_objectSpread(_objectSpread({}, item), {}, {
           tempCount: item.count
@@ -12693,7 +12650,7 @@ var getters = {
         return i.shop_id == shopId;
       }).reduce(function (sum, item) {
         return new _decimal.default(item.price).mul(item.tempCount).add(sum).toNumber();
-      }, 0) : state.carts.reduce(function (sum, item) {
+      }, 0).toFixed(1) : state.carts.reduce(function (sum, item) {
         return sum + new _decimal.default(item.price).mul(item.tempCount).add(sum).toNumber();
       }, 0);
     };
@@ -12889,7 +12846,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 /***/ }),
 
-/***/ 378:
+/***/ 376:
 /*!***********************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/node_modules/@dcloudio/uni-ui/lib/uni-forms/validate.js ***!
   \***********************************************************************************/
@@ -12905,9 +12862,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 46));
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 352));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 353));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 355));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 350));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 351));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 353));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 48));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
@@ -13581,7 +13538,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 379:
+/***/ 377:
 /*!********************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/node_modules/@dcloudio/uni-ui/lib/uni-forms/utils.js ***!
   \********************************************************************************/
@@ -14463,7 +14420,7 @@ var whiteList = [
 
 /**
  * 检查是否需要token，如果需要就从本地获取返回，不需要则返回空
-*/
+ */
 var checkToken = function checkToken(url) {
   var status = whiteList.includes(url);
   if (!status) {
@@ -14493,10 +14450,10 @@ var fetch = function fetch(url, method) {
       success: function success(res) {
         var _res$data = res.data,
           code = _res$data.code,
-          message = _res$data.message;
+          msg = _res$data.msg;
         if (res.statusCode === 200 || code === 200) {
           resolve(res.data);
-        } else if (res.statusCode === 201 || code === 201 || message === '你没有登录！') {
+        } else if (res.statusCode === 201 || code === 201 || msg === '你没有登录！') {
           uni.showModal({
             title: '提示',
             content: '登录状态失效',
@@ -14511,19 +14468,10 @@ var fetch = function fetch(url, method) {
             }
           });
         } else {
-          if (message) {
-            //已知的异常，有返回
-            console.log('bad reqest:', message);
-            uni.showToast({
-              title: message,
-              icon: 'none'
-            });
-          } else {
-            //未知的异常
-            console.log('bad reqest:', res.data.error);
+          if (msg) {
             uni.showModal({
               title: '提示',
-              content: '服务维护中，请稍后重试',
+              content: res.data.msg,
               //+res.data.error,
               showCancel: false
             });

@@ -96,7 +96,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(uni) {
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 Object.defineProperty(exports, "__esModule", {
@@ -105,16 +105,38 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 25));
 var _default = {
-  onLaunch: function onLaunch() {
-    // console.warn('当前组件仅支持 uni_modules 目录结构 ，请升级 HBuilderX 到 3.1.0 版本以上！')
-    // console.log('App Launch')
+  onLaunch: function onLaunch() {},
+  onShow: function onShow() {
+    var updateManager = uni.getUpdateManager();
+    // 请求完新版本信息的回调
+    updateManager.onCheckForUpdate(function (res) {
+      if (res.hasUpdate) {
+        // 新版本下载成功
+        updateManager.onUpdateReady(function () {
+          uni.showModal({
+            title: '更新提示',
+            content: '新版本已经准备好，点击确定重启小程序',
+            success: function success(res) {
+              if (res.confirm) {
+                // 新的版本已经下载好，强制更新
+                updateManager.applyUpdate();
+              }
+            }
+          });
+        });
+      }
+    });
+    // 新版本下载失败
+    updateManager.onUpdateFailed(function (res) {
+      console.error(res);
+    });
   },
-  onShow: function onShow() {},
   onHide: function onHide() {
     console.log('App Hide');
   }
 };
 exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 

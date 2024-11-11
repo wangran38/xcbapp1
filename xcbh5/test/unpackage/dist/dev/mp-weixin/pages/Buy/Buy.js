@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 338))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 336))
     },
   }
 } catch (e) {
@@ -418,9 +418,8 @@ var _default = {
                     goodsnum: item.tempCount
                   };
                 });
-                console.log(orderItems);
                 if (orderItems.length) {
-                  _context2.next = 15;
+                  _context2.next = 14;
                   break;
                 }
                 uni.showToast({
@@ -430,9 +429,9 @@ var _default = {
                 });
                 // uni.navigateBack()
                 return _context2.abrupt("return");
-              case 15:
+              case 14:
                 if (!(_this2.paymentMethod === '请选择')) {
-                  _context2.next = 18;
+                  _context2.next = 17;
                   break;
                 }
                 uni.showToast({
@@ -440,15 +439,15 @@ var _default = {
                   icon: 'none'
                 });
                 return _context2.abrupt("return");
-              case 18:
+              case 17:
                 // 生成订单数据
                 orderData = {
                   shop_id: Number(_this2.shop_id),
                   goods_num: _this2.cartsLengthByShopId(_this2.shop_id),
                   // 商品数量
-                  price: _this2.cartTotalByShopId(_this2.shop_id),
+                  price: Number(_this2.cartTotalByShopId(_this2.shop_id)),
                   // 订单合计金额
-                  payprice: _this2.cartTotalByShopId(_this2.shop_id),
+                  payprice: Number(_this2.cartTotalByShopId(_this2.shop_id)),
                   // 实际支付金额
                   payway: _this2.payway,
                   goods_arr: orderItems // 商品数组
@@ -457,9 +456,9 @@ var _default = {
                 console.log('提交的订单数据:', orderData);
 
                 // 调用提交订单接口
-                _context2.next = 22;
+                _context2.next = 21;
                 return _api.api.addorder(orderData);
-              case 22:
+              case 21:
                 response = _context2.sent;
                 if (response.code === 200) {
                   uni.showToast({
@@ -486,22 +485,22 @@ var _default = {
                     icon: 'none'
                   });
                 }
-                _context2.next = 30;
+                _context2.next = 29;
                 break;
-              case 26:
-                _context2.prev = 26;
+              case 25:
+                _context2.prev = 25;
                 _context2.t0 = _context2["catch"](0);
                 console.error('提交订单失败:', _context2.t0);
                 uni.showToast({
                   title: '订单提交失败',
                   icon: 'none'
                 });
-              case 30:
+              case 29:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 26]]);
+        }, _callee2, null, [[0, 25]]);
       }))();
     },
     updatePaymentMethodOnBlur: function updatePaymentMethodOnBlur() {

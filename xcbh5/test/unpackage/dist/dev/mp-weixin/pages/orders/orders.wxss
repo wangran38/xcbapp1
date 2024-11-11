@@ -1,4 +1,10 @@
 
+.orderTime {
+	position: relative;
+	right: 0;
+	top: 150rpx;
+	font-size: 25rpx;
+}
 .me-container {
 	overflow: hidden;
 	width: 100%;

@@ -130,7 +130,7 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 338))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 336))
     },
   }
 } catch (e) {
@@ -187,7 +187,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(wx, uni) {
+/* WEBPACK VAR INJECTION */(function(uni) {
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 Object.defineProperty(exports, "__esModule", {
@@ -353,6 +353,8 @@ var _default = {
             case 2:
               res = _context.sent;
               _this.signTotal = res.data;
+
+              // 检查是否登录
               _this.checkLoginStatus();
               if (_this.isLoggedIn) {
                 _this.fetchUserProfile();
@@ -372,42 +374,29 @@ var _default = {
      * 检查更新
      */
     checkUpdate: function checkUpdate() {
-      if ((0, _useUpload.getPlatform)() == 3) {
-        // 小程序支持检查更新其他的提示不兼容
-        if (wx.canIUse('getUpdateManager')) {
-          var updateManager = uni.getUpdateManager();
-          updateManager.onCheckForUpdate(function (res) {
-            if (res.hasUpdate) {
-              updateManager.onUpdateReady(function () {
-                uni.showModal({
-                  title: '更新提示',
-                  content: '新版本已经准备好，是否重启应用？',
-                  success: function success(res) {
-                    if (res.confirm) {
-                      updateManager.applyUpdate();
-                    }
-                  }
-                });
-              });
-            } else {
-              uni.showToast({
-                title: '已经是最新版了',
-                icon: 'success'
-              });
-            }
-          });
-        } else {
-          uni.showModal({
-            title: '提示',
-            content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+      var updateManager = uni.getUpdateManager();
+      // 请求完新版本信息的回调
+      updateManager.onCheckForUpdate(function (res) {
+        if (res.hasUpdate) {
+          // 新版本下载成功
+          updateManager.onUpdateReady(function () {
+            uni.showModal({
+              title: '更新提示',
+              content: '新版本已经准备好，点击确定重启小程序',
+              success: function success(res) {
+                if (res.confirm) {
+                  // 新的版本已经下载好，强制更新
+                  updateManager.applyUpdate();
+                }
+              }
+            });
           });
         }
-      } else {
-        uni.showToast({
-          title: '当前客户端不支持检查更新',
-          icon: 'error'
-        });
-      }
+      });
+      // 新版本下载失败
+      updateManager.onUpdateFailed(function (res) {
+        console.error(res);
+      });
     },
     /**
      * 检查登录状态
@@ -420,6 +409,9 @@ var _default = {
         this.isLoggedIn = false;
       }
     },
+    /**
+     * 获取用户个人信息
+     */
     fetchUserProfile: function fetchUserProfile() {
       var _this2 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
@@ -439,6 +431,21 @@ var _default = {
                   _this2.userName = name;
                   _this2.userAvatar = Headimgurl;
                   _this2.score = score;
+
+                  // if (!this.userName){
+                  // 	uni.showModal({
+                  // 		title:'个人信息不完整',
+                  // 		showCancel:false,
+                  // 		content:'系统检测到您的个人信息中缺少用户名，为了不影响后续的业务开展，请前往个人页面对个人信息进行补充',
+                  // 		success() {
+                  // 			setTimeout(()=>{
+                  // 				uni.navigateTo({
+                  // 					url:'/pages/user-edit/user-edit'
+                  // 				})
+                  // 			},100)
+                  // 		}
+                  // 	})
+                  // }
                 } else {
                   // 处理获取用户信息失败的情况
                   uni.showToast({
@@ -613,7 +620,7 @@ var _default = {
   }
 };
 exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ })
 

@@ -44,9 +44,11 @@
 			</view>
 		</view>
 		<view class="Notice">
-			今日打卡次数: &nbsp;{{signTotal.todaynum}}<br>
-			历史打卡累计: &nbsp;{{signTotal.allnum}}
+			今日打卡: &nbsp;{{signTotal.todaynum}}次<br>
+			历史打卡累计: &nbsp;{{signTotal.allnum}}次
+			<button @click="goToJackpot" style="margin-top: 10rpx; font-size: 30rpx;">查看摇号结果</button>
 		</view>
+		
 		
 
 	</view>
@@ -114,6 +116,11 @@
 			await this.initializePicker(); // 组件加载时初始化数据
 		},
 		methods: {
+			goToJackpot(){
+				uni.navigateTo({
+					url:"/pages/jackpot/jackpot"
+				})
+			},
 			...mapMutations('location', ['setStatus']),
 			
 			goTorules() {
@@ -409,18 +416,17 @@
 	};
 </script>
 
+
+
+
+
+
 <style>
 	.Notice {
 		margin: 50rpx;
 		text-align: center;
 		color: black;
 	}
-</style>
-
-
-
-
-<style>
 	.notice {
 		margin-top: 20rpx;
 		width: 100%;
@@ -489,7 +495,6 @@
 	}
 	.me-container {
 		height: 100vh;
-		/* overflow: hidden; */
 		width: 100%;
 		box-sizing: border-box;
 		padding: 0rpx 40rpx 0 40rpx;
@@ -498,7 +503,6 @@
 		background-color: #f8f8f8;
 		display: flex;
 		flex-direction: column;
-		/* justify-content: center; */
 		align-items: center;
 		position: relative;
 	}

@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 338))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 336))
     },
   }
 } catch (e) {
@@ -194,7 +194,7 @@ var _default = {
       // 上架时的价格
       marketList: [],
       // 存储摊位列表
-      candidates: ['千克',, '克', '斤', '两', '瓶', '桶', '个'],
+      candidates: ['斤', '瓶', '桶', '个'],
       candidate2: ['元'],
       unit: '',
       unit2: '',

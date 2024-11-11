@@ -20,7 +20,8 @@
 					<view class="btn1" @click="reduce">-</view>
 					<view class="count1" @click.stop="showInput" :catchtouchmove="null">
 						<text v-if="!show">{{getTempCount(item.id)}}</text>
-						<textarea  :adjust-position="false" v-if="show" v-model="count" @blur="overInput"  :auto-height="false" fixed class="input"  :focus="show"></textarea>
+						<textarea :adjust-position="false" v-if="show" v-model="count" @blur="overInput"
+							:auto-height="false" fixed class="input" :focus="show" @input="changeTextarea"></textarea>
 					</view>
 					<view class="btn2" @click="add">+</view>
 				</view>
@@ -48,31 +49,40 @@
 		// 	this.count = this.getTempCount(this.item.id)
 		// },
 		methods: {
+			changeTextarea(e) {
+
+			},
 			// 加一
-			add(){
+			add() {
 				this.addItem(this.item)
 				this.count = ''
 			},
 			// 减一
-			reduce(){
+			reduce() {
 				this.subItem(this.item)
 				this.count = ''
 			},
+			// isNumeric(str) {
+			//     return /^\d+$/.test(str);
+			// },
+
+			// int float  校验
 			isNumeric(str) {
-			    return /^\d+$/.test(str);
+				return /^\d+(\.\d+)?$/.test(str);
 			},
 			// 结束输入值
 			overInput(e) {
 				// 判断是否是正确数值
-				if (this.isNumeric(e.detail.value)){
-					let value = parseInt(e.detail.value)
+				if (this.isNumeric(e.detail.value)) {
+					let value = Number(Number(e.detail.value).toFixed(1))
 					this.item.count = value
+
 					this.anyNumber(this.item) // store保存数量
-					this.count = value  // input表单保存备份
-				}else{
+					this.count = value // input表单保存备份
+				} else {
 					uni.showToast({
-						title:'数值有误',
-						icon:'error'
+						title: '数值有误',
+						icon: 'error'
 					})
 					this.count = ''
 				}
@@ -93,11 +103,12 @@
 </script>
 
 <style>
-	.input{
+	.input {
 		border: 1rpx solid #007aff;
 		text-align: center;
 		height: 39rpx;
 	}
+
 	.box {
 		width: 100%;
 		display: flex;
@@ -209,7 +220,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		
+
 	}
 
 

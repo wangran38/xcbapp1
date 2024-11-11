@@ -1,6 +1,6 @@
 <template>
 	<view class="me-container">
-		<view class="checkUpdate" @click="checkUpdate">检查更新</view>
+		<!-- <view class="checkUpdate" @click="checkUpdate">检查更新</view> -->
 		<view class="user">
 			<view class="user-info">
 				<view class="user-img">
@@ -70,7 +70,7 @@
 			</view>
 		</view>
 
-<!-- 		<view class="Notice">
+		<!-- 		<view class="Notice">
 			今日打卡次数: &nbsp;{{signTotal.todayusernum}}<br>
 			历史打卡累计: &nbsp;{{signTotal.allnum}}
 		</view> -->
@@ -132,7 +132,9 @@
 	import {
 		api
 	} from '../../api/index.js';
-	import {getPlatform} from '../../hooks/useUpload.js'
+	import {
+		getPlatform
+	} from '../../hooks/useUpload.js'
 
 	export default {
 		data() {
@@ -149,7 +151,10 @@
 		async onShow() {
 			let res = await api.signTotal({})
 			this.signTotal = res.data
+			
+			// 检查是否登录
 			this.checkLoginStatus();
+			
 			if (this.isLoggedIn) {
 				this.fetchUserProfile();
 			}
@@ -161,43 +166,29 @@
 			 * 检查更新
 			 */
 			checkUpdate() {
-				if (getPlatform() == 3){
-					// 小程序支持检查更新其他的提示不兼容
-					if (wx.canIUse('getUpdateManager')) {
-						const updateManager = uni.getUpdateManager()
-						updateManager.onCheckForUpdate(function(res) {
-							if (res.hasUpdate) {
-								updateManager.onUpdateReady(function() {
-									uni.showModal({
-										title: '更新提示',
-										content: '新版本已经准备好，是否重启应用？',
-										success: function(res) {
-											if (res.confirm) {
-												updateManager.applyUpdate()
-											}
-										}
-									})
-								})
-							}else{
-								uni.showToast({
-									title:'已经是最新版了',
-									icon:'success'
-								})
-							}
-						})
-					} else {
-						uni.showModal({
-							title: '提示',
-							content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
-						})
-					}
-				}else{
-					uni.showToast({
-						title:'当前客户端不支持检查更新',
-						icon:'error'
-					})
-				}
-				
+				const updateManager = uni.getUpdateManager()
+				// 请求完新版本信息的回调
+				    updateManager.onCheckForUpdate(res => {
+				      if (res.hasUpdate) {
+				        // 新版本下载成功
+				        updateManager.onUpdateReady(() => {
+				          uni.showModal({
+				            title: '更新提示',
+				            content: '新版本已经准备好，点击确定重启小程序',
+				            success(res) {
+				              if (res.confirm) {
+				                // 新的版本已经下载好，强制更新
+				                updateManager.applyUpdate()
+				              }
+				            }
+				          })
+				        })
+				      }
+				    })
+				    // 新版本下载失败
+				    updateManager.onUpdateFailed(res => {
+				      console.error(res)
+				    })
 			},
 
 			/**
@@ -211,6 +202,10 @@
 					this.isLoggedIn = false;
 				}
 			},
+
+			/**
+			 * 获取用户个人信息
+			 */
 			async fetchUserProfile() {
 				try {
 					const token = uni.getStorageSync('token');
@@ -224,6 +219,21 @@
 						this.userName = name;
 						this.userAvatar = Headimgurl;
 						this.score = score;
+						
+						// if (!this.userName){
+						// 	uni.showModal({
+						// 		title:'个人信息不完整',
+						// 		showCancel:false,
+						// 		content:'系统检测到您的个人信息中缺少用户名，为了不影响后续的业务开展，请前往个人页面对个人信息进行补充',
+						// 		success() {
+						// 			setTimeout(()=>{
+						// 				uni.navigateTo({
+						// 					url:'/pages/user-edit/user-edit'
+						// 				})
+						// 			},100)
+						// 		}
+						// 	})
+						// }
 					} else {
 						// 处理获取用户信息失败的情况
 						uni.showToast({
@@ -321,7 +331,7 @@
 							console.log(res.code, "这是用户唯一标识")
 							发送code
 							let data = await api.bindingOpenid({
-								code:res.code
+								code: res.code
 							})
 							console.log(data)
 						},

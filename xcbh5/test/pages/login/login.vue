@@ -144,6 +144,7 @@ export default {
   cursor: pointer;
 }
 .bottom{
+	font-size:30rpx;
 	width: 350rpx;
 	display: flex;
 	justify-content: space-between;

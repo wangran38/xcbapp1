@@ -134,7 +134,7 @@
 				itemDescription: '', // 上架时的详细说明
 				itemPrice: '', // 上架时的价格
 				marketList: [], // 存储摊位列表
-				candidates: ['千克',,'克','斤', '两','瓶','桶','个'],
+				candidates: ['斤','瓶','桶','个'],
 				candidate2: ['元'],
 				unit: '',
 				unit2: '',

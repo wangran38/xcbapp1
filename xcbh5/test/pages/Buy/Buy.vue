@@ -1,7 +1,7 @@
 <template>
 	<!-- <scroll-view class="Stallholder" scroll-y="true" @scrolltolower="handleScrollToLower" :style="{ height: '100vh' }"> -->
 	<view class="me-container">
-		<scroll-view class="Stallholder" scroll-y="true" :style="{ height: '85vh' }">
+		<scroll-view class="Stallholder" scroll-y="true" :style="{ height: '100vh' }">
 			<view class="product-details">
 				<view class="commodity">
 					<view class="content">
@@ -277,10 +277,8 @@
 						price: item.price,
 						goodsnum: item.tempCount
 					}));
-
-					console.log(orderItems)
-
-
+					
+					
 					if (!orderItems.length) {
 						uni.showToast({
 							title: '您还未选购商品,无法提交订单!!!!',
@@ -305,11 +303,12 @@
 					const orderData = {
 						shop_id: Number(this.shop_id),
 						goods_num: this.cartsLengthByShopId(this.shop_id), // 商品数量
-						price: this.cartTotalByShopId(this.shop_id), // 订单合计金额
-						payprice: this.cartTotalByShopId(this.shop_id), // 实际支付金额
+						price: Number(this.cartTotalByShopId(this.shop_id)), // 订单合计金额
+						payprice: Number(this.cartTotalByShopId(this.shop_id)), // 实际支付金额
 						payway: this.payway,
 						goods_arr: orderItems // 商品数组
 					};
+					
 					console.log('提交的订单数据:', orderData);
 
 
@@ -419,7 +418,7 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		height: calc(100vh - 100rpx);
+		/* height: calc(100vh - 100rpx); */
 	}
 
 	.top {
@@ -471,24 +470,6 @@
 		border-radius: 10%;
 		background-color: antiquewhite;
 	}
-
-	/* .middle {
-		height: 140rpx;
-		margin-left: 10rpx;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-	} */
-
-	/* .right {
-		height: 140rpx;
-		width: 180rpx;
-		margin-left: auto;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: space-between;
-	} */
 	.item {
 		/* position: relative; */
 		width: 100%;
@@ -564,18 +545,6 @@
 		/* 只对最后一个Payment元素增加底部的50rpx外边距 */
 	}
 
-	.total {
-		margin-top: auto;
-		height: 100rpx;
-		/* background-color: brown; */
-		padding: 20rpx;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		border: 1px solid #ccc;
-		border-radius: 20rpx;
-	}
 
 	.numberpieces {
 		color: black;
@@ -586,6 +555,8 @@
 	}
 
 	.submit-order {
+		position: absolute;
+		right: 10rpx;
 		width: 25%;
 		height: 80rpx;
 		text-align: center;
@@ -612,22 +583,18 @@
 		font-weight: 600;
 	}
 
-
+	/* 未完成 */
 	.total {
-
+		
 		height: 100rpx;
-		width: 90%;
-		background-color: white;
+		padding: 20rpx;
+		border: 1px solid #ccc;
 		border-radius: 20rpx;
-		position: fixed;
-		/* box-sizing: border-box; */
-		bottom: 40rpx;
-		left: 50%;
-		transform: translateX(-50%);
 		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		z-index: 999;
+		position: absolute;
+		left: 10rpx;
+		right:10rpx;
+		bottom: 20rpx;
 	}
 
 	.content {

@@ -1,5 +1,5 @@
 
-.input{
+.input {
 	border: 1rpx solid #007aff;
 	text-align: center;
 	height: 39rpx;

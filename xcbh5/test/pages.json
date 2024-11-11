@@ -121,7 +121,7 @@
     	"path" : "pages/jackpot/jackpot",
     	"style" : 
     	{
-    		"navigationBarTitleText" : "中奖页"
+    		"navigationBarTitleText" : "摇号结果"
     	}
     },
     {

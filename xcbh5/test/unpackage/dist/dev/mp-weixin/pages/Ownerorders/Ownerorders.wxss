@@ -1,4 +1,10 @@
 
+.orderTime {
+	position: relative;
+	right: 0;
+	top: 150rpx;
+	font-size: 25rpx;
+}
 .me-container {
 	overflow: hidden;
 	width: 100%;
@@ -44,7 +50,7 @@
 	color: #007aff;
 	/* margin-top: 20rpx; */
 }
-.orderstitle{
+.orderstitle {
 	color: black;
 	margin-right: 10rpx;
 }

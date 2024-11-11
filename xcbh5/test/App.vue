@@ -2,10 +2,31 @@
 	import Vue from 'vue'
 	export default {
 		onLaunch: function() {
-			// console.warn('当前组件仅支持 uni_modules 目录结构 ，请升级 HBuilderX 到 3.1.0 版本以上！')
-			// console.log('App Launch')
 		},
-		onShow: function() {
+		onShow() {
+			const updateManager = uni.getUpdateManager()
+		    // 请求完新版本信息的回调
+		    updateManager.onCheckForUpdate(res => {
+		      if (res.hasUpdate) {
+		        // 新版本下载成功
+		        updateManager.onUpdateReady(() => {
+		          uni.showModal({
+		            title: '更新提示',
+		            content: '新版本已经准备好，点击确定重启小程序',
+		            success(res) {
+		              if (res.confirm) {
+		                // 新的版本已经下载好，强制更新
+		                updateManager.applyUpdate()
+		              }
+		            }
+		          })
+		        })
+		      }
+		    })
+		    // 新版本下载失败
+		    updateManager.onUpdateFailed(res => {
+		      console.error(res)
+		    })
 		},
 		onHide: function() {
 			console.log('App Hide')

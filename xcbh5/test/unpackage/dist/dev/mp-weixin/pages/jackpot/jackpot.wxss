@@ -75,7 +75,11 @@
 .pailie {
 	width: 100%;
 	display: flex;
-	justify-content: space-between;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+.pailie view{
+	padding: 5rpx;
 }
 
 /* Grid layout for二等奖 */

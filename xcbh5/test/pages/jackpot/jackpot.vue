@@ -5,9 +5,8 @@
 				<view class="consequence">开奖公告</view>
 			</view>
 			
-			<view class="nci" v-for="(data, index) in pagedData" :key="index">
-				<view class="draw-time">开奖时间：{{ data.drawTime }}</view>
-
+			<view class="nci">
+				<view class="draw-time">开奖时间：{{initTime(Created)}}</view>
 				<view class="Position">
 					<view class="grades">
 						<view class="grade"></view>
@@ -16,7 +15,7 @@
 							<view class="title one">
 								<view class="dengji">一等奖</view>
 								<view class="pailie">
-									<view v-for="item in data.pageData" :key="item.Id" v-if="item.type === 1">
+									<view v-for="item in yideng">
 										{{ formatPhoneNumber(item.phone) }}
 									</view>
 								</view>
@@ -26,18 +25,19 @@
 							<view class="title two">
 								<view class="dengji">二等奖</view>
 								<view class="pailie grid">
-									<view v-for="item in data.pageData" :key="item.Id" v-if="item.type === 2" class="grid-item">
+									<view v-for="item in erdeng">
 										{{ formatPhoneNumber(item.phone) }}
 									</view>
 								</view>
+								
 							</view>
 
 							<!-- 三等奖：3个号码，左中右对齐 -->
 							<view class="title three">
 								<view class="dengji">三等奖</view>
 								<view class="pailie">
-									<view v-for="item in data.pageData" :key="item.Id" v-if="item.type === 3">
-										{{ formatPhoneNumber(item.phone) }}
+									<view v-for="item in sandeng">
+											{{ formatPhoneNumber(item.phone) }}
 									</view>
 								</view>
 							</view>
@@ -58,6 +58,10 @@
 				pagedData: [],
 				totalnum: 0,
 				totalPages: 0,
+				yideng:[],
+				erdeng:[],
+				sandeng:[],
+				Created:''
 			};
 		},
 		mixins: [usePage],
@@ -65,34 +69,65 @@
 			this.reloadData();
 		},
 		methods: {
+			/**
+			 * 格式化时间
+			 */
+			initTime(str){
+				let timestamp = new Date(str).getTime()
+				var time = String(timestamp).length === 10 ? new Date(parseInt(timestamp) * 1000) : new Date(parseInt(
+					timestamp))
+				var y = time.getFullYear() // 年
+				var m = time.getMonth() + 1 // 月
+				if (m < 10) {
+					m = '0' + m
+				}
+				var d = time.getDate() // 日
+				if (d < 10) {
+					d = '0' + d
+				}
+				var h = time.getHours() // 时
+				if (h < 10) {
+					h = '0' + h
+				}
+				var mm = time.getMinutes() // 分
+				if (mm < 10) {
+					mm = '0' + mm
+				}
+				var s = time.getSeconds() // 秒
+				if (s < 10) {
+					s = '0' + s
+				}
+				var timeStr = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s
+				return timeStr
+			},
 			async fetchData(params) {
-				const { limit, ...otherParams } = params;
-				const requestParams = { ...otherParams, type: this.type };
-				const response = await api.lottery({ ...requestParams, page: 0 });
-				this.totalnum = response.data.totalnum;
 				this.totalPages = Math.ceil(this.totalnum / 6);
 				this.pagedData = []; // 清空之前的数据
-
-				// 创建请求数组
-				const requests = [];
-				for (let page = 1; page <= this.totalPages; page++) {
-					const pageParams = { ...requestParams, page, limit:6 };
-					requests.push(api.lottery(pageParams));
-				}
-
-				// 等待所有请求完成
-				const responses = await Promise.all(requests);
-
-				// 处理每个请求的结果
-				responses.forEach((response, index) => {
-					if (response.data.listdata.length > 0) {
-						const drawTime = this.formatDateTime(response.data.listdata[0].Created); // 提取每一页的开奖时间
-						this.pagedData.push({
-							drawTime,
-							pageData: response.data.listdata,
-						});
+				
+				const querList = [
+					{page:1,limit:1,type:1},
+					{page:1,limit:3,type:2},
+					{page:1,limit:8,type:3},
+				]
+				
+				querList.forEach(async (item)=>{
+					let {data} = await api.lottery(item)
+					let type = data.listdata[0].type
+					this.Created = data.listdata[0].Created
+					switch (type){
+						case 1:
+							this.yideng = data.listdata
+							break;
+						case 2:
+							this.erdeng = data.listdata
+							break;
+						case 3:
+							this.sandeng = data.listdata
+							break;
 					}
-				});
+				})
+				
+				
 			},
 			formatPhoneNumber(phone) {
 				if (!phone) return '';
@@ -198,7 +233,11 @@
 	.pailie {
 		width: 100%;
 		display: flex;
-		justify-content: space-between;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+	}
+	.pailie view{
+		padding: 5rpx;
 	}
 
 	/* Grid layout for二等奖 */
