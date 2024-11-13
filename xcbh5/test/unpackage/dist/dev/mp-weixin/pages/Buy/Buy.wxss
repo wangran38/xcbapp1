@@ -156,8 +156,6 @@
 	font-size: 35rpx;
 	font-weight: 600;
 }
-
-/* 未完成 */
 .total.data-v-d63f0f58 {
 	
 	height: 100rpx;

@@ -244,8 +244,22 @@
     	"path" : "pages/updatePwd/updatePwd",
     	"style" : 
     	{
-    		"navigationBarTitleText" : "",
+    		"navigationBarTitleText" : "更新密码",
     		"enablePullDownRefresh" : false
+    	}
+    },
+    {
+    	"path" : "pages/boothOwner/boothOwner",
+    	"style" : 
+    	{
+    		"navigationBarTitleText" : "摊主"
+    	}
+    },
+    {
+    	"path" : "pages/aHouseholder/aHouseholder",
+    	"style" : 
+    	{
+    		"navigationBarTitleText" : "户主"
     	}
     }
   ],

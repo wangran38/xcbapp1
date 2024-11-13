@@ -1,63 +1,61 @@
 
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 40rpx;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 40rpx;
 }
 .form {
-  width: 100%;
-  margin-bottom: 40rpx;
+	width: 100%;
+	margin-bottom: 40rpx;
 }
-.yanz{
+.yanz {
 	width: 90%;
 	/* background-color: #007aff; */
 }
 .header {
-  font-size: 48rpx;
-  margin-bottom: 40rpx;
-  text-align: center;
+	font-size: 48rpx;
+	margin-bottom: 40rpx;
+	text-align: center;
 }
 .input-group {
-  width: 100%;
-  margin-bottom: 40rpx;
-  display: flex;
-  justify-content: center;
+	width: 100%;
+	margin-bottom: 40rpx;
+	display: flex;
+	justify-content: center;
 }
 .button-group {
-  width: 90%;
-  text-align: center;
+	width: 90%;
+	text-align: center;
 }
 .login-button {
-  width: 100%;
-  padding: 10rpx;
-  background-color: #007aff;
-  color: white;
-  font-size: 28rpx;
-  border: none;
-  border-radius: 10rpx;
-  cursor: pointer;
+	width: 100%;
+	padding: 10rpx;
+	background-color: #007aff;
+	color: white;
+	font-size: 28rpx;
+	border: none;
+	border-radius: 10rpx;
+	cursor: pointer;
 }
 .login-button:active {
-  background-color: darkblue;
+	background-color: darkblue;
 }
 .login-wxbutton {
-  width: 90%;
-  padding: 10rpx;
-  background-color: blue;
-  color: white;
-  font-size: 28rpx;
-  border: none;
-  border-radius: 10rpx;
-  cursor: pointer;
+	width: 90%;
+	padding: 10rpx;
+	background-color: blue;
+	color: white;
+	font-size: 28rpx;
+	border: none;
+	border-radius: 10rpx;
+	cursor: pointer;
 }
-.bottom{
-	font-size:30rpx;
+.bottom {
+	font-size: 30rpx;
 	width: 350rpx;
 	display: flex;
 	justify-content: space-between;
 }
-
-
 

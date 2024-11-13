@@ -80,13 +80,8 @@
 					<menuBarVue :item="item" class="count"></menuBarVue>
 				</view>
 			</view>
-			
 				<shopItem :shop_id="shop_id" ref="shopitem"></shopItem>
-			
 		</view>
-		
-			
-		
 		
 	</scroll-view>
 

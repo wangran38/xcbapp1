@@ -75,13 +75,13 @@ const fetch = (url, method, data = {}, headers = {}) => {
 						},
 					})
 				} else {
-					if (msg) {
-						uni.showModal({
-							title: '提示',
-							content: res.data.msg, //+res.data.error,
-							showCancel: false
-						})
-					}
+					// if (msg) {
+					// 	uni.showModal({
+					// 		title: '提示',
+					// 		content: res.data.msg, //+res.data.error,
+					// 		showCancel: false
+					// 	})
+					// }
 				}
 			},
 			fail: (err) => {
@@ -318,8 +318,15 @@ export const api = {
 	bindingOpenid(data) {
 		return fetch('/api/wx/getopenid', 'GET', data);
 	},
+	
+	// 打卡数据
 	signTotal(data) {
 		return fetch('/api/sign/total', 'POST', data);
+	},
+	
+	
+	addfarmers(data) {
+		return fetch('/api/farmers/addfarmers', 'POST', data);
 	}
 
 }

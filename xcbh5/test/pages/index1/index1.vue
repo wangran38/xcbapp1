@@ -83,13 +83,7 @@
 				overseasCountryId: null,
 				overseasCityId: null,
 				// marketName:'' // 市场名
-				
-				signTotal: {}
 			};
-		},
-		async onShow() {
-			let res = await api.signTotal({})
-			this.signTotal = res.data
 		},
 		computed: {
 			displayArray() {
@@ -482,7 +476,6 @@
 	.dishes {
 		display: flex;
 		flex-direction: column;
-		/* margin-top: 20rpx; */
 		margin-bottom: 180rpx;
 	}
 	
@@ -492,6 +485,7 @@
 		font-weight: 600;
 	}
 	.me-container {
+		overflow-x: hidden;
 		height: 100vh;
 		width: 100%;
 		box-sizing: border-box;

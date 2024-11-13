@@ -583,7 +583,6 @@
 		font-weight: 600;
 	}
 
-	/* 未完成 */
 	.total {
 		
 		height: 100rpx;

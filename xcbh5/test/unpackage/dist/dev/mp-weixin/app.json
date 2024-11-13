@@ -34,7 +34,9 @@
     "pages/bankCard/bankCard",
     "pages/addCard/addCard",
     "pages/onlineBooth/onlineBooth",
-    "pages/updatePwd/updatePwd"
+    "pages/updatePwd/updatePwd",
+    "pages/boothOwner/boothOwner",
+    "pages/aHouseholder/aHouseholder"
   ],
   "subPackages": [],
   "window": {

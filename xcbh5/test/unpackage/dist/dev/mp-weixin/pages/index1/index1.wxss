@@ -4,8 +4,6 @@
 	text-align: center;
 	color: black;
 }
-
-
 .notice {
 	margin-top: 20rpx;
 	width: 100%;
@@ -56,7 +54,6 @@
 .dishes {
 	display: flex;
 	flex-direction: column;
-	/* margin-top: 20rpx; */
 	margin-bottom: 180rpx;
 }
 .dishes>text {
@@ -65,8 +62,8 @@
 	font-weight: 600;
 }
 .me-container {
+	overflow-x: hidden;
 	height: 100vh;
-	/* overflow: hidden; */
 	width: 100%;
 	box-sizing: border-box;
 	padding: 0rpx 40rpx 0 40rpx;
@@ -75,7 +72,6 @@
 	background-color: #f8f8f8;
 	display: flex;
 	flex-direction: column;
-	/* justify-content: center; */
 	align-items: center;
 	position: relative;
 }

@@ -10811,7 +10811,136 @@ module.exports = index_cjs;
 
 /***/ }),
 
-/***/ 341:
+/***/ 35:
+/*!*******************************************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
+var r = function r(_r) {
+    return function (r) {
+      return !!r && "object" == (0, _typeof2.default)(r);
+    }(_r) && !function (r) {
+      var t = Object.prototype.toString.call(r);
+      return "[object RegExp]" === t || "[object Date]" === t || function (r) {
+        return r.$$typeof === e;
+      }(r);
+    }(_r);
+  },
+  e = "function" == typeof Symbol && Symbol.for ? Symbol.for("react.element") : 60103;
+function t(r, e) {
+  return !1 !== e.clone && e.isMergeableObject(r) ? u(Array.isArray(r) ? [] : {}, r, e) : r;
+}
+function n(r, e, n) {
+  return r.concat(e).map(function (r) {
+    return t(r, n);
+  });
+}
+function o(r) {
+  return Object.keys(r).concat(function (r) {
+    return Object.getOwnPropertySymbols ? Object.getOwnPropertySymbols(r).filter(function (e) {
+      return r.propertyIsEnumerable(e);
+    }) : [];
+  }(r));
+}
+function c(r, e) {
+  try {
+    return e in r;
+  } catch (r) {
+    return !1;
+  }
+}
+function u(e, i, a) {
+  (a = a || {}).arrayMerge = a.arrayMerge || n, a.isMergeableObject = a.isMergeableObject || r, a.cloneUnlessOtherwiseSpecified = t;
+  var f = Array.isArray(i);
+  return f === Array.isArray(e) ? f ? a.arrayMerge(e, i, a) : function (r, e, n) {
+    var i = {};
+    return n.isMergeableObject(r) && o(r).forEach(function (e) {
+      i[e] = t(r[e], n);
+    }), o(e).forEach(function (o) {
+      (function (r, e) {
+        return c(r, e) && !(Object.hasOwnProperty.call(r, e) && Object.propertyIsEnumerable.call(r, e));
+      })(r, o) || (i[o] = c(r, o) && n.isMergeableObject(e[o]) ? function (r, e) {
+        if (!e.customMerge) return u;
+        var t = e.customMerge(r);
+        return "function" == typeof t ? t : u;
+      }(o, n)(r[o], e[o], n) : t(e[o], n));
+    }), i;
+  }(e, i, a) : t(i, a);
+}
+u.all = function (r, e) {
+  if (!Array.isArray(r)) throw new Error("first argument should be an array");
+  return r.reduce(function (r, t) {
+    return u(r, t, e);
+  }, {});
+};
+var i = u;
+function a(r) {
+  var e = (r = r || {}).storage || window && window.localStorage,
+    t = r.key || "vuex";
+  function n(r, e) {
+    var t = e.getItem(r);
+    try {
+      return "string" == typeof t ? JSON.parse(t) : "object" == (0, _typeof2.default)(t) ? t : void 0;
+    } catch (r) {}
+  }
+  function o() {
+    return !0;
+  }
+  function c(r, e, t) {
+    return t.setItem(r, JSON.stringify(e));
+  }
+  function u(r, e) {
+    return Array.isArray(e) ? e.reduce(function (e, t) {
+      return function (r, e, t, n) {
+        return !/^(__proto__|constructor|prototype)$/.test(e) && ((e = e.split ? e.split(".") : e.slice(0)).slice(0, -1).reduce(function (r, e) {
+          return r[e] = r[e] || {};
+        }, r)[e.pop()] = t), r;
+      }(e, t, (n = r, void 0 === (n = ((o = t).split ? o.split(".") : o).reduce(function (r, e) {
+        return r && r[e];
+      }, n)) ? void 0 : n));
+      var n, o;
+    }, {}) : r;
+  }
+  function a(r) {
+    return function (e) {
+      return r.subscribe(e);
+    };
+  }
+  (r.assertStorage || function () {
+    e.setItem("@@", 1), e.removeItem("@@");
+  })(e);
+  var f,
+    s = function s() {
+      return (r.getState || n)(t, e);
+    };
+  return r.fetchBeforeUse && (f = s()), function (n) {
+    r.fetchBeforeUse || (f = s()), "object" == (0, _typeof2.default)(f) && null !== f && (n.replaceState(r.overwrite ? f : i(n.state, f, {
+      arrayMerge: r.arrayMerger || function (r, e) {
+        return e;
+      },
+      clone: !1
+    })), (r.rehydrated || function () {})(n)), (r.subscriber || a)(n)(function (n, i) {
+      (r.filter || o)(n) && (r.setState || c)(t, (r.reducer || u)(i, r.paths), e);
+    });
+  };
+}
+var _default = a;
+exports.default = _default;
+
+/***/ }),
+
+/***/ 355:
 /*!*******************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-icons/components/uni-icons/uniicons_file_vue.js ***!
   \*******************************************************************************************/
@@ -11315,7 +11444,140 @@ exports.fontData = fontData;
 
 /***/ }),
 
-/***/ 349:
+/***/ 36:
+/*!*************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/store/modules/cart.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+var _decimal = _interopRequireDefault(__webpack_require__(/*! decimal */ 37));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+var state = {
+  carts: []
+};
+var mutations = {
+  // 数量加1
+  addItem: function addItem(state, item) {
+    // 查找购物车中是否存在该商品
+    var index = state.carts.findIndex(function (i) {
+      return i.id === item.id;
+    });
+    if (index !== -1) {
+      // 不等于-1就相当于存在，就商品数量就自增1
+      state.carts[index].tempCount = new _decimal.default(state.carts[index].tempCount).add(new _decimal.default(1)).toNumber();
+      // state.carts[index].tempCount += 1;
+    } else {
+      // 不存在就新增
+      state.carts.push(_objectSpread(_objectSpread({}, item), {}, {
+        tempCount: 1
+      }));
+    }
+  },
+  // 数量减一
+  subItem: function subItem(state, item) {
+    var index = state.carts.findIndex(function (i) {
+      return i.id === item.id;
+    });
+    if (index !== -1) {
+      // 检查购物车里是否有订单
+
+      // 大于1就减掉1
+      if (state.carts[index].tempCount > 1) {
+        state.carts[index].tempCount = new _decimal.default(state.carts[index].tempCount).sub(new _decimal.default(1)).toNumber();
+        // state.carts[index].tempCount -= 1;
+      } else {
+        // 删除数组项
+        state.carts.splice(index, 1);
+      }
+    }
+  },
+  // 清空购物车
+  clearCart: function clearCart(state) {
+    console.log('clearCart mutation triggered');
+    state.carts = [];
+  },
+  //  任意输入数量
+  anyNumber: function anyNumber(state, item) {
+    var index = state.carts.findIndex(function (i) {
+      return i.id === item.id;
+    });
+    // 不等于-1就相当于存在，就商品数量就修改数量
+    if (index !== -1) {
+      // 如果输入数量小于0.1就删除数组
+      if (item.count < 0.1) {
+        state.carts.splice(index, 1);
+      } else {
+        state.carts[index].tempCount = item.count;
+      }
+    } else {
+      // 数量要大于0.1才能push进去
+      if (item.count >= 0.1) {
+        // 反之不存在就新增
+        state.carts.push(_objectSpread(_objectSpread({}, item), {}, {
+          tempCount: item.count
+        }));
+      }
+    }
+  }
+};
+var getters = {
+  cartTotalByShopId: function cartTotalByShopId(state) {
+    return function (shopId) {
+      // return shopId ? state.carts.filter(i => i.shop_id == shopId).reduce((sum, item) => sum + item.tempCount * item.price, 0) :  state.carts.reduce((sum, item) => sum + item.tempCount * item.price, 0);
+      return shopId ? state.carts.filter(function (i) {
+        return i.shop_id == shopId;
+      }).reduce(function (sum, item) {
+        return new _decimal.default(item.price).mul(item.tempCount).add(sum).toNumber();
+      }, 0).toFixed(1) : state.carts.reduce(function (sum, item) {
+        return sum + new _decimal.default(item.price).mul(item.tempCount).add(sum).toNumber();
+      }, 0);
+    };
+  },
+  getTempCount: function getTempCount(state) {
+    return function (id) {
+      var item = state.carts.find(function (i) {
+        return i.id === id;
+      });
+      return item ? item.tempCount : 0;
+    };
+  },
+  cartsLengthByShopId: function cartsLengthByShopId(state) {
+    return function (shopId) {
+      return shopId ? state.carts.filter(function (i) {
+        return i.shop_id == shopId;
+      }).length : state.carts.length || 0;
+    };
+  },
+  getCartsByShopId: function getCartsByShopId(state) {
+    return function (shopId) {
+      return shopId ? state.carts.filter(function (i) {
+        return i.shop_id == shopId;
+      }) : state.carts;
+    };
+  }
+};
+var _default = {
+  namespaced: true,
+  state: state,
+  mutations: mutations,
+  getters: getters
+};
+exports.default = _default;
+
+/***/ }),
+
+/***/ 363:
 /*!**********************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-forms/components/uni-forms/validate.js ***!
   \**********************************************************************************/
@@ -11331,9 +11593,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 46));
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 350));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 351));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 353));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 364));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 365));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 367));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 48));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
@@ -12007,136 +12269,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 35:
-/*!*******************************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js ***!
-  \*******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
-var r = function r(_r) {
-    return function (r) {
-      return !!r && "object" == (0, _typeof2.default)(r);
-    }(_r) && !function (r) {
-      var t = Object.prototype.toString.call(r);
-      return "[object RegExp]" === t || "[object Date]" === t || function (r) {
-        return r.$$typeof === e;
-      }(r);
-    }(_r);
-  },
-  e = "function" == typeof Symbol && Symbol.for ? Symbol.for("react.element") : 60103;
-function t(r, e) {
-  return !1 !== e.clone && e.isMergeableObject(r) ? u(Array.isArray(r) ? [] : {}, r, e) : r;
-}
-function n(r, e, n) {
-  return r.concat(e).map(function (r) {
-    return t(r, n);
-  });
-}
-function o(r) {
-  return Object.keys(r).concat(function (r) {
-    return Object.getOwnPropertySymbols ? Object.getOwnPropertySymbols(r).filter(function (e) {
-      return r.propertyIsEnumerable(e);
-    }) : [];
-  }(r));
-}
-function c(r, e) {
-  try {
-    return e in r;
-  } catch (r) {
-    return !1;
-  }
-}
-function u(e, i, a) {
-  (a = a || {}).arrayMerge = a.arrayMerge || n, a.isMergeableObject = a.isMergeableObject || r, a.cloneUnlessOtherwiseSpecified = t;
-  var f = Array.isArray(i);
-  return f === Array.isArray(e) ? f ? a.arrayMerge(e, i, a) : function (r, e, n) {
-    var i = {};
-    return n.isMergeableObject(r) && o(r).forEach(function (e) {
-      i[e] = t(r[e], n);
-    }), o(e).forEach(function (o) {
-      (function (r, e) {
-        return c(r, e) && !(Object.hasOwnProperty.call(r, e) && Object.propertyIsEnumerable.call(r, e));
-      })(r, o) || (i[o] = c(r, o) && n.isMergeableObject(e[o]) ? function (r, e) {
-        if (!e.customMerge) return u;
-        var t = e.customMerge(r);
-        return "function" == typeof t ? t : u;
-      }(o, n)(r[o], e[o], n) : t(e[o], n));
-    }), i;
-  }(e, i, a) : t(i, a);
-}
-u.all = function (r, e) {
-  if (!Array.isArray(r)) throw new Error("first argument should be an array");
-  return r.reduce(function (r, t) {
-    return u(r, t, e);
-  }, {});
-};
-var i = u;
-function a(r) {
-  var e = (r = r || {}).storage || window && window.localStorage,
-    t = r.key || "vuex";
-  function n(r, e) {
-    var t = e.getItem(r);
-    try {
-      return "string" == typeof t ? JSON.parse(t) : "object" == (0, _typeof2.default)(t) ? t : void 0;
-    } catch (r) {}
-  }
-  function o() {
-    return !0;
-  }
-  function c(r, e, t) {
-    return t.setItem(r, JSON.stringify(e));
-  }
-  function u(r, e) {
-    return Array.isArray(e) ? e.reduce(function (e, t) {
-      return function (r, e, t, n) {
-        return !/^(__proto__|constructor|prototype)$/.test(e) && ((e = e.split ? e.split(".") : e.slice(0)).slice(0, -1).reduce(function (r, e) {
-          return r[e] = r[e] || {};
-        }, r)[e.pop()] = t), r;
-      }(e, t, (n = r, void 0 === (n = ((o = t).split ? o.split(".") : o).reduce(function (r, e) {
-        return r && r[e];
-      }, n)) ? void 0 : n));
-      var n, o;
-    }, {}) : r;
-  }
-  function a(r) {
-    return function (e) {
-      return r.subscribe(e);
-    };
-  }
-  (r.assertStorage || function () {
-    e.setItem("@@", 1), e.removeItem("@@");
-  })(e);
-  var f,
-    s = function s() {
-      return (r.getState || n)(t, e);
-    };
-  return r.fetchBeforeUse && (f = s()), function (n) {
-    r.fetchBeforeUse || (f = s()), "object" == (0, _typeof2.default)(f) && null !== f && (n.replaceState(r.overwrite ? f : i(n.state, f, {
-      arrayMerge: r.arrayMerger || function (r, e) {
-        return e;
-      },
-      clone: !1
-    })), (r.rehydrated || function () {})(n)), (r.subscriber || a)(n)(function (n, i) {
-      (r.filter || o)(n) && (r.setState || c)(t, (r.reducer || u)(i, r.paths), e);
-    });
-  };
-}
-var _default = a;
-exports.default = _default;
-
-/***/ }),
-
-/***/ 350:
+/***/ 364:
 /*!*********************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/inherits.js ***!
   \*********************************************************/
@@ -12164,7 +12297,7 @@ module.exports = _inherits, module.exports.__esModule = true, module.exports["de
 
 /***/ }),
 
-/***/ 351:
+/***/ 365:
 /*!**************************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
   \**************************************************************************/
@@ -12172,7 +12305,7 @@ module.exports = _inherits, module.exports.__esModule = true, module.exports["de
 /***/ (function(module, exports, __webpack_require__) {
 
 var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
-var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized.js */ 352);
+var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized.js */ 366);
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
     return call;
@@ -12185,7 +12318,7 @@ module.exports = _possibleConstructorReturn, module.exports.__esModule = true, m
 
 /***/ }),
 
-/***/ 352:
+/***/ 366:
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
   \**********************************************************************/
@@ -12202,7 +12335,7 @@ module.exports = _assertThisInitialized, module.exports.__esModule = true, modul
 
 /***/ }),
 
-/***/ 353:
+/***/ 367:
 /*!***************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
   \***************************************************************/
@@ -12219,7 +12352,7 @@ module.exports = _getPrototypeOf, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
-/***/ 354:
+/***/ 368:
 /*!*******************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-forms/components/uni-forms/utils.js ***!
   \*******************************************************************************/
@@ -12555,139 +12688,6 @@ exports.isEqual = isEqual;
 
 /***/ }),
 
-/***/ 36:
-/*!*************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/store/modules/cart.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var _decimal = _interopRequireDefault(__webpack_require__(/*! decimal */ 37));
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-var state = {
-  carts: []
-};
-var mutations = {
-  // 数量加1
-  addItem: function addItem(state, item) {
-    // 查找购物车中是否存在该商品
-    var index = state.carts.findIndex(function (i) {
-      return i.id === item.id;
-    });
-    if (index !== -1) {
-      // 不等于-1就相当于存在，就商品数量就自增1
-      state.carts[index].tempCount = new _decimal.default(state.carts[index].tempCount).add(new _decimal.default(1)).toNumber();
-      // state.carts[index].tempCount += 1;
-    } else {
-      // 不存在就新增
-      state.carts.push(_objectSpread(_objectSpread({}, item), {}, {
-        tempCount: 1
-      }));
-    }
-  },
-  // 数量减一
-  subItem: function subItem(state, item) {
-    var index = state.carts.findIndex(function (i) {
-      return i.id === item.id;
-    });
-    if (index !== -1) {
-      // 检查购物车里是否有订单
-
-      // 大于1就减掉1
-      if (state.carts[index].tempCount > 1) {
-        state.carts[index].tempCount = new _decimal.default(state.carts[index].tempCount).sub(new _decimal.default(1)).toNumber();
-        // state.carts[index].tempCount -= 1;
-      } else {
-        // 删除数组项
-        state.carts.splice(index, 1);
-      }
-    }
-  },
-  // 清空购物车
-  clearCart: function clearCart(state) {
-    console.log('clearCart mutation triggered');
-    state.carts = [];
-  },
-  //  任意输入数量
-  anyNumber: function anyNumber(state, item) {
-    var index = state.carts.findIndex(function (i) {
-      return i.id === item.id;
-    });
-    // 不等于-1就相当于存在，就商品数量就修改数量
-    if (index !== -1) {
-      // 如果输入数量小于0.1就删除数组
-      if (item.count < 0.1) {
-        state.carts.splice(index, 1);
-      } else {
-        state.carts[index].tempCount = item.count;
-      }
-    } else {
-      // 数量要大于0.1才能push进去
-      if (item.count >= 0.1) {
-        // 反之不存在就新增
-        state.carts.push(_objectSpread(_objectSpread({}, item), {}, {
-          tempCount: item.count
-        }));
-      }
-    }
-  }
-};
-var getters = {
-  cartTotalByShopId: function cartTotalByShopId(state) {
-    return function (shopId) {
-      // return shopId ? state.carts.filter(i => i.shop_id == shopId).reduce((sum, item) => sum + item.tempCount * item.price, 0) :  state.carts.reduce((sum, item) => sum + item.tempCount * item.price, 0);
-      return shopId ? state.carts.filter(function (i) {
-        return i.shop_id == shopId;
-      }).reduce(function (sum, item) {
-        return new _decimal.default(item.price).mul(item.tempCount).add(sum).toNumber();
-      }, 0).toFixed(1) : state.carts.reduce(function (sum, item) {
-        return sum + new _decimal.default(item.price).mul(item.tempCount).add(sum).toNumber();
-      }, 0);
-    };
-  },
-  getTempCount: function getTempCount(state) {
-    return function (id) {
-      var item = state.carts.find(function (i) {
-        return i.id === id;
-      });
-      return item ? item.tempCount : 0;
-    };
-  },
-  cartsLengthByShopId: function cartsLengthByShopId(state) {
-    return function (shopId) {
-      return shopId ? state.carts.filter(function (i) {
-        return i.shop_id == shopId;
-      }).length : state.carts.length || 0;
-    };
-  },
-  getCartsByShopId: function getCartsByShopId(state) {
-    return function (shopId) {
-      return shopId ? state.carts.filter(function (i) {
-        return i.shop_id == shopId;
-      }) : state.carts;
-    };
-  }
-};
-var _default = {
-  namespaced: true,
-  state: state,
-  mutations: mutations,
-  getters: getters
-};
-exports.default = _default;
-
-/***/ }),
-
 /***/ 37:
 /*!***************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/node_modules/decimal/lib/decimal.js ***!
@@ -12846,7 +12846,117 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 /***/ }),
 
-/***/ 376:
+/***/ 38:
+/*!*****************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/store/modules/location.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var state = {
+  selectStatus: false // 菜市场是否更新
+};
+
+var mutations = {
+  setStatus: function setStatus() {
+    state.selectStatus = !state.selectStatus;
+  }
+};
+var _default = {
+  namespaced: true,
+  state: state,
+  mutations: mutations
+};
+exports.default = _default;
+
+/***/ }),
+
+/***/ 39:
+/*!******************************************!*\
+  !*** E:/xcbh5/xcbh5/test/utils/Share.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  data: function data() {
+    return {
+      shareParams: {
+        path: '/pages/index/index',
+        title: '分享给朋友',
+        imageUrl: '',
+        desc: '',
+        content: ''
+      }
+    };
+  },
+  //分享给朋友
+  onShareAppMessage: function onShareAppMessage(res) {
+    return {
+      title: this.shareParams.title,
+      // 标题
+      path: this.shareParams.path,
+      // 分享路径
+      imageUrl: this.shareParams.imageUrl,
+      // 分享图
+      desc: this.shareParams.desc,
+      content: this.shareParams.content,
+      success: function success(res) {
+        uni.showToast({
+          title: '分享成功'
+        });
+      },
+      fail: function fail(res) {
+        uni.showToast({
+          title: '分享失败',
+          icon: 'none'
+        });
+      }
+    };
+  },
+  //分享到朋友圈
+  onShareTimeline: function onShareTimeline(res) {
+    return {
+      title: this.shareParams.title,
+      // 标题
+      path: this.shareParams.path,
+      // 分享路径
+      imageUrl: this.shareParams.imageUrl,
+      // 分享图
+      success: function success(res) {
+        uni.showToast({
+          title: '分享成功'
+        });
+      },
+      fail: function fail(res) {
+        uni.showToast({
+          title: '分享失败',
+          icon: 'none'
+        });
+      }
+    };
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+
+/***/ 390:
 /*!***********************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/node_modules/@dcloudio/uni-ui/lib/uni-forms/validate.js ***!
   \***********************************************************************************/
@@ -12862,9 +12972,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 46));
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 350));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 351));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 353));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 364));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 365));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 367));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 48));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
@@ -13538,7 +13648,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 377:
+/***/ 391:
 /*!********************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/node_modules/@dcloudio/uni-ui/lib/uni-forms/utils.js ***!
   \********************************************************************************/
@@ -13874,116 +13984,6 @@ exports.isEqual = isEqual;
 
 /***/ }),
 
-/***/ 38:
-/*!*****************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/store/modules/location.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var state = {
-  selectStatus: false // 菜市场是否更新
-};
-
-var mutations = {
-  setStatus: function setStatus() {
-    state.selectStatus = !state.selectStatus;
-  }
-};
-var _default = {
-  namespaced: true,
-  state: state,
-  mutations: mutations
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 39:
-/*!******************************************!*\
-  !*** E:/xcbh5/xcbh5/test/utils/Share.js ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  data: function data() {
-    return {
-      shareParams: {
-        path: '/pages/index/index',
-        title: '分享给朋友',
-        imageUrl: '',
-        desc: '',
-        content: ''
-      }
-    };
-  },
-  //分享给朋友
-  onShareAppMessage: function onShareAppMessage(res) {
-    return {
-      title: this.shareParams.title,
-      // 标题
-      path: this.shareParams.path,
-      // 分享路径
-      imageUrl: this.shareParams.imageUrl,
-      // 分享图
-      desc: this.shareParams.desc,
-      content: this.shareParams.content,
-      success: function success(res) {
-        uni.showToast({
-          title: '分享成功'
-        });
-      },
-      fail: function fail(res) {
-        uni.showToast({
-          title: '分享失败',
-          icon: 'none'
-        });
-      }
-    };
-  },
-  //分享到朋友圈
-  onShareTimeline: function onShareTimeline(res) {
-    return {
-      title: this.shareParams.title,
-      // 标题
-      path: this.shareParams.path,
-      // 分享路径
-      imageUrl: this.shareParams.imageUrl,
-      // 分享图
-      success: function success(res) {
-        uni.showToast({
-          title: '分享成功'
-        });
-      },
-      fail: function fail(res) {
-        uni.showToast({
-          title: '分享失败',
-          icon: 'none'
-        });
-      }
-    };
-  }
-};
-exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-
 /***/ 4:
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
@@ -14011,6 +14011,141 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
 
 var runtime = __webpack_require__(/*! @babel/runtime/helpers/regeneratorRuntime */ 47)();
 module.exports = runtime;
+
+/***/ }),
+
+/***/ 469:
+/*!***************************************************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-transition/components/uni-transition/createAnimation.js ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createAnimation = createAnimation;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+// const defaultOption = {
+// 	duration: 300,
+// 	timingFunction: 'linear',
+// 	delay: 0,
+// 	transformOrigin: '50% 50% 0'
+// }
+var MPAnimation = /*#__PURE__*/function () {
+  function MPAnimation(options, _this) {
+    (0, _classCallCheck2.default)(this, MPAnimation);
+    this.options = options;
+    // 在iOS10+QQ小程序平台下，传给原生的对象一定是个普通对象而不是Proxy对象，否则会报parameter should be Object instead of ProxyObject的错误
+    this.animation = uni.createAnimation(_objectSpread({}, options));
+    this.currentStepAnimates = {};
+    this.next = 0;
+    this.$ = _this;
+  }
+  (0, _createClass2.default)(MPAnimation, [{
+    key: "_nvuePushAnimates",
+    value: function _nvuePushAnimates(type, args) {
+      var aniObj = this.currentStepAnimates[this.next];
+      var styles = {};
+      if (!aniObj) {
+        styles = {
+          styles: {},
+          config: {}
+        };
+      } else {
+        styles = aniObj;
+      }
+      if (animateTypes1.includes(type)) {
+        if (!styles.styles.transform) {
+          styles.styles.transform = '';
+        }
+        var unit = '';
+        if (type === 'rotate') {
+          unit = 'deg';
+        }
+        styles.styles.transform += "".concat(type, "(").concat(args + unit, ") ");
+      } else {
+        styles.styles[type] = "".concat(args);
+      }
+      this.currentStepAnimates[this.next] = styles;
+    }
+  }, {
+    key: "_animateRun",
+    value: function _animateRun() {
+      var styles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var ref = this.$.$refs['ani'].ref;
+      if (!ref) return;
+      return new Promise(function (resolve, reject) {
+        nvueAnimation.transition(ref, _objectSpread({
+          styles: styles
+        }, config), function (res) {
+          resolve();
+        });
+      });
+    }
+  }, {
+    key: "_nvueNextAnimate",
+    value: function _nvueNextAnimate(animates) {
+      var _this2 = this;
+      var step = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var fn = arguments.length > 2 ? arguments[2] : undefined;
+      var obj = animates[step];
+      if (obj) {
+        var styles = obj.styles,
+          config = obj.config;
+        this._animateRun(styles, config).then(function () {
+          step += 1;
+          _this2._nvueNextAnimate(animates, step, fn);
+        });
+      } else {
+        this.currentStepAnimates = {};
+        typeof fn === 'function' && fn();
+        this.isEnd = true;
+      }
+    }
+  }, {
+    key: "step",
+    value: function step() {
+      var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      this.animation.step(config);
+      return this;
+    }
+  }, {
+    key: "run",
+    value: function run(fn) {
+      this.$.animationData = this.animation.export();
+      this.$.timer = setTimeout(function () {
+        typeof fn === 'function' && fn();
+      }, this.$.durationTime);
+    }
+  }]);
+  return MPAnimation;
+}();
+var animateTypes1 = ['matrix', 'matrix3d', 'rotate', 'rotate3d', 'rotateX', 'rotateY', 'rotateZ', 'scale', 'scale3d', 'scaleX', 'scaleY', 'scaleZ', 'skew', 'skewX', 'skewY', 'translate', 'translate3d', 'translateX', 'translateY', 'translateZ'];
+var animateTypes2 = ['opacity', 'backgroundColor'];
+var animateTypes3 = ['width', 'height', 'left', 'right', 'top', 'bottom'];
+animateTypes1.concat(animateTypes2, animateTypes3).forEach(function (type) {
+  MPAnimation.prototype[type] = function () {
+    var _this$animation;
+    (_this$animation = this.animation)[type].apply(_this$animation, arguments);
+    return this;
+  };
+});
+function createAnimation(option, _this) {
+  if (!_this) return;
+  clearTimeout(_this.timer);
+  return new MPAnimation(option, _this);
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 
@@ -14468,14 +14603,13 @@ var fetch = function fetch(url, method) {
             }
           });
         } else {
-          if (msg) {
-            uni.showModal({
-              title: '提示',
-              content: res.data.msg,
-              //+res.data.error,
-              showCancel: false
-            });
-          }
+          // if (msg) {
+          // 	uni.showModal({
+          // 		title: '提示',
+          // 		content: res.data.msg, //+res.data.error,
+          // 		showCancel: false
+          // 	})
+          // }
         }
       },
       fail: function fail(err) {
@@ -14691,6 +14825,8 @@ var api = (_api = {
   return fetch('/api/wx/getopenid', 'GET', data);
 }), (0, _defineProperty2.default)(_api, "signTotal", function signTotal(data) {
   return fetch('/api/sign/total', 'POST', data);
+}), (0, _defineProperty2.default)(_api, "addfarmers", function addfarmers(data) {
+  return fetch('/api/farmers/addfarmers', 'POST', data);
 }), _api);
 exports.api = api;
 var _default = {

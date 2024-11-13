@@ -21,7 +21,7 @@
 					<view class="count1" @click.stop="showInput" :catchtouchmove="null">
 						<text v-if="!show">{{getTempCount(item.id)}}</text>
 						<textarea :adjust-position="false" v-if="show" v-model="count" @blur="overInput"
-							:auto-height="false" fixed class="input" :focus="show" @input="changeTextarea"></textarea>
+							:auto-height="false" fixed class="input" :focus="show" @input="changeTextarea" adjust-position="true"></textarea>
 					</view>
 					<view class="btn2" @click="add">+</view>
 				</view>
@@ -36,7 +36,7 @@
 		mapMutations,
 		mapGetters
 	} from 'vuex';
-
+	import inputBoxVue from './inputBox.vue'
 	export default {
 		name: "menuBarVue",
 		data() {
@@ -44,6 +44,9 @@
 				show: false,
 				count: ''
 			};
+		},
+		components:{
+			inputBoxVue
 		},
 		// mounted() {
 		// 	this.count = this.getTempCount(this.item.id)

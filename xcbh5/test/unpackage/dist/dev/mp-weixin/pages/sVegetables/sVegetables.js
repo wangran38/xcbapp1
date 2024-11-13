@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 336))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 350))
     },
   }
 } catch (e) {
@@ -185,208 +185,47 @@ exports.default = void 0;
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _default = {
   data: function data() {
     return {};
   },
-  onShow: function onShow() {
-    if (this.checkToken()) {
-      uni.navigateTo({
-        url: '/pages/login/login'
-      });
-    }
-  },
   methods: {
+    // 跳转至我的摊主
+    goToBoothOwner: function goToBoothOwner() {
+      if (this.checkToken()) {
+        uni.showModal({
+          showCancel: false,
+          content: '暂未登录,请前往登录',
+          success: function success() {
+            uni.navigateTo({
+              url: '/pages/login/login'
+            });
+          }
+        });
+      } else {
+        uni.navigateTo({
+          url: '/pages/boothOwner/boothOwner'
+        });
+      }
+    },
+    // 跳转至我的户主
+    goToAhouseholder: function goToAhouseholder() {
+      if (this.checkToken()) {
+        uni.showModal({
+          showCancel: false,
+          content: '暂未登录,请前往登录',
+          success: function success() {
+            uni.navigateTo({
+              url: '/pages/login/login'
+            });
+          }
+        });
+      } else {
+        uni.navigateTo({
+          url: '/pages/aHouseholder/aHouseholder'
+        });
+      }
+    },
     // 检查是否token存在，存在则已登陆
     checkToken: function checkToken() {
       var token = uni.getStorageSync('token');
@@ -394,68 +233,6 @@ var _default = {
         return true;
       }
       return false;
-    },
-    gotopublish: function gotopublish() {
-      uni.navigateTo({
-        url: '/pages/publish/publish'
-      });
-    },
-    goTorelePage: function goTorelePage() {
-      uni.navigateTo({
-        url: '/pages/release/release'
-      });
-    },
-    goToapply: function goToapply() {
-      uni.navigateTo({
-        url: '/pages/Apply/Apply'
-      });
-    },
-    goToOnlineBooth: function goToOnlineBooth() {
-      uni.navigateTo({
-        url: '/pages/onlineBooth/onlineBooth'
-      });
-    },
-    gotostalllist: function gotostalllist() {
-      uni.navigateTo({
-        url: '/pages/stalllist/stalllist'
-      });
-    },
-    gotoListDis: function gotoListDis() {
-      uni.navigateTo({
-        url: '/pages/Listed-Dishes/Listed-Dishes'
-      });
-    },
-    gotoOwneroders: function gotoOwneroders(orderStatus) {
-      uni.navigateTo({
-        url: "/pages/Ownerorders/Ownerorders?orderStatus=".concat(orderStatus)
-      });
-    },
-    gotowallet: function gotowallet() {
-      uni.navigateTo({
-        url: '/pages/wallet/wallet'
-      });
-    },
-    gotoPoints: function gotoPoints() {
-      uni.navigateTo({
-        url: '/pages/Points/Points'
-      });
-    },
-    gotoPointspayouts: function gotoPointspayouts() {
-      uni.navigateTo({
-        url: '/pages/pointspayouts/pointspayouts'
-      });
-    },
-    // 补充摊位资料页面
-    gotoEditshop: function gotoEditshop() {
-      uni.navigateTo({
-        url: '/pages/editshop/editshop'
-      });
-    },
-    // 银行卡
-    gotoBankCard: function gotoBankCard() {
-      uni.navigateTo({
-        url: '/pages/bankCard/bankCard'
-      });
     }
   }
 };

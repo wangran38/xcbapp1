@@ -1,214 +1,24 @@
 <template>
-	<view class="me-container">
-		<view class="outlets">
-			<view class="title">
-				我的摊铺
-			</view>
-			<view class="content">
-				<view class="item" @click="goToapply">
-					<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe61a'}}</uni-icons>
-					<view class="add-dishes">
-						申请固定摊位
-					</view>
+	<view class="all">
+		<view class="tip">
+			<view class="heading">请选择您的身份</view>
+			<view class="items">
+				<view class="mencheng" @click="goToBoothOwner">
+					<uni-icons type="staff-filled" size="50rpx"></uni-icons>
+					<view>我是摊主</view>
 				</view>
-				<view class="item" @click="goToOnlineBooth">
-					<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe601;'}}</uni-icons>
-					<view class="add-dishes">
-						申请网络摊位
-					</view>
+				<view class="mencheng" @click="goToAhouseholder">
+					<uni-icons type="person-filled" size="50rpx"></uni-icons>
+					<view>我是户主</view>
 				</view>
-				<view class="item" @click="gotostalllist">
-					<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe602;'}}</uni-icons>
-					<view class="add-dishes">
-						摊位列表
-					</view>
-				</view>
-
-				<view class="item" @click="gotoEditshop">
-					<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe61e;'}}</uni-icons>
-					<view class="add-dishes">
-						摊位资料补充
-					</view>
-				</view>
-				<!-- <view class="item">
-					<uni-icons type="plus" size="30"></uni-icons>
-					<view class="add-dishes">
-						待开发
-					</view>
-				</view>
-				<view class="item">
-					<uni-icons type="plus" size="30"></uni-icons>
-					<view class="add-dishes">
-						待开发
-					</view>
-				</view>
-				<view class="item">
-					<uni-icons type="plus" size="30"></uni-icons>
-					<view class="add-dishes">
-						待开发
-					</view>
-				</view>
-				<view class="item">
-					<uni-icons type="plus" size="30"></uni-icons>
-					<view class="add-dishes">
-						待开发
-					</view>
-				</view> -->
 			</view>
 		</view>
-		<view class="dishes">
-			<view class="title">
-				我的菜品
-			</view>
-			<view class="content">
-				<view class="item" @click="goTorelePage">
-					<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe6ee;'}}</uni-icons>
-					<view class="add-dishes">
-						添加菜品
-					</view>
-				</view>
-				<view class="item" @click="gotopublish">
-					<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe603;'}}</uni-icons>
-					<view class="add-dishes">
-						菜品列表
-					</view>
-				</view>
-				<view class="item" @click="gotoListDis">
-					<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe689;'}}</uni-icons>
-					<view class="add-dishes">
-						已上架菜品
-					</view>
-				</view>
-				<!-- <view class="item">
-					<uni-icons type="plus" size="30"></uni-icons>
-					<view class="add-dishes">
-						菜品朋友圈
-					</view>
-				</view> -->
-				<!-- <view class="item">
-					<uni-icons type="plus" size="30"></uni-icons>
-					<view class="add-dishes">
-						待开发
-					</view>
-				</view>
-				<view class="item">
-					<uni-icons type="plus" size="30"></uni-icons>
-					<view class="add-dishes">
-						待开发
-					</view>
-				</view> -->
-			</view>
-
-		</view>
-
-		<view class="orders">
-			<view class="title" @click="gotoOwneroders(0)">
-				我的订单
-			</view>
-			<view class="content">
-				<view class="item" @click="gotoOwneroders(1)">
-					<uni-icons fontFamily="CustomFont" :size="26" color="red">{{'&#xe626;'}}</uni-icons>
-					<view class="add-dishes">
-						待支付
-					</view>
-				</view>
-				<view class="item" @click="gotoOwneroders(3)">
-					<uni-icons fontFamily="CustomFont" :size="26" color="red">{{'&#xe600;'}}</uni-icons>
-					<view class="add-dishes">
-						待收货
-					</view>
-				</view>
-				<view class="item" @click="gotoOwneroders(5)">
-					<uni-icons fontFamily="CustomFont" :size="26" color="red">{{'&#xe689;'}}</uni-icons>
-					<view class="add-dishes">
-						待结算
-					</view>
-				</view>
-				<view class="item" @click="gotoOwneroders(6)">
-					<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe60f;'}}</uni-icons>
-					<view class="add-dishes">
-						已结算
-					</view>
-				</view>
-				<!-- <view class="item">
-					<uni-icons type="plus" size="30"></uni-icons>
-					<view class="add-dishes">
-						待开发
-					</view>
-				</view>
-				<view class="item">
-					<uni-icons type="plus" size="30"></uni-icons>
-					<view class="add-dishes">
-						待开发
-					</view>
-				</view> -->
-			</view>
-		</view>
-		<view class="earnings">
-			<view class="title">
-				我的收益
-			</view>
-			<view class="content">
-				<view class="item" @click="gotowallet">
-					<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe613;'}}</uni-icons>
-					<view class="add-dishes">
-						钱包
-					</view>
-				</view>
-				<view class="item" @click="gotoPoints">
-					<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe673;'}}</uni-icons>
-					<view class="add-dishes">
-						积分钱包
-					</view>
-				</view>
-				<view class="item" @click="gotoPointspayouts">
-					<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe682;'}}</uni-icons>
-					<view class="add-dishes">
-						积分结算
-					</view>
-				</view>
-
-				<view class="item" @click="gotoBankCard">
-					<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe936;'}}</uni-icons>
-					<view class="add-dishes">
-						银行卡
-					</view>
-				</view>
-				<!-- <view class="item">
-					<uni-icons type="plus" size="30"></uni-icons>
-					<view class="add-dishes">
-						待开发
-					</view>
-				</view>
-				<view class="item">
-					<uni-icons type="plus" size="30"></uni-icons>
-					<view class="add-dishes">
-						待开发
-					</view>
-				</view>
-				<view class="item">
-					<uni-icons type="plus" size="30"></uni-icons>
-					<view class="add-dishes">
-						待开发
-					</view>
-				</view>
-				<view class="item">
-					<uni-icons type="plus" size="30"></uni-icons>
-					<view class="add-dishes">
-						待开发
-					</view>
-				</view>
-				<view class="item">
-					<uni-icons type="plus" size="30"></uni-icons>
-					<view class="add-dishes">
-						待开发
-					</view>
-				</view> -->
-			</view>
-		</view>
+		<!-- <inputBoxVue></inputBoxVue> -->
 	</view>
+
 </template>
 
+	
 <script>
 	export default {
 		data() {
@@ -216,89 +26,93 @@
 
 			}
 		},
-		onShow() {
-			if (this.checkToken()){
-				uni.navigateTo({
-					url:'/pages/login/login'
-				})
-			}
-		},
+
 		methods: {
+			
+			// 跳转至我的摊主
+			goToBoothOwner() {
+				if (this.checkToken()) {
+					uni.showModal({
+						showCancel: false,
+						content: '暂未登录,请前往登录',
+						success: () => {
+							uni.navigateTo({
+								url: '/pages/login/login'
+							})
+						}
+					})
+				} else {
+					uni.navigateTo({
+						url: '/pages/boothOwner/boothOwner'
+					})
+				}
+
+
+			},
+			// 跳转至我的户主
+			goToAhouseholder() {
+				if (this.checkToken()) {
+					uni.showModal({
+						showCancel: false,
+						content: '暂未登录,请前往登录',
+						success: () => {
+							uni.navigateTo({
+								url: '/pages/login/login'
+							})
+						}
+					})
+				} else {
+					uni.navigateTo({
+						url: '/pages/aHouseholder/aHouseholder'
+					})
+				}
+
+			},
 			// 检查是否token存在，存在则已登陆
 			checkToken() {
 				const token = uni.getStorageSync('token');
-				if (!token){
+				if (!token) {
 					return true
 				}
 				return false
 			},
-			gotopublish() {
-				uni.navigateTo({
-					url: '/pages/publish/publish'
-				});
-			},
-			goTorelePage() {
-				uni.navigateTo({
-					url: '/pages/release/release'
-				});
-			},
-			goToapply() {
-				uni.navigateTo({
-					url: '/pages/Apply/Apply'
-				});
-			},
-			goToOnlineBooth(){
-				uni.navigateTo({
-					url:'/pages/onlineBooth/onlineBooth'
-				})
-			},
-			gotostalllist() {
-				uni.navigateTo({
-					url: '/pages/stalllist/stalllist'
-				});
-			},
-			gotoListDis() {
-				uni.navigateTo({
-					url: '/pages/Listed-Dishes/Listed-Dishes'
-				});
-			},
-			gotoOwneroders(orderStatus) {
-				uni.navigateTo({
-					url: `/pages/Ownerorders/Ownerorders?orderStatus=${orderStatus}`
-				});
-			},
-			gotowallet() {
-				uni.navigateTo({
-					url: '/pages/wallet/wallet'
-				});
-			},
-			gotoPoints() {
-				uni.navigateTo({
-					url: '/pages/Points/Points'
-				});
-			},
-			gotoPointspayouts() {
-				uni.navigateTo({
-					url: '/pages/pointspayouts/pointspayouts'
-				});
-			},
-			// 补充摊位资料页面
-			gotoEditshop() {
-				uni.navigateTo({
-					url: '/pages/editshop/editshop'
-				});
-			},
-			// 银行卡
-			gotoBankCard() {
-				uni.navigateTo({
-					url: '/pages/bankCard/bankCard'
-				});
-			}
+
 		}
 	}
 </script>
 
 <style>
+	.tip {
+		width: 100%;
+		height: 100%;
+		background-color: white;
+		position: fixed;
+	}
+
+	.heading {
+		padding-left: 60rpx;
+		font-size: 50rpx;
+		font-weight: bold;
+		position: relative;
+		top: 370rpx;
+		text-align: center;
+	}
+
+	.mencheng {
+		padding: 20rpx;
+		border-radius: 10rpx;
+		background-color: yellowgreen;
+		margin-left: 40rpx;
+	}
+
+	.items {
+		text-align: center;
+		height: 100%;
+		justify-content: center;
+		align-items: center;
+		display: flex;
+	}
+
 	@font-face {
 		font-family: CustomFont;
 		src: url('../../static/maicai/iconfont.ttf');
