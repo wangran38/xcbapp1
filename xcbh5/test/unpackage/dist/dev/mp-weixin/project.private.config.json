@@ -3,5 +3,18 @@
   "projectname": "test",
   "setting": {
     "compileHotReLoad": true
+  },
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "",
+          "pathName": "subPackages/PaymentModule/payment/payment",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
   }
 }

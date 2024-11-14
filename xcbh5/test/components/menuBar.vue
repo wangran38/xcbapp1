@@ -36,7 +36,6 @@
 		mapMutations,
 		mapGetters
 	} from 'vuex';
-	import inputBoxVue from './inputBox.vue'
 	export default {
 		name: "menuBarVue",
 		data() {
@@ -45,12 +44,6 @@
 				count: ''
 			};
 		},
-		components:{
-			inputBoxVue
-		},
-		// mounted() {
-		// 	this.count = this.getTempCount(this.item.id)
-		// },
 		methods: {
 			changeTextarea(e) {
 
@@ -91,9 +84,13 @@
 				}
 				this.show = false
 			},
+			
+			
+			// 弹出键盘
 			showInput() {
-				this.count = ''
-				this.show = true
+				this.$emit('showKeyboard',this.item)
+				// this.count = ''
+				// this.show = true
 			},
 			...mapMutations('cart', ['addItem', 'subItem', 'anyNumber']),
 		},

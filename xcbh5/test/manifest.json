@@ -103,7 +103,10 @@
         "usingComponents" : true,
         "__usePrivacyCheck__" : true,
         "lazyCodeLoading" : "requiredComponents",
-        "permission" : {}
+        "permission" : {},
+        "optimization" : {
+            "subPackages" : true
+        }
     },
     "vueVersion" : "2",
     "h5" : {

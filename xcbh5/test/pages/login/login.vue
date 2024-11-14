@@ -84,13 +84,14 @@
 					const response = await api.login(this.form.username, this.form.password);
 					if (response.code === 200) {
 						const token = response.data.token;
+						// 保存token
 						uni.setStorageSync('token', token);
 						uni.switchTab({
 							url: '/pages/index/index'
 						});
 					} else {
 						uni.showToast({
-							title: response.message,
+							title: response.msg || response.messagex,
 							icon: 'none'
 						});
 					}

@@ -130,7 +130,7 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 350))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 356))
     },
   }
 } catch (e) {
@@ -573,20 +573,30 @@ var _default = {
                     provider: 'true',
                     success: function () {
                       var _success = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4(res) {
-                        var data;
+                        var data, msg;
                         return _regenerator.default.wrap(function _callee4$(_context4) {
                           while (1) {
                             switch (_context4.prev = _context4.next) {
                               case 0:
                                 console.log(res.code, "这是用户唯一标识");
-                                发送code;
-                                _context4.next = 4;
+                                _context4.next = 3;
                                 return _index.api.bindingOpenid({
                                   code: res.code
                                 });
-                              case 4:
+                              case 3:
                                 data = _context4.sent;
-                                console.log(data);
+                                msg = data.message;
+                                if (data.code == 200) {
+                                  uni.showToast({
+                                    title: msg,
+                                    icon: 'success'
+                                  });
+                                } else {
+                                  uni.showToast({
+                                    title: msg,
+                                    icon: 'error'
+                                  });
+                                }
                               case 6:
                               case "end":
                                 return _context4.stop();

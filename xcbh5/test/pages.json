@@ -1,4 +1,18 @@
 {
+	"subPackages": [
+		{
+			"root": "subPackages/PaymentModule",
+			"pages": [
+				{
+					"path" : "payment/payment",
+					"style" : 
+					{
+						"navigationBarTitleText" : "支付页面"
+					}
+				}
+			]
+		}
+	],
   "pages": [
     {
       "path": "pages/index/index",

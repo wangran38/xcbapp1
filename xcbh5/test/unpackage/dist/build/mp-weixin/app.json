@@ -38,7 +38,14 @@
     "pages/boothOwner/boothOwner",
     "pages/aHouseholder/aHouseholder"
   ],
-  "subPackages": [],
+  "subPackages": [
+    {
+      "root": "subPackages/PaymentModule",
+      "pages": [
+        "payment/payment"
+      ]
+    }
+  ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",

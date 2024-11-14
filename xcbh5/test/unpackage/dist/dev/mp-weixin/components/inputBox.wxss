@@ -1,37 +1,40 @@
 
-.bigBox{
+.bigBox {
+	z-index: 100000;
 	width: 100%;
 	height: 100%;
-	background-color: gray;
-	position: absolute;
+	position: fixed;
 	transition: opacity .5s;
 }
-.body{
+.body {
 	background-color: white;
 	position: absolute;
 	bottom: 0;
 	left: 0;
 	right: 0;
 }
-.function{
+.function {
 	font-size: 30rpx;
 	display: flex;
 	padding: 10rpx;
 	background-color: gainsboro;
 }
-.value{
+.value {
+	border: 1rpx solid black;
+	/* background-color:#007aff ; */
+	border-radius: 10rpx;
 	text-align: center;
 	line-height: 80rpx;
 	font-size: 30rpx;
 	height: 80rpx;
 }
-.nums{
+.nums {
 	width: 600rpx;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 }
-.num{
+.num {
 	margin: 5rpx;
 	flex: 1;
 	width: calc((100% - 10px) / 2);
@@ -43,7 +46,7 @@
 	line-height: 90rpx;
 	background-color: white;
 }
-.fun{
+.fun {
 	border-radius: 5rpx;
 	margin: 5rpx;
 	text-align: center;
@@ -52,10 +55,10 @@
 	height: 125rpx;
 	background-color: #b9bcc4;
 }
-.num:active{
+.num:active {
 	background-color: gray;
 }
-.fun:active{
+.fun:active {
 	background-color: white;
 }
 

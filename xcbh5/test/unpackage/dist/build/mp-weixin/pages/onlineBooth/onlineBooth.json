@@ -4,6 +4,6 @@
   "usingComponents": {
     "uni-steps": "/uni_modules/uni-steps/components/uni-steps/uni-steps",
     "uni-card": "/uni_modules/uni-card/components/uni-card/uni-card",
-    "pop-vue": "/pages/Apply/components/pop"
+    "pop-vue": "/pages/onlineBooth/components/pop"
   }
 }

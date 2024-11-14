@@ -329,11 +329,22 @@
 						provider: 'true',
 						success: async res => {
 							console.log(res.code, "这是用户唯一标识")
-							发送code
+
 							let data = await api.bindingOpenid({
 								code: res.code
 							})
-							console.log(data)
+							let msg = data.message
+							if (data.code == 200){
+								uni.showToast({
+									title:msg,
+									icon:'success'
+								})
+							}else{
+								uni.showToast({
+									title:msg,
+									icon:'error'
+								})
+							}
 						},
 						fail: () => {},
 						complete: () => {}

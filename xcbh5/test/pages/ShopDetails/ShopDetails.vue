@@ -1,6 +1,9 @@
 <template>
+	
 	<scroll-view class="Stallholder" scroll-y="true" @scrolltolower="handleScrollToLower" :style="{ height: '100vh' }"
 		@click="closeTan">
+		<!-- 自定义的数字键盘 -->
+		<inputBoxVue ref="inputBoxVueRef"></inputBoxVue>
 		<view class="container">
 			<view class="StoreName">
 				<text>{{ shopDetails.title}}</text>
@@ -77,10 +80,10 @@
 			<view class="dishes">
 				<text>菜品种类</text>
 				<view class="type" v-for="item in pageData" :key="item.id">
-					<menuBarVue :item="item" class="count"></menuBarVue>
+					<menuBarVue :item="item" class="count" @showKeyboard="Keyboard"></menuBarVue>
 				</view>
 			</view>
-				<shopItem :shop_id="shop_id" ref="shopitem"></shopItem>
+				<shopItem :shop_id="shop_id" ref="shopitem" ></shopItem>
 		</view>
 		
 	</scroll-view>
@@ -96,6 +99,7 @@
 	} from 'vuex';
 	import shopItem from '@/components/shop-item/shop-item.vue'
 	import menuBarVue from '../../components/menuBar.vue';
+	import inputBoxVue from '../../components/inputBox.vue';
 	import {
 		api
 	} from '@/api/index'
@@ -121,7 +125,8 @@
 		mixins: [usePage],
 		components: {
 			shopItem,
-			menuBarVue
+			menuBarVue,
+			inputBoxVue
 		},
 		computed: {
 			...mapState('cart', ['carts']),
@@ -131,6 +136,11 @@
 			this.loadPageData()
 		},
 		methods: {
+			// 需要调起数字键盘
+			Keyboard(value){
+				this.$refs.inputBoxVueRef.show = true
+				this.$refs.inputBoxVueRef.cartItem = value
+			},
 			// 收起购物车
 			closeTan() {
 				if (this.$refs.shopitem.showCartLayer1) {

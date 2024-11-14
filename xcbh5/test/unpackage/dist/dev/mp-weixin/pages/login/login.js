@@ -101,13 +101,13 @@ var components
 try {
   components = {
     uniForms: function () {
-      return Promise.all(/*! import() | uni_modules/uni-forms/components/uni-forms/uni-forms */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-forms/components/uni-forms/uni-forms")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms/uni-forms.vue */ 358))
+      return Promise.all(/*! import() | uni_modules/uni-forms/components/uni-forms/uni-forms */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-forms/components/uni-forms/uni-forms")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms/uni-forms.vue */ 364))
     },
     uniFormsItem: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-forms/components/uni-forms-item/uni-forms-item */ "uni_modules/uni-forms/components/uni-forms-item/uni-forms-item").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue */ 371))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-forms/components/uni-forms-item/uni-forms-item */ "uni_modules/uni-forms/components/uni-forms-item/uni-forms-item").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue */ 377))
     },
     uniEasyinput: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput */ "uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue */ 378))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput */ "uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue */ 384))
     },
   }
 } catch (e) {
@@ -176,17 +176,17 @@ var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/r
 var _index = __webpack_require__(/*! ../../api/index.js */ 49);
 var uniForms = function uniForms() {
   Promise.all(/*! require.ensure | node-modules/@dcloudio/uni-ui/lib/uni-forms/uni-forms */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/@dcloudio/uni-ui/lib/uni-forms/uni-forms")]).then((function () {
-    return resolve(__webpack_require__(/*! @dcloudio/uni-ui/lib/uni-forms/uni-forms.vue */ 385));
+    return resolve(__webpack_require__(/*! @dcloudio/uni-ui/lib/uni-forms/uni-forms.vue */ 391));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var uniFormsItem = function uniFormsItem() {
   __webpack_require__.e(/*! require.ensure | node-modules/@dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item */ "node-modules/@dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item").then((function () {
-    return resolve(__webpack_require__(/*! @dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item.vue */ 394));
+    return resolve(__webpack_require__(/*! @dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item.vue */ 400));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var uniEasyinput = function uniEasyinput() {
   __webpack_require__.e(/*! require.ensure | node-modules/@dcloudio/uni-ui/lib/uni-easyinput/uni-easyinput */ "node-modules/@dcloudio/uni-ui/lib/uni-easyinput/uni-easyinput").then((function () {
-    return resolve(__webpack_require__(/*! @dcloudio/uni-ui/lib/uni-easyinput/uni-easyinput.vue */ 401));
+    return resolve(__webpack_require__(/*! @dcloudio/uni-ui/lib/uni-easyinput/uni-easyinput.vue */ 407));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 // 确保路径正确
@@ -249,14 +249,14 @@ var _default = {
               case 7:
                 response = _context.sent;
                 if (response.code === 200) {
-                  token = response.data.token;
+                  token = response.data.token; // 保存token
                   uni.setStorageSync('token', token);
                   uni.switchTab({
                     url: '/pages/index/index'
                   });
                 } else {
                   uni.showToast({
-                    title: response.message,
+                    title: response.msg || response.messagex,
                     icon: 'none'
                   });
                 }
