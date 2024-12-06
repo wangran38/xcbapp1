@@ -12,17 +12,17 @@
 							申请户主
 						</view>
 					</view>
-					<view class="item" @click="gotostalllist">
+	<!-- 				<view class="item" @click="gotostalllist">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe602;'}}</uni-icons>
 						<view class="add-dishes">
 							摊位列表
 						</view>
-					</view>
+					</view> -->
 		
 					<view class="item" @click="gotoEditshop">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe61e;'}}</uni-icons>
 						<view class="add-dishes">
-							摊位资料补充
+							户主资料补充
 						</view>
 					</view>
 					<!-- <view class="item">
@@ -232,7 +232,7 @@
 			},
 			goTorelePage() {
 				uni.navigateTo({
-					url: '/pages/release/release'
+					url: '/subPackages/aHouseholder/publishDishes/publishDishes'
 				});
 			},
 			goToapply() {
@@ -273,7 +273,7 @@
 			// 补充摊位资料页面
 			gotoEditshop() {
 				uni.navigateTo({
-					url: '/pages/editshop/editshop'
+					url: '/subPackages/aHouseholder/additionalInformation/additionalInformation'
 				});
 			},
 			// 银行卡

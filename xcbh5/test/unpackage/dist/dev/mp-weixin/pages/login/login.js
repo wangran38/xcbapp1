@@ -101,13 +101,13 @@ var components
 try {
   components = {
     uniForms: function () {
-      return Promise.all(/*! import() | uni_modules/uni-forms/components/uni-forms/uni-forms */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-forms/components/uni-forms/uni-forms")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms/uni-forms.vue */ 364))
+      return Promise.all(/*! import() | uni_modules/uni-forms/components/uni-forms/uni-forms */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-forms/components/uni-forms/uni-forms")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms/uni-forms.vue */ 390))
     },
     uniFormsItem: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-forms/components/uni-forms-item/uni-forms-item */ "uni_modules/uni-forms/components/uni-forms-item/uni-forms-item").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue */ 377))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-forms/components/uni-forms-item/uni-forms-item */ "uni_modules/uni-forms/components/uni-forms-item/uni-forms-item").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue */ 403))
     },
     uniEasyinput: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput */ "uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue */ 384))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput */ "uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue */ 410))
     },
   }
 } catch (e) {
@@ -176,17 +176,17 @@ var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/r
 var _index = __webpack_require__(/*! ../../api/index.js */ 49);
 var uniForms = function uniForms() {
   Promise.all(/*! require.ensure | node-modules/@dcloudio/uni-ui/lib/uni-forms/uni-forms */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/@dcloudio/uni-ui/lib/uni-forms/uni-forms")]).then((function () {
-    return resolve(__webpack_require__(/*! @dcloudio/uni-ui/lib/uni-forms/uni-forms.vue */ 391));
+    return resolve(__webpack_require__(/*! @dcloudio/uni-ui/lib/uni-forms/uni-forms.vue */ 417));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var uniFormsItem = function uniFormsItem() {
   __webpack_require__.e(/*! require.ensure | node-modules/@dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item */ "node-modules/@dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item").then((function () {
-    return resolve(__webpack_require__(/*! @dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item.vue */ 400));
+    return resolve(__webpack_require__(/*! @dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item.vue */ 426));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var uniEasyinput = function uniEasyinput() {
   __webpack_require__.e(/*! require.ensure | node-modules/@dcloudio/uni-ui/lib/uni-easyinput/uni-easyinput */ "node-modules/@dcloudio/uni-ui/lib/uni-easyinput/uni-easyinput").then((function () {
-    return resolve(__webpack_require__(/*! @dcloudio/uni-ui/lib/uni-easyinput/uni-easyinput.vue */ 407));
+    return resolve(__webpack_require__(/*! @dcloudio/uni-ui/lib/uni-easyinput/uni-easyinput.vue */ 433));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 // 确保路径正确

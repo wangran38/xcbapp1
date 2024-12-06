@@ -31,26 +31,23 @@
 		onShow() {},
 		methods: {
 			receive(){
-				console.log(this.$emit('receive'))
+				this.$emit('receive')
 				this.show = false
 			},
 			custom() {
 				this.$refs.ani.step({
-					translateX: '50px',
-					scale: 1.5,
-					opacity:0
+					translateY: '-2000px',
 				}, {
-					timingFunction: 'linear',
-					duration: 100
+					duration: 0
 				})
 				this.$refs.ani.step({
-					translateX: '0px',
-					scale: 1,
+					translateY: '-100px',
 					opacity:1
-				}, {
-					timingFunction: 'linear',
-					duration: 150
-				})
+				},{
+
+					duration: 500
+				}
+				)
 
 				this.$refs.ani.run()
 			}
@@ -91,9 +88,7 @@
 	}
 
 	.card {
-/* 		position: relative;
-		left: 130rpx;
-		top: 400rpx; */
+		
 		background-color: white;
 		padding: 20rpx 30rpx 30rpx 30rpx;
 		width: 450rpx;
@@ -113,6 +108,8 @@
 	}
 
 	.pop {
+		display: grid;
+		place-items: center;
 		position: absolute;
 		left: 0;
 		top: 0;

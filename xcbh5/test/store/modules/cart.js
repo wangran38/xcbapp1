@@ -78,7 +78,7 @@ const getters = {
 	cartTotalByShopId: (state) => (shopId) => {
 		// return shopId ? state.carts.filter(i => i.shop_id == shopId).reduce((sum, item) => sum + item.tempCount * item.price, 0) :  state.carts.reduce((sum, item) => sum + item.tempCount * item.price, 0);
 		return shopId ? state.carts.filter(i => i.shop_id == shopId).reduce((sum, item) => new Decimal(item
-			.price).mul(item.tempCount).add(sum).toNumber(), 0).toFixed(1) : state.carts.reduce((sum, item) => sum +
+			.price).mul(item.tempCount).add(sum).toNumber(), 0) : state.carts.reduce((sum, item) => sum +
 			new Decimal(item.price).mul(item.tempCount).add(sum).toNumber(), 0);
 	},
 	getTempCount: (state) => (id) => {

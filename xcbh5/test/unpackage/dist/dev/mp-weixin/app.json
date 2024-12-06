@@ -42,7 +42,15 @@
     {
       "root": "subPackages/PaymentModule",
       "pages": [
-        "payment/payment"
+        "PaymentMethod/PaymentMethod",
+        "collectOnDelivery/collectOnDelivery"
+      ]
+    },
+    {
+      "root": "subPackages/aHouseholder",
+      "pages": [
+        "additionalInformation/additionalInformation",
+        "publishDishes/publishDishes"
       ]
     }
   ],

@@ -101,7 +101,10 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 356))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 382))
+    },
+    uniDatetimePicker: function () {
+      return Promise.all(/*! import() | uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue */ 461))
     },
   }
 } catch (e) {
@@ -138,7 +141,6 @@ var render = function () {
       }
     }
   )
-  var g1 = _vm.paymentMethod.startsWith("积分支付")
   var m1 = _vm.cartTotalByShopId(_vm.shop_id)
   var m2 = _vm.cartsLengthByShopId(_vm.shop_id)
   if (!_vm._isMounted) {
@@ -162,7 +164,6 @@ var render = function () {
     {
       $root: {
         l0: l0,
-        g1: g1,
         m1: m1,
         m2: m2,
       },
@@ -230,7 +231,8 @@ var _default = {
       score: '',
       inputScore: '',
       isEditingScore: false,
-      shop_id: ''
+      shop_id: '',
+      single: ''
     };
   },
   computed: _objectSpread(_objectSpread(_objectSpread({}, (0, _vuex.mapState)('cart', ['carts'])), (0, _vuex.mapGetters)('cart', ['cartTotalByShopId', 'getTempCount', 'cartsLengthByShopId', 'getCartsByShopId'])), {}, {
@@ -290,23 +292,46 @@ var _default = {
     //     })
   },
 
-  // computed: {
-  //   finalPrice() {
-  //     const total = Number(this.totalPrice);
-  //     const coupon = Number(this.couponPrice);
-  //     return total - (coupon < 0 ? 0 : coupon);
-  //   }
-  // },
-  // onShow() {
-  // 	// console.log('clearCart 方法:', this.clearCart);
-  // 	// this.loadCartItems();
-  // 	// 获取当前页面的 URL 参数
-  // 	const pages = getCurrentPages();
-  // 	const currentPage = pages[pages.length - 1];
-  // 	const id = currentPage.options.id; // 获取 URL 参数中的 id
-  // 	this.loadCouponData(id);
-  // },
-  methods: _objectSpread(_objectSpread({}, (0, _vuex.mapMutations)('cart', ['addItem', 'subItem', 'clearCart'])), {}, {
+  methods: _objectSpread(_objectSpread({
+    selectMethod: function selectMethod() {
+      var _this = this;
+      var method = ['线上支付', '到付'];
+      uni.showActionSheet({
+        itemList: method,
+        success: function () {
+          var _success = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(res) {
+            var selectedMethod;
+            return _regenerator.default.wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    selectedMethod = method[res.tapIndex]; // 更新为用户选择的支付方式
+                    _this.paymentMethod = selectedMethod;
+
+                    // 当支付方式为到付的话需要选择到付时间
+                    // if (this.paymentMethod == '到付'){
+                    // 	this.isShowSingle = true
+                    // }else{
+                    // 	this.isShowSingle = false
+                    // }
+                  case 2:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee);
+          }));
+          function success(_x) {
+            return _success.apply(this, arguments);
+          }
+          return success;
+        }(),
+        fail: function fail(err) {
+          console.log('选择支付方式失败:', err);
+        }
+      });
+    }
+  }, (0, _vuex.mapMutations)('cart', ['addItem', 'subItem', 'clearCart'])), {}, {
     clearCart: function clearCart() {
       this.$store.commit('cart/clearCart');
       // console.log('clearCart method called');
@@ -347,70 +372,40 @@ var _default = {
         console.error('coupon 数据格式不正确:', couponData);
       }
     },
-    // alterGoods(good, change) {
-    // 	if (good.count + change >= 0) {
-    // 		good.count += change;
-    // 		good.price = good.count * good.unitPrice;
-    // 	}
-    // },
     fetchUserProfile: function fetchUserProfile() {
-      var _this = this;
-      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-        var response, score;
-        return _regenerator.default.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return _api.api.getUserProfile();
-              case 2:
-                response = _context.sent;
-                // 仅在成功时更新 score
-                if (response.code === 200) {
-                  score = response.data.score;
-                  _this.score = score;
-                }
-              case 4:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    addorder: function addorder(data) {
       var _this2 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
-        var remainingAmount, Totalpoints, orderItems, orderData, response;
+        var response, score;
         return _regenerator.default.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.prev = 0;
-                //实际支付金额
-                remainingAmount = parseFloat(_this2.cartTotalByShopId(_this2.shop_id));
-                Totalpoints = parseFloat(_this2.score) / 10; //总积分
-                console.log('总积分:', Totalpoints);
-                console.log('实际支付金额:', remainingAmount);
-                console.log('支付方式:', _this2.paymentMethod);
-                // console.log('检查条件:', this.paymentMethod.startsWith('积分支付'));
-
-                // 检查积分余额是否足够支付订单
-                if (!(_this2.paymentMethod.startsWith('积分支付') && Totalpoints < remainingAmount)) {
-                  _context2.next = 10;
-                  break;
+                _context2.next = 2;
+                return _api.api.getUserProfile();
+              case 2:
+                response = _context2.sent;
+                // 仅在成功时更新 score
+                if (response.code === 200) {
+                  score = response.data.score;
+                  _this2.score = score;
                 }
-                console.log('积分不足，阻止订单提交');
-                uni.showToast({
-                  title: '积分不足以支付全部金额',
-                  icon: 'none'
-                });
-                return _context2.abrupt("return");
-              case 10:
-                // console.log('开始提交订单');
-                // console.log(cart)
-                // 将 cart 数据转换成后端要求的格式
-                orderItems = _this2.getCartsByShopId(_this2.shop_id).map(function (item) {
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    addorder: function addorder(data) {
+      var _this3 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
+        var orderItems, remainingAmount, Totalpoints, orderData, response;
+        return _regenerator.default.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                orderItems = _this3.getCartsByShopId(_this3.shop_id).map(function (item) {
                   return {
                     goods_id: item.id,
                     goodsname: item.commodity_name,
@@ -419,7 +414,7 @@ var _default = {
                   };
                 });
                 if (orderItems.length) {
-                  _context2.next = 14;
+                  _context3.next = 4;
                   break;
                 }
                 uni.showToast({
@@ -427,39 +422,43 @@ var _default = {
                   icon: 'error',
                   duration: 5000
                 });
-                // uni.navigateBack()
-                return _context2.abrupt("return");
-              case 14:
-                if (!(_this2.paymentMethod === '请选择')) {
-                  _context2.next = 17;
+                return _context3.abrupt("return");
+              case 4:
+                _context3.prev = 4;
+                //实际支付金额
+                remainingAmount = parseFloat(_this3.cartTotalByShopId(_this3.shop_id));
+                Totalpoints = parseFloat(_this3.score) / 10; //总积分
+                // console.log('总积分:', Totalpoints);
+                // console.log('实际支付金额:', remainingAmount);
+                // console.log('支付方式:', this.paymentMethod);
+                if (_this3.single) {
+                  _context3.next = 10;
                   break;
                 }
                 uni.showToast({
-                  title: '请选择支付方式',
-                  icon: 'none'
+                  title: "还没选取货时间呢",
+                  icon: 'error'
                 });
-                return _context2.abrupt("return");
-              case 17:
+                return _context3.abrupt("return");
+              case 10:
                 // 生成订单数据
                 orderData = {
-                  shop_id: Number(_this2.shop_id),
-                  goods_num: _this2.cartsLengthByShopId(_this2.shop_id),
+                  pay_time: _this3.single,
+                  shop_id: Number(_this3.shop_id),
+                  goods_num: _this3.cartsLengthByShopId(_this3.shop_id),
                   // 商品数量
-                  price: Number(_this2.cartTotalByShopId(_this2.shop_id)),
+                  price: Number(_this3.cartTotalByShopId(_this3.shop_id)),
                   // 订单合计金额
-                  payprice: Number(_this2.cartTotalByShopId(_this2.shop_id)),
+                  payprice: Number(_this3.cartTotalByShopId(_this3.shop_id)),
                   // 实际支付金额
-                  payway: _this2.payway,
+                  payway: _this3.payway,
                   goods_arr: orderItems // 商品数组
-                };
-
-                console.log('提交的订单数据:', orderData);
-
-                // 调用提交订单接口
-                _context2.next = 21;
+                }; // // 调用提交订单接口
+                _context3.next = 13;
                 return _api.api.addorder(orderData);
-              case 21:
-                response = _context2.sent;
+              case 13:
+                response = _context3.sent;
+                console.log();
                 if (response.code === 200) {
                   uni.showToast({
                     title: '订单提交成功',
@@ -467,9 +466,9 @@ var _default = {
                     duration: 1500,
                     complete: function complete() {
                       setTimeout(function () {
-                        _this2.clearCart();
-                        uni.switchTab({
-                          url: '/pages/index/index'
+                        _this3.clearCart();
+                        uni.navigateTo({
+                          url: "/subPackages/PaymentModule/collectOnDelivery/collectOnDelivery?out_trade_no=".concat(response.data.out_trade_no)
                         });
                       }, 1500);
                     }
@@ -485,22 +484,22 @@ var _default = {
                     icon: 'none'
                   });
                 }
-                _context2.next = 29;
+                _context3.next = 22;
                 break;
-              case 25:
-                _context2.prev = 25;
-                _context2.t0 = _context2["catch"](0);
-                console.error('提交订单失败:', _context2.t0);
+              case 18:
+                _context3.prev = 18;
+                _context3.t0 = _context3["catch"](4);
+                console.error('创建订单失败:', _context3.t0);
                 uni.showToast({
-                  title: '订单提交失败',
+                  title: '订单创建失败',
                   icon: 'none'
                 });
-              case 29:
+              case 22:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, null, [[0, 25]]);
+        }, _callee3, null, [[4, 18]]);
       }))();
     },
     updatePaymentMethodOnBlur: function updatePaymentMethodOnBlur() {
@@ -525,53 +524,53 @@ var _default = {
       // }
     },
     showActionSheet: function showActionSheet() {
-      var _this3 = this;
+      var _this4 = this;
       // const paymentMethods = ['积分支付', '微信支付', '支付宝支付'];
       var paymentMethods = ['积分支付'];
       uni.showActionSheet({
         itemList: paymentMethods,
         success: function () {
-          var _success = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3(res) {
+          var _success2 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4(res) {
             var selectedMethod;
-            return _regenerator.default.wrap(function _callee3$(_context3) {
+            return _regenerator.default.wrap(function _callee4$(_context4) {
               while (1) {
-                switch (_context3.prev = _context3.next) {
+                switch (_context4.prev = _context4.next) {
                   case 0:
                     // console.log('选择了' + paymentMethods[res.tapIndex] + '支付方式');
                     selectedMethod = paymentMethods[res.tapIndex]; // 更新为用户选择的支付方式
-                    _this3.paymentMethod = selectedMethod;
+                    _this4.paymentMethod = selectedMethod;
                     // 如果用户选择了积分支付，调用 fetchUserProfile
                     // 设置对应的 payway 值
                     if (!(selectedMethod === '积分支付')) {
-                      _context3.next = 8;
+                      _context4.next = 8;
                       break;
                     }
-                    _context3.next = 5;
-                    return _this3.fetchUserProfile();
+                    _context4.next = 5;
+                    return _this4.fetchUserProfile();
                   case 5:
                     // 获取积分余额
-                    _this3.payway = 1; // 积分支付对应的 payway 值
-                    _context3.next = 9;
+                    _this4.payway = 1; // 积分支付对应的 payway 值
+                    _context4.next = 9;
                     break;
                   case 8:
                     if (selectedMethod === '微信支付') {
-                      _this3.payway = 2; // 微信支付对应的 payway 值
+                      _this4.payway = 2; // 微信支付对应的 payway 值
                     } else if (selectedMethod === '支付宝支付') {
-                      _this3.payway = 3; // 支付宝支付对应的 payway 值
+                      _this4.payway = 3; // 支付宝支付对应的 payway 值
                     }
                   case 9:
                     // 更新支付方式，并显示积分余额
-                    console.log('更新后的支付方式:', _this3.paymentMethod);
-                    _this3.paymentMethod += selectedMethod === '积分支付' ? " (\u79EF\u5206\u4F59\u989D: ".concat(_this3.score, ")") : '';
+                    console.log('更新后的支付方式:', _this4.paymentMethod);
+                    _this4.paymentMethod += selectedMethod === '积分支付' ? " (\u79EF\u5206\u4F59\u989D: ".concat(_this4.score, ")") : '';
                   case 11:
                   case "end":
-                    return _context3.stop();
+                    return _context4.stop();
                 }
               }
-            }, _callee3);
+            }, _callee4);
           }));
-          function success(_x) {
-            return _success.apply(this, arguments);
+          function success(_x2) {
+            return _success2.apply(this, arguments);
           }
           return success;
         }(),

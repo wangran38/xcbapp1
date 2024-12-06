@@ -161,12 +161,14 @@
 		methods: {
 			async over(){
 				// 发送申请注册
+				
 				let res = await api.addfarmers({
 					area_id:this.area_id,
 					farmersname:this.userInfo.name,
 					address:this.userInfo.location,
 					category_id:this.userInfo.index
 				})
+				console.log(res)
 				if (res.code == 200){
 					this.title = '完成'
 				}else{

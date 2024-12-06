@@ -847,8 +847,8 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
-		border-radius: 4px;
-		background-color: #fff;
+		// border-radius: 4px;
+		// background-color: #fff;
 		color: #666;
 		font-size: 14px;
 		flex: 1;
@@ -869,7 +869,7 @@
 	.uni-date-x--border {
 		box-sizing: border-box;
 		border-radius: 4px;
-		border: 1px solid #e5e5e5;
+		// border: 1px solid #e5e5e5;
 	}
 
 	.uni-date-editor--x {

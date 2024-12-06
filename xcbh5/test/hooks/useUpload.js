@@ -112,7 +112,6 @@ export const compressPictures = (file) => {
 				  convertSize:false,
 				  success: (result) => {
 				    const fileA = new File([result], result.name, { type: result.type })
-					console.log(fileA)
 					resolve(fileA)
 				  },
 				  error: (error) => {

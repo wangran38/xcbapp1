@@ -80,6 +80,9 @@
 		onLoad() {
 			// 初始化页面
 			this.initPage()
+			const ws = uni.connectSocket({
+				url:'ws:/localhost:5000'
+			})
 		},
 		async onShow() {
 			if (this.selectStatus) {

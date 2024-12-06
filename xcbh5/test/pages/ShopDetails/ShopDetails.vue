@@ -1,9 +1,9 @@
 <template>
-	
 	<scroll-view class="Stallholder" scroll-y="true" @scrolltolower="handleScrollToLower" :style="{ height: '100vh' }"
 		@click="closeTan">
 		<!-- 自定义的数字键盘 -->
 		<inputBoxVue ref="inputBoxVueRef"></inputBoxVue>
+		
 		<view class="container">
 			<view class="StoreName">
 				<text>{{ shopDetails.title}}</text>
@@ -100,11 +100,12 @@
 	import shopItem from '@/components/shop-item/shop-item.vue'
 	import menuBarVue from '../../components/menuBar.vue';
 	import inputBoxVue from '../../components/inputBox.vue';
+	
+	
 	import {
 		api
 	} from '@/api/index'
 	import usePage from '@/hooks/usePage';
-	import ShopDetailsVue from './ShopDetails.vue';
 
 	export default {
 		data() {
@@ -124,9 +125,9 @@
 		},
 		mixins: [usePage],
 		components: {
-			shopItem,
-			menuBarVue,
-			inputBoxVue
+			'shopItem':shopItem,
+			'menuBarVue':menuBarVue,
+			'inputBoxVue':inputBoxVue
 		},
 		computed: {
 			...mapState('cart', ['carts']),

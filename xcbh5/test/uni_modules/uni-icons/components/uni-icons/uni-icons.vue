@@ -103,6 +103,7 @@
 
 	/* #endif */
 	.uni-icons {
+		color: red;
 		font-family: uniicons;
 		text-decoration: none;
 		text-align: center;

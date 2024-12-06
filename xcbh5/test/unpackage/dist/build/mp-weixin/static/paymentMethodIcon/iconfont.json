@@ -1,0 +1,30 @@
+{
+  "id": "4764281",
+  "name": "支付方式",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "36267481",
+      "name": "数字人名币",
+      "font_class": "shuzirenmingbi",
+      "unicode": "e78c",
+      "unicode_decimal": 59276
+    },
+    {
+      "icon_id": "12329930",
+      "name": "icon_积分支付",
+      "font_class": "icon_jifenzhifu",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "16996260",
+      "name": "微信支付",
+      "font_class": "wechat_pay",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    }
+  ]
+}

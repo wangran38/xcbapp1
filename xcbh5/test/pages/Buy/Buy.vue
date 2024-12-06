@@ -33,36 +33,19 @@
 					</view>
 				</view>
 
-				<view class="Payment" @click="handlePaymentMethodClick">
-					<view>支付方式</view>
-					<!-- <view style="color: #ccc;">{{ paymentMethod }}<uni-icons type="right" size="14"color="#ccc"></uni-icons></view> -->
-					<view style="color: #ccc;">
-						<!-- <template v-if="isEditingScore">
-							<input class="inputjf" v-model="inputScore" type="number" focus placeholder="输入使用的积分"
-								@blur="updatePaymentMethodOnBlur" />
-						</template> -->
-						<template>
-							<view :style="{ color: paymentMethod.startsWith('积分支付') ? 'black' : '' }">
-								{{ paymentMethod }}<uni-icons type="right" size="14" color="#ccc"></uni-icons>
-							</view>
-
-						</template>
-					</view>
-				</view>
-				<!-- <view class="Payment" @click="gotousecou">
-					<text>优惠卷</text>
-					<view style="color: #ccc;">
-						<template v-if="couponPrice">
-							¥{{ couponPrice }} {{ couponName }}
-						</template>
-						<template v-else>
-							{{ couponName }}
-						</template><uni-icons type="right" size="14" color="#ccc"></uni-icons>
-					</view>
-				</view> -->
 				<view class="Payment">
 					<text>取菜方式</text>
 					<view style="color: #ccc;">摊位自取<uni-icons type="right" size="14" color="#ccc"></uni-icons></view>
+				</view>
+
+				<!-- 				<view class="Payment" @click="selectMethod">
+					支付方式
+					<view style="color: #ccc;">{{paymentMethod}}<uni-icons type="right" size="14"
+							color="#ccc"></uni-icons></view>
+				</view> -->
+				<view class="Payment">
+					取货时间
+					<uni-datetime-picker type="datetime" :clear-icon="false" v-model="single" return-type="timestamp" />
 				</view>
 			</view>
 
@@ -102,7 +85,8 @@
 				score: '',
 				inputScore: '',
 				isEditingScore: false,
-				shop_id: ''
+				shop_id: '',
+				single: '',
 			}
 		},
 		computed: {
@@ -168,23 +152,31 @@
 			//         }
 			//     })
 		},
-		// computed: {
-		//   finalPrice() {
-		//     const total = Number(this.totalPrice);
-		//     const coupon = Number(this.couponPrice);
-		//     return total - (coupon < 0 ? 0 : coupon);
-		//   }
-		// },
-		// onShow() {
-		// 	// console.log('clearCart 方法:', this.clearCart);
-		// 	// this.loadCartItems();
-		// 	// 获取当前页面的 URL 参数
-		// 	const pages = getCurrentPages();
-		// 	const currentPage = pages[pages.length - 1];
-		// 	const id = currentPage.options.id; // 获取 URL 参数中的 id
-		// 	this.loadCouponData(id);
-		// },
+
+
 		methods: {
+			selectMethod() {
+				const method = ['线上支付', '到付'];
+				uni.showActionSheet({
+					itemList: method,
+					success: async (res) => {
+						const selectedMethod = method[res.tapIndex]; // 更新为用户选择的支付方式
+						this.paymentMethod = selectedMethod;
+
+						// 当支付方式为到付的话需要选择到付时间
+						// if (this.paymentMethod == '到付'){
+						// 	this.isShowSingle = true
+						// }else{
+						// 	this.isShowSingle = false
+						// }
+
+					},
+					fail: (err) => {
+						console.log('选择支付方式失败:', err);
+					}
+				});
+			},
+
 			...mapMutations('cart', ['addItem', 'subItem', 'clearCart']),
 			clearCart() {
 				this.$store.commit('cart/clearCart');
@@ -225,12 +217,8 @@
 					console.error('coupon 数据格式不正确:', couponData);
 				}
 			},
-			// alterGoods(good, change) {
-			// 	if (good.count + change >= 0) {
-			// 		good.count += change;
-			// 		good.price = good.count * good.unitPrice;
-			// 	}
-			// },
+
+
 			async fetchUserProfile() {
 				const response = await api.getUserProfile();
 
@@ -246,61 +234,48 @@
 
 
 			async addorder(data) {
-				try {
+				const orderItems = this.getCartsByShopId(this.shop_id).map(item => ({
+					goods_id: item.id,
+					goodsname: item.commodity_name,
+					price: item.price,
+					goodsnum: item.tempCount
+				}));
 
+				if (!orderItems.length) {
+					uni.showToast({
+						title: '您还未选购商品,无法提交订单!!!!',
+						icon: 'error',
+						duration: 5000,
+					})
+					return;
+				}
+
+
+
+
+				try {
 					//实际支付金额
 					const remainingAmount = parseFloat(this.cartTotalByShopId(this.shop_id));
 					const Totalpoints = parseFloat(this.score) / 10; //总积分
-					console.log('总积分:', Totalpoints);
-					console.log('实际支付金额:', remainingAmount);
-					console.log('支付方式:', this.paymentMethod);
-					// console.log('检查条件:', this.paymentMethod.startsWith('积分支付'));
-
-
-					// 检查积分余额是否足够支付订单
-					if (this.paymentMethod.startsWith('积分支付') && Totalpoints < remainingAmount) {
-						console.log('积分不足，阻止订单提交');
-						uni.showToast({
-							title: '积分不足以支付全部金额',
-							icon: 'none'
-						});
-						return; // 阻止订单提交
-					}
-					// console.log('开始提交订单');
-
-
-					// console.log(cart)
-					// 将 cart 数据转换成后端要求的格式
-					const orderItems = this.getCartsByShopId(this.shop_id).map(item => ({
-						goods_id: item.id,
-						goodsname: item.commodity_name,
-						price: item.price,
-						goodsnum: item.tempCount
-					}));
+					// console.log('总积分:', Totalpoints);
+					// console.log('实际支付金额:', remainingAmount);
+					// console.log('支付方式:', this.paymentMethod);
 					
 					
-					if (!orderItems.length) {
+					if (!this.single){
 						uni.showToast({
-							title: '您还未选购商品,无法提交订单!!!!',
-							icon:'error',
-							duration: 5000,
+							title:"还没选取货时间呢",
+							icon:'error'
 						})
-						// uni.navigateBack()
-						return;
+						return
 					}
 
-					// 检查是否选择了支付方式
-					if (this.paymentMethod === '请选择') {
-						uni.showToast({
-							title: '请选择支付方式',
-							icon: 'none'
-						});
-						return; // 阻止订单提交
-					}
-					
-					
+
+
+
 					// 生成订单数据
 					const orderData = {
+						pay_time:this.single,
 						shop_id: Number(this.shop_id),
 						goods_num: this.cartsLengthByShopId(this.shop_id), // 商品数量
 						price: Number(this.cartTotalByShopId(this.shop_id)), // 订单合计金额
@@ -308,13 +283,15 @@
 						payway: this.payway,
 						goods_arr: orderItems // 商品数组
 					};
+
+
+
+
+					// // 调用提交订单接口
 					
-					console.log('提交的订单数据:', orderData);
-
-
-					// 调用提交订单接口
 					const response = await api.addorder(orderData);
-
+					
+					console.log()
 					if (response.code === 200) {
 						uni.showToast({
 							title: '订单提交成功',
@@ -323,9 +300,9 @@
 							complete: () => {
 								setTimeout(() => {
 									this.clearCart();
-									uni.switchTab({
-										url: '/pages/index/index'
-									});
+									uni.navigateTo({
+										url: `/subPackages/PaymentModule/collectOnDelivery/collectOnDelivery?out_trade_no=${response.data.out_trade_no}`
+									})
 								}, 1500);
 							}
 						});
@@ -341,9 +318,9 @@
 						});
 					}
 				} catch (error) {
-					console.error('提交订单失败:', error);
+					console.error('创建订单失败:', error);
 					uni.showToast({
-						title: '订单提交失败',
+						title: '订单创建失败',
 						icon: 'none'
 					});
 				}
@@ -407,6 +384,10 @@
 </script>
 
 <style scoped>
+	.uni-date-x {
+		background-color: red !important;
+	}
+
 	.me-container {
 		overflow: hidden;
 		width: 100%;
@@ -470,6 +451,7 @@
 		border-radius: 10%;
 		background-color: antiquewhite;
 	}
+
 	.item {
 		/* position: relative; */
 		width: 100%;
@@ -528,6 +510,7 @@
 	}
 
 	.Payment {
+		padding-left: 10rpx;
 		height: 80rpx;
 		/* background-color: chartreuse; */
 		margin: 20rpx 20rpx;
@@ -584,7 +567,7 @@
 	}
 
 	.total {
-		
+
 		height: 100rpx;
 		padding: 20rpx;
 		border: 1px solid #ccc;
@@ -592,7 +575,7 @@
 		display: flex;
 		position: absolute;
 		left: 10rpx;
-		right:10rpx;
+		right: 10rpx;
 		bottom: 20rpx;
 	}
 

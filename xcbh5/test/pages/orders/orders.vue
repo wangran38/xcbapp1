@@ -60,7 +60,7 @@
 	export default {
 		data() {
 			return {
-				tabs1: ["全部", "待支付","已支付", "待收货", "已完成"],
+				tabs1: ["全部", "待支付", "待收货", "已完成"],
 				stastatus: [0, 1, 2, 3, 4],
 				tabs1Current: 0,
 				pageData: [],

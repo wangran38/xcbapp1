@@ -1,4 +1,7 @@
 
+.uni-date-x.data-v-d63f0f58 {
+	background-color: red !important;
+}
 .me-container.data-v-d63f0f58 {
 	overflow: hidden;
 	width: 100%;
@@ -109,6 +112,7 @@
 	align-items: center;
 }
 .Payment.data-v-d63f0f58 {
+	padding-left: 10rpx;
 	height: 80rpx;
 	/* background-color: chartreuse; */
 	margin: 20rpx 20rpx;
@@ -157,7 +161,7 @@
 	font-weight: 600;
 }
 .total.data-v-d63f0f58 {
-	
+
 	height: 100rpx;
 	padding: 20rpx;
 	border: 1px solid #ccc;
@@ -165,7 +169,7 @@
 	display: flex;
 	position: absolute;
 	left: 10rpx;
-	right:10rpx;
+	right: 10rpx;
 	bottom: 20rpx;
 }
 .content.data-v-d63f0f58 {

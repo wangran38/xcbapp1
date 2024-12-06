@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 356))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 382))
     },
   }
 } catch (e) {
@@ -194,7 +194,7 @@ var _index = __webpack_require__(/*! ../../api/index.js */ 49);
 //
 var bCard = function bCard() {
   __webpack_require__.e(/*! require.ensure | components/bCard */ "components/bCard").then((function () {
-    return resolve(__webpack_require__(/*! ../../components/bCard.vue */ 435));
+    return resolve(__webpack_require__(/*! ../../components/bCard.vue */ 473));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {

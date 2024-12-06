@@ -4,10 +4,36 @@
 			"root": "subPackages/PaymentModule",
 			"pages": [
 				{
-					"path" : "payment/payment",
+					"path" : "PaymentMethod/PaymentMethod",
 					"style" : 
 					{
-						"navigationBarTitleText" : "支付页面"
+						"navigationBarTitleText" : "支付方式"
+					}
+				},
+				{
+					"path" : "collectOnDelivery/collectOnDelivery",
+					"style" : 
+					{
+						"navigationBarTitleText" : "订单状态"
+					}
+				}
+			]
+		},
+		{
+			"root": "subPackages/aHouseholder",
+			"pages": [
+				{
+					"path" : "additionalInformation/additionalInformation",
+					"style" : 
+					{
+						"navigationBarTitleText" : "补充资料"
+					}
+				},
+				{
+					"path" : "publishDishes/publishDishes",
+					"style" : 
+					{
+						"navigationBarTitleText" : "发布菜品"
 					}
 				}
 			]

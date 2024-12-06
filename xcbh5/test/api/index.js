@@ -4,8 +4,8 @@ import {
 } from '@dcloudio/uni-app'
 
 // 定义基础URL
-// const BASE_URL = 'http://api.988cj.com'
-const BASE_URL = 'https://api.xcbdsc.com'
+// const BASE_URL = 'https://api.xcbdsc.com'
+const BASE_URL = 'http://192.168.0.106:8088'
 // const UPLOAD_URL = 'http://121.196.234.102:8080'
 export const UPLOAD_URL = 'https://image.xcbdsc.com'
 
@@ -78,10 +78,11 @@ const fetch = (url, method, data = {}, headers = {}) => {
 					// if (msg) {
 					// 	uni.showModal({
 					// 		title: '提示',
-					// 		content: res.data.msg, //+res.data.error,
+					// 		content: res.data.msg || res.data.message || res.data.error, //+res.data.error,
 					// 		showCancel: false
 					// 	})
 					// }
+					resolve(res.data)
 				}
 			},
 			fail: (err) => {
@@ -324,10 +325,28 @@ export const api = {
 		return fetch('/api/sign/total', 'POST', data);
 	},
 	
-	
+	// 创建户主
 	addfarmers(data) {
 		return fetch('/api/farmers/addfarmers', 'POST', data);
+	},
+	// 户主补充资料
+	upFarmers(data){
+		return fetch('/api/farmers/upFarmers', 'POST', data);
+	},
+	// 户主资料
+	myInfo(data){
+		return fetch('/api/farmers/info', 'POST', data);
+	},
+	
+	// 积分支付
+	payscore(data){
+		return fetch('/api/user/payscore', 'POST', data);
+	},
+	wechatpay(data){
+		return fetch('/api/pay/orderpay', 'POST', data);
 	}
+	
+	
 
 }
 export default {

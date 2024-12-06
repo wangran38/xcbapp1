@@ -1,8 +1,10 @@
 <template>
-	<view class="bigBox" @click="close" v-show="show">
+	<view class="bigBox" @click="close" v-show="show" :animation="animationData">
 		<view class="body" v-show="show" @click.stop="">
 			<view class="value">
-				{{value}}
+				
+				<text style="font-size: 30rpx;">{{value}}</text>
+				<!-- <test style="position: absolute; right: 0; color: gray;">&nbsp;&nbsp;最终价格{{value*cartItem.price}}￥</test> -->
 			</view>
 			<view class="function">
 				<view class="nums">
@@ -39,12 +41,15 @@
 					'7', '8', '9',
 					'0', '.', '取消'
 				],
+				unit:'',
 				funs: [
 					'删除',
 					'清空',
 					'确定',
 				],
-				lock: true // 键盘锁
+				lock: true, // 键盘锁
+				animationData: {},
+				cartItem:0
 			};
 		},
 		watch: {
@@ -70,7 +75,12 @@
 				} catch {}
 
 			},
+
+			// 监听数字键盘是否弹起
 			show(newValue, oldValue) {
+				// this.cartItem = this.cartItem
+				
+				// 数字回显
 				if (newValue) {
 					this.value = this.getTempCount(this.cartItem.id) + ''
 				}
@@ -92,9 +102,9 @@
 
 			// 数字
 			inputNum(num) {
-				if (this.value == '0'){
+				if (this.value == '0') {
 					this.value = num
-				}else{
+				} else {
 					this.value += num
 				}
 
@@ -129,7 +139,7 @@
 
 			// 确认提交
 			sure() {
-				if (!this.value){
+				if (!this.value) {
 					this.cartItem.count = 0
 					this.anyNumber(this.cartItem) // store保存数量
 					this.show = false
@@ -140,8 +150,7 @@
 					this.cartItem.count = value
 					this.anyNumber(this.cartItem) // store保存数量
 					this.show = false
-				} else {
-				}
+				} else {}
 			},
 		}
 	}
@@ -153,7 +162,6 @@
 		width: 100%;
 		height: 100%;
 		position: fixed;
-		transition: opacity .5s;
 	}
 
 	.body {
