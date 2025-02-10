@@ -21,7 +21,6 @@
 						@change="onCategoryChange">
 						<view class="picker-text">{{ pickerRange[selectedCategoryIndex] }}</view>
 					</picker>
-
 					<uni-icons class="rigicon" type="right" size="14" color="rgb(229, 229, 229)"></uni-icons>
 				</view>
 

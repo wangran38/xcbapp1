@@ -1,4 +1,8 @@
 
+.uni-easyinput__content-input{
+	font-size: 30rpx !important;
+	height: 100rpx !important;
+}
 .container {
 	display: flex;
 	flex-direction: column;

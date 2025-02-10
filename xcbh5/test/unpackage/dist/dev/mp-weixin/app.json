@@ -36,7 +36,10 @@
     "pages/onlineBooth/onlineBooth",
     "pages/updatePwd/updatePwd",
     "pages/boothOwner/boothOwner",
-    "pages/aHouseholder/aHouseholder"
+    "pages/aHouseholder/aHouseholder",
+    "pages/userServiceAgreement/userServiceAgreement",
+    "pages/privacyAgreement/privacyAgreement",
+    "pages/OpenAccountSharing/OpenAccountSharing"
   ],
   "subPackages": [
     {
@@ -50,7 +53,9 @@
       "root": "subPackages/aHouseholder",
       "pages": [
         "additionalInformation/additionalInformation",
-        "publishDishes/publishDishes"
+        "publishDishes/publishDishes",
+        "Traceability/Traceability",
+        "lookTraceability/lookTraceability"
       ]
     }
   ],

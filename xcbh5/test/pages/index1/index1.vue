@@ -29,14 +29,14 @@
 			<button class="save" @click="saveData">立即逛</button>
 		</view>
 		
-		<view class="notice" @click="goTorules">
+		<view class="notice">
 			<view class="nleft">
 				<uni-icons type="sound-filled" size="20" color="#007aff"></uni-icons>
 				<text class="ntext">公告</text>
 			</view>
-			<view class="ncen" >
-				<swiper class="swiper" vertical autoplay interval="1500" duration="300" circular>
-					<swiper-item class="swiitem" v-for="item in 4">赠送积分说明</swiper-item>
+			<view class="ncen">
+				<swiper class="swiper" vertical autoplay interval="2000" duration="500" circular>
+					<swiper-item class="swiitem" v-for="item in NoticeList" @click="goTorules(item)">{{item}}</swiper-item>
 				</swiper>
 			</view>
 			<view class="nrig">
@@ -44,6 +44,7 @@
 			</view>
 		</view>
 		<view class="Notice">
+			<view>今日打卡人次：{{signTotalData.todaynum}} <br>历史打卡次数：{{signTotalData.allnum}}</view>
 			<button @click="goToJackpot" style="margin-top: 10rpx; font-size: 30rpx; color: #ff3030;">查看摇号结果</button>
 		</view>
 		
@@ -63,6 +64,7 @@
 	export default {
 		data() {
 			return {
+				NoticeList:['赠送积分说明','关于春节放假通知'],
 				selectedCountry: 'china',
 				multiArray: [
 					[],
@@ -82,6 +84,7 @@
 				overseasCities: [],
 				overseasCountryId: null,
 				overseasCityId: null,
+				signTotalData:null
 				// marketName:'' // 市场名
 			};
 		},
@@ -105,7 +108,10 @@
 			}
 		},
 		async mounted() {
+			
 			await this.initializePicker(); // 组件加载时初始化数据
+			let res = await api.signTotal()
+			this.signTotalData = res.data
 		},
 		methods: {
 			goToJackpot(){
@@ -115,10 +121,21 @@
 			},
 			...mapMutations('location', ['setStatus']),
 			
-			goTorules() {
-				uni.navigateTo({
-					url: '/pages/rules/rules'
-				});
+			goTorules(item) {
+				console.log(item)
+				switch (item){
+					case '赠送积分说明':
+						uni.navigateTo({
+							url: '/pages/rules/rules'
+						});
+						break;
+					case '关于春节放假通知':
+						uni.navigateTo({
+							url: '/pages/arrangeNotification/arrangeNotification'
+						});
+						
+						break;
+				}
 			},
 			// 默认选中海南省定安县塔岭市场
 			async initializePicker() {

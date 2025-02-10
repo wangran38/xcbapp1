@@ -34,7 +34,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _orders_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./orders.vue?vue&type=script&lang=js& */ 202);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _orders_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _orders_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _orders_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./orders.vue?vue&type=style&index=0&lang=css& */ 204);
-/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 32);
+/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 40);
 
 var renderjs
 
@@ -101,7 +101,13 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 382))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 420))
+    },
+    uniPopup: function () {
+      return __webpack_require__.e(/*! import() | uni_modules/uni-popup/components/uni-popup/uni-popup */ "uni_modules/uni-popup/components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-popup/components/uni-popup/uni-popup.vue */ 511))
+    },
+    uvQrcode: function () {
+      return Promise.all(/*! import() | uni_modules/uv-qrcode/components/uv-qrcode/uv-qrcode */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uv-qrcode/components/uv-qrcode/uv-qrcode")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uv-qrcode/components/uv-qrcode/uv-qrcode.vue */ 518))
     },
   }
 } catch (e) {
@@ -174,17 +180,17 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(uni) {
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 46));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 54));
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 48));
-var _index = __webpack_require__(/*! @/api/index */ 49);
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
+var _index = __webpack_require__(/*! @/api/index */ 30);
 var _usePage = _interopRequireDefault(__webpack_require__(/*! @/hooks/usePage */ 57));
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -192,9 +198,10 @@ var _default = {
   data: function data() {
     return {
       tabs1: ["全部", "待支付", "待收货", "已完成"],
-      stastatus: [0, 1, 2, 3, 4],
+      stastatus: [0, 1, 3, 4],
       tabs1Current: 0,
-      pageData: []
+      pageData: [],
+      out_trade_no: ''
     };
   },
   mixins: [_usePage.default],
@@ -202,11 +209,8 @@ var _default = {
   // 	this.reloadData()
   // },
   onLoad: function onLoad(options) {
-    // 在页面首次加载时接收参数
     this.orderStatus = options.orderStatus;
-    // 根据传入的 orderStatus 进行处理（比如更新 tabs1Current）
     if (this.orderStatus) {
-      // 假设你要根据 orderStatus 来选择 tab 的 index
       var index = this.stastatus.indexOf(Number(this.orderStatus));
       if (index !== -1) {
         this.tabs1Current = index;
@@ -218,10 +222,46 @@ var _default = {
   },
   computed: {
     buyButtonText: function buyButtonText() {
-      return this.tabs1Current === 0 ? '再买一单' : this.tabs1[this.tabs1Current];
+      var strtemp = '';
+      switch (this.tabs1Current) {
+        case 0:
+          strtemp = '再买一单';
+          break;
+        case 1:
+          strtemp = '去支付';
+          break;
+        case 2:
+          strtemp = '确认收货';
+          break;
+        case 3:
+          strtemp = '已完成';
+          break;
+      }
+      return strtemp;
     }
   },
   methods: {
+    goPay: function goPay(item) {
+      this.out_trade_no = item.out_trade_no;
+      console.log();
+      switch (item.status) {
+        // 全部页面
+        case 1:
+          if (this.buyButtonText == '再买一单') {
+            return '';
+          } else {
+            uni.navigateTo({
+              url: "/subPackages/PaymentModule/collectOnDelivery/collectOnDelivery?out_trade_no=".concat(item.out_trade_no)
+            });
+          }
+          break;
+        case 2:
+        case 3:
+          // 确认收货基于订单号生成核销码并弹出
+          this.$refs.popup.open('center');
+          break;
+      }
+    },
     /**
      * 格式化时间
      */
@@ -284,6 +324,7 @@ var _default = {
   }
 };
 exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 

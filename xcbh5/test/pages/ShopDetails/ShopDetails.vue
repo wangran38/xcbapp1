@@ -415,7 +415,7 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: start;
-		height: 200rpx;
+		height: 240rpx;
 		width: 100%;
 		border-radius: 25rpx;
 		box-sizing: border-box;

@@ -1,9 +1,12 @@
 <script>
 	import Vue from 'vue'
+	import {getSocket} from '@/api/index.js'
 	export default {
 		onLaunch: function() {
 		},
 		onShow() {
+			
+			
 			const updateManager = uni.getUpdateManager()
 		    // 请求完新版本信息的回调
 		    updateManager.onCheckForUpdate(res => {

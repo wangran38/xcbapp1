@@ -18,19 +18,19 @@
 					<view class="consume">
 						<text>可提现</text>
 						<view class="Cumulative-top-ups">
-							{{ pagedata.hasmoney  }}
+							{{ pagedata.truemoney  }}
 						</view>
 					</view>
 					<view class="Not-received">
 						<text>已结算</text>
 						<view class="Cumulative-top-ups">
-							{{ pagedata.truemoney }}
+							{{ pagedata.paymoney }}
 						</view>
 					</view>
 				</view>
 			</view>
 			<view class="item">
-				<view class="Recording">
+				<view class="Recording" @click="goTopagesSettrecords">
 					<uni-icons custom-prefix="iconfont" type="icon-wodexiaofei" size="30" color="#007aff"></uni-icons>
 					<text class="text">账单记录</text>
 				</view>
@@ -61,6 +61,11 @@
 			this.fetchData(); // 在页面加载时调用接口
 		},
 		methods: {
+			goTopagesSettrecords(){
+				uni.navigateTo({
+					url: '/pages/Settrecords/Settrecords'
+				});
+			},
 			// 请求摊主积分接口
 			async fetchData() {
 				try {

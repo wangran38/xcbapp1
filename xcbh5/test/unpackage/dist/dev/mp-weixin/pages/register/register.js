@@ -34,7 +34,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _register_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./register.vue?vue&type=script&lang=js& */ 72);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _register_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _register_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _register_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./register.vue?vue&type=style&index=0&lang=css& */ 74);
-/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 32);
+/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 40);
 
 var renderjs
 
@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uniEasyinput: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput */ "uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue */ 410))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput */ "uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue */ 448))
     },
   }
 } catch (e) {
@@ -176,9 +176,31 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 46));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 48));
-var _index = __webpack_require__(/*! ../../api/index.js */ 49);
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 54));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
+var _index = __webpack_require__(/*! ../../api/index.js */ 30);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -224,7 +246,11 @@ var _default = {
       passwordError: '',
       confirmPasswordError: '',
       passwordValid: false,
-      confirmPasswordValid: false
+      confirmPasswordValid: false,
+      // 新增的状态，用于存储用户是否同意服务协议
+      agreeServiceAgreement: true,
+      // 新增的状态，用于存储用户是否同意隐私协议
+      agreePrivacyPolicy: true
     };
   },
   watch: {
@@ -270,6 +296,17 @@ var _default = {
           }
         }
       });
+    },
+    // 新增的方法，用于处理协议勾选状态的变化
+    checkBox: function checkBox(value) {
+      switch (value) {
+        case 0:
+          this.agreeServiceAgreement = !this.agreeServiceAgreement;
+          break;
+        case 1:
+          this.agreePrivacyPolicy = !this.agreePrivacyPolicy;
+          break;
+      }
     },
     register: function register() {
       var _this2 = this;
@@ -329,10 +366,22 @@ var _default = {
                 });
                 return _context.abrupt("return");
               case 15:
-                _context.prev = 15;
-                _context.next = 18;
+                console.log(_this2.agreeServiceAgreement, _this2.agreePrivacyPolicy);
+                // 新增的校验，确保用户已勾选服务协议和隐私协议
+                if (!(!_this2.agreeServiceAgreement || !_this2.agreePrivacyPolicy)) {
+                  _context.next = 19;
+                  break;
+                }
+                uni.showToast({
+                  icon: 'none',
+                  title: '请勾选服务协议和隐私协议'
+                });
+                return _context.abrupt("return");
+              case 19:
+                _context.prev = 19;
+                _context.next = 22;
                 return _index.api.register(_this2.form.username, _this2.form.password, _this2.form.confirm);
-              case 18:
+              case 22:
                 response = _context.sent;
                 if (response.code === 200) {
                   token = response.data;
@@ -353,22 +402,22 @@ var _default = {
                     title: response.msg || '注册失败，请重试'
                   });
                 }
-                _context.next = 26;
+                _context.next = 30;
                 break;
-              case 22:
-                _context.prev = 22;
-                _context.t0 = _context["catch"](15);
+              case 26:
+                _context.prev = 26;
+                _context.t0 = _context["catch"](19);
                 uni.showToast({
                   icon: 'none',
                   title: '网络错误，请稍后重试'
                 });
                 console.error('Registration Error:', _context.t0);
-              case 26:
+              case 30:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[15, 22]]);
+        }, _callee, null, [[19, 26]]);
       }))();
     }
   }

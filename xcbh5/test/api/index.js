@@ -4,10 +4,31 @@ import {
 } from '@dcloudio/uni-app'
 
 // 定义基础URL
-// const BASE_URL = 'https://api.xcbdsc.com'
-const BASE_URL = 'http://192.168.0.106:8088'
+const BASE_URL = 'https://api.xcbdsc.com'
+// const BASE_URL = 'http://192.168.0.111:8088'
+
 // const UPLOAD_URL = 'http://121.196.234.102:8080'
 export const UPLOAD_URL = 'https://image.xcbdsc.com'
+
+const WEBSOCKET_URL = "192.168.0.111:8088"
+
+
+/**
+ * 
+ * @@param {url,parmas} 连接的路由地址，连接参数
+ * @description websocket封装，调用之后返回实例，继而在实例上绑定事件
+*/
+const getSocket  = (url,parmas)=>{
+	let socketTask =  uni.connectSocket({
+		url:`ws://${WEBSOCKET_URL}${url}?${parmas}`,
+		 success(data) {
+			console.log("websocket连接成功"+url);
+		},
+	})
+	return socketTask
+} 
+
+export {getSocket}
 
 // 创建白名单，默认所有接口都需要传token，白名单中的接口不需要传token
 const whiteList = [
@@ -342,8 +363,35 @@ export const api = {
 	payscore(data){
 		return fetch('/api/user/payscore', 'POST', data);
 	},
+	// 微信支付
 	wechatpay(data){
 		return fetch('/api/pay/orderpay', 'POST', data);
+	},
+	// 轮询查询微信支付状态
+	getorderinfo(data){
+		return fetch('/api/user/getorderinfo', 'POST', data);
+	},
+	
+	// 添加溯源信息
+	addTraceability(data){
+		return fetch('/api/goods/addinfo', 'POST', data);
+	},
+	// 查看溯源信息
+	lookTraceability(data){
+		return fetch('/api/goods/getinfo', 'POST', data);
+	},
+	// 扫码收货
+	receiving(data){
+		return fetch('/api/shop/receiving', 'POST', data);
+	},
+	
+	// 发送短信
+	sendText(data){
+		return fetch('/api/sendsms', 'POST', data);
+	},
+	// 修改密码
+	editPwd(data){
+		return fetch('/api/user/editpsw', 'POST', data);
 	}
 	
 	

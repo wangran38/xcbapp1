@@ -169,6 +169,12 @@
 							银行卡
 						</view>
 					</view>
+					<view class="item" @click="gotoOpenAccountSharing">
+						<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe936;'}}</uni-icons>
+						<view class="add-dishes">
+							开通分账
+						</view>
+					</view>
 					<!-- <view class="item">
 						<uni-icons type="plus" size="30"></uni-icons>
 						<view class="add-dishes">
@@ -285,6 +291,11 @@
 			gotoBankCard() {
 				uni.navigateTo({
 					url: '/pages/bankCard/bankCard'
+				});
+			},
+			gotoOpenAccountSharing(){
+				uni.navigateTo({
+					url: '/pages/OpenAccountSharing/OpenAccountSharing'
 				});
 			}
 		}

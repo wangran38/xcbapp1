@@ -35,6 +35,20 @@
 					{
 						"navigationBarTitleText" : "发布菜品"
 					}
+				},
+				{
+					"path" : "Traceability/Traceability",
+					"style" : 
+					{
+						"navigationBarTitleText" : "溯源信息补充"
+					}
+				},
+				{
+					"path" : "lookTraceability/lookTraceability",
+					"style" : 
+					{
+						"navigationBarTitleText" : "查看溯源信息"
+					}
 				}
 			]
 		}
@@ -43,7 +57,8 @@
     {
       "path": "pages/index/index",
       "style": {
-        "navigationBarTitleText": "买菜"
+        "navigationBarTitleText": "乡愁宝",
+		"disableScroll":true
 		// "enablePullDownRefresh": true
       }
     },
@@ -300,6 +315,36 @@
     	"style" : 
     	{
     		"navigationBarTitleText" : "户主"
+    	}
+    },
+    {
+    	"path" : "pages/userServiceAgreement/userServiceAgreement",
+    	"style" : 
+    	{
+    		"navigationBarTitleText" : "用户服务协议",
+			"disableScroll":true
+    	}
+    },
+    {
+    	"path" : "pages/privacyAgreement/privacyAgreement",
+    	"style" : 
+    	{
+    		"navigationBarTitleText" : "隐私协议",
+			"disableScroll":true
+    	}
+    },
+    {
+    	"path" : "pages/OpenAccountSharing/OpenAccountSharing",
+    	"style" : 
+    	{
+    		"navigationBarTitleText" : "开通分账"
+    	}
+    },
+    {
+    	"path" : "pages/arrangeNotification/arrangeNotification",
+    	"style" : 
+    	{
+    		"navigationBarTitleText" : "通知"
     	}
     }
   ],

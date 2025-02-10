@@ -11,181 +11,181 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 .order-detail-page {
-  background-color: #f8f8f8;
-  padding: 0;
-  margin: 0;
-  min-height: 100vh;
+	background-color: #f8f8f8;
+	padding: 0;
+	margin: 0;
+	min-height: 100vh;
 }
 .header {
-  background-color: #007bff;
-  color: white;
-  padding: 20rpx;
-  display: flex;
-  align-items: center;
+	background-color: #007bff;
+	color: white;
+	padding: 20rpx;
+	display: flex;
+	align-items: center;
 }
 .back-btn {
-  text-decoration: none;
-  color: white;
-  margin-right: 20rpx;
+	text-decoration: none;
+	color: white;
+	margin-right: 20rpx;
 }
 .title {
-  font-size: 40rpx;
-  margin: 0;
+	font-size: 40rpx;
+	margin: 0;
 }
 .order-base-info {
-  background-color: white;
-  padding: 40rpx;
-  margin: 40rpx;
-  border-radius: 10rpx;
-  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+	background-color: white;
+	padding: 40rpx;
+	margin: 40rpx;
+	border-radius: 10rpx;
+	box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
 }
 .info-label {
-  font-size: 32rpx;
-  color: #666;
-  margin-right: 20rpx;
+	font-size: 32rpx;
+	color: #666;
+	margin-right: 20rpx;
 }
 .order-id {
-  font-size: 32rpx;
-  font-weight: bold;
-  color: #333;
+	font-size: 32rpx;
+	font-weight: bold;
+	color: #333;
 }
 .order-time {
-  font-size: 32rpx;
-  color: #333;
+	font-size: 32rpx;
+	color: #333;
 }
 .product-info {
-  background-color: white;
-  padding: 40rpx;
-  margin: 40rpx;
-  border-radius: 10rpx;
-  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+	background-color: white;
+	padding: 40rpx;
+	margin: 40rpx;
+	border-radius: 10rpx;
+	box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
 }
 .product-list {
-  margin-bottom: 40rpx;
+	margin-bottom: 40rpx;
 }
 .product-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20rpx;
+	display: flex;
+	align-items: center;
+	margin-bottom: 20rpx;
 }
 .product-img {
-  width: 160rpx;
-  height: 160rpx;
-  border-radius: 10rpx;
-  margin-right: 20rpx;
+	width: 160rpx;
+	height: 160rpx;
+	border-radius: 10rpx;
+	margin-right: 20rpx;
 }
 .product-details {
-  flex: 1;
+	flex: 1;
 }
 .product-name {
-  font-size: 32rpx;
-  margin: 0;
+	font-size: 32rpx;
+	margin: 0;
 }
 .product-spec {
-  font-size: 28rpx;
-  color: #666;
-  margin: 0;
+	font-size: 28rpx;
+	color: #666;
+	margin: 0;
 }
 .product-quantity {
-  font-weight: bold;
-  font-size: 28rpx;
+	font-weight: bold;
+	font-size: 28rpx;
 }
 .order-amount-info {
-  background-color: white;
-  padding: 40rpx;
-  margin: 40rpx;
-  border-radius: 10rpx;
-  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+	background-color: white;
+	padding: 40rpx;
+	margin: 40rpx;
+	border-radius: 10rpx;
+	box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
 }
 .order-amount-info ._div {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20rpx;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20rpx;
 }
 .amount-label {
-  font-size: 28rpx;
-  color: #666;
+	font-size: 28rpx;
+	color: #666;
 }
 .price-value {
-  font-weight: bold;
-  font-size: 32rpx;
+	font-weight: bold;
+	font-size: 32rpx;
 }
 .amount-total {
-  color: red;
-  font-size: 40rpx;
+	color: red;
+	font-size: 40rpx;
 }
 .payment-methods {
-  background-color: white;
-  padding: 40rpx;
-  margin: 40rpx;
-  border-radius: 10rpx;
-  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: space-around;
+	background-color: white;
+	padding: 40rpx;
+	margin: 40rpx;
+	border-radius: 10rpx;
+	box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+	display: flex;
+	justify-content: space-around;
 }
 .payment-method-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  padding: 20rpx;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	cursor: pointer;
+	padding: 20rpx;
 }
 .payment-method-item.active {
-  border: 4rpx solid #007bff;
-  border-radius: 10rpx;
+	border: 4rpx solid #007bff;
+	border-radius: 10rpx;
 }
 .payment-icon {
-  width: 80rpx;
-  height: 80rpx;
-  margin-bottom: 10rpx;
+	width: 80rpx;
+	height: 80rpx;
+	margin-bottom: 10rpx;
 }
 .payment-name {
-  font-size: 28rpx;
-  color: #333;
+	font-size: 28rpx;
+	color: #333;
 }
 .payment-btn-area {
-  margin: 40rpx;
-  text-align: center;
+	margin: 40rpx;
+	text-align: center;
 }
 .payment-tips {
-  background-color: white;
-  padding: 40rpx;
-  margin: 40rpx;
-  border-radius: 10rpx;
-  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
-  text-align: center;
+	background-color: white;
+	padding: 40rpx;
+	margin: 40rpx;
+	border-radius: 10rpx;
+	box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+	text-align: center;
 }
 .countdown-area {
-  background-color: white;
-  padding: 40rpx;
-  margin: 40rpx;
-  border-radius: 10rpx;
-  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
-  text-align: center;
+	background-color: white;
+	padding: 40rpx;
+	margin: 40rpx;
+	border-radius: 10rpx;
+	box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+	text-align: center;
 }
 .countdown-text {
-  font-size: 32rpx;
-  color: #333;
+	font-size: 32rpx;
+	color: #333;
 }
 .shipping-info {
-  background-color: white;
-  padding: 40rpx;
-  margin: 40rpx;
-  border-radius: 10rpx;
-  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+	background-color: white;
+	padding: 40rpx;
+	margin: 40rpx;
+	border-radius: 10rpx;
+	box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
 }
 .shipping-address {
-  font-size: 32rpx;
-  color: #333;
-  margin-bottom: 20rpx;
+	font-size: 32rpx;
+	color: #333;
+	margin-bottom: 20rpx;
 }
 .receiver {
-  font-size: 32rpx;
-  color: #333;
-  margin-bottom: 20rpx;
+	font-size: 32rpx;
+	color: #333;
+	margin-bottom: 20rpx;
 }
 .phone {
-  font-size: 32rpx;
-  color: #333;
+	font-size: 32rpx;
+	color: #333;
 }
 

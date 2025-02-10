@@ -4,7 +4,9 @@
 			<view class="value">
 				
 				<text style="font-size: 30rpx;">{{value}}</text>
-				<!-- <test style="position: absolute; right: 0; color: gray;">&nbsp;&nbsp;最终价格{{value*cartItem.price}}￥</test> -->
+				<test style="position: absolute; left: 20rpx; color: gray;">{{cartItem.commodity_name}} ￥{{cartItem.price}}元/{{cartItem.weight_name}}</test>
+				<test style="position: absolute; right: 20rpx; color: gray;">{{singleItemPrice}}元</test>
+				
 			</view>
 			<view class="function">
 				<view class="nums">
@@ -24,6 +26,7 @@
 </template>
 
 <script>
+	import Decimal from 'decimal'
 	import {
 		mapState,
 		mapMutations,
@@ -73,6 +76,11 @@
 						this.value = oldValue
 					}
 				} catch {}
+				
+				// 以下三行是用于实时同步，数字键盘中的输入框和购物车商品中的的数值对应
+				let value = Number(Number(this.value))
+				this.cartItem.count = value
+				this.anyNumber(this.cartItem) // store保存数量
 
 			},
 
@@ -88,6 +96,9 @@
 		},
 		computed: {
 			...mapGetters('cart', ['getTempCount']),
+			singleItemPrice(){
+				return  new Decimal(this.cartItem.price).mul(new Decimal(this.value)).toNumber()
+			}
 		},
 		methods: {
 			// state购物车自定义数量
@@ -100,7 +111,7 @@
 				this.show = false
 			},
 
-			// 数字
+			// 输入数字
 			inputNum(num) {
 				if (this.value == '0') {
 					this.value = num
@@ -111,7 +122,6 @@
 			},
 			// 功能函数
 			func(lable) {
-				console.log(lable)
 				switch (lable) {
 					case '删除':
 						this.remove()
@@ -139,6 +149,7 @@
 
 			// 确认提交
 			sure() {
+				// 输入值为0或者为空，就清空
 				if (!this.value) {
 					this.cartItem.count = 0
 					this.anyNumber(this.cartItem) // store保存数量

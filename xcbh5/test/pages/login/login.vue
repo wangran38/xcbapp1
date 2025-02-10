@@ -67,7 +67,8 @@
 						rules: [{
 							required: true,
 							errorMessage: '请输入密码'
-						}]
+						}
+						]
 					}
 				}
 			};
@@ -79,28 +80,45 @@
 			async login() {
 				try {
 					const valid = await this.$refs.form.validate(); // 等待验证完成
-					console.log('表单数据信息：', valid);
 
 					const response = await api.login(this.form.username, this.form.password);
 					if (response.code === 200) {
 						const token = response.data.token;
 						// 保存token
 						uni.setStorageSync('token', token);
-						uni.switchTab({
-							url: '/pages/index/index'
-						});
+						if (this.form.password == '123456'){
+							uni.showToast({
+								icon:'error',
+								title:'密码过于简单,请用户自行修改以确保账号安全',
+								duration:2000
+							})
+						}
+
+						setTimeout(()=>{
+							uni.showToast({
+								icon:'loading',
+								title:'正在登录.....',
+							})
+						},2000)
+
+						setTimeout(()=>{
+							uni.switchTab({
+								url: '/pages/index/index'
+							});
+						},4000)
+
 					} else {
 						uni.showToast({
-							title: response.msg || response.messagex,
+							title: response.msg || response.message,
 							icon: 'none'
 						});
 					}
 				} catch (error) {
+					
 					uni.showToast({
-						title: '登录请求失败',
-						icon: 'none'
+						title: `登录失败`,
+						icon: 'error'
 					});
-					console.error('Login error:', error);
 				}
 			}
 		}
@@ -108,6 +126,10 @@
 </script>
 
 <style>
+	.uni-easyinput__content-input{
+		font-size: 30rpx !important;
+		height: 100rpx !important;
+	}
 	.container {
 		display: flex;
 		flex-direction: column;

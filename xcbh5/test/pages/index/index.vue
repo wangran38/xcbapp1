@@ -80,9 +80,7 @@
 		onLoad() {
 			// 初始化页面
 			this.initPage()
-			const ws = uni.connectSocket({
-				url:'ws:/localhost:5000'
-			})
+			
 		},
 		async onShow() {
 			if (this.selectStatus) {
@@ -186,31 +184,19 @@
 				// 只允许通过相机扫码
 				uni.scanCode({
 					onlyFromCamera: false,
-					success: function(res) {
-
-						// 检查是否是 URL，如果是 URL，则跳转
-						const scannedUrl = res.result;
-						if (scannedUrl.startsWith('http')) {
-							console.log('这是一个有效的 URL');
-							// 解码 URL
-							const decodedUrl = decodeURIComponent(scannedUrl);
-							console.log('解码后的 URL:', decodedUrl);
-							// 提取 hash 部分（即 # 后面的部分）
-							const hashIndex = decodedUrl.indexOf('#');
-							if (hashIndex !== -1) {
-								const pagesPath = decodedUrl.substring(hashIndex +
-								1); // 例如 "/pages/Clock/Clock?time=1725806224"
-								console.log('提取到的页面路径:', pagesPath);
-								// 执行页面跳转
-								uni.navigateTo({
-									url: '/'+pagesPath // 跳转到指定页面并带上参数
-								});
-							} else {
-								console.warn('未能解析到有效的页面路径');
-							}
-						} else {
-							// 处理非 URL 的结果
-							console.warn('扫码结果不是有效的链接:', scannedUrl);
+					success: async (res)=> {
+						let data = await api.receiving({out_trade_no:res.result})
+						console.log(data)
+						if (data.code == 200){
+							uni.showToast({
+								icon:'success',
+								title:'核销成功'
+							})
+						}else{
+							uni.showToast({
+								icon:'error',
+								title:'核销失败'
+							})
 						}
 					},
 					fail: function(error) {

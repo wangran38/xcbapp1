@@ -291,7 +291,6 @@
 					
 					const response = await api.addorder(orderData);
 					
-					console.log()
 					if (response.code === 200) {
 						uni.showToast({
 							title: '订单提交成功',
@@ -300,7 +299,7 @@
 							complete: () => {
 								setTimeout(() => {
 									this.clearCart();
-									uni.navigateTo({
+									uni.redirectTo({
 										url: `/subPackages/PaymentModule/collectOnDelivery/collectOnDelivery?out_trade_no=${response.data.out_trade_no}`
 									})
 								}, 1500);

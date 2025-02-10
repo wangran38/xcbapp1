@@ -41,7 +41,7 @@
 		<view class="lottery" @click="lottery">
 			<view class="lottery-info">
 				<uni-icons type="auth" size="30" color="#00ff00"></uni-icons>
-				<text style="margin: auto 40rpx; text-align: center;">打卡抽奖</text>
+				<text style="margin: auto 40rpx; text-align: center;">打卡</text>
 				<text style="font-size: 24rpx;color: #708090;">累计打卡{{totalnum}}次</text>
 			</view>
 			<view class="item">
@@ -115,8 +115,12 @@
 				<view>我的信息</view>
 				<uni-icons type="right" size="20"></uni-icons>
 			</view>
-			<view class="user-edit" @click="bindingWechat">
+			<view class="Apply" @click="bindingWechat">
 				<view>绑定微信</view>
+				<uni-icons type="right" size="20"></uni-icons>
+			</view>
+			<view class="Apply" @click="goToUpdatePwd">
+				<view>修改密码</view>
 				<uni-icons type="right" size="20"></uni-icons>
 			</view>
 		</view>
@@ -145,22 +149,26 @@
 				score: '',
 				// 添加你需要的数据属性
 				totalnum: 0,
-				signTotal: {}
+				signTotal: {},
+				phone:null // 用户手机号
 			};
 		},
-		async onShow() {
-			let res = await api.signTotal({})
-			this.signTotal = res.data
-			
+		async onShow() {			
 			// 检查是否登录
 			this.checkLoginStatus();
 			
 			if (this.isLoggedIn) {
+				// 获取当前用户信息
 				this.fetchUserProfile();
 			}
 			this.signlist()
 		},
 		methods: {
+			goToUpdatePwd(){
+				uni.navigateTo({
+					url: `/pages/updatePwd/updatePwd?phone=${this.phone}`,
+				})
+			},
 			/**
 			 * 
 			 * 检查更新
@@ -208,17 +216,18 @@
 			 */
 			async fetchUserProfile() {
 				try {
-					const token = uni.getStorageSync('token');
 					const response = await api.getUserProfile();
 					if (response.code === 200) {
 						const {
 							name,
 							Headimgurl,
-							score
+							score,
+							phone
 						} = response.data;
 						this.userName = name;
 						this.userAvatar = Headimgurl;
 						this.score = score;
+						this.phone = phone
 						
 						// if (!this.userName){
 						// 	uni.showModal({
@@ -322,7 +331,6 @@
 			// 绑定微信
 			async bindingWechat() {
 				let systemInfo = await uni.getSystemInfo()
-
 				// 判断是否是小程序端，如果不是就提示用户到小程序端进行绑定
 				if (systemInfo[1].host && systemInfo[1].host.env == 'WeChat') {
 					uni.login({
@@ -610,7 +618,7 @@
 
 
 	.tool {
-		height: 180rpx;
+		height: 300rpx;
 		width: 100%;
 		margin-top: 5%;
 		background-color: white;
@@ -621,6 +629,7 @@
 	}
 
 	.Apply {
+		font-size: 33rpx;
 		height: 100%;
 		display: flex;
 		flex-direction: row;

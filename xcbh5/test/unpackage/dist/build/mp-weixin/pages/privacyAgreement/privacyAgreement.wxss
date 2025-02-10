@@ -1,0 +1,6 @@
+.privacy-agreement-page.data-v-b7390e94{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:30px;background-color:#fff}.privacy-agreement-title.data-v-b7390e94{font-size:30px;font-weight:700;margin-bottom:30px;color:#222;text-align:center;border-bottom:2px solid #ddd;padding-bottom:10px}.privacy-agreement-content.data-v-b7390e94{width:100%;max-height:700px;background-color:#f9f9f9;border:1px solid #e5e5e9;border-radius:8px;padding:20px;overflow-y:auto;box-shadow:0 0 10px rgba(0,0,0,.1)}.privacy-agreement-text.data-v-b7390e94{font-size:16px;line-height:1.8;color:#333;text-align:justify}.privacy-agreement-text ._h1.data-v-b7390e94,
+.privacy-agreement-text ._h2.data-v-b7390e94,
+.privacy-agreement-text ._h3.data-v-b7390e94,
+.privacy-agreement-text ._h4.data-v-b7390e94,
+.privacy-agreement-text ._h5.data-v-b7390e94,
+.privacy-agreement-text ._h6.data-v-b7390e94{color:#222;margin-top:20px;margin-bottom:10px}.privacy-agreement-text ._h1.data-v-b7390e94{font-size:24px}.privacy-agreement-text ._h2.data-v-b7390e94{font-size:22px}.privacy-agreement-text ._h3.data-v-b7390e94{font-size:20px}.privacy-agreement-text ._h4.data-v-b7390e94{font-size:18px}.privacy-agreement-text ._h5.data-v-b7390e94{font-size:17px}.privacy-agreement-text ._h6.data-v-b7390e94{font-size:16px}

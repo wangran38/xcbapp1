@@ -12,12 +12,6 @@
 							申请户主
 						</view>
 					</view>
-	<!-- 				<view class="item" @click="gotostalllist">
-						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe602;'}}</uni-icons>
-						<view class="add-dishes">
-							摊位列表
-						</view>
-					</view> -->
 		
 					<view class="item" @click="gotoEditshop">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe61e;'}}</uni-icons>
@@ -53,13 +47,19 @@
 			</view>
 			<view class="dishes">
 				<view class="title">
-					我的菜品
+					产品
 				</view>
 				<view class="content">
 					<view class="item" @click="goTorelePage">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe6ee;'}}</uni-icons>
 						<view class="add-dishes">
 							添加菜品
+						</view>
+					</view>
+					<view class="item" @click="goToTraceability">
+						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe6ee;'}}</uni-icons>
+						<view class="add-dishes">
+							产品溯源
 						</view>
 					</view>
 					<view class="item" @click="gotopublish">
@@ -224,6 +224,11 @@
 					return true
 				}
 				return false
+			},
+			goToTraceability(){
+				uni.navigateTo({
+					url: '/subPackages/aHouseholder/Traceability/Traceability'
+				});
 			},
 			gotopublish() {
 				uni.navigateTo({

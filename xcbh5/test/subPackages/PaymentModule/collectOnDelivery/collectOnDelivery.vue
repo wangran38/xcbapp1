@@ -13,8 +13,8 @@
 			</view>
 
 			<view>
-			<text class="info-label">下单时间：</text>
-			<text class="order-time">{{initTime(createtime)}}</text>
+				<text class="info-label">下单时间：</text>
+				<text class="order-time">{{initTime(createtime)}}</text>
 			</view>
 
 		</view>
@@ -58,7 +58,7 @@
 					&#xe600;
 				</uni-icons>
 
-				<uni-icons fontFamily="MyIconFont" :size="26" v-if="method.title=='数字人名币'" color="#ffd345;">
+				<uni-icons fontFamily="MyIconFont" :size="26" v-if="method.title=='数字人民币'" color="#ffd345;">
 					&#xe78c;
 				</uni-icons>
 				<text class="payment-name">{{method.title}}</text>
@@ -66,7 +66,8 @@
 		</view>
 		<!-- 支付按钮区 -->
 		<view class="payment-btn-area">
-			<button type="primary" @click="prepay" :disabled="isTimeOut ||!selectedPaymentMethod">{{isPayment?'已支付':'立即付款'}}</button>
+			<button type="primary" @tap="prepay"
+				:disabled="isTimeOut ||!selectedPaymentMethod">{{isPayment?'已支付':'立即付款'}}</button>
 		</view>
 		<!-- 支付提示区 -->
 		<view class="payment-tips">
@@ -86,18 +87,18 @@
 	export default {
 		data() {
 			return {
-				isPayment:false,
+				isPayment: false,
 				out_trade_no: null, // 这里先写示例编号，实际由后端生成返回
 				createtime: null, // 示例下单时间，实际由后端传递
 				productList: [],
 				totalPrice: 0, // 根据菜品单价和数量计算得出，示例价格
-				
-				otherFees: 0,   // 其他费用
-				totalAmount: 0,  // 最终价格
+				otherFees: 0, // 其他费用
+				totalAmount: 0, // 最终价格
 				countDownTime: 15, // 设置倒计时时长，单位为分钟，可根据实际需求调整
 				countDown: null, // 存储倒计时定时器实例
 				isTimeOut: false, // 是否超时标志
 				formattedCountDown: '', // 格式化后的倒计时显示文本
+				PaymentTimer: null,
 				paymentMethods: [{
 						title: '微信支付',
 						code: 1
@@ -107,16 +108,32 @@
 						code: 2
 					},
 					{
-						title: '数字人名币',
+						title: '数字人民币',
 						code: 3
 					}
 				],
-				selectedPaymentMethod: 2,   // 用户选择的支付方式
-				supportMethod:[1,2] // 目前支付的支付方式
+				selectedPaymentMethod: 2, // 用户选择的支付方式
+				supportMethod: [1, 2] // 目前支付的支付方式
 			};
 		},
 		mounted() {
 			this.startCountDown();
+			this.PaymentTimer = setInterval(async () => {
+				let {
+					data
+				} = await api.getorderinfo({
+					out_trade_no: this.out_trade_no
+				})
+				if (data.is_pay == 2 && data.success_time != '') {
+					clearInterval(this.PaymentTimer);
+					uni.redirectTo({
+						url: `/pages/orders/orders?orderStatus=3`
+					});
+					// 关闭定时器
+
+				}
+			}, 2500)
+
 		},
 		beforeDestroy() {
 			this.clearCountDown();
@@ -125,19 +142,22 @@
 			// 加载订单号
 			this.out_trade_no = value.out_trade_no
 			let res = await api.myorders(value)
-			if (res.code == 200){
+			if (res.code == 200) {
 				let data = res.data.listdata[0]
 				this.createtime = data.createtime
 				this.productList = data.list_arr
 				this.totalPrice = data.price
-				this.totalAmount = this.totalPrice+ this.otherFees
-				console.log(res)
-			}else{
+				this.totalAmount = this.totalPrice + this.otherFees
+			} else {
 				uni.showToast({
-					title:res.msg || res.message,
-					
+					title: res.msg || res.message,
+
 				})
 			}
+
+		},
+		onUnload() {
+			clearInterval(this.PaymentTimer);
 		},
 		methods: {
 			/**
@@ -175,71 +195,118 @@
 				// 实现返回上一页的逻辑，例如在uni-app中可以使用uni.navigateBack()
 				uni.navigateBack();
 			},
-			
+
 			// 选择支付方式
 			selectPaymentMethod(method) {
 				this.selectedPaymentMethod = method.code;
 			},
-			
-			// 支付
-			async prepay() {
-				if (this.supportMethod.includes(this.selectedPaymentMethod)){
 
-					switch (this.selectedPaymentMethod){
-						case 1:
-							let data = await api.wechatpay({out_trade_no:this.out_trade_no})
-							console.log(data)
-							data.data.timeStamp +=''
-							if (data.code == 200){
-								uni.requestPayment({
-									...data.data,
-									"success":function(res){
-										console.log(res)
-									},
-									"fail":function(error){
-										console.log(error)
-									},
-									"complete":function(res){}
+			// 调用微信支付方法
+			async startPayment(out_trade_no){
+				// 获取微信支付需要的参数
+				let data = await api.wechatpay({
+					out_trade_no: this.out_trade_no
+				})
+				if (data.code == 200) {
+					data.data.timeStamp += ''
+					uni.requestPayment({
+						...data.data,
+					})
+
+				} else if (data.code == 202) { // 未绑定uid就自动绑定并重新支付
+					uni.login({
+						provider: 'true',
+						success: async res => {
+							// 绑定openid
+							let idReseponse = await api.bindingOpenid({
+								code: res.code
+							})
+							console.log(idReseponse,data)
+							if (idReseponse.code == 200) {
+								let data = await api.wechatpay({
+									out_trade_no: this.out_trade_no
+								})
+								if (data.code == 200) {
+									data.data.timeStamp += ''
+									// 重新支付
+									uni.requestPayment({
+										...data.data,
+									})
+								}else{
+									uni.showToast({
+										title: data.message,
+										icon: 'error'
+									})
+								}
+	
+							} else {
+								uni.showToast({
+									title: idReseponse.message,
+									icon: 'error'
 								})
 							}
+						},
+					});
+
+				} else {
+					uni.showToast({
+						title: data.msg || data.message,
+						icon: 'error'
+					})
+				}
+			},
+
+			// 支付
+			async prepay() {
+				if (this.supportMethod.includes(this.selectedPaymentMethod)) {
+					switch (this.selectedPaymentMethod) {
+						// 微信支付
+						case 1:
+							this.startPayment(this.out_trade_no)
 							break;
+							// 积分支付
 						case 2:
-							let response = await api.payscore({out_trade_no:this.out_trade_no})
-							if (response.code == 200){
+							let response = await api.payscore({
+								out_trade_no: this.out_trade_no
+							})
+							console.log(response)
+							if (response.code == 200) {
 								uni.showToast({
-									title:"支付成功",
-									icon:'success'
+									title: "支付成功",
+									icon: 'success'
 								})
 								// 设置支付状态，为true
 								this.isPayment = true
-								this.clearCountDown()  // 清空定时器
-								setTimeout(()=>{
-									this.goBack()
-									this.goBack()
-								},2000)
+								this.clearCountDown() // 清空定时器
 
-							}else{
+								clearInterval(this.PaymentTimer);
+								uni.redirectTo({
+									url: `/pages/orders/orders?orderStatus=3`
+								});
+
+							} 
+							else {
 								uni.showToast({
-									title:response.msg || response.message,
-									icon:'error'
+									title: response.msg || response.message,
+									icon: 'error'
 								})
 							}
 							break;
 						case 3:
-							console.log("数字人名币")
+							console.log("数字人民币")
 							break;
 					}
-				}else{
+				} else {
 					uni.showToast({
-						title:'暂未开通'+this.paymentMethods[this.selectedPaymentMethod-1].title,
-						icon:'error'
+						title: '暂未开通' + this.paymentMethods[this.selectedPaymentMethod - 1].title,
+						icon: 'error'
 					})
 				}
-				
+
 			},
 			startCountDown() {
 				let totalSeconds = this.countDownTime * 60;
-				this.countDown = setInterval(() => {
+				this.countDown = setInterval(async () => {
 					if (totalSeconds <= 0) {
 						this.isTimeOut = true;
 						this.clearCountDown();
@@ -253,6 +320,7 @@
 					totalSeconds--;
 				}, 1000);
 			},
+			// 清空定时器
 			clearCountDown() {
 				if (this.countDown) {
 					clearInterval(this.countDown);
@@ -280,216 +348,216 @@
 	}
 
 	.order-detail-page {
-	  background-color: #f8f8f8;
-	  padding: 0;
-	  margin: 0;
-	  min-height: 100vh;
+		background-color: #f8f8f8;
+		padding: 0;
+		margin: 0;
+		min-height: 100vh;
 	}
-	
+
 	.header {
-	  background-color: #007bff;
-	  color: white;
-	  padding: 20rpx;
-	  display: flex;
-	  align-items: center;
+		background-color: #007bff;
+		color: white;
+		padding: 20rpx;
+		display: flex;
+		align-items: center;
 	}
-	
+
 	.back-btn {
-	  text-decoration: none;
-	  color: white;
-	  margin-right: 20rpx;
+		text-decoration: none;
+		color: white;
+		margin-right: 20rpx;
 	}
-	
+
 	.title {
-	  font-size: 40rpx;
-	  margin: 0;
+		font-size: 40rpx;
+		margin: 0;
 	}
-	
+
 	.order-base-info {
-	  background-color: white;
-	  padding: 40rpx;
-	  margin: 40rpx;
-	  border-radius: 10rpx;
-	  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+		background-color: white;
+		padding: 40rpx;
+		margin: 40rpx;
+		border-radius: 10rpx;
+		box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
 
 	}
-	
+
 	.info-label {
-	  font-size: 32rpx;
-	  color: #666;
-	  margin-right: 20rpx;
+		font-size: 32rpx;
+		color: #666;
+		margin-right: 20rpx;
 	}
-	
+
 	.order-id {
-	  font-size: 32rpx;
-	  font-weight: bold;
-	  color: #333;
+		font-size: 32rpx;
+		font-weight: bold;
+		color: #333;
 	}
-	
+
 	.order-time {
-	  font-size: 32rpx;
-	  color: #333;
+		font-size: 32rpx;
+		color: #333;
 	}
-	
+
 	.product-info {
-	  background-color: white;
-	  padding: 40rpx;
-	  margin: 40rpx;
-	  border-radius: 10rpx;
-	  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+		background-color: white;
+		padding: 40rpx;
+		margin: 40rpx;
+		border-radius: 10rpx;
+		box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
 	}
-	
+
 	.product-list {
-	  margin-bottom: 40rpx;
+		margin-bottom: 40rpx;
 	}
-	
+
 	.product-item {
-	  display: flex;
-	  align-items: center;
-	  margin-bottom: 20rpx;
+		display: flex;
+		align-items: center;
+		margin-bottom: 20rpx;
 	}
-	
+
 	.product-img {
-	  width: 160rpx;
-	  height: 160rpx;
-	  border-radius: 10rpx;
-	  margin-right: 20rpx;
+		width: 160rpx;
+		height: 160rpx;
+		border-radius: 10rpx;
+		margin-right: 20rpx;
 	}
-	
+
 	.product-details {
-	  flex: 1;
+		flex: 1;
 	}
-	
+
 	.product-name {
-	  font-size: 32rpx;
-	  margin: 0;
+		font-size: 32rpx;
+		margin: 0;
 	}
-	
+
 	.product-spec {
-	  font-size: 28rpx;
-	  color: #666;
-	  margin: 0;
+		font-size: 28rpx;
+		color: #666;
+		margin: 0;
 	}
-	
+
 	.product-quantity {
-	  font-weight: bold;
-	  font-size: 28rpx;
+		font-weight: bold;
+		font-size: 28rpx;
 	}
-	
+
 	.order-amount-info {
-	  background-color: white;
-	  padding: 40rpx;
-	  margin: 40rpx;
-	  border-radius: 10rpx;
-	  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+		background-color: white;
+		padding: 40rpx;
+		margin: 40rpx;
+		border-radius: 10rpx;
+		box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
 	}
-	
+
 	.order-amount-info div {
-	  display: flex;
-	  justify-content: space-between;
-	  margin-bottom: 20rpx;
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 20rpx;
 	}
-	
+
 	.amount-label {
-	  font-size: 28rpx;
-	  color: #666;
+		font-size: 28rpx;
+		color: #666;
 	}
-	
+
 	.price-value {
-	  font-weight: bold;
-	  font-size: 32rpx;
+		font-weight: bold;
+		font-size: 32rpx;
 	}
-	
+
 	.amount-total {
-	  color: red;
-	  font-size: 40rpx;
+		color: red;
+		font-size: 40rpx;
 	}
-	
+
 	.payment-methods {
-	  background-color: white;
-	  padding: 40rpx;
-	  margin: 40rpx;
-	  border-radius: 10rpx;
-	  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
-	  display: flex;
-	  justify-content: space-around;
+		background-color: white;
+		padding: 40rpx;
+		margin: 40rpx;
+		border-radius: 10rpx;
+		box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+		display: flex;
+		justify-content: space-around;
 	}
-	
+
 	.payment-method-item {
-	  display: flex;
-	  flex-direction: column;
-	  align-items: center;
-	  cursor: pointer;
-	  padding: 20rpx;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		cursor: pointer;
+		padding: 20rpx;
 	}
-	
+
 	.payment-method-item.active {
-	  border: 4rpx solid #007bff;
-	  border-radius: 10rpx;
+		border: 4rpx solid #007bff;
+		border-radius: 10rpx;
 	}
-	
+
 	.payment-icon {
-	  width: 80rpx;
-	  height: 80rpx;
-	  margin-bottom: 10rpx;
+		width: 80rpx;
+		height: 80rpx;
+		margin-bottom: 10rpx;
 	}
-	
+
 	.payment-name {
-	  font-size: 28rpx;
-	  color: #333;
+		font-size: 28rpx;
+		color: #333;
 	}
-	
-	
+
+
 	.payment-btn-area {
-	  margin: 40rpx;
-	  text-align: center;
+		margin: 40rpx;
+		text-align: center;
 	}
-	
+
 	.payment-tips {
-	  background-color: white;
-	  padding: 40rpx;
-	  margin: 40rpx;
-	  border-radius: 10rpx;
-	  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
-	  text-align: center;
+		background-color: white;
+		padding: 40rpx;
+		margin: 40rpx;
+		border-radius: 10rpx;
+		box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+		text-align: center;
 	}
-	
+
 	.countdown-area {
-	  background-color: white;
-	  padding: 40rpx;
-	  margin: 40rpx;
-	  border-radius: 10rpx;
-	  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
-	  text-align: center;
+		background-color: white;
+		padding: 40rpx;
+		margin: 40rpx;
+		border-radius: 10rpx;
+		box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+		text-align: center;
 	}
-	
+
 	.countdown-text {
-	  font-size: 32rpx;
-	  color: #333;
+		font-size: 32rpx;
+		color: #333;
 	}
-	
+
 	.shipping-info {
-	  background-color: white;
-	  padding: 40rpx;
-	  margin: 40rpx;
-	  border-radius: 10rpx;
-	  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
+		background-color: white;
+		padding: 40rpx;
+		margin: 40rpx;
+		border-radius: 10rpx;
+		box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1);
 	}
-	
+
 	.shipping-address {
-	  font-size: 32rpx;
-	  color: #333;
-	  margin-bottom: 20rpx;
+		font-size: 32rpx;
+		color: #333;
+		margin-bottom: 20rpx;
 	}
-	
+
 	.receiver {
-	  font-size: 32rpx;
-	  color: #333;
-	  margin-bottom: 20rpx;
+		font-size: 32rpx;
+		color: #333;
+		margin-bottom: 20rpx;
 	}
-	
+
 	.phone {
-	  font-size: 32rpx;
-	  color: #333;
+		font-size: 32rpx;
+		color: #333;
 	}
 </style>

@@ -7,12 +7,12 @@
 				<uni-icons type="right" size="14" color="#ccc"></uni-icons>
 			</view>
 			<view class="label">
-				<view class="one">
-					可溯源
+				<view class="one" @click="goToSuyuan(item)">
+					溯源
 				</view>
-				<view class="one">
+<!-- 				<view class="one">
 					已检测
-				</view>
+				</view> -->
 			</view>
 			<view class="price">
 				<text>¥ {{item.price.toFixed(2)}} 元/{{item.weight_name}}</text>
@@ -36,6 +36,7 @@
 		mapMutations,
 		mapGetters
 	} from 'vuex';
+	import {api} from '@/api/index.js'
 	export default {
 		name: "menuBarVue",
 		data() {
@@ -92,6 +93,12 @@
 				// this.count = ''
 				// this.show = true
 			},
+			goToSuyuan(item){
+				uni.navigateTo({
+					url:`/subPackages/aHouseholder/lookTraceability/lookTraceability?commodity_id=${item.id}`
+				})
+			},
+			
 			...mapMutations('cart', ['addItem', 'subItem', 'anyNumber']),
 		},
 		props: ['item'],
@@ -110,8 +117,8 @@
 	}
 
 	.box {
-		width: 100%;
 		display: flex;
+		height: 216rpx;
 	}
 
 	image {
@@ -160,13 +167,15 @@
 	}
 
 	.one {
-		width: 15%;
+		font-size:30rpx;
+		padding: 20rpx;
+		width: 18%;
 		height: 80%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		/* background-color: #007aff; */
-		border: 0.5rpx solid #007aff;
+		border: 0.5rpx solid red;
+		color: red;
 		margin-right: 10rpx;
 	}
 
@@ -201,13 +210,13 @@
 
 	.btn1,
 	.btn2 {
-		font-size: 30rpx;
+		font-size: 40rpx;
 		width: 50rpx;
 		height: 50rpx;
 		background-color: #007aff;
 		color: white;
 		text-align: center;
-		line-height: 50rpx;
+		line-height: 45rpx;
 		border-radius: 50%;
 		margin: 0 10rpx;
 	}
