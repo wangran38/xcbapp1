@@ -1,65 +1,137 @@
-
-.uni-easyinput__content-input{
-	font-size: 30rpx !important;
-	height: 100rpx !important;
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.login-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f9ff 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
 }
-.container {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	padding: 40rpx;
+.login-container .decorative-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(45deg, rgba(64, 158, 255, 0.1) 0%, rgba(64, 158, 255, 0.05) 100%);
 }
-.form {
-	width: 100%;
-	margin-bottom: 40rpx;
+.login-container .decorative-circle.circle-1 {
+  width: 600rpx;
+  height: 600rpx;
+  top: -300rpx;
+  right: -300rpx;
 }
-.yanz {
-	width: 90%;
-	/* background-color: #007aff; */
+.login-container .decorative-circle.circle-2 {
+  width: 400rpx;
+  height: 400rpx;
+  bottom: -200rpx;
+  left: -200rpx;
 }
-.header {
-	font-size: 48rpx;
-	margin-bottom: 40rpx;
-	text-align: center;
+.login-container .content-wrapper {
+  padding: 60rpx 50rpx;
+  position: relative;
+  z-index: 1;
 }
-.input-group {
-	width: 100%;
-	margin-bottom: 40rpx;
-	display: flex;
-	justify-content: center;
+.login-container .content-wrapper .header {
+  margin-bottom: 80rpx;
 }
-.button-group {
-	width: 90%;
-	text-align: center;
+.login-container .content-wrapper .header .title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 16rpx;
 }
-.login-button {
-	width: 100%;
-	padding: 10rpx;
-	background-color: #007aff;
-	color: white;
-	font-size: 28rpx;
-	border: none;
-	border-radius: 10rpx;
-	cursor: pointer;
+.login-container .content-wrapper .header .subtitle {
+  font-size: 28rpx;
+  color: #7f8c8d;
 }
-.login-button:active {
-	background-color: darkblue;
+.login-container .content-wrapper .form-wrapper .input-group {
+  height: 100rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 40rpx;
+  padding: 0 32rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
 }
-.login-wxbutton {
-	width: 90%;
-	padding: 10rpx;
-	background-color: blue;
-	color: white;
-	font-size: 28rpx;
-	border: none;
-	border-radius: 10rpx;
-	cursor: pointer;
+.login-container .content-wrapper .form-wrapper .input-group.focus {
+  box-shadow: 0 8rpx 24rpx rgba(64, 158, 255, 0.1);
+  -webkit-transform: translateY(-2rpx);
+          transform: translateY(-2rpx);
 }
-.bottom {
-	font-size: 30rpx;
-	width: 350rpx;
-	display: flex;
-	justify-content: space-between;
+.login-container .content-wrapper .form-wrapper .input-group .form-input {
+  flex: 1;
+  height: 100%;
+  margin: 0 24rpx;
+  font-size: 30rpx;
+  color: #2c3e50;
+  border: none;
+  outline: none;
+}
+.login-container .content-wrapper .form-wrapper .login-btn {
+  height: 96rpx;
+  line-height: 96rpx;
+  font-size: 34rpx;
+  color: #fff;
+  background: linear-gradient(45deg, #6AB3FD, #409EFF);
+  border-radius: 48rpx;
+  margin-top: 60rpx;
+  transition: all 0.3s;
+  box-shadow: 0 8rpx 24rpx rgba(64, 158, 255, 0.2);
+}
+.login-container .content-wrapper .form-wrapper .login-btn:not(.active) {
+  opacity: 0.6;
+  background: #c0dfff;
+  box-shadow: none;
+}
+.login-container .content-wrapper .form-wrapper .login-btn.loading {
+  opacity: 0.9;
+}
+.login-container .content-wrapper .form-wrapper .login-btn .loading-icon {
+  -webkit-animation: rotate 1s linear infinite;
+          animation: rotate 1s linear infinite;
+}
+.login-container .content-wrapper .form-wrapper .assist-links {
+  margin-top: 40rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.login-container .content-wrapper .form-wrapper .assist-links .link-text {
+  color: #409EFF;
+  font-size: 28rpx;
+  position: relative;
+}
+.login-container .content-wrapper .form-wrapper .assist-links .link-text::after {
+  content: '';
+  position: absolute;
+  bottom: -4rpx;
+  left: 0;
+  width: 0;
+  height: 2rpx;
+  background: #409EFF;
+  transition: width 0.3s;
+}
+.login-container .content-wrapper .form-wrapper .assist-links .link-text:active::after {
+  width: 100%;
+}
+@-webkit-keyframes rotate {
+from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+}
+to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+}
+}
+@keyframes rotate {
+from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+}
+to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+}
 }
 

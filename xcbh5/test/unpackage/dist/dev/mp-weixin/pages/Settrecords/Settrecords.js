@@ -163,7 +163,7 @@ exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 54));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
 var _api = __webpack_require__(/*! @/api */ 30);
-var _usePage = _interopRequireDefault(__webpack_require__(/*! @/hooks/usePage */ 57));
+var _usePage = _interopRequireDefault(__webpack_require__(/*! @/hooks/usePage */ 65));
 //
 //
 //

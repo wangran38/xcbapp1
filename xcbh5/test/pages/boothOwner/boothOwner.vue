@@ -147,7 +147,7 @@
 					<view class="item" @click="gotowallet">
 						<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe613;'}}</uni-icons>
 						<view class="add-dishes">
-							钱包
+							现金钱包
 						</view>
 					</view>
 					<view class="item" @click="gotoPoints">

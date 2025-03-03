@@ -25,7 +25,7 @@
 
 		<view class="Integral">
 			<view class="Total-spending">
-				<view>消费总额</view>
+				<view>现金消费累计</view>
 				<view>0元</view>
 			</view>
 			<view class="Points-available">

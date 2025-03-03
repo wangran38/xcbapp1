@@ -1,63 +1,68 @@
 <template>
-	<view class="container">
-		<view class="header">
-			注册
-		</view>
-		<view class="input-group">
-			<uni-easyinput v-model="form.username" prefixIcon="person" placeholder="请输入手机号码"
-				@input="validatePhoneNumber"></uni-easyinput>
-			<view v-if="phoneError" class="error-message">{{ phoneError }}</view>
-		</view>
-		<view class="input-group">
-			<uni-easyinput v-model="form.password" type="password" prefixIcon="locked" placeholder="请输入六位密码"
-				@input="validatePassword('password')" maxlength="6"></uni-easyinput>
-			<view
-				:class="['error-message', { 'valid': passwordValid, 'invalid':!passwordValid && form.password.length > 0 }]">
-				{{ passwordError }}
+	<view class="register-container">
+		<view class="decorative-circle circle-1"></view>
+		<view class="decorative-circle circle-2"></view>
+
+		<view class="content-wrapper">
+			<view class="header">
+				<text class="title">乡愁宝大市场</text>
+				<text class="subtitle">开始注册您的账号</text>
 			</view>
-		</view>
-		<view class="input-group">
-			<uni-easyinput v-model="form.confirm" type="password" prefixIcon="locked" placeholder="请确认密码"
-				@input="validatePassword('confirm')" maxlength="6"></uni-easyinput>
-			<view
-				:class="['error-message', { 'valid': confirmPasswordValid, 'invalid':!confirmPasswordValid && form.confirm.length > 0 }]">
-				{{ confirmPasswordError }}
-			</view>
-		</view>
-		<view style="margin-bottom: 62rpx; position: relative; left: -91rpx;">
-			<view class="agreement-checkbox">
-				<checkbox v-model="agreeServiceAgreement" :checked="agreeServiceAgreement" @click="checkBox(0)">
-				</checkbox>
-				<view class="checkbox-container">
-					<view class="checkbox-text">
-						我已阅读并同意 <navigator url="/pages/userServiceAgreement/userServiceAgreement" style="color: #007aff;">服务协议
-						</navigator>
+
+			<view class="form-wrapper">
+				<view class="input-group">
+					<uni-icons type="phone" size="24" color="#409EFF"></uni-icons>
+					<input class="form-input" type="number" v-model="form.username" placeholder="请输入手机号"
+						maxlength="11" />
+				</view>
+				<view class="input-group">
+					<uni-icons type="locked" size="24" color="#409EFF"></uni-icons>
+					<input class="form-input" :type="showPassword ? 'password':'text'" v-model="form.password" placeholder="请输入至少六位密码" />
+					<uni-icons :type="showPassword ? 'eye' : 'eye-slash'" size="24" color="#999"
+						@click="showPassword = !showPassword" />
+				</view>
+				
+
+				<view class="input-group">
+					<uni-icons type="locked" size="24" color="#409EFF"></uni-icons>
+					<input class="form-input" :type="showConfirmPassword ? 'password':'text'" v-model="form.confirm" placeholder="确认密码"
+						maxlength="11" />
+					<uni-icons :type="showConfirmPassword ? 'eye' : 'eye-slash'" size="24" color="#999"
+						@click="showConfirmPassword = !showConfirmPassword" />
+				</view>
+				{{this.confirmPasswordError}}
+				<view class="agreement-group">
+					<view class="checkbox-item">
+						<uni-icons :type="agreements.service ? 'checkbox-filled' : 'circle'" size="24"
+							:color="agreements.service ? '#409EFF' : '#999'"
+							@click="agreements.service = !agreements.service" />
+						<text class="agreement-text">我已阅读并同意</text>
+						<text class="link" @click="goTouserServiceAgreement">《服务协议》</text>
+					</view>
+					<view class="checkbox-item">
+						<uni-icons :type="agreements.privacy ? 'checkbox-filled' : 'circle'" size="24"
+							:color="agreements.privacy ? '#409EFF' : '#999'"
+							@click="agreements.privacy = !agreements.privacy" />
+						<text class="agreement-text">我已阅读并同意</text>
+						<text class="link" @click="goToprivacyAgreement">《隐私政策》</text>
 					</view>
 				</view>
-			</view>
-			<view class="agreement-checkbox">
-				<checkbox v-model="agreePrivacyPolicy" :checked="agreePrivacyPolicy" @click="checkBox(1)">
-				</checkbox>
-				<view class="checkbox-container">
-					<view class="checkbox-text">
-						我已阅读并同意 <navigator url="/pages/privacyAgreement/privacyAgreement" style="color: #007aff;">隐私协议
-						</navigator>
-					</view>
+
+				<button class="register-btn" @click="register">
+					<text class="link">立即注册</text>
+				</button>
+				<view class="login-link">
+					<text>已有账号？</text>
+					<text class="link" @click="navigateToLogin">立即登录</text>
 				</view>
 			</view>
-		</view>
-		<view class="button-group">
-			<button class="login-button" @click="register">注册</button>
 		</view>
 	</view>
 </template>
-
-
 <script>
 	import {
 		api
 	} from '../../api/index.js';
-
 	export default {
 		data() {
 			return {
@@ -71,58 +76,103 @@
 				confirmPasswordError: '',
 				passwordValid: false,
 				confirmPasswordValid: false,
-				// 新增的状态，用于存储用户是否同意服务协议
-				agreeServiceAgreement: true,
-				// 新增的状态，用于存储用户是否同意隐私协议
-				agreePrivacyPolicy: true
-			};
+				agreements: {
+					service: false,
+					privacy: false
+				},
+				showPassword: true,
+				showConfirmPassword: true
+			}
 		},
 		watch: {
 			'form.username': 'validatePhoneNumber',
 			'form.password': 'validatePassword'
 		},
+
 		methods: {
-			validatePhoneNumber() {
-				let reg = /^1[3-9]\d{9}$/;
-				if (!reg.test(this.form.username)) {
-					this.phoneError = '请输入正确的11位手机号';
-				} else {
-					this.phoneError = '';
-				}
+			goTouserServiceAgreement(){
+				uni.navigateTo({
+					url:'/pages/userServiceAgreement/userServiceAgreement'
+				})
 			},
-			validatePassword(field) {
-				this.$nextTick(() => {
-					if (field === 'password') {
-						if (this.form.password.length === 0) {
-							this.passwordError = '密码不能为空';
-							this.passwordValid = false;
-						} else if (this.form.password.length !== 6) {
-							this.passwordError = '密码必须6位';
-							this.passwordValid = false;
-						} else {
-							this.passwordError = '密码格式正确';
-							this.passwordValid = true;
-						}
-					} else if (field === 'confirm') {
-						if (this.form.confirm.length === 0) {
-							this.confirmPasswordError = '密码不能为空';
-							this.confirmPasswordValid = false;
-						} else if (this.form.confirm.length !== 6) {
-							this.confirmPasswordError = '密码必须6位';
-							this.confirmPasswordValid = false;
-						} else if (this.form.confirm !== this.form.password) {
-							this.confirmPasswordError = '两次密码输入不一致';
-							this.confirmPasswordValid = false;
-						} else {
-							this.confirmPasswordError = '密码格式正确';
-							this.confirmPasswordValid = true;
-						}
+			goToprivacyAgreement(){
+				uni.navigateTo({
+					url:'/pages/privacyAgreement/privacyAgreement'
+				})
+			},
+			async register() {
+					let reg = /^1[3-9]\d{9}$/;
+					if (!reg.test(this.form.username)) {
+						uni.showToast({
+							title: '请输入正确的11位手机号',
+							icon: 'error'
+						});
+						return 
 					}
-				});
-			},
-			// 新增的方法，用于处理协议勾选状态的变化
+					if (this.form.password === '') {
+						uni.showToast({
+							title: '请输入密码',
+							icon: 'error'
+						});
+						return;
+					}
+					// 校验密码是否为6位
+					if (this.form.password.length !== 6) {
+						uni.showToast({
+							icon: 'error',
+							title: '密码必须为6位'
+						});
+						return;
+					}
+					if (this.form.password !== this.form.confirm) {
+						uni.showToast({
+							icon: 'none',
+							title: '两次密码输入不一致'
+						});
+						return;
+					}
+					// 新增的校验，确保用户已勾选服务协议和隐私协议
+					if (!this.agreements.service || !this.agreements.privacy) {
+						uni.showToast({
+							icon: 'none',
+							title: '请勾选服务协议和隐私协议'
+						});
+						return;
+					}
+			
+					try {
+						const response = await api.register(this.form.username, this.form.password, this.form.confirm);
+						if (response.code === 200) {
+							const token = response.data;
+							uni.setStorageSync('token', token);
+			
+							uni.showToast({
+								title: '注册成功',
+								icon: 'success',
+								duration: 2000
+							});
+							setTimeout(() => {
+								uni.navigateTo({
+									url: '/pages/login/login'
+								});
+							}, 2000);
+						} else {
+							uni.showToast({
+								icon: 'none',
+								title: response.msg || '注册失败，请重试'
+							});
+						}
+					} catch (error) {
+						uni.showToast({
+							icon: 'none',
+							title: '网络错误，请稍后重试'
+						});
+						console.error('Registration Error:', error);
+					}
+				}
+			,
 			checkBox(value) {
-				switch (value){
+				switch (value) {
 					case 0:
 						this.agreeServiceAgreement = !this.agreeServiceAgreement
 						break;
@@ -131,205 +181,196 @@
 						break;
 				}
 			},
-			async register() {
-				// 校验手机号是否为空
-				if (this.form.username === '') {
-					uni.showToast({
-						title: '请输入手机号码',
-						icon: 'none'
-					});
-					return;
-				}
-				// 校验密码是否为空
-				if (this.form.password === '') {
-					uni.showToast({
-						title: '请输入密码',
-						icon: 'none'
-					});
-					return;
-				}
-				// 校验密码是否为6位
-				if (this.form.password.length !== 6) {
-					uni.showToast({
-						icon: 'none',
-						title: '密码必须为6位'
-					});
-					return;
-				}
-				if (this.form.password !== this.form.confirm) {
-					uni.showToast({
-						icon: 'none',
-						title: '两次密码输入不一致'
-					});
-					return;
-				}
-				if (this.phoneError) {
-					uni.showToast({
-						icon: 'none',
-						title: this.phoneError
-					});
-					return;
-				}
-				console.log(this.agreeServiceAgreement,this.agreePrivacyPolicy)
-				// 新增的校验，确保用户已勾选服务协议和隐私协议
-				if (!this.agreeServiceAgreement || !this.agreePrivacyPolicy) {
-					uni.showToast({
-						icon: 'none',
-						title: '请勾选服务协议和隐私协议'
-					});
-					return;
-				}
-
-				try {
-					const response = await api.register(this.form.username, this.form.password, this.form.confirm);
-					if (response.code === 200) {
-						const token = response.data;
-						uni.setStorageSync('token', token);
-
-						uni.showToast({
-							title: '注册成功',
-							icon: 'success',
-							duration: 2000
-						});
-						setTimeout(() => {
-							uni.navigateTo({
-								url: '/pages/login/login'
-							});
-						}, 2000);
-					} else {
-						uni.showToast({
-							icon: 'none',
-							title: response.msg || '注册失败，请重试'
-						});
-					}
-				} catch (error) {
-					uni.showToast({
-						icon: 'none',
-						title: '网络错误，请稍后重试'
-					});
-					console.error('Registration Error:', error);
-				}
+			navigateToLogin() {
+				uni.navigateTo({
+					url: '/pages/login/login'
+				})
 			}
 		}
 	}
 </script>
 
-<style>
-	.uni-easyinput__content-input{
-		font-size: 30rpx !important;
-		height: 100rpx !important;
-	}
-	.container {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 40rpx;
-		background-color: #f5f5f5;
-	}
-
-	.header {
-		font-size: 48rpx;
-		margin-bottom: 40rpx;
-		color: #333;
-	}
-
-	.input-group {
-		width: 90%;
-		margin-bottom: 40rpx;
-	}
-
-	.button-group {
-		width: 90%;
-	}
-
-	.login-button {
-		width: 100%;
-		padding: 15rpx;
-		background-color: #007aff;
-		color: white;
-		font-size: 32rpx;
-		border: none;
-		border-radius: 10rpx;
-		cursor: pointer;
-		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-		transition: background-color 0.3s ease;
-	}
-
-	.login-button:active {
-		background-color: #0056b3;
-	}
-
-	.error-message {
-		color: red;
-		font-size: 24rpx;
-		margin-top: 10rpx;
-	}
-
-	.error-message.valid {
-		color: green;
-		/* 正确提示的绿色 */
-	}
-
-	.error-message.invalid {
-		color: red;
-		/* 错误提示的红色 */
-	}
-
-	/* 协议勾选部分的样式 */
-	.agreement-checkbox {
-		display: flex;
-		justify-content: left;
-		width: 100%;
-		margin-bottom: 15rpx;
-	}
-
-	.checkbox-container {
-		display: flex;
-		align-items: center;
-		font-size: 28rpx;
-		color: #666;
-	}
-
-	.checkbox-icon {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 30rpx;
-		height: 30rpx;
-		border: 2rpx solid #ccc;
-		border-radius: 5rpx;
-		margin-right: 10rpx;
-	}
-
-	.checkbox-icon checkbox {
-		width: 100%;
+<style lang="scss">
+	.form-input {
+		flex: 1;
 		height: 100%;
-		opacity: 0;
-	}
-
-	.checkbox-text {
+		margin: 0 24rpx;
 		font-size: 30rpx;
-		display: flex;
-		align-items: center;
+		border: none;
+		outline: none;
+	}
+	/* 独立样式表 */
+	.register-container {
+		min-height: 100vh;
+		background: linear-gradient(135deg, #f5f9ff 0%, #ffffff 100%);
+		position: relative;
+		overflow: hidden;
+
+		.decorative-circle {
+			position: absolute;
+			border-radius: 50%;
+			background: linear-gradient(45deg, rgba(#409EFF, 0.1) 0%, rgba(#409EFF, 0.05) 100%);
+
+			&.circle-1 {
+				width: 600rpx;
+				height: 600rpx;
+				top: -300rpx;
+				right: -300rpx;
+			}
+
+			&.circle-2 {
+				width: 400rpx;
+				height: 400rpx;
+				bottom: -200rpx;
+				left: -200rpx;
+			}
+		}
+
+		.content-wrapper {
+			padding: 60rpx 50rpx;
+			position: relative;
+			z-index: 1;
+
+			.header {
+				margin-bottom: 80rpx;
+
+				.title {
+					display: block;
+					font-size: 48rpx;
+					font-weight: 600;
+					color: #2c3e50;
+					margin-bottom: 16rpx;
+				}
+
+				.subtitle {
+					font-size: 28rpx;
+					color: #7f8c8d;
+				}
+			}
+
+			.form-wrapper {
+				.input-group {
+					height: 100rpx;
+					background: #fff;
+					border-radius: 16rpx;
+					margin-bottom: 40rpx;
+					padding: 0 32rpx;
+					display: flex;
+					align-items: center;
+					box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.03);
+					transition: all 0.3s ease;
+					position: relative;
+
+
+					&.error {
+						border: 1rpx solid #F56C6C;
+						animation: shake 0.4s;
+
+						.form-input {
+							color: #F56C6C;
+						}
+
+						.error-msg {
+							position: absolute;
+							right: 24rpx;
+							bottom: -40rpx;
+							font-size: 24rpx;
+							color: #F56C6C;
+						}
+					}
+
+					.form-input {
+						flex: 1;
+						height: 100%;
+						margin: 0 24rpx;
+						font-size: 30rpx;
+						color: #2c3e50;
+					}
+				}
+
+				.agreement-group {
+					margin: 40rpx 0;
+
+					.checkbox-item {
+						display: flex;
+						align-items: center;
+						margin-bottom: 24rpx;
+
+						.agreement-text {
+							margin-left: 12rpx;
+							font-size: 26rpx;
+							color: #2c3e50;
+						}
+
+						.link {
+							color: #409EFF;
+							margin-left: 8rpx;
+						}
+					}
+				}
+
+				.register-btn {
+					height: 96rpx;
+					line-height: 96rpx;
+					font-size: 34rpx;
+					color: #fff;
+					background: linear-gradient(45deg, #6AB3FD, #409EFF);
+					border-radius: 48rpx;
+					margin-top: 60rpx;
+					transition: all 0.3s;
+					box-shadow: 0 8rpx 24rpx rgba(64, 158, 255, 0.2);
+
+					&:not(.active) {
+						background: blue;
+						box-shadow: none;
+					}
+
+
+					.loading-icon {
+						animation: rotate 1s linear infinite;
+					}
+				}
+
+				.login-link {
+					text-align: center;
+					margin-top: 40rpx;
+					font-size: 28rpx;
+					color: #7f8c8d;
+
+					.link {
+						color: #409EFF;
+						margin-left: 16rpx;
+					}
+				}
+			}
+		}
 	}
 
-	.checkbox-text navigator {
-		text-decoration: underline;
+	@keyframes rotate {
+		from {
+			transform: rotate(0deg);
+		}
+
+		to {
+			transform: rotate(360deg);
+		}
 	}
 
-	.checkbox-container.checked.checkbox-icon {
-		background-color: #007aff;
-		border-color: #007aff;
-	}
+	@keyframes shake {
 
-	.checkbox-container.checked.checkbox-icon::after {
-		content: '';
-		display: block;
-		width: 16rpx;
-		height: 8rpx;
-		border-left: 3rpx solid white;
-		border-bottom: 3rpx solid white;
-		transform: rotate(-45deg);
+		0%,
+		100% {
+			transform: translateX(0);
+		}
+
+		20%,
+		60% {
+			transform: translateX(-10rpx);
+		}
+
+		40%,
+		80% {
+			transform: translateX(10rpx);
+		}
 	}
 </style>

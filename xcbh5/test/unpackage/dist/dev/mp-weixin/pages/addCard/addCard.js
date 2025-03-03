@@ -253,36 +253,62 @@ var _default = {
     changeValue: function changeValue(val) {
       this.info.isuse = parseInt(val.detail.value);
     },
-    submit: function submit() {
-      var _this = this;
+    // 返回上一页
+    customizeBack: function customizeBack() {
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-        var _copyObj2, data;
+        var canNavBack;
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _context.next = 2;
+                return getCurrentPages();
+              case 2:
+                canNavBack = _context.sent;
+                if (canNavBack && canNavBack.length > 1) {
+                  uni.navigateBack();
+                } else {
+                  history.back();
+                }
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    submit: function submit() {
+      var _this = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+        var _copyObj2, data;
+        return _regenerator.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
                 if (!(_this.info.bankname && _this.info.bankusername && _this.info.bankaddress && _this.info.banknumber.toString().length == 19 && _this.isNumber(_this.info.banknumber))) {
-                  _context.next = 9;
+                  _context2.next = 9;
                   break;
                 }
                 _copyObj2 = _this.copyObj(_this.info);
                 _copyObj2.banknumber = String(BigInt(_copyObj2.banknumber));
-                _context.next = 5;
+                _context2.next = 5;
                 return _index.api.addbank(_copyObj2);
               case 5:
-                data = _context.sent;
+                data = _context2.sent;
                 if (data.code == 200) {
                   uni.showToast({
                     title: '添加成功',
                     icon: 'success'
                   });
+                  _this.customizeBack();
                 } else {
                   uni.showToast({
                     title: data.msg,
                     icon: 'error'
                   });
                 }
-                _context.next = 10;
+                _context2.next = 10;
                 break;
               case 9:
                 uni.showToast({
@@ -291,10 +317,10 @@ var _default = {
                 });
               case 10:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }))();
     }
   }

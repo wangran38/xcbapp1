@@ -5,7 +5,7 @@
 				<view class="Total-assets">
 					<text>总资产(元)</text>
 					<view class="money">
-						0.00
+						{{shopmoney}}
 					</view>
 				</view>
 				<view class="bottom">
@@ -18,7 +18,7 @@
 					<view class="consume">
 						<text>可提现</text>
 						<view class="Cumulative-top-ups">
-							0.00
+							{{shopmoney}}
 						</view>
 					</view>
 				</view>
@@ -29,27 +29,39 @@
 					<text class="text">账单记录</text>
 				</view>
 				<view class="Recording">
-					<uni-icons custom-prefix="iconfont" type="icon-xiaofeijifenmingxi" size="30" color="#007aff"></uni-icons>
-					<text class="text">账单记录</text>
+					<uni-icons custom-prefix="iconfont" type="icon-xiaofeijifenmingxi" size="30" color="#007aff" @click="goToweChatCashwWithdrawal"></uni-icons>
+					<text class="text">申请提现</text>
 				</view>
-				<view class="Recording">
+<!-- 				<view class="Recording">
 					<uni-icons custom-prefix="iconfont" type="icon-xiaofei01" size="30" color="#007aff"></uni-icons>
 					<text class="text">账单记录</text>
-				</view>
+				</view> -->
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import {api} from '@/api/index.js'
 	export default {
 		data() {
 			return {
-				
+				shopmoney:null,
+				mymoney:null
 			}
 		},
+		onLoad(){
+			api.mymoney({}).then((({data})=>{
+				this.mymoney =  data.mymoney
+				this.shopmoney  = data.shopmoney
+			}))
+		},
 		methods: {
-			
+			goToweChatCashwWithdrawal(){
+				uni.navigateTo({
+					url:'/pages/weChatCashwWithdrawal/weChatCashwWithdrawal'
+				})
+			}
 		}
 	}
 </script>
@@ -114,6 +126,7 @@
 	.Recording{
 		display: flex;
 		flex-direction: column;
+		text-align: center;
 	}
 	.text{
 		color: #cbcbcb;

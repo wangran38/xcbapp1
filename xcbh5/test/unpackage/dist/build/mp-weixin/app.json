@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index1/index1",
     "pages/index/index",
     "pages/login/login",
     "pages/register/register",
@@ -13,7 +14,6 @@
     "pages/release/release",
     "pages/user-edit/user-edit",
     "pages/stalllist/stalllist",
-    "pages/index1/index1",
     "pages/coupons/coupons",
     "pages/lottery/lottery",
     "pages/rules/rules",
@@ -40,7 +40,8 @@
     "pages/userServiceAgreement/userServiceAgreement",
     "pages/privacyAgreement/privacyAgreement",
     "pages/OpenAccountSharing/OpenAccountSharing",
-    "pages/arrangeNotification/arrangeNotification"
+    "pages/arrangeNotification/arrangeNotification",
+    "pages/weChatCashwWithdrawal/weChatCashwWithdrawal"
   ],
   "subPackages": [
     {

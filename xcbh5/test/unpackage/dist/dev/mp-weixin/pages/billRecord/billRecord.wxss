@@ -1,0 +1,179 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+/* 独立样式表 */
+.register-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f9ff 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+}
+.register-container .decorative-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(45deg, rgba(64, 158, 255, 0.1) 0%, rgba(64, 158, 255, 0.05) 100%);
+}
+.register-container .decorative-circle.circle-1 {
+  width: 600rpx;
+  height: 600rpx;
+  top: -300rpx;
+  right: -300rpx;
+}
+.register-container .decorative-circle.circle-2 {
+  width: 400rpx;
+  height: 400rpx;
+  bottom: -200rpx;
+  left: -200rpx;
+}
+.register-container .content-wrapper {
+  padding: 60rpx 50rpx;
+  position: relative;
+  z-index: 1;
+}
+.register-container .content-wrapper .header {
+  margin-bottom: 80rpx;
+}
+.register-container .content-wrapper .header .title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 16rpx;
+}
+.register-container .content-wrapper .header .subtitle {
+  font-size: 28rpx;
+  color: #7f8c8d;
+}
+.register-container .content-wrapper .form-wrapper .input-group {
+  height: 100rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 40rpx;
+  padding: 0 32rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+  position: relative;
+}
+.register-container .content-wrapper .form-wrapper .input-group.error {
+  border: 1rpx solid #F56C6C;
+  -webkit-animation: shake 0.4s;
+          animation: shake 0.4s;
+}
+.register-container .content-wrapper .form-wrapper .input-group.error .form-input {
+  color: #F56C6C;
+}
+.register-container .content-wrapper .form-wrapper .input-group.error .error-msg {
+  position: absolute;
+  right: 24rpx;
+  bottom: -40rpx;
+  font-size: 24rpx;
+  color: #F56C6C;
+}
+.register-container .content-wrapper .form-wrapper .input-group .form-input {
+  flex: 1;
+  height: 100%;
+  margin: 0 24rpx;
+  font-size: 30rpx;
+  color: #2c3e50;
+}
+.register-container .content-wrapper .form-wrapper .agreement-group {
+  margin: 40rpx 0;
+}
+.register-container .content-wrapper .form-wrapper .agreement-group .checkbox-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+.register-container .content-wrapper .form-wrapper .agreement-group .checkbox-item .agreement-text {
+  margin-left: 12rpx;
+  font-size: 26rpx;
+  color: #2c3e50;
+}
+.register-container .content-wrapper .form-wrapper .agreement-group .checkbox-item .link {
+  color: #409EFF;
+  margin-left: 8rpx;
+}
+.register-container .content-wrapper .form-wrapper .register-btn {
+  height: 96rpx;
+  line-height: 96rpx;
+  font-size: 34rpx;
+  color: #fff;
+  background: linear-gradient(45deg, #6AB3FD, #409EFF);
+  border-radius: 48rpx;
+  margin-top: 60rpx;
+  transition: all 0.3s;
+  box-shadow: 0 8rpx 24rpx rgba(64, 158, 255, 0.2);
+}
+.register-container .content-wrapper .form-wrapper .register-btn:not(.active) {
+  opacity: 0.6;
+  background: #c0dfff;
+  box-shadow: none;
+}
+.register-container .content-wrapper .form-wrapper .register-btn.loading {
+  opacity: 0.9;
+}
+.register-container .content-wrapper .form-wrapper .register-btn .loading-icon {
+  -webkit-animation: rotate 1s linear infinite;
+          animation: rotate 1s linear infinite;
+}
+.register-container .content-wrapper .form-wrapper .login-link {
+  text-align: center;
+  margin-top: 40rpx;
+  font-size: 28rpx;
+  color: #7f8c8d;
+}
+.register-container .content-wrapper .form-wrapper .login-link .link {
+  color: #409EFF;
+  margin-left: 16rpx;
+}
+@-webkit-keyframes rotate {
+from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+}
+to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+}
+}
+@keyframes rotate {
+from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+}
+to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+}
+}
+@-webkit-keyframes shake {
+0%, 100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+}
+20%, 60% {
+    -webkit-transform: translateX(-10rpx);
+            transform: translateX(-10rpx);
+}
+40%, 80% {
+    -webkit-transform: translateX(10rpx);
+            transform: translateX(10rpx);
+}
+}
+@keyframes shake {
+0%, 100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+}
+20%, 60% {
+    -webkit-transform: translateX(-10rpx);
+            transform: translateX(-10rpx);
+}
+40%, 80% {
+    -webkit-transform: translateX(10rpx);
+            transform: translateX(10rpx);
+}
+}
+

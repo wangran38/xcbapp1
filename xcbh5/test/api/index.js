@@ -392,6 +392,15 @@ export const api = {
 	// 修改密码
 	editPwd(data){
 		return fetch('/api/user/editpsw', 'POST', data);
+	},
+	// 我的钱包
+	mymoney(data){
+		return fetch('/api/shop/mymoney', 'POST', data);
+	},
+	
+	// 提现至银行卡
+	amount(data){
+		return fetch('/api/shop/amount', 'POST', data);
 	}
 	
 	

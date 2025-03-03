@@ -44,7 +44,7 @@
 			</view>
 		</view>
 		<view class="Notice">
-			<view>今日打卡人次：{{signTotalData.todaynum}} <br>历史打卡次数：{{signTotalData.allnum}}</view>
+			<view>今日打卡人次：{{signTotalData.todaynum}} <br>累计打卡人次：{{signTotalData.allnum}}</view>
 			<button @click="goToJackpot" style="margin-top: 10rpx; font-size: 30rpx; color: #ff3030;">查看摇号结果</button>
 		</view>
 		
@@ -64,7 +64,7 @@
 	export default {
 		data() {
 			return {
-				NoticeList:['赠送积分说明','关于春节放假通知'],
+				NoticeList:['赠送积分说明'],
 				selectedCountry: 'china',
 				multiArray: [
 					[],

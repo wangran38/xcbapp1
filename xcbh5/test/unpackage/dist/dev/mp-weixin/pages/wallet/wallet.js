@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 420))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 444))
     },
   }
 } catch (e) {
@@ -158,12 +158,13 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(uni) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+var _index = __webpack_require__(/*! @/api/index.js */ 30);
 //
 //
 //
@@ -209,11 +210,29 @@ exports.default = void 0;
 //
 var _default = {
   data: function data() {
-    return {};
+    return {
+      shopmoney: null,
+      mymoney: null
+    };
   },
-  methods: {}
+  onLoad: function onLoad() {
+    var _this = this;
+    _index.api.mymoney({}).then(function (_ref) {
+      var data = _ref.data;
+      _this.mymoney = data.mymoney;
+      _this.shopmoney = data.shopmoney;
+    });
+  },
+  methods: {
+    goToweChatCashwWithdrawal: function goToweChatCashwWithdrawal() {
+      uni.navigateTo({
+        url: '/pages/weChatCashwWithdrawal/weChatCashwWithdrawal'
+      });
+    }
+  }
 };
 exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 

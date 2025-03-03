@@ -311,8 +311,9 @@
   }
 
  .form-table th {
-    width: 30%;
-    font-size: 22px;
+    /* width: 30%; */
+    font-size: 40rpx;
+	font-weight: bold;
     color: #666;
   }
 

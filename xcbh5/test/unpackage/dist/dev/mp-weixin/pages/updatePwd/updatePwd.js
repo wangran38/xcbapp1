@@ -144,6 +144,63 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 54));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
+var _index = __webpack_require__(/*! @/api/index.js */ 30);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -189,130 +246,164 @@ var _default = {
         newPassword: '',
         confirmPassword: ''
       },
+      showPassword: false,
+      codeBtnText: '获取验证码',
+      canSendCode: true,
+      countdown: 0,
+      phoneError: '',
+      passwordError: '',
+      confirmError: '',
       message: '',
-      timer: null // 用于倒计时  
+      isError: false
     };
   },
-
+  computed: {
+    formValid: function formValid() {
+      return !this.phoneError && !this.passwordError && !this.confirmError && this.formData.phone && this.formData.verificationCode && this.formData.newPassword && this.formData.confirmPassword;
+    }
+  },
+  onLoad: function onLoad(va) {
+    // 如果是从首页过来会携带参数过来
+    if (va.phone) {
+      this.formData.phone = va.phone;
+    }
+  },
   methods: {
+    validatePhone: function validatePhone() {
+      var reg = /^1[3-9]\d{9}$/;
+      if (!this.formData.phone) {
+        this.phoneError = '手机号不能为空';
+      } else if (!reg.test(this.formData.phone)) {
+        this.phoneError = '手机号格式不正确';
+      } else {
+        this.phoneError = '';
+      }
+    },
+    validatePassword: function validatePassword() {
+      var reg = /^(?=.*[a-zA-Z])(?=.*\d).{8,20}$/;
+      if (!this.formData.newPassword) {
+        this.passwordError = '密码不能为空';
+      } else if (!reg.test(this.formData.newPassword)) {
+        this.passwordError = '需包含字母和数字，8-20位';
+      } else {
+        this.passwordError = '';
+      }
+      if (this.formData.confirmPassword) {
+        if (this.formData.confirmPassword !== this.formData.newPassword) {
+          this.passwordError = '两次输入密码不一致';
+        } else {
+          this.passwordError = '';
+        }
+      }
+    },
+    validateConfirm: function validateConfirm() {
+      if (this.formData.confirmPassword !== this.formData.newPassword) {
+        this.confirmError = '两次输入密码不一致';
+      } else {
+        this.confirmError = '';
+      }
+    },
+    togglePassword: function togglePassword() {
+      this.showPassword = !this.showPassword;
+    },
     sendVerificationCode: function sendVerificationCode() {
       var _this = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-        var response;
+        var res;
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (_this.formData.phone) {
-                  _context.next = 3;
+                if (!(_this.phoneError || !_this.formData.phone)) {
+                  _context.next = 2;
                   break;
                 }
-                _this.message = '请填写手机号';
                 return _context.abrupt("return");
-              case 3:
-                _context.prev = 3;
-                _context.next = 6;
-                return uni.request({
-                  url: 'https://your-backend-api.com/api/send-verification-code',
-                  method: 'POST',
-                  data: {
-                    phone: _this.formData.phone
-                  }
+              case 2:
+                _this.startCountdown();
+                _context.next = 5;
+                return _index.api.sendText({
+                  'phonenumber': _this.formData.phone
                 });
-              case 6:
-                response = _context.sent;
-                if (response.statusCode === 200) {
-                  _this.message = '验证码已发送，请注意查收。';
-                  _this.startCountdown();
+              case 5:
+                res = _context.sent;
+                if (res.code == 200) {
+                  uni.showToast({
+                    icon: 'success',
+                    title: '短信已发送至您的手机,请注意查收'
+                  });
                 } else {
-                  _this.message = '发送失败，请稍后再试。';
+                  uni.showToast({
+                    icon: 'error',
+                    title: res.msg
+                  });
                 }
-                _context.next = 13;
-                break;
-              case 10:
-                _context.prev = 10;
-                _context.t0 = _context["catch"](3);
-                _this.message = '网络错误，请检查您的网络连接。';
-              case 13:
+              case 7:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[3, 10]]);
+        }, _callee);
       }))();
     },
     startCountdown: function startCountdown() {
       var _this2 = this;
-      this.timer = setInterval(function () {
-        if (_this2.timerCount > 0) {
-          _this2.timerCount--;
-          _this2.$refs.getCodeBtn.text = "".concat(_this2.timerCount, "\u79D2\u540E\u91CD\u65B0\u53D1\u9001");
-        } else {
-          clearInterval(_this2.timer);
-          _this2.$refs.getCodeBtn.text = '获取验证码';
+      this.canSendCode = false;
+      this.countdown = 60;
+      this.codeBtnText = "".concat(this.countdown, "\u79D2\u540E\u91CD\u53D1");
+      var timer = setInterval(function () {
+        if (_this2.countdown <= 0) {
+          clearInterval(timer);
+          _this2.canSendCode = true;
+          _this2.codeBtnText = '获取验证码';
+          return;
         }
+        _this2.countdown--;
+        _this2.codeBtnText = "".concat(_this2.countdown, "\u79D2\u540E\u91CD\u53D1");
       }, 1000);
-      this.timerCount = 60; // 60秒倒计时  
     },
     handleSubmit: function handleSubmit() {
       var _this3 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
-        var response;
+        var res;
         return _regenerator.default.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                if (!(_this3.formData.newPassword !== _this3.formData.confirmPassword)) {
-                  _context2.next = 3;
+                if (_this3.formValid) {
+                  _context2.next = 2;
                   break;
                 }
-                _this3.message = '两次输入的密码不一致，请重新输入。';
                 return _context2.abrupt("return");
-              case 3:
-                _context2.prev = 3;
-                _context2.next = 6;
-                return uni.request({
-                  url: 'https://your-backend-api.com/api/reset-password',
-                  method: 'POST',
-                  data: {
-                    phone: _this3.formData.phone,
-                    verificationCode: _this3.formData.verificationCode,
-                    newPassword: _this3.formData.newPassword
-                  }
+              case 2:
+                _context2.next = 4;
+                return _index.api.editPwd({
+                  phone: _this3.formData.phone,
+                  codenum: _this3.formData.verificationCode,
+                  psw: _this3.formData.newPassword
                 });
-              case 6:
-                response = _context2.sent;
-                if (response.statusCode === 200) {
-                  _this3.message = '密码重置成功，请使用新密码登录。';
-                  // 可以选择清空表单或跳转到登录页面  
-                  _this3.formData = {
-                    phone: '',
-                    verificationCode: '',
-                    newPassword: '',
-                    confirmPassword: ''
-                  };
-                  // uni.navigateTo({ url: '/pages/login/login' });  
-                } else {
-                  _this3.message = '重置失败，请稍后再试。';
-                }
-                _context2.next = 13;
-                break;
-              case 10:
-                _context2.prev = 10;
-                _context2.t0 = _context2["catch"](3);
-                _this3.message = '网络错误，请检查您的网络连接。';
-              case 13:
+              case 4:
+                res = _context2.sent;
+                _this3.showMessage('密码重置成功', false);
+                setTimeout(function () {
+                  uni.navigateBack();
+                }, 1500);
+              case 7:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[3, 10]]);
+        }, _callee2);
       }))();
-    }
-  },
-  onUnload: function onUnload() {
-    if (this.timer) {
-      clearInterval(this.timer);
+    },
+    showMessage: function showMessage(msg) {
+      var _this4 = this;
+      var isError = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      this.message = msg;
+      this.isError = isError;
+      setTimeout(function () {
+        _this4.message = '';
+      }, 2000);
     }
   }
 };
