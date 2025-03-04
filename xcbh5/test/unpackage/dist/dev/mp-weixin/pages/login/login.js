@@ -214,7 +214,6 @@ var _index = __webpack_require__(/*! ../../api/index.js */ 30);
 //
 //
 //
-//
 var _default = {
   data: function data() {
     return {
@@ -238,7 +237,7 @@ var _default = {
     login: function login() {
       var _this = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-        var response, token;
+        var response, token, promise;
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -251,24 +250,46 @@ var _default = {
                 if (response.code === 200) {
                   token = response.data.token; // 保存token
                   uni.setStorageSync('token', token);
-                  if (_this.form.password == '123456') {
-                    uni.showToast({
-                      icon: 'error',
-                      title: '密码过于简单,请用户自行修改以确保账号安全',
-                      duration: 2000
-                    });
-                  }
-                  setTimeout(function () {
-                    uni.showToast({
-                      icon: 'loading',
-                      title: '正在登录.....'
-                    });
-                  }, 2000);
-                  setTimeout(function () {
-                    uni.switchTab({
-                      url: '/pages/index/index'
-                    });
-                  }, 4000);
+                  promise = new Promise(function (res, rej) {
+                    if (_this.form.password == '123456') {
+                      uni.showToast({
+                        icon: 'error',
+                        title: '密码过于简单,请用户自行修改以确保账号安全',
+                        duration: 1000
+                      });
+                      setTimeout(function () {
+                        res(200);
+                      }, 2000);
+                    } else {
+                      res(201);
+                    }
+                  });
+                  promise.then(function (code) {
+                    if (code == 200) {
+                      uni.showToast({
+                        icon: 'loading',
+                        title: '正在登录.....',
+                        duration: 2000
+                      });
+                      setTimeout(function () {
+                        console.log(code, "正在登录");
+                        return code;
+                      }, 1500);
+                    } else {
+                      uni.showToast({
+                        icon: 'loading',
+                        title: '正在登录.....',
+                        duration: 1000
+                      });
+                      return code;
+                    }
+                  }).then(function (code) {
+                    setTimeout(function () {
+                      uni.switchTab({
+                        url: '/pages/index/index'
+                      });
+                    }, 1000);
+                  });
                 } else {
                   uni.showToast({
                     title: response.msg || response.message,

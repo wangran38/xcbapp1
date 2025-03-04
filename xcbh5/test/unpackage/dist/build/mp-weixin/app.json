@@ -41,7 +41,8 @@
     "pages/privacyAgreement/privacyAgreement",
     "pages/OpenAccountSharing/OpenAccountSharing",
     "pages/arrangeNotification/arrangeNotification",
-    "pages/weChatCashwWithdrawal/weChatCashwWithdrawal"
+    "pages/weChatCashwWithdrawal/weChatCashwWithdrawal",
+    "pages/billRecord/billRecord"
   ],
   "subPackages": [
     {

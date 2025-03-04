@@ -30,7 +30,6 @@
 					<uni-icons :type="showConfirmPassword ? 'eye' : 'eye-slash'" size="24" color="#999"
 						@click="showConfirmPassword = !showConfirmPassword" />
 				</view>
-				{{this.confirmPasswordError}}
 				<view class="agreement-group">
 					<view class="checkbox-item">
 						<uni-icons :type="agreements.service ? 'checkbox-filled' : 'circle'" size="24"

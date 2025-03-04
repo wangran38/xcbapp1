@@ -23,13 +23,13 @@
 				<!-- 密码输入 -->
 				<view class="input-group">
 					<uni-icons type="locked" size="24" color="#409EFF"></uni-icons>
-					<input class="form-input" :type="showPassword ?'text':'password'" v-model="form.password"
+					<input class="form-input" :type="showPassword ? 'text':'password'" v-model="form.password"
 						placeholder="密码" />
 					<uni-icons :type="showPassword ? 'eye-slash' : 'eye'" size="24" color="#999"
-						@click="togglePassword" />
+						@tap="togglePassword" />
 				</view>
 
-				<button class="login-btn" :class="{ 'active': formValid, 'loading': loading }" @click="login">
+				<button class="login-btn" :class="{ 'active': formValid}" @click="login">
 					<text v-if="!loading">登 录</text>
 					<uni-icons v-else type="spinner-cycle" size="24" color="#fff" class="loading-icon"></uni-icons>
 				</button>

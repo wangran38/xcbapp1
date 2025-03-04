@@ -1,6 +1,6 @@
 <template>
 	<view class="box" @click="show=false">
-		<image :src="item.imglogo" mode="aspectFill"></image>
+		<image :src="item.imglogo" mode="aspectFill" @click="openBigImg(item.imglogo)"></image>
 		<view class="regard">
 			<view class="typetitle">
 				<text class="ellipsis">{{item.commodity_name}}</text>
@@ -10,9 +10,6 @@
 				<view class="one" @click="goToSuyuan(item)">
 					溯源
 				</view>
-<!-- 				<view class="one">
-					已检测
-				</view> -->
 			</view>
 			<view class="price">
 				<text>¥ {{item.price.toFixed(2)}} 元/{{item.weight_name}}</text>
@@ -21,10 +18,18 @@
 					<view class="count1" @click.stop="showInput" :catchtouchmove="null">
 						<text v-if="!show">{{getTempCount(item.id)}}</text>
 						<textarea :adjust-position="false" v-if="show" v-model="count" @blur="overInput"
-							:auto-height="false" fixed class="input" :focus="show" @input="changeTextarea" adjust-position="true"></textarea>
+							:auto-height="false" fixed class="input" :focus="show" @input="changeTextarea"
+							adjust-position="true"></textarea>
 					</view>
 					<view class="btn2" @click="add">+</view>
 				</view>
+			</view>
+		</view>
+		<view v-if="OpenImg" class="dialog-mask-img">
+			<view class="showImg">
+				<uni-icons mode="scaleToFill" type="closeempty" style="position: absolute; right: 5rpx; top: 10rpx;"
+					size="25" @click="OpenImg = false"></uni-icons>
+				<image :src="selectImgUrl" mode="scaleToFill"></image>
 			</view>
 		</view>
 	</view>
@@ -36,16 +41,25 @@
 		mapMutations,
 		mapGetters
 	} from 'vuex';
-	import {api} from '@/api/index.js'
+	import {
+		api
+	} from '@/api/index.js'
 	export default {
 		name: "menuBarVue",
 		data() {
 			return {
 				show: false,
-				count: ''
+				count: '',
+				OpenImg: false,
+				selectImgUrl: null
 			};
 		},
 		methods: {
+			// 放大图片
+			openBigImg(url) {
+				this.OpenImg = true
+				this.selectImgUrl = url
+			},
 			changeTextarea(e) {
 
 			},
@@ -85,20 +99,20 @@
 				}
 				this.show = false
 			},
-			
-			
+
+
 			// 弹出键盘
 			showInput() {
-				this.$emit('showKeyboard',this.item)
+				this.$emit('showKeyboard', this.item)
 				// this.count = ''
 				// this.show = true
 			},
-			goToSuyuan(item){
+			goToSuyuan(item) {
 				uni.navigateTo({
-					url:`/subPackages/aHouseholder/lookTraceability/lookTraceability?commodity_id=${item.id}`
+					url: `/subPackages/aHouseholder/lookTraceability/lookTraceability?commodity_id=${item.id}`
 				})
 			},
-			
+
 			...mapMutations('cart', ['addItem', 'subItem', 'anyNumber']),
 		},
 		props: ['item'],
@@ -110,6 +124,39 @@
 </script>
 
 <style>
+	.showImg {
+		position: relative;
+		width: 500rpx;
+		height: 500rpx;
+		margin: 0 auto;
+		opacity: 1;
+		padding: 16rpx;
+		border: 1px solid #ddd;
+		border-radius: 8px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		margin: 20px;
+		background-color: #fff;
+	}
+
+	.showImg image {
+		margin-top: 30rpx;
+		width: 96%;
+		height: 92%;
+	}
+
+	.dialog-mask-img {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(255, 255, 255, 0.5);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 999;
+	}
+
 	.input {
 		border: 1rpx solid #007aff;
 		text-align: center;
@@ -167,16 +214,17 @@
 	}
 
 	.one {
-		font-size:30rpx;
+		font-size: 30rpx;
 		padding: 20rpx;
 		width: 18%;
-		height: 80%;
+		height: 100%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		border: 0.5rpx solid red;
 		color: red;
 		margin-right: 10rpx;
+		z-index: 10
 	}
 
 	.price {

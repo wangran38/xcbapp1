@@ -1,9 +1,7 @@
 <template>
 	<scroll-view class="Stallholder" scroll-y="true" @scrolltolower="handleScrollToLower" :style="{ height: '100vh' }"
 		@click="closeTan">
-		<!-- 自定义的数字键盘 -->
 		<inputBoxVue ref="inputBoxVueRef"></inputBoxVue>
-		
 		<view class="container">
 			<view class="StoreName">
 				<text>{{ shopDetails.title}}</text>
@@ -37,7 +35,7 @@
 			<view class="time">
 				<view class="business-hours">
 					<view>营业时间:</view>
-					<view class="hour">7.00-12.00</view>
+					<view class="hour">6:00-21:00</view>
 				</view>
 
 				<view class="phone">
@@ -85,8 +83,9 @@
 			</view>
 				<shopItem :shop_id="shop_id" ref="shopitem" ></shopItem>
 		</view>
-		
+
 	</scroll-view>
+	
 
 </template>
 
@@ -256,7 +255,8 @@
 </script>
 
 
-<style>
+<style>	
+
 	.container {
 		display: flex;
 		flex-direction: column;

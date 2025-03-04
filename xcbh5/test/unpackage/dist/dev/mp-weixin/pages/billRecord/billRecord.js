@@ -103,6 +103,12 @@ try {
     uniIcons: function () {
       return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 444))
     },
+    uniList: function () {
+      return __webpack_require__.e(/*! import() | uni_modules/uni-list/components/uni-list/uni-list */ "uni_modules/uni-list/components/uni-list/uni-list").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-list/components/uni-list/uni-list.vue */ 540))
+    },
+    uniListItem: function () {
+      return __webpack_require__.e(/*! import() | uni_modules/uni-list/components/uni-list-item/uni-list-item */ "uni_modules/uni-list/components/uni-list-item/uni-list-item").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue */ 547))
+    },
   }
 } catch (e) {
   if (
@@ -125,20 +131,30 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  if (!_vm._isMounted) {
-    _vm.e0 = function ($event) {
-      _vm.showPassword = !_vm.showPassword
+  var g0 = _vm.filteredBills.length
+  var l0 = g0
+    ? _vm.__map(_vm.filteredBills, function (item, index) {
+        var $orig = _vm.__get_orig(item)
+        var m0 = _vm.formatDate(item.date)
+        return {
+          $orig: $orig,
+          m0: m0,
+        }
+      })
+    : null
+  var g1 = !_vm.hasMore && _vm.filteredBills.length
+  var g2 = !_vm.loading && !_vm.filteredBills.length
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        g0: g0,
+        l0: l0,
+        g1: g1,
+        g2: g2,
+      },
     }
-    _vm.e1 = function ($event) {
-      _vm.showConfirmPassword = !_vm.showConfirmPassword
-    }
-    _vm.e2 = function ($event) {
-      _vm.agreements.service = !_vm.agreements.service
-    }
-    _vm.e3 = function ($event) {
-      _vm.agreements.privacy = !_vm.agreements.privacy
-    }
-  }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -180,8 +196,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 54));
+var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
-var _index = __webpack_require__(/*! ../../api/index.js */ 30);
 //
 //
 //
@@ -260,154 +276,167 @@ var _index = __webpack_require__(/*! ../../api/index.js */ 30);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+// 确保已安装uni-ui组件：npm install @dcloudio/uni-ui
 var _default = {
   data: function data() {
     return {
-      formData: {
-        phone: '',
-        password: '',
-        confirmPassword: ''
-      },
-      agreements: {
-        service: false,
-        privacy: false
-      },
-      showPassword: false,
-      showConfirmPassword: false,
-      phoneError: '',
-      passwordError: '',
-      confirmPasswordError: '',
-      loading: false
+      statusBarHeight: 20,
+      typeOptions: ['全部', '收入', '支出'],
+      typeIndex: 0,
+      currentDate: this.formatDate(new Date()),
+      bills: [],
+      pageSize: 10,
+      currentPage: 1,
+      loading: false,
+      hasMore: true,
+      themeColor: {
+        primary: '#409EFF',
+        // 轻蓝主色
+        danger: '#F56C6C' // 警示色
+      }
     };
   },
+
   computed: {
-    formValid: function formValid() {
-      return !this.phoneError && !this.passwordError && !this.confirmPasswordError && this.agreements.service && this.agreements.privacy;
+    rightTextStyle: function rightTextStyle() {
+      return {
+        income: {
+          color: this.themeColor.primary
+        },
+        expense: {
+          color: this.themeColor.danger
+        }
+      };
+    },
+    filteredBills: function filteredBills() {
+      var _this = this;
+      // 先过滤后分页
+      var filtered = this.bills.filter(function (item) {
+        var typeMatch = _this.typeIndex === 0 || _this.typeIndex === 1 && item.type === 'income' || _this.typeIndex === 2 && item.type === 'expense';
+        var dateMatch = new Date(item.date).getMonth() === new Date(_this.currentDate).getMonth();
+        return typeMatch && dateMatch;
+      });
+      return filtered.slice(0, this.currentPage * this.pageSize);
+    },
+    totalIncome: function totalIncome() {
+      return this.bills.filter(function (item) {
+        return item.type === 'income';
+      }).reduce(function (sum, item) {
+        return sum + Number(item.amount);
+      }, 0).toFixed(2);
+    },
+    totalExpense: function totalExpense() {
+      return this.bills.filter(function (item) {
+        return item.type === 'expense';
+      }).reduce(function (sum, item) {
+        return sum + Number(item.amount);
+      }, 0).toFixed(2);
+    },
+    navBarStyle: function navBarStyle() {
+      return {
+        paddingTop: "".concat(this.statusBarHeight, "px"),
+        height: '44px',
+        background: this.themeColor.primary
+      };
     }
   },
   methods: {
-    validatePhone: function validatePhone() {
-      if (!this.formData.phone) {
-        this.phoneError = '请输入手机号';
-      } else if (!/^1[3-9]\d{9}$/.test(this.formData.phone)) {
-        this.phoneError = '手机号格式不正确';
-      } else {
-        this.phoneError = '';
-      }
+    formatDate: function formatDate(date) {
+      var d = new Date(date);
+      return "".concat(d.getFullYear(), "-").concat((d.getMonth() + 1).toString().padStart(2, '0'));
     },
-    validatePassword: function validatePassword() {
-      if (!this.formData.password) {
-        this.passwordError = '请输入密码';
-      } else if (this.formData.password.length < 6) {
-        this.passwordError = '密码至少6位';
-      } else if (this.formData.password.length > 20) {
-        this.passwordError = '密码最多20位';
-      } else {
-        this.passwordError = '';
-      }
+    typeChange: function typeChange(e) {
+      this.typeIndex = e.detail.value;
+      this.resetPagination();
     },
-    validateConfirmPassword: function validateConfirmPassword() {
-      if (!this.formData.confirmPassword) {
-        this.confirmPasswordError = '请确认密码';
-      } else if (this.formData.confirmPassword !== this.formData.password) {
-        this.confirmPasswordError = '两次密码不一致';
-      } else {
-        this.confirmPasswordError = '';
-      }
+    dateChange: function dateChange(e) {
+      this.currentDate = e.detail.value;
+      this.resetPagination();
     },
-    handleRegister: function handleRegister() {
-      var _this = this;
+    resetPagination: function resetPagination() {
+      this.currentPage = 1;
+      this.hasMore = true;
+      this.bills = [];
+      this.loadMore();
+    },
+    handleItemClick: function handleItemClick(item) {
+      uni.navigateTo({
+        url: "/pages/bill/detail?id=".concat(item.id)
+      });
+    },
+    getSystemInfo: function getSystemInfo() {
+      var systemInfo = uni.getSystemInfoSync();
+      this.statusBarHeight = systemInfo.statusBarHeight || 20;
+    },
+    loadMore: function loadMore() {
+      var _this2 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+        var newData;
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (!(!_this.formValid || _this.loading)) {
+                if (!(_this2.loading || !_this2.hasMore)) {
                   _context.next = 2;
                   break;
                 }
                 return _context.abrupt("return");
               case 2:
-                _context.prev = 2;
-                _this.loading = true;
-                // 模拟注册请求
+                _this2.loading = true;
+                _context.prev = 3;
                 _context.next = 6;
-                return new Promise(function (resolve) {
-                  return setTimeout(resolve, 1500);
-                });
+                return _this2.mockFetchData();
               case 6:
-                uni.showToast({
-                  title: '注册成功',
-                  icon: 'success'
-                });
-                setTimeout(function () {
-                  uni.navigateBack();
-                }, 1500);
-                _context.next = 13;
+                newData = _context.sent;
+                _this2.bills = [].concat((0, _toConsumableArray2.default)(_this2.bills), (0, _toConsumableArray2.default)(newData));
+                _this2.hasMore = newData.length >= _this2.pageSize;
+                _this2.currentPage++;
+                _context.next = 15;
                 break;
-              case 10:
-                _context.prev = 10;
-                _context.t0 = _context["catch"](2);
-                uni.showToast({
-                  title: '注册失败，请重试',
-                  icon: 'none'
-                });
-              case 13:
-                _context.prev = 13;
-                _this.loading = false;
-                return _context.finish(13);
-              case 16:
+              case 12:
+                _context.prev = 12;
+                _context.t0 = _context["catch"](3);
+                console.error(_context.t0);
+              case 15:
+                _context.prev = 15;
+                _this2.loading = false;
+                return _context.finish(15);
+              case 18:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[2, 10, 13, 16]]);
+        }, _callee, null, [[3, 12, 15, 18]]);
       }))();
     },
-    navigateTo: function navigateTo(type) {
-      var routes = {
-        service: '/pages/agreement/service',
-        privacy: '/pages/agreement/privacy'
-      };
-      uni.navigateTo({
-        url: routes[type]
-      });
-    },
-    navigateToLogin: function navigateToLogin() {
-      uni.navigateTo({
-        url: '/pages/login/login'
+    mockFetchData: function mockFetchData() {
+      var _this3 = this;
+      return new Promise(function (resolve) {
+        setTimeout(function () {
+          // 生成测试数据
+          var data = Array.from({
+            length: _this3.pageSize
+          }, function (_, i) {
+            return {
+              id: Date.now() + i,
+              type: Math.random() > 0.5 ? 'income' : 'expense',
+              category: ['工资', '餐饮', '交通', '购物'][Math.floor(Math.random() * 4)],
+              amount: (Math.random() * 2000 + 100).toFixed(2),
+              date: new Date(new Date().setDate(Math.floor(Math.random() * 30 + 1))).toISOString().split('T')[0],
+              remark: Math.random() > 0.7 ? '测试备注' : ''
+            };
+          });
+          resolve(data);
+        }, 800);
       });
     }
+  },
+  onLoad: function onLoad() {
+    this.getSystemInfo();
+    this.loadMore();
+  },
+  onReachBottom: function onReachBottom() {
+    this.loadMore();
   }
 };
 exports.default = _default;

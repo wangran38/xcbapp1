@@ -1,86 +1,144 @@
 <template>
 	<view class="me-container">
-		<view class="basicsinfo">
-			<text style="margin: 0rpx 20rpx;">基本信息</text>
-			<view class="item-info">
-				<view class="name">
-					<text>联系人:</text>
-					<input v-model="contactpeople" type="text" placeholder="请填写联系人" />
+		<!-- 基本信息卡片 -->
+		<view class="form-card">
+			<view class="section-title">
+				<text class="title-icon">｜</text>
+				<text class="title-text">基本信息</text>
+			</view>
+			<view class="form-item">
+				<view class="item-label">
+					<uni-icons type="person" size="18" color="#666" />
+					<text>联系人</text>
 				</view>
-				<view class="phone">
-					<text>联系电话:</text>
-					<input v-model="contactphone" type="text" placeholder="请填写联系人电话" />
+				<input class="form-input" v-model="contactpeople" placeholder="请输入联系人姓名"
+					placeholder-style="color: #c0c4cc" />
+			</view>
+			<view class="form-item">
+				<view class="item-label">
+					<uni-icons type="phone" size="18" color="#666" />
+					<text>联系电话</text>
 				</view>
+				<input class="form-input" v-model="contactphone" type="number" placeholder="请输入联系人电话"
+					placeholder-style="color: #c0c4cc" />
 			</view>
 		</view>
 
-		<view class="store">
-			<text style="margin: 10rpx 20rpx;">摊铺信息</text>
-			<view class="storename">
-				<text>摊铺名称:</text>
-				<input v-model="title" type="text" placeholder="请填写摊铺名称" />
+
+		<view class="form-card">
+			<view class="section-title">
+				<text class="title-icon">｜</text>
+				<text class="title-text">所在地</text>
 			</view>
-			<view class="area">
-				<text>所在地区:</text>
-				<picker class="picker" mode="multiSelector" :range="multiArray" :value="multiIndex"
-					@change="bindMultiPickerChange" @columnchange="bindMultiPickerColumnChange">
-					<view class="picker-text">
-						{{ multiArray[0][multiIndex[0]] }} - {{ multiArray[1][multiIndex[1]] }} -
-						{{ multiArray[2][multiIndex[2]] }}
+			<view class="form-item picker-item compact">
+				<view class="item-label">
+					<uni-icons type="location" size="18" color="#666" />
+					<text>所在地区</text>
+				</view>
+				<picker mode="multiSelector" :range="multiArray" :value="multiIndex" @change="bindMultiPickerChange"
+					@columnchange="bindMultiPickerColumnChange">
+					<view class="compact-picker">
+						<view>
+							<text class="province">{{ multiArray[0][multiIndex[0]] || '省' }}</text>
+							<text class="separator">/</text>
+							<text class="city">{{ multiArray[1][multiIndex[1]] || '市' }}</text>
+							<text class="separator">/</text>
+							<text class="district">{{ multiArray[2][multiIndex[2]] || '区' }}</text>
+						</view>
+
+						<view>
+							<uni-icons type="arrowright" size="18" color="#999" />
+						</view>
 					</view>
 				</picker>
 			</view>
-			<view class="Address">
-				<text>选择菜市场:</text>
-				<picker class="picker" mode="selector" :range="marketList" :value="selectedMarketIndex"
-					@change="bindMarketChange">
-					<view class="picker-text">{{ marketList[selectedMarketIndex]  }}</view>
+			<!-- 菜市场选择 -->
+			<view class="form-item picker-item">
+				<view class="item-label">
+					<uni-icons type="flag" size="18" color="#666" />
+					<text>选择菜市场</text>
+				</view>
+				<picker mode="selector" :range="marketList" :value="selectedMarketIndex" @change="bindMarketChange">
+					<view class="picker-content">
+						<text class="picker-text">{{ marketList[selectedMarketIndex] || '请选择菜市场' }}</text>
+						<uni-icons type="arrowright" size="18" color="#999" />
+					</view>
 				</picker>
 			</view>
-			<view class="Category">
-				<text>所售类目:</text>
-				<picker class="Categorypicker" mode="selector" :range="categoryList" @change="bindCategoryChange">
-					<view >{{ selectedCategory }}</view>
-				</picker>
-			</view>
-			<view class="stallphone">
-				<text>摊主电话:</text>
-				<input v-model="phone" type="text" placeholder="请填写摊主电话" />
-			</view>
-
-
-			<!-- <view class="BL">
-				<text>相关行业许可证</text>
-				<uni-file-picker class="BLpicker" v-model="imageValue" fileMediatype="image" mode="grid"
-					file-extname="png,jpg" :limit="9" @select="select" @progress="progress" @success="success"
-					@fail="fail" 点击上传图片
-					/>   //这里不要
-				<button class="BLpicker" @tap="chooseImage">选择图片</button>
-			</view> -->
-			<view class="BL1">
-				<text>摊位图片:</text>
-				<view class="BLpicker" @tap="chooseImage">{{ isImageSelected ? '已选择' : '选择图片' }}</view>
-			</view>
-			
-<!-- 			<view class="BL">
-				<text>营业执照:</text>
-				<view class="BLpicker" @tap="chooseImage2">{{ isImageSelected2 ? '已选择' : '选择图片' }}</view>
-			</view> -->
-<!-- 
-			<view class="illustrate">
-				<text>摊位的详细内容说明</text>
-				<textarea v-model="content" placeholder-style="color:#666666" placeholder="请输入详细内容说明" />
-			</view> -->
 
 		</view>
 
-		<button class="submit" type="primary" @click="submitForm" :disabled="isSubmitting">提交</button>
+
+		<!-- 摊铺信息卡片 -->
+		<view class="form-card">
+			<view class="section-title">
+				<text class="title-icon">｜</text>
+				<text class="title-text">摊铺信息</text>
+			</view>
+
+			<!-- 摊铺名称 -->
+			<view class="form-item">
+				<view class="item-label">
+					<uni-icons type="shop" size="18" color="#666" />
+					<text>摊铺名称</text>
+				</view>
+				<input class="form-input" v-model="title" placeholder="请输入摊铺名称" placeholder-style="color: #c0c4cc" />
+			</view>
+
+			<!-- 地区选择 -->
+
+			<!-- 类目选择 -->
+			<view class="form-item picker-item">
+				<view class="item-label">
+					<uni-icons type="list" size="18" color="#666" />
+					<text>所售类目</text>
+				</view>
+				<picker mode="selector" :range="categoryList" @change="bindCategoryChange">
+					<view class="picker-content">
+						<text class="picker-text">{{ selectedCategory || '请选择经营类目' }}</text>
+						<uni-icons type="arrowright" size="18" color="#999" />
+					</view>
+				</picker>
+			</view>
+
+			<!-- 摊主电话 -->
+			<view class="form-item">
+				<view class="item-label">
+					<uni-icons type="phone" size="18" color="#666" />
+					<text>摊主电话</text>
+				</view>
+				<input class="form-input" v-model="phone" type="number" placeholder="请输入摊主联系电话"
+					placeholder-style="color: #c0c4cc" />
+			</view>
+
+			<!-- 图片上传 -->
+			<view class="form-item">
+				<view class="item-label">
+					<uni-icons type="image" size="18" color="#666" />
+					<text>摊位图片</text>
+				</view>
+				<view class="upload-btn" :class="{ 'uploaded': isImageSelected }" @tap="chooseImage">
+					<uni-icons :type="isImageSelected ? 'checkmarkempty' : 'plusempty'" size="24"
+						:color="isImageSelected ? '#67C23A' : '#999'" />
+					<text>{{ isImageSelected ? '已上传' : '点击上传' }}</text>
+				</view>
+			</view>
+		</view>
+
+		<!-- 提交按钮 -->
+		<view class="submit-wrapper">
+			<button class="submit-btn" :class="{ 'disabled': isSubmitting }" @click="submitForm">
+				{{ isSubmitting ? '提交中...' : '立即提交' }}
+				<text class="loading-icon" v-if="isSubmitting">◌</text>
+			</button>
+		</view>
 	</view>
 </template>
 
 <script>
 	import {
-		api,UPLOAD_URL 
+		api,
+		UPLOAD_URL
 	} from '../../api/index.js';
 	import {
 		useUpload
@@ -113,8 +171,8 @@
 				market_id: null,
 				category_id: null,
 				isSubmitting: false,
-				businessLicense:'', // 营业执照
-				isImageSelected:false
+				businessLicense: '', // 营业执照
+				isImageSelected: false
 			};
 		},
 		mounted() {
@@ -123,9 +181,9 @@
 			this.fetchMarkets(); // 获取市场列表
 		},
 		onShow() {
-			if (this.checkToken()){
+			if (this.checkToken()) {
 				uni.navigateTo({
-					url:'/pages/login/login'
+					url: '/pages/login/login'
 				})
 			}
 		},
@@ -133,19 +191,19 @@
 			// 检查是否token存在，存在则已登陆
 			checkToken() {
 				const token = uni.getStorageSync('token');
-				if (!token){
+				if (!token) {
 					return true
 				}
 				return false
 			},
 			// 返回上一页
-			 async customizeBack(){  
-			  let canNavBack = await getCurrentPages()
-			  if( canNavBack && canNavBack.length>1) {  
-			      uni.navigateBack() 
-			  } else {  
-			      history.back();  
-			  }
+			async customizeBack() {
+				let canNavBack = await getCurrentPages()
+				if (canNavBack && canNavBack.length > 1) {
+					uni.navigateBack()
+				} else {
+					history.back();
+				}
 			},
 			async initializePicker() {
 				try {
@@ -246,14 +304,14 @@
 			async fetchMarkets(areaId) {
 				try {
 					const Limit = 100;
-					const response = await api.marketlist(areaId,Limit); // 传递实际的 areaId
+					const response = await api.marketlist(areaId, Limit); // 传递实际的 areaId
 					// console.log('Market API response:', response); // 打印响应数据
 					if (response.code === 200) {
 						this.marketData = response.data.listdata;
 						this.marketList = response.data.listdata.map(item => item.marketname);
 						this.marketIdMap = this.marketData.reduce((map, item) => {
 							map[item.marketname] = item.id;
-							
+
 							return map;
 						}, {});
 
@@ -293,12 +351,12 @@
 				this.selectedCategory = this.categoryList[selectedIndex];
 				this.category_id = this.categoryIdMap[this.selectedCategory]; // 设置分类ID
 			},
-			
+
 			// 摊位图片上传
 			chooseImage() {
 				uni.chooseImage({
 					count: 1,
-					sizeType: ['compressed','original'],
+					sizeType: ['compressed', 'original'],
 					sourceType: ['album', 'camera'],
 					success: (res) => {
 						const tempFilePaths = res.tempFilePaths;
@@ -309,33 +367,33 @@
 							} = useUpload({
 								uploadPath: '/group1/upload',
 								tempFilePaths: tempFilePaths[0],
-								file:res.tempFiles[0]
+								file: res.tempFiles[0]
 							})
 
 							upload().then((res) => {
 								var obj = JSON.parse(res);
 								// console.log(obj.data);
-								this.logo = UPLOAD_URL+obj.data.path;
-									this.isImageSelected = true;
+								this.logo = UPLOAD_URL + obj.data.path;
+								this.isImageSelected = true;
 							})
 						}
 					}
 				});
 			},
-			
+
 
 
 			async submitForm() {
 				if (this.isSubmitting) return; // 如果正在提交，直接返回
-				if (!this.contactpeople || !this.contactphone || !this.title || !this.phone  || !this
+				if (!this.contactpeople || !this.contactphone || !this.title || !this.phone || !this
 					.area_id || !this.market_id || !this.category_id || !this.logo) {
 					uni.showToast({
 						title: '请填写完整的信息',
 						icon: 'none'
 					});
 					return;
-				} 
-				
+				}
+
 				this.isSubmitting = true; // 设置为正在提交状态
 				try {
 					const formData = {
@@ -348,7 +406,7 @@
 						area_id: this.area_id,
 						market_id: this.market_id,
 						category_id: this.category_id,
-						
+
 					};
 
 					const response = await api.addshop(formData);
@@ -357,14 +415,14 @@
 						uni.showToast({
 							title: '摊位申请成功',
 							icon: 'success',
-							duration:2000
+							duration: 2000
 						})
 						// 清空表单或进行其他操作
 						// 返回上一页
-						setTimeout(()=>{
+						setTimeout(() => {
 							this.customizeBack()
-						},2000)
-						
+						}, 2000)
+
 					} else {
 						uni.showToast({
 							title: response.msg || '提交失败',
@@ -386,331 +444,149 @@
 </script>
 
 
-<style>
+<style lang="scss" scoped>
+	.compact-picker {
+		display: flex;
+		justify-content: space-between;
+		font-size: 28rpx;
+		
+	}
+
 	.me-container {
-		overflow: hidden;
-		width: 100%;
-		box-sizing: border-box;
-		padding: 0rpx 40rpx 0 40rpx;
-		color: white;
-		z-index: 1;
+		padding: 30rpx;
 		background-color: #f8f8f8;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
+		min-height: 100vh;
 	}
 
-	.basicsinfo {
-		height: 250rpx;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		margin-top: 20rpx;
-		border: 1px solid #ccc;
+	.form-card {
+		background: white;
+		border-radius: 16rpx;
+		padding: 0 30rpx 30rpx;
+		margin-bottom: 30rpx;
+		box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.04);
+
+		.section-title {
+			padding: 30rpx 0;
+			border-bottom: 2rpx solid #eee;
+			margin-bottom: 20rpx;
+
+			.title-icon {
+				color: #409EFF;
+				margin-right: 12rpx;
+			}
+
+			.title-text {
+				font-size: 34rpx;
+				font-weight: 600;
+				color: #333;
+			}
+		}
 	}
 
-	text {
-		color: black;
-		height: 50rpx;
-		line-height: 50rpx;
+	.form-item {
+		padding: 25rpx 0;
+		border-bottom: 1rpx solid #f5f5f5;
+
+		.item-label {
+			display: flex;
+			align-items: center;
+			margin-bottom: 20rpx;
+			font-size: 28rpx;
+			color: #666;
+
+			uni-icons {
+				margin-right: 12rpx;
+			}
+		}
+
+		.form-input {
+			height: 80rpx;
+			font-size: 30rpx;
+			color: #333;
+			padding: 0 20rpx;
+			background: #f8f8f8;
+			border-radius: 8rpx;
+		}
 	}
 
-	.item-info {
-		height: 200rpx;
-		width: 100%;
-		background-color: white;
+	.picker-item {
+		.picker-content {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 20rpx 0;
+
+			.picker-text {
+				font-size: 30rpx;
+				color: #333;
+				flex: 1;
+				margin-right: 20rpx;
+
+				&:empty::after {
+					content: '请选择';
+					color: #c0c4cc;
+				}
+			}
+		}
 	}
 
-	.name {
-		height: 100rpx;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
+	.upload-btn {
+		display: inline-flex;
 		align-items: center;
-		border-bottom: 1px solid #ccc;
-		margin: 0 20rpx;
+		padding: 16rpx 32rpx;
+		border: 2rpx dashed #ddd;
+		border-radius: 8rpx;
+		transition: all 0.3s;
+
+		&.uploaded {
+			border-color: #67C23A;
+			background: #f0f9eb;
+		}
+
+		uni-icons {
+			margin-right: 12rpx;
+		}
+
+		text {
+			font-size: 28rpx;
+			color: #666;
+		}
 	}
 
-	.name>text {
-		height: 100rpx;
-		width: 200rpx;
-		line-height: 100rpx;
-		text-align: left;
+	.submit-wrapper {
+		margin-top: 60rpx;
+		padding: 0 30rpx;
+
+		.submit-btn {
+			background: linear-gradient(45deg, #409EFF, #64b5f6);
+			color: white;
+			height: 88rpx;
+			line-height: 88rpx;
+			border-radius: 44rpx;
+			font-size: 34rpx;
+			letter-spacing: 2rpx;
+			transition: opacity 0.3s;
+
+			&.disabled {
+				opacity: 0.7;
+				background: #c0c4cc;
+			}
+
+			.loading-icon {
+				display: inline-block;
+				margin-left: 15rpx;
+				animation: rotate 1s linear infinite;
+			}
+		}
 	}
 
-	.name>input {
-		height: 100rpx;
-		width: 100%;
-		color: black;
-	}
+	@keyframes rotate {
+		from {
+			transform: rotate(0deg);
+		}
 
-	.phone {
-		height: 100rpx;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		margin: 0 20rpx;
-	}
-
-	.phone>text {
-		height: 100rpx;
-		width: 200rpx;
-		line-height: 100rpx;
-		text-align: left;
-	}
-
-	.phone>input {
-		height: 100rpx;
-		width: 100%;
-		color: black;
-	}
-
-	.store {
-		height: 685rpx;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		margin-top: 30rpx;
-		border: 1px solid #ccc;
-	}
-
-	.storename {
-		height: 100rpx;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		/* margin: 0 20rpx; */
-		padding: 0 20rpx;
-		border-bottom: 1px solid #ccc;
-		background-color: white;
-	}
-
-	.storename>text {
-		height: 100rpx;
-		width: 200rpx;
-		line-height: 100rpx;
-		text-align: left;
-	}
-
-	.storename>input {
-		height: 100rpx;
-		width: 100%;
-		color: black;
-	}
-
-	.area {
-		height: 100rpx;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		/* margin: 0 20rpx; */
-		padding: 0 20rpx;
-		border-bottom: 1px solid #ccc;
-		background-color: white;
-	}
-
-	.area>text {
-		height: 100rpx;
-		width: 200rpx;
-		line-height: 100rpx;
-		text-align: left;
-	}
-
-	.picker {
-		height: 100rpx;
-		width: 100%;
-		color: black;
-		line-height: 100rpx;
-		box-sizing: border-box;
-		overflow: hidden; /* 隐藏超出部分 */
-	}
-	
-	.picker-text {
-	  white-space: nowrap; /* 禁止换行 */
-	  overflow: hidden; /* 隐藏超出部分 */
-	  text-overflow: ellipsis; /* 超出部分显示省略号 */
-	  line-height: 100rpx;
-	  box-sizing: border-box;
-	  /* font-size: 30rpx; */
-	  /* padding: 0 10rpx; */
-	}
-
-	.Address {
-		height: 100rpx;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		/* margin: 0 20rpx; */
-		padding: 0 20rpx;
-		border-bottom: 1px solid #ccc;
-		background-color: white;
-	}
-
-	.Address>text {
-		height: 100rpx;
-		width: 200rpx;
-		line-height: 100rpx;
-		text-align: left;
-	}
-
-	/* .Address>input {
-		height: 100rpx;
-		width: 100%;
-		color: black;
-	} */
-
-	.Category {
-		height: 100rpx;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		/* margin: 0 20rpx; */
-		padding: 0 20rpx;
-		border-bottom: 1px solid #ccc;
-		background-color: white;
-	}
-
-	.Category>text {
-		height: 100rpx;
-		width: 200rpx;
-		line-height: 100rpx;
-		text-align: left;
-	}
-
-	.Categorypicker {
-		height: 100rpx;
-		width: 100%;
-		color: black;
-		line-height: 100rpx;
-		box-sizing: border-box;
-	}
-
-	.stallphone {
-		height: 100rpx;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		border-bottom: 1px solid #ccc;
-		/* margin: 0 20rpx; */
-		padding: 0 20rpx;
-		background-color: white;
-	}
-
-	.stallphone>text {
-		height: 100rpx;
-		width: 200rpx;
-		line-height: 100rpx;
-		text-align: left;
-	}
-
-	.stallphone>input {
-		height: 100rpx;
-		width: 100%;
-		color: black;
-	}
-
-	.BL {
-		height: 100rpx;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		/* margin: 0 20rpx; */
-		padding: 0 20rpx;
-		border-bottom: 1px solid #ccc;
-		background-color: white;
-	}
-
-	.BL>text {
-		height: 100rpx;
-		width: 200rpx;
-		line-height: 100rpx;
-		text-align: left;
-	}
-
-	.BLpicker {
-		height: 100rpx;
-		width: 100%;
-		color: black;
-		line-height: 100rpx;
-		box-sizing: border-box;
-	}
-
-	.BL1 {
-		height: 100rpx;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		/* margin: 0 20rpx; */
-		padding: 0 20rpx;
-		background-color: white;
-		border-bottom: 1px solid #ccc;
-	}
-
-	.BL1>text {
-		height: 100rpx;
-		width: 200rpx;
-		line-height: 100rpx;
-		text-align: left;
-	}
-
-	.BLpicker {
-		height: 100rpx;
-		width: 100%;
-		color: black;
-		line-height: 100rpx;
-		box-sizing: border-box;
-	}
-
-	.illustrate {
-		height: 200rpx;
-		width: 100%;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: left;
-		/* margin: 0 20rpx; */
-		padding: 0 20rpx;
-		box-sizing: border-box;
-		background-color: white;
-	}
-
-	.illustrate>text {
-		height: 200rpx;
-		width: 200rpx;
-		max-width: 200rpx;
-		/* 或者一个适合的最大宽度 */
-		line-height: 1.2;
-		text-align: left;
-		box-sizing: border-box;
-		word-wrap: break-word;
-		/* 允许长单词换行 */
-		overflow-wrap: break-word;
-		display: flex;
-		align-items: center;
-		border-right: 1px solid #ccc;
-	}
-
-	.illustrate>textarea {
-		height: 100rpx;
-		width: 100%;
-		color: black;
-	}
-
-	.submit {
-		overflow: hidden;
-		width: 100%;
-		box-sizing: border-box;
-		padding: 0rpx 40rpx 0 40rpx;
-		margin-top: 30rpx;
+		to {
+			transform: rotate(360deg);
+		}
 	}
 </style>
