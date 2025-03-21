@@ -18,8 +18,8 @@
 				<view class="input-group">
 					<uni-icons type="locked" size="24" color="#409EFF"></uni-icons>
 					<input class="form-input" :type="showPassword ? 'password':'text'" v-model="form.password" placeholder="请输入至少六位密码" />
-					<uni-icons :type="showPassword ? 'eye' : 'eye-slash'" size="24" color="#999"
-						@click="showPassword = !showPassword" />
+<!-- 					<uni-icons :type="showPassword ? 'eye' : 'eye-slash'" size="24" color="#999"
+						@click="showPassword = !showPassword" /> -->
 				</view>
 				
 
@@ -27,8 +27,8 @@
 					<uni-icons type="locked" size="24" color="#409EFF"></uni-icons>
 					<input class="form-input" :type="showConfirmPassword ? 'password':'text'" v-model="form.confirm" placeholder="确认密码"
 						maxlength="11" />
-					<uni-icons :type="showConfirmPassword ? 'eye' : 'eye-slash'" size="24" color="#999"
-						@click="showConfirmPassword = !showConfirmPassword" />
+<!-- 					<uni-icons :type="showConfirmPassword ? 'eye' : 'eye-slash'" size="24" color="#999"
+						@click="showConfirmPassword = !showConfirmPassword" /> -->
 				</view>
 				<view class="agreement-group">
 					<view class="checkbox-item">

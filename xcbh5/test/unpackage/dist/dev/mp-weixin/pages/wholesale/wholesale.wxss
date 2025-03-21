@@ -1,0 +1,93 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.vue-ref.data-v-dfa36278 {
+  padding-bottom: 0px;
+}
+.label.data-v-dfa36278 {
+  color: gray;
+}
+.container.data-v-dfa36278 {
+  height: 100vh;
+  background: #f8f9fb;
+  display: flex;
+  flex-direction: column;
+}
+.container .header-bar.data-v-dfa36278 {
+  padding: 24rpx 32rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+.container .header-bar .platform-name.data-v-dfa36278 {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #2d3436;
+  letter-spacing: 1rpx;
+}
+.container .main-content.data-v-dfa36278 {
+  flex: 1;
+  padding: 32rpx;
+}
+.container .main-content .nav-card.data-v-dfa36278 {
+  border-radius: 24rpx;
+  margin-bottom: 32rpx;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
+  transition: -webkit-transform 0.2s ease;
+  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, -webkit-transform 0.2s ease;
+}
+.container .main-content .nav-card.data-v-dfa36278:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+.container .main-content .nav-card .card-inner.data-v-dfa36278 {
+  padding: 48rpx;
+  color: #fff;
+}
+.container .main-content .nav-card .card-inner .card-title.data-v-dfa36278 {
+  display: block;
+  font-size: 40rpx;
+  margin: 24rpx 0 12rpx;
+  font-weight: 500;
+}
+.container .main-content .nav-card .card-inner .card-desc.data-v-dfa36278 {
+  font-size: 28rpx;
+  opacity: 0.95;
+}
+.container .main-content .nav-card.supply-card.data-v-dfa36278 {
+  background: linear-gradient(135deg, #2d8cf0, #53a1f3);
+}
+.container .main-content .nav-card.purchase-card.data-v-dfa36278 {
+  background: linear-gradient(135deg, #ff6a00, #ff8229);
+}
+.container .main-content .stats-panel.data-v-dfa36278 {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+.container .main-content .stats-panel .stats-item.data-v-dfa36278 {
+  text-align: center;
+}
+.container .main-content .stats-panel .stats-item .stats-value.data-v-dfa36278 {
+  margin: 0 0 10rpx 0;
+  display: block;
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #2d3436;
+}
+.container .main-content .stats-panel .stats-item .stats-label.data-v-dfa36278 {
+  font-size: 26rpx;
+  color: #7f8c8d;
+  margin-top: 8rpx;
+}
+

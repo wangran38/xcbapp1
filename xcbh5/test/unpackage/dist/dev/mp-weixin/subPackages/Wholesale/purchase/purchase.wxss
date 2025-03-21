@@ -1,0 +1,207 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.purchase-container.data-v-acd06004 {
+  background: #f8f9fb;
+  min-height: 100vh;
+  /* 采购列表样式 */
+}
+.purchase-container .filter-bar.data-v-acd06004 {
+  padding: 24rpx 32rpx;
+  background: #fff;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+.purchase-container .filter-bar .filter-group.data-v-acd06004 {
+  display: flex;
+  align-items: center;
+  background: rgba(58, 122, 254, 0.05);
+  border-radius: 12rpx;
+  position: relative;
+}
+.purchase-container .filter-bar .filter-group.data-v-acd06004::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 1px;
+  height: 60%;
+  background: rgba(58, 122, 254, 0.1);
+}
+.purchase-container .filter-bar .filter-group .filter-btn.data-v-acd06004 {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  padding: 16rpx;
+}
+.purchase-container .filter-bar .filter-group .filter-btn .btn-text.data-v-acd06004 {
+  font-size: 28rpx;
+  color: #3a7afe;
+  font-weight: 500;
+}
+.purchase-container .purchase-list.data-v-acd06004 {
+  padding: 32rpx;
+  /* 加载状态 */
+}
+.purchase-container .purchase-list .purchase-card.data-v-acd06004 {
+  width: 84%;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
+  /* 卡片头部 */
+  /* 采购详情 */
+  /* 公司信息 */
+  /* 底部信息 */
+}
+.purchase-container .purchase-list .purchase-card.data-v-acd06004:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+.purchase-container .purchase-list .purchase-card .card-header.data-v-acd06004 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 1px solid rgba(58, 122, 254, 0.1);
+}
+.purchase-container .purchase-list .purchase-card .card-header .header-left.data-v-acd06004 {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.purchase-container .purchase-list .purchase-card .card-header .header-left .title.data-v-acd06004 {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #2d3436;
+  line-height: 1.4;
+}
+.purchase-container .purchase-list .purchase-card .card-header .status-badge.data-v-acd06004 {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 32rpx;
+  font-size: 24rpx;
+}
+.purchase-container .purchase-list .purchase-card .card-header .status-badge[class*="processing"].data-v-acd06004 {
+  background: rgba(0, 200, 83, 0.08);
+  color: #00c853;
+}
+.purchase-container .purchase-list .purchase-card .card-header .status-badge[class*="urgent"].data-v-acd06004 {
+  background: rgba(255, 68, 68, 0.08);
+  color: #ff4444;
+}
+.purchase-container .purchase-list .purchase-card .card-header .status-badge .pulse-dot.data-v-acd06004 {
+  width: 12rpx;
+  height: 12rpx;
+  background: currentColor;
+  border-radius: 50%;
+  -webkit-animation: pulse-data-v-acd06004 1.5s infinite;
+          animation: pulse-data-v-acd06004 1.5s infinite;
+}
+.purchase-container .purchase-list .purchase-card .detail-row.data-v-acd06004 {
+  display: flex;
+  gap: 48rpx;
+  margin-bottom: 32rpx;
+}
+.purchase-container .purchase-list .purchase-card .detail-row .detail-item.data-v-acd06004 {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+.purchase-container .purchase-list .purchase-card .detail-row .detail-item .detail-text.data-v-acd06004 {
+  font-size: 26rpx;
+  color: #666;
+}
+.purchase-container .purchase-list .purchase-card .company-info.data-v-acd06004 {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 32rpx;
+}
+.purchase-container .purchase-list .purchase-card .company-info .company-logo.data-v-acd06004 {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 8rpx;
+}
+.purchase-container .purchase-list .purchase-card .company-info .company-detail.data-v-acd06004 {
+  flex: 1;
+}
+.purchase-container .purchase-list .purchase-card .company-info .company-detail .company-name.data-v-acd06004 {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+.purchase-container .purchase-list .purchase-card .company-info .company-detail .verify-tag.data-v-acd06004 {
+  margin: 0 0 0 10rpx;
+  display: inline-flex;
+  align-items: center;
+  gap: 4rpx;
+  padding: 4rpx 12rpx;
+  background: #3a7afe;
+  border-radius: 8rpx;
+  color: #fff;
+  font-size: 22rpx;
+}
+.purchase-container .purchase-list .purchase-card .card-footer.data-v-acd06004 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24rpx;
+  border-top: 1px solid #eee;
+}
+.purchase-container .purchase-list .purchase-card .card-footer .deadline.data-v-acd06004 {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  color: #666;
+  font-size: 26rpx;
+}
+.purchase-container .purchase-list .purchase-card .card-footer .action-btn.data-v-acd06004 {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 12rpx 32rpx;
+  background: #3a7afe;
+  color: #fff;
+  border-radius: 48rpx;
+  font-size: 26rpx;
+}
+.purchase-container .purchase-list .load-status.data-v-acd06004 {
+  text-align: center;
+  padding: 40rpx;
+  color: #999;
+  font-size: 26rpx;
+}
+@-webkit-keyframes pulse-data-v-acd06004 {
+0% {
+    opacity: 0.6;
+}
+50% {
+    opacity: 1;
+}
+100% {
+    opacity: 0.6;
+}
+}
+@keyframes pulse-data-v-acd06004 {
+0% {
+    opacity: 0.6;
+}
+50% {
+    opacity: 1;
+}
+100% {
+    opacity: 0.6;
+}
+}
+

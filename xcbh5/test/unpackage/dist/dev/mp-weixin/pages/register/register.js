@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 444))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 482))
     },
   }
 } catch (e) {
@@ -127,15 +127,9 @@ var render = function () {
   var _c = _vm._self._c || _h
   if (!_vm._isMounted) {
     _vm.e0 = function ($event) {
-      _vm.showPassword = !_vm.showPassword
-    }
-    _vm.e1 = function ($event) {
-      _vm.showConfirmPassword = !_vm.showConfirmPassword
-    }
-    _vm.e2 = function ($event) {
       _vm.agreements.service = !_vm.agreements.service
     }
-    _vm.e3 = function ($event) {
+    _vm.e1 = function ($event) {
       _vm.agreements.privacy = !_vm.agreements.privacy
     }
   }

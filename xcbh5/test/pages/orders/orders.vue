@@ -10,9 +10,14 @@
 				</view>
 			</scroll-view>
 		</view>
+
+		<uni-section title="查询" type="line" padding>
+			<uni-easyinput prefixIcon="search" v-model="searchOrderNumber" placeholder="请输入订单号" @iconClick="iconClick" @change="sendSearch" @clear="clearSearch">
+			</uni-easyinput>
+		</uni-section>
 		<scroll-view class="Stallholder" scroll-y="true" @scrolltolower="handleScrollToLower"
 			:style="{ height: '100vh' }">
-			<view class="list" v-for="item in pageData" :key="item.id">
+			<view v-show="searData.length==0" class="list" v-for="item in pageData" :key="item.id">
 				<view class="Order-number">
 					<text class="orderstitle">订单号 </text>
 					{{item.out_trade_no}}
@@ -44,8 +49,43 @@
 					<view class="buy" @click="goPay(item)">{{ buyButtonText }}</view>
 				</view>
 			</view>
+			
+			
+			<view v-show="searData.length!=0" class="list" v-for="item in searData">
+					<view class="Order-number">
+						<text class="orderstitle">订单号 </text>
+						{{item.out_trade_no}}
+					</view>
+					<view class="title">
+						<view>{{item.shop_name}}</view>
+						<uni-icons type="right" size="20"></uni-icons>
+					</view>
+					<view class="content" v-for="goods in item.list_arr" :key="goods.id">
+						<image class="logo" :src="goods.imglogo" mode="aspectFill"></image>
+						<view class="info">
+							<view class="cgname">{{goods.goodsname}}</view>
+							<view class="detail">{{goods.content}}</view>
+						</view>
+						<view class="amount">
+							<view>¥ {{goods.price}}</view>
+							<view>× {{goods.goodsnum}}</view>
+						</view>
+					</view>
+					<view class="orderTime">下单时间:{{initTime(item.createtime)}}</view>
+					<view class="pay">
+						<view class="paydetail">
+							<view v-if="item.payway === 1">积分支付 </view>
+							<view v-else>其他支付方式</view>
+							<view class="Payprice"> {{item.payprice * 10}}</view>
+						</view>
+					</view>
+					<view class="butt">
+						<view class="buy" @click="goPay(item)">{{ buyButtonText }}</view>
+					</view>
+				</view>
+			
 		</scroll-view>
-		<uni-popup ref="popup" >
+		<uni-popup ref="popup">
 			<view style="background-color: white; border: 1rpx; border-radius: 5%; padding: 50rpx;">
 				<view style="text-align: center; font-size: 30rpx; padding: 5rpx;">取货核销码</view>
 				<view class="card" style="background-color: white; border: 1rpx; border-radius: 5%;">
@@ -70,7 +110,9 @@
 				stastatus: [0, 1, 3, 4],
 				tabs1Current: 0,
 				pageData: [],
-				out_trade_no: ''
+				searData:[],
+				out_trade_no: '',
+				searchOrderNumber:null
 			}
 		},
 		mixins: [usePage],
@@ -110,16 +152,34 @@
 			}
 		},
 		methods: {
+			clearSearch(){
+				this.searData = []
+				this.searchOrderNumber = null
+				this.reloadData()
+			},
+			async sendSearch(){
+				let query = {
+					isshow: 1,
+					limit: 100,
+					page: 1,
+					status: 1,
+					out_trade_no:this.searchOrderNumber
+				}
+				// console.log(this.searchParams)
+				
+				const {data} = await api.myorders(query);
+				console.log("开始搜索",data.listdata)
+				this.searData = data.listdata
+			},
 			goPay(item) {
 				this.out_trade_no = item.out_trade_no
-				console.log()
 				switch (item.status) {
-					
+
 					// 全部页面
 					case 1:
-						if (this.buyButtonText == '再买一单'){
+						if (this.buyButtonText == '再买一单') {
 							return ''
-						}else{
+						} else {
 							uni.navigateTo({
 								url: `/subPackages/PaymentModule/collectOnDelivery/collectOnDelivery?out_trade_no=${item.out_trade_no}`
 							})

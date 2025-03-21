@@ -56,7 +56,7 @@
 <script>
 	import {
 		api
-	} from '../../api/index.js';
+	} from '@/api/index.js';
 	import {
 		mapMutations
 	} from 'vuex';

@@ -42,7 +42,8 @@
     "pages/OpenAccountSharing/OpenAccountSharing",
     "pages/arrangeNotification/arrangeNotification",
     "pages/weChatCashwWithdrawal/weChatCashwWithdrawal",
-    "pages/billRecord/billRecord"
+    "pages/billRecord/billRecord",
+    "pages/wholesale/wholesale"
   ],
   "subPackages": [
     {
@@ -59,6 +60,15 @@
         "publishDishes/publishDishes",
         "Traceability/Traceability",
         "lookTraceability/lookTraceability"
+      ]
+    },
+    {
+      "root": "subPackages/Wholesale",
+      "pages": [
+        "supply/supply",
+        "purchase/purchase",
+        "addSupply/addSupply",
+        "addPurchase/addPurchase"
       ]
     }
   ],
@@ -84,6 +94,12 @@
         "iconPath": "static/image/home.png",
         "pagePath": "pages/index/index",
         "text": "买菜"
+      },
+      {
+        "selectedIconPath": "static/image/wholesaleActive.png",
+        "iconPath": "static/image/wholesale.png",
+        "pagePath": "pages/wholesale/wholesale",
+        "text": "批发"
       },
       {
         "selectedIconPath": "static/image/selling_s.png",

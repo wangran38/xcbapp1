@@ -25,8 +25,8 @@
 					<uni-icons type="locked" size="24" color="#409EFF"></uni-icons>
 					<input class="form-input" :type="showPassword ? 'text':'password'" v-model="form.password"
 						placeholder="密码" />
-					<uni-icons :type="showPassword ? 'eye-slash' : 'eye'" size="24" color="#999"
-						@tap="togglePassword" />
+<!-- 					<uni-icons :type="showPassword ? 'eye-slash' : 'eye'" size="24" color="#999"
+						@tap="togglePassword" /> -->
 				</view>
 
 				<button class="login-btn" :class="{ 'active': formValid}" @click="login">

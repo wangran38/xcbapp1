@@ -401,8 +401,16 @@ export const api = {
 	// 提现至银行卡
 	amount(data){
 		return fetch('/api/shop/amount', 'POST', data);
-	}
+	},
+	// 添加预卖菜品
+	addPreSale(data){
+		return fetch('/api/farmers/addgoods', 'POST', data);
+	},
 	
+	// 预卖菜品列表
+	goodslist(data){
+		return fetch('/api/farmers/goodslist', 'POST', data);
+	}
 	
 
 }

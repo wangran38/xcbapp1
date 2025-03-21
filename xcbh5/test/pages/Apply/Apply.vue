@@ -287,7 +287,7 @@
 					const cities = await this.fetchCities(provinceId);
 					this.cityList = cities;
 					this.multiArray[1] = cities.map(item => item.name);
-					this.multiArray[2] = [];
+					this.multiArray[2] = cities ? cities[0].Children.map(item => item.name):[];
 					this.multiIndex[1] = 0;
 					this.multiIndex[2] = 0;
 				} else if (column === 1) {
@@ -349,7 +349,7 @@
 			bindCategoryChange(e) {
 				const selectedIndex = e.detail.value;
 				this.selectedCategory = this.categoryList[selectedIndex];
-				this.category_id = this.categoryIdMap[this.selectedCategory]; // 设置分类ID
+				this.category_id = this.categoryIdMap[this.selectedCategory];
 			},
 
 			// 摊位图片上传

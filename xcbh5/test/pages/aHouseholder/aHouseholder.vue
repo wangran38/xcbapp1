@@ -47,33 +47,46 @@
 			</view>
 			<view class="dishes">
 				<view class="title">
-					产品
+					我的菜
 				</view>
 				<view class="content">
-					<view class="item" @click="goTorelePage">
+					<view class="item" @click="gotoPreSale">
+						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe603;'}}</uni-icons>
+						<view class="add-dishes">
+							预卖
+						</view>
+					</view>
+					<view class="item" @click="gotoAdditionalinformation">
+						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe603;'}}</uni-icons>
+						<view class="add-dishes">
+							菜品资料
+						</view>
+					</view>
+<!-- 					<view class="item" @click="goTorelePage">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe6ee;'}}</uni-icons>
 						<view class="add-dishes">
 							添加菜品
 						</view>
-					</view>
-					<view class="item" @click="goToTraceability">
+					</view> -->
+<!-- 					<view class="item" @click="goToTraceability">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe6ee;'}}</uni-icons>
 						<view class="add-dishes">
 							产品溯源
 						</view>
-					</view>
-					<view class="item" @click="gotopublish">
+					</view> -->
+<!-- 					<view class="item" @click="gotopublish">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe603;'}}</uni-icons>
 						<view class="add-dishes">
 							菜品列表
 						</view>
-					</view>
-					<view class="item" @click="gotoListDis">
+					</view> -->
+<!-- 					<view class="item" @click="gotoListDis">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe689;'}}</uni-icons>
 						<view class="add-dishes">
 							已上架菜品
 						</view>
-					</view>
+					</view> -->
+
 					<!-- <view class="item">
 						<uni-icons type="plus" size="30"></uni-icons>
 						<view class="add-dishes">
@@ -217,6 +230,16 @@
 
 		},
 		methods: {
+			gotoAdditionalinformation(){
+				uni.navigateTo({
+					url:'/pages/additionalinformation/additionalinformation'
+				})
+			},
+			gotoPreSale(){
+				uni.navigateTo({
+					url:'/pages/preSale/preSale'
+				})
+			},
 			// 检查是否token存在，存在则已登陆
 			checkToken() {
 				const token = uni.getStorageSync('token');

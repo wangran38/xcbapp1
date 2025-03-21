@@ -10,6 +10,7 @@
 				</view>
 			</scroll-view>
 		</view>
+		
 		<scroll-view class="Stallholder" scroll-y="true" @scrolltolower="handleScrollToLower"
 			:style="{ height: '100vh' }">
 			<view class="list" v-for="item in pageData" :key="item.id">
@@ -42,7 +43,6 @@
 					</view>
 				</view>
 				<view class="butt">
-					<!-- <view class="del">删除订单</view> -->
 					<view class="buy">{{ tabs1[tabs1Current] }}</view>
 				</view>
 			</view>
