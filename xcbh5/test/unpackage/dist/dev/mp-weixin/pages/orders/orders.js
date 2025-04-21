@@ -100,14 +100,20 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
+    uniSection: function () {
+      return __webpack_require__.e(/*! import() | uni_modules/uni-section/components/uni-section/uni-section */ "uni_modules/uni-section/components/uni-section/uni-section").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-section/components/uni-section/uni-section.vue */ 643))
+    },
+    uniEasyinput: function () {
+      return __webpack_require__.e(/*! import() | uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput */ "uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue */ 650))
+    },
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 482))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 602))
     },
     uniPopup: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-popup/components/uni-popup/uni-popup */ "uni_modules/uni-popup/components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-popup/components/uni-popup/uni-popup.vue */ 523))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-popup/components/uni-popup/uni-popup */ "uni_modules/uni-popup/components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-popup/components/uni-popup/uni-popup.vue */ 657))
     },
     uvQrcode: function () {
-      return Promise.all(/*! import() | uni_modules/uv-qrcode/components/uv-qrcode/uv-qrcode */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uv-qrcode/components/uv-qrcode/uv-qrcode")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uv-qrcode/components/uv-qrcode/uv-qrcode.vue */ 530))
+      return Promise.all(/*! import() | uni_modules/uv-qrcode/components/uv-qrcode/uv-qrcode */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uv-qrcode/components/uv-qrcode/uv-qrcode")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uv-qrcode/components/uv-qrcode/uv-qrcode.vue */ 664))
     },
   }
 } catch (e) {
@@ -131,6 +137,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var g0 = _vm.searData.length
   var l0 = _vm.__map(_vm.pageData, function (item, __i0__) {
     var $orig = _vm.__get_orig(item)
     var m0 = _vm.initTime(item.createtime)
@@ -139,11 +146,23 @@ var render = function () {
       m0: m0,
     }
   })
+  var g1 = _vm.searData.length
+  var l1 = _vm.__map(_vm.searData, function (item, __i2__) {
+    var $orig = _vm.__get_orig(item)
+    var m1 = _vm.initTime(item.createtime)
+    return {
+      $orig: $orig,
+      m1: m1,
+    }
+  })
   _vm.$mp.data = Object.assign(
     {},
     {
       $root: {
+        g0: g0,
         l0: l0,
+        g1: g1,
+        l1: l1,
       },
     }
   )
@@ -201,7 +220,9 @@ var _default = {
       stastatus: [0, 1, 3, 4],
       tabs1Current: 0,
       pageData: [],
-      out_trade_no: ''
+      searData: [],
+      out_trade_no: '',
+      searchOrderNumber: null
     };
   },
   mixins: [_usePage.default],
@@ -241,9 +262,43 @@ var _default = {
     }
   },
   methods: {
+    clearSearch: function clearSearch() {
+      this.searData = [];
+      this.searchOrderNumber = null;
+      this.reloadData();
+    },
+    sendSearch: function sendSearch() {
+      var _this = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+        var query, _yield$api$myorders, data;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                query = {
+                  isshow: 1,
+                  limit: 100,
+                  page: 1,
+                  status: 1,
+                  out_trade_no: _this.searchOrderNumber
+                }; // console.log(this.searchParams)
+                _context.next = 3;
+                return _index.api.myorders(query);
+              case 3:
+                _yield$api$myorders = _context.sent;
+                data = _yield$api$myorders.data;
+                console.log("开始搜索", data.listdata);
+                _this.searData = data.listdata;
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
     goPay: function goPay(item) {
       this.out_trade_no = item.out_trade_no;
-      console.log();
       switch (item.status) {
         // 全部页面
         case 1:
@@ -297,28 +352,28 @@ var _default = {
       this.reloadData(); // 切换 tab 后重新加载数据
     },
     fetchData: function fetchData(params) {
-      var _this = this;
-      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+      var _this2 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
         var requestParams, response;
-        return _regenerator.default.wrap(function _callee$(_context) {
+        return _regenerator.default.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 requestParams = _objectSpread({}, params); // 只有 tabs1Current 不为 0 时才添加 status 参数
-                if (_this.tabs1Current !== 0) {
-                  requestParams.status = _this.stastatus[_this.tabs1Current]; // 传递具体状态
+                if (_this2.tabs1Current !== 0) {
+                  requestParams.status = _this2.stastatus[_this2.tabs1Current]; // 传递具体状态
                 }
-                _context.next = 4;
+                _context2.next = 4;
                 return _index.api.myorders(requestParams);
               case 4:
-                response = _context.sent;
-                return _context.abrupt("return", response.data);
+                response = _context2.sent;
+                return _context2.abrupt("return", response.data);
               case 6:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }))();
     }
   }

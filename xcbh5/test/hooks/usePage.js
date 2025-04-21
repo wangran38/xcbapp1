@@ -37,7 +37,7 @@ export default {
 			}
 		},
 		async fetchData(params) {
-			throw new Error('fetchData 方法未实现');
+			// throw new Error('fetchData 方法未实现');
 		},
 
 		// 检测还有没有下一页

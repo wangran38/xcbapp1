@@ -1,13 +1,10 @@
 <template>
 	<view class="purchase-container">
 		<uni-forms ref="form">
-
-
 			<view class="section">
 				<uni-section title="采购明细" type="line"></uni-section>
-				<uni-forms-item label="商品名称" required name="productName">
-					<uni-easyinput v-model="formData.productName" placeholder="请输入商品名称"
-						@focus="showGoodsPicker = true" />
+				<uni-forms-item label="商品名称" required name="infotitle">
+					<uni-easyinput v-model="formData.infotitle" placeholder="请输入商品名称" @focus="showGoodsPicker = true" />
 
 					<uni-popup ref="goodsPopup" type="dialog">
 						<goods-picker @select="handleGoodsSelect" />
@@ -16,63 +13,50 @@
 
 				<uni-forms-item label="采购量" required name="quantity">
 					<view class="quantity-input">
-						<uni-easyinput type="number" v-model="formData.quantity" placeholder="请输入数量" />
+						<uni-easyinput type="number" v-model.number="formData.infonumber" placeholder="请输入数量" />
 						<uni-data-select v-model="formData.unit" :localdata="units" class="unit-select"
 							placeholder="单位" />
 					</view>
 				</uni-forms-item>
-
+				
 				<uni-forms-item label="采购要求" name="requirements">
-					<uni-easyinput type="textarea" v-model="formData.requirements" placeholder="请输入规格、材质等要求"
+					<uni-easyinput type="textarea" v-model="formData.content" placeholder="请输入规格、材质等要求"
 						:maxlength="500" />
 				</uni-forms-item>
 			</view>
-
-			<!-- 时间要求 -->
 			<view class="section">
 				<uni-section title="时间要求" type="line"></uni-section>
-				<uni-forms-item label="报价截止" required name="quoteDeadline">
-					<uni-datetime-picker type="date" v-model="formData.quoteDeadline" :start="today"
-						:end="maxQuoteDate" />
+				<uni-forms-item label="报价截止" required name="stoptime">
+					<uni-datetime-picker type="date" v-model="formData.stoptime" :start="today" return-type="timestamp"/>
 				</uni-forms-item>
 
-				<!-- 				<uni-forms-item label="采购周期" required name="deliveryPeriod">
+				<!-- <uni-forms-item label="采购周期" required name="deliveryPeriod">
 					<view class="range-picker">
 						<uni-datetime-picker type="date" v-model="formData.deliveryStart" placeholder="开始日期" />
-						<text class="separator">至</text>
+						<text class="separator" style="font-size: 25rpx;">至</text>
 						<uni-datetime-picker type="date" v-model="formData.deliveryEnd" placeholder="结束日期" />
 					</view>
 				</uni-forms-item> -->
 			</view>
-
-			<!-- 物流信息 -->
 			<view class="section">
 				<uni-section title="物流信息" type="line"></uni-section>
-				<uni-forms-item label="收货地址" required name="deliveryAddress">
-					<picker mode="multiSelector" :range="multiArray" :value="multiIndex" @change="bindMultiPickerChange"
-						@columnchange="bindMultiPickerColumnChange">
-						<view class="compact-picker" style="display: flex; justify-content: space-between;">
-							<view>
-								<text class="province">{{ multiArray[0][multiIndex[0]] || '省' }}</text>
-								<text class="separator">/</text>
-								<text class="city">{{ multiArray[1][multiIndex[1]] || '市' }}</text>
-								<text class="separator">/</text>
-								<text class="district">{{ multiArray[2][multiIndex[2]] || '区' }}</text>
-							</view>
-
-							<view>
-								<uni-icons type="arrowright" size="18" color="#999" />
-							</view>
+				
+				<uni-forms-item label="收货地址" required name="deliveryAddress" class="range-picker">
+					<picker class="picker" mode="multiSelector" :range="multiArray" :value="multiIndex"
+						@change="bindMultiPickerChange" @columnchange="bindMultiPickerColumnChange">
+						<view style="font-size: 25rpx;">
+							{{ multiArray[0][multiIndex[0]] }} - {{ multiArray[1][multiIndex[1]] }}
+							-{{ selectedCountry === 'overseas' ? '' : multiArray[2][multiIndex[2]] }}
 						</view>
+					</picker>
 					</picker>
 
 				</uni-forms-item>
 
-				<uni-forms-item label="期望货源地" name="preferredOrigin">
-					<uni-easyinput v-model="formData.preferredOrigin" placeholder="请输入供应商或地区" />
+				<uni-forms-item label="期望货源地" name="byaddress">
+					<uni-easyinput v-model="formData.byaddress" placeholder="请输入供应商或地区" />
 				</uni-forms-item>
 			</view>
-
 			<button type="primary" @click="submitForm">提交采购单</button>
 		</uni-forms>
 	</view>
@@ -85,7 +69,7 @@
 
 	export default {
 		data() {
-			const today = '';
+			const today = Date.now();
 
 			return {
 				multiArray: [
@@ -93,23 +77,20 @@
 					[],
 					[]
 				],
+				selectedCountry: 'china',
 				multiIndex: [0, 0, 0],
 				formData: {
-					applicant: '',
-					department: '',
-					applyDate: 'today',
-					productName: '',
-					quantity: null,
-					unit: null,
-					requirements: '',
-					quoteDeadline: '',
-					deliveryStart: '',
-					deliveryEnd: '',
-					deliveryAddress: [],
-					preferredOrigin: '',
+					infotitle: '', // 商品名称
+					infonumber: null, // 采购量
+					unit: null, // 采购量
+					stoptime: '', // 截至时间
+					// deliveryStart: '',
+					// deliveryEnd: '',
+					// deliveryAddress: [],
+					byaddress: '', // 求购商品的指定货源地
+					buyaddress: '', // 求购商品物流地址
 					area_id: null,
-					market_id: null,
-					category_id: null,
+					content:''
 				},
 
 				units: [{
@@ -130,73 +111,86 @@
 					},
 
 				],
+				districtList: [],
 				today,
-				maxQuoteDate: ''
 			};
 		},
 		mounted() {
 			this.initializePicker();
-			this.fetchCategories();
 		},
 		options: {
 			stylelsolation: 'shared'
 		},
 		methods: {
-			async fetchCategories() {
-				try {
-					const response = await api.cglist();
-					if (response.code === 200) {
-						const categories = response.data.listdata;
-						this.categoryList = ['请选择分类', ...categories.map(item => item.title)];
-						this.categoryIdMap = categories.reduce((map, item) => {
-							map[item.title] = item.id;
-							return map;
-						}, {});
-					} else {
-						throw new Error('Failed to fetch categories');
-					}
-				} catch (error) {
-					console.error('Failed to fetch categories:', error);
-				}
-			},
 			async bindMultiPickerColumnChange(e) {
-				console.log(e.detail)
 				const column = e.detail.column;
 				const value = e.detail.value;
-				this.multiIndex[column] = value;
 
-				if (column === 0) {
-					const provinceId = this.provinceList[value].id;
-					const cities = await this.fetchCities(provinceId);
-					console.log(cities)
-					this.cityList = cities;
-					this.multiArray[1] = cities.map(item => item.name);
-					this.multiArray[2] = cities ? cities[0].Children.map(item => item.name) : [];
-					this.multiIndex[1] = 0;
-					this.multiIndex[2] = 0;
-				} else if (column === 1) {
-					const cityId = this.cityList[value].id;
-					const areas = await this.fetchAreas(cityId);
-					this.districtList = areas;
-					this.multiArray[2] = areas.map(item => item.name);
-					this.multiIndex[2] = 0;
+				if (this.selectedCountry === 'china') {
+					if (column === 0) {
+						const selectedProvince = this.provinceList[value];
+						if (selectedProvince && selectedProvince.id !== undefined) {
+							const cities = await this.fetchCities(selectedProvince.id);
+							this.multiArray[1] = cities.map(item => item.name);
+							if (cities.length > 0) {
+								const areas = await this.fetchAreas(cities[0].id);
+								this.multiArray[2] = areas.map(item => item.name);
+							} else {
+								this.multiArray[2] = [];
+							}
+						}
+						this.multiIndex[1] = 0;
+						this.multiIndex[2] = 0;
+					} else if (column === 1) {
+						const selectedCity = this.cityList[value];
+						if (selectedCity && selectedCity.id !== undefined) {
+							const areas = await this.fetchAreas(selectedCity.id);
+							this.multiArray[2] = areas.map(item => item.name);
+						} else {
+							this.multiArray[2] = [];
+						}
+						this.multiIndex[2] = 0;
+					}
+				} else if (this.selectedCountry === 'overseas') {
+					if (column === 0) {
+						const selectedContinent = this.overseasCountries[value];
+						if (selectedContinent && selectedContinent.id !== undefined) {
+							await this.fetchOverseasCities(selectedContinent.id);
+						}
+						this.multiArray[2] = [];
+						this.multiIndex[1] = 0;
+						this.multiIndex[2] = 0;
+					} else if (column === 1) {
+						this.multiArray[2] = [];
+						this.multiIndex[2] = 0;
+					}
 				}
 
-				console.log(this.multiArray[2][this.multiIndex[2]])
+				this.multiIndex[column] = value;
 				this.multiIndex = [...this.multiIndex];
 			},
 
-			bindMultiPickerChange(e) {
-				console.log(e)
-				this.multiIndex = e.detail.value;
-				const selectedProvince = this.multiArray[0][this.multiIndex[0]];
-				const selectedCity = this.multiArray[1][this.multiIndex[1]];
-				const selectedArea = this.multiArray[2][this.multiIndex[2]];
-				const selectedAreaId = this.districtList[this.multiIndex[2]].id;
-				this.area_id = selectedAreaId;
-				this.fetchMarkets(selectedAreaId);
+			async bindMultiPickerChange(e) {
+				// this.multiIndex = e.detail.value;
+				this.formData.area_id =  this.districtList[this.multiIndex[2]]['id']
+				// if (this.selectedCountry === 'china') {
+				// 	const selectedCityIndex = this.multiIndex[1];
+				// 	const selectedCityId = this.cityList[selectedCityIndex]?.id || null;
+				// 	if (selectedCityId) {
+				// 		await this.fetchAreas(selectedCityId);
+				// 		this.area_id = this.districtList[this.multiIndex[2]]?.id || null;
+				// 		await this.fetchMarkets(this.area_id);
+				// 	}
+				// } else if (this.selectedCountry === 'overseas') {
+				// 	const selectedCountryIndex = this.multiIndex[0];
+				// 	this.overseasCountryId = this.overseasCountries[selectedCountryIndex]?.id || null;
+				// 	const selectedCityIndex = this.multiIndex[1];
+				// 	if (this.overseasCountryId) {
+				// 		await this.fetchOverseasCities(this.overseasCountryId);
+				// 		this.overseasCityId = this.overseasCities[selectedCityIndex]?.id || null;
+				// 	}
+				// }
 			},
-
 			async fetchProvinces() {
 				try {
 					const response = await api.citylist({
@@ -213,6 +207,55 @@
 					throw error;
 				}
 			},
+			async fetchCities(provinceId) {
+				try {
+					const response = await api.citytree(provinceId);
+					if (response.code === 200 && Array.isArray(response.data)) {
+						this.cityList = response.data;
+						return response.data;
+					} else {
+						console.error('No cities data found');
+						return [];
+					}
+				} catch (error) {
+					console.error('Failed to fetch cities:', error);
+					return [];
+				}
+			},
+			async fetchAreas(cityId) {
+				try {
+					const response = await api.citytree(cityId);
+					if (response.code === 200 && Array.isArray(response.data)) {
+						this.districtList = response.data;
+						return response.data;
+					} else {
+						console.error('No areas data found');
+						return [];
+					}
+				} catch (error) {
+					console.error('Failed to fetch areas:', error);
+					return [];
+				}
+			},
+
+			async submitForm() {
+				
+				this.formData.buyaddress =  this.multiArray[0][this.multiIndex[0]]+'-'+this.multiArray[1][this.multiIndex[1]]+'-'+this.multiArray[2][this.multiIndex[2]]
+				console.log(this.formData)
+				let data = await api.buyinfoAdd(this.formData)
+				if (data.code != 200){
+					uni.showToast({
+						icon:'error',
+						title:data.msg || data.message
+					})
+				}else{
+					uni.showToast({
+						icon:'success',
+						title:data.msg || data.message
+					})
+				}
+			},
+
 			async initializePicker() {
 				try {
 					const provinces = await this.fetchProvinces();
@@ -223,50 +266,30 @@
 					this.multiArray[2] = areas.map(item => item.name);
 					this.multiIndex = [0, 0, 0];
 				} catch (error) {
-					return
+					console.log(error)
 				}
 			},
-			async fetchCities(provinceId) {
-				try {
-					const response = await api.citytree(provinceId);
-					if (response.code === 200 && Array.isArray(response.data)) {
-						return response.data;
-					} else {
-						console.error('No cities data found');
-						return [];
-					}
-				} catch (error) {
-					// console.error('Failed to fetch cities:', error);
-					return [];
-				}
-			},
-			async fetchAreas(cityId) {
-				try {
-					const response = await api.citytree(cityId);
-					if (response.code === 200 && Array.isArray(response.data)) {
-						return response.data;
-					} else {
-						console.error('No areas data found');
-						return [];
-					}
-				} catch (error) {
-					console.error('Failed to fetch areas:', error);
-					return [];
-				}
-			}
+
 		}
 	};
 </script>
 
 <style lang="scss">
+	.range-picker {
+		display: flex;
+		align-items: center;
+	}
+
 	/deep/ .uni-forms-item__label {
 		font-size: 30rpx;
 		width: auto !important;
 
 	}
-	/deep/ .uni-forms-item{
+
+	/deep/ .uni-forms-item {
 		// background-color: red;
 	}
+
 	/deep/ .distraction {
 		font-size: 30rpx !important;
 	}
@@ -365,7 +388,7 @@
 		/* 地址选择器 */
 		.compact-picker {
 			// background-color: red;
-			margin:10rpx 0 10rpx 10rpx;
+			margin: 10rpx 0 10rpx 10rpx;
 			// width: 100%;
 			// padding: 24rpx 0;
 			font-size: 30rpx;

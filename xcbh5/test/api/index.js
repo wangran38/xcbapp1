@@ -407,9 +407,49 @@ export const api = {
 		return fetch('/api/farmers/addgoods', 'POST', data);
 	},
 	
-	// 预卖菜品列表
+	// 卖家端预卖菜品列表
 	goodslist(data){
 		return fetch('/api/farmers/goodslist', 'POST', data);
+	},
+	// 菜品朋友圈上传
+	addinfos(data){
+		return fetch('/api/farmers/goods/addinfos', 'POST', data);
+	},
+	// 菜品生命周期
+	goodsinfoList(data){
+		return fetch('/api/farmers/goodsinfo/list', 'POST', data);
+	},
+	// 买家端预卖菜品列表
+	presaleList(data){
+		return fetch('/api/farmers/presale/list', 'POST', data);
+	},
+	
+	// 删除预卖菜品
+	delDishes(data){
+		return fetch('/api/farmers/delgoods', 'POST', data);
+	},
+	// 删除朋友圈
+	delMoments(data){
+		return fetch('/api/farmers/goodsinfo/del', 'POST', data);
+	},
+	// 删除列表
+	farmersList(data){
+		return fetch('/api/farmers/list', 'POST', data);
+	},
+	//  朋友圈数据
+	dynamicsDataList(data){
+		return fetch('/api/farmers/goodsinfo/showlist', 'POST', data);
+	},
+	// 发布求购信息
+	buyinfoAdd(data){
+		return fetch('/api/user/buyinfo/add', 'POST', data);
+	},
+	buyinfoList(data){
+		return fetch('/api/buyinfo/list', 'POST', data);
+	},
+	// 修改预卖菜品信息
+	updateDish(data){
+		return fetch('/api/farmers/upgoods', 'POST', data);
 	}
 	
 

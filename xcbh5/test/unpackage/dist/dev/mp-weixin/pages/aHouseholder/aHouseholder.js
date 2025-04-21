@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 482))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 602))
     },
   }
 } catch (e) {
@@ -372,12 +372,40 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {};
   },
   onShow: function onShow() {},
   methods: {
+    goToPreSoldDishesList: function goToPreSoldDishesList() {
+      uni.navigateTo({
+        url: '/subPackages/aHouseholder/PreSoldDishesList/PreSoldDishesList'
+      });
+    },
+    gotoAdditionalinformation: function gotoAdditionalinformation() {
+      uni.navigateTo({
+        url: '/pages/additionalinformation/additionalinformation'
+      });
+    },
+    gotoPreSale: function gotoPreSale() {
+      uni.navigateTo({
+        url: '/pages/preSale/preSale'
+      });
+    },
     // 检查是否token存在，存在则已登陆
     checkToken: function checkToken() {
       var token = uni.getStorageSync('token');

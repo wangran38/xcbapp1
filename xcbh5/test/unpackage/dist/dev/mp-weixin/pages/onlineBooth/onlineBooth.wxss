@@ -1,5 +1,5 @@
 
-.registerBtn.data-v-34fd0f64{
+.registerBtn.data-v-34fd0f64 {
 	box-shadow: 10rpx 10rpx 10rpx #e8e8e8;
 	background-color: lightblue;
 	width: 230rpx;
@@ -41,7 +41,7 @@
 	margin-top: 30rpx;
 }
 .label.data-v-34fd0f64 {
-	width:200rpx;
+	width: 200rpx;
 	font-weight: 300;
 	font-size: 25rpx;
 	margin-bottom: 20rpx;

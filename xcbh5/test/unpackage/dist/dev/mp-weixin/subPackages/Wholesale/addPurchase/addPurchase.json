@@ -1,4 +1,13 @@
 {
-  "navigationBarTitleText": "",
-  "usingComponents": {}
+  "navigationBarTitleText": "发布采购",
+  "usingComponents": {
+    "uni-forms": "/uni_modules/uni-forms/components/uni-forms/uni-forms",
+    "uni-section": "/uni_modules/uni-section/components/uni-section/uni-section",
+    "uni-forms-item": "/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item",
+    "uni-easyinput": "/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput",
+    "uni-popup": "/uni_modules/uni-popup/components/uni-popup/uni-popup",
+    "uni-data-select": "/uni_modules/uni-data-select/components/uni-data-select/uni-data-select",
+    "uni-datetime-picker": "/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker",
+    "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons"
+  }
 }

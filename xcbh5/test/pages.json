@@ -40,6 +40,20 @@
 					"style": {
 						"navigationBarTitleText": "查看溯源信息"
 					}
+				},
+				{
+					"path" : "PreSoldDishesList/PreSoldDishesList",
+					"style" : 
+					{
+						"navigationBarTitleText" : "预卖菜品"
+					}
+				},
+				{
+					"path" : "modifyPreSoldDishes/modifyPreSoldDishes",
+					"style" : 
+					{
+						"navigationBarTitleText" : "修改预卖菜品"
+					}
 				}
 			]
 		},
@@ -69,6 +83,76 @@
 						"navigationBarTitleText": "发布采购"
 					}
 				}
+			]
+		},
+		{
+			"root": "subPackages/shoppingPageList",
+			"pages": [{
+				"path" : "villageZone/villageZone",
+				"style" : 
+				{
+					"navigationBarTitleText" : "预卖菜品"
+				}
+			},
+			{
+				"path" : "nearbyFarmers/nearbyFarmers",
+				"style" : 
+				{
+					"navigationBarTitleText" : "附近农户"
+				}
+			},
+			{
+				"path" : "agriculturalAssistanceZone/agriculturalAssistanceZone",
+				"style" : 
+				{
+					"navigationBarTitleText" : "扶贫专区"
+				}
+			},
+			{
+				"path" : "official/official",
+				"style" : 
+				{
+					"navigationBarTitleText" : "官方直营"
+				}
+			},
+			{
+				"path" : "rentalStorefront/rentalStorefront",
+				"style" : 
+				{
+					"navigationBarTitleText" : ""
+					// "disableScroll": true
+				}
+			},
+			{
+				"path" : "rentalStorefrontList/rentalStorefrontList",
+				"style" : 
+				{
+					"navigationBarTitleText" : ""
+				}
+			},
+			{
+				"path" : "prePurchaseOrder/prePurchaseOrder",
+				"style" : 
+				{
+					"navigationBarTitleText" : ""
+				}
+			},
+			{
+				"path" : "prePurchaseDeposit/prePurchaseDeposit",
+				"style" : 
+				{
+					"navigationBarTitleText" : ""
+				}
+			},
+			{
+				"path" : "merchantDetails/merchantDetails",
+				"style" : 
+				{
+					"navigationBarTitleText" : "农户详情"
+					// "disableScroll": true
+				}
+			}
+				
 			]
 		}
 	],
@@ -365,7 +449,8 @@
 			"path" : "pages/additionalinformation/additionalinformation",
 			"style" : 
 			{
-				"navigationBarTitleText" : "补充资料"
+				"navigationBarTitleText" : "补充资料",
+				"disableScroll": true
 			}
 		},
 		{
@@ -373,6 +458,27 @@
 			"style" : 
 			{
 				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/dynamics/dynamics",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/demo/demo",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/merchantComplaints/merchantComplaints",
+			"style" : 
+			{
+				"navigationBarTitleText" : "投诉商家"
 			}
 		}
 	],

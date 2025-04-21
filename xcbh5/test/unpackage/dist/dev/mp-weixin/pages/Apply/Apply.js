@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 482))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 602))
     },
   }
 } catch (e) {
@@ -575,7 +575,9 @@ var _default = {
                 _this3.multiArray[1] = cities.map(function (item) {
                   return item.name;
                 });
-                _this3.multiArray[2] = [];
+                _this3.multiArray[2] = cities ? cities[0].Children.map(function (item) {
+                  return item.name;
+                }) : [];
                 _this3.multiIndex[1] = 0;
                 _this3.multiIndex[2] = 0;
                 _context6.next = 23;
@@ -699,7 +701,7 @@ var _default = {
     bindCategoryChange: function bindCategoryChange(e) {
       var selectedIndex = e.detail.value;
       this.selectedCategory = this.categoryList[selectedIndex];
-      this.category_id = this.categoryIdMap[this.selectedCategory]; // 设置分类ID
+      this.category_id = this.categoryIdMap[this.selectedCategory];
     },
     // 摊位图片上传
     chooseImage: function chooseImage() {

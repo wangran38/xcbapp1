@@ -84,7 +84,8 @@
 				overseasCities: [],
 				overseasCountryId: null,
 				overseasCityId: null,
-				signTotalData:null
+				signTotalData:{
+				}
 				// marketName:'' // 市场名
 			};
 		},

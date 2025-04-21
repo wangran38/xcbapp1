@@ -10,12 +10,12 @@
           </view>
         </picker>
         <view class="divider"></view>
-        <picker @change="sortChange" :range="sortOptions" range-key="label">
+<!--        <picker @change="sortChange" :range="sortOptions" range-key="label">
           <view class="filter-btn">
             <text class="btn-text">{{ selectedSort.label }}</text>
             <uni-icons type="arrowdown" size="14" color="#3a7afe" />
           </view>
-        </picker>
+        </picker> -->
       </view>
     </view>
 
@@ -30,32 +30,32 @@
         <!-- 卡片头部 -->
         <view class="card-header">
           <view class="header-left">
-            <uni-icons type="hand-up" size="20" color="#3a7afe" />
-            <text class="title">{{ item.title }}</text>
+            <!-- <uni-icons type="hand-up" size="20" color="#3a7afe" /> -->
+            <text class="title">{{ item.infotitle }}</text>
           </view>
-          <view class="status-badge" :class="item.status">
+          <!-- <view class="status-badge" :class="item.status">
             <text>{{ item.statusText }}</text>
             <view class="pulse-dot"></view>
-          </view>
+          </view> -->
         </view>
 
         <!-- 采购详情 -->
         <view class="detail-row">
           <view class="detail-item">
             <uni-icons type="balance" size="18" color="#999" />
-            <text class="detail-text">数量:{{ item.quantity }}{{ item.unit }}</text>
+            <text class="detail-text">数量:{{ item.infonumber }}{{ item.unit }}</text>
           </view>
         </view>
 
         <!-- 公司信息 -->
-        <view class="company-info">
-          <image class="company-logo" :src="item.company.logo" />
+       <view class="company-info">
+          <!-- <image class="company-logo" :src="item.company.logo" /> -->
           <view class="company-detail">
-            <text class="company-name">{{ item.company.name }}</text>
-            <view class="verify-tag" v-if="item.company.verified">
+            <text class="company-name">{{ item.buyaddress }}</text>
+<!--            <view class="verify-tag" v-if="item.company.verified">
               <uni-icons type="checkmark" size="12" color="#fff" />
               <text>认证企业</text>
-            </view>
+            </view> -->
           </view>
         </view>
 
@@ -63,7 +63,7 @@
         <view class="card-footer">
           <view class="deadline">
             <uni-icons type="calendar" size="16" color="#666" />
-            <text>{{ item.deadline }} 截止</text>
+            <text>{{ initDate(item.stoptime) }} 截止</text>
           </view>
           <view class="action-btn" @click.stop="contactSupplier(item.id)">
             <text>立即联系</text>
@@ -82,14 +82,17 @@
 </template>
 
 <script>
+	import {api} from '@/api/index.js'
+	import {myMixin} from '@/utils/public.js'
 export default {
+	mixins:[myMixin],
   data() {
     return {
       categories: [
         { label: '全部采购', value: 'all' },
-        { label: '原材料', value: 'material' },
-        { label: '工业设备', value: 'equipment' },
-        { label: '技术服务', value: 'service' }
+        { label: '肉类', value: 'material' },
+        { label: '蔬菜', value: 'equipment' },
+        { label: '蛋类', value: 'service' }
       ],
       sortOptions: [
         { label: '智能排序', value: 'default' },
@@ -101,7 +104,13 @@ export default {
       purchaseList: [],
       page: 1,
       loading: false,
-      noMore: false
+      noMore: false,
+	  query:{
+		  area_id:null,
+		  stoptime:null,
+		  page:1,
+		  limit:20
+	  }
     }
   },
   created() {
@@ -115,25 +124,25 @@ export default {
       this.loading = true
       try {
         // 模拟API请求
-        await new Promise(resolve => setTimeout(resolve, 800))
+		 let data = await api.buyinfoList(this.query)
+        // const mockData = Array.from({length: 5}, (_, i) => ({
+        //   id: this.page * 10 + i,
+        //   title: `采购${['鸡蛋', '槟榔苗', '蜂蜜', '猪肉'][i%4]}`,
+        //   quantity: Math.floor(Math.random() * 1000),
+        //   unit: ['个', '枝', '斤', '斤'][i%4],
+        //   budget: (Math.random() * 500 + 50).toFixed(1),
+        //   deadline: this.generateDeadline(),
+        //   status: ['processing', 'urgent'][i%2],
+        //   statusText: ['招标中', '紧急采购'][i%2],
+        //   company: {
+        //     name: `企业${String.fromCharCode(65 + i%26)}`,
+        //     logo: `https://picsum.photos/40/40?c=${i}`,
+        //     verified: i%3 === 0
+        //   }
+        // }))
         
-        const mockData = Array.from({length: 5}, (_, i) => ({
-          id: this.page * 10 + i,
-          title: `采购${['鸡蛋', '槟榔苗', '蜂蜜', '猪肉'][i%4]}`,
-          quantity: Math.floor(Math.random() * 1000),
-          unit: ['个', '枝', '斤', '斤'][i%4],
-          budget: (Math.random() * 500 + 50).toFixed(1),
-          deadline: this.generateDeadline(),
-          status: ['processing', 'urgent'][i%2],
-          statusText: ['招标中', '紧急采购'][i%2],
-          company: {
-            name: `企业${String.fromCharCode(65 + i%26)}`,
-            logo: `https://picsum.photos/40/40?c=${i}`,
-            verified: i%3 === 0
-          }
-        }))
-        
-        this.purchaseList = [...this.purchaseList, ...mockData]
+        this.purchaseList = [...this.purchaseList, ...data.data.listdata]
+		console.log(this.purchaseList)
         this.page++
         this.noMore = this.page > 2
       } finally {

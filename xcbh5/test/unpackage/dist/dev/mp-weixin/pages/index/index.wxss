@@ -1,174 +1,195 @@
-
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.category-nav {
+  margin-top: 30rpx;
+}
+.category-nav .nav-scroll {
+  white-space: nowrap;
+}
+.category-nav .nav-scroll .nav-item {
+  display: inline-block;
+  padding: 20rpx 40rpx;
+  margin-right: 20rpx;
+  border-radius: 40rpx;
+  background: #fff;
+  transition: all 0.3s;
+}
+.category-nav .nav-scroll .nav-item .nav-text {
+  font-size: 28rpx;
+  color: #666;
+}
 .container {
-	overflow: hidden;
-	overflow-y: hidden;
-	display: flex;
-	flex-direction: column;
-	margin: 2rpx 10rpx;
+  overflow: hidden;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 2rpx 10rpx;
 }
 .locating {
-	height: 70rpx;
-	margin: 10rpx 0;
-	display: flex;
-	flex-direction: row;
-	font-size: 28rpx;
-	font-weight: 600;
-	line-height: 70rpx;
+  height: 70rpx;
+  margin: 10rpx 0;
+  display: flex;
+  flex-direction: row;
+  font-size: 28rpx;
+  font-weight: 600;
+  line-height: 70rpx;
 }
 .targeting {
-	margin-left: 30rpx;
-	color: #1296db;
+  margin-left: 30rpx;
+  color: #1296db;
 }
 .current {
-	margin-left: auto;
-	color: black;
-	margin-right: 30rpx;
+  margin-left: auto;
+  color: black;
+  margin-right: 30rpx;
 }
 .search {
-	width: 100%;
-	/* position: relative; */
-	display: flex;
-	align-items: center;
+  width: 100%;
+  /* position: relative; */
+  display: flex;
+  align-items: center;
 }
 .sousuokuang {
-	width: 86%;
-	/* position: relative; */
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	border: 1px solid #FF3030;
-	border-radius: 20rpx;
-	padding: 10rpx 10rpx;
+  width: 86%;
+  /* position: relative; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #FF3030;
+  border-radius: 20rpx;
+  padding: 10rpx 10rpx;
 }
 .search-icon {
-	height: 60rpx;
-	width: 10%;
-	line-height: 60rpx;
-	/* position: absolute; */
-	left: 10rpx;
-	/* background-color: #1296db; */
+  height: 60rpx;
+  width: 10%;
+  line-height: 60rpx;
+  /* position: absolute; */
+  left: 10rpx;
+  /* background-color: #1296db; */
 }
 .uni-input {
-	width: 70%;
-	height: 60rpx;
-	line-height: 60rpx;
-	/* height: 80rpx; */
-	/* padding-left: 60rpx; */
-	padding-right: 100rpx;
-	/* box-sizing: border-box; */
-	/* background-color: #FF3030; */
+  width: 70%;
+  height: 60rpx;
+  line-height: 60rpx;
+  /* height: 80rpx; */
+  /* padding-left: 60rpx; */
+  padding-right: 100rpx;
+  /* box-sizing: border-box; */
+  /* background-color: #FF3030; */
 }
 .searchbt {
-
-	height: 60rpx;
-	/* line-height: 60rpx; */
-	text-align: center;
-	width: 150rpx;
-	border: none;
-	background-color: #FF3030;
-	color: white;
-	border-radius: 25rpx;
-	font-size: 24rpx;
+  height: 60rpx;
+  /* line-height: 60rpx; */
+  text-align: center;
+  width: 150rpx;
+  border: none;
+  background-color: #FF3030;
+  color: white;
+  border-radius: 25rpx;
+  font-size: 24rpx;
 }
 .buycar {
-	flex: 1;
-	/* width: 100rpx; */
-	/* margin: 0 10rpx; */
-	margin-left: auto;
-	height: 80rpx;
-	line-height: 80rpx;
-	text-align: center;
+  flex: 1;
+  /* width: 100rpx; */
+  /* margin: 0 10rpx; */
+  margin-left: auto;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
 }
 .uni-margin-wrap {
-	/* height: 110rpx; */
+  /* height: 110rpx; */
 }
 .swiper {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	height: 100%;
-	white-space: nowrap;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  white-space: nowrap;
 }
 .swiper-item {
-	display: inline-block;
-	height: 100%;
-	width: 120rpx;
-	margin: 0 20rpx;
-	text-align: center;
-	vertical-align: middle;
+  display: inline-block;
+  height: 100%;
+  width: 120rpx;
+  margin: 0 20rpx;
+  text-align: center;
+  vertical-align: middle;
 }
 .item-title {
-	display: inline-block;
-	box-sizing: border-box;
-	vertical-align: middle;
-	line-height: 120rpx;
+  display: inline-block;
+  box-sizing: border-box;
+  vertical-align: middle;
+  line-height: 120rpx;
 }
 .classify {
-	margin-top: 10%;
-	font-size: 35rpx;
-	font-weight: 600;
+  margin-top: 10%;
+  font-size: 35rpx;
+  font-weight: 600;
 }
 .classify.selected {
-	color: #1296db;
+  padding: 5rpx;
+  color: #1296db;
+  border-bottom: 5rpx solid gray;
 }
 .Stallholder {
-	/* background-color: red; */
-	display: flex;
-	flex-direction: column;
-	height: 75vh;
-	/* overflow-y: auto; */
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  height: 75vh;
+  /* overflow-y: auto; */
 }
 .Stallholder-content {
-	padding: 10rpx;
-	box-sizing: border-box;
-	-webkit-column-count: 2;
-	        column-count: 2;
-	-webkit-column-gap: 20rpx;
-	        column-gap: 20rpx;
+  padding: 10rpx;
+  box-sizing: border-box;
+  -webkit-column-count: 2;
+          column-count: 2;
+  -webkit-column-gap: 20rpx;
+          column-gap: 20rpx;
 }
 .Stallholder-item {
-	width: 100%;
-	height: 480rpx;
-	-webkit-column-break-inside: avoid;
-	        break-inside: avoid;
-	margin-bottom: 20rpx;
-	background-color: white;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  width: 100%;
+  height: 480rpx;
+  -webkit-column-break-inside: avoid;
+          break-inside: avoid;
+  margin-bottom: 20rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .Stallholder-content .Stallholder-item:nth-child(2n+1) {
-	height: 510rpx;
+  height: 510rpx;
 }
 .Stallholder-content .Stallholder-item:nth-child(3n+1) {
-	height: 540rpx;
+  height: 540rpx;
 }
 .standimg {
-	/* height: 300rpx; */
-	width: 100%;
-	border-radius: 20rpx;
-	/* background-color: #1296db; */
+  /* height: 300rpx; */
+  width: 100%;
+  border-radius: 20rpx;
+  /* background-color: #1296db; */
 }
 .standtitle {
-	width: 90%;
-	height: 100rpx;
-	line-height: 70rpx;
-	/* background-color: white; */
-	/* background-color: antiquewhite; */
-	overflow: hidden;
-	/* 隐藏超出的内容 */
-	white-space: nowrap;
-	/* 强制不换行 */
-	text-overflow: ellipsis;
-	/* 显示省略号 */
-	font-size: 30rpx;
-	/* background-color: aqua; */
+  width: 90%;
+  height: 100rpx;
+  line-height: 70rpx;
+  /* background-color: white; */
+  /* background-color: antiquewhite; */
+  overflow: hidden;
+  /* 隐藏超出的内容 */
+  white-space: nowrap;
+  /* 强制不换行 */
+  text-overflow: ellipsis;
+  /* 显示省略号 */
+  font-size: 30rpx;
+  /* background-color: aqua; */
 }
 .loading {
-	text-align: center;
-	padding: 20rpx;
-	color: #999;
+  text-align: center;
+  padding: 20rpx;
+  color: #999;
 }
 

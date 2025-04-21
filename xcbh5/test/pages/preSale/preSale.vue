@@ -10,7 +10,7 @@
 			<view class="form-card animated fadeIn">
 				<view class="card-header">
 					<uni-icons type="info" size="18" color="#4CD964" />
-					<text class="card-title">商品信息</text>
+					<text class="card-title">菜品信息</text>
 				</view>
 
 				<uni-forms ref="form" :modelValue="formData" label-position="top">
@@ -20,9 +20,12 @@
 								<input type="text" v-model="formData.goodsname" placeholder="请输入名称">
 							</uni-forms-item>
 						</view>
+
+					</view>
+					<view class="form-row">
 						<view class="col-9">
 							<uni-forms-item label="预售库存" required name="stock">
-								<input type="text" v-model="formData.goodstotal" placeholder="请输入库存">
+								<input type="text" v-model.number="formData.goodstotal" placeholder="请输入库存">
 
 							</uni-forms-item>
 						</view>
@@ -35,10 +38,10 @@
 					</view>
 
 					<view class="price-group">
-						<uni-forms-item label="单价设置" required name="price">
+						<uni-forms-item label="预卖价" required name="price">
 							<view class="price-input">
 								<text class="currency">¥</text>
-								<uni-easyinput type="number" v-model="formData.presaleprice" placeholder="0.00"
+								<uni-easyinput type="number" v-model.number="formData.presaleprice" placeholder="0.00"
 									:inputBorder="false" :styles="{color: isPaid ? '#999' : '#FF4444'}"
 									:disabled="isPaid" />
 							</view>
@@ -48,24 +51,24 @@
 							<text>预付后价格将锁定不可修改</text>
 						</view>
 					</view>
-					<uni-forms-item label="是否预卖" required name="week">
-						<switch @change="switchChange"/>
-					</uni-forms-item>
-					<uni-forms-item label="预售起始" required name="week">
-						<uni-datetime-picker type="datetime" v-model="formData.sellbegintime"  return-type="timestamp"/>
-					</uni-forms-item>
-					<uni-forms-item label="预售结束" required name="week">
-						<uni-datetime-picker type="datetime" v-model="formData.sellendtime"  return-type="timestamp"/>
-					</uni-forms-item>
-
-
+					<view class="price-group">
+						<uni-forms-item label="市场价" required name="price">
+							<view class="price-input">
+								<text class="currency">¥</text>
+								<uni-easyinput type="number" v-model.number="formData.price" placeholder="0.00"
+									:inputBorder="false" :styles="{color: isPaid ? '#999' : '#FF4444'}"
+									:disabled="isPaid" />
+							</view>
+						</uni-forms-item>
+					</view>
+					
 					<view class="form-item">
 						<view class="item-label">
 							<view style="display: flex;">
 								<uni-icons type="image" size="18" color="#666" style="" />
-								<uni-forms-item label="商品图片" required name="week" style=""></uni-forms-item>
+								<uni-forms-item label="菜品图片" required name="week" style=""></uni-forms-item>
 							</view>
-
+					
 						</view>
 						<view class="upload-btn" :class="{ 'uploaded': isImageSelected }" @tap="chooseImage">
 							<uni-icons :type="isImageSelected ? 'checkmarkempty' : 'plusempty'" size="24"
@@ -73,6 +76,18 @@
 							<text>{{ isImageSelected ? '已上传' : '点击上传' }}</text>
 						</view>
 					</view>
+					<uni-forms-item label="是否预卖" required name="week">
+						<switch @change="switchChange" />
+					</uni-forms-item>
+					<uni-forms-item label="预售起始" required name="week">
+						<uni-datetime-picker type="datetime" v-model="formData.sellbegintime" return-type="timestamp" />
+					</uni-forms-item>
+					<uni-forms-item label="预售结束" required name="week">
+						<uni-datetime-picker type="datetime" v-model="formData.sellendtime" return-type="timestamp" />
+					</uni-forms-item>
+
+
+					
 
 				</uni-forms>
 			</view>
@@ -90,33 +105,33 @@
 
 				<view class="form-card">
 
-					<view class="protocol-section">
+					<!-- <view class="protocol-section">
 						<text class="section-title">第一条 商品信息</text>
 						<text class="protocol-text">
 							1.1 预售商品名称：{{goodsInfo.name}}\n1.2商品单价：¥{{goodsInfo.price}}/{{goodsInfo.unit}}\n1.3预售周期：{{formatWeek(goodsInfo.weekSelection)}}
 						</text>
-					</view>
+					</view> -->
 
 					<view class="protocol-section">
-						<text class="section-title">第二条 质量保证</text>
+						<text class="section-title">第一条 质量保证</text>
 						<text class="protocol-text">
 							卖方承诺商品质量符合GB/T 20014.5-2013标准，并提供以下证明文件：\n- 农产品质量安全检测报告\n- 原产地证明\n- 无公害农产品认证
 						</text>
 					</view>
 
 					<view class="protocol-section">
-						<text class="section-title">第三条 隐私条款</text>
+						<text class="section-title">第二条 隐私条款</text>
 						<text class="protocol-text">
 							平台将采取以下措施保护用户隐私：\n1. 联系方式加密存储（AES-256）\n2. 生物特征信息实时删除
 						</text>
 					</view>
 
-					<view class="protocol-section">
+					<!-- <view class="protocol-section">
 						<text class="section-title">第四条 违约责任</text>
 						<text class="protocol-text">
 							违约金计算公式：\n违约金 = 定金金额 × 违约天数 × 0.05\n最低违约金：¥500
 						</text>
-					</view>
+					</view> -->
 
 
 					<view class="protocol-actions">
@@ -149,7 +164,9 @@
 	import {
 		useUpload
 	} from "@/hooks/useUpload"
+	import {myMixin} from '@/utils/public.js'
 	export default {
+		mixins:[myMixin],
 		data() {
 			return {
 				isImageSelected: false,
@@ -172,7 +189,8 @@
 					imglogo: null, // 图片地址
 					sellbegintime: null, // 预卖开始时间戳
 					sellendtime: null, //  预卖结束时间戳
-					presaleprice: 1, // 预卖价格
+					presaleprice: null, // 预卖价格
+					price: null // 市场价
 				},
 			}
 		},
@@ -183,8 +201,35 @@
 			}
 		},
 		methods: {
-			switchChange(){
-				this.formData.ispresale = this.formData.ispresale == 1 ? 2:1
+			
+			handleConfirm() {
+				if (this.disabled) {
+					this.formData.presaleprice = parseInt(this.formData.presaleprice)
+					this.formData.price = parseInt(this.formData.price)
+					api.addPreSale(this.formData).then((data)=>{
+						console.log(data)
+						if (data.code == 200) {
+							uni.showToast({
+								icon:"success",
+								title:'添加成功'
+							})
+							setTimeout(()=>{
+								this.customizeBack()
+							},2000)
+						}else{
+							uni.showToast({
+								icon:"error",
+								title:data.msg
+							})
+						}
+					})
+					
+				}
+				// 开始提交菜品信息
+
+			},
+			switchChange() {
+				this.formData.ispresale = this.formData.ispresale == 1 ? 2 : 1
 				console.log(this.formData.ispresale)
 			},
 			// 图片上传
@@ -229,10 +274,6 @@
 
 			async gotoSupplement() {
 				this.setp = 2
-
-				// 开始提交菜品信息
-				let data = await api.addPreSale(this.formData)
-				console.log(data)
 
 			}
 		}

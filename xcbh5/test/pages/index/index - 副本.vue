@@ -14,7 +14,8 @@
 
 			<uni-icons class="buycar" type="scan" size="75rpx" @click="scan"></uni-icons>
 		</view>
-
+		
+		
 		<view class="uni-margin-wrap">
 			<scroll-view class="swiper" scroll-x="true" scroll-y="false" show-scrollbar="false">
 				<view v-for="item in categories" :key="item.id" class="swiper-item" @click="filterByCategory(item.id)">
@@ -25,6 +26,7 @@
 				</view>
 			</scroll-view>
 		</view>
+
 
 
 

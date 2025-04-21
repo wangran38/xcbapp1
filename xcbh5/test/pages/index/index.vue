@@ -15,6 +15,14 @@
 			<uni-icons class="buycar" type="scan" size="75rpx" @click="scan"></uni-icons>
 		</view>
 
+		<view class="category-nav">
+			<scroll-view class="nav-scroll" scroll-x  scroll-with-animation>
+				<view v-for="item in tabs" :id="'tab'+item.id" :key="item.id" class="nav-item"
+					:class="{active: selectedCategoryId === item.id}" @click="goToshoppingPageList(item)">
+					<text class="nav-text">{{ item.title }}</text>
+				</view>
+			</scroll-view>
+		</view>
 		<view class="uni-margin-wrap">
 			<scroll-view class="swiper" scroll-x="true" scroll-y="false" show-scrollbar="false">
 				<view v-for="item in categories" :key="item.id" class="swiper-item" @click="filterByCategory(item.id)">
@@ -25,6 +33,7 @@
 				</view>
 			</scroll-view>
 		</view>
+
 
 
 
@@ -51,14 +60,41 @@
 	} from '../../api/index.js'
 
 	import usePage from '@/hooks/usePage';
-	import {
-		mapMutations,
-		mapState
-	} from 'vuex';
 
 	export default {
 		data() {
 			return {
+				tabs: [{
+						id: 0,
+						title: '附近农户',
+						path:'/subPackages/shoppingPageList/nearbyFarmers/nearbyFarmers'
+					},
+					{
+						id: 1,
+						title: '预卖菜品',  // 扶贫预卖
+						path:'/subPackages/shoppingPageList/villageZone/villageZone'
+					},
+					{
+						id: 2,
+						title: '官方直营',
+						path:'/subPackages/shoppingPageList/official/official'
+					},
+					{
+						id:3,
+						title: '扶贫专区',
+						path:'/subPackages/shoppingPageList/agriculturalAssistanceZone/agriculturalAssistanceZone'
+					},
+					{
+						id:4,
+						title: '菜品朋友圈',
+						path:'/pages/dynamics/dynamics'
+					},
+					{
+						id:5,
+						title: '铺面出租',
+						path:'/subPackages/shoppingPageList/rentalStorefrontList/rentalStorefrontList'
+					}
+				],
 				selectedCategoryId: '',
 				categories: [],
 				pageData: [], // 
@@ -73,28 +109,33 @@
 				initReques: false
 			}
 		},
-		computed: {
-			...mapState('location', ['selectStatus']),
-		},
 		onLoad() {
 			// 初始化页面
 			this.initPage()
-			
+
 		},
 		async onShow() {
-			if (this.selectStatus) {
+			let res = uni.getStorageSync('userSelection')
+			console.log(this.marketName,res.marketName)
+			if (this.marketName != res.marketName){
 				this.initPage()
-				this.setStatus()
 			}
-		},
-		onPullDownRefresh() {
-			setTimeout(function() {
-				uni.stopPullDownRefresh();
-			}, 1000);
 		},
 		mixins: [usePage],
 		methods: {
-			...mapMutations('location', ['setStatus']),
+			goToshoppingPageList(item){
+				if (item.path){
+					console.log(item.path)
+					uni.navigateTo({
+						url:item.path
+					})
+				}else{
+					uni.showToast({
+						icon:'error',
+						title:`"${item.title}" 暂未开发`
+					})
+				}
+			},
 			async fetchData(params) {
 				const response = await api.marketShopList(params)
 				return response.data
@@ -112,6 +153,7 @@
 
 				// 选中市场
 				let res = uni.getStorageSync('userSelection')
+				
 				this.marketName = res.marketName
 			},
 			setDefaultMarketId() {
@@ -183,18 +225,20 @@
 				// 只允许通过相机扫码
 				uni.scanCode({
 					onlyFromCamera: false,
-					success: async (res)=> {
-						let data = await api.receiving({out_trade_no:res.result})
+					success: async (res) => {
+						let data = await api.receiving({
+							out_trade_no: res.result
+						})
 						console.log(data)
-						if (data.code == 200){
+						if (data.code == 200) {
 							uni.showToast({
-								icon:'success',
-								title:'核销成功'
+								icon: 'success',
+								title: '核销成功'
 							})
-						}else{
+						} else {
 							uni.showToast({
-								icon:'error',
-								title:'核销失败'
+								icon: 'error',
+								title: '核销失败'
 							})
 						}
 					},
@@ -208,7 +252,29 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
+	.category-nav {
+		margin-top: 30rpx;
+
+		.nav-scroll {
+			white-space: nowrap;
+
+			.nav-item {
+				display: inline-block;
+				padding: 20rpx 40rpx;
+				margin-right: 20rpx;
+				border-radius: 40rpx;
+				background: #fff;
+				transition: all 0.3s;
+
+				.nav-text {
+					font-size: 28rpx;
+					color: #666;
+				}
+			}
+		}
+	}
+
 	.container {
 		overflow: hidden;
 		overflow-y: hidden;
@@ -336,7 +402,9 @@
 	}
 
 	.classify.selected {
+		padding: 5rpx;
 		color: #1296db;
+		border-bottom: 5rpx solid gray;
 	}
 
 	.Stallholder {

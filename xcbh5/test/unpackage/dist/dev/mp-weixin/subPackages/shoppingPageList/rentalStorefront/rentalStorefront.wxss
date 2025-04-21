@@ -1,0 +1,113 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.rental-page.data-v-0e350505 {
+  padding-bottom: 120rpx;
+}
+.rental-page .swiper.data-v-0e350505 {
+  height: 500rpx;
+}
+.rental-page .swiper-img.data-v-0e350505 {
+  width: 100%;
+  height: 100%;
+}
+.rental-page .core-info.data-v-0e350505 {
+  padding: 30rpx;
+  background: #fff;
+}
+.rental-page .core-info .price-section.data-v-0e350505 {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 20rpx;
+}
+.rental-page .core-info .price-section .price.data-v-0e350505 {
+  color: #e4393c;
+  font-size: 48rpx;
+  font-weight: bold;
+  margin-right: 20rpx;
+}
+.rental-page .core-info .price-section .area.data-v-0e350505 {
+  color: #666;
+  font-size: 32rpx;
+}
+.rental-page .core-info .meta-info.data-v-0e350505 {
+  display: flex;
+  justify-content: space-between;
+  color: #666;
+}
+.rental-page .core-info .meta-info .location.data-v-0e350505 {
+  flex: 1;
+}
+.rental-page .detail-grid.data-v-0e350505 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30rpx;
+  padding: 20rpx;
+}
+.rental-page .detail-grid .grid-item.data-v-0e350505 {
+  background: #f8f8f8;
+  border-radius: 8rpx;
+  padding: 20rpx;
+}
+.rental-page .detail-grid .grid-item .label.data-v-0e350505 {
+  color: #999;
+  font-size: 24rpx;
+  display: block;
+  margin-bottom: 10rpx;
+}
+.rental-page .detail-grid .grid-item .value.data-v-0e350505 {
+  font-size: 32rpx;
+  font-weight: 500;
+}
+.rental-page .panorama-box.data-v-0e350505 {
+  position: relative;
+  height: 400rpx;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+.rental-page .panorama-box-img.data-v-0e350505 {
+  width: 100%;
+  height: 100%;
+}
+.rental-page .panorama-box-tip.data-v-0e350505 {
+  position: absolute;
+  bottom: 20rpx;
+  right: 20rpx;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8rpx 20rpx;
+  border-radius: 40rpx;
+}
+.rental-page .booking-form.data-v-0e350505 {
+  background: #fff;
+  margin-top: 30rpx;
+  padding: 20rpx;
+}
+.rental-page .footer-bar.data-v-0e350505 {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100rpx;
+  display: flex;
+  background: #fff;
+  box-shadow: 0 -2rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+.rental-page .footer-bar button.data-v-0e350505 {
+  flex: 1;
+  height: 100%;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+}
+.rental-page .footer-bar button.contact-btn.data-v-0e350505 {
+  background: #333;
+  color: #fff;
+}
+.rental-page .footer-bar button.booking-btn.data-v-0e350505 {
+  background: #e4393c;
+  color: #fff;
+}
+

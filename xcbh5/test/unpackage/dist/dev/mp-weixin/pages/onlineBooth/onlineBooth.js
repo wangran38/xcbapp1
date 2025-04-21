@@ -101,10 +101,10 @@ var components
 try {
   components = {
     uniSteps: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-steps/components/uni-steps/uni-steps */ "uni_modules/uni-steps/components/uni-steps/uni-steps").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-steps/components/uni-steps/uni-steps.vue */ 557))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-steps/components/uni-steps/uni-steps */ "uni_modules/uni-steps/components/uni-steps/uni-steps").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-steps/components/uni-steps/uni-steps.vue */ 691))
     },
     uniCard: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-card/components/uni-card/uni-card */ "uni_modules/uni-card/components/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-card/components/uni-card/uni-card.vue */ 564))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-card/components/uni-card/uni-card */ "uni_modules/uni-card/components/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-card/components/uni-card/uni-card.vue */ 698))
     },
   }
 } catch (e) {
@@ -178,18 +178,23 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var popVue = function popVue() {
   __webpack_require__.e(/*! require.ensure | pages/onlineBooth/components/pop */ "pages/onlineBooth/components/pop").then((function () {
-    return resolve(__webpack_require__(/*! ./components/pop.vue */ 571));
+    return resolve(__webpack_require__(/*! ./components/pop.vue */ 705));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {
   data: function data() {
     return {
+      // options: [{
+      // 	title: '创建摊位'
+      // }, {
+      // 	title: '用户信息'
+      // }, {
+      // 	title: '领取福利'
+      // }, ]
       options: [{
         title: '创建摊位'
       }, {
         title: '用户信息'
-      }, {
-        title: '领取福利'
       }],
       active: 0,
       categoryList: ['请选择分类'],
@@ -259,15 +264,39 @@ var _default = {
     popVue: popVue
   },
   methods: _objectSpread(_objectSpread({
-    over: function over() {
-      var _this2 = this;
+    customizeBack: function customizeBack() {
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
-        var res;
+        var canNavBack;
         return _regenerator.default.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
+                return getCurrentPages();
+              case 2:
+                canNavBack = _context2.sent;
+                if (canNavBack && canNavBack.length > 1) {
+                  uni.navigateBack();
+                } else {
+                  history.back();
+                }
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    over: function over() {
+      var _this2 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
+        var res;
+        return _regenerator.default.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
                 return _index.api.addfarmers({
                   area_id: _this2.area_id,
                   farmersname: _this2.userInfo.name,
@@ -275,22 +304,30 @@ var _default = {
                   category_id: _this2.userInfo.index
                 });
               case 2:
-                res = _context2.sent;
+                res = _context3.sent;
                 console.log(res);
                 if (res.code == 200) {
-                  _this2.title = '完成';
+                  // this.title = '完成'
+                  uni.showToast({
+                    icon: 'success',
+                    title: '注册成功'
+                  }).then(function (data) {
+                    setTimeout(function () {
+                      _this2.customizeBack();
+                    }, 2000);
+                  });
                 } else {
                   uni.showToast({
                     icon: 'error',
-                    title: '服务器异常'
+                    title: res.msg || res.message
                   });
                 }
               case 5:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2);
+        }, _callee3);
       }))();
     },
     register: function register() {
@@ -303,19 +340,19 @@ var _default = {
     },
     fetchCategories: function fetchCategories() {
       var _this3 = this;
-      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3() {
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4() {
         var response, categories;
-        return _regenerator.default.wrap(function _callee3$(_context3) {
+        return _regenerator.default.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
-                _context3.prev = 0;
-                _context3.next = 3;
+                _context4.prev = 0;
+                _context4.next = 3;
                 return _index.api.cglist();
               case 3:
-                response = _context3.sent;
+                response = _context4.sent;
                 if (!(response.code === 200)) {
-                  _context3.next = 10;
+                  _context4.next = 10;
                   break;
                 }
                 categories = response.data.listdata;
@@ -326,23 +363,23 @@ var _default = {
                   map[item.title] = item.id;
                   return map;
                 }, {});
-                _context3.next = 11;
+                _context4.next = 11;
                 break;
               case 10:
                 throw new Error('Failed to fetch categories');
               case 11:
-                _context3.next = 16;
+                _context4.next = 16;
                 break;
               case 13:
-                _context3.prev = 13;
-                _context3.t0 = _context3["catch"](0);
-                console.error('Failed to fetch categories:', _context3.t0);
+                _context4.prev = 13;
+                _context4.t0 = _context4["catch"](0);
+                console.error('Failed to fetch categories:', _context4.t0);
               case 16:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, null, [[0, 13]]);
+        }, _callee4, null, [[0, 13]]);
       }))();
     },
     // 选择菜品
@@ -360,59 +397,59 @@ var _default = {
     // 默认选中海南省定安县塔岭市场
     initializePicker: function initializePicker() {
       var _this4 = this;
-      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4() {
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee5() {
         var provinces, cities, areas, countries;
-        return _regenerator.default.wrap(function _callee4$(_context4) {
+        return _regenerator.default.wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
-                _context4.prev = 0;
+                _context5.prev = 0;
                 if (!(_this4.selectedCountry === 'china')) {
-                  _context4.next = 19;
+                  _context5.next = 19;
                   break;
                 }
-                _context4.next = 4;
+                _context5.next = 4;
                 return _this4.fetchProvinces();
               case 4:
-                provinces = _context4.sent;
+                provinces = _context5.sent;
                 _this4.multiArray[0] = provinces.map(function (item) {
                   return item.name;
                 });
                 if (!(provinces.length > 0)) {
-                  _context4.next = 16;
+                  _context5.next = 16;
                   break;
                 }
-                _context4.next = 9;
+                _context5.next = 9;
                 return _this4.fetchCities(provinces[20].id);
               case 9:
-                cities = _context4.sent;
+                cities = _context5.sent;
                 _this4.multiArray[1] = cities.map(function (item) {
                   return item.name;
                 });
                 if (!(cities.length > 0)) {
-                  _context4.next = 16;
+                  _context5.next = 16;
                   break;
                 }
-                _context4.next = 14;
+                _context5.next = 14;
                 return _this4.fetchAreas(2306);
               case 14:
-                areas = _context4.sent;
+                areas = _context5.sent;
                 _this4.multiArray[2] = areas.map(function (item) {
                   return item.name;
                 });
               case 16:
                 _this4.multiIndex = [20, 3, 6];
-                _context4.next = 27;
+                _context5.next = 27;
                 break;
               case 19:
                 if (!(_this4.selectedCountry === 'overseas')) {
-                  _context4.next = 27;
+                  _context5.next = 27;
                   break;
                 }
-                _context4.next = 22;
+                _context5.next = 22;
                 return _this4.fetchOverseas();
               case 22:
-                countries = _context4.sent;
+                countries = _context5.sent;
                 _this4.multiArray[0] = countries.map(function (c) {
                   return c.shortname;
                 });
@@ -420,62 +457,25 @@ var _default = {
                 _this4.multiArray[2] = [];
                 _this4.multiIndex = [0, 0, 0];
               case 27:
-                _context4.next = 32;
+                _context5.next = 32;
                 break;
               case 29:
-                _context4.prev = 29;
-                _context4.t0 = _context4["catch"](0);
-                console.error('Failed to initialize picker:', _context4.t0);
+                _context5.prev = 29;
+                _context5.t0 = _context5["catch"](0);
+                console.error('Failed to initialize picker:', _context5.t0);
               case 32:
                 _this4.fetchMarkets(2313);
                 _this4.selectedMarketIndex = 1;
               case 34:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4, null, [[0, 29]]);
+        }, _callee5, null, [[0, 29]]);
       }))();
     },
     fetchProvinces: function fetchProvinces() {
       var _this5 = this;
-      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee5() {
-        var response;
-        return _regenerator.default.wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                _context5.prev = 0;
-                _context5.next = 3;
-                return _index.api.citylist({
-                  level: 1,
-                  limit: 100
-                });
-              case 3:
-                response = _context5.sent;
-                if (!(response.code === 200)) {
-                  _context5.next = 7;
-                  break;
-                }
-                _this5.provinceList = response.data.listdata;
-                return _context5.abrupt("return", _this5.provinceList);
-              case 7:
-                throw new Error('Failed to fetch provinces');
-              case 10:
-                _context5.prev = 10;
-                _context5.t0 = _context5["catch"](0);
-                console.error('Failed to fetch provinces:', _context5.t0);
-                throw _context5.t0;
-              case 14:
-              case "end":
-                return _context5.stop();
-            }
-          }
-        }, _callee5, null, [[0, 10]]);
-      }))();
-    },
-    fetchCities: function fetchCities(provinceId) {
-      var _this6 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee6() {
         var response;
         return _regenerator.default.wrap(function _callee6$(_context6) {
@@ -484,36 +484,35 @@ var _default = {
               case 0:
                 _context6.prev = 0;
                 _context6.next = 3;
-                return _index.api.citytree(provinceId);
+                return _index.api.citylist({
+                  level: 1,
+                  limit: 100
+                });
               case 3:
                 response = _context6.sent;
-                if (!(response.code === 200 && Array.isArray(response.data))) {
-                  _context6.next = 9;
+                if (!(response.code === 200)) {
+                  _context6.next = 7;
                   break;
                 }
-                _this6.cityList = response.data;
-                return _context6.abrupt("return", response.data);
-              case 9:
-                console.error('No cities data found');
-                return _context6.abrupt("return", []);
-              case 11:
-                _context6.next = 17;
-                break;
-              case 13:
-                _context6.prev = 13;
+                _this5.provinceList = response.data.listdata;
+                return _context6.abrupt("return", _this5.provinceList);
+              case 7:
+                throw new Error('Failed to fetch provinces');
+              case 10:
+                _context6.prev = 10;
                 _context6.t0 = _context6["catch"](0);
-                console.error('Failed to fetch cities:', _context6.t0);
-                return _context6.abrupt("return", []);
-              case 17:
+                console.error('Failed to fetch provinces:', _context6.t0);
+                throw _context6.t0;
+              case 14:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[0, 13]]);
+        }, _callee6, null, [[0, 10]]);
       }))();
     },
-    fetchAreas: function fetchAreas(cityId) {
-      var _this7 = this;
+    fetchCities: function fetchCities(provinceId) {
+      var _this6 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee7() {
         var response;
         return _regenerator.default.wrap(function _callee7$(_context7) {
@@ -522,17 +521,17 @@ var _default = {
               case 0:
                 _context7.prev = 0;
                 _context7.next = 3;
-                return _index.api.citytree(cityId);
+                return _index.api.citytree(provinceId);
               case 3:
                 response = _context7.sent;
                 if (!(response.code === 200 && Array.isArray(response.data))) {
                   _context7.next = 9;
                   break;
                 }
-                _this7.districtList = response.data;
+                _this6.cityList = response.data;
                 return _context7.abrupt("return", response.data);
               case 9:
-                console.error('No areas data found');
+                console.error('No cities data found');
                 return _context7.abrupt("return", []);
               case 11:
                 _context7.next = 17;
@@ -540,7 +539,7 @@ var _default = {
               case 13:
                 _context7.prev = 13;
                 _context7.t0 = _context7["catch"](0);
-                console.error('Failed to fetch areas:', _context7.t0);
+                console.error('Failed to fetch cities:', _context7.t0);
                 return _context7.abrupt("return", []);
               case 17:
               case "end":
@@ -550,8 +549,8 @@ var _default = {
         }, _callee7, null, [[0, 13]]);
       }))();
     },
-    fetchOverseas: function fetchOverseas() {
-      var _this8 = this;
+    fetchAreas: function fetchAreas(cityId) {
+      var _this7 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee8() {
         var response;
         return _regenerator.default.wrap(function _callee8$(_context8) {
@@ -560,11 +559,49 @@ var _default = {
               case 0:
                 _context8.prev = 0;
                 _context8.next = 3;
-                return _index.api.countrylist(0, 200, 1);
+                return _index.api.citytree(cityId);
               case 3:
                 response = _context8.sent;
+                if (!(response.code === 200 && Array.isArray(response.data))) {
+                  _context8.next = 9;
+                  break;
+                }
+                _this7.districtList = response.data;
+                return _context8.abrupt("return", response.data);
+              case 9:
+                console.error('No areas data found');
+                return _context8.abrupt("return", []);
+              case 11:
+                _context8.next = 17;
+                break;
+              case 13:
+                _context8.prev = 13;
+                _context8.t0 = _context8["catch"](0);
+                console.error('Failed to fetch areas:', _context8.t0);
+                return _context8.abrupt("return", []);
+              case 17:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8, null, [[0, 13]]);
+      }))();
+    },
+    fetchOverseas: function fetchOverseas() {
+      var _this8 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee9() {
+        var response;
+        return _regenerator.default.wrap(function _callee9$(_context9) {
+          while (1) {
+            switch (_context9.prev = _context9.next) {
+              case 0:
+                _context9.prev = 0;
+                _context9.next = 3;
+                return _index.api.countrylist(0, 200, 1);
+              case 3:
+                response = _context9.sent;
                 if (!(response.code === 200)) {
-                  _context8.next = 13;
+                  _context9.next = 13;
                   break;
                 }
                 _this8.overseasCountries = response.data.listdata;
@@ -574,59 +611,16 @@ var _default = {
                 _this8.multiArray[1] = [];
                 _this8.multiArray[2] = [];
                 _this8.multiIndex = [0, 0, 0];
-                return _context8.abrupt("return", _this8.overseasCountries);
+                return _context9.abrupt("return", _this8.overseasCountries);
               case 13:
                 throw new Error('Failed to fetch overseas continents');
-              case 14:
-                _context8.next = 20;
-                break;
-              case 16:
-                _context8.prev = 16;
-                _context8.t0 = _context8["catch"](0);
-                console.error('Failed to fetch overseas continents:', _context8.t0);
-                throw _context8.t0;
-              case 20:
-              case "end":
-                return _context8.stop();
-            }
-          }
-        }, _callee8, null, [[0, 16]]);
-      }))();
-    },
-    fetchOverseasCities: function fetchOverseasCities(continentId) {
-      var _this9 = this;
-      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee9() {
-        var response;
-        return _regenerator.default.wrap(function _callee9$(_context9) {
-          while (1) {
-            switch (_context9.prev = _context9.next) {
-              case 0:
-                _context9.prev = 0;
-                _context9.next = 3;
-                return _index.api.countrylist(continentId, 100, 1);
-              case 3:
-                response = _context9.sent;
-                if (!(response.code === 200)) {
-                  _context9.next = 13;
-                  break;
-                }
-                _this9.overseasCities = response.data.listdata;
-                _this9.multiArray[1] = _this9.overseasCities.map(function (c) {
-                  return c.shortname;
-                });
-                _this9.multiArray[2] = [];
-                _this9.multiIndex[1] = 0;
-                _this9.multiIndex[2] = 0;
-                return _context9.abrupt("return", _this9.overseasCities);
-              case 13:
-                throw new Error('Failed to fetch overseas countries');
               case 14:
                 _context9.next = 20;
                 break;
               case 16:
                 _context9.prev = 16;
                 _context9.t0 = _context9["catch"](0);
-                console.error('Failed to fetch overseas countries:', _context9.t0);
+                console.error('Failed to fetch overseas continents:', _context9.t0);
                 throw _context9.t0;
               case 20:
               case "end":
@@ -636,12 +630,55 @@ var _default = {
         }, _callee9, null, [[0, 16]]);
       }))();
     },
-    selectCountry: function selectCountry(country) {
-      var _this10 = this;
+    fetchOverseasCities: function fetchOverseasCities(continentId) {
+      var _this9 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee10() {
+        var response;
         return _regenerator.default.wrap(function _callee10$(_context10) {
           while (1) {
             switch (_context10.prev = _context10.next) {
+              case 0:
+                _context10.prev = 0;
+                _context10.next = 3;
+                return _index.api.countrylist(continentId, 100, 1);
+              case 3:
+                response = _context10.sent;
+                if (!(response.code === 200)) {
+                  _context10.next = 13;
+                  break;
+                }
+                _this9.overseasCities = response.data.listdata;
+                _this9.multiArray[1] = _this9.overseasCities.map(function (c) {
+                  return c.shortname;
+                });
+                _this9.multiArray[2] = [];
+                _this9.multiIndex[1] = 0;
+                _this9.multiIndex[2] = 0;
+                return _context10.abrupt("return", _this9.overseasCities);
+              case 13:
+                throw new Error('Failed to fetch overseas countries');
+              case 14:
+                _context10.next = 20;
+                break;
+              case 16:
+                _context10.prev = 16;
+                _context10.t0 = _context10["catch"](0);
+                console.error('Failed to fetch overseas countries:', _context10.t0);
+                throw _context10.t0;
+              case 20:
+              case "end":
+                return _context10.stop();
+            }
+          }
+        }, _callee10, null, [[0, 16]]);
+      }))();
+    },
+    selectCountry: function selectCountry(country) {
+      var _this10 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee11() {
+        return _regenerator.default.wrap(function _callee11$(_context11) {
+          while (1) {
+            switch (_context11.prev = _context11.next) {
               case 0:
                 _this10.selectedCountry = country;
                 _this10.multiArray = [[], [], []];
@@ -650,126 +687,126 @@ var _default = {
                 _this10.area_id = null;
                 _this10.market_id = null;
                 if (!(country === 'china')) {
-                  _context10.next = 11;
+                  _context11.next = 11;
                   break;
                 }
-                _context10.next = 9;
+                _context11.next = 9;
                 return _this10.initializePicker();
               case 9:
-                _context10.next = 14;
+                _context11.next = 14;
                 break;
               case 11:
                 if (!(country === 'overseas')) {
-                  _context10.next = 14;
+                  _context11.next = 14;
                   break;
                 }
-                _context10.next = 14;
+                _context11.next = 14;
                 return _this10.fetchOverseas();
               case 14:
               case "end":
-                return _context10.stop();
+                return _context11.stop();
             }
           }
-        }, _callee10);
+        }, _callee11);
       }))();
     },
     bindMultiPickerColumnChange: function bindMultiPickerColumnChange(e) {
       var _this11 = this;
-      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee11() {
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee12() {
         var column, value, selectedProvince, cities, areas, selectedCity, _areas, selectedContinent;
-        return _regenerator.default.wrap(function _callee11$(_context11) {
+        return _regenerator.default.wrap(function _callee12$(_context12) {
           while (1) {
-            switch (_context11.prev = _context11.next) {
+            switch (_context12.prev = _context12.next) {
               case 0:
                 column = e.detail.column;
                 value = e.detail.value;
                 if (!(_this11.selectedCountry === 'china')) {
-                  _context11.next = 35;
+                  _context12.next = 35;
                   break;
                 }
                 if (!(column === 0)) {
-                  _context11.next = 22;
+                  _context12.next = 22;
                   break;
                 }
                 selectedProvince = _this11.provinceList[value];
                 if (!(selectedProvince && selectedProvince.id !== undefined)) {
-                  _context11.next = 18;
+                  _context12.next = 18;
                   break;
                 }
-                _context11.next = 8;
+                _context12.next = 8;
                 return _this11.fetchCities(selectedProvince.id);
               case 8:
-                cities = _context11.sent;
+                cities = _context12.sent;
                 _this11.multiArray[1] = cities.map(function (item) {
                   return item.name;
                 });
                 if (!(cities.length > 0)) {
-                  _context11.next = 17;
+                  _context12.next = 17;
                   break;
                 }
-                _context11.next = 13;
+                _context12.next = 13;
                 return _this11.fetchAreas(cities[0].id);
               case 13:
-                areas = _context11.sent;
+                areas = _context12.sent;
                 _this11.multiArray[2] = areas.map(function (item) {
                   return item.name;
                 });
-                _context11.next = 18;
+                _context12.next = 18;
                 break;
               case 17:
                 _this11.multiArray[2] = [];
               case 18:
                 _this11.multiIndex[1] = 0;
                 _this11.multiIndex[2] = 0;
-                _context11.next = 33;
+                _context12.next = 33;
                 break;
               case 22:
                 if (!(column === 1)) {
-                  _context11.next = 33;
+                  _context12.next = 33;
                   break;
                 }
                 selectedCity = _this11.cityList[value];
                 if (!(selectedCity && selectedCity.id !== undefined)) {
-                  _context11.next = 31;
+                  _context12.next = 31;
                   break;
                 }
-                _context11.next = 27;
+                _context12.next = 27;
                 return _this11.fetchAreas(selectedCity.id);
               case 27:
-                _areas = _context11.sent;
+                _areas = _context12.sent;
                 _this11.multiArray[2] = _areas.map(function (item) {
                   return item.name;
                 });
-                _context11.next = 32;
+                _context12.next = 32;
                 break;
               case 31:
                 _this11.multiArray[2] = [];
               case 32:
                 _this11.multiIndex[2] = 0;
               case 33:
-                _context11.next = 47;
+                _context12.next = 47;
                 break;
               case 35:
                 if (!(_this11.selectedCountry === 'overseas')) {
-                  _context11.next = 47;
+                  _context12.next = 47;
                   break;
                 }
                 if (!(column === 0)) {
-                  _context11.next = 46;
+                  _context12.next = 46;
                   break;
                 }
                 selectedContinent = _this11.overseasCountries[value];
                 if (!(selectedContinent && selectedContinent.id !== undefined)) {
-                  _context11.next = 41;
+                  _context12.next = 41;
                   break;
                 }
-                _context11.next = 41;
+                _context12.next = 41;
                 return _this11.fetchOverseasCities(selectedContinent.id);
               case 41:
                 _this11.multiArray[2] = [];
                 _this11.multiIndex[1] = 0;
                 _this11.multiIndex[2] = 0;
-                _context11.next = 47;
+                _context12.next = 47;
                 break;
               case 46:
                 if (column === 1) {
@@ -781,78 +818,78 @@ var _default = {
                 _this11.multiIndex = (0, _toConsumableArray2.default)(_this11.multiIndex);
               case 49:
               case "end":
-                return _context11.stop();
-            }
-          }
-        }, _callee11);
-      }))();
-    },
-    bindMultiPickerChange: function bindMultiPickerChange(e) {
-      var _this12 = this;
-      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee12() {
-        var _this12$cityList$sele, selectedCityIndex, selectedCityId, _this12$districtList$, _this12$overseasCount, selectedCountryIndex, _selectedCityIndex, _this12$overseasCitie;
-        return _regenerator.default.wrap(function _callee12$(_context12) {
-          while (1) {
-            switch (_context12.prev = _context12.next) {
-              case 0:
-                _this12.multiIndex = e.detail.value;
-                if (!(_this12.selectedCountry === 'china')) {
-                  _context12.next = 12;
-                  break;
-                }
-                selectedCityIndex = _this12.multiIndex[1];
-                selectedCityId = ((_this12$cityList$sele = _this12.cityList[selectedCityIndex]) === null || _this12$cityList$sele === void 0 ? void 0 : _this12$cityList$sele.id) || null;
-                if (!selectedCityId) {
-                  _context12.next = 10;
-                  break;
-                }
-                _context12.next = 7;
-                return _this12.fetchAreas(selectedCityId);
-              case 7:
-                _this12.area_id = ((_this12$districtList$ = _this12.districtList[_this12.multiIndex[2]]) === null || _this12$districtList$ === void 0 ? void 0 : _this12$districtList$.id) || null;
-                _context12.next = 10;
-                return _this12.fetchMarkets(_this12.area_id);
-              case 10:
-                _context12.next = 20;
-                break;
-              case 12:
-                if (!(_this12.selectedCountry === 'overseas')) {
-                  _context12.next = 20;
-                  break;
-                }
-                selectedCountryIndex = _this12.multiIndex[0];
-                _this12.overseasCountryId = ((_this12$overseasCount = _this12.overseasCountries[selectedCountryIndex]) === null || _this12$overseasCount === void 0 ? void 0 : _this12$overseasCount.id) || null;
-                _selectedCityIndex = _this12.multiIndex[1];
-                if (!_this12.overseasCountryId) {
-                  _context12.next = 20;
-                  break;
-                }
-                _context12.next = 19;
-                return _this12.fetchOverseasCities(_this12.overseasCountryId);
-              case 19:
-                _this12.overseasCityId = ((_this12$overseasCitie = _this12.overseasCities[_selectedCityIndex]) === null || _this12$overseasCitie === void 0 ? void 0 : _this12$overseasCitie.id) || null;
-              case 20:
-              case "end":
                 return _context12.stop();
             }
           }
         }, _callee12);
       }))();
     },
-    fetchMarkets: function fetchMarkets(areaId) {
-      var _this13 = this;
+    bindMultiPickerChange: function bindMultiPickerChange(e) {
+      var _this12 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee13() {
-        var Limit, response;
+        var _this12$cityList$sele, selectedCityIndex, selectedCityId, _this12$districtList$, _this12$overseasCount, selectedCountryIndex, _selectedCityIndex, _this12$overseasCitie;
         return _regenerator.default.wrap(function _callee13$(_context13) {
           while (1) {
             switch (_context13.prev = _context13.next) {
               case 0:
-                _context13.prev = 0;
+                _this12.multiIndex = e.detail.value;
+                if (!(_this12.selectedCountry === 'china')) {
+                  _context13.next = 12;
+                  break;
+                }
+                selectedCityIndex = _this12.multiIndex[1];
+                selectedCityId = ((_this12$cityList$sele = _this12.cityList[selectedCityIndex]) === null || _this12$cityList$sele === void 0 ? void 0 : _this12$cityList$sele.id) || null;
+                if (!selectedCityId) {
+                  _context13.next = 10;
+                  break;
+                }
+                _context13.next = 7;
+                return _this12.fetchAreas(selectedCityId);
+              case 7:
+                _this12.area_id = ((_this12$districtList$ = _this12.districtList[_this12.multiIndex[2]]) === null || _this12$districtList$ === void 0 ? void 0 : _this12$districtList$.id) || null;
+                _context13.next = 10;
+                return _this12.fetchMarkets(_this12.area_id);
+              case 10:
+                _context13.next = 20;
+                break;
+              case 12:
+                if (!(_this12.selectedCountry === 'overseas')) {
+                  _context13.next = 20;
+                  break;
+                }
+                selectedCountryIndex = _this12.multiIndex[0];
+                _this12.overseasCountryId = ((_this12$overseasCount = _this12.overseasCountries[selectedCountryIndex]) === null || _this12$overseasCount === void 0 ? void 0 : _this12$overseasCount.id) || null;
+                _selectedCityIndex = _this12.multiIndex[1];
+                if (!_this12.overseasCountryId) {
+                  _context13.next = 20;
+                  break;
+                }
+                _context13.next = 19;
+                return _this12.fetchOverseasCities(_this12.overseasCountryId);
+              case 19:
+                _this12.overseasCityId = ((_this12$overseasCitie = _this12.overseasCities[_selectedCityIndex]) === null || _this12$overseasCitie === void 0 ? void 0 : _this12$overseasCitie.id) || null;
+              case 20:
+              case "end":
+                return _context13.stop();
+            }
+          }
+        }, _callee13);
+      }))();
+    },
+    fetchMarkets: function fetchMarkets(areaId) {
+      var _this13 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee14() {
+        var Limit, response;
+        return _regenerator.default.wrap(function _callee14$(_context14) {
+          while (1) {
+            switch (_context14.prev = _context14.next) {
+              case 0:
+                _context14.prev = 0;
                 Limit = 100;
-                _context13.next = 4;
+                _context14.next = 4;
                 return _index.api.marketlist(areaId, Limit);
               case 4:
-                response = _context13.sent;
+                response = _context14.sent;
                 if (response.code === 200 && Array.isArray(response.data.listdata)) {
                   _this13.marketList = response.data.listdata.map(function (item) {
                     return item.marketname;
@@ -866,20 +903,20 @@ var _default = {
                   _this13.marketList = [];
                   _this13.marketIdMap = {};
                 }
-                _context13.next = 13;
+                _context14.next = 13;
                 break;
               case 8:
-                _context13.prev = 8;
-                _context13.t0 = _context13["catch"](0);
-                console.error('Failed to fetch markets:', _context13.t0);
+                _context14.prev = 8;
+                _context14.t0 = _context14["catch"](0);
+                console.error('Failed to fetch markets:', _context14.t0);
                 _this13.marketList = [];
                 _this13.marketIdMap = {};
               case 13:
               case "end":
-                return _context13.stop();
+                return _context14.stop();
             }
           }
-        }, _callee13, null, [[0, 8]]);
+        }, _callee14, null, [[0, 8]]);
       }))();
     },
     bindMarketChange: function bindMarketChange(e) {
@@ -893,13 +930,15 @@ var _default = {
       switch (this.active) {
         case 0:
           this.active += 1;
+          this.title = '注册';
           break;
         case 1:
           this.userInfo.index = this.categoryList.findIndex(function (item) {
             return item == _this14.selectedCategory;
           });
           if (this.userInfo.name && this.userInfo.location && this.userInfo.index != -1) {
-            this.active += 1;
+            // this.active += 1
+            this.over();
           } else {
             uni.showToast({
               icon: 'error',

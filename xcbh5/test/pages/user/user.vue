@@ -75,6 +75,30 @@
 			历史打卡累计: &nbsp;{{signTotal.allnum}}
 		</view> -->
 		<view class="My-Order">
+			<view class="Order-top" @click="goToprePurchaseOrder">
+				<view style="margin: auto 20rpx; text-align: center;">我的预购</view>
+				<view style=" margin: auto 20rpx; text-align: center;color: #ccc;"><uni-icons type="right" size="14"
+						color="#ccc"></uni-icons></view>
+			</view>
+			<view class="Order-bottom">
+					<view class="item-title" >
+						<uni-icons custom-prefix="iconfont" type="icon-zhifuguanli" size="30"></uni-icons>
+						<text style="margin-top: 10rpx;">待支付</text>
+					</view>
+					<view class="item-title" >
+						<uni-icons custom-prefix="iconfont" type="icon-fapiaoguanli" size="30"></uni-icons>
+						<text style="margin-top: 10rpx;">已支付</text>
+					</view>
+					<view class="item-title" >
+						<uni-icons custom-prefix="iconfont" type="icon-fahuoguanli" size="30"></uni-icons>
+						<text style="margin-top: 10rpx;">待收货</text>
+					</view>
+					<view class="item-title" >
+						<uni-icons custom-prefix="iconfont" type="icon-dingdanguanli" size="30"></uni-icons>
+						<text style="margin-top: 10rpx;">已完成</text>
+					</view>
+				</view>
+			
 			<view class="Order-top" @click="toorders(0)">
 				<view style="margin: auto 20rpx; text-align: center;">我的订单</view>
 				<view style=" margin: auto 20rpx; text-align: center;color: #ccc;">全部<uni-icons type="right" size="14"
@@ -99,6 +123,7 @@
 				</view>
 			</view>
 		</view>
+		
 
 
 
@@ -164,6 +189,11 @@
 			this.signlist()
 		},
 		methods: {
+			goToprePurchaseOrder(){
+				uni.navigateTo({
+					 url: `/subPackages/shoppingPageList/prePurchaseOrder/prePurchaseOrder`
+				})
+			},
 			goToUpdatePwd(){
 				uni.navigateTo({
 					url: `/pages/updatePwd/updatePwd?phone=${this.phone}`,
@@ -576,7 +606,7 @@
 	}
 
 	.My-Order {
-		height: 200rpx;
+		height: 400rpx;
 		width: 100%;
 		margin-top: 5%;
 		background-color: white;

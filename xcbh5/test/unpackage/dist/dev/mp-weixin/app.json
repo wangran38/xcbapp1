@@ -43,7 +43,13 @@
     "pages/arrangeNotification/arrangeNotification",
     "pages/weChatCashwWithdrawal/weChatCashwWithdrawal",
     "pages/billRecord/billRecord",
-    "pages/wholesale/wholesale"
+    "pages/wholesale/wholesale",
+    "pages/prizeDraw/prizeDraw",
+    "pages/preSale/preSale",
+    "pages/additionalinformation/additionalinformation",
+    "pages/Presalemenulist/Presalemenulist",
+    "pages/dynamics/dynamics",
+    "pages/demo/demo"
   ],
   "subPackages": [
     {
@@ -59,7 +65,8 @@
         "additionalInformation/additionalInformation",
         "publishDishes/publishDishes",
         "Traceability/Traceability",
-        "lookTraceability/lookTraceability"
+        "lookTraceability/lookTraceability",
+        "PreSoldDishesList/PreSoldDishesList"
       ]
     },
     {
@@ -69,6 +76,19 @@
         "purchase/purchase",
         "addSupply/addSupply",
         "addPurchase/addPurchase"
+      ]
+    },
+    {
+      "root": "subPackages/shoppingPageList",
+      "pages": [
+        "villageZone/villageZone",
+        "nearbyFarmers/nearbyFarmers",
+        "agriculturalAssistanceZone/agriculturalAssistanceZone",
+        "official/official",
+        "rentalStorefront/rentalStorefront",
+        "rentalStorefrontList/rentalStorefrontList",
+        "prePurchaseOrder/prePurchaseOrder",
+        "prePurchaseDeposit/prePurchaseDeposit"
       ]
     }
   ],

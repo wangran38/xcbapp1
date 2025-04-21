@@ -1,0 +1,153 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.container.data-v-fee84836 {
+  background: #f8f8f8;
+  padding-bottom: 120rpx;
+}
+.banner.data-v-fee84836 {
+  height: 360rpx;
+  position: relative;
+}
+.banner-img.data-v-fee84836 {
+  width: 100%;
+  height: 100%;
+}
+.banner-label.data-v-fee84836 {
+  position: absolute;
+  bottom: 30rpx;
+  left: 30rpx;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 8rpx 20rpx;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+}
+.dashboard.data-v-fee84836 {
+  display: flex;
+  justify-content: space-around;
+  background: #fff;
+  margin: 20rpx;
+  padding: 30rpx 0;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+.dashboard .data-item.data-v-fee84836 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dashboard .data-item .value.data-v-fee84836 {
+  color: #ff7900;
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+.dashboard .data-item .label.data-v-fee84836 {
+  color: #666;
+  font-size: 24rpx;
+}
+.product-list.data-v-fee84836 {
+  padding: 0 20rpx;
+}
+.product-list .product-card.data-v-fee84836 {
+  background: #fff;
+  border-radius: 16rpx;
+  margin: 20rpx;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+.product-list .product-card .badge.data-v-fee84836 {
+  position: absolute;
+  top: 20rpx;
+  left: 0;
+  background: #ff7900;
+  color: #fff;
+  padding: 6rpx 20rpx;
+  border-radius: 0 8rpx 8rpx 0;
+  font-size: 24rpx;
+  z-index: 2;
+}
+.product-list .product-card .cover.data-v-fee84836 {
+  width: 100%;
+  height: 300rpx;
+}
+.product-list .product-card .info.data-v-fee84836 {
+  padding: 20rpx;
+}
+.product-list .product-card .info .header.data-v-fee84836 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.product-list .product-card .info .header .title.data-v-fee84836 {
+  font-size: 30rpx;
+  color: #333;
+  flex: 1;
+  margin-right: 20rpx;
+}
+.product-list .product-card .info .farmer-info.data-v-fee84836 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25rpx;
+}
+.product-list .product-card .info .farmer-info .avatar.data-v-fee84836 {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  margin-right: 12rpx;
+}
+.product-list .product-card .info .farmer-info .name.data-v-fee84836 {
+  color: #666;
+  font-size: 26rpx;
+}
+.product-list .product-card .info .progress .label.data-v-fee84836 {
+  color: #888;
+  font-size: 24rpx;
+  margin-bottom: 10rpx;
+}
+.product-list .product-card .info .progress .percent.data-v-fee84836 {
+  color: #ff7900;
+  font-size: 24rpx;
+  margin-left: 15rpx;
+}
+.product-list .product-card .info .footer.data-v-fee84836 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+}
+.product-list .product-card .info .footer .price .current.data-v-fee84836 {
+  color: #ff7900;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+.product-list .product-card .info .footer .price .original.data-v-fee84836 {
+  color: #999;
+  font-size: 24rpx;
+  text-decoration: line-through;
+  margin-left: 12rpx;
+}
+.product-list .product-card .info .footer .sold.data-v-fee84836 {
+  color: #999;
+  font-size: 24rpx;
+}
+.story-fab.data-v-fee84836 {
+  position: fixed;
+  right: 40rpx;
+  bottom: 120rpx;
+  background: #ff7900;
+  padding: 16rpx 24rpx;
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 8rpx 20rpx rgba(255, 121, 0, 0.3);
+}
+.story-fab text.data-v-fee84836 {
+  color: #fff;
+  font-size: 26rpx;
+  margin-left: 10rpx;
+}
+

@@ -53,21 +53,21 @@
 					<view class="item" @click="gotoPreSale">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe603;'}}</uni-icons>
 						<view class="add-dishes">
-							预卖
+							添加菜品
 						</view>
 					</view>
 					<view class="item" @click="gotoAdditionalinformation">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe603;'}}</uni-icons>
 						<view class="add-dishes">
-							菜品资料
+							菜品朋友圈
 						</view>
 					</view>
-<!-- 					<view class="item" @click="goTorelePage">
-						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe6ee;'}}</uni-icons>
+					<view class="item" @click="goToPreSoldDishesList">
+						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe603;'}}</uni-icons>
 						<view class="add-dishes">
-							添加菜品
+							预卖菜品列表
 						</view>
-					</view> -->
+					</view>
 <!-- 					<view class="item" @click="goToTraceability">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe6ee;'}}</uni-icons>
 						<view class="add-dishes">
@@ -163,18 +163,18 @@
 							钱包
 						</view>
 					</view>
-					<view class="item" @click="gotoPoints">
+<!-- 					<view class="item" @click="gotoPoints">
 						<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe673;'}}</uni-icons>
 						<view class="add-dishes">
 							积分钱包
 						</view>
-					</view>
-					<view class="item" @click="gotoPointspayouts">
+					</view> -->
+<!-- 					<view class="item" @click="gotoPointspayouts">
 						<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe682;'}}</uni-icons>
 						<view class="add-dishes">
 							积分结算
 						</view>
-					</view>
+					</view> -->
 		
 					<view class="item" @click="gotoBankCard">
 						<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe936;'}}</uni-icons>
@@ -230,6 +230,11 @@
 
 		},
 		methods: {
+			goToPreSoldDishesList(){
+				uni.navigateTo({
+					url: '/subPackages/aHouseholder/PreSoldDishesList/PreSoldDishesList'
+				});
+			},
 			gotoAdditionalinformation(){
 				uni.navigateTo({
 					url:'/pages/additionalinformation/additionalinformation'

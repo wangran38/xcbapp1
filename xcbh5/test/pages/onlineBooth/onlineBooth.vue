@@ -1,6 +1,6 @@
 <template>
 	<view class="bixBox">
-		<popVue ref="pop"  @receive="over"></popVue>
+		<popVue ref="pop" @receive="over"></popVue>
 		<view class="title">
 			轻松三步，成为农户
 		</view>
@@ -47,12 +47,14 @@
 						所售类目
 					</view>
 					<view class="Select">
-						<picker class="Categorypicker" mode="selector" :range="categoryList" @change="bindCategoryChange">
-							<view style="text-align: center; width: 230rpx; font-size: 30rpx; line-height: 50rpx; ">{{ selectedCategory }}</view>
+						<picker class="Categorypicker" mode="selector" :range="categoryList"
+							@change="bindCategoryChange">
+							<view style="text-align: center; width: 230rpx; font-size: 30rpx; line-height: 50rpx; ">
+								{{ selectedCategory }}</view>
 						</picker>
 					</view>
 				</view>
-				
+
 				<view class="hr">
 				</view>
 				<view class="card">
@@ -60,7 +62,7 @@
 						详细地址
 					</view>
 					<view class="Select">
-						<input v-model="userInfo.location" type="text" placeholder="请输入地址"  style="mix-width: 400rpx;"/>
+						<input v-model="userInfo.location" type="text" placeholder="请输入地址" style="mix-width: 400rpx;" />
 					</view>
 				</view>
 				<view>
@@ -69,7 +71,7 @@
 			</view>
 		</view>
 
-		<view class="three" v-show="active == 2">
+		<!-- 	<view class="three" v-show="active == 2">
 			<view class="tip">
 				建议建议建议建议建议建议建议建议建议建议建议建议建议建议建议建议建议建议建议建议建议
 			</view>
@@ -77,7 +79,7 @@
 				开通并领取福利
 			</view>
 
-		</view>
+		</view> -->
 		<button class="btn" @click="next">{{title}}</button>
 	</view>
 </template>
@@ -94,23 +96,28 @@
 	export default {
 		data() {
 			return {
+				// options: [{
+				// 	title: '创建摊位'
+				// }, {
+				// 	title: '用户信息'
+				// }, {
+				// 	title: '领取福利'
+				// }, ]
 				options: [{
 					title: '创建摊位'
 				}, {
 					title: '用户信息'
-				}, {
-					title: '领取福利'
 				}, ],
 				active: 0,
 				categoryList: ['请选择分类'],
-				selectedCategory: '请选择分类',  // 分类
-				userInfo:{  // 用户信息
-					name:null,
-					location:null,
-					index:null
+				selectedCategory: '请选择分类', // 分类
+				userInfo: { // 用户信息
+					name: null,
+					location: null,
+					index: null
 				},
-				title:'下一步',
-				lock:true, // 领取按钮锁
+				title: '下一步',
+				lock: true, // 领取按钮锁
 
 
 
@@ -155,32 +162,45 @@
 			await this.initializePicker(); // 组件加载时初始化数据
 			this.fetchCategories()
 		},
-		components:{
+		components: {
 			popVue
 		},
 		methods: {
-			async over(){
+			async customizeBack() {
+				let canNavBack = await getCurrentPages()
+				if (canNavBack && canNavBack.length > 1) {
+					uni.navigateBack()
+				} else {
+					history.back();
+				}
+			},
+			async over() {
 				// 发送申请注册
-				
 				let res = await api.addfarmers({
-					area_id:this.area_id,
-					farmersname:this.userInfo.name,
-					address:this.userInfo.location,
-					category_id:this.userInfo.index
+					area_id: this.area_id,
+					farmersname: this.userInfo.name,
+					address: this.userInfo.location,
+					category_id: this.userInfo.index
 				})
 				console.log(res)
-				if (res.code == 200){
-					this.title = '完成'
-				}else{
+				if (res.code == 200) {
+					// this.title = '完成'
 					uni.showToast({
-						icon:'error',
-						title:'服务器异常'
+						icon: 'success',
+						title: '注册成功'
+					}).then((data)=>{
+						setTimeout(()=>{this.customizeBack()},2000)
+					})
+				} else {
+					uni.showToast({
+						icon: 'error',
+						title: res.msg || res.message
 					})
 				}
-				
+
 			},
-			register(){
-				if (this.lock){
+			register() {
+				if (this.lock) {
 					let pop = this.$refs.pop
 					pop.show = true
 					pop.custom()
@@ -192,7 +212,7 @@
 					const response = await api.cglist();
 					if (response.code === 200) {
 						const categories = response.data.listdata;
-						this.categoryList = [ ...categories.map(item => item.title)];
+						this.categoryList = [...categories.map(item => item.title)];
 						this.categoryIdMap = categories.reduce((map, item) => {
 							map[item.title] = item.id;
 							return map;
@@ -453,36 +473,38 @@
 				const selectedMarket = this.marketList[this.selectedMarketIndex];
 				this.market_id = this.marketIdMap[selectedMarket] || null;
 			},
-			
+
 			// 下一步
 			next() {
-				switch (this.active){
+				switch (this.active) {
 					case 0:
 						this.active += 1
+						this.title = '注册'
 						break
 					case 1:
-						this.userInfo.index = this.categoryList.findIndex((item)=>item==this.selectedCategory)
-						if (this.userInfo.name && this.userInfo.location && this.userInfo.index!=-1){
-							this.active += 1
-							
-						}else{
+						this.userInfo.index = this.categoryList.findIndex((item) => item == this.selectedCategory)
+						if (this.userInfo.name && this.userInfo.location && this.userInfo.index != -1) {
+							// this.active += 1
+							this.over()
+						} else {
 							uni.showToast({
-								icon:'error',
-								title:'请补充完整信息'
-							})
-						}
-						break
-					case 2:
-						// 注册完成
-						if (this.title =='完成'){
-							uni.showToast({
-								title:'注册完成'
+								icon: 'error',
+								title: '请补充完整信息'
 							})
 						}
 
-						
+						break
+					case 2:
+						// 注册完成
+						if (this.title == '完成') {
+							uni.showToast({
+								title: '注册完成'
+							})
+						}
+
+
 				}
-				
+
 			}
 
 		}
@@ -492,7 +514,7 @@
 
 
 <style scoped>
-	.registerBtn{
+	.registerBtn {
 		box-shadow: 10rpx 10rpx 10rpx #e8e8e8;
 		background-color: lightblue;
 		width: 230rpx;
@@ -504,6 +526,7 @@
 		color: white;
 		font-family: STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑";
 	}
+
 	.Select {
 		display: flex;
 	}
@@ -541,7 +564,7 @@
 	}
 
 	.label {
-		width:200rpx;
+		width: 200rpx;
 		font-weight: 300;
 		font-size: 25rpx;
 		margin-bottom: 20rpx;
