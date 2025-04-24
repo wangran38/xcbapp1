@@ -50,7 +50,10 @@
     "pages/Presalemenulist/Presalemenulist",
     "pages/dynamics/dynamics",
     "pages/demo/demo",
-    "pages/merchantComplaints/merchantComplaints"
+    "pages/merchantComplaints/merchantComplaints",
+    "pages/myComplaint/myComplaint",
+    "pages/test/test",
+    "pages/complaintDetails/complaintDetails"
   ],
   "subPackages": [
     {
@@ -91,7 +94,9 @@
         "rentalStorefrontList/rentalStorefrontList",
         "prePurchaseOrder/prePurchaseOrder",
         "prePurchaseDeposit/prePurchaseDeposit",
-        "merchantDetails/merchantDetails"
+        "merchantDetails/merchantDetails",
+        "realTimeInfo/realTimeInfo",
+        "realTimeInfoDetail/realTimeInfoDetail"
       ]
     }
   ],

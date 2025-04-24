@@ -450,7 +450,24 @@ export const api = {
 	// 修改预卖菜品信息
 	updateDish(data){
 		return fetch('/api/farmers/upgoods', 'POST', data);
-	}
+	},
+	// 用户提交投诉
+	submitComplaint(data){
+		return fetch('/api/user/complaint/add', 'POST', data);
+	},
+	// 我的投诉
+	mylist(data){
+		return fetch('/api/user/complaint/mylist', 'POST', data);
+	},
+	// 资讯信息列表
+	informationData(data){
+		return fetch('/api/news/list', 'POST', data);
+	},
+	// 资讯信息分类
+	classification(data){
+		return fetch('/api/news/category/list', 'POST', data);
+	},
+	
 	
 
 }

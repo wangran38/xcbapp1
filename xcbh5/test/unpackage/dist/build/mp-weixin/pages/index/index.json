@@ -2,6 +2,7 @@
   "navigationBarTitleText": "乡愁宝",
   "disableScroll": true,
   "usingComponents": {
-    "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons"
+    "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons",
+    "float-ball": "/components/float-ball/float-ball"
   }
 }

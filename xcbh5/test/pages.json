@@ -151,6 +151,21 @@
 					"navigationBarTitleText" : "农户详情"
 					// "disableScroll": true
 				}
+			},
+			{
+				"path" : "realTimeInfo/realTimeInfo",
+				"style" : 
+				{
+					"navigationBarTitleText" : "资讯",
+					"disableScroll": true
+				}
+			},
+			{
+				"path" : "realTimeInfoDetail/realTimeInfoDetail",
+				"style" : 
+				{
+					"navigationBarTitleText" : "新闻详情"
+				}
 			}
 				
 			]
@@ -479,6 +494,28 @@
 			"style" : 
 			{
 				"navigationBarTitleText" : "投诉商家"
+			}
+		},
+		{
+			"path" : "pages/myComplaint/myComplaint",
+			"style" : 
+			{
+				"navigationBarTitleText" : "我的投诉"
+			}
+		},
+		{
+			"path" : "pages/test/test",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/complaintDetails/complaintDetails",
+			"style" : 
+			{
+				"navigationBarTitleText" : "投诉详情",
+				"disableScroll": true
 			}
 		}
 	],

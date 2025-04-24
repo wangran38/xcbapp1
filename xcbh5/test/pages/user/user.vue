@@ -148,6 +148,10 @@
 				<view>修改密码</view>
 				<uni-icons type="right" size="20"></uni-icons>
 			</view>
+			<!-- <view class="Apply" @click="GoToComplaint">
+				<view>我的投诉</view>
+				<uni-icons type="right" size="20"></uni-icons>
+			</view> -->
 		</view>
 
 		<view v-if="isLoggedIn">
@@ -189,6 +193,11 @@
 			this.signlist()
 		},
 		methods: {
+			GoToComplaint(){
+				uni.navigateTo({
+					 url: '/pages/myComplaint/myComplaint'
+				})
+			},
 			goToprePurchaseOrder(){
 				uni.navigateTo({
 					 url: `/subPackages/shoppingPageList/prePurchaseOrder/prePurchaseOrder`

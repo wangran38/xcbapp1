@@ -53,14 +53,6 @@
 
 					<scroll-view class="preview-container" scroll-x="true">
 						<view v-for="(item, index) in fileList" :key="index" class="preview-item">
-							<!-- 图片预览 -->
-<!-- 							<image v-if="item.fileType === 'image'" :src="item.tempFilePath" mode="aspectFill"
-								class="preview-image" @click="previewImage(index)" /> -->
-
-							<!-- 视频预览 -->
-<!-- 							<view v-else-if="item.fileType === 'video'" class="video-wrapper">
-								<video :src="item.tempFilePath" :poster="item.thumbTempFilePath" controls></video>
-							</view> -->
 							<image
 							  v-if="item.fileType === 'image'"
 							  :src="item.tempFilePath"

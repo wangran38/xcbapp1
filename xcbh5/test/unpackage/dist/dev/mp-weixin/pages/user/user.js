@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 602))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 666))
     },
   }
 } catch (e) {
@@ -309,6 +309,29 @@ var _useUpload = __webpack_require__(/*! ../../hooks/useUpload.js */ 106);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
@@ -345,6 +368,11 @@ var _default = {
     }))();
   },
   methods: {
+    GoToComplaint: function GoToComplaint() {
+      uni.navigateTo({
+        url: '/pages/myComplaint/myComplaint'
+      });
+    },
     goToprePurchaseOrder: function goToprePurchaseOrder() {
       uni.navigateTo({
         url: "/subPackages/shoppingPageList/prePurchaseOrder/prePurchaseOrder"

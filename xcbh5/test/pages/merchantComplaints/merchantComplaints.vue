@@ -1,308 +1,373 @@
 <template>
-	<view class="complaint-page">
-		<view class="page-header">
-			<text class="title">投诉与建议</text>
+	<view class="complaint-container">
+		<!-- 头部 -->
+		<view class="complaint-header">
+			<text class="title">提交投诉</text>
+			<text class="subtitle">请补充投诉“{{query.title}}”的具体依据</text>
 		</view>
 
-		<!-- 投诉表单 -->
-		<uni-forms ref="form" :model="formData">
+		<!-- 表单主体 -->
+		<view class="complaint-form">
 			<!-- 投诉类型 -->
-			<uni-forms-item label="投诉类型" required name="type">
-				<uni-data-select v-model="formData.type" :localdata="complaintTypes" placeholder="请选择投诉类型" />
-			</uni-forms-item>
+			<view class="form-item">
+				<text class="item-label">投诉标题<text class="required">*</text></text>
+				<input v-model="formData.title" placeholder="请简述一下您遇到的问题"
+					style="background-color: #F8F9FA; padding: 30rpx; font-size: 28rpx;" />
 
-			<!-- 订单选择 -->
-			<uni-forms-item label="相关订单" required name="orderId">
-				<uni-easyinput v-model="formData.orderId" placeholder="输入订单编号" suffixIcon="search"
-					@iconClick="showOrderList" />
-			</uni-forms-item>
-
-			<!-- 投诉内容 -->
-			<uni-forms-item label="投诉描述" required name="content">
-				<textarea v-model="formData.content" placeholder="请详细描述您的问题（不少于20字）" class="content-input"
-					auto-height />
-			</uni-forms-item>
-
-			<!-- 图片上传 -->
-			<view class="upload-section">
-				<text class="upload-title">上传凭证（最多4张）</text>
-				<uni-file-picker v-model="formData.files" fileMediatype="image" limit="4" :image-styles="imageStyles"
-					@select="handleFileSelect" />
 			</view>
 
-			<!-- 联系方式 -->
-			<uni-forms-item label="联系方式" required name="contact">
-				<uni-easyinput v-model="formData.contact" placeholder="手机/邮箱" />
-			</uni-forms-item>
-
-			<!-- 提交按钮 -->
-			<button class="submit-btn" :class="{ disabled: !formValid }" @click="handleSubmit">
-				<text v-if="loading" class="loading-text">提交中...</text>
-				<text v-else>立即提交</text>
-			</button>
-		</uni-forms>
-
-		<!-- 订单选择弹窗 -->
-		<uni-popup ref="orderPopup" type="bottom">
-			<view class="order-popup">
-				<view class="popup-header">
-					<text>选择订单</text>
-					<uni-icons type="close" @click="closeOrderList" />
+			<!-- 投诉描述 -->
+			<view class="form-item">
+				<text class="item-label">投诉描述<text class="required">*</text></text>
+				<textarea v-model="formData.content" placeholder="请详细描述遇到的问题（建议包含时间、地点、具体经过）" class="content-input"
+					maxlength="500" />
+				<view class="word-counter">
+					{{ formData.content.length }}/500
 				</view>
-				<scroll-view scroll-y class="order-list">
-					<view v-for="order in recentOrders" :key="order.id" class="order-item" @click="selectOrder(order)">
-						<text class="order-no">{{ order.orderNo }}</text>
-						<text class="order-date">{{ formatDate(order.date) }}</text>
-					</view>
-				</scroll-view>
 			</view>
-		</uni-popup>
+
+			<!-- 上传凭证 -->
+			<view class="form-item">
+				<text class="item-label">上传凭证</text>
+				<view class="upload-area">
+					<view class="upload-card" @click="selectImage">
+						<uni-icons type="plusempty" size="36" color="#7A9D7E" />
+						<text class="upload-tip">请选择上传图片</text>
+						<text class="upload-subtip">最多6张图片</text>
+					</view>
+					<!-- 					<uni-file-picker v-model="formData.files" fileMediatype="image" limit="6"
+						@select="handleFileSelect">
+					</uni-file-picker> -->
+
+					<view class="preview-grid" v-if="fileList.length > 0">
+						<view v-for="(file, index) in fileList" :key="index" class="preview-item">
+							<image :src="file.data.url" class="preview-image" mode="aspectFill" />
+							<uni-icons type="close" size="18" class="delete-icon" @click="removeFile(index)" />
+						</view>
+					</view>
+				</view>
+			</view>
+
+			<!-- 联系电话 -->
+			<view class="form-item">
+				<text class="item-label">联系电话<text class="required">*</text></text>
+				<view class="phone-input">
+					<uni-icons type="phone" size="20" color="#7A9D7E" />
+					<input v-model="formData.phone" type="number" placeholder="请输入您的手机号码" maxlength="11" />
+				</view>
+			</view>
+		</view>
+
+		<!-- 提交按钮 -->
+		<view class="submit-area">
+			<button class="submit-btn" @click="handleSubmit">
+				立即提交
+			</button>
+			<text class="agreement-tip">提交之后工作人员将在两个小时之后联系您，请保持通话正常</text>
+		</view>
 	</view>
 </template>
 
 <script>
+	import {
+		api,
+		UPLOAD_URL
+	} from '../../api/index.js';
+	import {
+		useUpload
+	} from "@/hooks/useUpload"
+	import {
+		myMixin
+	} from '@/utils/public.js'
 	export default {
+		mixins:[myMixin],
 		data() {
 			return {
-				loading: false,
 				formData: {
-					type: '',
-					orderId: '',
+					title: '',
 					content: '',
-					files: [],
-					contact: ''
+					phone: ''
 				},
-				complaintTypes: [{
-						value: 1,
-						text: "商品质量问题"
-					},
-					{
-						value: 2,
-						text: "配送问题"
-					},
-					{
-						value: 3,
-						text: "服务态度"
-					},
-					{
-						value: 4,
-						text: "其他问题"
-					}
-				],
-				imageStyles: {
-					width: 160,
-					height: 160,
-					border: {
-						color: "#eee",
-						width: 1,
-						style: 'solid'
-					}
-				}
+				fileList: [],
+				query: null, // 上个页面传来的数据
 			}
-		},
 
+		},
 		computed: {
+
 		},
-
+		onLoad(query) {
+			console.log(query)
+			this.query = query
+		},
 		methods: {
-			// 表单验证方法
-			validateContent(rule, value, callback) {
-				if (value.length < 20) {
-					callback('描述需不少于20字')
-				}
-				return true
-			},
-
-			validateContact(rule, value, callback) {
-				const phoneReg = /^1[3-9]\d{9}$/
-				const emailReg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
-				if (!phoneReg.test(value) && !emailReg.test(value)) {
-					callback('请输入有效的手机或邮箱')
-				}
-				return true
-			},
-
-			// 文件选择处理
-			handleFileSelect(e) {
-				if (e.tempFilePaths.length > 4) {
-					uni.showToast({
-						title: '最多选择4张图片',
-						icon: 'none'
-					})
-					return false
-				}
-			},
-
-			// 订单选择
-			showOrderList() {
-				this.$refs.orderPopup.open()
-			},
-
-			selectOrder(order) {
-				this.formData.orderId = order.orderNo
-				this.$refs.orderPopup.close()
-			},
-
-			closeOrderList() {
-				this.$refs.orderPopup.close()
-			},
-
-			// 提交处理
-			async handleSubmit() {
-				if (this.loading || !this.formValid) return
-
-				try {
-					this.loading = true
-					await this.$refs.form.validate()
-
-					const form = new FormData()
-					Object.entries(this.formData).forEach(([key, value]) => {
-						if (key === 'files') {
-							value.forEach(file => form.append('files', file))
-						} else {
-							form.append(key, value)
+			saveImage(path) {
+				return new Promise((res, rej) => {
+					uni.uploadFile({
+						url: 'https://image.xcbdsc.com/group1/upload',
+						name: 'file',
+						filePath: path,
+						formData: {
+							output: 'json2'
+						},
+						success: (reponse) => {
+							res(JSON.parse(reponse.data))
+						},
+						fail: (err) => {
+							rej(err)
+							uni.showToast({
+								title: '上传失败',
+								icon: 'error'
+							});
 						}
 					})
-
-					await this.$api.submitComplaint(form)
-					uni.showToast({
-						title: '提交成功'
-					})
-					setTimeout(() => uni.navigateBack(), 1500)
-				} catch (error) {
-					console.error('提交失败:', error)
-				} finally {
-					this.loading = false
-				}
+				})
+			},
+			async selectImage() {
+				uni.chooseMedia({
+					count: 6,
+					mediaType: 'mix',
+					sourceType: ['album', 'camera'],
+					maxDuration: 30,
+					camera: 'back',
+					success: (res) => {
+						const imgUploadPromises = res.tempFiles.map(item => {
+							return this.saveImage(item.tempFilePath)
+						})
+						Promise.all(imgUploadPromises)
+							.then(urlList => {
+								this.fileList = [...this.fileList, ...urlList]
+							})
+					}
+				})
 			},
 
-			formatDate(date) {
-				return new Date(date).toLocaleDateString()
+			removeFile(index) {
+				this.fileList.splice(index, 1)
+			},
+			async handleSubmit() {
+				this.formData.shop_id  = parseInt(this.query.id)
+				let ImgList = this.fileList.map(item=>{
+					return item.data.url
+				})
+				this.formData.complaint_img = ImgList.join(',')
+				// 构建数据包
+				uni.showToast({
+					icon:'loading',
+					title:'正在提交'
+				})
+				api.submitComplaint(this.formData).then((data)=>{
+					if (data.code == 200){
+						uni.showToast({
+							icon:'success',
+							title:'投诉成功'
+						})
+					}else{
+						uni.showToast({
+							icon:'error',
+							title:data.msg
+						})
+						return
+					}
+					setTimeout(()=>{
+						this.customizeBack()
+					},2000)
+				})
 			}
 		}
 	}
 </script>
 
-<style lang="scss">
-	.complaint-page {
-		padding: 30rpx;
-		background: #f8f9fa;
+<style lang="scss" scoped>
+	.complaint-container {
+		background: linear-gradient(180deg, #F8FFF9 0%, #FFFFFF 100%);
 		min-height: 100vh;
+		padding: 40rpx 30rpx;
+	}
 
-		.page-header {
-			margin-bottom: 40rpx;
+	.complaint-header {
+		margin-bottom: 48rpx;
 
-			.title {
-				display: block;
-				font-size: 44rpx;
-				font-weight: 600;
-				color: #333;
-			}
-
-			.subtitle {
-				font-size: 26rpx;
-				color: #999;
-				margin-top: 16rpx;
-			}
+		.title {
+			display: block;
+			font-size: 44rpx;
+			font-weight: 600;
+			color: #2C3E50;
+			margin-bottom: 16rpx;
 		}
 
-		.content-input {
-			width: 100%;
-			min-height: 200rpx;
-			padding: 24rpx;
-			background: #fff;
-			border-radius: 12rpx;
-			font-size: 28rpx;
+		.subtitle {
+			font-size: 26rpx;
+			color: #7A9D7E;
 		}
+	}
 
-		.upload-section {
-			margin: 40rpx 0;
+	.complaint-form {
+		background: #FFFFFF;
+		border-radius: 24rpx;
+		padding: 32rpx;
+		box-shadow: 0 8rpx 24rpx rgba(122, 157, 126, 0.08);
+	}
 
-			.upload-title {
-				display: block;
-				font-size: 28rpx;
-				color: #666;
-				margin-bottom: 24rpx;
-			}
-		}
+	.form-item {
+		margin-bottom: 48rpx;
 
-		.submit-btn {
-			background: #007aff;
-			color: white;
-			height: 88rpx;
-			border-radius: 44rpx;
-			font-size: 32rpx;
-			margin-top: 60rpx;
+		.item-label {
+			display: block;
+			font-size: 30rpx;
+			color: #34495E;
+			margin-bottom: 24rpx;
 
-			&.disabled {
-				opacity: 0.6;
-			}
-
-			.loading-text {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-
-				&::after {
-					content: '';
-					display: inline-block;
-					width: 32rpx;
-					height: 32rpx;
-					border: 4rpx solid #fff;
-					border-radius: 50%;
-					border-top-color: transparent;
-					animation: spin 0.8s linear infinite;
-					margin-left: 16rpx;
-				}
-			}
-		}
-
-		.order-popup {
-			background: #fff;
-			border-radius: 32rpx 32rpx 0 0;
-			padding: 32rpx;
-
-			.popup-header {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				margin-bottom: 32rpx;
-
-				text {
-					font-size: 36rpx;
-					font-weight: 500;
-				}
-			}
-
-			.order-list {
-				max-height: 60vh;
-
-				.order-item {
-					padding: 24rpx;
-					background: #f8f9fa;
-					border-radius: 16rpx;
-					margin-bottom: 24rpx;
-					display: flex;
-					justify-content: space-between;
-					align-items: center;
-
-					.order-no {
-						font-weight: 500;
-						color: #333;
-					}
-
-					.order-date {
-						color: #999;
-						font-size: 24rpx;
-					}
-				}
+			.required {
+				color: #FF5A5F;
+				margin-left: 8rpx;
 			}
 		}
 	}
 
-	@keyframes spin {
-		to {
-			transform: rotate(360deg);
+	.type-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 24rpx;
+
+		.type-item {
+			background: #F8FFF9;
+			border: 2rpx solid #E8F5E9;
+			border-radius: 16rpx;
+			padding: 32rpx;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			transition: all 0.3s;
+
+			&.active {
+				border-color: #7A9D7E;
+				background: rgba(122, 157, 126, 0.1);
+
+				uni-icons {
+					color: #7A9D7E;
+				}
+			}
+
+			uni-icons {
+				color: #95A5A6;
+				margin-bottom: 16rpx;
+			}
+
+			text {
+				font-size: 28rpx;
+				color: #2C3E50;
+			}
+		}
+	}
+
+	.content-input {
+		width: 100%;
+		height: 240rpx;
+		padding: 24rpx;
+		background: #F8F9FA;
+		border-radius: 16rpx;
+		font-size: 28rpx;
+		line-height: 1.6;
+	}
+
+	.word-counter {
+		text-align: right;
+		font-size: 24rpx;
+		color: #95A5A6;
+		margin-top: 16rpx;
+	}
+
+	.upload-area {
+		.upload-card {
+			background: #F8FFF9;
+			border: 2rpx dashed #7A9D7E;
+			border-radius: 16rpx;
+			padding: 48rpx 0;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+
+			.upload-tip {
+				color: #7A9D7E;
+				font-size: 28rpx;
+				margin-top: 16rpx;
+			}
+
+			.upload-subtip {
+				color: #BDC3C7;
+				font-size: 24rpx;
+				margin-top: 8rpx;
+			}
+		}
+	}
+
+	.preview-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 20rpx;
+		margin-top: 24rpx;
+
+		.preview-item {
+			position: relative;
+			border-radius: 12rpx;
+			overflow: hidden;
+
+			.preview-image {
+				width: 100%;
+				height: 200rpx;
+			}
+
+			.delete-icon {
+				position: absolute;
+				right: 8rpx;
+				top: 8rpx;
+				background: white;
+				color: black;
+				border-radius: 50%;
+				padding: 4rpx;
+			}
+		}
+	}
+
+	.phone-input {
+		display: flex;
+		align-items: center;
+		background: #F8F9FA;
+		border-radius: 16rpx;
+		padding: 24rpx;
+
+		uni-icons {
+			margin-right: 16rpx;
+		}
+
+		input {
+			flex: 1;
+			font-size: 28rpx;
+		}
+	}
+
+	.submit-area {
+		margin-top: 64rpx;
+
+		.submit-btn {
+			background: #007aff;
+			;
+			color: white;
+			height: 96rpx;
+			border-radius: 64rpx;
+			font-size: 32rpx;
+			transition: opacity 0.3s;
+
+
+		}
+
+		.agreement-tip {
+			display: block;
+			text-align: center;
+			color: #7A9D7E;
+			font-size: 24rpx;
+			margin-top: 24rpx;
 		}
 	}
 </style>

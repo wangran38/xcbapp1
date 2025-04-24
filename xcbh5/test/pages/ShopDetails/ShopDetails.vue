@@ -3,9 +3,13 @@
 		@click="closeTan">
 		<inputBoxVue ref="inputBoxVueRef"></inputBoxVue>
 		<view class="container">
-			<view class="StoreName">
+			
+			<view class="StoreName" style="position: relative;">
+				
 				<text>{{ shopDetails.title}}</text>
 				<image class="logo" :src="shopDetails.logo" mode="aspectFill"></image>
+				<view style="position: absolute; bottom: 10rpx; font-size: 25rpx; border: 5rpx solid gray; padding: 5rpx; border-radius: 5rpx; margin: 5rpx 0 0 0; left: 50%;" @click="complaint"><uni-icons type="compose" size="30" ></uni-icons>投诉建议</view>
+				
 			</view>
 
 			<view class="time">
@@ -136,6 +140,11 @@
 			this.loadPageData()
 		},
 		methods: {
+			complaint(){
+				uni.navigateTo({
+					url:`/pages/merchantComplaints/merchantComplaints?id=${this.shopDetails.id}&title=${this.shopDetails.title}`,
+				})
+			},
 			// 需要调起数字键盘
 			Keyboard(value){
 				this.$refs.inputBoxVueRef.show = true

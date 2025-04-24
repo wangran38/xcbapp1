@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 602))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 666))
     },
   }
 } catch (e) {
@@ -226,9 +226,19 @@ var _usePage = _interopRequireDefault(__webpack_require__(/*! @/hooks/usePage */
 //
 //
 //
+//
+var floatBall = function floatBall() {
+  __webpack_require__.e(/*! require.ensure | components/float-ball/float-ball */ "components/float-ball/float-ball").then((function () {
+    return resolve(__webpack_require__(/*! @/components/float-ball/float-ball.vue */ 674));
+  }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+};
 var _default = {
+  components: {
+    floatBall: floatBall
+  },
   data: function data() {
     return {
+      menuItems: [],
       tabs: [{
         id: 0,
         title: '附近农户',
@@ -238,22 +248,31 @@ var _default = {
         title: '预卖菜品',
         // 扶贫预卖
         path: '/subPackages/shoppingPageList/villageZone/villageZone'
-      }, {
-        id: 2,
-        title: '官方直营',
-        path: '/subPackages/shoppingPageList/official/official'
-      }, {
-        id: 3,
-        title: '扶贫专区',
-        path: '/subPackages/shoppingPageList/agriculturalAssistanceZone/agriculturalAssistanceZone'
-      }, {
+      },
+      // {
+      // 	id: 2,
+      // 	title: '官方直营',
+      // 	path: '/subPackages/shoppingPageList/official/official'
+      // },
+      // {
+      // 	id: 3,
+      // 	title: '扶贫专区',
+      // 	path: '/subPackages/shoppingPageList/agriculturalAssistanceZone/agriculturalAssistanceZone'
+      // },
+      {
         id: 4,
         title: '菜品朋友圈',
         path: '/pages/dynamics/dynamics'
-      }, {
-        id: 5,
-        title: '铺面出租',
-        path: '/subPackages/shoppingPageList/rentalStorefrontList/rentalStorefrontList'
+      },
+      // {
+      // 	id: 5,
+      // 	title: '铺面出租',
+      // 	path: '/subPackages/shoppingPageList/rentalStorefrontList/rentalStorefrontList'
+      // },
+      {
+        id: 6,
+        title: '资讯信息',
+        path: '/subPackages/shoppingPageList/realTimeInfo/realTimeInfo'
       }],
       selectedCategoryId: '',
       categories: [],

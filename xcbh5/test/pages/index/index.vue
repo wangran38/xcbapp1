@@ -2,8 +2,8 @@
 	<view class="container">
 		<view class="locating">
 			<view class="targeting" @click="toindex1"><uni-icons type="location-filled" size="25"
-					color="#007aff"></uni-icons></view>
-			<view class="current ">{{marketName? marketName:'暂未选中市场'}}</view>
+					color="#007aff"></uni-icons>{{marketName? marketName:'暂未选中市场'}}</view>
+			<view class="current "></view>
 		</view>
 		<view class="search">
 			<view class="sousuokuang">
@@ -16,7 +16,7 @@
 		</view>
 
 		<view class="category-nav">
-			<scroll-view class="nav-scroll" scroll-x  scroll-with-animation>
+			<scroll-view class="nav-scroll" scroll-x scroll-with-animation>
 				<view v-for="item in tabs" :id="'tab'+item.id" :key="item.id" class="nav-item"
 					:class="{active: selectedCategoryId === item.id}" @click="goToshoppingPageList(item)">
 					<text class="nav-text">{{ item.title }}</text>
@@ -51,6 +51,7 @@
 			<view v-if="pageLoading" class="loading">加载中...</view>
 			<view v-if="!hasMore" class="loading">没有更多了</view>
 		</scroll-view>
+		<floatBall />
 	</view>
 </template>
 
@@ -58,42 +59,52 @@
 	import {
 		api
 	} from '../../api/index.js'
+	import floatBall from '@/components/float-ball/float-ball.vue'
 
 	import usePage from '@/hooks/usePage';
 
 	export default {
+		 components: { floatBall },
 		data() {
 			return {
+				menuItems: [
+				],
 				tabs: [{
 						id: 0,
 						title: '附近农户',
-						path:'/subPackages/shoppingPageList/nearbyFarmers/nearbyFarmers'
+						path: '/subPackages/shoppingPageList/nearbyFarmers/nearbyFarmers'
 					},
 					{
 						id: 1,
-						title: '预卖菜品',  // 扶贫预卖
-						path:'/subPackages/shoppingPageList/villageZone/villageZone'
+						title: '预卖菜品', // 扶贫预卖
+						path: '/subPackages/shoppingPageList/villageZone/villageZone'
 					},
+					// {
+					// 	id: 2,
+					// 	title: '官方直营',
+					// 	path: '/subPackages/shoppingPageList/official/official'
+					// },
+					// {
+					// 	id: 3,
+					// 	title: '扶贫专区',
+					// 	path: '/subPackages/shoppingPageList/agriculturalAssistanceZone/agriculturalAssistanceZone'
+					// },
 					{
-						id: 2,
-						title: '官方直营',
-						path:'/subPackages/shoppingPageList/official/official'
+						id: 4,
+						title: '种养来历',
+						path: '/pages/dynamics/dynamics'
 					},
+					// {
+					// 	id: 5,
+					// 	title: '铺面出租',
+					// 	path: '/subPackages/shoppingPageList/rentalStorefrontList/rentalStorefrontList'
+					// },
 					{
-						id:3,
-						title: '扶贫专区',
-						path:'/subPackages/shoppingPageList/agriculturalAssistanceZone/agriculturalAssistanceZone'
+						id: 6,
+						title: '资讯信息',
+						path: '/subPackages/shoppingPageList/realTimeInfo/realTimeInfo'
 					},
-					{
-						id:4,
-						title: '菜品朋友圈',
-						path:'/pages/dynamics/dynamics'
-					},
-					{
-						id:5,
-						title: '铺面出租',
-						path:'/subPackages/shoppingPageList/rentalStorefrontList/rentalStorefrontList'
-					}
+					
 				],
 				selectedCategoryId: '',
 				categories: [],
@@ -116,23 +127,23 @@
 		},
 		async onShow() {
 			let res = uni.getStorageSync('userSelection')
-			console.log(this.marketName,res.marketName)
-			if (this.marketName != res.marketName){
+			console.log(this.marketName, res.marketName)
+			if (this.marketName != res.marketName) {
 				this.initPage()
 			}
 		},
 		mixins: [usePage],
 		methods: {
-			goToshoppingPageList(item){
-				if (item.path){
+			goToshoppingPageList(item) {
+				if (item.path) {
 					console.log(item.path)
 					uni.navigateTo({
-						url:item.path
+						url: item.path
 					})
-				}else{
+				} else {
 					uni.showToast({
-						icon:'error',
-						title:`"${item.title}" 暂未开发`
+						icon: 'error',
+						title: `"${item.title}" 暂未开发`
 					})
 				}
 			},
@@ -153,7 +164,7 @@
 
 				// 选中市场
 				let res = uni.getStorageSync('userSelection')
-				
+
 				this.marketName = res.marketName
 			},
 			setDefaultMarketId() {
@@ -295,7 +306,7 @@
 
 	.targeting {
 		margin-left: 30rpx;
-		color: #1296db;
+		// color: #1296db;
 	}
 
 	.current {
@@ -318,7 +329,8 @@
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		border: 1px solid #FF3030;
+		// border: 1px solid #FF3030;
+		background-color: white;
 		border-radius: 20rpx;
 		padding: 10rpx 10rpx;
 	}

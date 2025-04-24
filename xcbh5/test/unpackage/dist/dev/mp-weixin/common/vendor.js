@@ -11002,6 +11002,18 @@ var api = (_api = {
   return fetch('/api/farmers/list', 'POST', data);
 }), (0, _defineProperty2.default)(_api, "dynamicsDataList", function dynamicsDataList(data) {
   return fetch('/api/farmers/goodsinfo/showlist', 'POST', data);
+}), (0, _defineProperty2.default)(_api, "buyinfoAdd", function buyinfoAdd(data) {
+  return fetch('/api/user/buyinfo/add', 'POST', data);
+}), (0, _defineProperty2.default)(_api, "buyinfoList", function buyinfoList(data) {
+  return fetch('/api/buyinfo/list', 'POST', data);
+}), (0, _defineProperty2.default)(_api, "updateDish", function updateDish(data) {
+  return fetch('/api/farmers/upgoods', 'POST', data);
+}), (0, _defineProperty2.default)(_api, "submitComplaint", function submitComplaint(data) {
+  return fetch('/api/user/complaint/add', 'POST', data);
+}), (0, _defineProperty2.default)(_api, "mylist", function mylist(data) {
+  return fetch('/api/user/complaint/mylist', 'POST', data);
+}), (0, _defineProperty2.default)(_api, "informationData", function informationData(data) {
+  return fetch('/api/news/list', 'POST', data);
 }), _api);
 exports.api = api;
 var _default = {
@@ -13988,6 +14000,34 @@ var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
 var myMixin = {
   methods: {
+    getChineseTimeDiff: function getChineseTimeDiff(t1, t2) {
+      var diff = Math.abs(t1 - t2);
+      var units = [{
+        value: 86400000,
+        name: '天'
+      }, {
+        value: 3600000,
+        name: '小时'
+      }];
+      var remaining = diff;
+      var result = units.map(function (unit) {
+        var val = Math.floor(remaining / unit.value);
+        remaining %= unit.value;
+        return {
+          val: val,
+          name: unit.name
+        };
+      });
+      var output = result.filter(function (item) {
+        return item.val > 0;
+      }).map(function (item) {
+        return "".concat(item.val).concat(item.name);
+      }).join('');
+      return output || '0秒';
+    },
+    /**
+     * 返回上一页
+     */
     customizeBack: function customizeBack() {
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
         var canNavBack;
@@ -16662,7 +16702,146 @@ module.exports = _arrayWithHoles, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
-/***/ 607:
+/***/ 65:
+/*!********************************************!*\
+  !*** E:/xcbh5/xcbh5/test/hooks/usePage.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 54));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+var _default = {
+  data: function data() {
+    return {
+      page: 1,
+      limit: 10,
+      totalnum: 0,
+      pageData: [],
+      pageLoading: false,
+      hasMore: true,
+      searchParams: {}
+    };
+  },
+  computed: {
+    queryParams: function queryParams() {
+      var filteredSearchParams = Object.fromEntries(Object.entries(this.searchParams).filter(function (_ref) {
+        var _ref2 = (0, _slicedToArray2.default)(_ref, 2),
+          key = _ref2[0],
+          value = _ref2[1];
+        return value !== '';
+      }));
+      return _objectSpread({
+        page: this.page,
+        limit: this.limit,
+        isshow: 1
+      }, filteredSearchParams);
+    }
+  },
+  methods: {
+    loadPageData: function loadPageData() {
+      var _this = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+        var response;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!(!_this.hasMore || _this.pageLoading)) {
+                  _context.next = 2;
+                  break;
+                }
+                return _context.abrupt("return");
+              case 2:
+                _this.pageLoading = true;
+                _context.prev = 3;
+                _context.next = 6;
+                return _this.fetchData(_this.queryParams);
+              case 6:
+                response = _context.sent;
+                _this.querySuccess(response);
+                _context.next = 13;
+                break;
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](3);
+                _this.handleFetchError(_context.t0);
+              case 13:
+                _context.prev = 13;
+                _this.pageLoading = false;
+                return _context.finish(13);
+              case 16:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[3, 10, 13, 16]]);
+      }))();
+    },
+    fetchData: function fetchData(params) {
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+        return _regenerator.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    } // throw new Error('fetchData 方法未实现');
+    ,
+    // 检测还有没有下一页
+    querySuccess: function querySuccess(data) {
+      if (data !== null && data !== void 0 && data.listdata) {
+        this.pageData = this.page === 1 ? data.listdata : this.pageData.concat(data.listdata);
+        this.totalnum = data.totalnum || 0;
+        this.hasMore = this.pageData.length < this.totalnum;
+      }
+    },
+    /**
+     * 分页加载
+     */
+    handleScrollToLower: function handleScrollToLower() {
+      if (!this.pageLoading && this.hasMore) {
+        this.page += 1;
+        this.loadPageData();
+      }
+    },
+    handleFetchError: function handleFetchError(error) {
+      console.error('Error loading data:', error);
+    },
+    // 初始化
+    resetPagination: function resetPagination() {
+      this.page = 1;
+      this.pageData = [];
+      this.totalnum = 0;
+      this.hasMore = true;
+    },
+    reloadData: function reloadData() {
+      this.resetPagination();
+      this.loadPageData();
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+
+/***/ 671:
 /*!*******************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-icons/components/uni-icons/uniicons_file_vue.js ***!
   \*******************************************************************************************/
@@ -17166,7 +17345,47 @@ exports.fontData = fontData;
 
 /***/ }),
 
-/***/ 636:
+/***/ 7:
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _iterableToArrayLimit(r, l) {
+  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = !0,
+      o = !1;
+    try {
+      if (i = (t = t.call(r)).next, 0 === l) {
+        if (Object(t) !== t) return;
+        f = !1;
+      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0) {
+        ;
+      }
+    } catch (r) {
+      o = !0, n = r;
+    } finally {
+      try {
+        if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
+      } finally {
+        if (o) throw n;
+      }
+    }
+    return a;
+  }
+}
+module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 707:
 /*!********************************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-datetime-picker/components/uni-datetime-picker/i18n/index.js ***!
   \********************************************************************************************************/
@@ -17181,9 +17400,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 637));
-var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 638));
-var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 639));
+var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 708));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 709));
+var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 710));
 var _default = {
   en: _en.default,
   'zh-Hans': _zhHans.default,
@@ -17193,7 +17412,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 637:
+/***/ 708:
 /*!*******************************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-datetime-picker/components/uni-datetime-picker/i18n/en.json ***!
   \*******************************************************************************************************/
@@ -17204,7 +17423,7 @@ module.exports = JSON.parse("{\"uni-datetime-picker.selectDate\":\"select date\"
 
 /***/ }),
 
-/***/ 638:
+/***/ 709:
 /*!************************************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-datetime-picker/components/uni-datetime-picker/i18n/zh-Hans.json ***!
   \************************************************************************************************************/
@@ -17215,7 +17434,7 @@ module.exports = JSON.parse("{\"uni-datetime-picker.selectDate\":\"选择日期\
 
 /***/ }),
 
-/***/ 639:
+/***/ 710:
 /*!************************************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-datetime-picker/components/uni-datetime-picker/i18n/zh-Hant.json ***!
   \************************************************************************************************************/
@@ -17226,7 +17445,7 @@ module.exports = JSON.parse("{\"uni-datetime-picker.selectDate\":\"選擇日期\
 
 /***/ }),
 
-/***/ 640:
+/***/ 711:
 /*!**************************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-datetime-picker/components/uni-datetime-picker/util.js ***!
   \**************************************************************************************************/
@@ -17676,146 +17895,7 @@ function fixIosDateFormat(value) {
 
 /***/ }),
 
-/***/ 65:
-/*!********************************************!*\
-  !*** E:/xcbh5/xcbh5/test/hooks/usePage.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 54));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-var _default = {
-  data: function data() {
-    return {
-      page: 1,
-      limit: 10,
-      totalnum: 0,
-      pageData: [],
-      pageLoading: false,
-      hasMore: true,
-      searchParams: {}
-    };
-  },
-  computed: {
-    queryParams: function queryParams() {
-      var filteredSearchParams = Object.fromEntries(Object.entries(this.searchParams).filter(function (_ref) {
-        var _ref2 = (0, _slicedToArray2.default)(_ref, 2),
-          key = _ref2[0],
-          value = _ref2[1];
-        return value !== '';
-      }));
-      return _objectSpread({
-        page: this.page,
-        limit: this.limit,
-        isshow: 1
-      }, filteredSearchParams);
-    }
-  },
-  methods: {
-    loadPageData: function loadPageData() {
-      var _this = this;
-      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-        var response;
-        return _regenerator.default.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (!(!_this.hasMore || _this.pageLoading)) {
-                  _context.next = 2;
-                  break;
-                }
-                return _context.abrupt("return");
-              case 2:
-                _this.pageLoading = true;
-                _context.prev = 3;
-                _context.next = 6;
-                return _this.fetchData(_this.queryParams);
-              case 6:
-                response = _context.sent;
-                _this.querySuccess(response);
-                _context.next = 13;
-                break;
-              case 10:
-                _context.prev = 10;
-                _context.t0 = _context["catch"](3);
-                _this.handleFetchError(_context.t0);
-              case 13:
-                _context.prev = 13;
-                _this.pageLoading = false;
-                return _context.finish(13);
-              case 16:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[3, 10, 13, 16]]);
-      }))();
-    },
-    fetchData: function fetchData(params) {
-      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
-        return _regenerator.default.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
-    } // throw new Error('fetchData 方法未实现');
-    ,
-    // 检测还有没有下一页
-    querySuccess: function querySuccess(data) {
-      if (data !== null && data !== void 0 && data.listdata) {
-        this.pageData = this.page === 1 ? data.listdata : this.pageData.concat(data.listdata);
-        this.totalnum = data.totalnum || 0;
-        this.hasMore = this.pageData.length < this.totalnum;
-      }
-    },
-    /**
-     * 分页加载
-     */
-    handleScrollToLower: function handleScrollToLower() {
-      if (!this.pageLoading && this.hasMore) {
-        this.page += 1;
-        this.loadPageData();
-      }
-    },
-    handleFetchError: function handleFetchError(error) {
-      console.error('Error loading data:', error);
-    },
-    // 初始化
-    resetPagination: function resetPagination() {
-      this.page = 1;
-      this.pageData = [];
-      this.totalnum = 0;
-      this.hasMore = true;
-    },
-    reloadData: function reloadData() {
-      this.resetPagination();
-      this.loadPageData();
-    }
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 669:
+/***/ 740:
 /*!*******************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-qrcode/components/uv-qrcode/props.js ***!
   \*******************************************************************************/
@@ -17913,7 +17993,7 @@ exports.default = _default2;
 
 /***/ }),
 
-/***/ 670:
+/***/ 741:
 /*!*************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-ui-tools/libs/mixin/mpMixin.js ***!
   \*************************************************************************/
@@ -17937,7 +18017,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 671:
+/***/ 742:
 /*!***********************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-ui-tools/libs/mixin/mixin.js ***!
   \***********************************************************************/
@@ -17954,11 +18034,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var index = _interopRequireWildcard(__webpack_require__(/*! ../function/index.js */ 672));
-var test = _interopRequireWildcard(__webpack_require__(/*! ../function/test.js */ 673));
-var _route = _interopRequireDefault(__webpack_require__(/*! ../util/route.js */ 676));
-var _debounce = _interopRequireDefault(__webpack_require__(/*! ../function/debounce.js */ 677));
-var _throttle = _interopRequireDefault(__webpack_require__(/*! ../function/throttle.js */ 678));
+var index = _interopRequireWildcard(__webpack_require__(/*! ../function/index.js */ 743));
+var test = _interopRequireWildcard(__webpack_require__(/*! ../function/test.js */ 744));
+var _route = _interopRequireDefault(__webpack_require__(/*! ../util/route.js */ 747));
+var _debounce = _interopRequireDefault(__webpack_require__(/*! ../function/debounce.js */ 748));
+var _throttle = _interopRequireDefault(__webpack_require__(/*! ../function/throttle.js */ 749));
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -18139,7 +18219,7 @@ exports.default = _default2;
 
 /***/ }),
 
-/***/ 672:
+/***/ 743:
 /*!**************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-ui-tools/libs/function/index.js ***!
   \**************************************************************************/
@@ -18185,8 +18265,8 @@ exports.trim = trim;
 exports.type2icon = type2icon;
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
-var _test = __webpack_require__(/*! ./test.js */ 673);
-var _digit = __webpack_require__(/*! ./digit.js */ 674);
+var _test = __webpack_require__(/*! ./test.js */ 744);
+var _digit = __webpack_require__(/*! ./digit.js */ 745);
 /**
  * @description 如果value小于min，取min；如果value大于max，取max
  * @param {number} min
@@ -18938,7 +19018,7 @@ function setConfig(_ref5) {
 
 /***/ }),
 
-/***/ 673:
+/***/ 744:
 /*!*************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-ui-tools/libs/function/test.js ***!
   \*************************************************************************/
@@ -19239,7 +19319,7 @@ function regExp(o) {
 
 /***/ }),
 
-/***/ 674:
+/***/ 745:
 /*!**************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-ui-tools/libs/function/digit.js ***!
   \**************************************************************************/
@@ -19260,7 +19340,7 @@ exports.minus = minus;
 exports.plus = plus;
 exports.round = round;
 exports.times = times;
-var _toArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toArray */ 675));
+var _toArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toArray */ 746));
 var _boundaryCheckingState = true; // 是否进行越界检查的全局开关
 
 /**
@@ -19442,7 +19522,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 675:
+/***/ 746:
 /*!********************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/toArray.js ***!
   \********************************************************/
@@ -19460,7 +19540,7 @@ module.exports = _toArray, module.exports.__esModule = true, module.exports["def
 
 /***/ }),
 
-/***/ 676:
+/***/ 747:
 /*!**********************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-ui-tools/libs/util/route.js ***!
   \**********************************************************************/
@@ -19479,7 +19559,7 @@ var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-var _index = __webpack_require__(/*! @/uni_modules/uv-ui-tools/libs/function/index.js */ 672);
+var _index = __webpack_require__(/*! @/uni_modules/uv-ui-tools/libs/function/index.js */ 743);
 /**
  * 路由跳转方法，该方法相对于直接使用uni.xxx的好处是使用更加简单快捷
  * 并且带有路由拦截功能
@@ -19653,7 +19733,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 677:
+/***/ 748:
 /*!*****************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-ui-tools/libs/function/debounce.js ***!
   \*****************************************************************************/
@@ -19701,7 +19781,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 678:
+/***/ 749:
 /*!*****************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-ui-tools/libs/function/throttle.js ***!
   \*****************************************************************************/
@@ -19751,7 +19831,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 679:
+/***/ 750:
 /*!********************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-qrcode/components/uv-qrcode/qrcode.js ***!
   \********************************************************************************/
@@ -21008,7 +21088,7 @@ f.prototype = {
 
 /***/ }),
 
-/***/ 680:
+/***/ 751:
 /*!*******************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-qrcode/components/uv-qrcode/queue.js ***!
   \*******************************************************************************/
@@ -21065,7 +21145,7 @@ exports.queueLoadImage = queueLoadImage;
 
 /***/ }),
 
-/***/ 681:
+/***/ 752:
 /*!*******************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-qrcode/components/uv-qrcode/cache.js ***!
   \*******************************************************************************/
@@ -21084,47 +21164,27 @@ exports.cacheImageList = cacheImageList;
 
 /***/ }),
 
-/***/ 7:
-/*!*********************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
-  \*********************************************************************/
+/***/ 8:
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
+  \***************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-function _iterableToArrayLimit(r, l) {
-  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
-  if (null != t) {
-    var e,
-      n,
-      i,
-      u,
-      a = [],
-      f = !0,
-      o = !1;
-    try {
-      if (i = (t = t.call(r)).next, 0 === l) {
-        if (Object(t) !== t) return;
-        f = !1;
-      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0) {
-        ;
-      }
-    } catch (r) {
-      o = !0, n = r;
-    } finally {
-      try {
-        if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
-      } finally {
-        if (o) throw n;
-      }
-    }
-    return a;
-  }
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 9);
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
 }
-module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module.exports["default"] = module.exports;
+module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 
-/***/ 731:
+/***/ 802:
 /*!**********************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-forms/components/uni-forms/validate.js ***!
   \**********************************************************************************/
@@ -21140,9 +21200,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 54));
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 732));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 733));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 735));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 803));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 804));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 806));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
@@ -21816,7 +21876,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 732:
+/***/ 803:
 /*!*********************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/inherits.js ***!
   \*********************************************************/
@@ -21844,7 +21904,7 @@ module.exports = _inherits, module.exports.__esModule = true, module.exports["de
 
 /***/ }),
 
-/***/ 733:
+/***/ 804:
 /*!**************************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
   \**************************************************************************/
@@ -21852,7 +21912,7 @@ module.exports = _inherits, module.exports.__esModule = true, module.exports["de
 /***/ (function(module, exports, __webpack_require__) {
 
 var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
-var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized.js */ 734);
+var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized.js */ 805);
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
     return call;
@@ -21865,7 +21925,7 @@ module.exports = _possibleConstructorReturn, module.exports.__esModule = true, m
 
 /***/ }),
 
-/***/ 734:
+/***/ 805:
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
   \**********************************************************************/
@@ -21882,7 +21942,7 @@ module.exports = _assertThisInitialized, module.exports.__esModule = true, modul
 
 /***/ }),
 
-/***/ 735:
+/***/ 806:
 /*!***************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
   \***************************************************************/
@@ -21899,7 +21959,7 @@ module.exports = _getPrototypeOf, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
-/***/ 736:
+/***/ 807:
 /*!*******************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-forms/components/uni-forms/utils.js ***!
   \*******************************************************************************/
@@ -22235,7 +22295,7 @@ exports.isEqual = isEqual;
 
 /***/ }),
 
-/***/ 751:
+/***/ 822:
 /*!************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js ***!
   \************************************************************************************/
@@ -22251,19 +22311,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = exports.UniCloudError = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 54));
-var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ 734));
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ 805));
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
 var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 732));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 733));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 735));
-var _wrapNativeSuper2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/wrapNativeSuper */ 752));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 803));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 804));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 806));
+var _wrapNativeSuper2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/wrapNativeSuper */ 823));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-var _pages = _interopRequireDefault(__webpack_require__(/*! @/pages.json */ 754));
+var _pages = _interopRequireDefault(__webpack_require__(/*! @/pages.json */ 825));
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e33) { throw _e33; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e34) { didErr = true; err = _e34; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
@@ -22716,7 +22776,7 @@ var S = "development" === "development",
   x = true;
 var O = "";
 try {
-  O = (__webpack_require__(/*! uni-stat-config */ 755).default || __webpack_require__(/*! uni-stat-config */ 755)).appid;
+  O = (__webpack_require__(/*! uni-stat-config */ 826).default || __webpack_require__(/*! uni-stat-config */ 826)).appid;
 } catch (e) {}
 var E = {};
 function L(e) {
@@ -30278,16 +30338,16 @@ exports.default = Gs;
 
 /***/ }),
 
-/***/ 752:
+/***/ 823:
 /*!****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/wrapNativeSuper.js ***!
   \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getPrototypeOf = __webpack_require__(/*! ./getPrototypeOf.js */ 735);
+var getPrototypeOf = __webpack_require__(/*! ./getPrototypeOf.js */ 806);
 var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf.js */ 16);
-var isNativeFunction = __webpack_require__(/*! ./isNativeFunction.js */ 753);
+var isNativeFunction = __webpack_require__(/*! ./isNativeFunction.js */ 824);
 var construct = __webpack_require__(/*! ./construct.js */ 15);
 function _wrapNativeSuper(Class) {
   var _cache = typeof Map === "function" ? new Map() : undefined;
@@ -30319,7 +30379,7 @@ module.exports = _wrapNativeSuper, module.exports.__esModule = true, module.expo
 
 /***/ }),
 
-/***/ 753:
+/***/ 824:
 /*!*****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/isNativeFunction.js ***!
   \*****************************************************************/
@@ -30337,7 +30397,7 @@ module.exports = _isNativeFunction, module.exports.__esModule = true, module.exp
 
 /***/ }),
 
-/***/ 754:
+/***/ 825:
 /*!*******************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/pages.json?{"type":"origin-pages-json"} ***!
   \*******************************************************************/
@@ -30391,6 +30451,11 @@ var _default = {
       "path": "PreSoldDishesList/PreSoldDishesList",
       "style": {
         "navigationBarTitleText": "预卖菜品"
+      }
+    }, {
+      "path": "modifyPreSoldDishes/modifyPreSoldDishes",
+      "style": {
+        "navigationBarTitleText": "修改预卖菜品"
       }
     }]
   }, {
@@ -30457,6 +30522,22 @@ var _default = {
       "path": "prePurchaseDeposit/prePurchaseDeposit",
       "style": {
         "navigationBarTitleText": ""
+      }
+    }, {
+      "path": "merchantDetails/merchantDetails",
+      "style": {
+        "navigationBarTitleText": "农户详情"
+      }
+    }, {
+      "path": "realTimeInfo/realTimeInfo",
+      "style": {
+        "navigationBarTitleText": "资讯",
+        "disableScroll": true
+      }
+    }, {
+      "path": "realTimeInfoDetail/realTimeInfoDetail",
+      "style": {
+        "navigationBarTitleText": "新闻详情"
       }
     }]
   }],
@@ -30722,6 +30803,27 @@ var _default = {
     "style": {
       "navigationBarTitleText": ""
     }
+  }, {
+    "path": "pages/merchantComplaints/merchantComplaints",
+    "style": {
+      "navigationBarTitleText": "投诉商家"
+    }
+  }, {
+    "path": "pages/myComplaint/myComplaint",
+    "style": {
+      "navigationBarTitleText": "我的投诉"
+    }
+  }, {
+    "path": "pages/test/test",
+    "style": {
+      "navigationBarTitleText": ""
+    }
+  }, {
+    "path": "pages/complaintDetails/complaintDetails",
+    "style": {
+      "navigationBarTitleText": "投诉详情",
+      "disableScroll": true
+    }
   }],
   "globalStyle": {
     "navigationBarTextStyle": "black",
@@ -30768,7 +30870,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 755:
+/***/ 826:
 /*!******************************************************!*\
   !*** E:/xcbh5/xcbh5/test/pages.json?{"type":"stat"} ***!
   \******************************************************/
@@ -30789,109 +30891,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 763:
-/*!*******************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-popup/components/uni-popup/popup.js ***!
-  \*******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  data: function data() {
-    return {};
-  },
-  created: function created() {
-    this.popup = this.getParent();
-  },
-  methods: {
-    /**
-     * 获取父元素实例
-     */
-    getParent: function getParent() {
-      var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'uniPopup';
-      var parent = this.$parent;
-      var parentName = parent.$options.name;
-      while (parentName !== name) {
-        parent = parent.$parent;
-        if (!parent) return false;
-        parentName = parent.$options.name;
-      }
-      return parent;
-    }
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 764:
-/*!************************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-popup/components/uni-popup/i18n/index.js ***!
-  \************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 765));
-var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 766));
-var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 767));
-var _default = {
-  en: _en.default,
-  'zh-Hans': _zhHans.default,
-  'zh-Hant': _zhHant.default
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 765:
-/*!***********************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-popup/components/uni-popup/i18n/en.json ***!
-  \***********************************************************************************/
-/*! exports provided: uni-popup.cancel, uni-popup.ok, uni-popup.placeholder, uni-popup.title, uni-popup.shareTitle, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-popup.cancel\":\"cancel\",\"uni-popup.ok\":\"ok\",\"uni-popup.placeholder\":\"pleace enter\",\"uni-popup.title\":\"Hint\",\"uni-popup.shareTitle\":\"Share to\"}");
-
-/***/ }),
-
-/***/ 766:
-/*!****************************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hans.json ***!
-  \****************************************************************************************/
-/*! exports provided: uni-popup.cancel, uni-popup.ok, uni-popup.placeholder, uni-popup.title, uni-popup.shareTitle, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-popup.cancel\":\"取消\",\"uni-popup.ok\":\"确定\",\"uni-popup.placeholder\":\"请输入\",\"uni-popup.title\":\"提示\",\"uni-popup.shareTitle\":\"分享到\"}");
-
-/***/ }),
-
-/***/ 767:
-/*!****************************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hant.json ***!
-  \****************************************************************************************/
-/*! exports provided: uni-popup.cancel, uni-popup.ok, uni-popup.placeholder, uni-popup.title, uni-popup.shareTitle, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-popup.cancel\":\"取消\",\"uni-popup.ok\":\"確定\",\"uni-popup.placeholder\":\"請輸入\",\"uni-popup.title\":\"提示\",\"uni-popup.shareTitle\":\"分享到\"}");
-
-/***/ }),
-
-/***/ 775:
+/***/ 834:
 /*!************************************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-file-picker/components/uni-file-picker/choose-and-upload-file.js ***!
   \************************************************************************************************************/
@@ -31111,11 +31111,11 @@ function chooseAndUploadFile() {
   }
   return uploadFiles(chooseAll(opts), opts);
 }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 751)["default"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 822)["default"]))
 
 /***/ }),
 
-/***/ 776:
+/***/ 835:
 /*!*******************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-file-picker/components/uni-file-picker/utils.js ***!
   \*******************************************************************************************/
@@ -31280,7 +31280,109 @@ exports.get_file_data = get_file_data;
 
 /***/ }),
 
-/***/ 784:
+/***/ 843:
+/*!*******************************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-popup/components/uni-popup/popup.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  data: function data() {
+    return {};
+  },
+  created: function created() {
+    this.popup = this.getParent();
+  },
+  methods: {
+    /**
+     * 获取父元素实例
+     */
+    getParent: function getParent() {
+      var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'uniPopup';
+      var parent = this.$parent;
+      var parentName = parent.$options.name;
+      while (parentName !== name) {
+        parent = parent.$parent;
+        if (!parent) return false;
+        parentName = parent.$options.name;
+      }
+      return parent;
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+
+/***/ 844:
+/*!************************************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-popup/components/uni-popup/i18n/index.js ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 845));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 846));
+var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 847));
+var _default = {
+  en: _en.default,
+  'zh-Hans': _zhHans.default,
+  'zh-Hant': _zhHant.default
+};
+exports.default = _default;
+
+/***/ }),
+
+/***/ 845:
+/*!***********************************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-popup/components/uni-popup/i18n/en.json ***!
+  \***********************************************************************************/
+/*! exports provided: uni-popup.cancel, uni-popup.ok, uni-popup.placeholder, uni-popup.title, uni-popup.shareTitle, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-popup.cancel\":\"cancel\",\"uni-popup.ok\":\"ok\",\"uni-popup.placeholder\":\"pleace enter\",\"uni-popup.title\":\"Hint\",\"uni-popup.shareTitle\":\"Share to\"}");
+
+/***/ }),
+
+/***/ 846:
+/*!****************************************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hans.json ***!
+  \****************************************************************************************/
+/*! exports provided: uni-popup.cancel, uni-popup.ok, uni-popup.placeholder, uni-popup.title, uni-popup.shareTitle, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-popup.cancel\":\"取消\",\"uni-popup.ok\":\"确定\",\"uni-popup.placeholder\":\"请输入\",\"uni-popup.title\":\"提示\",\"uni-popup.shareTitle\":\"分享到\"}");
+
+/***/ }),
+
+/***/ 847:
+/*!****************************************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hant.json ***!
+  \****************************************************************************************/
+/*! exports provided: uni-popup.cancel, uni-popup.ok, uni-popup.placeholder, uni-popup.title, uni-popup.shareTitle, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-popup.cancel\":\"取消\",\"uni-popup.ok\":\"確定\",\"uni-popup.placeholder\":\"請輸入\",\"uni-popup.title\":\"提示\",\"uni-popup.shareTitle\":\"分享到\"}");
+
+/***/ }),
+
+/***/ 855:
 /*!********************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-load-more/components/uni-load-more/i18n/index.js ***!
   \********************************************************************************************/
@@ -31295,9 +31397,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 785));
-var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 786));
-var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 787));
+var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 856));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 857));
+var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 858));
 var _default = {
   en: _en.default,
   'zh-Hans': _zhHans.default,
@@ -31307,7 +31409,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 785:
+/***/ 856:
 /*!*******************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-load-more/components/uni-load-more/i18n/en.json ***!
   \*******************************************************************************************/
@@ -31318,7 +31420,7 @@ module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"Pull up to show mo
 
 /***/ }),
 
-/***/ 786:
+/***/ 857:
 /*!************************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hans.json ***!
   \************************************************************************************************/
@@ -31329,7 +31431,7 @@ module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉显示更多
 
 /***/ }),
 
-/***/ 787:
+/***/ 858:
 /*!************************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hant.json ***!
   \************************************************************************************************/
@@ -31340,7 +31442,7 @@ module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉顯示更多
 
 /***/ }),
 
-/***/ 795:
+/***/ 866:
 /*!**********************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-search-bar/components/uni-search-bar/i18n/index.js ***!
   \**********************************************************************************************/
@@ -31355,9 +31457,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 796));
-var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 797));
-var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 798));
+var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 867));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 868));
+var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 869));
 var _default = {
   en: _en.default,
   'zh-Hans': _zhHans.default,
@@ -31367,7 +31469,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 796:
+/***/ 867:
 /*!*********************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-search-bar/components/uni-search-bar/i18n/en.json ***!
   \*********************************************************************************************/
@@ -31378,7 +31480,7 @@ module.exports = JSON.parse("{\"uni-search-bar.cancel\":\"cancel\",\"uni-search-
 
 /***/ }),
 
-/***/ 797:
+/***/ 868:
 /*!**************************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-search-bar/components/uni-search-bar/i18n/zh-Hans.json ***!
   \**************************************************************************************************/
@@ -31389,7 +31491,7 @@ module.exports = JSON.parse("{\"uni-search-bar.cancel\":\"取消\",\"uni-search-
 
 /***/ }),
 
-/***/ 798:
+/***/ 869:
 /*!**************************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-search-bar/components/uni-search-bar/i18n/zh-Hant.json ***!
   \**************************************************************************************************/
@@ -31400,27 +31502,633 @@ module.exports = JSON.parse("{\"uni-search-bar.cancel\":\"取消\",\"uni-search-
 
 /***/ }),
 
-/***/ 8:
-/*!***************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
-  \***************************************************************************/
+/***/ 877:
+/*!*********************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/components/gaoyia-parse/libs/html2json.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 9);
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+"use strict";
+/* WEBPACK VAR INJECTION */(function(wx) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _wxDiscode = _interopRequireDefault(__webpack_require__(/*! ./wxDiscode */ 878));
+var _htmlparser = _interopRequireDefault(__webpack_require__(/*! ./htmlparser */ 879));
+/**
+ * html2Json 改造来自: https://github.com/Jxck/html2json
+ *
+ *
+ * author: Di (微信小程序开发工程师)
+ * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
+ *               垂直微信小程序开发交流社区
+ *
+ * github地址: https://github.com/icindy/wxParse
+ *
+ * for: 微信小程序富文本解析
+ * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
+ */
+
+function makeMap(str) {
+  var obj = {};
+  var items = str.split(',');
+  for (var i = 0; i < items.length; i += 1) {
+    obj[items[i]] = true;
+  }
+  return obj;
 }
-module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+// Block Elements - HTML 5
+var block = makeMap('br,code,address,article,applet,aside,audio,blockquote,button,canvas,center,dd,del,dir,div,dl,dt,fieldset,figcaption,figure,footer,form,frameset,h1,h2,h3,h4,h5,h6,header,hgroup,hr,iframe,ins,isindex,li,map,menu,noframes,noscript,object,ol,output,p,pre,section,script,table,tbody,td,tfoot,th,thead,tr,ul,video');
+
+// Inline Elements - HTML 5
+var inline = makeMap('a,abbr,acronym,applet,b,basefont,bdo,big,button,cite,del,dfn,em,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,span,strike,strong,sub,sup,textarea,tt,u,var');
+
+// Elements that you can, intentionally, leave open
+// (and which close themselves)
+var closeSelf = makeMap('colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr');
+function removeDOCTYPE(html) {
+  var isDocument = /<body.*>([^]*)<\/body>/.test(html);
+  return isDocument ? RegExp.$1 : html;
+}
+function trimHtml(html) {
+  return html.replace(/<!--.*?-->/gi, '').replace(/\/\*.*?\*\//gi, '').replace(/[ ]+</gi, '<').replace(/<script[^]*<\/script>/gi, '').replace(/<style[^]*<\/style>/gi, '');
+}
+function getScreenInfo() {
+  var screen = {};
+  wx.getSystemInfo({
+    success: function success(res) {
+      screen.width = res.windowWidth;
+      screen.height = res.windowHeight;
+    }
+  });
+  return screen;
+}
+function html2json(html, customHandler, imageProp, host) {
+  // 处理字符串
+  html = removeDOCTYPE(html);
+  html = trimHtml(html);
+  html = _wxDiscode.default.strDiscode(html);
+  // 生成node节点
+  var bufArray = [];
+  var results = {
+    nodes: [],
+    imageUrls: []
+  };
+  var screen = getScreenInfo();
+  function Node(tag) {
+    this.node = 'element';
+    this.tag = tag;
+    this.$screen = screen;
+  }
+  (0, _htmlparser.default)(html, {
+    start: function start(tag, attrs, unary) {
+      // node for this element
+      var node = new Node(tag);
+      if (bufArray.length !== 0) {
+        var parent = bufArray[0];
+        if (parent.nodes === undefined) {
+          parent.nodes = [];
+        }
+      }
+      if (block[tag]) {
+        node.tagType = 'block';
+      } else if (inline[tag]) {
+        node.tagType = 'inline';
+      } else if (closeSelf[tag]) {
+        node.tagType = 'closeSelf';
+      }
+      node.attr = attrs.reduce(function (pre, attr) {
+        var name = attr.name;
+        var value = attr.value;
+        if (name === 'class') {
+          node.classStr = value;
+        }
+        // has multi attibutes
+        // make it array of attribute
+        if (name === 'style') {
+          node.styleStr = value;
+        }
+        if (value.match(/ /)) {
+          value = value.split(' ');
+        }
+
+        // if attr already exists
+        // merge it
+        if (pre[name]) {
+          if (Array.isArray(pre[name])) {
+            // already array, push to last
+            pre[name].push(value);
+          } else {
+            // single value, make it array
+            pre[name] = [pre[name], value];
+          }
+        } else {
+          // not exist, put it
+          pre[name] = value;
+        }
+        return pre;
+      }, {});
+
+      // 优化样式相关属性
+      if (node.classStr) {
+        node.classStr += " ".concat(node.tag);
+      } else {
+        node.classStr = node.tag;
+      }
+      if (node.tagType === 'inline') {
+        node.classStr += ' inline';
+      }
+
+      // 对img添加额外数据
+      if (node.tag === 'img') {
+        var imgUrl = node.attr.src;
+        imgUrl = _wxDiscode.default.urlToHttpUrl(imgUrl, imageProp.domain);
+        Object.assign(node.attr, imageProp, {
+          src: imgUrl || ''
+        });
+        if (imgUrl) {
+          results.imageUrls.push(imgUrl);
+        }
+      }
+
+      // 处理a标签属性
+      if (node.tag === 'a') {
+        node.attr.href = node.attr.href || '';
+      }
+
+      // 处理font标签样式属性
+      if (node.tag === 'font') {
+        var fontSize = ['x-small', 'small', 'medium', 'large', 'x-large', 'xx-large', '-webkit-xxx-large'];
+        var styleAttrs = {
+          color: 'color',
+          face: 'font-family',
+          size: 'font-size'
+        };
+        if (!node.styleStr) node.styleStr = '';
+        Object.keys(styleAttrs).forEach(function (key) {
+          if (node.attr[key]) {
+            var value = key === 'size' ? fontSize[node.attr[key] - 1] : node.attr[key];
+            node.styleStr += "".concat(styleAttrs[key], ": ").concat(value, ";");
+          }
+        });
+      }
+
+      // 临时记录source资源
+      if (node.tag === 'source') {
+        results.source = node.attr.src;
+      }
+      if (customHandler.start) {
+        customHandler.start(node, results);
+      }
+      if (unary) {
+        // if this tag doesn't have end tag
+        // like <img src="hoge.png"/>
+        // add to parents
+        var _parent = bufArray[0] || results;
+        if (_parent.nodes === undefined) {
+          _parent.nodes = [];
+        }
+        _parent.nodes.push(node);
+      } else {
+        bufArray.unshift(node);
+      }
+    },
+    end: function end(tag) {
+      // merge into parent tag
+      var node = bufArray.shift();
+      if (node.tag !== tag) {
+        console.error('invalid state: mismatch end tag');
+      }
+
+      // 当有缓存source资源时于于video补上src资源
+      if (node.tag === 'video' && results.source) {
+        node.attr.src = results.source;
+        delete results.source;
+      }
+      if (customHandler.end) {
+        customHandler.end(node, results);
+      }
+      if (bufArray.length === 0) {
+        results.nodes.push(node);
+      } else {
+        var parent = bufArray[0];
+        if (!parent.nodes) {
+          parent.nodes = [];
+        }
+        parent.nodes.push(node);
+      }
+    },
+    chars: function chars(text) {
+      if (!text.trim()) return;
+      var node = {
+        node: 'text',
+        text: text
+      };
+      if (customHandler.chars) {
+        customHandler.chars(node, results);
+      }
+      if (bufArray.length === 0) {
+        results.nodes.push(node);
+      } else {
+        var parent = bufArray[0];
+        if (parent.nodes === undefined) {
+          parent.nodes = [];
+        }
+        parent.nodes.push(node);
+      }
+    }
+  });
+  return results;
+}
+var _default = html2json;
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
 
 /***/ }),
 
-/***/ 827:
+/***/ 878:
+/*!*********************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/components/gaoyia-parse/libs/wxDiscode.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+// HTML 支持的数学符号
+function strNumDiscode(str) {
+  str = str.replace(/&forall;|&#8704;|&#x2200;/g, '∀');
+  str = str.replace(/&part;|&#8706;|&#x2202;/g, '∂');
+  str = str.replace(/&exist;|&#8707;|&#x2203;/g, '∃');
+  str = str.replace(/&empty;|&#8709;|&#x2205;/g, '∅');
+  str = str.replace(/&nabla;|&#8711;|&#x2207;/g, '∇');
+  str = str.replace(/&isin;|&#8712;|&#x2208;/g, '∈');
+  str = str.replace(/&notin;|&#8713;|&#x2209;/g, '∉');
+  str = str.replace(/&ni;|&#8715;|&#x220b;/g, '∋');
+  str = str.replace(/&prod;|&#8719;|&#x220f;/g, '∏');
+  str = str.replace(/&sum;|&#8721;|&#x2211;/g, '∑');
+  str = str.replace(/&minus;|&#8722;|&#x2212;/g, '−');
+  str = str.replace(/&lowast;|&#8727;|&#x2217;/g, '∗');
+  str = str.replace(/&radic;|&#8730;|&#x221a;/g, '√');
+  str = str.replace(/&prop;|&#8733;|&#x221d;/g, '∝');
+  str = str.replace(/&infin;|&#8734;|&#x221e;/g, '∞');
+  str = str.replace(/&ang;|&#8736;|&#x2220;/g, '∠');
+  str = str.replace(/&and;|&#8743;|&#x2227;/g, '∧');
+  str = str.replace(/&or;|&#8744;|&#x2228;/g, '∨');
+  str = str.replace(/&cap;|&#8745;|&#x2229;/g, '∩');
+  str = str.replace(/&cup;|&#8746;|&#x222a;/g, '∪');
+  str = str.replace(/&int;|&#8747;|&#x222b;/g, '∫');
+  str = str.replace(/&there4;|&#8756;|&#x2234;/g, '∴');
+  str = str.replace(/&sim;|&#8764;|&#x223c;/g, '∼');
+  str = str.replace(/&cong;|&#8773;|&#x2245;/g, '≅');
+  str = str.replace(/&asymp;|&#8776;|&#x2248;/g, '≈');
+  str = str.replace(/&ne;|&#8800;|&#x2260;/g, '≠');
+  str = str.replace(/&le;|&#8804;|&#x2264;/g, '≤');
+  str = str.replace(/&ge;|&#8805;|&#x2265;/g, '≥');
+  str = str.replace(/&sub;|&#8834;|&#x2282;/g, '⊂');
+  str = str.replace(/&sup;|&#8835;|&#x2283;/g, '⊃');
+  str = str.replace(/&nsub;|&#8836;|&#x2284;/g, '⊄');
+  str = str.replace(/&sube;|&#8838;|&#x2286;/g, '⊆');
+  str = str.replace(/&supe;|&#8839;|&#x2287;/g, '⊇');
+  str = str.replace(/&oplus;|&#8853;|&#x2295;/g, '⊕');
+  str = str.replace(/&otimes;|&#8855;|&#x2297;/g, '⊗');
+  str = str.replace(/&perp;|&#8869;|&#x22a5;/g, '⊥');
+  str = str.replace(/&sdot;|&#8901;|&#x22c5;/g, '⋅');
+  return str;
+}
+
+// HTML 支持的希腊字母
+function strGreeceDiscode(str) {
+  str = str.replace(/&Alpha;|&#913;|&#x391;/g, 'Α');
+  str = str.replace(/&Beta;|&#914;|&#x392;/g, 'Β');
+  str = str.replace(/&Gamma;|&#915;|&#x393;/g, 'Γ');
+  str = str.replace(/&Delta;|&#916;|&#x394;/g, 'Δ');
+  str = str.replace(/&Epsilon;|&#917;|&#x395;/g, 'Ε');
+  str = str.replace(/&Zeta;|&#918;|&#x396;/g, 'Ζ');
+  str = str.replace(/&Eta;|&#919;|&#x397;/g, 'Η');
+  str = str.replace(/&Theta;|&#920;|&#x398;/g, 'Θ');
+  str = str.replace(/&Iota;|&#921;|&#x399;/g, 'Ι');
+  str = str.replace(/&Kappa;|&#922;|&#x39a;/g, 'Κ');
+  str = str.replace(/&Lambda;|&#923;|&#x39b;/g, 'Λ');
+  str = str.replace(/&Mu;|&#924;|&#x39c;/g, 'Μ');
+  str = str.replace(/&Nu;|&#925;|&#x39d;/g, 'Ν');
+  str = str.replace(/&Xi;|&#925;|&#x39d;/g, 'Ν');
+  str = str.replace(/&Omicron;|&#927;|&#x39f;/g, 'Ο');
+  str = str.replace(/&Pi;|&#928;|&#x3a0;/g, 'Π');
+  str = str.replace(/&Rho;|&#929;|&#x3a1;/g, 'Ρ');
+  str = str.replace(/&Sigma;|&#931;|&#x3a3;/g, 'Σ');
+  str = str.replace(/&Tau;|&#932;|&#x3a4;/g, 'Τ');
+  str = str.replace(/&Upsilon;|&#933;|&#x3a5;/g, 'Υ');
+  str = str.replace(/&Phi;|&#934;|&#x3a6;/g, 'Φ');
+  str = str.replace(/&Chi;|&#935;|&#x3a7;/g, 'Χ');
+  str = str.replace(/&Psi;|&#936;|&#x3a8;/g, 'Ψ');
+  str = str.replace(/&Omega;|&#937;|&#x3a9;/g, 'Ω');
+  str = str.replace(/&alpha;|&#945;|&#x3b1;/g, 'α');
+  str = str.replace(/&beta;|&#946;|&#x3b2;/g, 'β');
+  str = str.replace(/&gamma;|&#947;|&#x3b3;/g, 'γ');
+  str = str.replace(/&delta;|&#948;|&#x3b4;/g, 'δ');
+  str = str.replace(/&epsilon;|&#949;|&#x3b5;/g, 'ε');
+  str = str.replace(/&zeta;|&#950;|&#x3b6;/g, 'ζ');
+  str = str.replace(/&eta;|&#951;|&#x3b7;/g, 'η');
+  str = str.replace(/&theta;|&#952;|&#x3b8;/g, 'θ');
+  str = str.replace(/&iota;|&#953;|&#x3b9;/g, 'ι');
+  str = str.replace(/&kappa;|&#954;|&#x3ba;/g, 'κ');
+  str = str.replace(/&lambda;|&#955;|&#x3bb;/g, 'λ');
+  str = str.replace(/&mu;|&#956;|&#x3bc;/g, 'μ');
+  str = str.replace(/&nu;|&#957;|&#x3bd;/g, 'ν');
+  str = str.replace(/&xi;|&#958;|&#x3be;/g, 'ξ');
+  str = str.replace(/&omicron;|&#959;|&#x3bf;/g, 'ο');
+  str = str.replace(/&pi;|&#960;|&#x3c0;/g, 'π');
+  str = str.replace(/&rho;|&#961;|&#x3c1;/g, 'ρ');
+  str = str.replace(/&sigmaf;|&#962;|&#x3c2;/g, 'ς');
+  str = str.replace(/&sigma;|&#963;|&#x3c3;/g, 'σ');
+  str = str.replace(/&tau;|&#964;|&#x3c4;/g, 'τ');
+  str = str.replace(/&upsilon;|&#965;|&#x3c5;/g, 'υ');
+  str = str.replace(/&phi;|&#966;|&#x3c6;/g, 'φ');
+  str = str.replace(/&chi;|&#967;|&#x3c7;/g, 'χ');
+  str = str.replace(/&psi;|&#968;|&#x3c8;/g, 'ψ');
+  str = str.replace(/&omega;|&#969;|&#x3c9;/g, 'ω');
+  str = str.replace(/&thetasym;|&#977;|&#x3d1;/g, 'ϑ');
+  str = str.replace(/&upsih;|&#978;|&#x3d2;/g, 'ϒ');
+  str = str.replace(/&piv;|&#982;|&#x3d6;/g, 'ϖ');
+  str = str.replace(/&middot;|&#183;|&#xb7;/g, '·');
+  return str;
+}
+function strcharacterDiscode(str) {
+  // 加入常用解析
+
+  // str = str.replace(/&nbsp;|&#32;|&#x20;/g, "&nbsp;");
+  // str = str.replace(/&ensp;|&#8194;|&#x2002;/g, '&ensp;');
+  // str = str.replace(/&#12288;|&#x3000;/g, '<span class=\'spaceshow\'>　</span>');
+  // str = str.replace(/&emsp;|&#8195;|&#x2003;/g, '&emsp;');
+  // str = str.replace(/&quot;|&#34;|&#x22;/g, "\"");
+  // str = str.replace(/&apos;|&#39;|&#x27;/g, "&apos;");
+  // str = str.replace(/&acute;|&#180;|&#xB4;/g, "´");
+  // str = str.replace(/&times;|&#215;|&#xD7;/g, "×");
+  // str = str.replace(/&divide;|&#247;|&#xF7;/g, "÷");
+  // str = str.replace(/&amp;|&#38;|&#x26;/g, '&amp;');
+  // str = str.replace(/&lt;|&#60;|&#x3c;/g, '&lt;');
+  // str = str.replace(/&gt;|&#62;|&#x3e;/g, '&gt;');
+
+  str = str.replace(/&nbsp;|&#32;|&#x20;/g, "<span class='spaceshow'> </span>");
+  str = str.replace(/&ensp;|&#8194;|&#x2002;/g, '<span class=\'spaceshow\'> </span>');
+  str = str.replace(/&#12288;|&#x3000;/g, '<span class=\'spaceshow\'>　</span>');
+  str = str.replace(/&emsp;|&#8195;|&#x2003;/g, '<span class=\'spaceshow\'> </span>');
+  str = str.replace(/&quot;|&#34;|&#x22;/g, "\"");
+  str = str.replace(/&quot;|&#39;|&#x27;/g, "'");
+  str = str.replace(/&acute;|&#180;|&#xB4;/g, "´");
+  str = str.replace(/&times;|&#215;|&#xD7;/g, "×");
+  str = str.replace(/&divide;|&#247;|&#xF7;/g, "÷");
+  str = str.replace(/&amp;|&#38;|&#x26;/g, '&');
+  str = str.replace(/&lt;|&#60;|&#x3c;/g, '<');
+  str = str.replace(/&gt;|&#62;|&#x3e;/g, '>');
+  return str;
+}
+
+// HTML 支持的其他实体
+function strOtherDiscode(str) {
+  str = str.replace(/&OElig;|&#338;|&#x152;/g, 'Œ');
+  str = str.replace(/&oelig;|&#339;|&#x153;/g, 'œ');
+  str = str.replace(/&Scaron;|&#352;|&#x160;/g, 'Š');
+  str = str.replace(/&scaron;|&#353;|&#x161;/g, 'š');
+  str = str.replace(/&Yuml;|&#376;|&#x178;/g, 'Ÿ');
+  str = str.replace(/&fnof;|&#402;|&#x192;/g, 'ƒ');
+  str = str.replace(/&circ;|&#710;|&#x2c6;/g, 'ˆ');
+  str = str.replace(/&tilde;|&#732;|&#x2dc;/g, '˜');
+  str = str.replace(/&thinsp;|$#8201;|&#x2009;/g, '<span class=\'spaceshow\'> </span>');
+  str = str.replace(/&zwnj;|&#8204;|&#x200C;/g, '<span class=\'spaceshow\'>‌</span>');
+  str = str.replace(/&zwj;|$#8205;|&#x200D;/g, '<span class=\'spaceshow\'>‍</span>');
+  str = str.replace(/&lrm;|$#8206;|&#x200E;/g, '<span class=\'spaceshow\'>‎</span>');
+  str = str.replace(/&rlm;|&#8207;|&#x200F;/g, '<span class=\'spaceshow\'>‏</span>');
+  str = str.replace(/&ndash;|&#8211;|&#x2013;/g, '–');
+  str = str.replace(/&mdash;|&#8212;|&#x2014;/g, '—');
+  str = str.replace(/&lsquo;|&#8216;|&#x2018;/g, '‘');
+  str = str.replace(/&rsquo;|&#8217;|&#x2019;/g, '’');
+  str = str.replace(/&sbquo;|&#8218;|&#x201a;/g, '‚');
+  str = str.replace(/&ldquo;|&#8220;|&#x201c;/g, '“');
+  str = str.replace(/&rdquo;|&#8221;|&#x201d;/g, '”');
+  str = str.replace(/&bdquo;|&#8222;|&#x201e;/g, '„');
+  str = str.replace(/&dagger;|&#8224;|&#x2020;/g, '†');
+  str = str.replace(/&Dagger;|&#8225;|&#x2021;/g, '‡');
+  str = str.replace(/&bull;|&#8226;|&#x2022;/g, '•');
+  str = str.replace(/&hellip;|&#8230;|&#x2026;/g, '…');
+  str = str.replace(/&permil;|&#8240;|&#x2030;/g, '‰');
+  str = str.replace(/&prime;|&#8242;|&#x2032;/g, '′');
+  str = str.replace(/&Prime;|&#8243;|&#x2033;/g, '″');
+  str = str.replace(/&lsaquo;|&#8249;|&#x2039;/g, '‹');
+  str = str.replace(/&rsaquo;|&#8250;|&#x203a;/g, '›');
+  str = str.replace(/&oline;|&#8254;|&#x203e;/g, '‾');
+  str = str.replace(/&euro;|&#8364;|&#x20ac;/g, '€');
+  str = str.replace(/&trade;|&#8482;|&#x2122;/g, '™');
+  str = str.replace(/&larr;|&#8592;|&#x2190;/g, '←');
+  str = str.replace(/&uarr;|&#8593;|&#x2191;/g, '↑');
+  str = str.replace(/&rarr;|&#8594;|&#x2192;/g, '→');
+  str = str.replace(/&darr;|&#8595;|&#x2193;/g, '↓');
+  str = str.replace(/&harr;|&#8596;|&#x2194;/g, '↔');
+  str = str.replace(/&crarr;|&#8629;|&#x21b5;/g, '↵');
+  str = str.replace(/&lceil;|&#8968;|&#x2308;/g, '⌈');
+  str = str.replace(/&rceil;|&#8969;|&#x2309;/g, '⌉');
+  str = str.replace(/&lfloor;|&#8970;|&#x230a;/g, '⌊');
+  str = str.replace(/&rfloor;|&#8971;|&#x230b;/g, '⌋');
+  str = str.replace(/&loz;|&#9674;|&#x25ca;/g, '◊');
+  str = str.replace(/&spades;|&#9824;|&#x2660;/g, '♠');
+  str = str.replace(/&clubs;|&#9827;|&#x2663;/g, '♣');
+  str = str.replace(/&hearts;|&#9829;|&#x2665;/g, '♥');
+  str = str.replace(/&diams;|&#9830;|&#x2666;/g, '♦');
+  return str;
+}
+function strDiscode(str) {
+  str = strNumDiscode(str);
+  str = strGreeceDiscode(str);
+  str = strcharacterDiscode(str);
+  str = strOtherDiscode(str);
+  return str;
+}
+function urlToHttpUrl(url, domain) {
+  if (/^\/\//.test(url)) {
+    return "https:".concat(url);
+  } else if (/^\//.test(url)) {
+    return "https://".concat(domain).concat(url);
+  }
+  return url;
+}
+var _default = {
+  strDiscode: strDiscode,
+  urlToHttpUrl: urlToHttpUrl
+};
+exports.default = _default;
+
+/***/ }),
+
+/***/ 879:
+/*!**********************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/components/gaoyia-parse/libs/htmlparser.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/**
+ *
+ * htmlParser改造自: https://github.com/blowsie/Pure-JavaScript-HTML5-Parser
+ *
+ * author: Di (微信小程序开发工程师)
+ * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
+ *               垂直微信小程序开发交流社区
+ *
+ * github地址: https://github.com/icindy/wxParse
+ *
+ * for: 微信小程序富文本解析
+ * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
+ */
+// Regular Expressions for parsing tags and attributes
+
+var startTag = /^<([-A-Za-z0-9_]+)((?:\s+[a-zA-Z0-9_:][-a-zA-Z0-9_:.]*(?:\s*=\s*(?:(?:"[^"]*")|(?:'[^']*')|[^>\s]+))?)*)\s*(\/?)>/;
+var endTag = /^<\/([-A-Za-z0-9_]+)[^>]*>/;
+var attr = /([a-zA-Z0-9_:][-a-zA-Z0-9_:.]*)(?:\s*=\s*(?:(?:"((?:\\.|[^"])*)")|(?:'((?:\\.|[^'])*)')|([^>\s]+)))?/g;
+function makeMap(str) {
+  var obj = {};
+  var items = str.split(',');
+  for (var i = 0; i < items.length; i += 1) {
+    obj[items[i]] = true;
+  }
+  return obj;
+}
+
+// Empty Elements - HTML 5
+var empty = makeMap('area,base,basefont,br,col,frame,hr,img,input,link,meta,param,embed,command,keygen,source,track,wbr');
+
+// Block Elements - HTML 5
+var block = makeMap('address,code,article,applet,aside,audio,blockquote,button,canvas,center,dd,del,dir,div,dl,dt,fieldset,figcaption,figure,footer,form,frameset,h1,h2,h3,h4,h5,h6,header,hgroup,hr,iframe,ins,isindex,li,map,menu,noframes,noscript,object,ol,output,p,pre,section,script,table,tbody,td,tfoot,th,thead,tr,ul,video');
+
+// Inline Elements - HTML 5
+var inline = makeMap('a,abbr,acronym,applet,b,basefont,bdo,big,br,button,cite,del,dfn,em,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,span,strike,strong,sub,sup,textarea,tt,u,var');
+
+// Elements that you can, intentionally, leave open
+// (and which close themselves)
+var closeSelf = makeMap('colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr');
+
+// Attributes that have their values filled in disabled="disabled"
+var fillAttrs = makeMap('checked,compact,declare,defer,disabled,ismap,multiple,nohref,noresize,noshade,nowrap,readonly,selected');
+function HTMLParser(html, handler) {
+  var index;
+  var chars;
+  var match;
+  var last = html;
+  var stack = [];
+  stack.last = function () {
+    return stack[stack.length - 1];
+  };
+  function parseEndTag(tag, tagName) {
+    // If no tag name is provided, clean shop
+    var pos;
+    if (!tagName) {
+      pos = 0;
+    } else {
+      // Find the closest opened tag of the same type
+      tagName = tagName.toLowerCase();
+      for (pos = stack.length - 1; pos >= 0; pos -= 1) {
+        if (stack[pos] === tagName) break;
+      }
+    }
+    if (pos >= 0) {
+      // Close all the open elements, up the stack
+      for (var i = stack.length - 1; i >= pos; i -= 1) {
+        if (handler.end) handler.end(stack[i]);
+      }
+
+      // Remove the open elements from the stack
+      stack.length = pos;
+    }
+  }
+  function parseStartTag(tag, tagName, rest, unary) {
+    tagName = tagName.toLowerCase();
+    if (block[tagName]) {
+      while (stack.last() && inline[stack.last()]) {
+        parseEndTag('', stack.last());
+      }
+    }
+    if (closeSelf[tagName] && stack.last() === tagName) {
+      parseEndTag('', tagName);
+    }
+    unary = empty[tagName] || !!unary;
+    if (!unary) stack.push(tagName);
+    if (handler.start) {
+      var attrs = [];
+      rest.replace(attr, function genAttr(matches, name) {
+        var value = arguments[2] || arguments[3] || arguments[4] || (fillAttrs[name] ? name : '');
+        attrs.push({
+          name: name,
+          value: value,
+          escaped: value.replace(/(^|[^\\])"/g, '$1\\"') // "
+        });
+      });
+
+      if (handler.start) {
+        handler.start(tagName, attrs, unary);
+      }
+    }
+  }
+  while (html) {
+    chars = true;
+    if (html.indexOf('</') === 0) {
+      match = html.match(endTag);
+      if (match) {
+        html = html.substring(match[0].length);
+        match[0].replace(endTag, parseEndTag);
+        chars = false;
+      }
+
+      // start tag
+    } else if (html.indexOf('<') === 0) {
+      match = html.match(startTag);
+      if (match) {
+        html = html.substring(match[0].length);
+        match[0].replace(startTag, parseStartTag);
+        chars = false;
+      }
+    }
+    if (chars) {
+      index = html.indexOf('<');
+      var text = '';
+      while (index === 0) {
+        text += '<';
+        html = html.substring(1);
+        index = html.indexOf('<');
+      }
+      text += index < 0 ? html : html.substring(0, index);
+      html = index < 0 ? '' : html.substring(index);
+      if (handler.chars) handler.chars(text);
+    }
+    if (html === last) throw new Error("Parse Error: ".concat(html));
+    last = html;
+  }
+
+  // Clean up any remaining tags
+  parseEndTag();
+}
+var _default = HTMLParser;
+exports.default = _default;
+
+/***/ }),
+
+/***/ 899:
 /*!***************************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-transition/components/uni-transition/createAnimation.js ***!
   \***************************************************************************************************/

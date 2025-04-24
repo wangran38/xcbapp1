@@ -3,6 +3,7 @@
     <view class="dynamic-header">
       <text class="header-title">菜品朋友圈</text>
       <view class="header-gradient"></view>
+      <view style="margin: 5rpx; font-size: 25rpx;">在这里你可以了解到即将上市的菜品养殖、种植信息，持续更新中</view>
     </view>
 
     <scroll-view 
