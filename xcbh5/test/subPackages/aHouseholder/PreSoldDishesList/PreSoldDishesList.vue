@@ -45,12 +45,12 @@
 								上市
 							</view>
 
-							<view>
+<!-- 							<view>
 								<button class="delete-btn" @click="editItem(item)" style="background-color: #55ffff;">
 									<uni-icons type="compose" size="18" color="#fff" />
 								</button>
 								编辑
-							</view>
+							</view> -->
 
 
 

@@ -2,23 +2,32 @@
 	<view class="container">
 		<!-- 搜索栏 -->
 		<view class="search-bar">
-			<uni-search-bar placeholder="搜索农户姓名或地址" v-model="searchKey" @confirm="handleSearch" @clear="clearSearch"
-				bgColor="#f5f5f5" radius="40" />
+			<view
+				style="display: flex;  background-color: rgb(245, 245, 245); align-items: center; border-radius: 20rpx;">
+				<view style="padding: 20rpx;"><uni-icons color="#999999" size="20" type="search" /></view>
+				<input type="text" placeholder="搜索农户姓名或地址" v-model="formdata.farmersname" />
+			</view>
+			<view
+				style="background-color: #007aff; color: white; width: 120rpx; height: 80rpx; line-height: 80rpx; text-align: center; border-radius: 10rpx; margin: 10rpx;" @click="startSearch">
+				搜索</view>
+			<view
+				style="background-color: red; color: white;width: 120rpx; height: 80rpx; line-height: 80rpx; text-align: center; border-radius: 10rpx; margin: 10rpx;" @click="stopSearch">
+				清空</view>
+
 		</view>
 
 		<!-- 农户列表 -->
-		<scroll-view class="list-container" scroll-y :refresher-enabled="true" @refresherrefresh="onRefresh"
-			:refresher-triggered="isRefreshing">
+		<scroll-view class="list-container" scroll-y :refresher-triggered="isRefreshing">
 			<view class="farmer-list">
 				<view v-for="(farmer, index) in farmers" :key="farmer.id" class="farmer-card">
 					<view class="card-header">
 
 						<view class="header-info">
 							<text class="name">{{farmer.name}}</text>
-							<text class="location">
+							<view class="location">
 								<uni-icons type="location" size="16" color="#666" />
 								{{farmer.address}}
-							</text>
+							</view>
 						</view>
 					</view>
 
@@ -28,18 +37,17 @@
 							<text class="value">{{farmer.farmersname}}</text>
 						</view>
 						<view class="info-item">
+							<text class="label">所属地区：</text>
+							<text class="value">{{farmer.area_name}}</text>
+						</view>
+						<view class="info-item">
 							<text class="label">加入时间：</text>
-							<text class="value">{{initDate(farmer.Created)}}</text>
+							<text class="value">{{initDate(farmer.createtime)}}</text>
 						</view>
 						<view class="info-item">
 							<text class="label">所售类目：</text>
-							<text class="value">{{farmer.type}}</text>
+							<text class="value">{{farmer.category_name}}</text>
 						</view>
-<!-- 						<view class="info-item">
-							<text class="label">认证状态：</text>
-							<uni-tag :text="farmer.certified ? '已认证' : '未认证'"
-								:type="farmer.certified ? 'success' : 'default'" size="small" />
-						</view> -->
 					</view>
 
 					<view class="card-footer">
@@ -47,13 +55,13 @@
 							<uni-icons type="phone" size="18" color="#fff" />
 							联系农户
 						</button>
-						<button class="detail-btn" @click="navigateToDetail(farmer)" style="border-color: #007aff; color: #007aff;">
+						<button class="detail-btn" @click="navigateToDetail(farmer)"
+							style="border-color: #007aff; color: #007aff;">
 							查看详情
 						</button>
 					</view>
 				</view>
 
-				<!-- 空状态 -->
 				<view v-if="farmers.length === 0" class="empty-container">
 					<image src="/static/empty-farmer.png" class="empty-image" />
 					<text class="empty-text">暂无相关农户信息</text>
@@ -70,59 +78,63 @@
 	import {
 		myMixin
 	} from '@/utils/public.js'
-	
+
 	export default {
-		mixins:[myMixin],
+		mixins: [myMixin],
 		data() {
 			return {
 				searchKey: '',
 				isRefreshing: false,
-				farmers: [
-				],
-				formdata:{
-					page:1,
-					limit:100
-				}
+				farmers: [],
+				formdata: {
+					page: 1,
+					limit: 100,
+					farmersname: null // 农户名称模糊查询
+				},
+				isSearch: false // 是否在搜索状态
 			}
 		},
 		async onLoad() {
-			let data = await api.farmersList(this.formdata)
-			
-			if (data.code = 200){
-				this.farmers = data.data.listdata
-				console.log(this.farmers)
-			}
+			this.getData()
 		},
-		computed: {
-		},
+		computed: {},
 		methods: {
-			formatDate(date) {
-				// return this.$dayjs(date).format('YYYY-MM-DD')
+			intiQuery(){
+				this.formdata =  {
+					page: 1,
+					limit: 100,
+					farmersname: null // 农户名称模糊查询
+				}
 			},
-			handleSearch() {
-				uni.pageScrollTo({
-					scrollTop: 0
-				})
+			// 开始搜索
+			startSearch(){
+				this.farmers = [] // 清空原来的数据
+				this.getData()
 			},
-			clearSearch() {
-				this.searchKey = ''
+			// 结束搜索
+			stopSearch(){
+				this.farmers = [] // 清空原来的数据
+				this.intiQuery()
+				this.getData()
 			},
-			onRefresh() {
-				this.isRefreshing = true
-				setTimeout(() => {
-					this.isRefreshing = false
-					uni.showToast({
-						title: '刷新成功'
-					})
-				}, 1000)
+			
+			
+			
+			async getData() {
+				let data = await api.farmersList(this.formdata)
+				if (data.code = 200) {
+					this.farmers = [...this.farmers,...data.data.listdata]
+				}
+				console.log(this.farmers)
 			},
+
+		
 			handleContact(farmer) {
 				uni.makePhoneCall({
 					phoneNumber: farmer.phone
 				})
 			},
 			navigateToDetail(item) {
-				
 				uni.navigateTo({
 					url: `/subPackages/shoppingPageList/merchantDetails/merchantDetails?query=${JSON.stringify(item)}`
 				})
@@ -138,6 +150,7 @@
 	}
 
 	.search-bar {
+		display: flex;
 		padding: 20rpx 30rpx;
 		background: #fff;
 	}

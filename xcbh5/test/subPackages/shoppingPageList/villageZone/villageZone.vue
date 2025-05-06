@@ -9,13 +9,21 @@
 		</view>
 
 		<view class="search-bar">
-		  <uni-icons type="search" size="20" color="#999" />
-		  <input 
-		    class="search-input" 
-		    placeholder="搜索产品" 
-		    placeholder-class="placeholder-style"
-		  />
+			<view
+				style="display: flex;   align-items: center; border-radius: 20rpx;">
+				<view style="padding: 20rpx;"><uni-icons color="#999999" size="20" type="search" /></view>
+				<input type="text" placeholder="搜索菜品" v-model="queryData.goodsname" />
+			</view>
+			
+			<view
+				style="background-color: #007aff; color: white; width: 120rpx; height: 80rpx; line-height: 80rpx; text-align: center; border-radius: 10rpx; margin: 10rpx;" @click="startSearch">
+				搜索</view>
+			<view
+				style="background-color: red; color: white;width: 120rpx; height: 80rpx; line-height: 80rpx; text-align: center; border-radius: 10rpx; margin: 10rpx;" @click="stopSearch">
+				清空</view>
 		</view>
+
+		
 		<view class="uni-margin-wrap">
 			<scroll-view class="category-nav" scroll-x="true">
 				<view v-for="(item,index) in categories" :key="item.id" class="swiper-item"
@@ -99,6 +107,7 @@
 				goodsData: [],
 				cartCount: 0,
 				queryData: {
+					goodsname:null,
 					page: 1,
 					limit: 5
 				},
@@ -113,6 +122,27 @@
 			this.fetchCategories()
 		},
 		methods: {
+			intiQuery(){
+				this.queryData =  {
+					goodsname:null,
+					page: 1,
+					limit: 5
+				}
+			},
+			// 开始搜索
+			startSearch(){
+				this.noMore = false
+				this.goodsData = [] // 清空原来的数据
+				this.getGoodsData()
+			},
+			// 结束搜索
+			stopSearch(){
+				this.noMore = false
+				this.goodsData = [] // 清空原来的数据
+				this.intiQuery()
+				this.getGoodsData()
+			},
+			
 			goToDynamics(item){
 				uni.navigateTo({
 					url:`/pages/dynamics/dynamics?id=${item.id}`

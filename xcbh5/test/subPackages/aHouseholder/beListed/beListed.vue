@@ -100,7 +100,7 @@
 					},
 					{
 						id: 2,
-						name: '代销',
+						name: '代提',
 						active: false,
 						refName: 'twoRef'
 					},

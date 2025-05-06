@@ -2,7 +2,7 @@
 	<view class="container">
 		<view class="locating">
 			<view class="targeting" @click="toindex1"><uni-icons type="location-filled" size="25"
-					color="#007aff"></uni-icons>{{marketName? marketName:'暂未选中市场'}}</view>
+					color="#007aff"></uni-icons><text>{{marketName? marketName:'暂未选中市场'}}</text></view>
 			<view class="current "><uni-icons class="buycar" type="scan" size="75rpx" @click="scan"></uni-icons></view>
 		</view>
 		<view class="search">
@@ -310,8 +310,7 @@
 	}
 
 	.targeting {
-		// margin-left: 30rpx;
-		// color: #1296db;
+		display: flex;
 	}
 
 	.current {
