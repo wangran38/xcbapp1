@@ -1,0 +1,447 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+/**
+ * author: Di (微信小程序开发工程师)
+ * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
+ *         垂直微信小程序开发交流社区
+ *
+ * github地址: https://github.com/icindy/wxParse
+ *
+ * for: 微信小程序富文本解析
+ * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
+ */
+/**
+ * 请在全局下引入该文件，@import '/static/wxParse.css';
+ */
+.wxParse.data-v-66356780 {
+  -webkit-user-select: none;
+          user-select: none;
+  width: 100%;
+  font-family: Helvetica, "PingFangSC", 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
+  color: #333;
+  line-height: 1.5;
+  font-size: 1em;
+  text-align: justify;
+  /* //左右两端对齐 */
+}
+.wxParse view.data-v-66356780, .wxParse uni-view.data-v-66356780 {
+  word-break: break-word;
+}
+.wxParse .p.data-v-66356780 {
+  padding-bottom: 0.5em;
+  clear: both;
+  /* letter-spacing: 0;//字间距 */
+}
+.wxParse .inline.data-v-66356780 {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+.wxParse .div.data-v-66356780 {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+.wxParse .h1.data-v-66356780 {
+  font-size: 2em;
+  line-height: 1.2em;
+  margin: 0.67em 0;
+}
+.wxParse .h2.data-v-66356780 {
+  font-size: 1.5em;
+  margin: 0.83em 0;
+}
+.wxParse .h3.data-v-66356780 {
+  font-size: 1.17em;
+  margin: 1em 0;
+}
+.wxParse .h4.data-v-66356780 {
+  margin: 1.33em 0;
+}
+.wxParse .h5.data-v-66356780 {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+.wxParse .h6.data-v-66356780 {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+.wxParse .h1.data-v-66356780,
+.wxParse .h2.data-v-66356780,
+.wxParse .h3.data-v-66356780,
+.wxParse .h4.data-v-66356780,
+.wxParse .h5.data-v-66356780,
+.wxParse .h6.data-v-66356780,
+.wxParse .b.data-v-66356780,
+.wxParse .strong.data-v-66356780 {
+  font-weight: bolder;
+}
+.wxParse .i.data-v-66356780,
+.wxParse .cite.data-v-66356780,
+.wxParse .em.data-v-66356780,
+.wxParse .var.data-v-66356780,
+.wxParse .address.data-v-66356780 {
+  font-style: italic;
+}
+.wxParse .spaceshow.data-v-66356780 {
+  white-space: pre;
+}
+.wxParse .pre.data-v-66356780,
+.wxParse .tt.data-v-66356780,
+.wxParse .code.data-v-66356780,
+.wxParse .kbd.data-v-66356780,
+.wxParse .samp.data-v-66356780 {
+  font-family: monospace;
+}
+.wxParse .pre.data-v-66356780 {
+  overflow: auto;
+  background: #f5f5f5;
+  padding: 16rpx;
+  white-space: pre;
+  margin: 1em 0rpx;
+  font-size: 24rpx;
+}
+.wxParse .code.data-v-66356780 {
+  overflow: auto;
+  padding: 16rpx;
+  white-space: pre;
+  margin: 1em 0rpx;
+  background: #f5f5f5;
+  font-size: 24rpx;
+}
+.wxParse .big.data-v-66356780 {
+  font-size: 1.17em;
+}
+.wxParse .small.data-v-66356780,
+.wxParse .sub.data-v-66356780,
+.wxParse .sup.data-v-66356780 {
+  font-size: 0.83em;
+}
+.wxParse .sub.data-v-66356780 {
+  vertical-align: sub;
+}
+.wxParse .sup.data-v-66356780 {
+  vertical-align: super;
+}
+.wxParse .s.data-v-66356780,
+.wxParse .strike.data-v-66356780,
+.wxParse .del.data-v-66356780 {
+  text-decoration: line-through;
+}
+.wxParse .strong.data-v-66356780,
+.wxParse .text.data-v-66356780,
+.wxParse .span.data-v-66356780,
+.wxParse .s.data-v-66356780 {
+  display: inline;
+}
+.wxParse .a.data-v-66356780 {
+  color: deepskyblue;
+}
+.wxParse .video.data-v-66356780 {
+  text-align: center;
+  margin: 22rpx 0;
+}
+.wxParse .video-video.data-v-66356780 {
+  width: 100%;
+}
+.wxParse .uni-image.data-v-66356780 {
+  height: 100px !important;
+  width: 100px !important;
+}
+.wxParse .img.data-v-66356780 {
+  height: 600rpx !important;
+  display: block;
+  height: 100rpx;
+  margin-bottom: 0em;
+  /* //与p标签底部padding同时修改 */
+  overflow: hidden;
+}
+.wxParse .blockquote.data-v-66356780 {
+  margin: 10rpx 0;
+  padding: 22rpx 0 22rpx 22rpx;
+  font-family: Courier, Calibri, "宋体";
+  background: #f5f5f5;
+  border-left: 6rpx solid #dbdbdb;
+}
+.wxParse .blockquote .p.data-v-66356780 {
+  margin: 0;
+}
+.wxParse .ul.data-v-66356780, .wxParse .ol.data-v-66356780 {
+  display: block;
+  margin: 1em 0;
+  padding-left: 2em;
+}
+.wxParse .ol.data-v-66356780 {
+  list-style-type: disc;
+}
+.wxParse .ol.data-v-66356780 {
+  list-style-type: decimal;
+}
+.wxParse .ol > weixin-parse-template.data-v-66356780, .wxParse .ul > weixin-parse-template.data-v-66356780 {
+  display: list-item;
+  align-items: baseline;
+  text-align: match-parent;
+}
+.wxParse .ol > .li.data-v-66356780, .wxParse .ul > .li.data-v-66356780 {
+  display: list-item;
+  align-items: baseline;
+  text-align: match-parent;
+}
+.wxParse .ul .ul.data-v-66356780, .wxParse .ol .ul.data-v-66356780 {
+  list-style-type: circle;
+}
+.wxParse .ol .ol .ul.data-v-66356780, .wxParse .ol .ul .ul.data-v-66356780, .wxParse .ul .ol .ul.data-v-66356780, .wxParse .ul .ul .ul.data-v-66356780 {
+  list-style-type: square;
+}
+.wxParse .u.data-v-66356780 {
+  text-decoration: underline;
+}
+.wxParse .hide.data-v-66356780 {
+  display: none;
+}
+.wxParse .del.data-v-66356780 {
+  display: inline;
+}
+.wxParse .figure.data-v-66356780 {
+  overflow: hidden;
+}
+.wxParse .tablebox.data-v-66356780 {
+  overflow: auto;
+  background-color: #f5f5f5;
+  background: #f5f5f5;
+  font-size: 13px;
+  padding: 8px;
+}
+.wxParse .table .table.data-v-66356780, .wxParse .table.data-v-66356780 {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  /* 内边框 */
+  /* width: 100%; */
+  overflow: auto;
+  white-space: pre;
+}
+.wxParse .tbody.data-v-66356780 {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  /* 内边框 */
+  border: 1px solid #dadada;
+}
+.wxParse .table .thead.data-v-66356780, .wxParse .table .tfoot.data-v-66356780, .wxParse .table .th.data-v-66356780 {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  background: #ececec;
+  font-weight: 40;
+}
+.wxParse .table .tr.data-v-66356780 {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  /* border: 2px solid #F0AD4E; */
+  overflow: auto;
+}
+.wxParse .table .th.data-v-66356780,
+.wxParse .table .td.data-v-66356780 {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  border: 2rpx solid #dadada;
+  overflow: auto;
+}
+.wxParse .audio.data-v-66356780, .wxParse .uni-audio-default.data-v-66356780 {
+  display: block;
+}
+/* Material Design 配色 */
+.modal-backdrop.data-v-66356780 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+}
+.modal-backdrop.backdrop-active.data-v-66356780 {
+  opacity: 1;
+}
+.modal-container.data-v-66356780 {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -48%) scale(0.9);
+          transform: translate(-50%, -48%) scale(0.9);
+  width: 85%;
+  max-width: 560px;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1001;
+}
+.modal-container.container-active.data-v-66356780 {
+  opacity: 1;
+  -webkit-transform: translate(-50%, -50%) scale(1);
+          transform: translate(-50%, -50%) scale(1);
+}
+.modal-card.data-v-66356780 {
+  background: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.modal-header.data-v-66356780 {
+  padding: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+.modal-header .header-icon.data-v-66356780 {
+  margin-bottom: 16px;
+}
+.modal-header .header-icon .default-icon.data-v-66356780 {
+  width: 48px;
+  height: 48px;
+  -webkit-filter: drop-shadow(0 2px 4px rgba(33, 150, 243, 0.2));
+          filter: drop-shadow(0 2px 4px rgba(33, 150, 243, 0.2));
+}
+.modal-header .header-title.data-v-66356780 {
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.87);
+  line-height: 1.3;
+}
+.content-wrapper.data-v-66356780 {
+  height: 200rpx;
+  padding: 24px;
+}
+.content-wrapper .content-text.data-v-66356780 {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 24px;
+}
+.step-item.data-v-66356780 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.step-item .step-badge.data-v-66356780 {
+  width: 24px;
+  height: 24px;
+  background: #2196F3;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.step-item .step-text.data-v-66356780 {
+  flex: 1;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.87);
+}
+.agreement-box.data-v-66356780 {
+  margin-top: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+}
+.agreement-box .agreement-scroll.data-v-66356780 {
+  max-height: 120px;
+  padding: 16px;
+}
+.agreement-box .agreement-text.data-v-66356780 {
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.6);
+  white-space: pre-wrap;
+}
+.agreement-box .agree-check.data-v-66356780 {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+.agreement-box .agree-check .checkmark.data-v-66356780 {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(0, 0, 0, 0.24);
+  border-radius: 4px;
+  margin-right: 8px;
+  transition: all 0.2s;
+}
+.agreement-box .agree-check .checkmark.checked.data-v-66356780 {
+  background: #2196F3;
+  border-color: #2196F3;
+}
+.agreement-box .agree-check .checkmark.checked .check-icon.data-v-66356780 {
+  width: 14px;
+  height: 14px;
+}
+.agreement-box .agree-check .agree-text.data-v-66356780 {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.87);
+}
+.action-buttons.data-v-66356780 {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  gap: 16px;
+}
+.action-buttons .btn.data-v-66356780 {
+  min-width: 88px;
+  height: 36px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+}
+.action-buttons .btn.data-v-66356780::after {
+  border: none;
+}
+.action-buttons .btn.cancel-btn.data-v-66356780 {
+  background: transparent;
+  color: rgba(0, 0, 0, 0.6);
+}
+.action-buttons .btn.cancel-btn.data-v-66356780:active {
+  background: rgba(0, 0, 0, 0.08);
+}
+.action-buttons .btn.confirm-btn.data-v-66356780 {
+  color: white;
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.3);
+}
+.action-buttons .btn.confirm-btn.data-v-66356780:disabled {
+  background: rgba(0, 0, 0, 0.12);
+  box-shadow: none;
+  color: rgba(0, 0, 0, 0.26);
+}
+.action-buttons .btn.confirm-btn.data-v-66356780:active:not(:disabled) {
+  -webkit-transform: translateY(1px);
+          transform: translateY(1px);
+}
+

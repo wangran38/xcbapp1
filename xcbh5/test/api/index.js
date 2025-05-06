@@ -421,7 +421,7 @@ export const api = {
 	},
 	// 买家端预卖菜品列表
 	presaleList(data){
-		return fetch('/api/farmers/presale/list', 'POST', data);
+		return fetch('/api/farmers/market/goodslist', 'POST', data);
 	},
 	
 	// 删除预卖菜品
@@ -467,6 +467,11 @@ export const api = {
 	classification(data){
 		return fetch('/api/news/category/list', 'POST', data);
 	},
+	
+	// 菜品上市
+	foodOnSale(data){
+		return fetch('/api/farmers/market/addgoods', 'POST', data);
+	}
 	
 	
 

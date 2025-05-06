@@ -125,7 +125,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l0 = _vm.__map(_vm.filteredNews, function (news, __i0__) {
+  var l0 = _vm.__map(_vm.newsList, function (news, __i0__) {
     var $orig = _vm.__get_orig(news)
     var m0 = _vm.initTime(news.createtime)
     return {
@@ -185,7 +185,9 @@ var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime
 var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
 var _index = __webpack_require__(/*! @/api/index.js */ 30);
-var _public = __webpack_require__(/*! @/utils/public.js */ 416);
+var _public = __webpack_require__(/*! @/utils/public.js */ 425);
+//
+//
 //
 //
 //
@@ -230,70 +232,63 @@ var _default = {
       activeCategory: 0,
       searchText: '',
       scrollHeight: 0,
-      categories: [{
-        id: 0,
-        name: '推荐'
-      }, {
-        id: 1,
-        name: '热点'
-      }, {
-        id: 2,
-        name: '科技'
-      }, {
-        id: 3,
-        name: '财经'
-      }, {
-        id: 4,
-        name: '体育'
-      }, {
-        id: 5,
-        name: '娱乐'
-      }],
+      categories: [],
       query: {
+        category_name: null,
+        // 分类
         page: 1,
         limit: 10
       },
-      newsList: [
-        // {
-        // 	id: 1,
-        // 	cover: 'https://p3-sign.toutiaoimg.com/tos-cn-i-tjoges91tu/6364552d41c8fa05f6f4eaa18ffbb644~tplv-tt-cs0:1920:1080.jpg?_iz=31826&bid=11&from=article.headline&gid=7494028106890478119&lk3s=06827d14&x-expires=1747962193&x-signature=UfX9dikcqRW%2FsVB8h8HqhEx87to%3D',
-        // 	title: '人工智能新突破：GPT-4正式发布',
-        // 	likeCount: 0,
-        // 	category: 2
-        // },
-      ]
+      newsList: [],
+      isNext: false
     };
-  },
-  computed: {
-    filteredNews: function filteredNews() {
-      var _this = this;
-      return this.newsList.filter(function (item) {
-        var matchCategory = _this.activeCategory === 0 || item.category === _this.activeCategory;
-        var matchSearch = item.title.includes(_this.searchText) || item.summary.includes(_this.searchText);
-        return matchCategory && matchSearch;
-      });
-    }
   },
   mounted: function mounted() {
     this.calcScrollHeight();
+    this.initClassification();
     this.getData();
   },
+  watch: {
+    activeCategory: function activeCategory(newValue, oldValue) {
+      // 重置页码
+      this.query.page = 1;
+      // 解除翻页锁
+      this.isNext = false;
+
+      // 更新数据
+      this.query.category_name = this.categories[newValue].name;
+      this.getData(true);
+    }
+  },
   methods: {
-    getData: function getData() {
-      var _this2 = this;
+    // 翻页
+    changePage: function changePage() {
+      if (!this.isNext) {
+        this.query.page += 1;
+        this.getData();
+      }
+    },
+    // 分类数据
+    initClassification: function initClassification() {
+      var _this = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-        var data;
+        var data, newList;
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _index.api.informationData(_this2.query);
+                return _index.api.classification({});
               case 2:
                 data = _context.sent;
                 if (data.code == 200) {
-                  console.log(data.data.listdata);
-                  _this2.newsList = [].concat((0, _toConsumableArray2.default)(_this2.newsList), (0, _toConsumableArray2.default)(data.data.listdata));
+                  newList = data.data.map(function (item, index) {
+                    return {
+                      id: index,
+                      name: item
+                    };
+                  });
+                  _this.categories = (0, _toConsumableArray2.default)(newList);
                 }
               case 4:
               case "end":
@@ -303,12 +298,44 @@ var _default = {
         }, _callee);
       }))();
     },
+    getData: function getData() {
+      var _arguments = arguments,
+        _this2 = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+        var lock, data;
+        return _regenerator.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                lock = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : false;
+                _context2.next = 3;
+                return _index.api.informationData(_this2.query);
+              case 3:
+                data = _context2.sent;
+                if (data.code == 200) {
+                  if (!lock) {
+                    _this2.newsList = [].concat((0, _toConsumableArray2.default)(_this2.newsList), (0, _toConsumableArray2.default)(data.data.listdata));
+                  } else {
+                    _this2.newsList = data.data.listdata;
+                  }
+                  _this2.isNext = data.data.listdata.length < _this2.query.limit ? true : false; // 判断是否还能继续翻页
+                }
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
     calcScrollHeight: function calcScrollHeight() {
       var systemInfo = uni.getSystemInfoSync();
       this.scrollHeight = systemInfo.windowHeight - 180; // 根据实际高度调整
     },
+    // 切换分类
     switchCategory: function switchCategory(index) {
       this.activeCategory = index;
+      this.query.category_name = this.categories[index].name;
     },
     onSearchInput: function onSearchInput(e) {
       this.searchText = e.detail.value.trim();

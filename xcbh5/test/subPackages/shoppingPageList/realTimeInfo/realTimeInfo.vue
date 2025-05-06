@@ -130,7 +130,7 @@
 			navigateToDetail(item) {
 				let content = encodeURIComponent(item.content)
 				uni.navigateTo({
-					url: `/subPackages/shoppingPageList/realTimeInfoDetail/realTimeInfoDetail?content=${content}`
+					url: `/subPackages/shoppingPageList/realTimeInfoDetail/realTimeInfoDetail?content=${content}&createtime=${this.initTime(item.createtime)}`
 				})
 
 			}

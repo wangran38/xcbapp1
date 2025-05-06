@@ -2,10 +2,10 @@
 	<view class="container">
 		<view class="header-bar">
 			<text class="platform-name">批发</text>
-			<uni-icons type="notification" size="28" color="#2d3436" />
+<!-- 			<uni-icons type="notification" size="28" color="#2d3436" />
 			<view
 				style="width: 30rpx; height: 30rpx; position: absolute; right: 12rpx; border: 5rpx solid red; background-color: red; top: 5rpx;border-radius: 50%; text-align: center; line-height: 30rpx; font-size: 17rpx; font-weight: bold;">
-				100</view>
+				100</view> -->
 		</view>
 
 		<!-- 主内容区域 -->

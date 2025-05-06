@@ -1,7 +1,7 @@
 {
-  "usingComponents": {},
-  "component": true,
   "componentGenerics": {
     "scoped-slots-error": true
-  }
+  },
+  "component": true,
+  "usingComponents": {}
 }

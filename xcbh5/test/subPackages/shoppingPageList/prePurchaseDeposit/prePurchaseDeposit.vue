@@ -34,9 +34,9 @@
 
     <view class="form-item">
       <text class="label">选择提货点</text>
-	  <view style="font-weight: bold; font-size: 25rpx;">{{deliveryPoints.length<=0? '暂无数据':''}}</view>
+	  <!-- <view style="font-weight: bold; font-size: 25rpx;">{{deliveryPoints.length<=0? '暂无数据':''}}</view> -->
       <scroll-view scroll-y class="delivery-list">
-        <view 
+<!--        <view 
           v-for="point in deliveryPoints"
           :key="point.id"
           class="delivery-item"
@@ -56,7 +56,30 @@
               size="20"
             />
           </view>
-        </view>
+        </view> -->
+		
+		<view
+		  class="delivery-item"
+		  :class="{ active: selectedPoint === product.id }"
+		  @click="selectPoint(product.id)"
+		  v-if=" product.pickaddress"
+		>
+		  <view class="point-info">
+		    <text class="name">{{ product.pickaddress }}</text>
+		    <!-- <text class="address">{{ product.pickaddress }}</text> -->
+		  </view>
+		  <view class="distance">
+		    <!-- <text>{{ product.distance }}km</text> -->
+		    <uni-icons 
+		      v-if="selectedPoint === product.id"
+		      type="checkmarkempty" 
+		      color="#07c160"
+		      size="20"
+		    />
+		  </view>
+		 
+		</view>
+		 <view v-else style="font-weight: bold; color: gray">暂无取货点</view>
       </scroll-view>
     </view>
 
@@ -66,7 +89,6 @@
         <view v-for="(rule,index) in shortRules" :key="index" class="rule-item">
           {{ index + 1 }}. {{ rule }}
         </view>
-        <text class="view-detail" @click="showRulesPopup = true">查看完整规则 ></text>
       </view>
     </view>
 
@@ -110,12 +132,12 @@ export default {
       selectedPoint: null,
       showRulesPopup: false,
       deliveryPoints: [
-        // {
-        //   id: 1,
-        //   name: "绿鲜社区店",
-        //   address: "朝阳区光华路8号",
-        //   distance: 1.2
-        // },
+        {
+          id: 1,
+          name: "绿鲜社区店",
+          address: "朝阳区光华路8号",
+          distance: 1.2
+        },
         // {
         //   id: 2,
         //   name: "智慧生活超市",
@@ -138,6 +160,7 @@ export default {
   },
   onLoad({query}) {
   	this.product =  JSON.parse(query)
+	console.log(this.product)
   },
   computed: {
     totalDeposit() {

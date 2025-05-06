@@ -16,7 +16,7 @@
 					<view class="item" @click="gotoEditshop">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe61e;'}}</uni-icons>
 						<view class="add-dishes">
-							户主资料补充
+							资料补充
 						</view>
 					</view>
 					<!-- <view class="item">
@@ -47,7 +47,7 @@
 			</view>
 			<view class="dishes">
 				<view class="title">
-					我的菜
+					我的菜品
 				</view>
 				<view class="content">
 					<view class="item" @click="gotoPreSale">
@@ -56,16 +56,28 @@
 							添加菜品
 						</view>
 					</view>
+<!-- 					<view class="item" @click="gotoBeListed">
+						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe603;'}}</uni-icons>
+						<view class="add-dishes">
+							我的菜品
+						</view>
+					</view> -->
 					<view class="item" @click="gotoAdditionalinformation">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe603;'}}</uni-icons>
 						<view class="add-dishes">
-							菜品朋友圈
+							发朋友圈
 						</view>
 					</view>
+<!-- 					<view class="item" @click="goToPreSoldDishesList">
+						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe603;'}}</uni-icons>
+						<view class="add-dishes">
+							预卖菜品
+						</view>
+					</view> -->
 					<view class="item" @click="goToPreSoldDishesList">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe603;'}}</uni-icons>
 						<view class="add-dishes">
-							预卖菜品列表
+							我的菜品
 						</view>
 					</view>
 <!-- 					<view class="item" @click="goToTraceability">

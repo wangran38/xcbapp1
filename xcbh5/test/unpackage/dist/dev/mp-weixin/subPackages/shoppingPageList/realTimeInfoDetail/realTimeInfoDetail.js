@@ -143,7 +143,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var uParse = function uParse() {
   Promise.all(/*! require.ensure | components/gaoyia-parse/parse */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/gaoyia-parse/parse")]).then((function () {
-    return resolve(__webpack_require__(/*! @/components/gaoyia-parse/parse.vue */ 872));
+    return resolve(__webpack_require__(/*! @/components/gaoyia-parse/parse.vue */ 900));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {

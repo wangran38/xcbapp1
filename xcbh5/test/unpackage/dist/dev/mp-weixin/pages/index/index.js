@@ -261,7 +261,7 @@ var _default = {
       // },
       {
         id: 4,
-        title: '菜品朋友圈',
+        title: '种养来历',
         path: '/pages/dynamics/dynamics'
       },
       // {

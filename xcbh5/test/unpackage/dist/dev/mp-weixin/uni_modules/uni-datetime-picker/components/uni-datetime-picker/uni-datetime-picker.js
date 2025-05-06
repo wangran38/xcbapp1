@@ -150,12 +150,12 @@ var _index = _interopRequireDefault(__webpack_require__(/*! ./i18n/index.js */ 7
 var _util = __webpack_require__(/*! ./util */ 711);
 var Calendar = function Calendar() {
   __webpack_require__.e(/*! require.ensure | uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar */ "uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar").then((function () {
-    return resolve(__webpack_require__(/*! ./calendar.vue */ 880));
+    return resolve(__webpack_require__(/*! ./calendar.vue */ 908));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var TimePicker = function TimePicker() {
   __webpack_require__.e(/*! require.ensure | uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker */ "uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker").then((function () {
-    return resolve(__webpack_require__(/*! ./time-picker.vue */ 887));
+    return resolve(__webpack_require__(/*! ./time-picker.vue */ 915));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {

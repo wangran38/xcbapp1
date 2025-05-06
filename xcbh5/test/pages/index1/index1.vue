@@ -29,7 +29,7 @@
 			<button class="save" @click="saveData">立即逛</button>
 		</view>
 		
-		<view class="notice">
+<!-- 		<view class="notice">
 			<view class="nleft">
 				<uni-icons type="sound-filled" size="20" color="#007aff"></uni-icons>
 				<text class="ntext">公告</text>
@@ -46,7 +46,7 @@
 		<view class="Notice">
 			<view>今日打卡人次：{{signTotalData.todaynum}} <br>累计打卡人次：{{signTotalData.allnum}}</view>
 			<button @click="goToJackpot" style="margin-top: 10rpx; font-size: 30rpx; color: #ff3030;">查看摇号结果</button>
-		</view>
+		</view> -->
 		
 		
 

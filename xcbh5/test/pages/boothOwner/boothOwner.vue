@@ -9,7 +9,7 @@
 					<view class="item" @click="goToapply">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe61a'}}</uni-icons>
 						<view class="add-dishes">
-							申请固定摊位
+							申请摊位
 						</view>
 					</view>
 					<view class="item" @click="gotostalllist">
@@ -22,7 +22,7 @@
 					<view class="item" @click="gotoEditshop">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe61e;'}}</uni-icons>
 						<view class="add-dishes">
-							摊位资料补充
+							资料补充
 						</view>
 					</view>
 					<!-- <view class="item">
@@ -71,7 +71,7 @@
 					<view class="item" @click="gotoListDis">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe689;'}}</uni-icons>
 						<view class="add-dishes">
-							已上架菜品
+							上架菜品
 						</view>
 					</view>
 					<!-- <view class="item">
@@ -169,12 +169,12 @@
 							银行卡
 						</view>
 					</view>
-					<view class="item" @click="gotoOpenAccountSharing">
+<!-- 					<view class="item" @click="gotoOpenAccountSharing">
 						<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe936;'}}</uni-icons>
 						<view class="add-dishes">
 							开通分账
 						</view>
-					</view>
+					</view> -->
 					<!-- <view class="item">
 						<uni-icons type="plus" size="30"></uni-icons>
 						<view class="add-dishes">

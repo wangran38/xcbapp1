@@ -3,7 +3,7 @@
 		<view class="locating">
 			<view class="targeting" @click="toindex1"><uni-icons type="location-filled" size="25"
 					color="#007aff"></uni-icons>{{marketName? marketName:'暂未选中市场'}}</view>
-			<view class="current "></view>
+			<view class="current "><uni-icons class="buycar" type="scan" size="75rpx" @click="scan"></uni-icons></view>
 		</view>
 		<view class="search">
 			<view class="sousuokuang">
@@ -12,7 +12,7 @@
 				<button class="searchbt" @click="reloadData">搜索</button>
 			</view>
 
-			<uni-icons class="buycar" type="scan" size="75rpx" @click="scan"></uni-icons>
+			
 		</view>
 
 		<view class="category-nav">
@@ -103,6 +103,11 @@
 						id: 6,
 						title: '资讯信息',
 						path: '/subPackages/shoppingPageList/realTimeInfo/realTimeInfo'
+					},
+					{
+						id: 7,
+						title: '免费买菜',
+						path: '/pages/jackpot/jackpot'
 					},
 					
 				],
@@ -305,7 +310,7 @@
 	}
 
 	.targeting {
-		margin-left: 30rpx;
+		// margin-left: 30rpx;
 		// color: #1296db;
 	}
 
@@ -323,7 +328,7 @@
 	}
 
 	.sousuokuang {
-		width: 86%;
+		width: 100%;
 		/* position: relative; */
 		display: flex;
 		flex-direction: row;

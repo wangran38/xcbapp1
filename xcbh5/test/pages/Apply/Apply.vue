@@ -52,7 +52,8 @@
 					</view>
 				</picker>
 			</view>
-			<!-- 菜市场选择 -->
+
+
 			<view class="form-item picker-item">
 				<view class="item-label">
 					<uni-icons type="flag" size="18" color="#666" />

@@ -46,6 +46,9 @@
 				</view>
 			</view>
 		</view>
+		
+		
+		<button @click="goTofreeGroceryShopping">参与活动说明</button>
 	</view>
 </template>
 
@@ -69,6 +72,12 @@
 			this.reloadData();
 		},
 		methods: {
+			goTofreeGroceryShopping(){
+				uni.navigateTo({
+					url:'/subPackages/shoppingPageList/freeGroceryShopping/freeGroceryShopping'
+				})
+				
+			},
 			/**
 			 * 格式化时间
 			 */

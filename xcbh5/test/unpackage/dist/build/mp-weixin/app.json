@@ -71,7 +71,8 @@
         "Traceability/Traceability",
         "lookTraceability/lookTraceability",
         "PreSoldDishesList/PreSoldDishesList",
-        "modifyPreSoldDishes/modifyPreSoldDishes"
+        "modifyPreSoldDishes/modifyPreSoldDishes",
+        "beListed/beListed"
       ]
     },
     {
@@ -96,7 +97,8 @@
         "prePurchaseDeposit/prePurchaseDeposit",
         "merchantDetails/merchantDetails",
         "realTimeInfo/realTimeInfo",
-        "realTimeInfoDetail/realTimeInfoDetail"
+        "realTimeInfoDetail/realTimeInfoDetail",
+        "freeGroceryShopping/freeGroceryShopping"
       ]
     }
   ],

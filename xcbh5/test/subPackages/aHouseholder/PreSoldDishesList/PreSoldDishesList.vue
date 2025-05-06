@@ -1,12 +1,12 @@
 <template>
 	<view class="container">
 		<!-- 分类导航 -->
-		<view class="nav-bar">
+<!-- 		<view class="nav-bar">
 			<view v-for="(item, index) in navItems" :key="index"
 				:class="['nav-item', activeNav === index ? 'active' : '']" @click="switchNav(index)">
 				{{item}}
 			</view>
-		</view>
+		</view> -->
 
 		<!-- 农产品列表 -->
 		<scroll-view class="list-container" scroll-y>
@@ -18,7 +18,7 @@
 						<view class="info-header">
 							<text class="product-name">{{item.goodsname}}</text>
 						</view>
-						<view class="info-detail">
+						<!-- <view class="info-detail">
 							<view class="detail-item">
 								开始时间:
 								<text>{{initDate(item.sellbegintime)}}</text>
@@ -27,19 +27,35 @@
 								结束时间
 								<text>{{initDate(item.sellbegintime)}}</text>
 							</view>
+						</view> -->
+<!-- 						<view style="font-size: 28rpx;color: red;">市场价:<text
+								style="text-decoration:line-through">{{item.price}}</text></view>
+						<view style="font-size: 28rpx;">预卖价:{{item.presaleprice}}</view> -->
+						<view class="action-bar" v-if="!formData.id" style="text-align: center;">
+							<view >
+								<button class="delete-btn" @click="showDeleteConfirm(item.id)">
+									<uni-icons type="trash" size="18" color="#fff" />
+								</button>
+								删除
+							</view>
+							<view>
+								<button class="delete-btn" @click="beListed(item)" style="background-color: #32ff13;">
+									<uni-icons type="upload" size="18" color="#fff" />
+								</button>
+								上市
+							</view>
+
+							<view>
+								<button class="delete-btn" @click="editItem(item)" style="background-color: #55ffff;">
+									<uni-icons type="compose" size="18" color="#fff" />
+								</button>
+								编辑
+							</view>
+
+
+
 						</view>
-						<view style="font-size: 28rpx;color: red;">市场价:<text style="text-decoration:line-through">{{item.price}}</text></view>
-						<view style="font-size: 28rpx;">预卖价:{{item.presaleprice}}</view>
-						<view class="action-bar" v-if="!formData.id">
-							<button  class="delete-btn" @click="showDeleteConfirm(item.id)">
-								<uni-icons type="trash" size="18" color="#fff" />
-							</button>
-							<button class="delete-btn" @click="editItem(item)" style="background-color: #55ffff;">
-								<uni-icons type="compose" size="18" color="#fff" />
-							</button>
-							、
-						</view>
-						
+
 					</view>
 				</view>
 			</view>
@@ -72,8 +88,7 @@
 				activeNav: 0,
 				navItems: ['预卖菜品列表'],
 				deleteId: null,
-				vegetables: [
-				],
+				vegetables: [],
 				livestock: [
 					// 禽畜数据
 				],
@@ -84,17 +99,25 @@
 			}
 		},
 		mixins: [myMixin],
-		onLoad({query}) {
-			if (query){
+		onLoad({
+			query
+		}) {
+			if (query) {
 				this.formData.id = query
 			}
 			this.getData()
 		},
 		methods: {
-			editItem(item){
+			beListed(item) {
 				let jsondata = JSON.stringify(item)
 				uni.navigateTo({
-					url:"/subPackages/aHouseholder/modifyPreSoldDishes/modifyPreSoldDishes?pramas="+jsondata
+					url: "/subPackages/aHouseholder/beListed/beListed?pramas=" + jsondata
+				})
+			},
+			editItem(item) {
+				let jsondata = JSON.stringify(item)
+				uni.navigateTo({
+					url: "/subPackages/aHouseholder/modifyPreSoldDishes/modifyPreSoldDishes?pramas=" + jsondata
 				})
 			},
 			switchNav(index) {
@@ -127,9 +150,9 @@
 			confirmDelete() {
 				api.delDishes({
 					id: this.deleteId
-				}).then((data)=>{
+				}).then((data) => {
 					console.log(data)
-					if (data.code == 200){
+					if (data.code == 200) {
 						this.getData()
 						uni.showToast({
 							title: data.message,
@@ -138,7 +161,7 @@
 					}
 				})
 
-				
+
 				this.$refs.deletePopup.close()
 			},
 			cancelDelete() {
@@ -244,7 +267,7 @@
 
 			.action-bar {
 				display: flex;
-				justify-content: right;
+				justify-content: space-around;
 				align-items: center;
 				border-top: 1rpx solid #EEE;
 				padding-top: 20rpx;

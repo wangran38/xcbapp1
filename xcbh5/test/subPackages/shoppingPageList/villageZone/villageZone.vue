@@ -52,10 +52,10 @@
 							<uni-icons v-if="item.organic" type="star-filled" color="#ffd700" size="18" />
 						</view>
 						<view class="price-section">
-							<text class="current">¥{{item.presaleprice}}</text>
-							<text class="original">¥{{item.price + 99}}</text>
+							<text class="current">¥{{item.price}}</text>
+							<text class="original">¥{{item.presaleprice}}</text>
 							<text class="discount">{{calcDiscount(item)}}折</text>
-							<view class="title">上市时间:{{initDate(item.sellendtime)}}</view>
+							<view class="title">上市时间:{{initDate(item.sellbegintime)}}</view>
 						</view>
 					</view>
 
@@ -162,7 +162,7 @@
 			},
 
 			calcDiscount(item) {
-				return '8.8'
+				return ((item.price/item.presaleprice)*10).toFixed(1)
 			},
 			addToCart(item) {
 				// uni.showToast({

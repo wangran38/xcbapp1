@@ -54,6 +54,13 @@
 					{
 						"navigationBarTitleText" : "修改预卖菜品"
 					}
+				},
+				{
+					"path" : "beListed/beListed",
+					"style" : 
+					{
+						"navigationBarTitleText" : "上市"
+					}
 				}
 			]
 		},
@@ -165,6 +172,13 @@
 				"style" : 
 				{
 					"navigationBarTitleText" : "新闻详情"
+				}
+			},
+			{
+				"path" : "freeGroceryShopping/freeGroceryShopping",
+				"style" : 
+				{
+					"navigationBarTitleText" : "免费买菜"
 				}
 			}
 				

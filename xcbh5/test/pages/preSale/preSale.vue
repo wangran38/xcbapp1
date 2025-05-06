@@ -17,15 +17,30 @@
 					<view class="form-row">
 						<view class="col-9">
 							<uni-forms-item label="预售菜品" required name="category">
-								<input type="text" v-model="formData.goodsname" placeholder="请输入名称">
+								<input type="text" v-model="formData.goodsname" placeholder="输入名称">
 							</uni-forms-item>
 						</view>
 
 					</view>
+					
 					<view class="form-row">
 						<view class="col-9">
-							<uni-forms-item label="预售库存" required name="stock">
-								<input type="text" v-model.number="formData.goodstotal" placeholder="请输入库存">
+							<uni-forms-item label="菜品分类" required name="category">
+								<picker class="picker" :range="pickerRange" :value="selectedCategoryIndex"
+									@change="onCategoryChange">
+									<view class="picker-text" style="">{{ pickerRange[selectedCategoryIndex] }}</view>
+								</picker>
+							</uni-forms-item>
+						</view>
+					
+					</view>
+					
+					
+					
+					<view class="form-row">
+						<view class="col-9" >
+							<uni-forms-item label="预售库存" required name="stock" >
+								<input   type="text" v-model.number="formData.goodstotal" placeholder="请输入库存">
 
 							</uni-forms-item>
 						</view>
@@ -37,7 +52,7 @@
 						</view>
 					</view>
 
-					<view class="price-group">
+					<view class="price-group form-row">
 						<uni-forms-item label="预卖价" required name="price">
 							<view class="price-input">
 								<text class="currency">¥</text>
@@ -46,12 +61,12 @@
 									:disabled="isPaid" />
 							</view>
 						</uni-forms-item>
-						<view class="price-tips">
+						<!-- <view class="price-tips">
 							<uni-icons type="alert" size="14" color="#999" />
 							<text>预付后价格将锁定不可修改</text>
-						</view>
+						</view> -->
 					</view>
-					<view class="price-group">
+					<view class="price-group form-row">
 						<uni-forms-item label="市场价" required name="price">
 							<view class="price-input">
 								<text class="currency">¥</text>
@@ -114,16 +129,16 @@
 
 					<view class="protocol-section">
 						<text class="section-title">第一条 质量保证</text>
-						<text class="protocol-text">
+						<!-- <text class="protocol-text">
 							卖方承诺商品质量符合GB/T 20014.5-2013标准，并提供以下证明文件：\n- 农产品质量安全检测报告\n- 原产地证明\n- 无公害农产品认证
-						</text>
+						</text> -->
 					</view>
 
 					<view class="protocol-section">
 						<text class="section-title">第二条 隐私条款</text>
-						<text class="protocol-text">
+<!-- 						<text class="protocol-text">
 							平台将采取以下措施保护用户隐私：\n1. 联系方式加密存储（AES-256）\n2. 生物特征信息实时删除
-						</text>
+						</text> -->
 					</view>
 
 					<!-- <view class="protocol-section">
@@ -169,6 +184,8 @@
 		mixins:[myMixin],
 		data() {
 			return {
+				selectedCategoryIndex:0,
+				pickerRange:[],
 				isImageSelected: false,
 				imglogo: null,
 				disabled: false,
@@ -200,7 +217,51 @@
 				return Math.min(Object.keys(storedData).length * 20, 100)
 			}
 		},
+		onLoad() {
+			this.fetchCategories();
+		},
 		methods: {
+			onCategoryChange(e) {
+				const selectedIndex = e.detail.value;
+				this.selectedCategoryIndex = selectedIndex;
+			
+				// 检查用户是否选择了有效的分类（跳过第一个默认项）
+				if (selectedIndex > 0) {
+					this.category_id = this.categories[selectedIndex - 1].id; // -1 是因为 `pickerRange` 的第一项是提示
+				} else {
+					this.category_id = ''; // 用户选择了默认提示项，重置 `category_id`
+				}
+			},
+			// 请求菜品分类数据
+			fetchCategories() {
+				api.cglist().then(res => {
+					if (res.code === 200) {
+						// 获取分类数据
+						const categories = res.data.listdata.map(item => ({
+							id: item.id,
+							content: item.content
+						}));
+						// 存储分类数据
+						this.categories = categories;
+						// 初始化 picker 的范围数据，包括默认提示项
+						this.pickerRange = ['请选择分类', ...categories.map(category => category.content)];
+						if (categories.length > 0) {
+							this.category_id = categories[0].id; // 默认选择第一个分类
+						}
+					} else {
+						uni.showToast({
+							title: res.message || '获取分类失败',
+							icon: 'none'
+						});
+					}
+				}).catch(err => {
+					console.error(err);
+					uni.showToast({
+						title: '获取分类失败',
+						icon: 'none'
+					});
+				});
+			},
 			
 			handleConfirm() {
 				if (this.disabled) {
@@ -282,6 +343,13 @@
 
 
 <style lang="scss">
+	
+	.picker-text {
+		/* width: 250rpx; */
+		height: 100%;
+		color: #808080;
+		font-size: 25rpx;
+	}
 	.upload-btn {
 		display: inline-flex;
 		align-items: center;
@@ -417,15 +485,15 @@
 			color: #999;
 			position: relative;
 
-			&::after {
-				content: '';
-				position: absolute;
-				right: -50%;
-				top: 50%;
-				width: 200rpx;
-				height: 2rpx;
-				background: #eee;
-			}
+			// &::after {
+			// 	content: '';
+			// 	position: absolute;
+			// 	right: -50%;
+			// 	top: 50%;
+			// 	width: 200rpx;
+			// 	height: 2rpx;
+			// 	background: #eee;
+			// }
 
 			&.active {
 				color: #4CD964;
@@ -447,6 +515,7 @@
 		box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.03);
 
 		.card-header {
+			justify-content: center;
 			display: flex;
 			align-items: center;
 			margin-bottom: 48rpx;
@@ -454,7 +523,7 @@
 			.card-title {
 				font-size: 32rpx;
 				color: #333;
-				margin-left: 16rpx;
+				// margin-left: 16rpx;
 				font-weight: 600;
 			}
 		}
