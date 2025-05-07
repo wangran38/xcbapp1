@@ -9,20 +9,26 @@
 					<view class="item" @click="goToapply">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe61a'}}</uni-icons>
 						<view class="add-dishes">
-							申请摊位
+							注册摊位
 						</view>
 					</view>
 					<view class="item" @click="gotostalllist">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe602;'}}</uni-icons>
 						<view class="add-dishes">
-							摊位列表
+							我的摊铺
 						</view>
 					</view>
 		
 					<view class="item" @click="gotoEditshop">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe61e;'}}</uni-icons>
 						<view class="add-dishes">
-							资料补充
+							补充资料
+						</view>
+					</view>
+					<view class="item" @click="goToSalesApplication">
+						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe61e;'}}</uni-icons>
+						<view class="add-dishes">
+							代销申请
 						</view>
 					</view>
 					<!-- <view class="item">
@@ -65,7 +71,7 @@
 					<view class="item" @click="gotopublish">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe603;'}}</uni-icons>
 						<view class="add-dishes">
-							菜品列表
+							我的菜品
 						</view>
 					</view>
 					<view class="item" @click="gotoListDis">
@@ -228,13 +234,10 @@
 			// }
 		},
 		methods: {
-			// 检查是否token存在，存在则已登陆
-			checkToken() {
-				const token = uni.getStorageSync('token');
-				if (!token){
-					return true
-				}
-				return false
+			goToSalesApplication(){
+				uni.navigateTo({
+					url: '/subPackages/boothOwner/salesApplication/salesApplication'
+				});
 			},
 			gotopublish() {
 				uni.navigateTo({

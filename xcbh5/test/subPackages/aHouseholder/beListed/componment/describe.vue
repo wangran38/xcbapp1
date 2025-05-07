@@ -91,6 +91,7 @@
 	$divider-color: rgba(0, 0, 0, 0.12);
 
 	.modal-backdrop {
+		z-index: 10000;
 		position: fixed;
 		top: 0;
 		left: 0;

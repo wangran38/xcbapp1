@@ -1,5 +1,6 @@
 {
-	"subPackages": [{
+	"subPackages": [
+		{
 			"root": "subPackages/PaymentModule",
 			"pages": [{
 					"path": "PaymentMethod/PaymentMethod",
@@ -42,24 +43,27 @@
 					}
 				},
 				{
-					"path" : "PreSoldDishesList/PreSoldDishesList",
-					"style" : 
-					{
-						"navigationBarTitleText" : "预卖菜品"
+					"path": "PreSoldDishesList/PreSoldDishesList",
+					"style": {
+						"navigationBarTitleText": "预卖菜品"
 					}
 				},
 				{
-					"path" : "modifyPreSoldDishes/modifyPreSoldDishes",
-					"style" : 
-					{
-						"navigationBarTitleText" : "修改预卖菜品"
+					"path": "modifyPreSoldDishes/modifyPreSoldDishes",
+					"style": {
+						"navigationBarTitleText": "修改预卖菜品"
 					}
 				},
 				{
-					"path" : "beListed/beListed",
-					"style" : 
-					{
-						"navigationBarTitleText" : "上市"
+					"path": "beListed/beListed",
+					"style": {
+						"navigationBarTitleText": "上市"
+					}
+				},
+				{
+					"path": "alreadyListed/alreadyListed",
+					"style": {
+						"navigationBarTitleText": "已上架"
 					}
 				}
 			]
@@ -95,90 +99,90 @@
 		{
 			"root": "subPackages/shoppingPageList",
 			"pages": [{
-				"path" : "villageZone/villageZone",
-				"style" : 
+					"path": "villageZone/villageZone",
+					"style": {
+						"navigationBarTitleText": "预卖菜品"
+					}
+				},
 				{
-					"navigationBarTitleText" : "预卖菜品"
+					"path": "nearbyFarmers/nearbyFarmers",
+					"style": {
+						"navigationBarTitleText": "附近农户"
+					}
+				},
+				{
+					"path": "agriculturalAssistanceZone/agriculturalAssistanceZone",
+					"style": {
+						"navigationBarTitleText": "扶贫专区"
+					}
+				},
+				{
+					"path": "official/official",
+					"style": {
+						"navigationBarTitleText": "官方直营"
+					}
+				},
+				{
+					"path": "rentalStorefront/rentalStorefront",
+					"style": {
+						"navigationBarTitleText": "铺面详情"
+						// "disableScroll": true
+					}
+				},
+				{
+					"path": "rentalStorefrontList/rentalStorefrontList",
+					"style": {
+						"navigationBarTitleText": "铺面列表"
+					}
+				},
+				{
+					"path": "prePurchaseOrder/prePurchaseOrder",
+					"style": {
+						"navigationBarTitleText": "预购订单"
+					}
+				},
+				{
+					"path": "prePurchaseDeposit/prePurchaseDeposit",
+					"style": {
+						"navigationBarTitleText": "预买"
+					}
+				},
+				{
+					"path": "merchantDetails/merchantDetails",
+					"style": {
+						"navigationBarTitleText": "农户详情"
+						// "disableScroll": true
+					}
+				},
+				{
+					"path": "realTimeInfo/realTimeInfo",
+					"style": {
+						"navigationBarTitleText": "资讯",
+						"disableScroll": true
+					}
+				},
+				{
+					"path": "realTimeInfoDetail/realTimeInfoDetail",
+					"style": {
+						"navigationBarTitleText": "新闻详情"
+					}
+				},
+				{
+					"path": "freeGroceryShopping/freeGroceryShopping",
+					"style": {
+						"navigationBarTitleText": "免费买菜"
+					}
 				}
-			},
-			{
-				"path" : "nearbyFarmers/nearbyFarmers",
+
+			]
+		},
+		{
+			"root": "subPackages/boothOwner",
+			"pages":[{
+				"path" : "salesApplication/salesApplication",
 				"style" : 
 				{
-					"navigationBarTitleText" : "附近农户"
-				}
-			},
-			{
-				"path" : "agriculturalAssistanceZone/agriculturalAssistanceZone",
-				"style" : 
-				{
-					"navigationBarTitleText" : "扶贫专区"
-				}
-			},
-			{
-				"path" : "official/official",
-				"style" : 
-				{
-					"navigationBarTitleText" : "官方直营"
-				}
-			},
-			{
-				"path" : "rentalStorefront/rentalStorefront",
-				"style" : 
-				{
-					"navigationBarTitleText" : ""
-					// "disableScroll": true
-				}
-			},
-			{
-				"path" : "rentalStorefrontList/rentalStorefrontList",
-				"style" : 
-				{
-					"navigationBarTitleText" : ""
-				}
-			},
-			{
-				"path" : "prePurchaseOrder/prePurchaseOrder",
-				"style" : 
-				{
-					"navigationBarTitleText" : ""
-				}
-			},
-			{
-				"path" : "prePurchaseDeposit/prePurchaseDeposit",
-				"style" : 
-				{
-					"navigationBarTitleText" : ""
-				}
-			},
-			{
-				"path" : "merchantDetails/merchantDetails",
-				"style" : 
-				{
-					"navigationBarTitleText" : "农户详情"
-					// "disableScroll": true
-				}
-			},
-			{
-				"path" : "realTimeInfo/realTimeInfo",
-				"style" : 
-				{
-					"navigationBarTitleText" : "资讯",
-					"disableScroll": true
-				}
-			},
-			{
-				"path" : "realTimeInfoDetail/realTimeInfoDetail",
-				"style" : 
-				{
-					"navigationBarTitleText" : "新闻详情"
-				}
-			},
-			{
-				"path" : "freeGroceryShopping/freeGroceryShopping",
-				"style" : 
-				{
-					"navigationBarTitleText" : "免费买菜"
+					"navigationBarTitleText" : "代销申请"
 				}
 			}
 				
@@ -468,67 +472,58 @@
 			}
 		},
 		{
-			"path" : "pages/preSale/preSale",
-			"style" : 
-			{
-				"navigationBarTitleText" : "预卖"
+			"path": "pages/preSale/preSale",
+			"style": {
+				"navigationBarTitleText": "预卖"
 			}
 		},
 		{
-			"path" : "pages/additionalinformation/additionalinformation",
-			"style" : 
-			{
-				"navigationBarTitleText" : "补充资料",
+			"path": "pages/additionalinformation/additionalinformation",
+			"style": {
+				"navigationBarTitleText": "补充资料",
 				"disableScroll": true
 			}
 		},
 		{
-			"path" : "pages/Presalemenulist/Presalemenulist",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/Presalemenulist/Presalemenulist",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		},
 		{
-			"path" : "pages/dynamics/dynamics",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/dynamics/dynamics",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		},
 		{
-			"path" : "pages/demo/demo",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/demo/demo",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		},
 		{
-			"path" : "pages/merchantComplaints/merchantComplaints",
-			"style" : 
-			{
-				"navigationBarTitleText" : "投诉商家"
+			"path": "pages/merchantComplaints/merchantComplaints",
+			"style": {
+				"navigationBarTitleText": "投诉商家"
 			}
 		},
 		{
-			"path" : "pages/myComplaint/myComplaint",
-			"style" : 
-			{
-				"navigationBarTitleText" : "我的投诉"
+			"path": "pages/myComplaint/myComplaint",
+			"style": {
+				"navigationBarTitleText": "我的投诉"
 			}
 		},
 		{
-			"path" : "pages/test/test",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/test/test",
+			"style": {
+				"navigationBarTitleText": ""
 			}
 		},
 		{
-			"path" : "pages/complaintDetails/complaintDetails",
-			"style" : 
-			{
-				"navigationBarTitleText" : "投诉详情",
+			"path": "pages/complaintDetails/complaintDetails",
+			"style": {
+				"navigationBarTitleText": "投诉详情",
 				"disableScroll": true
 			}
 		}

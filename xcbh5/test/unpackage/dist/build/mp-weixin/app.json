@@ -72,7 +72,8 @@
         "lookTraceability/lookTraceability",
         "PreSoldDishesList/PreSoldDishesList",
         "modifyPreSoldDishes/modifyPreSoldDishes",
-        "beListed/beListed"
+        "beListed/beListed",
+        "alreadyListed/alreadyListed"
       ]
     },
     {
@@ -99,6 +100,12 @@
         "realTimeInfo/realTimeInfo",
         "realTimeInfoDetail/realTimeInfoDetail",
         "freeGroceryShopping/freeGroceryShopping"
+      ]
+    },
+    {
+      "root": "subPackages/boothOwner",
+      "pages": [
+        "salesApplication/salesApplication"
       ]
     }
   ],

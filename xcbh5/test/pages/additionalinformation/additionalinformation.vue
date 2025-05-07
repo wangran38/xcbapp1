@@ -467,19 +467,20 @@
 	}
 
 	.delete-icon {
-		line-height: 40rpx;
-		padding: 10rpx;
 		position: absolute;
 		right: 10rpx;
 		top: 10rpx;
 		width: 40rpx;
 		height: 40rpx;
 		background: rgba(0, 0, 0, 0.5);
-		color: white;
 		border-radius: 50%;
-		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 15rpx;
 		font-size: 50rpx;
 		z-index: 2;
+		color: white;
 	}
 
 	.video-wrapper {
@@ -530,7 +531,7 @@
 		left: 0;
 		right: 0;
 		height: 200rpx;
-		background: linear-gradient(160deg, $primary-color 20%, $secondary-color 80%);
+		background: linear-gradient(160deg, #55FFED 20%, $secondary-color 80%);
 		border-radius: 0 0 30% 30%;
 		z-index: 0;
 	}

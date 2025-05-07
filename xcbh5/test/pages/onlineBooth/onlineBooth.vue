@@ -1,88 +1,226 @@
 <template>
-	<view class="bixBox">
+	<view class="container">
 		<popVue ref="pop" @receive="over"></popVue>
-		<view class="title">
-			轻松三步，成为农户
+		<view class="header">
+			<view class="title">
+				轻松三步，成为农户
+				<view class="decorate-line"></view>
+			</view>
 		</view>
-		<uni-steps :options="options" :active="active" class="steps"></uni-steps>
-		<view class="one" v-show="active == 0">
-			<view class="tip">
+
+		<uni-steps :options="options" :active="active" class="steps" active-color="#00ff00"></uni-steps>
+
+		<!-- 第一步：地区选择 -->
+		<view class="step-content" v-show="active == 0">
+			<view class="tip-text">
+				<uni-icons type="info" size="16" color="#6C757D"></uni-icons>
 				先选择自己所在的城市地区，申请成功后将展示在该地区的所有范围
 			</view>
-			<view class="info">
-				<uni-card title="所在的地区" :isFull="true">
-					<view class="area">
-						<picker class="picker" mode="multiSelector" :range="multiArray" :value="multiIndex"
-							@change="bindMultiPickerChange" @columnchange="bindMultiPickerColumnChange">
-							<view class="picker-text">
-								{{ multiArray[0][multiIndex[0]] }} - {{ multiArray[1][multiIndex[1]] }}
-								-{{ selectedCountry === 'overseas' ? '' : multiArray[2][multiIndex[2]] }}
+
+			<uni-card class="form-card">
+				<view class="card-header">
+					<text class="card-title">所在地区</text>
+					<uni-icons type="location-filled" size="20" color="#4A6572"></uni-icons>
+				</view>
+				<picker class="area-picker" mode="multiSelector" :range="multiArray" :value="multiIndex"
+					@change="bindMultiPickerChange" @columnchange="bindMultiPickerColumnChange">
+					<view class="picker-content">
+						{{ multiArray[0][multiIndex[0]] }} - {{ multiArray[1][multiIndex[1]] }}
+						-{{ selectedCountry === 'overseas' ? '' : multiArray[2][multiIndex[2]] }}
+						<uni-icons type="arrowright" size="18" color="#8E9BA6"></uni-icons>
+					</view>
+				</picker>
+			</uni-card>
+		</view>
+
+		<!-- 第二步：用户信息 -->
+		<view class="step-content" v-show="active == 1">
+			<view class="tip-text">
+				<uni-icons type="info" size="16" color="#6C757D"></uni-icons>
+				请输入户主名称，选择您要卖的菜品所属分类，以及详细地址
+			</view>
+
+			<view class="form-section">
+				<uni-card class="form-card">
+					<!-- 户主名称 -->
+					<view class="form-item">
+						<text class="item-label">户主名称</text>
+						<input class="input-box" 
+               v-model="userInfo.name" 
+               placeholder="请输入名称"
+               placeholder-style="color:#ADB5BD"/>
+					</view>
+
+					<!-- 分割线 -->
+					<view class="divider"></view>
+
+					<!-- 所售类目 -->
+					<view class="form-item">
+						<text class="item-label">所售类目</text>
+						<picker class="category-picker" mode="selector" :range="categoryList" @change="bindCategoryChange">
+							<view class="picker-content">
+								{{ selectedCategory }}
+								<uni-icons type="arrowright" size="18" color="#8E9BA6"></uni-icons>
 							</view>
 						</picker>
 					</view>
+
+					<!-- 分割线 -->
+					<view class="divider"></view>
+
+					<!-- 详细地址 -->
+					<view class="form-item">
+						<text class="item-label">详细地址</text>
+						<input class="input-box" 
+               v-model="userInfo.location" 
+               placeholder="请输入地址"
+               placeholder-style="color:#ADB5BD"/>
+					</view>
 				</uni-card>
-
 			</view>
 		</view>
 
-
-		<view class="two" v-show="active == 1">
-			<view class="tip">
-				请输入户主名称，选择您要卖的菜品所属分类，以及详细地址，申请成功后在页面上显示您的信息。帮您全平台推广您的菜品。
-			</view>
-			<view class="title" style="text-align: left; color: black; font-weight: 100;">
-				店主身份
-			</view>
-			<view class="form">
-				<view class="card">
-					<view class="label">
-						户主名称
-					</view>
-					<input v-model="userInfo.name" type="text" placeholder="请输入名称" />
-				</view>
-				<view class="hr">
-				</view>
-				<view class="card">
-					<view class="label">
-						所售类目
-					</view>
-					<view class="Select">
-						<picker class="Categorypicker" mode="selector" :range="categoryList"
-							@change="bindCategoryChange">
-							<view style="text-align: center; width: 230rpx; font-size: 30rpx; line-height: 50rpx; ">
-								{{ selectedCategory }}</view>
-						</picker>
-					</view>
-				</view>
-
-				<view class="hr">
-				</view>
-				<view class="card">
-					<view class="label">
-						详细地址
-					</view>
-					<view class="Select">
-						<input v-model="userInfo.location" type="text" placeholder="请输入地址" style="mix-width: 400rpx;" />
-					</view>
-				</view>
-				<view>
-
-				</view>
-			</view>
-		</view>
-
-		<!-- 	<view class="three" v-show="active == 2">
-			<view class="tip">
-				建议建议建议建议建议建议建议建议建议建议建议建议建议建议建议建议建议建议建议建议建议
-			</view>
-			<view class="registerBtn" @click="register">
-				开通并领取福利
-			</view>
-
-		</view> -->
-		<button class="btn" @click="next">{{title}}</button>
+		<!-- 操作按钮 -->
+		<button class="next-btn" @click="next">{{title}}</button>
 	</view>
 </template>
+
+<style scoped>
+/* 整体容器 */
+.container {
+  padding: 40rpx 32rpx;
+  background: #F8F9FA;
+  min-height: 100vh;
+}
+
+/* 头部样式 */
+.header {
+  margin-bottom: 60rpx;
+}
+
+.title {
+  font-size: 38rpx;
+  color: black;
+  font-weight: 500;
+  position: relative;
+  display: inline-block;
+  letter-spacing: 1rpx;
+}
+
+.decorate-line {
+  position: absolute;
+  bottom: -12rpx;
+  left: 0;
+  width: 70%;
+  height: 4rpx;
+  background: rgba(58, 95, 124, 0.3);
+  border-radius: 2rpx;
+}
+
+/* 步骤条样式 */
+.steps {
+  margin-bottom: 60rpx;
+}
+
+/* 提示文本 */
+.tip-text {
+  background: #EDF2F5;
+  padding: 24rpx 32rpx;
+  border-radius: 8rpx;
+  color: #4A6572;
+  font-size: 28rpx;
+  margin-bottom: 40rpx;
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+}
+
+/* 表单卡片 */
+.form-card {
+  border-radius: 12rpx;
+  overflow: hidden;
+  border: 1rpx solid #E9ECEF;
+  background: #FFFFFF;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.card-title {
+  font-size: 32rpx;
+  color: #2D3A4A;
+  margin-right: 16rpx;
+  font-weight: 500;
+}
+
+/* 选择器样式 */
+.area-picker, .category-picker {
+  padding: 32rpx 0;
+}
+
+.picker-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 30rpx;
+  color: #4A6572;
+  padding: 24rpx 0;
+}
+
+/* 表单项 */
+.form-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32rpx 0;
+}
+
+.item-label {
+  font-size: 30rpx;
+  color: #4A6572;
+  width: 160rpx;
+  font-weight: 400;
+}
+
+.input-box {
+  flex: 1;
+  font-size: 30rpx;
+  color: #2D3A4A;
+  text-align: right;
+  padding: 20rpx 0;
+}
+
+/* 分割线 */
+.divider {
+  height: 1rpx;
+  background: #E9ECEF;
+  margin: 8rpx 0;
+}
+
+/* 下一步按钮 */
+.next-btn {
+  position: fixed;
+  bottom: 80rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 88rpx;
+  line-height: 88rpx;
+background-color: #007aff;
+  color: white;
+  font-size: 32rpx;
+  border-radius: 8rpx;
+  transition: background 0.3s;
+  border: none;
+}
+
+.next-btn:active {
+  background: #2D4A5F;
+}
+</style>
 
 <script>
 	import {
@@ -513,104 +651,3 @@
 
 
 
-<style scoped>
-	.registerBtn {
-		box-shadow: 10rpx 10rpx 10rpx #e8e8e8;
-		background-color: lightblue;
-		width: 230rpx;
-		height: 100rpx;
-		font-size: 26rpx;
-		line-height: 100rpx;
-		border-radius: 10rpx;
-		margin: 0 auto;
-		color: white;
-		font-family: STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑";
-	}
-
-	.Select {
-		display: flex;
-	}
-
-	.area {
-		font-size: 35rpx;
-	}
-
-	.bixBox {
-		padding: 20rpx 20rpx 20rpx 20rpx;
-		text-align: center;
-	}
-
-	.title {
-		font-weight: 700;
-		font-size: 30rpx;
-		color: limegreen;
-	}
-
-	.steps {
-		margin-top: 20rpx;
-	}
-
-	.tip {
-		font-weight: 800;
-		text-align: left;
-		margin: 20rpx 0 20rpx 0;
-		height: 200rpx;
-		border-radius: 10rpx;
-		background-color: white;
-	}
-
-	.info {
-		margin-top: 30rpx;
-	}
-
-	.label {
-		width: 200rpx;
-		font-weight: 300;
-		font-size: 25rpx;
-		margin-bottom: 20rpx;
-	}
-
-	.btn {
-		width: 90%;
-		background-color: lightgreen;
-		position: fixed;
-		left: 0;
-		right: 0;
-		bottom: 30rpx;
-	}
-
-
-	.hr {
-		background-color: #e8e8e8;
-		height: 1rpx;
-
-	}
-
-	.form {
-		background-color: white;
-		position: relative;
-		text-align: left;
-		line-height: 30rpx;
-		border: 1rpx solid #e8e8e8;
-		padding: 20rpx 0rpx 20rpx 0rpx;
-		margin-top: 20rpx;
-		border-radius: 10rpx;
-	}
-
-	.form input {
-		width: 230rpx;
-		text-align: center;
-		font-size: 30rpx;
-	}
-
-	.form .label {
-		line-height: 40rpx;
-		font-size: 30rpx;
-		font-weight: 600;
-	}
-
-	.card {
-		padding: 10rpx 10rpx 10rpx 10rpx;
-		display: flex;
-	}
-</style>

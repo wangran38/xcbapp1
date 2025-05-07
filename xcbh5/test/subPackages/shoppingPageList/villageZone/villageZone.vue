@@ -9,21 +9,22 @@
 		</view>
 
 		<view class="search-bar">
-			<view
-				style="display: flex;   align-items: center; border-radius: 20rpx;">
+			<view style="display: flex;   align-items: center; border-radius: 20rpx;">
 				<view style="padding: 20rpx;"><uni-icons color="#999999" size="20" type="search" /></view>
 				<input type="text" placeholder="搜索菜品" v-model="queryData.goodsname" />
 			</view>
-			
+
 			<view
-				style="background-color: #007aff; color: white; width: 120rpx; height: 80rpx; line-height: 80rpx; text-align: center; border-radius: 10rpx; margin: 10rpx;" @click="startSearch">
+				style="background-color: #007aff; color: white; width: 120rpx; height: 80rpx; line-height: 80rpx; text-align: center; border-radius: 10rpx; margin: 10rpx;"
+				@click="startSearch">
 				搜索</view>
 			<view
-				style="background-color: red; color: white;width: 120rpx; height: 80rpx; line-height: 80rpx; text-align: center; border-radius: 10rpx; margin: 10rpx;" @click="stopSearch">
+				style="background-color: red; color: white;width: 120rpx; height: 80rpx; line-height: 80rpx; text-align: center; border-radius: 10rpx; margin: 10rpx;"
+				@click="stopSearch">
 				清空</view>
 		</view>
 
-		
+
 		<view class="uni-margin-wrap">
 			<scroll-view class="category-nav" scroll-x="true">
 				<view v-for="(item,index) in categories" :key="item.id" class="swiper-item"
@@ -48,8 +49,9 @@
 							<view class="ribbon-tail"></view>
 						</view>
 						<view class="sales-progress">
-							<progress :percent="(	item.goodstotal > 0 ? Math.min((item.selltotal / item.goodstotal) * 100, 100) : 0)" stroke-width="4"
-								activeColor="#ff6b6b" />
+							<progress
+								:percent="(	item.goodstotal > 0 ? Math.min((item.selltotal / item.goodstotal) * 100, 100) : 0)"
+								stroke-width="4" activeColor="#ff6b6b" />
 							<text>已售{{item.selltotal}}/{{item.goodstotal}}{{item.unit}}</text>
 						</view>
 					</view>
@@ -96,9 +98,11 @@
 	import {
 		api
 	} from '@/api/index.js';
-	import {myMixin} from '@/utils/public.js'
+	import {
+		myMixin
+	} from '@/utils/public.js'
 	export default {
-		mixins:[myMixin],
+		mixins: [myMixin],
 		data() {
 			return {
 				selectedCategoryId: 0,
@@ -107,7 +111,8 @@
 				goodsData: [],
 				cartCount: 0,
 				queryData: {
-					goodsname:null,
+					category_id:null,
+					goodsname: null,
 					page: 1,
 					limit: 5
 				},
@@ -122,35 +127,42 @@
 			this.fetchCategories()
 		},
 		methods: {
-			intiQuery(){
-				this.queryData =  {
-					goodsname:null,
+			intiQuery() {
+				this.queryData = {
+					category_id:null,
+					goodsname: null,
 					page: 1,
 					limit: 5
 				}
 			},
 			// 开始搜索
-			startSearch(){
+			startSearch() {
+				this.queryData.category_id = null
 				this.noMore = false
 				this.goodsData = [] // 清空原来的数据
 				this.getGoodsData()
 			},
 			// 结束搜索
-			stopSearch(){
+			stopSearch() {
 				this.noMore = false
 				this.goodsData = [] // 清空原来的数据
 				this.intiQuery()
 				this.getGoodsData()
 			},
-			
-			goToDynamics(item){
+
+			goToDynamics(item) {
 				uni.navigateTo({
-					url:`/pages/dynamics/dynamics?id=${item.id}`
+					url: `/pages/dynamics/dynamics?id=${item.id}`
 				})
 			},
 			switchClass(index) {
-				this.selectedCategoryId = index
 				console.log(index)
+				this.selectedCategoryId = index
+				this.goodsData = []
+				this.noMore = false
+				this.intiQuery()
+				this.queryData.category_id = this.categories[index].id
+				this.getGoodsData()
 			},
 			async fetchCategories() {
 				const response = await api.cglist()
@@ -192,7 +204,7 @@
 			},
 
 			calcDiscount(item) {
-				return ((item.price/item.presaleprice)*10).toFixed(1)
+				return ((item.price / item.presaleprice) * 10).toFixed(1)
 			},
 			addToCart(item) {
 				// uni.showToast({
@@ -221,30 +233,30 @@
 
 <style lang="scss" scoped>
 	.search-bar {
-		margin: 10rpx;
-	  background: #FFF;
-	  height: 80rpx;
-	  border-radius: 40rpx;
-	  display: flex;
-	  align-items: center;
-	  padding: 0 30rpx;
-	  margin-bottom: 30rpx;
-	  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.06);
-	  
-	  .search-input {
-	    flex: 1;
-	    height: 100%;
-	    font-size: 28rpx;
-	    margin-left: 20rpx;
-	  }
-	  
-	  .placeholder-style {
-	    color: #CCC;
-	  }
+		margin: 15rpx;
+		background: #FFF;
+		height: 80rpx;
+		border-radius: 40rpx;
+		display: flex;
+		align-items: center;
+		padding: 0 30rpx;
+		margin-bottom: 30rpx;
+		box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.06);
+
+		.search-input {
+			flex: 1;
+			height: 100%;
+			font-size: 28rpx;
+			margin-left: 20rpx;
+		}
+
+		.placeholder-style {
+			color: #CCC;
+		}
 	}
-	
+
 	.container {
-		background: linear-gradient(160deg, #f5fff0 0%, #e3f0da 100%);
+		// background: linear-gradient(160deg, #f5fff0 0%, #e3f0da 100%);
 		min-height: 100vh;
 		position: relative;
 	}
