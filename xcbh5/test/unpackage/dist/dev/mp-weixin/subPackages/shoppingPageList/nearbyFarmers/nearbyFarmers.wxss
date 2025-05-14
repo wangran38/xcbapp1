@@ -279,6 +279,7 @@
   min-height: 100vh;
 }
 .search-bar.data-v-06b36029 {
+  display: flex;
   padding: 20rpx 30rpx;
   background: #fff;
 }

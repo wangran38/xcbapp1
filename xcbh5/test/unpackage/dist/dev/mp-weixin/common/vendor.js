@@ -58,7 +58,142 @@ module.exports = _nonIterableRest, module.exports.__esModule = true, module.expo
 
 /***/ }),
 
-/***/ 106:
+/***/ 1006:
+/*!***************************************************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-transition/components/uni-transition/createAnimation.js ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createAnimation = createAnimation;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+// const defaultOption = {
+// 	duration: 300,
+// 	timingFunction: 'linear',
+// 	delay: 0,
+// 	transformOrigin: '50% 50% 0'
+// }
+var MPAnimation = /*#__PURE__*/function () {
+  function MPAnimation(options, _this) {
+    (0, _classCallCheck2.default)(this, MPAnimation);
+    this.options = options;
+    // 在iOS10+QQ小程序平台下，传给原生的对象一定是个普通对象而不是Proxy对象，否则会报parameter should be Object instead of ProxyObject的错误
+    this.animation = uni.createAnimation(_objectSpread({}, options));
+    this.currentStepAnimates = {};
+    this.next = 0;
+    this.$ = _this;
+  }
+  (0, _createClass2.default)(MPAnimation, [{
+    key: "_nvuePushAnimates",
+    value: function _nvuePushAnimates(type, args) {
+      var aniObj = this.currentStepAnimates[this.next];
+      var styles = {};
+      if (!aniObj) {
+        styles = {
+          styles: {},
+          config: {}
+        };
+      } else {
+        styles = aniObj;
+      }
+      if (animateTypes1.includes(type)) {
+        if (!styles.styles.transform) {
+          styles.styles.transform = '';
+        }
+        var unit = '';
+        if (type === 'rotate') {
+          unit = 'deg';
+        }
+        styles.styles.transform += "".concat(type, "(").concat(args + unit, ") ");
+      } else {
+        styles.styles[type] = "".concat(args);
+      }
+      this.currentStepAnimates[this.next] = styles;
+    }
+  }, {
+    key: "_animateRun",
+    value: function _animateRun() {
+      var styles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var ref = this.$.$refs['ani'].ref;
+      if (!ref) return;
+      return new Promise(function (resolve, reject) {
+        nvueAnimation.transition(ref, _objectSpread({
+          styles: styles
+        }, config), function (res) {
+          resolve();
+        });
+      });
+    }
+  }, {
+    key: "_nvueNextAnimate",
+    value: function _nvueNextAnimate(animates) {
+      var _this2 = this;
+      var step = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var fn = arguments.length > 2 ? arguments[2] : undefined;
+      var obj = animates[step];
+      if (obj) {
+        var styles = obj.styles,
+          config = obj.config;
+        this._animateRun(styles, config).then(function () {
+          step += 1;
+          _this2._nvueNextAnimate(animates, step, fn);
+        });
+      } else {
+        this.currentStepAnimates = {};
+        typeof fn === 'function' && fn();
+        this.isEnd = true;
+      }
+    }
+  }, {
+    key: "step",
+    value: function step() {
+      var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      this.animation.step(config);
+      return this;
+    }
+  }, {
+    key: "run",
+    value: function run(fn) {
+      this.$.animationData = this.animation.export();
+      this.$.timer = setTimeout(function () {
+        typeof fn === 'function' && fn();
+      }, this.$.durationTime);
+    }
+  }]);
+  return MPAnimation;
+}();
+var animateTypes1 = ['matrix', 'matrix3d', 'rotate', 'rotate3d', 'rotateX', 'rotateY', 'rotateZ', 'scale', 'scale3d', 'scaleX', 'scaleY', 'scaleZ', 'skew', 'skewX', 'skewY', 'translate', 'translate3d', 'translateX', 'translateY', 'translateZ'];
+var animateTypes2 = ['opacity', 'backgroundColor'];
+var animateTypes3 = ['width', 'height', 'left', 'right', 'top', 'bottom'];
+animateTypes1.concat(animateTypes2, animateTypes3).forEach(function (type) {
+  MPAnimation.prototype[type] = function () {
+    var _this$animation;
+    (_this$animation = this.animation)[type].apply(_this$animation, arguments);
+    return this;
+  };
+});
+function createAnimation(option, _this) {
+  if (!_this) return;
+  clearTimeout(_this.timer);
+  return new MPAnimation(option, _this);
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+
+/***/ 108:
 /*!**********************************************!*\
   !*** E:/xcbh5/xcbh5/test/hooks/useUpload.js ***!
   \**********************************************/
@@ -79,7 +214,7 @@ exports.useUpload = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 54));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
 var _index = _interopRequireWildcard(__webpack_require__(/*! @/api/index */ 30));
-var _compressorjs = _interopRequireDefault(__webpack_require__(/*! compressorjs */ 107));
+var _compressorjs = _interopRequireDefault(__webpack_require__(/*! compressorjs */ 109));
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 var useUpload = function useUpload(opts) {
@@ -239,7 +374,7 @@ exports.compressPictures = compressPictures;
 
 /***/ }),
 
-/***/ 107:
+/***/ 109:
 /*!************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/node_modules/compressorjs/dist/compressor.js ***!
   \************************************************************************/
@@ -1482,6 +1617,150 @@ function _arrayWithoutHoles(arr) {
   if (Array.isArray(arr)) return arrayLikeToArray(arr);
 }
 module.exports = _arrayWithoutHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 190:
+/*!*******************************************!*\
+  !*** E:/xcbh5/xcbh5/test/utils/public.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.myMixin = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 54));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
+var myMixin = {
+  methods: {
+    // 获取今天日期
+    getNowDate: function getNowDate() {
+      return this.initDate(Date.now());
+    },
+    // 计算时间间隔
+    getChineseTimeDiff: function getChineseTimeDiff(t1, t2) {
+      var diff = Math.abs(t1 - t2);
+      var units = [{
+        value: 86400000,
+        name: '天'
+      }, {
+        value: 3600000,
+        name: '小时'
+      }];
+      var remaining = diff;
+      var result = units.map(function (unit) {
+        var val = Math.floor(remaining / unit.value);
+        remaining %= unit.value;
+        return {
+          val: val,
+          name: unit.name
+        };
+      });
+      var output = result.filter(function (item) {
+        return item.val > 0;
+      }).map(function (item) {
+        return "".concat(item.val).concat(item.name);
+      }).join('');
+      return output || '0秒';
+    },
+    /**
+     * 返回上一页
+     */
+    customizeBack: function customizeBack() {
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+        var canNavBack;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return getCurrentPages();
+              case 2:
+                canNavBack = _context.sent;
+                if (canNavBack && canNavBack.length > 1) {
+                  uni.navigateBack();
+                } else {
+                  history.back();
+                }
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    /**
+     *
+     * 时间格式化
+     * {parmars} str   utc时间
+     * {returns} timeStr   格式化后的时间
+     */
+    initTime: function initTime(str) {
+      var timestamp = new Date(str).getTime();
+      var time = String(timestamp).length === 10 ? new Date(parseInt(timestamp) * 1000) : new Date(parseInt(timestamp));
+      var y = time.getFullYear(); // 年
+      var m = time.getMonth() + 1; // 月
+      if (m < 10) {
+        m = '0' + m;
+      }
+      var d = time.getDate(); // 日
+      if (d < 10) {
+        d = '0' + d;
+      }
+      var h = time.getHours(); // 时
+      if (h < 10) {
+        h = '0' + h;
+      }
+      var mm = time.getMinutes(); // 分
+      if (mm < 10) {
+        mm = '0' + mm;
+      }
+      var s = time.getSeconds(); // 秒
+      if (s < 10) {
+        s = '0' + s;
+      }
+      var timeStr = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;
+      return timeStr;
+    },
+    // 年月日
+    initDate: function initDate(str) {
+      var timestamp = new Date(str).getTime();
+      var time = String(timestamp).length === 10 ? new Date(parseInt(timestamp) * 1000) : new Date(parseInt(timestamp));
+      var y = time.getFullYear(); // 年
+      var m = time.getMonth() + 1; // 月
+      if (m < 10) {
+        m = '0' + m;
+      }
+      var d = time.getDate(); // 日
+      if (d < 10) {
+        d = '0' + d;
+      }
+      var h = time.getHours(); // 时
+      if (h < 10) {
+        h = '0' + h;
+      }
+      var mm = time.getMinutes(); // 分
+      if (mm < 10) {
+        mm = '0' + mm;
+      }
+      var s = time.getSeconds(); // 秒
+      if (s < 10) {
+        s = '0' + s;
+      }
+      var timeStr = y + '-' + m + '-' + d;
+      return timeStr;
+    }
+  }
+};
+exports.myMixin = myMixin;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 
@@ -2999,7 +3278,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝大市场","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝大市场","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -10042,7 +10321,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝大市场","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝大市场","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -10063,14 +10342,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝大市场","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝大市场","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝大市场","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝大市场","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -10166,7 +10445,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝大市场","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"乡愁宝大市场","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -10993,7 +11272,7 @@ var api = (_api = {
 }), (0, _defineProperty2.default)(_api, "goodsinfoList", function goodsinfoList(data) {
   return fetch('/api/farmers/goodsinfo/list', 'POST', data);
 }), (0, _defineProperty2.default)(_api, "presaleList", function presaleList(data) {
-  return fetch('/api/farmers/presale/list', 'POST', data);
+  return fetch('/api/farmers/market/goodslist', 'POST', data);
 }), (0, _defineProperty2.default)(_api, "delDishes", function delDishes(data) {
   return fetch('/api/farmers/delgoods', 'POST', data);
 }), (0, _defineProperty2.default)(_api, "delMoments", function delMoments(data) {
@@ -11016,6 +11295,24 @@ var api = (_api = {
   return fetch('/api/news/list', 'POST', data);
 }), (0, _defineProperty2.default)(_api, "classification", function classification(data) {
   return fetch('/api/news/category/list', 'POST', data);
+}), (0, _defineProperty2.default)(_api, "foodOnSale", function foodOnSale(data) {
+  return fetch('/api/farmers/market/addgoods', 'POST', data);
+}), (0, _defineProperty2.default)(_api, "XiaShiCity", function XiaShiCity(data) {
+  return fetch('/api/farmers/market/editgoods', 'POST', data);
+}), (0, _defineProperty2.default)(_api, "publishWholesale", function publishWholesale(data) {
+  return fetch('/api/user/sellinfo/add', 'POST', data);
+}), (0, _defineProperty2.default)(_api, "wholesaleList", function wholesaleList(data) {
+  return fetch('/api/sellinfo/list', 'POST', data);
+}), (0, _defineProperty2.default)(_api, "myProcurementData", function myProcurementData(data) {
+  return fetch('/api/user/buyinfo/mylist', 'POST', data);
+}), (0, _defineProperty2.default)(_api, "mySupplyData", function mySupplyData(data) {
+  return fetch('/api/user/sellinfo/mylist', 'POST', data);
+}), (0, _defineProperty2.default)(_api, "myaddressData", function myaddressData(data) {
+  return fetch('/api/user/myaddress', 'POST', data);
+}), (0, _defineProperty2.default)(_api, "addMyAddress", function addMyAddress(data) {
+  return fetch('/api/user/addaddress', 'POST', data);
+}), (0, _defineProperty2.default)(_api, "editMyAddress", function editMyAddress(data) {
+  return fetch('/api/user/editaddress', 'POST', data);
 }), _api);
 exports.api = api;
 var _default = {
@@ -13983,6 +14280,392 @@ exports.default = _default;
 
 /***/ }),
 
+/***/ 411:
+/*!***********************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/node_modules/dayjs/dayjs.min.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ 13);
+!function (t, e) {
+  "object" == ( false ? undefined : _typeof(exports)) && "undefined" != typeof module ? module.exports = e() :  true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (e),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : undefined;
+}(this, function () {
+  "use strict";
+
+  var t = 1e3,
+    e = 6e4,
+    n = 36e5,
+    r = "millisecond",
+    i = "second",
+    s = "minute",
+    u = "hour",
+    a = "day",
+    o = "week",
+    c = "month",
+    f = "quarter",
+    h = "year",
+    d = "date",
+    l = "Invalid Date",
+    $ = /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[Tt\s]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/,
+    y = /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,
+    M = {
+      name: "en",
+      weekdays: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),
+      months: "January_February_March_April_May_June_July_August_September_October_November_December".split("_"),
+      ordinal: function ordinal(t) {
+        var e = ["th", "st", "nd", "rd"],
+          n = t % 100;
+        return "[" + t + (e[(n - 20) % 10] || e[n] || e[0]) + "]";
+      }
+    },
+    m = function m(t, e, n) {
+      var r = String(t);
+      return !r || r.length >= e ? t : "" + Array(e + 1 - r.length).join(n) + t;
+    },
+    v = {
+      s: m,
+      z: function z(t) {
+        var e = -t.utcOffset(),
+          n = Math.abs(e),
+          r = Math.floor(n / 60),
+          i = n % 60;
+        return (e <= 0 ? "+" : "-") + m(r, 2, "0") + ":" + m(i, 2, "0");
+      },
+      m: function t(e, n) {
+        if (e.date() < n.date()) return -t(n, e);
+        var r = 12 * (n.year() - e.year()) + (n.month() - e.month()),
+          i = e.clone().add(r, c),
+          s = n - i < 0,
+          u = e.clone().add(r + (s ? -1 : 1), c);
+        return +(-(r + (n - i) / (s ? i - u : u - i)) || 0);
+      },
+      a: function a(t) {
+        return t < 0 ? Math.ceil(t) || 0 : Math.floor(t);
+      },
+      p: function p(t) {
+        return {
+          M: c,
+          y: h,
+          w: o,
+          d: a,
+          D: d,
+          h: u,
+          m: s,
+          s: i,
+          ms: r,
+          Q: f
+        }[t] || String(t || "").toLowerCase().replace(/s$/, "");
+      },
+      u: function u(t) {
+        return void 0 === t;
+      }
+    },
+    g = "en",
+    D = {};
+  D[g] = M;
+  var p = "$isDayjsObject",
+    S = function S(t) {
+      return t instanceof _ || !(!t || !t[p]);
+    },
+    w = function t(e, n, r) {
+      var i;
+      if (!e) return g;
+      if ("string" == typeof e) {
+        var s = e.toLowerCase();
+        D[s] && (i = s), n && (D[s] = n, i = s);
+        var u = e.split("-");
+        if (!i && u.length > 1) return t(u[0]);
+      } else {
+        var a = e.name;
+        D[a] = e, i = a;
+      }
+      return !r && i && (g = i), i || !r && g;
+    },
+    O = function O(t, e) {
+      if (S(t)) return t.clone();
+      var n = "object" == _typeof(e) ? e : {};
+      return n.date = t, n.args = arguments, new _(n);
+    },
+    b = v;
+  b.l = w, b.i = S, b.w = function (t, e) {
+    return O(t, {
+      locale: e.$L,
+      utc: e.$u,
+      x: e.$x,
+      $offset: e.$offset
+    });
+  };
+  var _ = function () {
+      function M(t) {
+        this.$L = w(t.locale, null, !0), this.parse(t), this.$x = this.$x || t.x || {}, this[p] = !0;
+      }
+      var m = M.prototype;
+      return m.parse = function (t) {
+        this.$d = function (t) {
+          var e = t.date,
+            n = t.utc;
+          if (null === e) return new Date(NaN);
+          if (b.u(e)) return new Date();
+          if (e instanceof Date) return new Date(e);
+          if ("string" == typeof e && !/Z$/i.test(e)) {
+            var r = e.match($);
+            if (r) {
+              var i = r[2] - 1 || 0,
+                s = (r[7] || "0").substring(0, 3);
+              return n ? new Date(Date.UTC(r[1], i, r[3] || 1, r[4] || 0, r[5] || 0, r[6] || 0, s)) : new Date(r[1], i, r[3] || 1, r[4] || 0, r[5] || 0, r[6] || 0, s);
+            }
+          }
+          return new Date(e);
+        }(t), this.init();
+      }, m.init = function () {
+        var t = this.$d;
+        this.$y = t.getFullYear(), this.$M = t.getMonth(), this.$D = t.getDate(), this.$W = t.getDay(), this.$H = t.getHours(), this.$m = t.getMinutes(), this.$s = t.getSeconds(), this.$ms = t.getMilliseconds();
+      }, m.$utils = function () {
+        return b;
+      }, m.isValid = function () {
+        return !(this.$d.toString() === l);
+      }, m.isSame = function (t, e) {
+        var n = O(t);
+        return this.startOf(e) <= n && n <= this.endOf(e);
+      }, m.isAfter = function (t, e) {
+        return O(t) < this.startOf(e);
+      }, m.isBefore = function (t, e) {
+        return this.endOf(e) < O(t);
+      }, m.$g = function (t, e, n) {
+        return b.u(t) ? this[e] : this.set(n, t);
+      }, m.unix = function () {
+        return Math.floor(this.valueOf() / 1e3);
+      }, m.valueOf = function () {
+        return this.$d.getTime();
+      }, m.startOf = function (t, e) {
+        var n = this,
+          r = !!b.u(e) || e,
+          f = b.p(t),
+          l = function l(t, e) {
+            var i = b.w(n.$u ? Date.UTC(n.$y, e, t) : new Date(n.$y, e, t), n);
+            return r ? i : i.endOf(a);
+          },
+          $ = function $(t, e) {
+            return b.w(n.toDate()[t].apply(n.toDate("s"), (r ? [0, 0, 0, 0] : [23, 59, 59, 999]).slice(e)), n);
+          },
+          y = this.$W,
+          M = this.$M,
+          m = this.$D,
+          v = "set" + (this.$u ? "UTC" : "");
+        switch (f) {
+          case h:
+            return r ? l(1, 0) : l(31, 11);
+          case c:
+            return r ? l(1, M) : l(0, M + 1);
+          case o:
+            var g = this.$locale().weekStart || 0,
+              D = (y < g ? y + 7 : y) - g;
+            return l(r ? m - D : m + (6 - D), M);
+          case a:
+          case d:
+            return $(v + "Hours", 0);
+          case u:
+            return $(v + "Minutes", 1);
+          case s:
+            return $(v + "Seconds", 2);
+          case i:
+            return $(v + "Milliseconds", 3);
+          default:
+            return this.clone();
+        }
+      }, m.endOf = function (t) {
+        return this.startOf(t, !1);
+      }, m.$set = function (t, e) {
+        var n,
+          o = b.p(t),
+          f = "set" + (this.$u ? "UTC" : ""),
+          l = (n = {}, n[a] = f + "Date", n[d] = f + "Date", n[c] = f + "Month", n[h] = f + "FullYear", n[u] = f + "Hours", n[s] = f + "Minutes", n[i] = f + "Seconds", n[r] = f + "Milliseconds", n)[o],
+          $ = o === a ? this.$D + (e - this.$W) : e;
+        if (o === c || o === h) {
+          var y = this.clone().set(d, 1);
+          y.$d[l]($), y.init(), this.$d = y.set(d, Math.min(this.$D, y.daysInMonth())).$d;
+        } else l && this.$d[l]($);
+        return this.init(), this;
+      }, m.set = function (t, e) {
+        return this.clone().$set(t, e);
+      }, m.get = function (t) {
+        return this[b.p(t)]();
+      }, m.add = function (r, f) {
+        var d,
+          l = this;
+        r = Number(r);
+        var $ = b.p(f),
+          y = function y(t) {
+            var e = O(l);
+            return b.w(e.date(e.date() + Math.round(t * r)), l);
+          };
+        if ($ === c) return this.set(c, this.$M + r);
+        if ($ === h) return this.set(h, this.$y + r);
+        if ($ === a) return y(1);
+        if ($ === o) return y(7);
+        var M = (d = {}, d[s] = e, d[u] = n, d[i] = t, d)[$] || 1,
+          m = this.$d.getTime() + r * M;
+        return b.w(m, this);
+      }, m.subtract = function (t, e) {
+        return this.add(-1 * t, e);
+      }, m.format = function (t) {
+        var e = this,
+          n = this.$locale();
+        if (!this.isValid()) return n.invalidDate || l;
+        var r = t || "YYYY-MM-DDTHH:mm:ssZ",
+          i = b.z(this),
+          s = this.$H,
+          u = this.$m,
+          a = this.$M,
+          o = n.weekdays,
+          c = n.months,
+          f = n.meridiem,
+          h = function h(t, n, i, s) {
+            return t && (t[n] || t(e, r)) || i[n].slice(0, s);
+          },
+          d = function d(t) {
+            return b.s(s % 12 || 12, t, "0");
+          },
+          $ = f || function (t, e, n) {
+            var r = t < 12 ? "AM" : "PM";
+            return n ? r.toLowerCase() : r;
+          };
+        return r.replace(y, function (t, r) {
+          return r || function (t) {
+            switch (t) {
+              case "YY":
+                return String(e.$y).slice(-2);
+              case "YYYY":
+                return b.s(e.$y, 4, "0");
+              case "M":
+                return a + 1;
+              case "MM":
+                return b.s(a + 1, 2, "0");
+              case "MMM":
+                return h(n.monthsShort, a, c, 3);
+              case "MMMM":
+                return h(c, a);
+              case "D":
+                return e.$D;
+              case "DD":
+                return b.s(e.$D, 2, "0");
+              case "d":
+                return String(e.$W);
+              case "dd":
+                return h(n.weekdaysMin, e.$W, o, 2);
+              case "ddd":
+                return h(n.weekdaysShort, e.$W, o, 3);
+              case "dddd":
+                return o[e.$W];
+              case "H":
+                return String(s);
+              case "HH":
+                return b.s(s, 2, "0");
+              case "h":
+                return d(1);
+              case "hh":
+                return d(2);
+              case "a":
+                return $(s, u, !0);
+              case "A":
+                return $(s, u, !1);
+              case "m":
+                return String(u);
+              case "mm":
+                return b.s(u, 2, "0");
+              case "s":
+                return String(e.$s);
+              case "ss":
+                return b.s(e.$s, 2, "0");
+              case "SSS":
+                return b.s(e.$ms, 3, "0");
+              case "Z":
+                return i;
+            }
+            return null;
+          }(t) || i.replace(":", "");
+        });
+      }, m.utcOffset = function () {
+        return 15 * -Math.round(this.$d.getTimezoneOffset() / 15);
+      }, m.diff = function (r, d, l) {
+        var $,
+          y = this,
+          M = b.p(d),
+          m = O(r),
+          v = (m.utcOffset() - this.utcOffset()) * e,
+          g = this - m,
+          D = function D() {
+            return b.m(y, m);
+          };
+        switch (M) {
+          case h:
+            $ = D() / 12;
+            break;
+          case c:
+            $ = D();
+            break;
+          case f:
+            $ = D() / 3;
+            break;
+          case o:
+            $ = (g - v) / 6048e5;
+            break;
+          case a:
+            $ = (g - v) / 864e5;
+            break;
+          case u:
+            $ = g / n;
+            break;
+          case s:
+            $ = g / e;
+            break;
+          case i:
+            $ = g / t;
+            break;
+          default:
+            $ = g;
+        }
+        return l ? $ : b.a($);
+      }, m.daysInMonth = function () {
+        return this.endOf(c).$D;
+      }, m.$locale = function () {
+        return D[this.$L];
+      }, m.locale = function (t, e) {
+        if (!t) return this.$L;
+        var n = this.clone(),
+          r = w(t, e, !0);
+        return r && (n.$L = r), n;
+      }, m.clone = function () {
+        return b.w(this.$d, this);
+      }, m.toDate = function () {
+        return new Date(this.valueOf());
+      }, m.toJSON = function () {
+        return this.isValid() ? this.toISOString() : null;
+      }, m.toISOString = function () {
+        return this.$d.toISOString();
+      }, m.toString = function () {
+        return this.$d.toUTCString();
+      }, M;
+    }(),
+    k = _.prototype;
+  return O.prototype = k, [["$ms", r], ["$s", i], ["$m", s], ["$H", u], ["$W", a], ["$M", c], ["$y", h], ["$D", d]].forEach(function (t) {
+    k[t[1]] = function (e) {
+      return this.$g(e, t[0], t[1]);
+    };
+  }), O.extend = function (t, e) {
+    return t.$i || (t(e, _, O), t.$i = !0), O;
+  }, O.locale = w, O.isDayjs = S, O.unix = function (t) {
+    return O(1e3 * t);
+  }, O.en = D[g], O.Ls = D, O.p = {}, O;
+});
+
+/***/ }),
+
 /***/ 42:
 /*!**************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vuex3/dist/vuex.common.js ***!
@@ -15240,531 +15923,6 @@ module.exports = index_cjs;
 
 /***/ }),
 
-/***/ 424:
-/*!***********************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/node_modules/dayjs/dayjs.min.js ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ 13);
-!function (t, e) {
-  "object" == ( false ? undefined : _typeof(exports)) && "undefined" != typeof module ? module.exports = e() :  true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (e),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
-				__WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : undefined;
-}(this, function () {
-  "use strict";
-
-  var t = 1e3,
-    e = 6e4,
-    n = 36e5,
-    r = "millisecond",
-    i = "second",
-    s = "minute",
-    u = "hour",
-    a = "day",
-    o = "week",
-    c = "month",
-    f = "quarter",
-    h = "year",
-    d = "date",
-    l = "Invalid Date",
-    $ = /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[Tt\s]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/,
-    y = /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,
-    M = {
-      name: "en",
-      weekdays: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"),
-      months: "January_February_March_April_May_June_July_August_September_October_November_December".split("_"),
-      ordinal: function ordinal(t) {
-        var e = ["th", "st", "nd", "rd"],
-          n = t % 100;
-        return "[" + t + (e[(n - 20) % 10] || e[n] || e[0]) + "]";
-      }
-    },
-    m = function m(t, e, n) {
-      var r = String(t);
-      return !r || r.length >= e ? t : "" + Array(e + 1 - r.length).join(n) + t;
-    },
-    v = {
-      s: m,
-      z: function z(t) {
-        var e = -t.utcOffset(),
-          n = Math.abs(e),
-          r = Math.floor(n / 60),
-          i = n % 60;
-        return (e <= 0 ? "+" : "-") + m(r, 2, "0") + ":" + m(i, 2, "0");
-      },
-      m: function t(e, n) {
-        if (e.date() < n.date()) return -t(n, e);
-        var r = 12 * (n.year() - e.year()) + (n.month() - e.month()),
-          i = e.clone().add(r, c),
-          s = n - i < 0,
-          u = e.clone().add(r + (s ? -1 : 1), c);
-        return +(-(r + (n - i) / (s ? i - u : u - i)) || 0);
-      },
-      a: function a(t) {
-        return t < 0 ? Math.ceil(t) || 0 : Math.floor(t);
-      },
-      p: function p(t) {
-        return {
-          M: c,
-          y: h,
-          w: o,
-          d: a,
-          D: d,
-          h: u,
-          m: s,
-          s: i,
-          ms: r,
-          Q: f
-        }[t] || String(t || "").toLowerCase().replace(/s$/, "");
-      },
-      u: function u(t) {
-        return void 0 === t;
-      }
-    },
-    g = "en",
-    D = {};
-  D[g] = M;
-  var p = "$isDayjsObject",
-    S = function S(t) {
-      return t instanceof _ || !(!t || !t[p]);
-    },
-    w = function t(e, n, r) {
-      var i;
-      if (!e) return g;
-      if ("string" == typeof e) {
-        var s = e.toLowerCase();
-        D[s] && (i = s), n && (D[s] = n, i = s);
-        var u = e.split("-");
-        if (!i && u.length > 1) return t(u[0]);
-      } else {
-        var a = e.name;
-        D[a] = e, i = a;
-      }
-      return !r && i && (g = i), i || !r && g;
-    },
-    O = function O(t, e) {
-      if (S(t)) return t.clone();
-      var n = "object" == _typeof(e) ? e : {};
-      return n.date = t, n.args = arguments, new _(n);
-    },
-    b = v;
-  b.l = w, b.i = S, b.w = function (t, e) {
-    return O(t, {
-      locale: e.$L,
-      utc: e.$u,
-      x: e.$x,
-      $offset: e.$offset
-    });
-  };
-  var _ = function () {
-      function M(t) {
-        this.$L = w(t.locale, null, !0), this.parse(t), this.$x = this.$x || t.x || {}, this[p] = !0;
-      }
-      var m = M.prototype;
-      return m.parse = function (t) {
-        this.$d = function (t) {
-          var e = t.date,
-            n = t.utc;
-          if (null === e) return new Date(NaN);
-          if (b.u(e)) return new Date();
-          if (e instanceof Date) return new Date(e);
-          if ("string" == typeof e && !/Z$/i.test(e)) {
-            var r = e.match($);
-            if (r) {
-              var i = r[2] - 1 || 0,
-                s = (r[7] || "0").substring(0, 3);
-              return n ? new Date(Date.UTC(r[1], i, r[3] || 1, r[4] || 0, r[5] || 0, r[6] || 0, s)) : new Date(r[1], i, r[3] || 1, r[4] || 0, r[5] || 0, r[6] || 0, s);
-            }
-          }
-          return new Date(e);
-        }(t), this.init();
-      }, m.init = function () {
-        var t = this.$d;
-        this.$y = t.getFullYear(), this.$M = t.getMonth(), this.$D = t.getDate(), this.$W = t.getDay(), this.$H = t.getHours(), this.$m = t.getMinutes(), this.$s = t.getSeconds(), this.$ms = t.getMilliseconds();
-      }, m.$utils = function () {
-        return b;
-      }, m.isValid = function () {
-        return !(this.$d.toString() === l);
-      }, m.isSame = function (t, e) {
-        var n = O(t);
-        return this.startOf(e) <= n && n <= this.endOf(e);
-      }, m.isAfter = function (t, e) {
-        return O(t) < this.startOf(e);
-      }, m.isBefore = function (t, e) {
-        return this.endOf(e) < O(t);
-      }, m.$g = function (t, e, n) {
-        return b.u(t) ? this[e] : this.set(n, t);
-      }, m.unix = function () {
-        return Math.floor(this.valueOf() / 1e3);
-      }, m.valueOf = function () {
-        return this.$d.getTime();
-      }, m.startOf = function (t, e) {
-        var n = this,
-          r = !!b.u(e) || e,
-          f = b.p(t),
-          l = function l(t, e) {
-            var i = b.w(n.$u ? Date.UTC(n.$y, e, t) : new Date(n.$y, e, t), n);
-            return r ? i : i.endOf(a);
-          },
-          $ = function $(t, e) {
-            return b.w(n.toDate()[t].apply(n.toDate("s"), (r ? [0, 0, 0, 0] : [23, 59, 59, 999]).slice(e)), n);
-          },
-          y = this.$W,
-          M = this.$M,
-          m = this.$D,
-          v = "set" + (this.$u ? "UTC" : "");
-        switch (f) {
-          case h:
-            return r ? l(1, 0) : l(31, 11);
-          case c:
-            return r ? l(1, M) : l(0, M + 1);
-          case o:
-            var g = this.$locale().weekStart || 0,
-              D = (y < g ? y + 7 : y) - g;
-            return l(r ? m - D : m + (6 - D), M);
-          case a:
-          case d:
-            return $(v + "Hours", 0);
-          case u:
-            return $(v + "Minutes", 1);
-          case s:
-            return $(v + "Seconds", 2);
-          case i:
-            return $(v + "Milliseconds", 3);
-          default:
-            return this.clone();
-        }
-      }, m.endOf = function (t) {
-        return this.startOf(t, !1);
-      }, m.$set = function (t, e) {
-        var n,
-          o = b.p(t),
-          f = "set" + (this.$u ? "UTC" : ""),
-          l = (n = {}, n[a] = f + "Date", n[d] = f + "Date", n[c] = f + "Month", n[h] = f + "FullYear", n[u] = f + "Hours", n[s] = f + "Minutes", n[i] = f + "Seconds", n[r] = f + "Milliseconds", n)[o],
-          $ = o === a ? this.$D + (e - this.$W) : e;
-        if (o === c || o === h) {
-          var y = this.clone().set(d, 1);
-          y.$d[l]($), y.init(), this.$d = y.set(d, Math.min(this.$D, y.daysInMonth())).$d;
-        } else l && this.$d[l]($);
-        return this.init(), this;
-      }, m.set = function (t, e) {
-        return this.clone().$set(t, e);
-      }, m.get = function (t) {
-        return this[b.p(t)]();
-      }, m.add = function (r, f) {
-        var d,
-          l = this;
-        r = Number(r);
-        var $ = b.p(f),
-          y = function y(t) {
-            var e = O(l);
-            return b.w(e.date(e.date() + Math.round(t * r)), l);
-          };
-        if ($ === c) return this.set(c, this.$M + r);
-        if ($ === h) return this.set(h, this.$y + r);
-        if ($ === a) return y(1);
-        if ($ === o) return y(7);
-        var M = (d = {}, d[s] = e, d[u] = n, d[i] = t, d)[$] || 1,
-          m = this.$d.getTime() + r * M;
-        return b.w(m, this);
-      }, m.subtract = function (t, e) {
-        return this.add(-1 * t, e);
-      }, m.format = function (t) {
-        var e = this,
-          n = this.$locale();
-        if (!this.isValid()) return n.invalidDate || l;
-        var r = t || "YYYY-MM-DDTHH:mm:ssZ",
-          i = b.z(this),
-          s = this.$H,
-          u = this.$m,
-          a = this.$M,
-          o = n.weekdays,
-          c = n.months,
-          f = n.meridiem,
-          h = function h(t, n, i, s) {
-            return t && (t[n] || t(e, r)) || i[n].slice(0, s);
-          },
-          d = function d(t) {
-            return b.s(s % 12 || 12, t, "0");
-          },
-          $ = f || function (t, e, n) {
-            var r = t < 12 ? "AM" : "PM";
-            return n ? r.toLowerCase() : r;
-          };
-        return r.replace(y, function (t, r) {
-          return r || function (t) {
-            switch (t) {
-              case "YY":
-                return String(e.$y).slice(-2);
-              case "YYYY":
-                return b.s(e.$y, 4, "0");
-              case "M":
-                return a + 1;
-              case "MM":
-                return b.s(a + 1, 2, "0");
-              case "MMM":
-                return h(n.monthsShort, a, c, 3);
-              case "MMMM":
-                return h(c, a);
-              case "D":
-                return e.$D;
-              case "DD":
-                return b.s(e.$D, 2, "0");
-              case "d":
-                return String(e.$W);
-              case "dd":
-                return h(n.weekdaysMin, e.$W, o, 2);
-              case "ddd":
-                return h(n.weekdaysShort, e.$W, o, 3);
-              case "dddd":
-                return o[e.$W];
-              case "H":
-                return String(s);
-              case "HH":
-                return b.s(s, 2, "0");
-              case "h":
-                return d(1);
-              case "hh":
-                return d(2);
-              case "a":
-                return $(s, u, !0);
-              case "A":
-                return $(s, u, !1);
-              case "m":
-                return String(u);
-              case "mm":
-                return b.s(u, 2, "0");
-              case "s":
-                return String(e.$s);
-              case "ss":
-                return b.s(e.$s, 2, "0");
-              case "SSS":
-                return b.s(e.$ms, 3, "0");
-              case "Z":
-                return i;
-            }
-            return null;
-          }(t) || i.replace(":", "");
-        });
-      }, m.utcOffset = function () {
-        return 15 * -Math.round(this.$d.getTimezoneOffset() / 15);
-      }, m.diff = function (r, d, l) {
-        var $,
-          y = this,
-          M = b.p(d),
-          m = O(r),
-          v = (m.utcOffset() - this.utcOffset()) * e,
-          g = this - m,
-          D = function D() {
-            return b.m(y, m);
-          };
-        switch (M) {
-          case h:
-            $ = D() / 12;
-            break;
-          case c:
-            $ = D();
-            break;
-          case f:
-            $ = D() / 3;
-            break;
-          case o:
-            $ = (g - v) / 6048e5;
-            break;
-          case a:
-            $ = (g - v) / 864e5;
-            break;
-          case u:
-            $ = g / n;
-            break;
-          case s:
-            $ = g / e;
-            break;
-          case i:
-            $ = g / t;
-            break;
-          default:
-            $ = g;
-        }
-        return l ? $ : b.a($);
-      }, m.daysInMonth = function () {
-        return this.endOf(c).$D;
-      }, m.$locale = function () {
-        return D[this.$L];
-      }, m.locale = function (t, e) {
-        if (!t) return this.$L;
-        var n = this.clone(),
-          r = w(t, e, !0);
-        return r && (n.$L = r), n;
-      }, m.clone = function () {
-        return b.w(this.$d, this);
-      }, m.toDate = function () {
-        return new Date(this.valueOf());
-      }, m.toJSON = function () {
-        return this.isValid() ? this.toISOString() : null;
-      }, m.toISOString = function () {
-        return this.$d.toISOString();
-      }, m.toString = function () {
-        return this.$d.toUTCString();
-      }, M;
-    }(),
-    k = _.prototype;
-  return O.prototype = k, [["$ms", r], ["$s", i], ["$m", s], ["$H", u], ["$W", a], ["$M", c], ["$y", h], ["$D", d]].forEach(function (t) {
-    k[t[1]] = function (e) {
-      return this.$g(e, t[0], t[1]);
-    };
-  }), O.extend = function (t, e) {
-    return t.$i || (t(e, _, O), t.$i = !0), O;
-  }, O.locale = w, O.isDayjs = S, O.unix = function (t) {
-    return O(1e3 * t);
-  }, O.en = D[g], O.Ls = D, O.p = {}, O;
-});
-
-/***/ }),
-
-/***/ 425:
-/*!*******************************************!*\
-  !*** E:/xcbh5/xcbh5/test/utils/public.js ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.myMixin = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 54));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
-var myMixin = {
-  methods: {
-    getChineseTimeDiff: function getChineseTimeDiff(t1, t2) {
-      var diff = Math.abs(t1 - t2);
-      var units = [{
-        value: 86400000,
-        name: '天'
-      }, {
-        value: 3600000,
-        name: '小时'
-      }];
-      var remaining = diff;
-      var result = units.map(function (unit) {
-        var val = Math.floor(remaining / unit.value);
-        remaining %= unit.value;
-        return {
-          val: val,
-          name: unit.name
-        };
-      });
-      var output = result.filter(function (item) {
-        return item.val > 0;
-      }).map(function (item) {
-        return "".concat(item.val).concat(item.name);
-      }).join('');
-      return output || '0秒';
-    },
-    /**
-     * 返回上一页
-     */
-    customizeBack: function customizeBack() {
-      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
-        var canNavBack;
-        return _regenerator.default.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return getCurrentPages();
-              case 2:
-                canNavBack = _context.sent;
-                if (canNavBack && canNavBack.length > 1) {
-                  uni.navigateBack();
-                } else {
-                  history.back();
-                }
-              case 4:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    /**
-     *
-     * 时间格式化
-     * {parmars} str   utc时间
-     * {returns} timeStr   格式化后的时间
-     */
-    initTime: function initTime(str) {
-      var timestamp = new Date(str).getTime();
-      var time = String(timestamp).length === 10 ? new Date(parseInt(timestamp) * 1000) : new Date(parseInt(timestamp));
-      var y = time.getFullYear(); // 年
-      var m = time.getMonth() + 1; // 月
-      if (m < 10) {
-        m = '0' + m;
-      }
-      var d = time.getDate(); // 日
-      if (d < 10) {
-        d = '0' + d;
-      }
-      var h = time.getHours(); // 时
-      if (h < 10) {
-        h = '0' + h;
-      }
-      var mm = time.getMinutes(); // 分
-      if (mm < 10) {
-        mm = '0' + mm;
-      }
-      var s = time.getSeconds(); // 秒
-      if (s < 10) {
-        s = '0' + s;
-      }
-      var timeStr = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s;
-      return timeStr;
-    },
-    // 年月日
-    initDate: function initDate(str) {
-      var timestamp = new Date(str).getTime();
-      var time = String(timestamp).length === 10 ? new Date(parseInt(timestamp) * 1000) : new Date(parseInt(timestamp));
-      var y = time.getFullYear(); // 年
-      var m = time.getMonth() + 1; // 月
-      if (m < 10) {
-        m = '0' + m;
-      }
-      var d = time.getDate(); // 日
-      if (d < 10) {
-        d = '0' + d;
-      }
-      var h = time.getHours(); // 时
-      if (h < 10) {
-        h = '0' + h;
-      }
-      var mm = time.getMinutes(); // 分
-      if (mm < 10) {
-        mm = '0' + mm;
-      }
-      var s = time.getSeconds(); // 秒
-      if (s < 10) {
-        s = '0' + s;
-      }
-      var timeStr = y + '-' + m + '-' + d;
-      return timeStr;
-    }
-  }
-};
-exports.myMixin = myMixin;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-
 /***/ 43:
 /*!*******************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js ***!
@@ -16843,7 +17001,47 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 671:
+/***/ 7:
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _iterableToArrayLimit(r, l) {
+  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = !0,
+      o = !1;
+    try {
+      if (i = (t = t.call(r)).next, 0 === l) {
+        if (Object(t) !== t) return;
+        f = !1;
+      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0) {
+        ;
+      }
+    } catch (r) {
+      o = !0, n = r;
+    } finally {
+      try {
+        if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
+      } finally {
+        if (o) throw n;
+      }
+    }
+    return a;
+  }
+}
+module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 765:
 /*!*******************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-icons/components/uni-icons/uniicons_file_vue.js ***!
   \*******************************************************************************************/
@@ -17347,47 +17545,87 @@ exports.fontData = fontData;
 
 /***/ }),
 
-/***/ 7:
-/*!*********************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
-  \*********************************************************************/
+/***/ 773:
+/*!********************************************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-load-more/components/uni-load-more/i18n/index.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-function _iterableToArrayLimit(r, l) {
-  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
-  if (null != t) {
-    var e,
-      n,
-      i,
-      u,
-      a = [],
-      f = !0,
-      o = !1;
-    try {
-      if (i = (t = t.call(r)).next, 0 === l) {
-        if (Object(t) !== t) return;
-        f = !1;
-      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0) {
-        ;
-      }
-    } catch (r) {
-      o = !0, n = r;
-    } finally {
-      try {
-        if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
-      } finally {
-        if (o) throw n;
-      }
-    }
-    return a;
-  }
-}
-module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module.exports["default"] = module.exports;
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 774));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 775));
+var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 776));
+var _default = {
+  en: _en.default,
+  'zh-Hans': _zhHans.default,
+  'zh-Hant': _zhHant.default
+};
+exports.default = _default;
 
 /***/ }),
 
-/***/ 707:
+/***/ 774:
+/*!*******************************************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-load-more/components/uni-load-more/i18n/en.json ***!
+  \*******************************************************************************************/
+/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"Pull up to show more\",\"uni-load-more.contentrefresh\":\"loading...\",\"uni-load-more.contentnomore\":\"No more data\"}");
+
+/***/ }),
+
+/***/ 775:
+/*!************************************************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hans.json ***!
+  \************************************************************************************************/
+/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉显示更多\",\"uni-load-more.contentrefresh\":\"正在加载...\",\"uni-load-more.contentnomore\":\"没有更多数据了\"}");
+
+/***/ }),
+
+/***/ 776:
+/*!************************************************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hant.json ***!
+  \************************************************************************************************/
+/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉顯示更多\",\"uni-load-more.contentrefresh\":\"正在加載...\",\"uni-load-more.contentnomore\":\"沒有更多數據了\"}");
+
+/***/ }),
+
+/***/ 8:
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 9);
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 812:
 /*!********************************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-datetime-picker/components/uni-datetime-picker/i18n/index.js ***!
   \********************************************************************************************************/
@@ -17402,9 +17640,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 708));
-var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 709));
-var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 710));
+var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 813));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 814));
+var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 815));
 var _default = {
   en: _en.default,
   'zh-Hans': _zhHans.default,
@@ -17414,7 +17652,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 708:
+/***/ 813:
 /*!*******************************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-datetime-picker/components/uni-datetime-picker/i18n/en.json ***!
   \*******************************************************************************************************/
@@ -17425,7 +17663,7 @@ module.exports = JSON.parse("{\"uni-datetime-picker.selectDate\":\"select date\"
 
 /***/ }),
 
-/***/ 709:
+/***/ 814:
 /*!************************************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-datetime-picker/components/uni-datetime-picker/i18n/zh-Hans.json ***!
   \************************************************************************************************************/
@@ -17436,7 +17674,7 @@ module.exports = JSON.parse("{\"uni-datetime-picker.selectDate\":\"选择日期\
 
 /***/ }),
 
-/***/ 710:
+/***/ 815:
 /*!************************************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-datetime-picker/components/uni-datetime-picker/i18n/zh-Hant.json ***!
   \************************************************************************************************************/
@@ -17447,7 +17685,7 @@ module.exports = JSON.parse("{\"uni-datetime-picker.selectDate\":\"選擇日期\
 
 /***/ }),
 
-/***/ 711:
+/***/ 816:
 /*!**************************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-datetime-picker/components/uni-datetime-picker/util.js ***!
   \**************************************************************************************************/
@@ -17897,7 +18135,7 @@ function fixIosDateFormat(value) {
 
 /***/ }),
 
-/***/ 740:
+/***/ 845:
 /*!*******************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-qrcode/components/uv-qrcode/props.js ***!
   \*******************************************************************************/
@@ -17995,7 +18233,7 @@ exports.default = _default2;
 
 /***/ }),
 
-/***/ 741:
+/***/ 846:
 /*!*************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-ui-tools/libs/mixin/mpMixin.js ***!
   \*************************************************************************/
@@ -18019,7 +18257,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 742:
+/***/ 847:
 /*!***********************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-ui-tools/libs/mixin/mixin.js ***!
   \***********************************************************************/
@@ -18036,11 +18274,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var index = _interopRequireWildcard(__webpack_require__(/*! ../function/index.js */ 743));
-var test = _interopRequireWildcard(__webpack_require__(/*! ../function/test.js */ 744));
-var _route = _interopRequireDefault(__webpack_require__(/*! ../util/route.js */ 747));
-var _debounce = _interopRequireDefault(__webpack_require__(/*! ../function/debounce.js */ 748));
-var _throttle = _interopRequireDefault(__webpack_require__(/*! ../function/throttle.js */ 749));
+var index = _interopRequireWildcard(__webpack_require__(/*! ../function/index.js */ 848));
+var test = _interopRequireWildcard(__webpack_require__(/*! ../function/test.js */ 849));
+var _route = _interopRequireDefault(__webpack_require__(/*! ../util/route.js */ 852));
+var _debounce = _interopRequireDefault(__webpack_require__(/*! ../function/debounce.js */ 853));
+var _throttle = _interopRequireDefault(__webpack_require__(/*! ../function/throttle.js */ 854));
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -18221,7 +18459,7 @@ exports.default = _default2;
 
 /***/ }),
 
-/***/ 743:
+/***/ 848:
 /*!**************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-ui-tools/libs/function/index.js ***!
   \**************************************************************************/
@@ -18267,8 +18505,8 @@ exports.trim = trim;
 exports.type2icon = type2icon;
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
-var _test = __webpack_require__(/*! ./test.js */ 744);
-var _digit = __webpack_require__(/*! ./digit.js */ 745);
+var _test = __webpack_require__(/*! ./test.js */ 849);
+var _digit = __webpack_require__(/*! ./digit.js */ 850);
 /**
  * @description 如果value小于min，取min；如果value大于max，取max
  * @param {number} min
@@ -19020,7 +19258,7 @@ function setConfig(_ref5) {
 
 /***/ }),
 
-/***/ 744:
+/***/ 849:
 /*!*************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-ui-tools/libs/function/test.js ***!
   \*************************************************************************/
@@ -19321,7 +19559,7 @@ function regExp(o) {
 
 /***/ }),
 
-/***/ 745:
+/***/ 850:
 /*!**************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-ui-tools/libs/function/digit.js ***!
   \**************************************************************************/
@@ -19342,7 +19580,7 @@ exports.minus = minus;
 exports.plus = plus;
 exports.round = round;
 exports.times = times;
-var _toArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toArray */ 746));
+var _toArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toArray */ 851));
 var _boundaryCheckingState = true; // 是否进行越界检查的全局开关
 
 /**
@@ -19524,7 +19762,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 746:
+/***/ 851:
 /*!********************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/toArray.js ***!
   \********************************************************/
@@ -19542,7 +19780,7 @@ module.exports = _toArray, module.exports.__esModule = true, module.exports["def
 
 /***/ }),
 
-/***/ 747:
+/***/ 852:
 /*!**********************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-ui-tools/libs/util/route.js ***!
   \**********************************************************************/
@@ -19561,7 +19799,7 @@ var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-var _index = __webpack_require__(/*! @/uni_modules/uv-ui-tools/libs/function/index.js */ 743);
+var _index = __webpack_require__(/*! @/uni_modules/uv-ui-tools/libs/function/index.js */ 848);
 /**
  * 路由跳转方法，该方法相对于直接使用uni.xxx的好处是使用更加简单快捷
  * 并且带有路由拦截功能
@@ -19735,7 +19973,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 748:
+/***/ 853:
 /*!*****************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-ui-tools/libs/function/debounce.js ***!
   \*****************************************************************************/
@@ -19783,7 +20021,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 749:
+/***/ 854:
 /*!*****************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-ui-tools/libs/function/throttle.js ***!
   \*****************************************************************************/
@@ -19833,7 +20071,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 750:
+/***/ 855:
 /*!********************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-qrcode/components/uv-qrcode/qrcode.js ***!
   \********************************************************************************/
@@ -21090,7 +21328,7 @@ f.prototype = {
 
 /***/ }),
 
-/***/ 751:
+/***/ 856:
 /*!*******************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-qrcode/components/uv-qrcode/queue.js ***!
   \*******************************************************************************/
@@ -21147,7 +21385,7 @@ exports.queueLoadImage = queueLoadImage;
 
 /***/ }),
 
-/***/ 752:
+/***/ 857:
 /*!*******************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uv-qrcode/components/uv-qrcode/cache.js ***!
   \*******************************************************************************/
@@ -21166,27 +21404,1136 @@ exports.cacheImageList = cacheImageList;
 
 /***/ }),
 
-/***/ 8:
-/*!***************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
-  \***************************************************************************/
+/***/ 9:
+/*!*****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
+  \*****************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 9);
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+  return arr2;
 }
-module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 
-/***/ 837:
+/***/ 907:
+/*!**********************************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-forms/components/uni-forms/validate.js ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 54));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 908));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 909));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 911));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+var pattern = {
+  email: /^\S+?@\S+?\.\S+?$/,
+  idcard: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
+  url: new RegExp("^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$", 'i')
+};
+var FORMAT_MAPPING = {
+  "int": 'integer',
+  "bool": 'boolean',
+  "double": 'number',
+  "long": 'number',
+  "password": 'string'
+  // "fileurls": 'array'
+};
+
+function formatMessage(args) {
+  var resources = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var defaultMessage = ['label'];
+  defaultMessage.forEach(function (item) {
+    if (args[item] === undefined) {
+      args[item] = '';
+    }
+  });
+  var str = resources;
+  for (var key in args) {
+    var reg = new RegExp('{' + key + '}');
+    str = str.replace(reg, args[key]);
+  }
+  return str;
+}
+function isEmptyValue(value, type) {
+  if (value === undefined || value === null) {
+    return true;
+  }
+  if (typeof value === 'string' && !value) {
+    return true;
+  }
+  if (Array.isArray(value) && !value.length) {
+    return true;
+  }
+  if (type === 'object' && !Object.keys(value).length) {
+    return true;
+  }
+  return false;
+}
+var types = {
+  integer: function integer(value) {
+    return types.number(value) && parseInt(value, 10) === value;
+  },
+  string: function string(value) {
+    return typeof value === 'string';
+  },
+  number: function number(value) {
+    if (isNaN(value)) {
+      return false;
+    }
+    return typeof value === 'number';
+  },
+  "boolean": function boolean(value) {
+    return typeof value === 'boolean';
+  },
+  "float": function float(value) {
+    return types.number(value) && !types.integer(value);
+  },
+  array: function array(value) {
+    return Array.isArray(value);
+  },
+  object: function object(value) {
+    return (0, _typeof2.default)(value) === 'object' && !types.array(value);
+  },
+  date: function date(value) {
+    return value instanceof Date;
+  },
+  timestamp: function timestamp(value) {
+    if (!this.integer(value) || Math.abs(value).toString().length > 16) {
+      return false;
+    }
+    return true;
+  },
+  file: function file(value) {
+    return typeof value.url === 'string';
+  },
+  email: function email(value) {
+    return typeof value === 'string' && !!value.match(pattern.email) && value.length < 255;
+  },
+  url: function url(value) {
+    return typeof value === 'string' && !!value.match(pattern.url);
+  },
+  pattern: function pattern(reg, value) {
+    try {
+      return new RegExp(reg).test(value);
+    } catch (e) {
+      return false;
+    }
+  },
+  method: function method(value) {
+    return typeof value === 'function';
+  },
+  idcard: function idcard(value) {
+    return typeof value === 'string' && !!value.match(pattern.idcard);
+  },
+  'url-https': function urlHttps(value) {
+    return this.url(value) && value.startsWith('https://');
+  },
+  'url-scheme': function urlScheme(value) {
+    return value.startsWith('://');
+  },
+  'url-web': function urlWeb(value) {
+    return false;
+  }
+};
+var RuleValidator = /*#__PURE__*/function () {
+  function RuleValidator(message) {
+    (0, _classCallCheck2.default)(this, RuleValidator);
+    this._message = message;
+  }
+  (0, _createClass2.default)(RuleValidator, [{
+    key: "validateRule",
+    value: function () {
+      var _validateRule = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(fieldKey, fieldValue, value, data, allData) {
+        var result, rules, hasRequired, message, i, rule, vt, now, resultExpr;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                result = null;
+                rules = fieldValue.rules;
+                hasRequired = rules.findIndex(function (item) {
+                  return item.required;
+                });
+                if (!(hasRequired < 0)) {
+                  _context.next = 8;
+                  break;
+                }
+                if (!(value === null || value === undefined)) {
+                  _context.next = 6;
+                  break;
+                }
+                return _context.abrupt("return", result);
+              case 6:
+                if (!(typeof value === 'string' && !value.length)) {
+                  _context.next = 8;
+                  break;
+                }
+                return _context.abrupt("return", result);
+              case 8:
+                message = this._message;
+                if (!(rules === undefined)) {
+                  _context.next = 11;
+                  break;
+                }
+                return _context.abrupt("return", message['default']);
+              case 11:
+                i = 0;
+              case 12:
+                if (!(i < rules.length)) {
+                  _context.next = 35;
+                  break;
+                }
+                rule = rules[i];
+                vt = this._getValidateType(rule);
+                Object.assign(rule, {
+                  label: fieldValue.label || "[\"".concat(fieldKey, "\"]")
+                });
+                if (!RuleValidatorHelper[vt]) {
+                  _context.next = 20;
+                  break;
+                }
+                result = RuleValidatorHelper[vt](rule, value, message);
+                if (!(result != null)) {
+                  _context.next = 20;
+                  break;
+                }
+                return _context.abrupt("break", 35);
+              case 20:
+                if (!rule.validateExpr) {
+                  _context.next = 26;
+                  break;
+                }
+                now = Date.now();
+                resultExpr = rule.validateExpr(value, allData, now);
+                if (!(resultExpr === false)) {
+                  _context.next = 26;
+                  break;
+                }
+                result = this._getMessage(rule, rule.errorMessage || this._message['default']);
+                return _context.abrupt("break", 35);
+              case 26:
+                if (!rule.validateFunction) {
+                  _context.next = 32;
+                  break;
+                }
+                _context.next = 29;
+                return this.validateFunction(rule, value, data, allData, vt);
+              case 29:
+                result = _context.sent;
+                if (!(result !== null)) {
+                  _context.next = 32;
+                  break;
+                }
+                return _context.abrupt("break", 35);
+              case 32:
+                i++;
+                _context.next = 12;
+                break;
+              case 35:
+                if (result !== null) {
+                  result = message.TAG + result;
+                }
+                return _context.abrupt("return", result);
+              case 37:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+      function validateRule(_x, _x2, _x3, _x4, _x5) {
+        return _validateRule.apply(this, arguments);
+      }
+      return validateRule;
+    }()
+  }, {
+    key: "validateFunction",
+    value: function () {
+      var _validateFunction = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2(rule, value, data, allData, vt) {
+        var result, callbackMessage, res;
+        return _regenerator.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                result = null;
+                _context2.prev = 1;
+                callbackMessage = null;
+                _context2.next = 5;
+                return rule.validateFunction(rule, value, allData || data, function (message) {
+                  callbackMessage = message;
+                });
+              case 5:
+                res = _context2.sent;
+                if (callbackMessage || typeof res === 'string' && res || res === false) {
+                  result = this._getMessage(rule, callbackMessage || res, vt);
+                }
+                _context2.next = 12;
+                break;
+              case 9:
+                _context2.prev = 9;
+                _context2.t0 = _context2["catch"](1);
+                result = this._getMessage(rule, _context2.t0.message, vt);
+              case 12:
+                return _context2.abrupt("return", result);
+              case 13:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[1, 9]]);
+      }));
+      function validateFunction(_x6, _x7, _x8, _x9, _x10) {
+        return _validateFunction.apply(this, arguments);
+      }
+      return validateFunction;
+    }()
+  }, {
+    key: "_getMessage",
+    value: function _getMessage(rule, message, vt) {
+      return formatMessage(rule, message || rule.errorMessage || this._message[vt] || message['default']);
+    }
+  }, {
+    key: "_getValidateType",
+    value: function _getValidateType(rule) {
+      var result = '';
+      if (rule.required) {
+        result = 'required';
+      } else if (rule.format) {
+        result = 'format';
+      } else if (rule.arrayType) {
+        result = 'arrayTypeFormat';
+      } else if (rule.range) {
+        result = 'range';
+      } else if (rule.maximum !== undefined || rule.minimum !== undefined) {
+        result = 'rangeNumber';
+      } else if (rule.maxLength !== undefined || rule.minLength !== undefined) {
+        result = 'rangeLength';
+      } else if (rule.pattern) {
+        result = 'pattern';
+      } else if (rule.validateFunction) {
+        result = 'validateFunction';
+      }
+      return result;
+    }
+  }]);
+  return RuleValidator;
+}();
+var RuleValidatorHelper = {
+  required: function required(rule, value, message) {
+    if (rule.required && isEmptyValue(value, rule.format || (0, _typeof2.default)(value))) {
+      return formatMessage(rule, rule.errorMessage || message.required);
+    }
+    return null;
+  },
+  range: function range(rule, value, message) {
+    var range = rule.range,
+      errorMessage = rule.errorMessage;
+    var list = new Array(range.length);
+    for (var i = 0; i < range.length; i++) {
+      var item = range[i];
+      if (types.object(item) && item.value !== undefined) {
+        list[i] = item.value;
+      } else {
+        list[i] = item;
+      }
+    }
+    var result = false;
+    if (Array.isArray(value)) {
+      result = new Set(value.concat(list)).size === list.length;
+    } else {
+      if (list.indexOf(value) > -1) {
+        result = true;
+      }
+    }
+    if (!result) {
+      return formatMessage(rule, errorMessage || message['enum']);
+    }
+    return null;
+  },
+  rangeNumber: function rangeNumber(rule, value, message) {
+    if (!types.number(value)) {
+      return formatMessage(rule, rule.errorMessage || message.pattern.mismatch);
+    }
+    var minimum = rule.minimum,
+      maximum = rule.maximum,
+      exclusiveMinimum = rule.exclusiveMinimum,
+      exclusiveMaximum = rule.exclusiveMaximum;
+    var min = exclusiveMinimum ? value <= minimum : value < minimum;
+    var max = exclusiveMaximum ? value >= maximum : value > maximum;
+    if (minimum !== undefined && min) {
+      return formatMessage(rule, rule.errorMessage || message['number'][exclusiveMinimum ? 'exclusiveMinimum' : 'minimum']);
+    } else if (maximum !== undefined && max) {
+      return formatMessage(rule, rule.errorMessage || message['number'][exclusiveMaximum ? 'exclusiveMaximum' : 'maximum']);
+    } else if (minimum !== undefined && maximum !== undefined && (min || max)) {
+      return formatMessage(rule, rule.errorMessage || message['number'].range);
+    }
+    return null;
+  },
+  rangeLength: function rangeLength(rule, value, message) {
+    if (!types.string(value) && !types.array(value)) {
+      return formatMessage(rule, rule.errorMessage || message.pattern.mismatch);
+    }
+    var min = rule.minLength;
+    var max = rule.maxLength;
+    var val = value.length;
+    if (min !== undefined && val < min) {
+      return formatMessage(rule, rule.errorMessage || message['length'].minLength);
+    } else if (max !== undefined && val > max) {
+      return formatMessage(rule, rule.errorMessage || message['length'].maxLength);
+    } else if (min !== undefined && max !== undefined && (val < min || val > max)) {
+      return formatMessage(rule, rule.errorMessage || message['length'].range);
+    }
+    return null;
+  },
+  pattern: function pattern(rule, value, message) {
+    if (!types['pattern'](rule.pattern, value)) {
+      return formatMessage(rule, rule.errorMessage || message.pattern.mismatch);
+    }
+    return null;
+  },
+  format: function format(rule, value, message) {
+    var customTypes = Object.keys(types);
+    var format = FORMAT_MAPPING[rule.format] ? FORMAT_MAPPING[rule.format] : rule.format || rule.arrayType;
+    if (customTypes.indexOf(format) > -1) {
+      if (!types[format](value)) {
+        return formatMessage(rule, rule.errorMessage || message.typeError);
+      }
+    }
+    return null;
+  },
+  arrayTypeFormat: function arrayTypeFormat(rule, value, message) {
+    if (!Array.isArray(value)) {
+      return formatMessage(rule, rule.errorMessage || message.typeError);
+    }
+    for (var i = 0; i < value.length; i++) {
+      var element = value[i];
+      var formatResult = this.format(rule, element, message);
+      if (formatResult !== null) {
+        return formatResult;
+      }
+    }
+    return null;
+  }
+};
+var SchemaValidator = /*#__PURE__*/function (_RuleValidator) {
+  (0, _inherits2.default)(SchemaValidator, _RuleValidator);
+  var _super = _createSuper(SchemaValidator);
+  function SchemaValidator(schema, options) {
+    var _this;
+    (0, _classCallCheck2.default)(this, SchemaValidator);
+    _this = _super.call(this, SchemaValidator.message);
+    _this._schema = schema;
+    _this._options = options || null;
+    return _this;
+  }
+  (0, _createClass2.default)(SchemaValidator, [{
+    key: "updateSchema",
+    value: function updateSchema(schema) {
+      this._schema = schema;
+    }
+  }, {
+    key: "validate",
+    value: function () {
+      var _validate = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3(data, allData) {
+        var result;
+        return _regenerator.default.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                result = this._checkFieldInSchema(data);
+                if (result) {
+                  _context3.next = 5;
+                  break;
+                }
+                _context3.next = 4;
+                return this.invokeValidate(data, false, allData);
+              case 4:
+                result = _context3.sent;
+              case 5:
+                return _context3.abrupt("return", result.length ? result[0] : null);
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+      function validate(_x11, _x12) {
+        return _validate.apply(this, arguments);
+      }
+      return validate;
+    }()
+  }, {
+    key: "validateAll",
+    value: function () {
+      var _validateAll = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4(data, allData) {
+        var result;
+        return _regenerator.default.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                result = this._checkFieldInSchema(data);
+                if (result) {
+                  _context4.next = 5;
+                  break;
+                }
+                _context4.next = 4;
+                return this.invokeValidate(data, true, allData);
+              case 4:
+                result = _context4.sent;
+              case 5:
+                return _context4.abrupt("return", result);
+              case 6:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+      function validateAll(_x13, _x14) {
+        return _validateAll.apply(this, arguments);
+      }
+      return validateAll;
+    }()
+  }, {
+    key: "validateUpdate",
+    value: function () {
+      var _validateUpdate = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee5(data, allData) {
+        var result;
+        return _regenerator.default.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                result = this._checkFieldInSchema(data);
+                if (result) {
+                  _context5.next = 5;
+                  break;
+                }
+                _context5.next = 4;
+                return this.invokeValidateUpdate(data, false, allData);
+              case 4:
+                result = _context5.sent;
+              case 5:
+                return _context5.abrupt("return", result.length ? result[0] : null);
+              case 6:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+      function validateUpdate(_x15, _x16) {
+        return _validateUpdate.apply(this, arguments);
+      }
+      return validateUpdate;
+    }()
+  }, {
+    key: "invokeValidate",
+    value: function () {
+      var _invokeValidate = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee6(data, all, allData) {
+        var result, schema, key, value, errorMessage;
+        return _regenerator.default.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                result = [];
+                schema = this._schema;
+                _context6.t0 = _regenerator.default.keys(schema);
+              case 3:
+                if ((_context6.t1 = _context6.t0()).done) {
+                  _context6.next = 15;
+                  break;
+                }
+                key = _context6.t1.value;
+                value = schema[key];
+                _context6.next = 8;
+                return this.validateRule(key, value, data[key], data, allData);
+              case 8:
+                errorMessage = _context6.sent;
+                if (!(errorMessage != null)) {
+                  _context6.next = 13;
+                  break;
+                }
+                result.push({
+                  key: key,
+                  errorMessage: errorMessage
+                });
+                if (all) {
+                  _context6.next = 13;
+                  break;
+                }
+                return _context6.abrupt("break", 15);
+              case 13:
+                _context6.next = 3;
+                break;
+              case 15:
+                return _context6.abrupt("return", result);
+              case 16:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+      function invokeValidate(_x17, _x18, _x19) {
+        return _invokeValidate.apply(this, arguments);
+      }
+      return invokeValidate;
+    }()
+  }, {
+    key: "invokeValidateUpdate",
+    value: function () {
+      var _invokeValidateUpdate = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee7(data, all, allData) {
+        var result, key, errorMessage;
+        return _regenerator.default.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                result = [];
+                _context7.t0 = _regenerator.default.keys(data);
+              case 2:
+                if ((_context7.t1 = _context7.t0()).done) {
+                  _context7.next = 13;
+                  break;
+                }
+                key = _context7.t1.value;
+                _context7.next = 6;
+                return this.validateRule(key, this._schema[key], data[key], data, allData);
+              case 6:
+                errorMessage = _context7.sent;
+                if (!(errorMessage != null)) {
+                  _context7.next = 11;
+                  break;
+                }
+                result.push({
+                  key: key,
+                  errorMessage: errorMessage
+                });
+                if (all) {
+                  _context7.next = 11;
+                  break;
+                }
+                return _context7.abrupt("break", 13);
+              case 11:
+                _context7.next = 2;
+                break;
+              case 13:
+                return _context7.abrupt("return", result);
+              case 14:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, this);
+      }));
+      function invokeValidateUpdate(_x20, _x21, _x22) {
+        return _invokeValidateUpdate.apply(this, arguments);
+      }
+      return invokeValidateUpdate;
+    }()
+  }, {
+    key: "_checkFieldInSchema",
+    value: function _checkFieldInSchema(data) {
+      var keys = Object.keys(data);
+      var keys2 = Object.keys(this._schema);
+      if (new Set(keys.concat(keys2)).size === keys2.length) {
+        return '';
+      }
+      var noExistFields = keys.filter(function (key) {
+        return keys2.indexOf(key) < 0;
+      });
+      var errorMessage = formatMessage({
+        field: JSON.stringify(noExistFields)
+      }, SchemaValidator.message.TAG + SchemaValidator.message['defaultInvalid']);
+      return [{
+        key: 'invalid',
+        errorMessage: errorMessage
+      }];
+    }
+  }]);
+  return SchemaValidator;
+}(RuleValidator);
+function Message() {
+  return {
+    TAG: "",
+    default: '验证错误',
+    defaultInvalid: '提交的字段{field}在数据库中并不存在',
+    validateFunction: '验证无效',
+    required: '{label}必填',
+    'enum': '{label}超出范围',
+    timestamp: '{label}格式无效',
+    whitespace: '{label}不能为空',
+    typeError: '{label}类型无效',
+    date: {
+      format: '{label}日期{value}格式无效',
+      parse: '{label}日期无法解析,{value}无效',
+      invalid: '{label}日期{value}无效'
+    },
+    length: {
+      minLength: '{label}长度不能少于{minLength}',
+      maxLength: '{label}长度不能超过{maxLength}',
+      range: '{label}必须介于{minLength}和{maxLength}之间'
+    },
+    number: {
+      minimum: '{label}不能小于{minimum}',
+      maximum: '{label}不能大于{maximum}',
+      exclusiveMinimum: '{label}不能小于等于{minimum}',
+      exclusiveMaximum: '{label}不能大于等于{maximum}',
+      range: '{label}必须介于{minimum}and{maximum}之间'
+    },
+    pattern: {
+      mismatch: '{label}格式不匹配'
+    }
+  };
+}
+SchemaValidator.message = new Message();
+var _default = SchemaValidator;
+exports.default = _default;
+
+/***/ }),
+
+/***/ 908:
+/*!*********************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/inherits.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf.js */ 16);
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  Object.defineProperty(subClass, "prototype", {
+    writable: false
+  });
+  if (superClass) setPrototypeOf(subClass, superClass);
+}
+module.exports = _inherits, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 909:
+/*!**************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
+var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized.js */ 910);
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  } else if (call !== void 0) {
+    throw new TypeError("Derived constructors may only return object or undefined");
+  }
+  return assertThisInitialized(self);
+}
+module.exports = _possibleConstructorReturn, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 910:
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+  return self;
+}
+module.exports = _assertThisInitialized, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 911:
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _getPrototypeOf(o) {
+  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+  return _getPrototypeOf(o);
+}
+module.exports = _getPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 912:
+/*!*******************************************************************************!*\
+  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-forms/components/uni-forms/utils.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.typeFilter = exports.type = exports.setDataValue = exports.realName = exports.rawData = exports.objSet = exports.objGet = exports.name2arr = exports.isRequiredField = exports.isRealName = exports.isNumber = exports.isEqual = exports.isBoolean = exports.getValue = exports.getDataValueType = exports.getDataValue = exports.deepCopy = void 0;
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
+/**
+ * 简单处理对象拷贝
+ * @param {Obejct} 被拷贝对象
+ * @@return {Object} 拷贝对象
+ */
+var deepCopy = function deepCopy(val) {
+  return JSON.parse(JSON.stringify(val));
+};
+/**
+ * 过滤数字类型
+ * @param {String} format 数字类型
+ * @@return {Boolean} 返回是否为数字类型
+ */
+exports.deepCopy = deepCopy;
+var typeFilter = function typeFilter(format) {
+  return format === 'int' || format === 'double' || format === 'number' || format === 'timestamp';
+};
+
+/**
+ * 把 value 转换成指定的类型，用于处理初始值，原因是初始值需要入库不能为 undefined
+ * @param {String} key 字段名
+ * @param {any} value 字段值
+ * @param {Object} rules 表单校验规则
+ */
+exports.typeFilter = typeFilter;
+var getValue = function getValue(key, value, rules) {
+  var isRuleNumType = rules.find(function (val) {
+    return val.format && typeFilter(val.format);
+  });
+  var isRuleBoolType = rules.find(function (val) {
+    return val.format && val.format === 'boolean' || val.format === 'bool';
+  });
+  // 输入类型为 number
+  if (!!isRuleNumType) {
+    if (!value && value !== 0) {
+      value = null;
+    } else {
+      value = isNumber(Number(value)) ? Number(value) : value;
+    }
+  }
+
+  // 输入类型为 boolean
+  if (!!isRuleBoolType) {
+    value = isBoolean(value) ? value : false;
+  }
+  return value;
+};
+
+/**
+ * 获取表单数据
+ * @param {String|Array} name 真实名称，需要使用 realName 获取
+ * @param {Object} data 原始数据
+ * @param {any} value  需要设置的值
+ */
+exports.getValue = getValue;
+var setDataValue = function setDataValue(field, formdata, value) {
+  formdata[field] = value;
+  return value || '';
+};
+
+/**
+ * 获取表单数据
+ * @param {String|Array} field 真实名称，需要使用 realName 获取
+ * @param {Object} data 原始数据
+ */
+exports.setDataValue = setDataValue;
+var getDataValue = function getDataValue(field, data) {
+  return objGet(data, field);
+};
+
+/**
+ * 获取表单类型
+ * @param {String|Array} field 真实名称，需要使用 realName 获取
+ */
+exports.getDataValue = getDataValue;
+var getDataValueType = function getDataValueType(field, data) {
+  var value = getDataValue(field, data);
+  return {
+    type: type(value),
+    value: value
+  };
+};
+
+/**
+ * 获取表单可用的真实name
+ * @param {String|Array} name 表单name
+ * @@return {String} 表单可用的真实name
+ */
+exports.getDataValueType = getDataValueType;
+var realName = function realName(name) {
+  var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var base_name = _basePath(name);
+  if ((0, _typeof2.default)(base_name) === 'object' && Array.isArray(base_name) && base_name.length > 1) {
+    var realname = base_name.reduce(function (a, b) {
+      return a += "#".concat(b);
+    }, '_formdata_');
+    return realname;
+  }
+  return base_name[0] || name;
+};
+
+/**
+ * 判断是否表单可用的真实name
+ * @param {String|Array} name 表单name
+ * @@return {String} 表单可用的真实name
+ */
+exports.realName = realName;
+var isRealName = function isRealName(name) {
+  var reg = /^_formdata_#*/;
+  return reg.test(name);
+};
+
+/**
+ * 获取表单数据的原始格式
+ * @@return {Object|Array} object 需要解析的数据
+ */
+exports.isRealName = isRealName;
+var rawData = function rawData() {
+  var object = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var name = arguments.length > 1 ? arguments[1] : undefined;
+  var newData = JSON.parse(JSON.stringify(object));
+  var formData = {};
+  for (var i in newData) {
+    var path = name2arr(i);
+    objSet(formData, path, newData[i]);
+  }
+  return formData;
+};
+
+/**
+ * 真实name还原为 array
+ * @param {*} name 
+ */
+exports.rawData = rawData;
+var name2arr = function name2arr(name) {
+  var field = name.replace('_formdata_#', '');
+  field = field.split('#').map(function (v) {
+    return isNumber(v) ? Number(v) : v;
+  });
+  return field;
+};
+
+/**
+ * 对象中设置值
+ * @param {Object|Array} object 源数据
+ * @param {String| Array} path 'a.b.c' 或 ['a',0,'b','c']
+ * @param {String} value 需要设置的值
+ */
+exports.name2arr = name2arr;
+var objSet = function objSet(object, path, value) {
+  if ((0, _typeof2.default)(object) !== 'object') return object;
+  _basePath(path).reduce(function (o, k, i, _) {
+    if (i === _.length - 1) {
+      // 若遍历结束直接赋值
+      o[k] = value;
+      return null;
+    } else if (k in o) {
+      // 若存在对应路径，则返回找到的对象，进行下一次遍历
+      return o[k];
+    } else {
+      // 若不存在对应路径，则创建对应对象，若下一路径是数字，新对象赋值为空数组，否则赋值为空对象
+      o[k] = /^[0-9]{1,}$/.test(_[i + 1]) ? [] : {};
+      return o[k];
+    }
+  }, object);
+  // 返回object
+  return object;
+};
+
+// 处理 path， path有三种形式：'a[0].b.c'、'a.0.b.c' 和 ['a','0','b','c']，需要统一处理成数组，便于后续使用
+exports.objSet = objSet;
+function _basePath(path) {
+  // 若是数组，则直接返回
+  if (Array.isArray(path)) return path;
+  // 若有 '[',']'，则替换成将 '[' 替换成 '.',去掉 ']'
+  return path.replace(/\[/g, '.').replace(/\]/g, '').split('.');
+}
+
+/**
+ * 从对象中获取值
+ * @param {Object|Array} object 源数据
+ * @param {String| Array} path 'a.b.c' 或 ['a',0,'b','c']
+ * @param {String} defaultVal 如果无法从调用链中获取值的默认值
+ */
+var objGet = function objGet(object, path) {
+  var defaultVal = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'undefined';
+  // 先将path处理成统一格式
+  var newPath = _basePath(path);
+  // 递归处理，返回最后结果
+  var val = newPath.reduce(function (o, k) {
+    return (o || {})[k];
+  }, object);
+  return !val || val !== undefined ? val : defaultVal;
+};
+
+/**
+ * 是否为 number 类型 
+ * @param {any} num 需要判断的值
+ * @return {Boolean} 是否为 number
+ */
+exports.objGet = objGet;
+var isNumber = function isNumber(num) {
+  return !isNaN(Number(num));
+};
+
+/**
+ * 是否为 boolean 类型 
+ * @param {any} bool 需要判断的值
+ * @return {Boolean} 是否为 boolean
+ */
+exports.isNumber = isNumber;
+var isBoolean = function isBoolean(bool) {
+  return typeof bool === 'boolean';
+};
+/**
+ * 是否有必填字段
+ * @param {Object} rules 规则
+ * @return {Boolean} 是否有必填字段
+ */
+exports.isBoolean = isBoolean;
+var isRequiredField = function isRequiredField(rules) {
+  var isNoField = false;
+  for (var i = 0; i < rules.length; i++) {
+    var ruleData = rules[i];
+    if (ruleData.required) {
+      isNoField = true;
+      break;
+    }
+  }
+  return isNoField;
+};
+
+/**
+ * 获取数据类型
+ * @param {Any} obj 需要获取数据类型的值
+ */
+exports.isRequiredField = isRequiredField;
+var type = function type(obj) {
+  var class2type = {};
+
+  // 生成class2type映射
+  "Boolean Number String Function Array Date RegExp Object Error".split(" ").map(function (item, index) {
+    class2type["[object " + item + "]"] = item.toLowerCase();
+  });
+  if (obj == null) {
+    return obj + "";
+  }
+  return (0, _typeof2.default)(obj) === "object" || typeof obj === "function" ? class2type[Object.prototype.toString.call(obj)] || "object" : (0, _typeof2.default)(obj);
+};
+
+/**
+ * 判断两个值是否相等
+ * @param {any} a 值  
+ * @param {any} b 值  
+ * @return {Boolean} 是否相等
+ */
+exports.type = type;
+var isEqual = function isEqual(a, b) {
+  //如果a和b本来就全等
+  if (a === b) {
+    //判断是否为0和-0
+    return a !== 0 || 1 / a === 1 / b;
+  }
+  //判断是否为null和undefined
+  if (a == null || b == null) {
+    return a === b;
+  }
+  //接下来判断a和b的数据类型
+  var classNameA = toString.call(a),
+    classNameB = toString.call(b);
+  //如果数据类型不相等，则返回false
+  if (classNameA !== classNameB) {
+    return false;
+  }
+  //如果数据类型相等，再根据不同数据类型分别判断
+  switch (classNameA) {
+    case '[object RegExp]':
+    case '[object String]':
+      //进行字符串转换比较
+      return '' + a === '' + b;
+    case '[object Number]':
+      //进行数字转换比较,判断是否为NaN
+      if (+a !== +a) {
+        return +b !== +b;
+      }
+      //判断是否为0或-0
+      return +a === 0 ? 1 / +a === 1 / b : +a === +b;
+    case '[object Date]':
+    case '[object Boolean]':
+      return +a === +b;
+  }
+  //如果是对象类型
+  if (classNameA == '[object Object]') {
+    //获取a和b的属性长度
+    var propsA = Object.getOwnPropertyNames(a),
+      propsB = Object.getOwnPropertyNames(b);
+    if (propsA.length != propsB.length) {
+      return false;
+    }
+    for (var i = 0; i < propsA.length; i++) {
+      var propName = propsA[i];
+      //如果对应属性对应值不相等，则返回false
+      if (a[propName] !== b[propName]) {
+        return false;
+      }
+    }
+    return true;
+  }
+  //如果是数组类型
+  if (classNameA == '[object Array]') {
+    if (a.toString() == b.toString()) {
+      return true;
+    }
+    return false;
+  }
+};
+exports.isEqual = isEqual;
+
+/***/ }),
+
+/***/ 927:
 /*!************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js ***!
   \************************************************************************************/
@@ -21202,19 +22549,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = exports.UniCloudError = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 54));
-var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ 838));
+var _assertThisInitialized2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/assertThisInitialized */ 910));
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
 var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 839));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 840));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 841));
-var _wrapNativeSuper2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/wrapNativeSuper */ 842));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 908));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 909));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 911));
+var _wrapNativeSuper2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/wrapNativeSuper */ 928));
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
 var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-var _pages = _interopRequireDefault(__webpack_require__(/*! @/pages.json */ 844));
+var _pages = _interopRequireDefault(__webpack_require__(/*! @/pages.json */ 930));
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e33) { throw _e33; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e34) { didErr = true; err = _e34; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
@@ -21667,7 +23014,7 @@ var S = "development" === "development",
   x = true;
 var O = "";
 try {
-  O = (__webpack_require__(/*! uni-stat-config */ 845).default || __webpack_require__(/*! uni-stat-config */ 845)).appid;
+  O = (__webpack_require__(/*! uni-stat-config */ 931).default || __webpack_require__(/*! uni-stat-config */ 931)).appid;
 } catch (e) {}
 var E = {};
 function L(e) {
@@ -29229,99 +30576,16 @@ exports.default = Gs;
 
 /***/ }),
 
-/***/ 838:
-/*!**********************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-  return self;
-}
-module.exports = _assertThisInitialized, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 839:
-/*!*********************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/inherits.js ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf.js */ 16);
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function");
-  }
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      writable: true,
-      configurable: true
-    }
-  });
-  Object.defineProperty(subClass, "prototype", {
-    writable: false
-  });
-  if (superClass) setPrototypeOf(subClass, superClass);
-}
-module.exports = _inherits, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 840:
-/*!**************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
-  \**************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
-var assertThisInitialized = __webpack_require__(/*! ./assertThisInitialized.js */ 838);
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
-  } else if (call !== void 0) {
-    throw new TypeError("Derived constructors may only return object or undefined");
-  }
-  return assertThisInitialized(self);
-}
-module.exports = _possibleConstructorReturn, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 841:
-/*!***************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _getPrototypeOf(o) {
-  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
-  return _getPrototypeOf(o);
-}
-module.exports = _getPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 842:
+/***/ 928:
 /*!****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/wrapNativeSuper.js ***!
   \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getPrototypeOf = __webpack_require__(/*! ./getPrototypeOf.js */ 841);
+var getPrototypeOf = __webpack_require__(/*! ./getPrototypeOf.js */ 911);
 var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf.js */ 16);
-var isNativeFunction = __webpack_require__(/*! ./isNativeFunction.js */ 843);
+var isNativeFunction = __webpack_require__(/*! ./isNativeFunction.js */ 929);
 var construct = __webpack_require__(/*! ./construct.js */ 15);
 function _wrapNativeSuper(Class) {
   var _cache = typeof Map === "function" ? new Map() : undefined;
@@ -29353,7 +30617,7 @@ module.exports = _wrapNativeSuper, module.exports.__esModule = true, module.expo
 
 /***/ }),
 
-/***/ 843:
+/***/ 929:
 /*!*****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/isNativeFunction.js ***!
   \*****************************************************************/
@@ -29371,7 +30635,7 @@ module.exports = _isNativeFunction, module.exports.__esModule = true, module.exp
 
 /***/ }),
 
-/***/ 844:
+/***/ 930:
 /*!*******************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/pages.json?{"type":"origin-pages-json"} ***!
   \*******************************************************************/
@@ -29431,6 +30695,16 @@ var _default = {
       "style": {
         "navigationBarTitleText": "修改预卖菜品"
       }
+    }, {
+      "path": "beListed/beListed",
+      "style": {
+        "navigationBarTitleText": "上市"
+      }
+    }, {
+      "path": "alreadyListed/alreadyListed",
+      "style": {
+        "navigationBarTitleText": "已上架"
+      }
     }]
   }, {
     "root": "subPackages/Wholesale",
@@ -29453,6 +30727,21 @@ var _default = {
       "path": "addPurchase/addPurchase",
       "style": {
         "navigationBarTitleText": "发布采购"
+      }
+    }, {
+      "path": "wholesaleNavigation/wholesaleNavigation",
+      "style": {
+        "navigationBarTitleText": "我的批发"
+      }
+    }, {
+      "path": "mySupply/mySupply",
+      "style": {
+        "navigationBarTitleText": "我的供应"
+      }
+    }, {
+      "path": "myProcurement/myProcurement",
+      "style": {
+        "navigationBarTitleText": "我的采购"
       }
     }]
   }, {
@@ -29480,22 +30769,22 @@ var _default = {
     }, {
       "path": "rentalStorefront/rentalStorefront",
       "style": {
-        "navigationBarTitleText": ""
+        "navigationBarTitleText": "铺面详情"
       }
     }, {
       "path": "rentalStorefrontList/rentalStorefrontList",
       "style": {
-        "navigationBarTitleText": ""
+        "navigationBarTitleText": "铺面列表"
       }
     }, {
       "path": "prePurchaseOrder/prePurchaseOrder",
       "style": {
-        "navigationBarTitleText": ""
+        "navigationBarTitleText": "预购订单"
       }
     }, {
       "path": "prePurchaseDeposit/prePurchaseDeposit",
       "style": {
-        "navigationBarTitleText": ""
+        "navigationBarTitleText": "预买"
       }
     }, {
       "path": "merchantDetails/merchantDetails",
@@ -29512,6 +30801,53 @@ var _default = {
       "path": "realTimeInfoDetail/realTimeInfoDetail",
       "style": {
         "navigationBarTitleText": "新闻详情"
+      }
+    }, {
+      "path": "freeGroceryShopping/freeGroceryShopping",
+      "style": {
+        "navigationBarTitleText": "免费买菜"
+      }
+    }]
+  }, {
+    "root": "subPackages/boothOwner",
+    "pages": [{
+      "path": "salesApplication/salesApplication",
+      "style": {
+        "navigationBarTitleText": "代销申请"
+      }
+    }]
+  }, {
+    "root": "subPackages/settings",
+    "pages": [{
+      "path": "user-edit/user-edit",
+      "style": {
+        "navigationBarTitleText": "修改信息"
+      }
+    }, {
+      "path": "updatePwd/updatePwd",
+      "style": {
+        "navigationBarTitleText": "更新密码",
+        "enablePullDownRefresh": false
+      }
+    }, {
+      "path": "aboutUs/aboutUs",
+      "style": {
+        "navigationBarTitleText": "关于我们"
+      }
+    }, {
+      "path": "version/version",
+      "style": {
+        "navigationBarTitleText": "版本更新"
+      }
+    }, {
+      "path": "myAddress/myAddress",
+      "style": {
+        "navigationBarTitleText": "我的地址"
+      }
+    }, {
+      "path": "addAddress/addAddress",
+      "style": {
+        "navigationBarTitleText": "地址"
       }
     }]
   }],
@@ -29578,11 +30914,6 @@ var _default = {
     "path": "pages/release/release",
     "style": {
       "navigationBarTitleText": "发布"
-    }
-  }, {
-    "path": "pages/user-edit/user-edit",
-    "style": {
-      "navigationBarTitleText": "信息编辑"
     }
   }, {
     "path": "pages/stalllist/stalllist",
@@ -29694,12 +31025,6 @@ var _default = {
       "enablePullDownRefresh": false
     }
   }, {
-    "path": "pages/updatePwd/updatePwd",
-    "style": {
-      "navigationBarTitleText": "更新密码",
-      "enablePullDownRefresh": false
-    }
-  }, {
     "path": "pages/boothOwner/boothOwner",
     "style": {
       "navigationBarTitleText": "摊主"
@@ -29798,6 +31123,11 @@ var _default = {
       "navigationBarTitleText": "投诉详情",
       "disableScroll": true
     }
+  }, {
+    "path": "pages/settings/settings",
+    "style": {
+      "navigationBarTitleText": "设置"
+    }
   }],
   "globalStyle": {
     "navigationBarTextStyle": "black",
@@ -29844,7 +31174,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 845:
+/***/ 931:
 /*!******************************************************!*\
   !*** E:/xcbh5/xcbh5/test/pages.json?{"type":"stat"} ***!
   \******************************************************/
@@ -29865,396 +31195,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 853:
-/*!************************************************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-file-picker/components/uni-file-picker/choose-and-upload-file.js ***!
-  \************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni, wx, uniCloud) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.chooseAndUploadFile = chooseAndUploadFile;
-exports.uploadCloudFiles = uploadCloudFiles;
-var ERR_MSG_OK = 'chooseAndUploadFile:ok';
-var ERR_MSG_FAIL = 'chooseAndUploadFile:fail';
-function chooseImage(opts) {
-  var count = opts.count,
-    _opts$sizeType = opts.sizeType,
-    sizeType = _opts$sizeType === void 0 ? ['original', 'compressed'] : _opts$sizeType,
-    sourceType = opts.sourceType,
-    extension = opts.extension;
-  return new Promise(function (resolve, reject) {
-    // 微信由于旧接口不再维护，针对微信小程序平台改用chooseMedia接口
-
-    uni.chooseMedia({
-      count: count,
-      sizeType: sizeType,
-      sourceType: sourceType,
-      mediaType: ['image'],
-      extension: extension,
-      success: function success(res) {
-        res.tempFiles.forEach(function (item) {
-          item.path = item.tempFilePath;
-        });
-        resolve(normalizeChooseAndUploadFileRes(res, 'image'));
-      },
-      fail: function fail(res) {
-        reject({
-          errMsg: res.errMsg.replace('chooseImage:fail', ERR_MSG_FAIL)
-        });
-      }
-    });
-  });
-}
-function chooseVideo(opts) {
-  var count = opts.count,
-    camera = opts.camera,
-    compressed = opts.compressed,
-    maxDuration = opts.maxDuration,
-    sourceType = opts.sourceType,
-    extension = opts.extension;
-  return new Promise(function (resolve, reject) {
-    // 微信由于旧接口不再维护，针对微信小程序平台改用chooseMedia接口
-
-    uni.chooseMedia({
-      count: count,
-      compressed: compressed,
-      maxDuration: maxDuration,
-      sourceType: sourceType,
-      extension: extension,
-      mediaType: ['video'],
-      success: function success(res) {
-        var tempFiles = res.tempFiles;
-        resolve(normalizeChooseAndUploadFileRes({
-          errMsg: 'chooseVideo:ok',
-          tempFiles: tempFiles.map(function (item) {
-            return {
-              name: item.name || '',
-              path: item.tempFilePath,
-              thumbTempFilePath: item.thumbTempFilePath,
-              size: item.size,
-              type: res.tempFile && res.tempFile.type || '',
-              width: item.width,
-              height: item.height,
-              duration: item.duration,
-              fileType: 'video',
-              cloudPath: ''
-            };
-          })
-        }, 'video'));
-      },
-      fail: function fail(res) {
-        reject({
-          errMsg: res.errMsg.replace('chooseVideo:fail', ERR_MSG_FAIL)
-        });
-      }
-    });
-  });
-}
-function chooseAll(opts) {
-  var count = opts.count,
-    extension = opts.extension;
-  return new Promise(function (resolve, reject) {
-    var chooseFile = uni.chooseFile;
-    if (typeof wx !== 'undefined' && typeof wx.chooseMessageFile === 'function') {
-      chooseFile = wx.chooseMessageFile;
-    }
-    if (typeof chooseFile !== 'function') {
-      return reject({
-        errMsg: ERR_MSG_FAIL + ' 请指定 type 类型，该平台仅支持选择 image 或 video。'
-      });
-    }
-    chooseFile({
-      type: 'all',
-      count: count,
-      extension: extension,
-      success: function success(res) {
-        resolve(normalizeChooseAndUploadFileRes(res));
-      },
-      fail: function fail(res) {
-        reject({
-          errMsg: res.errMsg.replace('chooseFile:fail', ERR_MSG_FAIL)
-        });
-      }
-    });
-  });
-}
-function normalizeChooseAndUploadFileRes(res, fileType) {
-  res.tempFiles.forEach(function (item, index) {
-    if (!item.name) {
-      item.name = item.path.substring(item.path.lastIndexOf('/') + 1);
-    }
-    if (fileType) {
-      item.fileType = fileType;
-    }
-    item.cloudPath = Date.now() + '_' + index + item.name.substring(item.name.lastIndexOf('.'));
-  });
-  if (!res.tempFilePaths) {
-    res.tempFilePaths = res.tempFiles.map(function (file) {
-      return file.path;
-    });
-  }
-  return res;
-}
-function uploadCloudFiles(files) {
-  var max = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 5;
-  var _onUploadProgress = arguments.length > 2 ? arguments[2] : undefined;
-  files = JSON.parse(JSON.stringify(files));
-  var len = files.length;
-  var count = 0;
-  var self = this;
-  return new Promise(function (resolve) {
-    while (count < max) {
-      next();
-    }
-    function next() {
-      var cur = count++;
-      if (cur >= len) {
-        !files.find(function (item) {
-          return !item.url && !item.errMsg;
-        }) && resolve(files);
-        return;
-      }
-      var fileItem = files[cur];
-      var index = self.files.findIndex(function (v) {
-        return v.uuid === fileItem.uuid;
-      });
-      fileItem.url = '';
-      delete fileItem.errMsg;
-      uniCloud.uploadFile({
-        filePath: fileItem.path,
-        cloudPath: fileItem.cloudPath,
-        fileType: fileItem.fileType,
-        onUploadProgress: function onUploadProgress(res) {
-          res.index = index;
-          _onUploadProgress && _onUploadProgress(res);
-        }
-      }).then(function (res) {
-        fileItem.url = res.fileID;
-        fileItem.index = index;
-        if (cur < len) {
-          next();
-        }
-      }).catch(function (res) {
-        fileItem.errMsg = res.errMsg || res.message;
-        fileItem.index = index;
-        if (cur < len) {
-          next();
-        }
-      });
-    }
-  });
-}
-function uploadFiles(choosePromise, _ref) {
-  var onChooseFile = _ref.onChooseFile,
-    onUploadProgress = _ref.onUploadProgress;
-  return choosePromise.then(function (res) {
-    if (onChooseFile) {
-      var customChooseRes = onChooseFile(res);
-      if (typeof customChooseRes !== 'undefined') {
-        return Promise.resolve(customChooseRes).then(function (chooseRes) {
-          return typeof chooseRes === 'undefined' ? res : chooseRes;
-        });
-      }
-    }
-    return res;
-  }).then(function (res) {
-    if (res === false) {
-      return {
-        errMsg: ERR_MSG_OK,
-        tempFilePaths: [],
-        tempFiles: []
-      };
-    }
-    return res;
-  });
-}
-function chooseAndUploadFile() {
-  var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-    type: 'all'
-  };
-  if (opts.type === 'image') {
-    return uploadFiles(chooseImage(opts), opts);
-  } else if (opts.type === 'video') {
-    return uploadFiles(chooseVideo(opts), opts);
-  }
-  return uploadFiles(chooseAll(opts), opts);
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 837)["default"]))
-
-/***/ }),
-
-/***/ 854:
-/*!*******************************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-file-picker/components/uni-file-picker/utils.js ***!
-  \*******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.get_files_and_is_max = exports.get_file_info = exports.get_file_ext = exports.get_file_data = exports.get_extname = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 54));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
-/**
- * 获取文件名和后缀
- * @param {String} name
- */
-var get_file_ext = function get_file_ext(name) {
-  var last_len = name.lastIndexOf('.');
-  var len = name.length;
-  return {
-    name: name.substring(0, last_len),
-    ext: name.substring(last_len + 1, len)
-  };
-};
-
-/**
- * 获取扩展名
- * @param {Array} fileExtname
- */
-exports.get_file_ext = get_file_ext;
-var get_extname = function get_extname(fileExtname) {
-  if (!Array.isArray(fileExtname)) {
-    var extname = fileExtname.replace(/(\[|\])/g, '');
-    return extname.split(',');
-  } else {
-    return fileExtname;
-  }
-  return [];
-};
-
-/**
- * 获取文件和检测是否可选
- */
-exports.get_extname = get_extname;
-var get_files_and_is_max = function get_files_and_is_max(res, _extname) {
-  var filePaths = [];
-  var files = [];
-  if (!_extname || _extname.length === 0) {
-    return {
-      filePaths: filePaths,
-      files: files
-    };
-  }
-  res.tempFiles.forEach(function (v) {
-    var fileFullName = get_file_ext(v.name);
-    var extname = fileFullName.ext.toLowerCase();
-    if (_extname.indexOf(extname) !== -1) {
-      files.push(v);
-      filePaths.push(v.path);
-    }
-  });
-  if (files.length !== res.tempFiles.length) {
-    uni.showToast({
-      title: "\u5F53\u524D\u9009\u62E9\u4E86".concat(res.tempFiles.length, "\u4E2A\u6587\u4EF6 \uFF0C").concat(res.tempFiles.length - files.length, " \u4E2A\u6587\u4EF6\u683C\u5F0F\u4E0D\u6B63\u786E"),
-      icon: 'none',
-      duration: 5000
-    });
-  }
-  return {
-    filePaths: filePaths,
-    files: files
-  };
-};
-
-/**
- * 获取图片信息
- * @param {Object} filepath
- */
-exports.get_files_and_is_max = get_files_and_is_max;
-var get_file_info = function get_file_info(filepath) {
-  return new Promise(function (resolve, reject) {
-    uni.getImageInfo({
-      src: filepath,
-      success: function success(res) {
-        resolve(res);
-      },
-      fail: function fail(err) {
-        reject(err);
-      }
-    });
-  });
-};
-/**
- * 获取封装数据
- */
-exports.get_file_info = get_file_info;
-var get_file_data = /*#__PURE__*/function () {
-  var _ref = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(files) {
-    var type,
-      fileFullName,
-      extname,
-      filedata,
-      imageinfo,
-      _args = arguments;
-    return _regenerator.default.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            type = _args.length > 1 && _args[1] !== undefined ? _args[1] : 'image';
-            // 最终需要上传数据库的数据
-            fileFullName = get_file_ext(files.name);
-            extname = fileFullName.ext.toLowerCase();
-            filedata = {
-              name: files.name,
-              uuid: files.uuid,
-              extname: extname || '',
-              cloudPath: files.cloudPath,
-              fileType: files.fileType,
-              thumbTempFilePath: files.thumbTempFilePath,
-              url: files.path || files.path,
-              size: files.size,
-              //单位是字节
-              image: {},
-              path: files.path,
-              video: {}
-            };
-            if (!(type === 'image')) {
-              _context.next = 14;
-              break;
-            }
-            _context.next = 7;
-            return get_file_info(files.path);
-          case 7:
-            imageinfo = _context.sent;
-            delete filedata.video;
-            filedata.image.width = imageinfo.width;
-            filedata.image.height = imageinfo.height;
-            filedata.image.location = imageinfo.path;
-            _context.next = 15;
-            break;
-          case 14:
-            delete filedata.image;
-          case 15:
-            return _context.abrupt("return", filedata);
-          case 16:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-  return function get_file_data(_x) {
-    return _ref.apply(this, arguments);
-  };
-}();
-exports.get_file_data = get_file_data;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-
-/***/ 862:
+/***/ 939:
 /*!*******************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-popup/components/uni-popup/popup.js ***!
   \*******************************************************************************/
@@ -30296,7 +31237,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 863:
+/***/ 940:
 /*!************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-popup/components/uni-popup/i18n/index.js ***!
   \************************************************************************************/
@@ -30311,9 +31252,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 864));
-var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 865));
-var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 866));
+var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 941));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 942));
+var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 943));
 var _default = {
   en: _en.default,
   'zh-Hans': _zhHans.default,
@@ -30323,7 +31264,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 864:
+/***/ 941:
 /*!***********************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-popup/components/uni-popup/i18n/en.json ***!
   \***********************************************************************************/
@@ -30334,7 +31275,7 @@ module.exports = JSON.parse("{\"uni-popup.cancel\":\"cancel\",\"uni-popup.ok\":\
 
 /***/ }),
 
-/***/ 865:
+/***/ 942:
 /*!****************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hans.json ***!
   \****************************************************************************************/
@@ -30345,7 +31286,7 @@ module.exports = JSON.parse("{\"uni-popup.cancel\":\"取消\",\"uni-popup.ok\":\
 
 /***/ }),
 
-/***/ 866:
+/***/ 943:
 /*!****************************************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hant.json ***!
   \****************************************************************************************/
@@ -30356,1173 +31297,7 @@ module.exports = JSON.parse("{\"uni-popup.cancel\":\"取消\",\"uni-popup.ok\":\
 
 /***/ }),
 
-/***/ 874:
-/*!**********************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-forms/components/uni-forms/validate.js ***!
-  \**********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 54));
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 839));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 840));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 841));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
-var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-var pattern = {
-  email: /^\S+?@\S+?\.\S+?$/,
-  idcard: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
-  url: new RegExp("^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$", 'i')
-};
-var FORMAT_MAPPING = {
-  "int": 'integer',
-  "bool": 'boolean',
-  "double": 'number',
-  "long": 'number',
-  "password": 'string'
-  // "fileurls": 'array'
-};
-
-function formatMessage(args) {
-  var resources = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-  var defaultMessage = ['label'];
-  defaultMessage.forEach(function (item) {
-    if (args[item] === undefined) {
-      args[item] = '';
-    }
-  });
-  var str = resources;
-  for (var key in args) {
-    var reg = new RegExp('{' + key + '}');
-    str = str.replace(reg, args[key]);
-  }
-  return str;
-}
-function isEmptyValue(value, type) {
-  if (value === undefined || value === null) {
-    return true;
-  }
-  if (typeof value === 'string' && !value) {
-    return true;
-  }
-  if (Array.isArray(value) && !value.length) {
-    return true;
-  }
-  if (type === 'object' && !Object.keys(value).length) {
-    return true;
-  }
-  return false;
-}
-var types = {
-  integer: function integer(value) {
-    return types.number(value) && parseInt(value, 10) === value;
-  },
-  string: function string(value) {
-    return typeof value === 'string';
-  },
-  number: function number(value) {
-    if (isNaN(value)) {
-      return false;
-    }
-    return typeof value === 'number';
-  },
-  "boolean": function boolean(value) {
-    return typeof value === 'boolean';
-  },
-  "float": function float(value) {
-    return types.number(value) && !types.integer(value);
-  },
-  array: function array(value) {
-    return Array.isArray(value);
-  },
-  object: function object(value) {
-    return (0, _typeof2.default)(value) === 'object' && !types.array(value);
-  },
-  date: function date(value) {
-    return value instanceof Date;
-  },
-  timestamp: function timestamp(value) {
-    if (!this.integer(value) || Math.abs(value).toString().length > 16) {
-      return false;
-    }
-    return true;
-  },
-  file: function file(value) {
-    return typeof value.url === 'string';
-  },
-  email: function email(value) {
-    return typeof value === 'string' && !!value.match(pattern.email) && value.length < 255;
-  },
-  url: function url(value) {
-    return typeof value === 'string' && !!value.match(pattern.url);
-  },
-  pattern: function pattern(reg, value) {
-    try {
-      return new RegExp(reg).test(value);
-    } catch (e) {
-      return false;
-    }
-  },
-  method: function method(value) {
-    return typeof value === 'function';
-  },
-  idcard: function idcard(value) {
-    return typeof value === 'string' && !!value.match(pattern.idcard);
-  },
-  'url-https': function urlHttps(value) {
-    return this.url(value) && value.startsWith('https://');
-  },
-  'url-scheme': function urlScheme(value) {
-    return value.startsWith('://');
-  },
-  'url-web': function urlWeb(value) {
-    return false;
-  }
-};
-var RuleValidator = /*#__PURE__*/function () {
-  function RuleValidator(message) {
-    (0, _classCallCheck2.default)(this, RuleValidator);
-    this._message = message;
-  }
-  (0, _createClass2.default)(RuleValidator, [{
-    key: "validateRule",
-    value: function () {
-      var _validateRule = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(fieldKey, fieldValue, value, data, allData) {
-        var result, rules, hasRequired, message, i, rule, vt, now, resultExpr;
-        return _regenerator.default.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                result = null;
-                rules = fieldValue.rules;
-                hasRequired = rules.findIndex(function (item) {
-                  return item.required;
-                });
-                if (!(hasRequired < 0)) {
-                  _context.next = 8;
-                  break;
-                }
-                if (!(value === null || value === undefined)) {
-                  _context.next = 6;
-                  break;
-                }
-                return _context.abrupt("return", result);
-              case 6:
-                if (!(typeof value === 'string' && !value.length)) {
-                  _context.next = 8;
-                  break;
-                }
-                return _context.abrupt("return", result);
-              case 8:
-                message = this._message;
-                if (!(rules === undefined)) {
-                  _context.next = 11;
-                  break;
-                }
-                return _context.abrupt("return", message['default']);
-              case 11:
-                i = 0;
-              case 12:
-                if (!(i < rules.length)) {
-                  _context.next = 35;
-                  break;
-                }
-                rule = rules[i];
-                vt = this._getValidateType(rule);
-                Object.assign(rule, {
-                  label: fieldValue.label || "[\"".concat(fieldKey, "\"]")
-                });
-                if (!RuleValidatorHelper[vt]) {
-                  _context.next = 20;
-                  break;
-                }
-                result = RuleValidatorHelper[vt](rule, value, message);
-                if (!(result != null)) {
-                  _context.next = 20;
-                  break;
-                }
-                return _context.abrupt("break", 35);
-              case 20:
-                if (!rule.validateExpr) {
-                  _context.next = 26;
-                  break;
-                }
-                now = Date.now();
-                resultExpr = rule.validateExpr(value, allData, now);
-                if (!(resultExpr === false)) {
-                  _context.next = 26;
-                  break;
-                }
-                result = this._getMessage(rule, rule.errorMessage || this._message['default']);
-                return _context.abrupt("break", 35);
-              case 26:
-                if (!rule.validateFunction) {
-                  _context.next = 32;
-                  break;
-                }
-                _context.next = 29;
-                return this.validateFunction(rule, value, data, allData, vt);
-              case 29:
-                result = _context.sent;
-                if (!(result !== null)) {
-                  _context.next = 32;
-                  break;
-                }
-                return _context.abrupt("break", 35);
-              case 32:
-                i++;
-                _context.next = 12;
-                break;
-              case 35:
-                if (result !== null) {
-                  result = message.TAG + result;
-                }
-                return _context.abrupt("return", result);
-              case 37:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-      function validateRule(_x, _x2, _x3, _x4, _x5) {
-        return _validateRule.apply(this, arguments);
-      }
-      return validateRule;
-    }()
-  }, {
-    key: "validateFunction",
-    value: function () {
-      var _validateFunction = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2(rule, value, data, allData, vt) {
-        var result, callbackMessage, res;
-        return _regenerator.default.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                result = null;
-                _context2.prev = 1;
-                callbackMessage = null;
-                _context2.next = 5;
-                return rule.validateFunction(rule, value, allData || data, function (message) {
-                  callbackMessage = message;
-                });
-              case 5:
-                res = _context2.sent;
-                if (callbackMessage || typeof res === 'string' && res || res === false) {
-                  result = this._getMessage(rule, callbackMessage || res, vt);
-                }
-                _context2.next = 12;
-                break;
-              case 9:
-                _context2.prev = 9;
-                _context2.t0 = _context2["catch"](1);
-                result = this._getMessage(rule, _context2.t0.message, vt);
-              case 12:
-                return _context2.abrupt("return", result);
-              case 13:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this, [[1, 9]]);
-      }));
-      function validateFunction(_x6, _x7, _x8, _x9, _x10) {
-        return _validateFunction.apply(this, arguments);
-      }
-      return validateFunction;
-    }()
-  }, {
-    key: "_getMessage",
-    value: function _getMessage(rule, message, vt) {
-      return formatMessage(rule, message || rule.errorMessage || this._message[vt] || message['default']);
-    }
-  }, {
-    key: "_getValidateType",
-    value: function _getValidateType(rule) {
-      var result = '';
-      if (rule.required) {
-        result = 'required';
-      } else if (rule.format) {
-        result = 'format';
-      } else if (rule.arrayType) {
-        result = 'arrayTypeFormat';
-      } else if (rule.range) {
-        result = 'range';
-      } else if (rule.maximum !== undefined || rule.minimum !== undefined) {
-        result = 'rangeNumber';
-      } else if (rule.maxLength !== undefined || rule.minLength !== undefined) {
-        result = 'rangeLength';
-      } else if (rule.pattern) {
-        result = 'pattern';
-      } else if (rule.validateFunction) {
-        result = 'validateFunction';
-      }
-      return result;
-    }
-  }]);
-  return RuleValidator;
-}();
-var RuleValidatorHelper = {
-  required: function required(rule, value, message) {
-    if (rule.required && isEmptyValue(value, rule.format || (0, _typeof2.default)(value))) {
-      return formatMessage(rule, rule.errorMessage || message.required);
-    }
-    return null;
-  },
-  range: function range(rule, value, message) {
-    var range = rule.range,
-      errorMessage = rule.errorMessage;
-    var list = new Array(range.length);
-    for (var i = 0; i < range.length; i++) {
-      var item = range[i];
-      if (types.object(item) && item.value !== undefined) {
-        list[i] = item.value;
-      } else {
-        list[i] = item;
-      }
-    }
-    var result = false;
-    if (Array.isArray(value)) {
-      result = new Set(value.concat(list)).size === list.length;
-    } else {
-      if (list.indexOf(value) > -1) {
-        result = true;
-      }
-    }
-    if (!result) {
-      return formatMessage(rule, errorMessage || message['enum']);
-    }
-    return null;
-  },
-  rangeNumber: function rangeNumber(rule, value, message) {
-    if (!types.number(value)) {
-      return formatMessage(rule, rule.errorMessage || message.pattern.mismatch);
-    }
-    var minimum = rule.minimum,
-      maximum = rule.maximum,
-      exclusiveMinimum = rule.exclusiveMinimum,
-      exclusiveMaximum = rule.exclusiveMaximum;
-    var min = exclusiveMinimum ? value <= minimum : value < minimum;
-    var max = exclusiveMaximum ? value >= maximum : value > maximum;
-    if (minimum !== undefined && min) {
-      return formatMessage(rule, rule.errorMessage || message['number'][exclusiveMinimum ? 'exclusiveMinimum' : 'minimum']);
-    } else if (maximum !== undefined && max) {
-      return formatMessage(rule, rule.errorMessage || message['number'][exclusiveMaximum ? 'exclusiveMaximum' : 'maximum']);
-    } else if (minimum !== undefined && maximum !== undefined && (min || max)) {
-      return formatMessage(rule, rule.errorMessage || message['number'].range);
-    }
-    return null;
-  },
-  rangeLength: function rangeLength(rule, value, message) {
-    if (!types.string(value) && !types.array(value)) {
-      return formatMessage(rule, rule.errorMessage || message.pattern.mismatch);
-    }
-    var min = rule.minLength;
-    var max = rule.maxLength;
-    var val = value.length;
-    if (min !== undefined && val < min) {
-      return formatMessage(rule, rule.errorMessage || message['length'].minLength);
-    } else if (max !== undefined && val > max) {
-      return formatMessage(rule, rule.errorMessage || message['length'].maxLength);
-    } else if (min !== undefined && max !== undefined && (val < min || val > max)) {
-      return formatMessage(rule, rule.errorMessage || message['length'].range);
-    }
-    return null;
-  },
-  pattern: function pattern(rule, value, message) {
-    if (!types['pattern'](rule.pattern, value)) {
-      return formatMessage(rule, rule.errorMessage || message.pattern.mismatch);
-    }
-    return null;
-  },
-  format: function format(rule, value, message) {
-    var customTypes = Object.keys(types);
-    var format = FORMAT_MAPPING[rule.format] ? FORMAT_MAPPING[rule.format] : rule.format || rule.arrayType;
-    if (customTypes.indexOf(format) > -1) {
-      if (!types[format](value)) {
-        return formatMessage(rule, rule.errorMessage || message.typeError);
-      }
-    }
-    return null;
-  },
-  arrayTypeFormat: function arrayTypeFormat(rule, value, message) {
-    if (!Array.isArray(value)) {
-      return formatMessage(rule, rule.errorMessage || message.typeError);
-    }
-    for (var i = 0; i < value.length; i++) {
-      var element = value[i];
-      var formatResult = this.format(rule, element, message);
-      if (formatResult !== null) {
-        return formatResult;
-      }
-    }
-    return null;
-  }
-};
-var SchemaValidator = /*#__PURE__*/function (_RuleValidator) {
-  (0, _inherits2.default)(SchemaValidator, _RuleValidator);
-  var _super = _createSuper(SchemaValidator);
-  function SchemaValidator(schema, options) {
-    var _this;
-    (0, _classCallCheck2.default)(this, SchemaValidator);
-    _this = _super.call(this, SchemaValidator.message);
-    _this._schema = schema;
-    _this._options = options || null;
-    return _this;
-  }
-  (0, _createClass2.default)(SchemaValidator, [{
-    key: "updateSchema",
-    value: function updateSchema(schema) {
-      this._schema = schema;
-    }
-  }, {
-    key: "validate",
-    value: function () {
-      var _validate = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3(data, allData) {
-        var result;
-        return _regenerator.default.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                result = this._checkFieldInSchema(data);
-                if (result) {
-                  _context3.next = 5;
-                  break;
-                }
-                _context3.next = 4;
-                return this.invokeValidate(data, false, allData);
-              case 4:
-                result = _context3.sent;
-              case 5:
-                return _context3.abrupt("return", result.length ? result[0] : null);
-              case 6:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, this);
-      }));
-      function validate(_x11, _x12) {
-        return _validate.apply(this, arguments);
-      }
-      return validate;
-    }()
-  }, {
-    key: "validateAll",
-    value: function () {
-      var _validateAll = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4(data, allData) {
-        var result;
-        return _regenerator.default.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                result = this._checkFieldInSchema(data);
-                if (result) {
-                  _context4.next = 5;
-                  break;
-                }
-                _context4.next = 4;
-                return this.invokeValidate(data, true, allData);
-              case 4:
-                result = _context4.sent;
-              case 5:
-                return _context4.abrupt("return", result);
-              case 6:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, this);
-      }));
-      function validateAll(_x13, _x14) {
-        return _validateAll.apply(this, arguments);
-      }
-      return validateAll;
-    }()
-  }, {
-    key: "validateUpdate",
-    value: function () {
-      var _validateUpdate = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee5(data, allData) {
-        var result;
-        return _regenerator.default.wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                result = this._checkFieldInSchema(data);
-                if (result) {
-                  _context5.next = 5;
-                  break;
-                }
-                _context5.next = 4;
-                return this.invokeValidateUpdate(data, false, allData);
-              case 4:
-                result = _context5.sent;
-              case 5:
-                return _context5.abrupt("return", result.length ? result[0] : null);
-              case 6:
-              case "end":
-                return _context5.stop();
-            }
-          }
-        }, _callee5, this);
-      }));
-      function validateUpdate(_x15, _x16) {
-        return _validateUpdate.apply(this, arguments);
-      }
-      return validateUpdate;
-    }()
-  }, {
-    key: "invokeValidate",
-    value: function () {
-      var _invokeValidate = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee6(data, all, allData) {
-        var result, schema, key, value, errorMessage;
-        return _regenerator.default.wrap(function _callee6$(_context6) {
-          while (1) {
-            switch (_context6.prev = _context6.next) {
-              case 0:
-                result = [];
-                schema = this._schema;
-                _context6.t0 = _regenerator.default.keys(schema);
-              case 3:
-                if ((_context6.t1 = _context6.t0()).done) {
-                  _context6.next = 15;
-                  break;
-                }
-                key = _context6.t1.value;
-                value = schema[key];
-                _context6.next = 8;
-                return this.validateRule(key, value, data[key], data, allData);
-              case 8:
-                errorMessage = _context6.sent;
-                if (!(errorMessage != null)) {
-                  _context6.next = 13;
-                  break;
-                }
-                result.push({
-                  key: key,
-                  errorMessage: errorMessage
-                });
-                if (all) {
-                  _context6.next = 13;
-                  break;
-                }
-                return _context6.abrupt("break", 15);
-              case 13:
-                _context6.next = 3;
-                break;
-              case 15:
-                return _context6.abrupt("return", result);
-              case 16:
-              case "end":
-                return _context6.stop();
-            }
-          }
-        }, _callee6, this);
-      }));
-      function invokeValidate(_x17, _x18, _x19) {
-        return _invokeValidate.apply(this, arguments);
-      }
-      return invokeValidate;
-    }()
-  }, {
-    key: "invokeValidateUpdate",
-    value: function () {
-      var _invokeValidateUpdate = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee7(data, all, allData) {
-        var result, key, errorMessage;
-        return _regenerator.default.wrap(function _callee7$(_context7) {
-          while (1) {
-            switch (_context7.prev = _context7.next) {
-              case 0:
-                result = [];
-                _context7.t0 = _regenerator.default.keys(data);
-              case 2:
-                if ((_context7.t1 = _context7.t0()).done) {
-                  _context7.next = 13;
-                  break;
-                }
-                key = _context7.t1.value;
-                _context7.next = 6;
-                return this.validateRule(key, this._schema[key], data[key], data, allData);
-              case 6:
-                errorMessage = _context7.sent;
-                if (!(errorMessage != null)) {
-                  _context7.next = 11;
-                  break;
-                }
-                result.push({
-                  key: key,
-                  errorMessage: errorMessage
-                });
-                if (all) {
-                  _context7.next = 11;
-                  break;
-                }
-                return _context7.abrupt("break", 13);
-              case 11:
-                _context7.next = 2;
-                break;
-              case 13:
-                return _context7.abrupt("return", result);
-              case 14:
-              case "end":
-                return _context7.stop();
-            }
-          }
-        }, _callee7, this);
-      }));
-      function invokeValidateUpdate(_x20, _x21, _x22) {
-        return _invokeValidateUpdate.apply(this, arguments);
-      }
-      return invokeValidateUpdate;
-    }()
-  }, {
-    key: "_checkFieldInSchema",
-    value: function _checkFieldInSchema(data) {
-      var keys = Object.keys(data);
-      var keys2 = Object.keys(this._schema);
-      if (new Set(keys.concat(keys2)).size === keys2.length) {
-        return '';
-      }
-      var noExistFields = keys.filter(function (key) {
-        return keys2.indexOf(key) < 0;
-      });
-      var errorMessage = formatMessage({
-        field: JSON.stringify(noExistFields)
-      }, SchemaValidator.message.TAG + SchemaValidator.message['defaultInvalid']);
-      return [{
-        key: 'invalid',
-        errorMessage: errorMessage
-      }];
-    }
-  }]);
-  return SchemaValidator;
-}(RuleValidator);
-function Message() {
-  return {
-    TAG: "",
-    default: '验证错误',
-    defaultInvalid: '提交的字段{field}在数据库中并不存在',
-    validateFunction: '验证无效',
-    required: '{label}必填',
-    'enum': '{label}超出范围',
-    timestamp: '{label}格式无效',
-    whitespace: '{label}不能为空',
-    typeError: '{label}类型无效',
-    date: {
-      format: '{label}日期{value}格式无效',
-      parse: '{label}日期无法解析,{value}无效',
-      invalid: '{label}日期{value}无效'
-    },
-    length: {
-      minLength: '{label}长度不能少于{minLength}',
-      maxLength: '{label}长度不能超过{maxLength}',
-      range: '{label}必须介于{minLength}和{maxLength}之间'
-    },
-    number: {
-      minimum: '{label}不能小于{minimum}',
-      maximum: '{label}不能大于{maximum}',
-      exclusiveMinimum: '{label}不能小于等于{minimum}',
-      exclusiveMaximum: '{label}不能大于等于{maximum}',
-      range: '{label}必须介于{minimum}and{maximum}之间'
-    },
-    pattern: {
-      mismatch: '{label}格式不匹配'
-    }
-  };
-}
-SchemaValidator.message = new Message();
-var _default = SchemaValidator;
-exports.default = _default;
-
-/***/ }),
-
-/***/ 875:
-/*!*******************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-forms/components/uni-forms/utils.js ***!
-  \*******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.typeFilter = exports.type = exports.setDataValue = exports.realName = exports.rawData = exports.objSet = exports.objGet = exports.name2arr = exports.isRequiredField = exports.isRealName = exports.isNumber = exports.isEqual = exports.isBoolean = exports.getValue = exports.getDataValueType = exports.getDataValue = exports.deepCopy = void 0;
-var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
-/**
- * 简单处理对象拷贝
- * @param {Obejct} 被拷贝对象
- * @@return {Object} 拷贝对象
- */
-var deepCopy = function deepCopy(val) {
-  return JSON.parse(JSON.stringify(val));
-};
-/**
- * 过滤数字类型
- * @param {String} format 数字类型
- * @@return {Boolean} 返回是否为数字类型
- */
-exports.deepCopy = deepCopy;
-var typeFilter = function typeFilter(format) {
-  return format === 'int' || format === 'double' || format === 'number' || format === 'timestamp';
-};
-
-/**
- * 把 value 转换成指定的类型，用于处理初始值，原因是初始值需要入库不能为 undefined
- * @param {String} key 字段名
- * @param {any} value 字段值
- * @param {Object} rules 表单校验规则
- */
-exports.typeFilter = typeFilter;
-var getValue = function getValue(key, value, rules) {
-  var isRuleNumType = rules.find(function (val) {
-    return val.format && typeFilter(val.format);
-  });
-  var isRuleBoolType = rules.find(function (val) {
-    return val.format && val.format === 'boolean' || val.format === 'bool';
-  });
-  // 输入类型为 number
-  if (!!isRuleNumType) {
-    if (!value && value !== 0) {
-      value = null;
-    } else {
-      value = isNumber(Number(value)) ? Number(value) : value;
-    }
-  }
-
-  // 输入类型为 boolean
-  if (!!isRuleBoolType) {
-    value = isBoolean(value) ? value : false;
-  }
-  return value;
-};
-
-/**
- * 获取表单数据
- * @param {String|Array} name 真实名称，需要使用 realName 获取
- * @param {Object} data 原始数据
- * @param {any} value  需要设置的值
- */
-exports.getValue = getValue;
-var setDataValue = function setDataValue(field, formdata, value) {
-  formdata[field] = value;
-  return value || '';
-};
-
-/**
- * 获取表单数据
- * @param {String|Array} field 真实名称，需要使用 realName 获取
- * @param {Object} data 原始数据
- */
-exports.setDataValue = setDataValue;
-var getDataValue = function getDataValue(field, data) {
-  return objGet(data, field);
-};
-
-/**
- * 获取表单类型
- * @param {String|Array} field 真实名称，需要使用 realName 获取
- */
-exports.getDataValue = getDataValue;
-var getDataValueType = function getDataValueType(field, data) {
-  var value = getDataValue(field, data);
-  return {
-    type: type(value),
-    value: value
-  };
-};
-
-/**
- * 获取表单可用的真实name
- * @param {String|Array} name 表单name
- * @@return {String} 表单可用的真实name
- */
-exports.getDataValueType = getDataValueType;
-var realName = function realName(name) {
-  var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var base_name = _basePath(name);
-  if ((0, _typeof2.default)(base_name) === 'object' && Array.isArray(base_name) && base_name.length > 1) {
-    var realname = base_name.reduce(function (a, b) {
-      return a += "#".concat(b);
-    }, '_formdata_');
-    return realname;
-  }
-  return base_name[0] || name;
-};
-
-/**
- * 判断是否表单可用的真实name
- * @param {String|Array} name 表单name
- * @@return {String} 表单可用的真实name
- */
-exports.realName = realName;
-var isRealName = function isRealName(name) {
-  var reg = /^_formdata_#*/;
-  return reg.test(name);
-};
-
-/**
- * 获取表单数据的原始格式
- * @@return {Object|Array} object 需要解析的数据
- */
-exports.isRealName = isRealName;
-var rawData = function rawData() {
-  var object = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var name = arguments.length > 1 ? arguments[1] : undefined;
-  var newData = JSON.parse(JSON.stringify(object));
-  var formData = {};
-  for (var i in newData) {
-    var path = name2arr(i);
-    objSet(formData, path, newData[i]);
-  }
-  return formData;
-};
-
-/**
- * 真实name还原为 array
- * @param {*} name 
- */
-exports.rawData = rawData;
-var name2arr = function name2arr(name) {
-  var field = name.replace('_formdata_#', '');
-  field = field.split('#').map(function (v) {
-    return isNumber(v) ? Number(v) : v;
-  });
-  return field;
-};
-
-/**
- * 对象中设置值
- * @param {Object|Array} object 源数据
- * @param {String| Array} path 'a.b.c' 或 ['a',0,'b','c']
- * @param {String} value 需要设置的值
- */
-exports.name2arr = name2arr;
-var objSet = function objSet(object, path, value) {
-  if ((0, _typeof2.default)(object) !== 'object') return object;
-  _basePath(path).reduce(function (o, k, i, _) {
-    if (i === _.length - 1) {
-      // 若遍历结束直接赋值
-      o[k] = value;
-      return null;
-    } else if (k in o) {
-      // 若存在对应路径，则返回找到的对象，进行下一次遍历
-      return o[k];
-    } else {
-      // 若不存在对应路径，则创建对应对象，若下一路径是数字，新对象赋值为空数组，否则赋值为空对象
-      o[k] = /^[0-9]{1,}$/.test(_[i + 1]) ? [] : {};
-      return o[k];
-    }
-  }, object);
-  // 返回object
-  return object;
-};
-
-// 处理 path， path有三种形式：'a[0].b.c'、'a.0.b.c' 和 ['a','0','b','c']，需要统一处理成数组，便于后续使用
-exports.objSet = objSet;
-function _basePath(path) {
-  // 若是数组，则直接返回
-  if (Array.isArray(path)) return path;
-  // 若有 '[',']'，则替换成将 '[' 替换成 '.',去掉 ']'
-  return path.replace(/\[/g, '.').replace(/\]/g, '').split('.');
-}
-
-/**
- * 从对象中获取值
- * @param {Object|Array} object 源数据
- * @param {String| Array} path 'a.b.c' 或 ['a',0,'b','c']
- * @param {String} defaultVal 如果无法从调用链中获取值的默认值
- */
-var objGet = function objGet(object, path) {
-  var defaultVal = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'undefined';
-  // 先将path处理成统一格式
-  var newPath = _basePath(path);
-  // 递归处理，返回最后结果
-  var val = newPath.reduce(function (o, k) {
-    return (o || {})[k];
-  }, object);
-  return !val || val !== undefined ? val : defaultVal;
-};
-
-/**
- * 是否为 number 类型 
- * @param {any} num 需要判断的值
- * @return {Boolean} 是否为 number
- */
-exports.objGet = objGet;
-var isNumber = function isNumber(num) {
-  return !isNaN(Number(num));
-};
-
-/**
- * 是否为 boolean 类型 
- * @param {any} bool 需要判断的值
- * @return {Boolean} 是否为 boolean
- */
-exports.isNumber = isNumber;
-var isBoolean = function isBoolean(bool) {
-  return typeof bool === 'boolean';
-};
-/**
- * 是否有必填字段
- * @param {Object} rules 规则
- * @return {Boolean} 是否有必填字段
- */
-exports.isBoolean = isBoolean;
-var isRequiredField = function isRequiredField(rules) {
-  var isNoField = false;
-  for (var i = 0; i < rules.length; i++) {
-    var ruleData = rules[i];
-    if (ruleData.required) {
-      isNoField = true;
-      break;
-    }
-  }
-  return isNoField;
-};
-
-/**
- * 获取数据类型
- * @param {Any} obj 需要获取数据类型的值
- */
-exports.isRequiredField = isRequiredField;
-var type = function type(obj) {
-  var class2type = {};
-
-  // 生成class2type映射
-  "Boolean Number String Function Array Date RegExp Object Error".split(" ").map(function (item, index) {
-    class2type["[object " + item + "]"] = item.toLowerCase();
-  });
-  if (obj == null) {
-    return obj + "";
-  }
-  return (0, _typeof2.default)(obj) === "object" || typeof obj === "function" ? class2type[Object.prototype.toString.call(obj)] || "object" : (0, _typeof2.default)(obj);
-};
-
-/**
- * 判断两个值是否相等
- * @param {any} a 值  
- * @param {any} b 值  
- * @return {Boolean} 是否相等
- */
-exports.type = type;
-var isEqual = function isEqual(a, b) {
-  //如果a和b本来就全等
-  if (a === b) {
-    //判断是否为0和-0
-    return a !== 0 || 1 / a === 1 / b;
-  }
-  //判断是否为null和undefined
-  if (a == null || b == null) {
-    return a === b;
-  }
-  //接下来判断a和b的数据类型
-  var classNameA = toString.call(a),
-    classNameB = toString.call(b);
-  //如果数据类型不相等，则返回false
-  if (classNameA !== classNameB) {
-    return false;
-  }
-  //如果数据类型相等，再根据不同数据类型分别判断
-  switch (classNameA) {
-    case '[object RegExp]':
-    case '[object String]':
-      //进行字符串转换比较
-      return '' + a === '' + b;
-    case '[object Number]':
-      //进行数字转换比较,判断是否为NaN
-      if (+a !== +a) {
-        return +b !== +b;
-      }
-      //判断是否为0或-0
-      return +a === 0 ? 1 / +a === 1 / b : +a === +b;
-    case '[object Date]':
-    case '[object Boolean]':
-      return +a === +b;
-  }
-  //如果是对象类型
-  if (classNameA == '[object Object]') {
-    //获取a和b的属性长度
-    var propsA = Object.getOwnPropertyNames(a),
-      propsB = Object.getOwnPropertyNames(b);
-    if (propsA.length != propsB.length) {
-      return false;
-    }
-    for (var i = 0; i < propsA.length; i++) {
-      var propName = propsA[i];
-      //如果对应属性对应值不相等，则返回false
-      if (a[propName] !== b[propName]) {
-        return false;
-      }
-    }
-    return true;
-  }
-  //如果是数组类型
-  if (classNameA == '[object Array]') {
-    if (a.toString() == b.toString()) {
-      return true;
-    }
-    return false;
-  }
-};
-exports.isEqual = isEqual;
-
-/***/ }),
-
-/***/ 883:
-/*!********************************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-load-more/components/uni-load-more/i18n/index.js ***!
-  \********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 884));
-var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 885));
-var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 886));
-var _default = {
-  en: _en.default,
-  'zh-Hans': _zhHans.default,
-  'zh-Hant': _zhHant.default
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 884:
-/*!*******************************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-load-more/components/uni-load-more/i18n/en.json ***!
-  \*******************************************************************************************/
-/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"Pull up to show more\",\"uni-load-more.contentrefresh\":\"loading...\",\"uni-load-more.contentnomore\":\"No more data\"}");
-
-/***/ }),
-
-/***/ 885:
-/*!************************************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hans.json ***!
-  \************************************************************************************************/
-/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉显示更多\",\"uni-load-more.contentrefresh\":\"正在加载...\",\"uni-load-more.contentnomore\":\"没有更多数据了\"}");
-
-/***/ }),
-
-/***/ 886:
-/*!************************************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hant.json ***!
-  \************************************************************************************************/
-/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉顯示更多\",\"uni-load-more.contentrefresh\":\"正在加載...\",\"uni-load-more.contentnomore\":\"沒有更多數據了\"}");
-
-/***/ }),
-
-/***/ 894:
-/*!**********************************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-search-bar/components/uni-search-bar/i18n/index.js ***!
-  \**********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 895));
-var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 896));
-var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 897));
-var _default = {
-  en: _en.default,
-  'zh-Hans': _zhHans.default,
-  'zh-Hant': _zhHant.default
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 895:
-/*!*********************************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-search-bar/components/uni-search-bar/i18n/en.json ***!
-  \*********************************************************************************************/
-/*! exports provided: uni-search-bar.cancel, uni-search-bar.placeholder, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-search-bar.cancel\":\"cancel\",\"uni-search-bar.placeholder\":\"Search enter content\"}");
-
-/***/ }),
-
-/***/ 896:
-/*!**************************************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-search-bar/components/uni-search-bar/i18n/zh-Hans.json ***!
-  \**************************************************************************************************/
-/*! exports provided: uni-search-bar.cancel, uni-search-bar.placeholder, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-search-bar.cancel\":\"取消\",\"uni-search-bar.placeholder\":\"请输入搜索内容\"}");
-
-/***/ }),
-
-/***/ 897:
-/*!**************************************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-search-bar/components/uni-search-bar/i18n/zh-Hant.json ***!
-  \**************************************************************************************************/
-/*! exports provided: uni-search-bar.cancel, uni-search-bar.placeholder, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-search-bar.cancel\":\"取消\",\"uni-search-bar.placeholder\":\"請輸入搜索內容\"}");
-
-/***/ }),
-
-/***/ 9:
-/*!*****************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
-  return arr2;
-}
-module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 905:
+/***/ 979:
 /*!*********************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/components/gaoyia-parse/libs/html2json.js ***!
   \*********************************************************************/
@@ -31537,8 +31312,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _wxDiscode = _interopRequireDefault(__webpack_require__(/*! ./wxDiscode */ 906));
-var _htmlparser = _interopRequireDefault(__webpack_require__(/*! ./htmlparser */ 907));
+var _wxDiscode = _interopRequireDefault(__webpack_require__(/*! ./wxDiscode */ 980));
+var _htmlparser = _interopRequireDefault(__webpack_require__(/*! ./htmlparser */ 981));
 /**
  * html2Json 改造来自: https://github.com/Jxck/html2json
  *
@@ -31771,7 +31546,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 906:
+/***/ 980:
 /*!*********************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/components/gaoyia-parse/libs/wxDiscode.js ***!
   \*********************************************************************/
@@ -31990,7 +31765,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 907:
+/***/ 981:
 /*!**********************************************************************!*\
   !*** E:/xcbh5/xcbh5/test/components/gaoyia-parse/libs/htmlparser.js ***!
   \**********************************************************************/
@@ -32145,141 +31920,6 @@ function HTMLParser(html, handler) {
 }
 var _default = HTMLParser;
 exports.default = _default;
-
-/***/ }),
-
-/***/ 927:
-/*!***************************************************************************************************!*\
-  !*** E:/xcbh5/xcbh5/test/uni_modules/uni-transition/components/uni-transition/createAnimation.js ***!
-  \***************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.createAnimation = createAnimation;
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
-var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-// const defaultOption = {
-// 	duration: 300,
-// 	timingFunction: 'linear',
-// 	delay: 0,
-// 	transformOrigin: '50% 50% 0'
-// }
-var MPAnimation = /*#__PURE__*/function () {
-  function MPAnimation(options, _this) {
-    (0, _classCallCheck2.default)(this, MPAnimation);
-    this.options = options;
-    // 在iOS10+QQ小程序平台下，传给原生的对象一定是个普通对象而不是Proxy对象，否则会报parameter should be Object instead of ProxyObject的错误
-    this.animation = uni.createAnimation(_objectSpread({}, options));
-    this.currentStepAnimates = {};
-    this.next = 0;
-    this.$ = _this;
-  }
-  (0, _createClass2.default)(MPAnimation, [{
-    key: "_nvuePushAnimates",
-    value: function _nvuePushAnimates(type, args) {
-      var aniObj = this.currentStepAnimates[this.next];
-      var styles = {};
-      if (!aniObj) {
-        styles = {
-          styles: {},
-          config: {}
-        };
-      } else {
-        styles = aniObj;
-      }
-      if (animateTypes1.includes(type)) {
-        if (!styles.styles.transform) {
-          styles.styles.transform = '';
-        }
-        var unit = '';
-        if (type === 'rotate') {
-          unit = 'deg';
-        }
-        styles.styles.transform += "".concat(type, "(").concat(args + unit, ") ");
-      } else {
-        styles.styles[type] = "".concat(args);
-      }
-      this.currentStepAnimates[this.next] = styles;
-    }
-  }, {
-    key: "_animateRun",
-    value: function _animateRun() {
-      var styles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var ref = this.$.$refs['ani'].ref;
-      if (!ref) return;
-      return new Promise(function (resolve, reject) {
-        nvueAnimation.transition(ref, _objectSpread({
-          styles: styles
-        }, config), function (res) {
-          resolve();
-        });
-      });
-    }
-  }, {
-    key: "_nvueNextAnimate",
-    value: function _nvueNextAnimate(animates) {
-      var _this2 = this;
-      var step = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var fn = arguments.length > 2 ? arguments[2] : undefined;
-      var obj = animates[step];
-      if (obj) {
-        var styles = obj.styles,
-          config = obj.config;
-        this._animateRun(styles, config).then(function () {
-          step += 1;
-          _this2._nvueNextAnimate(animates, step, fn);
-        });
-      } else {
-        this.currentStepAnimates = {};
-        typeof fn === 'function' && fn();
-        this.isEnd = true;
-      }
-    }
-  }, {
-    key: "step",
-    value: function step() {
-      var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      this.animation.step(config);
-      return this;
-    }
-  }, {
-    key: "run",
-    value: function run(fn) {
-      this.$.animationData = this.animation.export();
-      this.$.timer = setTimeout(function () {
-        typeof fn === 'function' && fn();
-      }, this.$.durationTime);
-    }
-  }]);
-  return MPAnimation;
-}();
-var animateTypes1 = ['matrix', 'matrix3d', 'rotate', 'rotate3d', 'rotateX', 'rotateY', 'rotateZ', 'scale', 'scale3d', 'scaleX', 'scaleY', 'scaleZ', 'skew', 'skewX', 'skewY', 'translate', 'translate3d', 'translateX', 'translateY', 'translateZ'];
-var animateTypes2 = ['opacity', 'backgroundColor'];
-var animateTypes3 = ['width', 'height', 'left', 'right', 'top', 'bottom'];
-animateTypes1.concat(animateTypes2, animateTypes3).forEach(function (type) {
-  MPAnimation.prototype[type] = function () {
-    var _this$animation;
-    (_this$animation = this.animation)[type].apply(_this$animation, arguments);
-    return this;
-  };
-});
-function createAnimation(option, _this) {
-  if (!_this) return;
-  clearTimeout(_this.timer);
-  return new MPAnimation(option, _this);
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ })
 

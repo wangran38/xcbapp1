@@ -274,6 +274,18 @@
 .wxParse .audio, .wxParse .uni-audio-default {
   display: block;
 }
+.imgIcon {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #eeeeee;
+  border-radius: 3px;
+  height: 200px;
+  padding-top: 0px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
  .uni-card {
   overflow: visible !important;
 }
@@ -327,6 +339,10 @@
   box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.05);
 }
 .create-container .submit-bar .submit-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #007aff;
   color: white;
   height: 80rpx;
   border-radius: 40rpx;

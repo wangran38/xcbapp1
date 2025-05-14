@@ -15,7 +15,7 @@
 				<picker class="picker" mode="multiSelector" :range="multiArray" :value="multiIndex"
 					@change="bindMultiPickerChange" @columnchange="bindMultiPickerColumnChange">
 					<view class="picker-text">
-						{{ multiArray[0][multiIndex[0]] }} - {{ multiArray[1][multiIndex[1]] }} -{{ selectedCountry === 'overseas' ? '' : multiArray[2][multiIndex[2]] }}
+						{{ multiArray[0][multiIndex[0]] }} - {{ multiArray[1][multiIndex[1]] ? multiArray[1][multiIndex[1]]: '暂无数据' }} -{{ selectedCountry === 'overseas' ? '' : multiArray[2][multiIndex[2]] }}
 					</view>
 				</picker>
 			</view>
@@ -28,27 +28,12 @@
 			</view>
 			<button class="save" @click="saveData">立即逛</button>
 		</view>
-		
-<!-- 		<view class="notice">
-			<view class="nleft">
-				<uni-icons type="sound-filled" size="20" color="#007aff"></uni-icons>
-				<text class="ntext">公告</text>
-			</view>
-			<view class="ncen">
-				<swiper class="swiper" vertical autoplay interval="2000" duration="500" circular>
-					<swiper-item class="swiitem" v-for="item in NoticeList" @click="goTorules(item)">{{item}}</swiper-item>
-				</swiper>
-			</view>
-			<view class="nrig">
-				<uni-icons type="right" size="16" color="#333"></uni-icons>
-			</view>
+<!-- 		<view style="color: white; margin: 20rpx; font-size: 25rpx; background-color: black; border: 5rpx solid lightslategray; padding: 20rpx;">
+			小程序使用体验上出现问题,请打热线电话联系我们我们将虚心接受您的意见并进行整改.
+			
 		</view>
-		<view class="Notice">
-			<view>今日打卡人次：{{signTotalData.todaynum}} <br>累计打卡人次：{{signTotalData.allnum}}</view>
-			<button @click="goToJackpot" style="margin-top: 10rpx; font-size: 30rpx; color: #ff3030;">查看摇号结果</button>
-		</view> -->
-		
-		
+		<view style="color: white; margin: 10rpx; font-size: 25rpx; background-color: black; border: 5rpx solid lightslategray; padding: 20rpx;">官方热线电话:63836278</view>
+		 -->
 
 	</view>
 </template>
@@ -100,7 +85,7 @@
 				}
 			},
 			displayMarketList() {
-				return this.selectedCountry === 'china' ? this.marketList : ['暂时还没有数据'];
+				return this.selectedCountry === 'china' ? this.marketList : ['暂无数据'];
 			}
 		},
 		watch: {
@@ -175,6 +160,7 @@
 				}
 				this.fetchMarkets(2313)
 				this.selectedMarketIndex = 1
+				console.log(this.multiArray,this.multiIndex)
 			},
 			
 			

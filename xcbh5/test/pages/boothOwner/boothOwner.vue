@@ -80,12 +80,12 @@
 							上架菜品
 						</view>
 					</view>
-					<!-- <view class="item">
+					<view class="item" @click="GotoTraceability">
 						<uni-icons type="plus" size="30"></uni-icons>
 						<view class="add-dishes">
-							菜品朋友圈
+							溯源补充
 						</view>
-					</view> -->
+					</view>
 					<!-- <view class="item">
 						<uni-icons type="plus" size="30"></uni-icons>
 						<view class="add-dishes">
@@ -234,6 +234,11 @@
 			// }
 		},
 		methods: {
+			GotoTraceability(){
+				uni.navigateTo({
+					url: '/subPackages/aHouseholder/Traceability/Traceability'
+				});
+			},
 			goToSalesApplication(){
 				uni.navigateTo({
 					url: '/subPackages/boothOwner/salesApplication/salesApplication'

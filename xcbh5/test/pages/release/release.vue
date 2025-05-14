@@ -123,6 +123,7 @@
 					sourceType: ['album', 'camera'],
 					success: async (res) => {
 						const tempFilePaths = res.tempFilePaths;
+						console.log(res)
 						if (tempFilePaths.length > 0) {
 							const {
 								upload,

@@ -156,8 +156,21 @@
 				area_id: null,
 				market_id: null,
 				isSubmitting: false,
-				formData: {
-
+				formData:{
+					sellstatus:3, // 批发
+					farmersgoods_id:null  ,// 菜品id，
+					market_id:null, // 市场id
+					area_id:null, // 城市id
+					unit:null, // 单位
+					ispresale:2, // 是否上市
+					sellbegintime:null, // 开始时间戳
+					sellendtime:null, // 结束时间戳
+					presaleprice:null, // 市场价
+					price:null, // 上市价
+					goodstotal:null, // 库存
+					contactpeople:null, // 联系人
+					contactphone:null, // 手机号
+					pickaddress:null, // 取货点
 				}
 			};
 		},

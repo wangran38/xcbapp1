@@ -3,287 +3,308 @@
 		<view class="filter-section">
 			<view class="search-box">
 				<uni-icons type="search" size="18" color="#999" />
-				<input placeholder="输入商品关键词" v-model="searchText" @confirm="handleSearch" class="search-input" />
-			</view>
-
-			<view class="filter-row">
-				<picker class="filter-select" @change="categoryChange" :range="categories" range-key="label">
-					<view class="select-box">
-						<text>{{ selectedCategory.label }}</text>
-						<uni-icons type="arrowdown" size="14" color="#666" />
-					</view>
-				</picker>
-
-				<picker class="filter-select" @change="sortChange" :range="sortOptions" range-key="label">
-					<view class="select-box">
-						<text>{{ selectedSort.label }}</text>
-						<uni-icons type="arrowdown" size="14" color="#666" />
-					</view>
-				</picker>
+				<input 
+					placeholder="输入商品关键词" 
+					v-model="searchText" 
+					@confirm="handleSearch" 
+					class="search-input" 
+				/>
 			</view>
 		</view>
 
 		<!-- 商品列表 -->
-		<scroll-view class="goods-list" scroll-y @scrolltolower="loadMore">
-			<view class="goods-card" v-for="item in goodsList" :key="item.id" @click="goDetail(item.id)">
-				<image class="goods-image" :src="item.image" mode="aspectFill" />
-				<view class="goods-info">
-					<text class="goods-title">{{ item.title }}</text>
-					<view class="price-section">
-						<text class="current-price">￥{{ item.price }}</text>
-						<text class="original-price" v-if="item.originalPrice">￥{{ item.originalPrice }}</text>
+		<scroll-view 
+			class="goods-list" 
+			scroll-y 
+			@scrolltolower="loadMore"
+			:scroll-with-animation="true"
+		>
+			<view class="goods-grid">
+				<view 
+					class="goods-card" 
+					v-for="item in goodsList" 
+					:key="item.id" 
+					@click="goDetail(item.id)"
+				>
+					<view class="image-container">
+						<image 
+							class="goods-image" 
+							:src="item.selllogo" 
+							mode="aspectFill" 
+							:lazy-load="true"
+						/>
+						<view v-if="item.tag" class="goods-tag">
+							{{ item.tag }}
+						</view>
 					</view>
-					<view class="tags">
-						<text class="tag" v-for="tag in item.tags" :key="tag">{{ tag }}</text>
-					</view>
-					<view class="meta-info">
-						<text class="sales">{{ item.sales }}人付款</text>
-						<text class="location">{{ item.location }}</text>
+					
+					<view class="goods-content">
+						<text class="goods-title">{{ item.selltitle }}</text>
+						
+						<view class="price-section">
+							<text class="current-price">￥{{ item.marketprice }}</text>
+							<text 
+								class="original-price" 
+								v-if="item.price"
+							>￥{{ item.price }}</text>
+						</view>
+						
+						<view class="action-bar">
+							<view class="sales-info">
+								<uni-icons type="shop" size="12" color="#666" />
+								<text>{{ item.stoptime }}人付款</text>
+							</view>
+							<view class="contact-btn" @click.stop="contactNow">
+								<text>询底价</text>
+								<uni-icons type="arrow-right" size="14" color="#fff" />
+							</view>
+						</view>
+						
+						<view class="location-info">
+							<uni-icons type="location" size="12" color="#666" />
+							<text>{{ item.selladdress }}</text>
+						</view>
 					</view>
 				</view>
 			</view>
 
 			<view class="load-status">
 				<text v-if="loading" class="loading-text">加载中...</text>
-				<text v-else-if="noMore" class="no-more">没有更多了</text>
+				<text v-else-if="noMore" class="no-more">—— 没有更多了 ——</text>
 			</view>
 		</scroll-view>
 	</view>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				searchText: '',
-				categories: [{
-						label: '全部分类',
-						value: 'all'
-					},
-					{
-						label: '工业原料',
-						value: 'industry'
-					},
-					{
-						label: '农产品',
-						value: 'agriculture'
-					},
-					{
-						label: '电子元件',
-						value: 'electronics'
-					}
-				],
-				sortOptions: [{
-						label: '综合排序',
-						value: 'default'
-					},
-					{
-						label: '价格从低到高',
-						value: 'price_asc'
-					},
-					{
-						label: '价格从高到低',
-						value: 'price_desc'
-					},
-					{
-						label: '销量优先',
-						value: 'sales'
-					}
-				],
-				selectedCategory: {
-					label: '全部分类',
-					value: 'all'
-				},
-				selectedSort: {
-					label: '综合排序',
-					value: 'default'
-				},
-				goodsList: [],
+import { api } from '@/api/index.js'
+
+export default {
+	data() {
+		return {
+			searchText: '',
+			goodsList: [],
+			page: 1,
+			loading: false,
+			noMore: false,
+			queryData: {
 				page: 1,
-				loading: false,
-				noMore: false
+				limit: 10
+			}
+		}
+	},
+	onLoad() {
+		this.loadData()
+	},
+	methods: {
+		async loadData() {
+			if (this.loading || this.noMore) return
+			
+			this.loading = true
+			try {
+				const res = await api.wholesaleList(this.queryData)
+				
+				this.goodsList = res.data.listdata
+				if (res.data.listdata.length === 0) {
+					this.noMore = true
+					return
+				}
+				
+				this.page++
+			} catch (error) {
+				console.log(error)
+			} finally {
+				this.loading = false
 			}
 		},
-		onLoad() {
+		
+		processGoodsData(list) {
+			return list.map(item => ({
+				...item,
+				marketprice: Number(item.marketprice).toFixed(2),
+				price: item.price ? Number(item.price).toFixed(2) : null,
+			}))
+		},
+		
+		
+		handleSearch() {
+			this.resetList()
 			this.loadData()
 		},
-		methods: {
-			async loadData() {
-				// 模拟数据加载
-				const mockData = Array.from({
-					length: 10
-				}, (_, i) => ({
-					id: this.page * 10 + i,
-					title: `定安黑山猪 ${this.page * 10 + i}`,
-					price: (Math.random() * 1000 + 50).toFixed(2),
-					originalPrice: (Math.random() * 1200 + 100).toFixed(2),
-					image: `https://img1.baidu.com/it/u=2670186960,2836929917&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500`,
-					tags: ['七天退换', '48小时发货', '品质保证'].slice(0, Math.floor(Math.random() * 3)),
-					sales: Math.floor(Math.random() * 1000),
-					location: ['广东', '浙江', '江苏'][i % 3]
-				}))
-
-				this.goodsList = [...this.goodsList, ...mockData]
-				this.page++
-				this.noMore = this.page > 3
-			},
-			categoryChange(e) {
-				this.selectedCategory = this.categories[e.detail.value]
-				this.refreshList()
-			},
-			sortChange(e) {
-				this.selectedSort = this.sortOptions[e.detail.value]
-				this.refreshList()
-			},
-			refreshList() {
-				this.page = 1
-				this.goodsList = []
-				this.noMore = false
-				this.loadData()
-			},
-			loadMore() {
-				if (!this.noMore) this.loadData()
-			}
+		
+		loadMore() {
+			if (!this.noMore) this.loadData()
+		},
+		
+		resetList() {
+			this.goodsList = []
+			this.page = 1
+			this.noMore = false
+		},
+		
+		contactNow() {
+			uni.showToast({ title: '已发送联系请求', icon: 'none' })
+		},
+		
+		goDetail(id) {
+			uni.navigateTo({ url: `/pages/goods/detail?id=${id}` })
 		}
 	}
+}
 </script>
 
-<style lang="scss" scoped>
-	$primary-color: #3a7afe;
-	$border-color: #e0e0e0;
+<style lang="scss">
+.supply-container {
+	padding: 20rpx;
+	background: #f5f5f5;
+	min-height: 100vh;
+}
 
-	.supply-container {
-		height: 100vh;
+.filter-section {
+	margin-bottom: 20rpx;
+	
+	.search-box {
 		display: flex;
-		flex-direction: column;
-		background: #f8f9fb;
+		align-items: center;
+		background: #fff;
+		border-radius: 48rpx;
+		padding: 0 28rpx;
+		height: 80rpx;
+		
+		.search-input {
+			flex: 1;
+			font-size: 28rpx;
+			padding: 0 20rpx;
+			color: #333;
+		}
+	}
+}
 
-		.filter-section {
-			background: #fff;
-			padding: 20rpx 30rpx;
-			box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.03);
-
-			.search-box {
+.goods-list {
+	height: calc(100vh - 120rpx);
+	
+	.goods-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 20rpx;
+		padding-bottom: 40rpx;
+	}
+	
+	.goods-card {
+		background: #fff;
+		border-radius: 16rpx;
+		overflow: hidden;
+		box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.04);
+	}
+	
+	.image-container {
+		position: relative;
+		aspect-ratio: 1/1;
+		
+		.goods-image {
+			width: 100%;
+			height: 100%;
+		}
+		
+		.goods-tag {
+			position: absolute;
+			top: 10rpx;
+			left: 10rpx;
+			background: #ff4444;
+			color: #fff;
+			padding: 4rpx 16rpx;
+			border-radius: 8rpx;
+			font-size: 22rpx;
+		}
+	}
+	
+	.goods-content {
+		padding: 20rpx;
+		
+		.goods-title {
+			font-size: 28rpx;
+			color: #333;
+			line-height: 1.4;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			overflow: hidden;
+			min-height: 80rpx;
+			margin-bottom: 16rpx;
+		}
+		
+		.price-section {
+			display: flex;
+			align-items: baseline;
+			margin-bottom: 20rpx;
+			
+			.current-price {
+				color: #ff4444;
+				font-size: 32rpx;
+				font-weight: 600;
+				margin-right: 12rpx;
+			}
+			
+			.original-price {
+				color: #999;
+				font-size: 24rpx;
+				text-decoration: line-through;
+			}
+		}
+		
+		.action-bar {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 16rpx;
+			
+			.sales-info {
 				display: flex;
 				align-items: center;
-				background: #f5f6fa;
-				border-radius: 48rpx;
-				padding: 20rpx 32rpx;
-				margin-bottom: 24rpx;
-
-				.search-input {
-					flex: 1;
-					font-size: 28rpx;
-					margin-left: 20rpx;
-					color: #333;
+				color: #666;
+				font-size: 24rpx;
+				
+				.uni-icons {
+					margin-right: 6rpx;
 				}
 			}
-
-			.filter-row {
+			
+			.contact-btn {
+				background: linear-gradient(90deg, #2979FF, #00B8FF);
+				border-radius: 40rpx;
+				padding: 8rpx 24rpx;
 				display: flex;
-				gap: 30rpx;
-
-				.filter-select {
-					flex: 1;
-
-					.select-box {
-						display: flex;
-						align-items: center;
-						justify-content: space-between;
-						padding: 20rpx 32rpx;
-						background: #f5f6fa;
-						border-radius: 48rpx;
-						font-size: 28rpx;
-						color: #333;
-					}
+				align-items: center;
+				
+				text {
+					color: #fff;
+					font-size: 24rpx;
+					margin-right: 8rpx;
 				}
 			}
 		}
-
-		.goods-list {
-			flex: 1;
-			padding: 30rpx;
-
-			.goods-card {
-				width: 93%;
-				background: #fff;
-				border-radius: 24rpx;
-				margin-bottom: 30rpx;
-				box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.03);
-				overflow: hidden;
-				transition: transform 0.2s;
-
-				&:active {
-					transform: scale(0.98);
-				}
-
-				.goods-image {
-					width: 100%;
-					height: 360rpx;
-				}
-
-				.goods-info {
-					padding: 24rpx;
-
-					.goods-title {
-						display: -webkit-box;
-						-webkit-box-orient: vertical;
-						-webkit-line-clamp: 2;
-						overflow: hidden;
-						font-size: 32rpx;
-						line-height: 1.4;
-						color: #333;
-					}
-
-					.price-section {
-						margin: 20rpx 0;
-						display: flex;
-						align-items: baseline;
-
-						.current-price {
-							color: #ff4444;
-							font-size: 36rpx;
-							font-weight: 600;
-						}
-
-						.original-price {
-							color: #999;
-							font-size: 24rpx;
-							text-decoration: line-through;
-							margin-left: 16rpx;
-						}
-					}
-
-					.tags {
-						display: flex;
-						gap: 12rpx;
-						margin-bottom: 20rpx;
-
-						.tag {
-							padding: 6rpx 16rpx;
-							background: rgba($primary-color, 0.1);
-							color: $primary-color;
-							border-radius: 8rpx;
-							font-size: 24rpx;
-						}
-					}
-
-					.meta-info {
-						width: 90%;
-						display: flex;
-						justify-content: space-between;
-						color: #999;
-						font-size: 30rpx;
-					}
-				}
-			}
-
-			.load-status {
-				text-align: center;
-				padding: 40rpx;
-				color: #999;
-				font-size: 26rpx;
+		
+		.location-info {
+			display: flex;
+			align-items: center;
+			color: #666;
+			font-size: 24rpx;
+			
+			.uni-icons {
+				margin-right: 6rpx;
 			}
 		}
 	}
+}
+
+.load-status {
+	padding: 30rpx 0;
+	text-align: center;
+	font-size: 26rpx;
+	color: #999;
+	
+	.no-more {
+		color: #666;
+	}
+}
 </style>

@@ -5,7 +5,7 @@
 				<view class="Total-assets">
 					<text>总积分</text>
 					<view class="money">
-						{{ pagedata.score }}
+						{{ pagedata.score.toFixed(1) }}
 					</view>
 				</view>
 				<view class="bottom">
@@ -18,7 +18,7 @@
 					<view class="consume">
 						<text>可提现</text>
 						<view class="Cumulative-top-ups">
-							{{ pagedata.truemoney  }}
+							{{ pagedata.truemoney.toFixed(1)  }}
 						</view>
 					</view>
 					<view class="Not-received">
@@ -54,10 +54,13 @@
 	export default {
 		data() {
 			return {
-				pagedata: {}
+				pagedata: {
+					truemoney:0,
+					pagedata:0
+				}
 			}
 		},
-		mounted() {
+		onShow() {
 			this.fetchData(); // 在页面加载时调用接口
 		},
 		methods: {

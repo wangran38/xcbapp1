@@ -44,6 +44,12 @@
 								</button>
 								上市
 							</view>
+							<view>
+								<button class="delete-btn" @click="additionalinformation(item)" style="background-color: #57fffa;">
+									<uni-icons type="staff" size="18" color="#fff" />
+								</button>
+								朋友圈
+							</view>
 
 <!-- 							<view>
 								<button class="delete-btn" @click="editItem(item)" style="background-color: #55ffff;">
@@ -108,6 +114,11 @@
 			this.getData()
 		},
 		methods: {
+			additionalinformation(){
+				uni.navigateTo({
+					url: "/pages/additionalinformation/additionalinformation"
+				})
+			},
 			beListed(item) {
 				let jsondata = JSON.stringify(item)
 				uni.navigateTo({

@@ -356,7 +356,7 @@
 }
 .product-card .product-info .action-bar.data-v-2ddc9f52 {
   display: flex;
-  justify-content: right;
+  justify-content: space-around;
   align-items: center;
   border-top: 1rpx solid #EEE;
   padding-top: 20rpx;

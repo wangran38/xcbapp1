@@ -1,0 +1,414 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+/**
+ * author: Di (微信小程序开发工程师)
+ * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
+ *         垂直微信小程序开发交流社区
+ *
+ * github地址: https://github.com/icindy/wxParse
+ *
+ * for: 微信小程序富文本解析
+ * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
+ */
+/**
+ * 请在全局下引入该文件，@import '/static/wxParse.css';
+ */
+.wxParse.data-v-5c3ae13e {
+  -webkit-user-select: none;
+          user-select: none;
+  width: 100%;
+  font-family: Helvetica, "PingFangSC", 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
+  color: #333;
+  line-height: 1.5;
+  font-size: 1em;
+  text-align: justify;
+  /* //左右两端对齐 */
+}
+.wxParse view.data-v-5c3ae13e, .wxParse uni-view.data-v-5c3ae13e {
+  word-break: break-word;
+}
+.wxParse .p.data-v-5c3ae13e {
+  padding-bottom: 0.5em;
+  clear: both;
+  /* letter-spacing: 0;//字间距 */
+}
+.wxParse .inline.data-v-5c3ae13e {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+.wxParse .div.data-v-5c3ae13e {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+.wxParse .h1.data-v-5c3ae13e {
+  font-size: 2em;
+  line-height: 1.2em;
+  margin: 0.67em 0;
+}
+.wxParse .h2.data-v-5c3ae13e {
+  font-size: 1.5em;
+  margin: 0.83em 0;
+}
+.wxParse .h3.data-v-5c3ae13e {
+  font-size: 1.17em;
+  margin: 1em 0;
+}
+.wxParse .h4.data-v-5c3ae13e {
+  margin: 1.33em 0;
+}
+.wxParse .h5.data-v-5c3ae13e {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+.wxParse .h6.data-v-5c3ae13e {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+.wxParse .h1.data-v-5c3ae13e,
+.wxParse .h2.data-v-5c3ae13e,
+.wxParse .h3.data-v-5c3ae13e,
+.wxParse .h4.data-v-5c3ae13e,
+.wxParse .h5.data-v-5c3ae13e,
+.wxParse .h6.data-v-5c3ae13e,
+.wxParse .b.data-v-5c3ae13e,
+.wxParse .strong.data-v-5c3ae13e {
+  font-weight: bolder;
+}
+.wxParse .i.data-v-5c3ae13e,
+.wxParse .cite.data-v-5c3ae13e,
+.wxParse .em.data-v-5c3ae13e,
+.wxParse .var.data-v-5c3ae13e,
+.wxParse .address.data-v-5c3ae13e {
+  font-style: italic;
+}
+.wxParse .spaceshow.data-v-5c3ae13e {
+  white-space: pre;
+}
+.wxParse .pre.data-v-5c3ae13e,
+.wxParse .tt.data-v-5c3ae13e,
+.wxParse .code.data-v-5c3ae13e,
+.wxParse .kbd.data-v-5c3ae13e,
+.wxParse .samp.data-v-5c3ae13e {
+  font-family: monospace;
+}
+.wxParse .pre.data-v-5c3ae13e {
+  overflow: auto;
+  background: #f5f5f5;
+  padding: 16rpx;
+  white-space: pre;
+  margin: 1em 0rpx;
+  font-size: 24rpx;
+}
+.wxParse .code.data-v-5c3ae13e {
+  overflow: auto;
+  padding: 16rpx;
+  white-space: pre;
+  margin: 1em 0rpx;
+  background: #f5f5f5;
+  font-size: 24rpx;
+}
+.wxParse .big.data-v-5c3ae13e {
+  font-size: 1.17em;
+}
+.wxParse .small.data-v-5c3ae13e,
+.wxParse .sub.data-v-5c3ae13e,
+.wxParse .sup.data-v-5c3ae13e {
+  font-size: 0.83em;
+}
+.wxParse .sub.data-v-5c3ae13e {
+  vertical-align: sub;
+}
+.wxParse .sup.data-v-5c3ae13e {
+  vertical-align: super;
+}
+.wxParse .s.data-v-5c3ae13e,
+.wxParse .strike.data-v-5c3ae13e,
+.wxParse .del.data-v-5c3ae13e {
+  text-decoration: line-through;
+}
+.wxParse .strong.data-v-5c3ae13e,
+.wxParse .text.data-v-5c3ae13e,
+.wxParse .span.data-v-5c3ae13e,
+.wxParse .s.data-v-5c3ae13e {
+  display: inline;
+}
+.wxParse .a.data-v-5c3ae13e {
+  color: deepskyblue;
+}
+.wxParse .video.data-v-5c3ae13e {
+  text-align: center;
+  margin: 22rpx 0;
+}
+.wxParse .video-video.data-v-5c3ae13e {
+  width: 100%;
+}
+.wxParse .uni-image.data-v-5c3ae13e {
+  height: 100px !important;
+  width: 100px !important;
+}
+.wxParse .img.data-v-5c3ae13e {
+  height: 600rpx !important;
+  display: block;
+  height: 100rpx;
+  margin-bottom: 0em;
+  /* //与p标签底部padding同时修改 */
+  overflow: hidden;
+}
+.wxParse .blockquote.data-v-5c3ae13e {
+  margin: 10rpx 0;
+  padding: 22rpx 0 22rpx 22rpx;
+  font-family: Courier, Calibri, "宋体";
+  background: #f5f5f5;
+  border-left: 6rpx solid #dbdbdb;
+}
+.wxParse .blockquote .p.data-v-5c3ae13e {
+  margin: 0;
+}
+.wxParse .ul.data-v-5c3ae13e, .wxParse .ol.data-v-5c3ae13e {
+  display: block;
+  margin: 1em 0;
+  padding-left: 2em;
+}
+.wxParse .ol.data-v-5c3ae13e {
+  list-style-type: disc;
+}
+.wxParse .ol.data-v-5c3ae13e {
+  list-style-type: decimal;
+}
+.wxParse .ol > weixin-parse-template.data-v-5c3ae13e, .wxParse .ul > weixin-parse-template.data-v-5c3ae13e {
+  display: list-item;
+  align-items: baseline;
+  text-align: match-parent;
+}
+.wxParse .ol > .li.data-v-5c3ae13e, .wxParse .ul > .li.data-v-5c3ae13e {
+  display: list-item;
+  align-items: baseline;
+  text-align: match-parent;
+}
+.wxParse .ul .ul.data-v-5c3ae13e, .wxParse .ol .ul.data-v-5c3ae13e {
+  list-style-type: circle;
+}
+.wxParse .ol .ol .ul.data-v-5c3ae13e, .wxParse .ol .ul .ul.data-v-5c3ae13e, .wxParse .ul .ol .ul.data-v-5c3ae13e, .wxParse .ul .ul .ul.data-v-5c3ae13e {
+  list-style-type: square;
+}
+.wxParse .u.data-v-5c3ae13e {
+  text-decoration: underline;
+}
+.wxParse .hide.data-v-5c3ae13e {
+  display: none;
+}
+.wxParse .del.data-v-5c3ae13e {
+  display: inline;
+}
+.wxParse .figure.data-v-5c3ae13e {
+  overflow: hidden;
+}
+.wxParse .tablebox.data-v-5c3ae13e {
+  overflow: auto;
+  background-color: #f5f5f5;
+  background: #f5f5f5;
+  font-size: 13px;
+  padding: 8px;
+}
+.wxParse .table .table.data-v-5c3ae13e, .wxParse .table.data-v-5c3ae13e {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  /* 内边框 */
+  /* width: 100%; */
+  overflow: auto;
+  white-space: pre;
+}
+.wxParse .tbody.data-v-5c3ae13e {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  /* 内边框 */
+  border: 1px solid #dadada;
+}
+.wxParse .table .thead.data-v-5c3ae13e, .wxParse .table .tfoot.data-v-5c3ae13e, .wxParse .table .th.data-v-5c3ae13e {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  background: #ececec;
+  font-weight: 40;
+}
+.wxParse .table .tr.data-v-5c3ae13e {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  /* border: 2px solid #F0AD4E; */
+  overflow: auto;
+}
+.wxParse .table .th.data-v-5c3ae13e,
+.wxParse .table .td.data-v-5c3ae13e {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  border: 2rpx solid #dadada;
+  overflow: auto;
+}
+.wxParse .audio.data-v-5c3ae13e, .wxParse .uni-audio-default.data-v-5c3ae13e {
+  display: block;
+}
+.supply-container.data-v-5c3ae13e {
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+.supply-container .header-bg.data-v-5c3ae13e {
+  background: linear-gradient(135deg, #2c3e50, #3498db);
+  padding: 40rpx 32rpx 120rpx;
+  color: white;
+}
+.supply-container .header-bg .title.data-v-5c3ae13e {
+  font-size: 44rpx;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 16rpx;
+}
+.supply-container .header-bg .count.data-v-5c3ae13e {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+.supply-container .card-list.data-v-5c3ae13e {
+  position: relative;
+  top: -80rpx;
+  padding: 0 32rpx 120rpx;
+}
+.supply-container .supply-card.data-v-5c3ae13e {
+  width: 700rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+.supply-container .supply-card.status-1.data-v-5c3ae13e {
+  border-left: 8rpx solid #4cd964;
+}
+.supply-container .supply-card.status-2.data-v-5c3ae13e {
+  border-left: 8rpx solid #909399;
+}
+.supply-container .supply-card .product-thumb.data-v-5c3ae13e {
+  width: 100%;
+  height: 320rpx;
+  background: #f0f2f5;
+}
+.supply-container .supply-card .status-tag.data-v-5c3ae13e {
+  position: absolute;
+  top: 24rpx;
+  left: 24rpx;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 8rpx 24rpx;
+  border-radius: 40rpx;
+  color: white;
+  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+}
+.supply-container .supply-card .status-tag .dot.data-v-5c3ae13e {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  margin-right: 12rpx;
+}
+.supply-container .supply-card .card-body.data-v-5c3ae13e {
+  padding: 32rpx;
+}
+.supply-container .supply-card .card-body .product-name.data-v-5c3ae13e {
+  font-size: 34rpx;
+  font-weight: 500;
+  color: #2c3e50;
+  line-height: 1.4;
+  margin-bottom: 24rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.supply-container .supply-card .card-body .specs.data-v-5c3ae13e {
+  display: flex;
+  gap: 32rpx;
+  margin-bottom: 32rpx;
+}
+.supply-container .supply-card .card-body .specs .spec-item.data-v-5c3ae13e {
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: #666;
+}
+.supply-container .supply-card .card-body .specs .spec-item .price.data-v-5c3ae13e {
+  color: #e64340;
+  font-weight: 500;
+  margin-left: 8rpx;
+}
+.supply-container .supply-card .card-body .supply-details.data-v-5c3ae13e {
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  padding: 24rpx;
+}
+.supply-container .supply-card .card-body .supply-details .detail-item.data-v-5c3ae13e {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+  font-size: 26rpx;
+  color: #666;
+}
+.supply-container .supply-card .card-body .supply-details .detail-item.data-v-5c3ae13e:last-child {
+  margin-bottom: 0;
+}
+.supply-container .supply-card .card-body .supply-details .detail-item .address.data-v-5c3ae13e {
+  margin-left: 8rpx;
+  max-width: 80%;
+}
+.supply-container .empty-state.data-v-5c3ae13e {
+  text-align: center;
+  padding: 100rpx 0;
+}
+.supply-container .empty-state .empty-img.data-v-5c3ae13e {
+  width: 300rpx;
+  height: 300rpx;
+  opacity: 0.8;
+}
+.supply-container .empty-state .empty-text.data-v-5c3ae13e {
+  display: block;
+  color: #666;
+  margin: 20rpx 0;
+  font-size: 28rpx;
+}
+@media (min-width: 768px) {
+.supply-container .card-list.data-v-5c3ae13e {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.supply-container .supply-card.data-v-5c3ae13e {
+    margin-bottom: 48rpx;
+}
+.supply-container .supply-card .card-body.data-v-5c3ae13e {
+    padding: 48rpx;
+}
+}
+

@@ -3,13 +3,16 @@
 		@click="closeTan">
 		<inputBoxVue ref="inputBoxVueRef"></inputBoxVue>
 		<view class="container">
-			
+
 			<view class="StoreName" style="position: relative;">
-				
+
 				<text>{{ shopDetails.title}}</text>
 				<image class="logo" :src="shopDetails.logo" mode="aspectFill"></image>
-				<view style="position: absolute; bottom: 10rpx; font-size: 25rpx; border: 5rpx solid gray; padding: 5rpx; border-radius: 5rpx; margin: 5rpx 0 0 0; left: 50%;" @click="complaint"><uni-icons type="compose" size="30" ></uni-icons>投诉建议</view>
-				
+				<view class="complaint-btn" @click="complaint">
+					<uni-icons type="compose" size="18" color="#fff"></uni-icons>
+					<text>投诉建议</text>
+				</view>
+
 			</view>
 
 			<view class="time">
@@ -85,11 +88,11 @@
 					<menuBarVue :item="item" class="count" @showKeyboard="Keyboard"></menuBarVue>
 				</view>
 			</view>
-				<shopItem :shop_id="shop_id" ref="shopitem" ></shopItem>
+			<shopItem :shop_id="shop_id" ref="shopitem"></shopItem>
 		</view>
 
 	</scroll-view>
-	
+
 
 </template>
 
@@ -103,8 +106,8 @@
 	import shopItem from '@/components/shop-item/shop-item.vue'
 	import menuBarVue from '../../components/menuBar.vue';
 	import inputBoxVue from '../../components/inputBox.vue';
-	
-	
+
+
 	import {
 		api
 	} from '@/api/index'
@@ -128,9 +131,9 @@
 		},
 		mixins: [usePage],
 		components: {
-			'shopItem':shopItem,
-			'menuBarVue':menuBarVue,
-			'inputBoxVue':inputBoxVue
+			'shopItem': shopItem,
+			'menuBarVue': menuBarVue,
+			'inputBoxVue': inputBoxVue
 		},
 		computed: {
 			...mapState('cart', ['carts']),
@@ -140,13 +143,13 @@
 			this.loadPageData()
 		},
 		methods: {
-			complaint(){
+			complaint() {
 				uni.navigateTo({
-					url:`/pages/merchantComplaints/merchantComplaints?id=${this.shopDetails.id}&title=${this.shopDetails.title}`,
+					url: `/pages/merchantComplaints/merchantComplaints?id=${this.shopDetails.id}&title=${this.shopDetails.title}`,
 				})
 			},
 			// 需要调起数字键盘
-			Keyboard(value){
+			Keyboard(value) {
 				this.$refs.inputBoxVueRef.show = true
 				this.$refs.inputBoxVueRef.cartItem = value
 			},
@@ -264,7 +267,23 @@
 </script>
 
 
-<style>	
+<style lang="scss">
+	.complaint-btn {
+		position: absolute;
+		left: 10rpx;
+		bottom: 10rpx;
+		display: flex;
+		align-items: center;
+		background: #ff7675;
+		border-radius: 40rpx;
+		padding: 8rpx 24rpx;
+		color: #fff;
+		font-size: 24rpx;
+
+		text {
+			margin-left: 8rpx;
+		}
+	}
 
 	.container {
 		display: flex;
@@ -524,6 +543,7 @@
 	.count {
 		width: 100%;
 	}
+
 	.fixed {
 		height: 100rpx;
 		width: 90%;

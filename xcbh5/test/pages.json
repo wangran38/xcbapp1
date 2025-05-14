@@ -93,6 +93,27 @@
 					"style": {
 						"navigationBarTitleText": "发布采购"
 					}
+				},
+				{
+					"path" : "wholesaleNavigation/wholesaleNavigation",
+					"style" : 
+					{
+						"navigationBarTitleText" : "我的批发"
+					}
+				},
+				{
+					"path" : "mySupply/mySupply",
+					"style" : 
+					{
+						"navigationBarTitleText" : "我的供应"
+					}
+				},
+				{
+					"path" : "myProcurement/myProcurement",
+					"style" : 
+					{
+						"navigationBarTitleText" : "我的采购"
+					}
 				}
 			]
 		},
@@ -187,6 +208,53 @@
 			}
 				
 			]
+		},
+		{
+			"root": "subPackages/settings",
+			"pages":[
+				{
+					"path" : "user-edit/user-edit",
+					"style" : 
+					{
+						"navigationBarTitleText" : "修改信息"
+					}
+				},
+				{
+					"path": "updatePwd/updatePwd",
+					"style": {
+						"navigationBarTitleText": "更新密码",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path" : "aboutUs/aboutUs",
+					"style" : 
+					{
+						"navigationBarTitleText" : "关于我们"
+					}
+				},
+				{
+					"path" : "version/version",
+					"style" : 
+					{
+						"navigationBarTitleText" : "版本更新"
+					}
+				},
+				{
+					"path" : "myAddress/myAddress",
+					"style" : 
+					{
+						"navigationBarTitleText" : "我的地址"
+					}
+				},
+				{
+					"path" : "addAddress/addAddress",
+					"style" : 
+					{
+						"navigationBarTitleText" : "地址"
+					}
+				}
+			]
 		}
 	],
 	"pages": [{
@@ -264,12 +332,6 @@
 			"path": "pages/release/release",
 			"style": {
 				"navigationBarTitleText": "发布"
-			}
-		},
-		{
-			"path": "pages/user-edit/user-edit",
-			"style": {
-				"navigationBarTitleText": "信息编辑"
 			}
 		},
 		{
@@ -402,13 +464,7 @@
 				"enablePullDownRefresh": false
 			}
 		},
-		{
-			"path": "pages/updatePwd/updatePwd",
-			"style": {
-				"navigationBarTitleText": "更新密码",
-				"enablePullDownRefresh": false
-			}
-		},
+	
 		{
 			"path": "pages/boothOwner/boothOwner",
 			"style": {
@@ -525,6 +581,13 @@
 			"style": {
 				"navigationBarTitleText": "投诉详情",
 				"disableScroll": true
+			}
+		},
+		{
+			"path" : "pages/settings/settings",
+			"style" : 
+			{
+				"navigationBarTitleText" : "设置"
 			}
 		}
 	],

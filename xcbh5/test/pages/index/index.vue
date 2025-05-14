@@ -1,60 +1,77 @@
 <template>
 	<view class="container">
-		<view class="locating">
-			<view class="targeting" @click="toindex1"><uni-icons type="location-filled" size="25"
-					color="#007aff"></uni-icons><text>{{marketName? marketName:'暂未选中市场'}}</text></view>
-			<view class="current "><uni-icons class="buycar" type="scan" size="75rpx" @click="scan"></uni-icons></view>
-		</view>
-		<view class="search">
-			<view class="sousuokuang">
-				<uni-icons type="search" size="20" color="#999" class="search-icon"></uni-icons>
-				<input class="uni-input" placeholder="请输入搜索条件" v-model="searchParams.title">
-				<button class="searchbt" @click="reloadData">搜索</button>
+		<!-- 定位模块 -->
+		<view class="location-header">
+			<view class="location-info" @click="toindex1">
+				<uni-icons type="location-filled" size="22" color="#4a90e2" />
+				<text class="market-name">{{marketName || '暂未选中市场'}}</text>
+				<uni-icons type="arrowright" size="16" color="#999" />
 			</view>
+			<uni-icons class="scan-btn" type="scan" size="32" @click="scan" />
+		</view>
 
+		<!-- 搜索模块 -->
+		<view class="search-container">
+			<view class="search-bar">
+				<uni-icons type="search" size="18" color="#b2b2b2" />
+				<input class="search-input" placeholder="搜索摊位/商品" placeholder-class="placeholder-style"
+					v-model="searchParams.title" />
+				<button class="search-btn" @click="reloadData">搜索</button>
+			</view>
+		</view>
+
+		<!-- 分类导航 -->
+		<!-- <view style="border-bottom: 3rpx solid lightblue; width: 90rpx; margin: 5rpx;">活动页面</view> -->
+		<scroll-view class="category-nav" scroll-x  :scroll-with-animation="true">
+			<view v-for="item in tabs" :key="item.id" class="nav-item"
+				@click="goToshoppingPageList(item)">
+				<text class="nav-text">{{ item.title }}</text>
+				<view v-if="selectedCategoryId === item.id" class="nav-indicator" />
+			</view>
+		</scroll-view>
+
+		<!-- <view style="border-bottom: 3rpx solid lightblue; width: 90rpx; margin: 5rpx;">菜品分类</view> -->
+		<scroll-view class="category-filter" scroll-x>
 			
-		</view>
+			<view v-for="item in categories" :key="item.id" class="filter-item"
+				:class="{active: item.id === selectedCategoryId}" @click="filterByCategory(item.id)">
+				<text class="filter-text">{{ item.title }}</text>
+			</view>
+		</scroll-view>
 
-		<view class="category-nav">
-			<scroll-view class="nav-scroll" scroll-x scroll-with-animation>
-				<view v-for="item in tabs" :id="'tab'+item.id" :key="item.id" class="nav-item"
-					:class="{active: selectedCategoryId === item.id}" @click="goToshoppingPageList(item)">
-					<text class="nav-text">{{ item.title }}</text>
-				</view>
-			</scroll-view>
-		</view>
-		<view class="uni-margin-wrap">
-			<scroll-view class="swiper" scroll-x="true" scroll-y="false" show-scrollbar="false">
-				<view v-for="item in categories" :key="item.id" class="swiper-item" @click="filterByCategory(item.id)">
-					<view class="item-title">
-						<text
-							:class="['classify', { 'selected': item.id === selectedCategoryId }]">{{ item.title }}</text>
+		<!-- 摊位列表 -->
+		<scroll-view class="stall-list"  scroll-y="true" scroll-x="false" @scrolltolower="handleScrollToLower">
+			<view class="stall-grid">
+				<view v-for="item in pageData" :key="item.id" class="stall-card"
+					@click="navigateToShopDetails(item.id)">
+					<image class="stall-image" :src="item.logo || '/static/default-logo.png'" mode="aspectFill"
+						:lazy-load="true" />
+					<view class="stall-info">
+						<text class="stall-title">{{ item.title }}</text>
+						<view class="meta-container">
+							<text class="meta-item">
+								地区:{{ item.area_name }}
+							</text>
+							<text class="meta-item">
+								类型:{{ item.category_name || '未知类目' }}
+							</text>
+						</view>
 					</view>
 				</view>
-			</scroll-view>
-		</view>
-
-
-
-
-		<scroll-view class="Stallholder" scroll-y="true" scroll-x="false" @scrolltolower="handleScrollToLower">
-			<view class="Stallholder-content">
-				<view v-for="item in pageData" :key="item.id" class="Stallholder-item"
-					@click="navigateToShopDetails(item.id)">
-					<image class="standimg" v-if="isloaded" lazy-load
-						:src="item.logo?item.logo:'../../static/defaultLogo.png'" mode="aspectFill"></image>
-					<view class="standtitle">地区名称：{{ item.area_name }}</view>
-					<view class="standtitle">摊位名称：{{ item.title }}</view>
-					<view class="standtitle">所售类目：{{ item.category_name || '未知类目' }}</view>
-				</view>
 			</view>
-			<view v-if="pageLoading" class="loading">加载中...</view>
-			<view v-if="!hasMore" class="loading">没有更多了</view>
+
+			<!-- 加载状态 -->
+			<view v-if="pageLoading" class="loading-more">
+				<uni-load-more status="loading" />
+			</view>
+			<view v-if="!hasMore" class="loading-more">
+				<text class="no-more">- 已经到底了 -</text>
+			</view>
 		</scroll-view>
+
 		<floatBall />
 	</view>
 </template>
-
 <script>
 	import {
 		api
@@ -64,11 +81,12 @@
 	import usePage from '@/hooks/usePage';
 
 	export default {
-		 components: { floatBall },
+		components: {
+			floatBall
+		},
 		data() {
 			return {
-				menuItems: [
-				],
+				menuItems: [],
 				tabs: [{
 						id: 0,
 						title: '附近农户',
@@ -109,7 +127,7 @@
 						title: '免费买菜',
 						path: '/pages/jackpot/jackpot'
 					},
-					
+
 				],
 				selectedCategoryId: '',
 				categories: [],
@@ -268,6 +286,214 @@
 	}
 </script>
 
+
+<style lang="scss">
+	.container {
+		padding: 0 20rpx;
+	}
+
+	/* 定位模块样式 */
+	.location-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 30rpx 0;
+
+		.location-info {
+			display: flex;
+			align-items: center;
+			background: #fff;
+			border-radius: 40rpx;
+			padding: 12rpx 24rpx;
+			box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+
+			.market-name {
+				font-size: 28rpx;
+				color: #333;
+				margin: 0 12rpx;
+				max-width: 400rpx;
+			}
+		}
+
+		.scan-btn {
+			background: #fff;
+			padding: 16rpx;
+			border-radius: 50%;
+			box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+		}
+	}
+
+	/* 搜索模块样式 */
+	.search-container {
+		.search-bar {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			background: #fff;
+			border-radius: 48rpx;
+			// padding: 0 24rpx;
+			padding: 10rpx 10rpx 10rpx 24rpx;
+			height: 80rpx;
+			box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+
+			.search-input {
+				flex: 1;
+				font-size: 28rpx;
+				padding: 0 20rpx;
+				color: #333;
+			}
+
+			.search-btn {
+				font-size: 28rpx;
+				color: #fff;
+				background: #4a90e2;
+				border-radius: 36rpx;
+				padding: 0 36rpx;
+				height: 64rpx;
+				line-height: 64rpx;
+
+				&::after {
+					border: none
+				}
+			}
+		}
+	}
+
+	/* 分类导航样式 */
+	.category-nav {
+		white-space: nowrap;
+		.nav-item {
+			box-shadow: 10rpx 10rpx 16rpx rgba(0, 0, 0, 0.06);
+			
+			background: linear-gradient(135deg, #ff6a00, #ff8229);
+			border-radius: 5%;
+			margin: 10rpx;
+			display: inline-block;
+			padding: 0 32rpx;
+			position: relative;
+			height: 88rpx;
+
+			.nav-text {
+				font-size: 28rpx;
+				color: white;
+				line-height: 88rpx;
+				transition: all 0.3s;
+				font-weight: bold;
+			}
+
+			&.active {
+				.nav-text {
+					color: #333;
+					font-weight: 500;
+				}
+
+				.nav-indicator {
+					position: absolute;
+					bottom: 12rpx;
+					left: 50%;
+					transform: translateX(-50%);
+					width: 48rpx;
+					height: 6rpx;
+					background: #4a90e2;
+					border-radius: 3rpx;
+				}
+			}
+		}
+	}
+
+	/* 分类筛选样式 */
+	.category-filter {
+		white-space: nowrap;
+		padding: 24rpx 0;
+
+		.filter-item {
+			display: inline-block;
+			padding: 12rpx 28rpx;
+			margin-right: 20rpx;
+			background: #f0f0f0;
+			border-radius: 40rpx;
+			transition: all 0.2s;
+
+			.filter-text {
+				font-size: 26rpx;
+				color: #666;
+			}
+
+			&.active {
+				background: rgba(74, 144, 226, 0.1);
+
+				.filter-text {
+					color: #4a90e2;
+					font-weight: 500;
+				}
+			}
+		}
+	}
+
+	/* 摊位列表样式 */
+	.stall-list {
+		height: calc(100vh - 480rpx);
+
+		.stall-grid {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 20rpx;
+			padding: 20rpx 0;
+		}
+
+		.stall-card {
+			background: #fff;
+			border-radius: 16rpx;
+			overflow: hidden;
+			box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.04);
+
+			.stall-image {
+				width: 100%;
+				height: 280rpx;
+				background: #f8f8f8;
+			}
+
+			.stall-info {
+				padding: 20rpx;
+
+				.stall-title {
+					display: block;
+					font-size: 30rpx;
+					color: #333;
+					font-weight: 500;
+				}
+
+				.meta-container {
+					margin-top: 16rpx;
+
+					.meta-item {
+						display: block;
+						font-size: 24rpx;
+						color: #666;
+						margin-bottom: 8rpx;
+
+						.uni-icons {
+							margin-right: 8rpx;
+							vertical-align: middle;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/* 加载状态 */
+	.loading-more {
+		padding: 40rpx 0;
+		text-align: center;
+
+		.no-more {
+			font-size: 24rpx;
+			color: #999;
+		}
+	}
+</style>
+
 <style lang="scss">
 	.category-nav {
 		margin-top: 30rpx;
@@ -366,7 +592,7 @@
 		text-align: center;
 		width: 150rpx;
 		border: none;
-		background-color: #FF3030;
+		background-color: #00aaff;
 		color: white;
 		border-radius: 25rpx;
 		font-size: 24rpx;

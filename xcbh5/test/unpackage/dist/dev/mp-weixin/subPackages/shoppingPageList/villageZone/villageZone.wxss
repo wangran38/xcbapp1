@@ -275,7 +275,7 @@
   display: block;
 }
 .search-bar.data-v-49e5f192 {
-  margin: 10rpx;
+  margin: 15rpx;
   background: #FFF;
   height: 80rpx;
   border-radius: 40rpx;
@@ -295,7 +295,6 @@
   color: #CCC;
 }
 .container.data-v-49e5f192 {
-  background: linear-gradient(160deg, #f5fff0 0%, #e3f0da 100%);
   min-height: 100vh;
   position: relative;
 }

@@ -62,12 +62,12 @@
 							我的菜品
 						</view>
 					</view> -->
-					<view class="item" @click="gotoAdditionalinformation">
+<!-- 					<view class="item" @click="gotoAdditionalinformation">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe603;'}}</uni-icons>
 						<view class="add-dishes">
 							发朋友圈
 						</view>
-					</view>
+					</view> -->
 <!-- 					<view class="item" @click="goToPreSoldDishesList">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe603;'}}</uni-icons>
 						<view class="add-dishes">
@@ -83,7 +83,7 @@
 					<view class="item" @click="goToAlreadyListed">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe689;'}}</uni-icons>
 						<view class="add-dishes">
-							已上架
+							上架菜品
 						</view>
 					</view>
 

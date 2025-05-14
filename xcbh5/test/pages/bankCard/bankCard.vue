@@ -1,17 +1,114 @@
 <template>
-	<view class="bigBox" @tap="handleTouch">
-		<view class="myCard">
-			<text>我的卡</text>
-			<text>({{cardList.length}}张)</text>
+	<view class="bank-card-container">
+		<!-- 标题区域 -->
+		<view class="header-section">
+			<text class="title">我的银行卡</text>
+			<text class="count">({{cardList.length}}张)</text>
 		</view>
-		<bCard v-for="(item,index) in cardList" :ref="index" :key="index"  :info="item" @remove="getCardDataList"></bCard>
 
-		<view class="card add" @click="gotoAddCard">
-			<uni-icons type="plusempty" size="20"></uni-icons>
-			<view class="card-title">添加银行卡</view>
+		<!-- 银行卡列表 -->
+		<view class="card-list">
+			<bCard 
+				v-for="(item,index) in cardList" 
+				:ref="index" 
+				:key="index"  
+				:info="item" 
+				@remove="getCardDataList"
+				class="card-item"
+			/>
+			
+			<!-- 添加银行卡 -->
+			<view class="add-card" @click="gotoAddCard">
+				<uni-icons type="plusempty" size="24" color="#2979FF" />
+				<text class="add-text">添加银行卡</text>
+			</view>
 		</view>
 	</view>
 </template>
+
+<style lang="scss">
+.bank-card-container {
+	padding: 32rpx;
+	background: #f5f6fa;
+	min-height: 100vh;
+}
+
+/* 标题样式 */
+.header-section {
+	display: flex;
+	align-items: baseline;
+	margin-bottom: 48rpx;
+	
+	.title {
+		font-size: 40rpx;
+		font-weight: 600;
+		color: #2d3436;
+		margin-right: 16rpx;
+	}
+	
+	.count {
+		font-size: 28rpx;
+		color: #a4a9b3;
+	}
+}
+
+/* 卡片列表 */
+.card-list {
+	display: flex;
+	flex-direction: column;
+	gap: 32rpx;
+	
+	/* 银行卡组件容器 */
+	.card-item {
+		// background: linear-gradient(135deg, #6b5fff, #2979ff);
+		border-radius: 24rpx;
+		box-shadow: 0 8rpx 24rpx rgba(43, 76, 215, 0.15);
+		transition: transform 0.2s ease;
+		
+		&:active {
+			transform: scale(0.98);
+		}
+	}
+}
+
+/* 添加银行卡按钮 */
+.add-card {
+	height: 240rpx;
+	background: #fff;
+	border: 2rpx dashed #e0e3e9;
+	border-radius: 24rpx;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 32rpx;
+	transition: all 0.2s ease;
+	
+	&:active {
+		background: #f8f9fb;
+	}
+	
+	.add-text {
+		font-size: 28rpx;
+		color: #2979FF;
+		margin-top: 16rpx;
+	}
+}
+
+/* 过渡动画优化 */
+.fade-enter-active {
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fade-leave-active {
+	transition: all 0.2s cubic-bezier(0.4, 0, 1, 1);
+}
+.fade-enter-from,
+.fade-leave-to {
+	opacity: 0;
+	transform: translateY(-20rpx);
+}
+</style>
+
 
 <script>
 	import {api} from '../../api/index.js'
@@ -66,102 +163,3 @@
 	}
 </script>
 
-<style>
-	.bigBox {
-		min-height: 2000rpx;
-		/* background: white; */
-		margin: 15rpx 0 0 10rpx;
-	}
-
-	.myCard>text:first-child {
-		font-weight: 500;
-		font-size: 35rpx;
-	}
-
-	.myCard>text:last-child {
-		color: darkgrey;
-		font-size: 30rpx;
-	}
-
-	.card {
-		margin: 10rpx 10rpx 10rpx 0;
-		height: 100rpx;
-		/* background: linear-gradient(to right, #ff8418, #fe3d3d); */
-		background-color: red;
-		border-radius: 15px;
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-		display: flex;
-		padding: 20px;
-		color: white;
-		font-family: Arial, sans-serif;
-		position: relative;
-	}
-
-	.card-icon image {
-		width: 100rpx;
-		height: 100rpx;
-		border-radius: 50%;
-	}
-
-	.card-title {
-		font-size: 25rpx;
-		margin: 3rpx 0 0 10rpx;
-		flex: 1;
-	}
-
-	.edit {
-		right: 30rpx;
-		top: 110rpx;
-		position: absolute;
-	}
-
-	.lift {
-		position: absolute;
-		color: black;
-		right: 90rpx;
-		top: 110rpx;
-		background-color: white;
-		border-radius: 15px;
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-		padding: 10rpx;
-		font-size: 26rpx;
-	}
-
-
-	.num {
-		display: flex;
-	}
-
-	.num>view:first-child {
-		margin-top: 5rpx;
-		font-size: 30rpx;
-		color: gainsboro;
-	}
-
-	.num>view:last-child {
-		font-size: 30rpx;
-		color: white;
-	}
-
-	.add {
-		margin: 20rpx 0 0 0;
-		line-height: 18rpx;
-		height: 20rpx;
-		background-color: white;
-		color: black;
-		font-size: 20rpx;
-		font-family: 'Courier New', Courier, monospace;
-	}
-
-
-	/* 过渡效果 */
-	.fade-enter-active,
-	.fade-leave-active {
-		transition: opacity .5s;
-	}
-
-	.fade-enter,
-	.fade-leave-to {
-		opacity: 0;
-	}
-</style>

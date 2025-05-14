@@ -1,164 +1,103 @@
 <template>
-	<view class="me-container">
-		<!-- <view class="checkUpdate" @click="checkUpdate">检查更新</view> -->
-		<view class="user">
-			<view class="user-info">
-				<view class="user-img">
-					<image :src="userAvatar || 'http://h5.xcbdsc.com/static/morentouxiang.jpg'" mode="aspectFill">
-					</image>
-					<!-- <open-data wx:else type="userAvatarUrl" data-url="{{userInfo.avatar}}"></open-data> -->
-				</view>
-				<view class="user-name">
-					<button v-if="!isLoggedIn" @click="login" class="login-button">点击登录</button>
-					<view v-if="isLoggedIn" class="nickname-container">
-						<!-- <input v-model="nickname" placeholder="请到我的信息中填写信息" class="nickname-input" /> -->
-						<view class="nickname-input">{{ userName || '请到我的信息中填写昵称' }}</view>
-					</view>
-				</view>
+  <view class="me-container">
+    <!-- 用户信息区域 -->
+    <view class="user">
+      <view class="user-info">
+        <!-- 用户头像 -->
+        <view class="user-img">
+          <image :src="userAvatar || 'http://h5.xcbdsc.com/static/morentouxiang.jpg'" mode="aspectFill" />
+        </view>
+        
+        <!-- 用户名称 -->
+        <view class="user-name">
+          <button v-if="!isLoggedIn" @click="login" class="login-button">点击登录</button>
+          <view v-if="isLoggedIn" class="nickname-container">
+            <view class="nickname-input">{{ userName || '请到我的信息中填写昵称' }}</view>
+          </view>
+        </view>
+        
+        <!-- 设置图标 -->
+        <uni-icons 
+          custom-prefix="iconfont" 
+          type="icon-shezhi" 
+          size="20" 
+          class="settings-icon"
+          @click="GoTOsettings"
+        />
+      </view>
+    </view>
 
-				<uni-icons custom-prefix="iconfont" type="icon-shezhi" size="20" class="settings-icon"
-					@click="useredit"></uni-icons>
-			</view>
-		</view>
+    <!-- 积分统计 -->
+    <view class="integral-grid">
+      <view class="integral-item">
+        <text class="label">现金消费累计</text>
+        <text class="value">0元</text>
+      </view>
+      <view class="integral-item highlight">
+        <text class="label">可用积分</text>
+        <text class="value">{{score}}分</text>
+      </view>
+      <view class="integral-item">
+        <text class="label">冻结积分</text>
+        <text class="value">0分</text>
+      </view>
+    </view>
 
-		<!-- 其他视图保持不变 -->
+    <!-- 功能入口 -->
+    <view class="function-list">
+      <!-- 打卡 -->
+      <view class="function-item" @click="lottery">
+        <view class="item-left">
+          <uni-icons type="auth" size="30" color="#00C853" />
+          <text class="title">我的打卡</text>
+          <text class="subtitle">累计打卡{{totalnum}}次</text>
+        </view>
+        <uni-icons type="right" size="18" color="#999" />
+      </view>
 
-		<view class="Integral">
-			<view class="Total-spending">
-				<view>现金消费累计</view>
-				<view>0元</view>
-			</view>
-			<view class="Points-available">
-				<view>可用积分</view>
-				<view>{{score}}分</view>
-			</view>
-			<view class="Freeze-points">
-				<view>冻结积分</view>
-				<view>0分</view>
-			</view>
-		</view>
+      <!-- 我的积分 -->
+      <view class="function-item" @click="mypoints">
+        <view class="item-left">
+          <uni-icons type="vip" size="30" color="#FFD600" />
+          <text class="title">我的积分</text>
+        </view>
+        <uni-icons type="right" size="18" color="#999" />
+      </view>
 
-		<view class="lottery" @click="lottery">
-			<view class="lottery-info">
-				<uni-icons type="auth" size="30" color="#00ff00"></uni-icons>
-				<text style="margin: auto 40rpx; text-align: center;">打卡</text>
-				<text style="font-size: 24rpx;color: #708090;">累计打卡{{totalnum}}次</text>
-			</view>
-			<view class="item">
-				<!-- <f-icon width="30" height="30" path="../../static/right.png"></f-icon> -->
-				<uni-icons type="right" size="20"></uni-icons>
-			</view>
-		</view>
-
-		<!-- <view class="prize" @click="coupons">
-			<view class="prize-info">
-				<uni-icons type="auth-filled" size="30" color="#fb9755"></uni-icons>
-				<text style="margin: auto 40rpx; text-align: center;">我的奖品</text>
-			</view>
-			<view class="item">
-				<uni-icons type="right" size="20"></uni-icons>
-			</view>
-		</view> -->
-		<view class="MyPoints" @click="mypoints">
-			<view class="MyPoints-info">
-				<uni-icons type="vip" size="30" color="#f4e323"></uni-icons>
-				<text style="margin: auto 40rpx; text-align: center;">我的积分</text>
-			</view>
-			<view class="item">
-				<!-- <f-icon width="30" height="30" path="../../static/right.png"></f-icon> -->
-				<uni-icons type="right" size="20"></uni-icons>
-			</view>
-		</view>
-
-		<!-- 		<view class="Notice">
-			今日打卡次数: &nbsp;{{signTotal.todayusernum}}<br>
-			历史打卡累计: &nbsp;{{signTotal.allnum}}
-		</view> -->
-		<view class="My-Order">
-			<view class="Order-top" @click="goToprePurchaseOrder">
-				<view style="margin: auto 20rpx; text-align: center;">我的预购</view>
-				<view style=" margin: auto 20rpx; text-align: center;color: #ccc;"><uni-icons type="right" size="14"
-						color="#ccc"></uni-icons></view>
-			</view>
-			<view class="Order-bottom">
-					<view class="item-title" >
-						<uni-icons custom-prefix="iconfont" type="icon-zhifuguanli" size="30"></uni-icons>
-						<text style="margin-top: 10rpx;">待支付</text>
-					</view>
-					<view class="item-title" >
-						<uni-icons custom-prefix="iconfont" type="icon-fapiaoguanli" size="30"></uni-icons>
-						<text style="margin-top: 10rpx;">已支付</text>
-					</view>
-					<view class="item-title" >
-						<uni-icons custom-prefix="iconfont" type="icon-fahuoguanli" size="30"></uni-icons>
-						<text style="margin-top: 10rpx;">待收货</text>
-					</view>
-					<view class="item-title" >
-						<uni-icons custom-prefix="iconfont" type="icon-dingdanguanli" size="30"></uni-icons>
-						<text style="margin-top: 10rpx;">已完成</text>
-					</view>
-				</view>
-			
-			<view class="Order-top" @click="toorders(0)">
-				<view style="margin: auto 20rpx; text-align: center;">我的订单</view>
-				<view style=" margin: auto 20rpx; text-align: center;color: #ccc;">全部<uni-icons type="right" size="14"
-						color="#ccc"></uni-icons></view>
-			</view>
-			<view class="Order-bottom">
-				<view class="item-title" @click="toorders(1)">
-					<uni-icons custom-prefix="iconfont" type="icon-zhifuguanli" size="30"></uni-icons>
-					<text style="margin-top: 10rpx;">待支付</text>
-				</view>
-				<view class="item-title" @click="toorders(2)">
-					<uni-icons custom-prefix="iconfont" type="icon-fapiaoguanli" size="30"></uni-icons>
-					<text style="margin-top: 10rpx;">已支付</text>
-				</view>
-				<view class="item-title" @click="toorders(3)">
-					<uni-icons custom-prefix="iconfont" type="icon-fahuoguanli" size="30"></uni-icons>
-					<text style="margin-top: 10rpx;">待收货</text>
-				</view>
-				<view class="item-title" @click="toorders(4)">
-					<uni-icons custom-prefix="iconfont" type="icon-dingdanguanli" size="30"></uni-icons>
-					<text style="margin-top: 10rpx;">已完成</text>
-				</view>
-			</view>
-		</view>
-		
-
-
-
-		<view class="tool">
-			<!-- <view class="Check" @click="Check">
-				<view >每日打卡</view>
-				<uni-icons type="right" size="20"></uni-icons>
-			</view> -->
-			<view class="Apply" @click="Apply">
-				<view>摊主申请</view>
-				<uni-icons type="right" size="20"></uni-icons>
-			</view>
-			<view class="Apply" @click="useredit">
-				<view>我的信息</view>
-				<uni-icons type="right" size="20"></uni-icons>
-			</view>
-			<view class="Apply" @click="bindingWechat">
-				<view>绑定微信</view>
-				<uni-icons type="right" size="20"></uni-icons>
-			</view>
-			<view class="Apply" @click="goToUpdatePwd">
-				<view>修改密码</view>
-				<uni-icons type="right" size="20"></uni-icons>
-			</view>
-			<!-- <view class="Apply" @click="GoToComplaint">
-				<view>我的投诉</view>
-				<uni-icons type="right" size="20"></uni-icons>
-			</view> -->
-		</view>
-
-		<view v-if="isLoggedIn">
-			<button @click="logout" class="Signout">退出登录</button>
-		</view>
-
-	</view>
+      <!-- 我的预购 -->
+      <view class="function-item" @click="goToprePurchaseOrder">
+        <view class="item-left">
+          <uni-icons type="shop-filled" size="30" color="#2979FF" />
+          <text class="title">我的预购</text>
+        </view>
+        <uni-icons type="right" size="18" color="#999" />
+      </view>
+	  
+	  <view class="function-item" @click="toorders">
+	    <view class="item-left">
+	      <uni-icons type="cart" size="30" color="#2979FF" />
+	      <text class="title">我的订单</text>
+	    </view>
+	    <uni-icons type="right" size="18" color="#999" />
+	  </view>
+	  <view class="function-item" @click="GotowholesaleNavigation">
+	    <view class="item-left">
+	      <uni-icons type="list" size="30" color="#2979FF" />
+	      <text class="title">我的批发</text>
+	    </view>
+	    <uni-icons type="right" size="18" color="#999" />
+	  </view>
+	  <view class="function-item" @click="GoTOsettings">
+	    <view class="item-left">
+	      <uni-icons type="gear" size="30" color="#2979FF" />
+	      <text class="title">我的设置</text>
+	    </view>
+	    <uni-icons type="right" size="18" color="#999" />
+	  </view>
+	  
+    </view>
+	<button type="warn" @click="logout" style="margin: 20rpx;">退出登录</button>
+  </view>
 </template>
 
 <script>
@@ -168,7 +107,6 @@
 	import {
 		getPlatform
 	} from '../../hooks/useUpload.js'
-
 	export default {
 		data() {
 			return {
@@ -185,7 +123,6 @@
 		async onShow() {			
 			// 检查是否登录
 			this.checkLoginStatus();
-			
 			if (this.isLoggedIn) {
 				// 获取当前用户信息
 				this.fetchUserProfile();
@@ -193,6 +130,16 @@
 			this.signlist()
 		},
 		methods: {
+			GotowholesaleNavigation(){
+				uni.navigateTo({
+					 url: '/subPackages/Wholesale/wholesaleNavigation/wholesaleNavigation'
+				})
+			},
+			GoTOsettings(){
+				uni.navigateTo({
+					 url: '/pages/settings/settings'
+				})
+			},
 			GoToComplaint(){
 				uni.navigateTo({
 					 url: '/pages/myComplaint/myComplaint'
@@ -208,35 +155,6 @@
 					url: `/pages/updatePwd/updatePwd?phone=${this.phone}`,
 				})
 			},
-			/**
-			 * 
-			 * 检查更新
-			 */
-			checkUpdate() {
-				const updateManager = uni.getUpdateManager()
-				// 请求完新版本信息的回调
-				    updateManager.onCheckForUpdate(res => {
-				      if (res.hasUpdate) {
-				        // 新版本下载成功
-				        updateManager.onUpdateReady(() => {
-				          uni.showModal({
-				            title: '更新提示',
-				            content: '新版本已经准备好，点击确定重启小程序',
-				            success(res) {
-				              if (res.confirm) {
-				                // 新的版本已经下载好，强制更新
-				                updateManager.applyUpdate()
-				              }
-				            }
-				          })
-				        })
-				      }
-				    })
-				    // 新版本下载失败
-				    updateManager.onUpdateFailed(res => {
-				      console.error(res)
-				    })
-			},
 
 			/**
 			 * 检查登录状态
@@ -249,7 +167,6 @@
 					this.isLoggedIn = false;
 				}
 			},
-
 			/**
 			 * 获取用户个人信息
 			 */
@@ -267,7 +184,6 @@
 						this.userAvatar = Headimgurl;
 						this.score = score;
 						this.phone = phone
-						
 						// if (!this.userName){
 						// 	uni.showModal({
 						// 		title:'个人信息不完整',
@@ -297,35 +213,15 @@
 					});
 				}
 			},
-
 			async signlist(data) {
 				const token = uni.getStorageSync('token');
 				const response = await api.signlist(token);
 				this.totalnum = response.data.totalnum
 			},
-
 			login() {
 				// 跳转到登录页面
 				uni.navigateTo({
 					url: '/pages/login/login'
-				});
-			},
-			Apply() {
-				// 跳转到申请页面
-				uni.navigateTo({
-					url: '/pages/Apply/Apply'
-				});
-			},
-			useredit() {
-				// 跳转到用户编辑页面
-				uni.navigateTo({
-					url: '/pages/user-edit/user-edit'
-				});
-			},
-			coupons() {
-				// 跳转到用户奖品页面
-				uni.navigateTo({
-					url: '/pages/coupons/coupons'
 				});
 			},
 			lottery() {
@@ -335,7 +231,6 @@
 				});
 			},
 			toorders(orderStatus) {
-				// 跳转到用户抽奖页面
 				uni.navigateTo({
 					url: `/pages/orders/orders?orderStatus=${orderStatus}`
 				});
@@ -355,18 +250,15 @@
 				} catch (e) {
 					console.error('Failed to remove token or nickname from storage', e);
 				}
-
 				// 设置登录状态为未登录
 				this.isLoggedIn = false;
 				this.nickname = '';
 				this.userName = '';
-
 				// 跳转到登录页面
 				uni.redirectTo({
 					url: '/pages/login/login'
 				});
 			},
-
 			// 绑定微信
 			async bindingWechat() {
 				let systemInfo = await uni.getSystemInfo()
@@ -376,7 +268,6 @@
 						provider: 'true',
 						success: async res => {
 							console.log(res.code, "这是用户唯一标识")
-
 							let data = await api.bindingOpenid({
 								code: res.code
 							})
@@ -409,346 +300,148 @@
 </script>
 
 
-<style>
-	.checkUpdate {
-		font-size: 20rpx;
-		position: absolute;
-		top: 10rpx;
-		right: 10rpx;
-		color: black;
-		padding: 10rpx;
-		background-color: #f8f8f8;
-		box-shadow: 1rpx 1rpx 1rpx 1rpx gray;
-	}
+<style lang="scss">
+.me-container {
+  padding: 32rpx;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
 
-	.Notice {
-		margin: 50rpx;
-		text-align: center;
-		color: black;
-	}
+/* 用户信息 */
+.user {
+  margin-bottom: 48rpx;
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 24rpx;
+    
+    .user-img {
+      width: 120rpx;
+      height: 120rpx;
+      border-radius: 50%;
+      overflow: hidden;
+      image {
+        width: 100%;
+        height: 100%;
+      }
+    }
 
-	.me-container {
-		overflow: hidden;
-		width: 100%;
-		box-sizing: border-box;
-		padding: 80rpx 40rpx 0 40rpx;
-		color: white;
-		z-index: 1;
-		background-color: #f8f8f8;
-		position: relative;
-	}
+    .user-name {
+      flex: 1;
+      .login-button {
+        background: #2979FF;
+        color: white;
+        border-radius: 48rpx;
+        font-size: 28rpx;
+        padding: 16rpx 32rpx;
+        &::after { border: none; }
+      }
+      
+      .nickname-input {
+        font-size: 32rpx;
+        color: #333;
+      }
+    }
 
-	.me-container::after {
-		content: "";
-		width: 140%;
-		height: 200px;
-		position: absolute;
-		left: -20%;
-		top: 0;
-		z-index: -1;
-		border-radius: 0 0 50% 50%;
-		background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-	}
+    .settings-icon {
+      padding: 16rpx;
+    }
+  }
+}
 
-	.user {
-		height: 140rpx;
-		display: flex;
-		flex-direction: row;
-		/* justify-content: space-between; */
-		text-align: center;
-		/* border: 1px solid #ccc; */
-		/* background-color: white; */
-		background-color: transparent;
-	}
+/* 积分统计 */
+.integral-grid {
+  display: flex;
+  justify-content: space-around;
+  background: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 24rpx rgba(0,0,0,0.05);
 
-	.user-info {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: space-between;
+  .integral-item {
+    padding: 32rpx;
+    background: #fff;
+    text-align: center;
+    
+    .label {
+      display: block;
+      font-size: 26rpx;
+      color: #666;
+      margin-bottom: 8rpx;
+    }
+    
+    .value {
+      font-size: 32rpx;
+      color: #333;
+      font-weight: 500;
+    }
 
-		/* justify-content: flex-start; */
-		margin: 0 20rpx;
-		width: 100%;
-	}
+    &.highlight .value {
+      color: #2979FF;
+    }
+  }
+}
 
-	.settings-icon {
-		margin-left: auto;
-		/* 将设置图标推到最右侧 */
-	}
+/* 功能列表 */
+.function-list {
+  margin-top: 48rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 24rpx rgba(0,0,0,0.05);
 
-	.user-img {
-		width: 110rpx;
-		height: 110rpx;
-		border: 1px solid #ccc;
-		border-radius: 50%;
-		overflow: hidden;
-		/* margin: auto auto; */
-		/* background-color: #00aaff; */
-	}
+  .function-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32rpx;
+    border-bottom: 1rpx solid #eee;
+    
+    &:last-child {
+      border: none;
+    }
 
-	.user-img>image {
-		width: 100%;
-		height: 100%;
-		border-radius: 50%;
-	}
+    .item-left {
+      display: flex;
+      align-items: center;
+      gap: 24rpx;
+      
+      .title {
+        font-size: 30rpx;
+        color: #333;
+      }
+      
+      .subtitle {
+        font-size: 24rpx;
+        color: #999;
+        margin-left: 24rpx;
+      }
+    }
+  }
+}
 
-	.user-name {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		color: black;
-		margin: auto 30rpx;
-	}
+/* 移动端适配 */
+@media (max-width: 480px) {
+  .me-container {
+    padding: 24rpx;
+  }
+  
+  .user-info {
+    .user-img {
+      width: 96rpx !important;
+      height: 96rpx !important;
+    }
+    
+    .nickname-input {
+      font-size: 28rpx !important;
+    }
+  }
 
-	.nickname-container {
-		display: flex;
-		margin-top: 10rpx;
-	}
-
-	.nickname-input {
-		flex: 1;
-		height: 60rpx;
-		/* border: 1rpx solid #ccc; */
-		border-radius: 10rpx;
-		padding: 0 10rpx;
-		margin-right: 10rpx;
-		font-size: 30rpx;
-		font-weight: 600;
-	}
-
-
-	.lottery {
-		width: 100%;
-		height: 100rpx;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		color: black;
-		text-align: center;
-		border: 1rpx solid #ccc;
-		background-color: white;
-		box-sizing: border-box;
-		border-top: none;
-		border-top-left-radius: 20rpx;
-		border-top-right-radius: 20rpx;
-	}
-
-	.lottery-info {
-		display: flex;
-		align-items: center;
-		margin-left: 20rpx;
-	}
-
-	.lottery>.item {
-		width: 40rpx;
-		height: 100rpx;
-		text-align: center;
-		line-height: 100rpx;
-		color: rgb(229, 229, 229);
-		margin-right: 12rpx;
-	}
-
-	.prize {
-		width: 100%;
-		height: 100rpx;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		color: black;
-		text-align: center;
-		border: 1rpx solid #ccc;
-		background-color: white;
-		box-sizing: border-box;
-		border-top: none;
-		/* border-bottom-left-radius: 20rpx; */
-		/* border-bottom-right-radius: 20rpx; */
-	}
-
-	.prize-info {
-		display: flex;
-		align-items: center;
-		margin-left: 20rpx;
-	}
-
-	.prize>.item {
-		width: 40rpx;
-		height: 100rpx;
-		text-align: center;
-		line-height: 100rpx;
-		color: rgb(229, 229, 229);
-		margin-right: 12rpx;
-	}
-
-	.MyPoints {
-		width: 100%;
-		height: 100rpx;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		color: black;
-		text-align: center;
-		border: 1rpx solid #ccc;
-		background-color: white;
-		box-sizing: border-box;
-		border-top: none;
-		border-bottom-left-radius: 20rpx;
-		border-bottom-right-radius: 20rpx;
-	}
-
-	.MyPoints-info {
-		display: flex;
-		align-items: center;
-		margin-left: 20rpx;
-	}
-
-	.MyPoints>.item {
-		width: 40rpx;
-		height: 100rpx;
-		text-align: center;
-		line-height: 100rpx;
-		color: rgb(229, 229, 229);
-		margin-right: 12rpx;
-	}
-
-	.My-Order {
-		height: 400rpx;
-		width: 100%;
-		margin-top: 5%;
-		background-color: white;
-		border: 1px solid #ccc;
-		border-radius: 20rpx;
-	}
-
-	.Order-top {
-		height: 60rpx;
-		width: 100%;
-		line-height: 60rpx;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		border-bottom: 1rpx solid #ccc;
-		color: black;
-	}
-
-	.Order-bottom {
-		height: 140rpx;
-		flex: 5;
-		display: flex;
-		flex-direction: row;
-	}
-
-	.item-title {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		/* padding-top: 20rpx; */
-		/* padding-bottom: 20rpx; */
-		color: black;
-		box-sizing: border-box;
-		/* background-color: #4facfe; */
-		/* height: 80%; */
-	}
-
-
-	.tool {
-		height: 300rpx;
-		width: 100%;
-		margin-top: 5%;
-		background-color: white;
-		border: 1rpx solid #ccc;
-		display: flex;
-		flex-direction: column;
-		border-radius: 20rpx;
-	}
-
-	.Apply {
-		font-size: 33rpx;
-		height: 100%;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		color: black;
-		padding: 0 20rpx;
-		border-bottom: 1rpx solid #ccc;
-	}
-
-	.Signout {
-		margin-top: 20rpx;
-		background-color: #007aff;
-		color: white;
-	}
-
-	.user-edit {
-		height: 100%;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-		color: black;
-		padding: 0 20rpx;
-	}
-
-	.login-button {
-		display: flex;
-		align-items: center;
-		appearance: none;
-		background-color: #fff;
-		border-radius: 24px;
-		font-size: 16px;
-		font-weight: 500;
-		height: 40px;
-		justify-content: center;
-		letter-spacing: .25px;
-		line-height: 40rpx;
-		max-width: 100%;
-		overflow: visible;
-	}
-
-	.Integral {
-		color: rgb(58, 58, 60);
-		width: 100%;
-		height: 100rpx;
-		background-color: white;
-		display: flex;
-		align-items: center;
-		margin-bottom: 3%;
-		border-radius: 20rpx;
-		border: 1px solid #ccc;
-	}
-
-	.Total-spending {
-		width: 33%;
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		border-right: 1px solid #ccc;
-	}
-
-	.Points-available {
-		width: 34%;
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		border-right: 1px solid #ccc;
-	}
-
-	.Freeze-points {
-		width: 33%;
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-	}
+  .integral-grid {
+    grid-template-columns: 1fr;
+    .integral-item {
+      padding: 24rpx;
+    }
+  }
+}
 </style>

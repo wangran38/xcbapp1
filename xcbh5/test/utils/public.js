@@ -1,5 +1,10 @@
 export const myMixin = {
   methods: {
+	  // 获取今天日期
+	  getNowDate(){
+	  	return this.initDate(Date.now())
+	  },
+	  // 计算时间间隔
 	   getChineseTimeDiff(t1, t2) {
 	    const diff = Math.abs(t1 - t2);
 	    const units = [

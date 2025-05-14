@@ -100,7 +100,7 @@
 					},
 					{
 						id: 2,
-						name: '代提',
+						name: '提货点',
 						active: false,
 						refName: 'twoRef'
 					},
@@ -146,14 +146,16 @@
 				this.typeList.filter(item => {
 					setTimeout(async () => {
 						if (item.active) {
+							// 获取子组件的formData数据集合
 							let formData = this.$refs[item.refName].formData
 							formData.farmersgoods_id = this.dishId
 							formData.market_id = this.$refs[item.refName]['marketIdMap'][this.$refs[
 								item.refName].marketList[this.$refs[item.refName]
 								.selectedMarketIndex]]
 							formData.area_id = this.$refs[item.refName]['area_id']
-
-
+							
+							formData = {...formData,isshow:2,ispresale:2}
+							console.log(formData)
 							let res = await api.foodOnSale(formData)
 							if (res.code == 200) {
 								uni.showToast({

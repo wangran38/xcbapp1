@@ -1,0 +1,272 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 整体容器 */
+.container.data-v-04359966 {
+  padding: 30rpx;
+  background: #f8f9fb;
+  min-height: 100vh;
+}
+/* 头部统计卡片 */
+.header-card.data-v-04359966 {
+  background: white;
+  border-radius: 24rpx;
+  padding: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.06);
+  margin-bottom: 40rpx;
+}
+.stat-item.data-v-04359966 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.stat-number.data-v-04359966 {
+  font-size: 44rpx;
+  font-weight: 600;
+  color: #2c3e50;
+}
+.stat-label.data-v-04359966 {
+  font-size: 24rpx;
+  color: #95a5a6;
+  margin-top: 12rpx;
+}
+.stat-divider.data-v-04359966 {
+  width: 2rpx;
+  height: 60rpx;
+  background: #e8eef3;
+}
+/* 申请卡片样式 */
+.application-card.data-v-04359966 {
+  background: white;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.06);
+}
+.user-info.data-v-04359966 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40rpx;
+  position: relative;
+}
+.user-avatar.data-v-04359966 {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 16rpx;
+  margin-right: 24rpx;
+}
+.user-detail.data-v-04359966 {
+  flex: 1;
+}
+.user-name.data-v-04359966 {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #2c3e50;
+}
+.user-address.data-v-04359966 {
+  font-size: 24rpx;
+  color: #95a5a6;
+}
+.status-tag.data-v-04359966 {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 8rpx 24rpx;
+  border-radius: 40rpx;
+  font-size: 24rpx;
+}
+.status-pending.data-v-04359966 {
+  background: #fff4e5;
+  color: #f39c12;
+}
+.status-approved.data-v-04359966 {
+  background: #e3f8ff;
+  color: #3498db;
+}
+.status-rejected.data-v-04359966 {
+  background: #ffeef0;
+  color: #e74c3c;
+}
+/* 产品信息 */
+.product-info.data-v-04359966 {
+  border-top: 2rpx solid #f1f3f6;
+  padding-top: 24rpx;
+  margin-bottom: 32rpx;
+}
+.info-row.data-v-04359966 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+.info-label.data-v-04359966 {
+  color: #7f8c8d;
+  font-size: 28rpx;
+}
+.info-value.data-v-04359966 {
+  color: #34495e;
+  font-weight: 500;
+  font-size: 28rpx;
+}
+/* 操作按钮 */
+.action-buttons.data-v-04359966 {
+  display: flex;
+  gap: 30rpx;
+  margin-top: 40rpx;
+}
+.btn.data-v-04359966 {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  transition: all 0.3s;
+}
+.reject-btn.data-v-04359966 {
+  background: #fff0f1;
+  color: #e74c3c;
+  border: 2rpx solid #ffd5d7;
+}
+.accept-btn.data-v-04359966 {
+  background: #e8f9f4;
+  color: #2ecc71;
+  border: 2rpx solid #b8f1d6;
+}
+.btn.data-v-04359966:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+  opacity: 0.9;
+}
+.apply-time.data-v-04359966 {
+  display: block;
+  text-align: right;
+  color: #95a5a6;
+  font-size: 24rpx;
+  margin-top: 20rpx;
+}
+

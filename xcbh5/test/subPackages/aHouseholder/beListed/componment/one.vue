@@ -166,6 +166,7 @@
 				market_id: null,
 				isSubmitting: false,
 				formData:{
+					sellstatus:1, // 自销
 					farmersgoods_id:null  ,// 菜品id，
 					market_id:null, // 市场id
 					area_id:null, // 城市id

@@ -18,29 +18,14 @@
 							placeholder="单位" />
 					</view>
 				</uni-forms-item>
-				
+
 				<uni-forms-item label="采购要求" name="requirements">
 					<uni-easyinput type="textarea" v-model="formData.content" placeholder="请输入规格、材质等要求"
 						:maxlength="500" />
 				</uni-forms-item>
-			</view>
-			<view class="section">
-				<uni-section title="时间要求" type="line"></uni-section>
-				<uni-forms-item label="报价截止" required name="stoptime">
-					<uni-datetime-picker type="date" v-model="formData.stoptime" :start="today" return-type="timestamp"/>
-				</uni-forms-item>
 
-				<!-- <uni-forms-item label="采购周期" required name="deliveryPeriod">
-					<view class="range-picker">
-						<uni-datetime-picker type="date" v-model="formData.deliveryStart" placeholder="开始日期" />
-						<text class="separator" style="font-size: 25rpx;">至</text>
-						<uni-datetime-picker type="date" v-model="formData.deliveryEnd" placeholder="结束日期" />
-					</view>
-				</uni-forms-item> -->
-			</view>
-			<view class="section">
-				<uni-section title="物流信息" type="line"></uni-section>
-				
+
+
 				<uni-forms-item label="收货地址" required name="deliveryAddress" class="range-picker">
 					<picker class="picker" mode="multiSelector" :range="multiArray" :value="multiIndex"
 						@change="bindMultiPickerChange" @columnchange="bindMultiPickerColumnChange">
@@ -49,13 +34,15 @@
 							-{{ selectedCountry === 'overseas' ? '' : multiArray[2][multiIndex[2]] }}
 						</view>
 					</picker>
-					</picker>
-
+				</uni-forms-item>
+				<uni-forms-item label="详细地址" name="byaddress">
+					<uni-easyinput v-model="formData.byaddress" placeholder="请输入详细地址" />
+				</uni-forms-item>
+				<uni-forms-item label="报价截止" required name="stoptime">
+					<uni-datetime-picker type="date" v-model="formData.stoptime" :start="today"
+						return-type="timestamp" />
 				</uni-forms-item>
 
-				<uni-forms-item label="期望货源地" name="byaddress">
-					<uni-easyinput v-model="formData.byaddress" placeholder="请输入供应商或地区" />
-				</uni-forms-item>
 			</view>
 			<button type="primary" @click="submitForm">提交采购单</button>
 		</uni-forms>
@@ -90,7 +77,7 @@
 					byaddress: '', // 求购商品的指定货源地
 					buyaddress: '', // 求购商品物流地址
 					area_id: null,
-					content:''
+					content: ''
 				},
 
 				units: [{
@@ -172,7 +159,7 @@
 
 			async bindMultiPickerChange(e) {
 				// this.multiIndex = e.detail.value;
-				this.formData.area_id =  this.districtList[this.multiIndex[2]]['id']
+				this.formData.area_id = this.districtList[this.multiIndex[2]]['id']
 				// if (this.selectedCountry === 'china') {
 				// 	const selectedCityIndex = this.multiIndex[1];
 				// 	const selectedCityId = this.cityList[selectedCityIndex]?.id || null;
@@ -239,19 +226,21 @@
 			},
 
 			async submitForm() {
-				
-				this.formData.buyaddress =  this.multiArray[0][this.multiIndex[0]]+'-'+this.multiArray[1][this.multiIndex[1]]+'-'+this.multiArray[2][this.multiIndex[2]]
+
+				this.formData.buyaddress = this.multiArray[0][this.multiIndex[0]] + '-' + this.multiArray[1][this
+					.multiIndex[1]
+				] + '-' + this.multiArray[2][this.multiIndex[2]]
 				console.log(this.formData)
 				let data = await api.buyinfoAdd(this.formData)
-				if (data.code != 200){
+				if (data.code != 200) {
 					uni.showToast({
-						icon:'error',
-						title:data.msg || data.message
+						icon: 'error',
+						title: data.msg || data.message
 					})
-				}else{
+				} else {
 					uni.showToast({
-						icon:'success',
-						title:data.msg || data.message
+						icon: 'success',
+						title: data.msg || data.message
 					})
 				}
 			},

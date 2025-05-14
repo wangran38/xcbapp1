@@ -21,7 +21,6 @@
 				<view class="title">
 					<view>{{item.shop_name}}</view>
 					<uni-icons type="right" size="20"></uni-icons>
-					<!-- <view class="state">交易状态</view> -->
 				</view>
 				<view class="content" v-for="goods in item.list_arr" :key="goods.id">
 					<image class="logo" :src="goods.imglogo" mode="aspectFill"></image>
@@ -60,7 +59,8 @@
 	export default {
 		data() {
 			return {
-				tabs1: ["全部", "待支付", "待收货", "待结算", "已结算"],
+				// tabs1: ["全部", "待支付", "待收货", "待结算", "已结算"],
+				tabs1: ["全部", "待支付", "已完成"],
 				stastatus: [0, 1, 3, 5, 6],
 				tabs1Current: 0,
 				pageData: [],
@@ -141,7 +141,19 @@
 </script>
 
 <style>
+	.card {
+		z-index: 1000;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 400rpx;
+		height: 400rpx;
+		background-color: white;
+	}
+
 	.orderTime {
+		z-index: 1;
+		display: inline-block;
 		position: relative;
 		right: 0;
 		top: 150rpx;
@@ -183,11 +195,13 @@
 	}
 
 	.list {
+		position: relative;
 		/* height: 450rpx; */
 		margin-top: 20rpx;
 		padding: 20rpx 20rpx;
 		display: flex;
 		flex-direction: column;
+		flex-wrap: nowrap;
 		background-color: #ffffff;
 		border-radius: 20rpx;
 	}
@@ -205,12 +219,10 @@
 	}
 
 	.title {
-		position: absolute;
-		right: 0;
 		height: 50rpx;
 		line-height: 50rpx;
 		display: flex;
-		flex-direction: row;
+		justify-content: flex-end;
 	}
 
 	.state {
@@ -261,7 +273,6 @@
 		font-size: 28rpx;
 		text-align: end;
 		display: flex;
-		flex-direction: row;
 	}
 
 	.Payprice {
@@ -290,6 +301,7 @@
 	}
 
 	.buy {
+		z-index: 1;
 		height: 60rpx;
 		width: 25%;
 		text-align: center;

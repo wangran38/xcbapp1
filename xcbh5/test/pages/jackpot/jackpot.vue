@@ -47,14 +47,20 @@
 			</view>
 		</view>
 		
-		
+
 		<button @click="goTofreeGroceryShopping">参与活动说明</button>
+		<view class="Notice">
+			<view style="text-align: center; font-size: 40rpx;">
+				{{getNowDate()}}
+			</view>
+			<view>今日打卡人次：{{signTotalData.todaynum}} <br>累计打卡人次：{{signTotalData.allnum}}</view>
+		</view>
 	</view>
 </template>
 
 <script>
 	import { api } from '@/api/index';
-	import usePage from '@/hooks/usePage';
+	import {myMixin} from '@/utils/public.js'
 	export default {
 		data() {
 			return {
@@ -64,51 +70,25 @@
 				yideng:[],
 				erdeng:[],
 				sandeng:[],
-				Created:''
+				Created:'',
+				signTotalData:{},
 			};
 		},
-		mixins: [usePage],
-		onLoad() {
-			this.reloadData();
+		mixins: [myMixin],
+		async onLoad() {
+			this.fetchData()
+			let res = await api.signTotal()
+			this.signTotalData = res.data
 		},
 		methods: {
+
 			goTofreeGroceryShopping(){
 				uni.navigateTo({
 					url:'/subPackages/shoppingPageList/freeGroceryShopping/freeGroceryShopping'
 				})
 				
 			},
-			/**
-			 * 格式化时间
-			 */
-			initTime(str){
-				let timestamp = new Date(str).getTime()
-				var time = String(timestamp).length === 10 ? new Date(parseInt(timestamp) * 1000) : new Date(parseInt(
-					timestamp))
-				var y = time.getFullYear() // 年
-				var m = time.getMonth() + 1 // 月
-				if (m < 10) {
-					m = '0' + m
-				}
-				var d = time.getDate() // 日
-				if (d < 10) {
-					d = '0' + d
-				}
-				var h = time.getHours() // 时
-				if (h < 10) {
-					h = '0' + h
-				}
-				var mm = time.getMinutes() // 分
-				if (mm < 10) {
-					mm = '0' + mm
-				}
-				var s = time.getSeconds() // 秒
-				if (s < 10) {
-					s = '0' + s
-				}
-				var timeStr = y + '-' + m + '-' + d + ' ' + h + ':' + mm + ':' + s
-				return timeStr
-			},
+			
 			async fetchData(params) {
 				this.totalPages = Math.ceil(this.totalnum / 6);
 				this.pagedData = []; // 清空之前的数据
@@ -141,22 +121,19 @@
 			formatPhoneNumber(phone) {
 				if (!phone) return '';
 				return phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
-			},
-			formatDateTime(datetime) {
-				if (!datetime) return '';
-				const date = new Date(datetime);
-				return date.toISOString().slice(0, 16).replace('T', ' ').replace(/-/g, '/');
-			},
-			gotolottery() {
-				uni.navigateBack({
-					delta: 1 // 关闭当前页面并返回上一个页面
-				});
 			}
 		}
 	};
 </script>
 
 <style>
+	.Notice view{
+		padding: 20rpx;
+		font-size: 25rpx;
+		font-weight: bold;
+		background-color: white;
+		/* display: inline; */
+	}
 	.me-container {
 		overflow: hidden;
 		width: 100%;

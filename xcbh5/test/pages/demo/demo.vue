@@ -1,604 +1,570 @@
 <template>
-	<view class="container">
-		<view class="header">
-			<text class="title">铺面招租</text>
-			<text class="subtitle">信息发布</text>
+	<scroll-view class="shop-detail" scroll-y :style="{ height: '100vh' }" @scrolltolower="handleScrollToLower">
+		<inputBoxVue ref="inputBoxVueRef"></inputBoxVue>
+		<view class="container">
+			<!-- 商铺头部 -->
+			<view class="shop-header">
+				<image class="shop-logo" :src="shopDetails.logo" mode="aspectFit"></image>
+				<view class="shop-info">
+					<text class="shop-title">{{ shopDetails.title}}</text>
+					<view class="complaint-btn" @click="complaint">
+						<uni-icons type="compose" size="18" color="#fff"></uni-icons>
+						<text>投诉建议</text>
+					</view>
+				</view>
+			</view>
+
+			<!-- 商铺信息 -->
+			<view class="info-card-group">
+				<view class="info-card">
+					<uni-icons type="person" size="20" color="#2979FF"></uni-icons>
+					<view class="info-content">
+						<text class="info-label">摊主名称</text>
+						<text class="info-value">{{ shopDetails.contactpeople}}</text>
+					</view>
+				</view>
+
+				<view class="info-card">
+					<uni-icons type="phone" size="20" color="#2979FF"></uni-icons>
+					<view class="info-content">
+						<text class="info-label">联系电话</text>
+						<text class="info-value">{{ shopDetails.contactphone}}</text>
+					</view>
+				</view>
+
+				<view class="info-card">
+					<uni-icons type="time" size="20" color="#2979FF"></uni-icons>
+					<view class="info-content">
+						<text class="info-label">营业时间</text>
+						<text class="info-value">6:00 - 21:00</text>
+					</view>
+				</view>
+
+				<view class="info-card">
+					<uni-icons type="certificate" size="20" color="#2979FF"></uni-icons>
+					<view class="info-content">
+						<text class="info-label">营业执照</text>
+						<text class="info-value link" @click="openAvater2">点击查看</text>
+					</view>
+				</view>
+			</view>
+
+			<!-- 地址 -->
+			<view class="address-card">
+				<uni-icons type="location" size="20" color="#ff6b6b"></uni-icons>
+				<view class="address-content">
+					<text class="address-text">{{ shopDetails.market_address || '暂无地址信息' }}</text>
+				</view>
+			</view>
+
+			<!-- 公告 -->
+			<view class="notice-card">
+				<view class="notice-header">
+					<uni-icons type="sound" size="18" color="#ff9f43"></uni-icons>
+					<text class="notice-title">公告</text>
+				</view>
+				<swiper class="notice-swiper" vertical autoplay interval="1500" circular>
+					<swiper-item v-for="item in 4" :key="item" class="swiper-item">
+						<text class="notice-text">赠送积分说明 {{ item }}</text>
+					</swiper-item>
+				</swiper>
+				<uni-icons type="right" size="14" color="#999"></uni-icons>
+			</view>
+
+			<!-- 菜品展示 -->
+			<view class="dishes-section">
+				<text class="section-title">菜品种类</text>
+				<view class="dishes-grid">
+					<view class="dish-item" v-for="item in pageData" :key="item.id">
+						<menuBarVue :item="item" @showKeyboard="Keyboard"></menuBarVue>
+					</view>
+				</view>
+			</view>
+
+			<shopItem :shop_id="shop_id" ref="shopitem"></shopItem>
 		</view>
-
-		<scroll-view class="form-container" scroll-y>
-			<view class="form-card">
-				<view class="card-title">
-					<text>位置信息</text>
-				</view>
-				
-				所在地区
-				<picker class="picker" mode="multiSelector" :range="multiArray" :value="multiIndex"
-					@change="bindMultiPickerChange" @columnchange="bindMultiPickerColumnChange">
-					<view class="picker-text">
-						{{ multiArray[0][multiIndex[0]] }} - {{ multiArray[1][multiIndex[1]] }}
-						-{{ selectedCountry === 'overseas' ? '' : multiArray[2][multiIndex[2]] }}
-					</view>
-				</picker>
-				
-				菜市场
-				<picker class="picker" mode="selector" :range="displayMarketList" :value="selectedMarketIndex"
-					@change="bindMarketChange">
-					<view class="picker-text">{{ displayMarketList[selectedMarketIndex] }}</view>
-				</picker>
-				<!-- <view class="input-group">
-          <input 
-            v-model="form.address" 
-            placeholder="请输入详细地址"
-            class="modern-input"
-            placeholder-class="placeholder"
-          />
-          <image src="/static/icon-edit.png" class="input-icon" />
-        </view> -->
-			</view>
-
-			<view class="form-card grid">
-				<view class="grid-item">
-					<text class="input-label">建筑面积 (m²)</text>
-					<view class="input-group">
-						<input v-model="form.area" type="number" placeholder="0" class="modern-input" />
-						<text class="unit">m²</text>
-					</view>
-				</view>
-				<view class="divider"></view>
-				<view class="grid-item">
-					<text class="input-label">租金价格</text>
-					<view class="input-group">
-						<input v-model="form.price" type="number" placeholder="0" class="modern-input" />
-						<text class="unit">元/月</text>
-					</view>
-				</view>
-			</view>
-
-			<view class="form-card">
-				<text class="card-title">租期要求</text>
-				<view class="duration-picker">
-					<view v-for="(item,index) in leaseTerms" :key="index"
-						:class="['duration-item', activeTerm === index ? 'active' : '']" @click="activeTerm = index">
-						{{ item }}
-					</view>
-				</view>
-			</view>
-
-			<view class="form-card">
-				<text class="card-title">配套设施</text>
-				<view class="facility-grid">
-					<view v-for="(item,index) in facilities" :key="index"
-						:class="['facility-item', item.checked ? 'active' : '']" @click="toggleFacility(index)">
-						<image :src="item.checked ? item.activeIcon : item.icon" class="facility-icon" />
-						<text>{{ item.name }}</text>
-					</view>
-				</view>
-			</view>
-
-			<view class="form-card">
-				<text class="card-title">铺面照片</text>
-				<view class="upload-container">
-					<uni-file-picker limit="9" fileMediatype="image" class="modern-uploader">
-						<view class="upload-card">
-							<image src="/static/icon-camera.png" class="upload-icon" />
-							<text class="upload-text">点击上传照片</text>
-						</view>
-					</uni-file-picker>
-				</view>
-			</view>
-
-			<view class="form-card">
-				<text class="card-title">详细信息</text>
-				<textarea v-model="form.details" placeholder="描述铺面特色（如层高、结构、周边环境等）" class="modern-textarea"
-					placeholder-class="placeholder" />
-			</view>
-		</scroll-view>
-		<view class="footer">
-			<button class="submit-btn" @click="submitForm">
-				<text>立即发布</text>
-				<image src="/static/icon-rocket.png" class="btn-icon" />
-			</button>
-		</view>
-	</view>
+	</scroll-view>
 </template>
+
+<style lang="scss">
+.shop-detail {
+	background: #f8f9fa;
+	.container {
+		padding: 24rpx;
+	}
+}
+
+/* 商铺头部 */
+.shop-header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 32rpx;
+	background: #fff;
+	border-radius: 16rpx;
+	padding: 32rpx;
+	box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.04);
+
+	.shop-logo {
+		width: 160rpx;
+		height: 160rpx;
+		border-radius: 8rpx;
+		margin-right: 24rpx;
+	}
+
+	.shop-info {
+		flex: 1;
+		position: relative;
+		
+		.shop-title {
+			font-size: 36rpx;
+			font-weight: 600;
+			color: #2d3436;
+			line-height: 1.4;
+		}
+
+		.complaint-btn {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			display: flex;
+			align-items: center;
+			background: #ff7675;
+			border-radius: 40rpx;
+			padding: 8rpx 24rpx;
+			color: #fff;
+			font-size: 24rpx;
+			
+			text {
+				margin-left: 8rpx;
+			}
+		}
+	}
+}
+
+/* 信息卡片组 */
+.info-card-group {
+	background: #fff;
+	border-radius: 16rpx;
+	padding: 24rpx;
+	margin-bottom: 24rpx;
+	box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.04);
+
+	.info-card {
+		display: flex;
+		align-items: center;
+		padding: 24rpx 0;
+		&:not(:last-child) {
+			border-bottom: 1rpx solid #eee;
+		}
+
+		.info-content {
+			margin-left: 24rpx;
+			.info-label {
+				font-size: 26rpx;
+				color: #666;
+				display: block;
+				margin-bottom: 8rpx;
+			}
+			.info-value {
+				font-size: 28rpx;
+				color: #333;
+				&.link {
+					color: #2979FF;
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+}
+
+/* 地址卡片 */
+.address-card {
+	display: flex;
+	align-items: center;
+	background: #fff;
+	border-radius: 16rpx;
+	padding: 24rpx;
+	margin-bottom: 24rpx;
+	box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.04);
+
+	.address-content {
+		margin-left: 24rpx;
+		.address-text {
+			font-size: 28rpx;
+			color: #333;
+			line-height: 1.4;
+		}
+	}
+}
+
+/* 公告卡片 */
+.notice-card {
+	display: flex;
+	align-items: center;
+	background: #fff;
+	border-radius: 16rpx;
+	padding: 24rpx;
+	margin-bottom: 32rpx;
+	box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.04);
+
+	.notice-header {
+		display: flex;
+		align-items: center;
+		margin-right: 24rpx;
+		.notice-title {
+			font-size: 28rpx;
+			color: #333;
+			margin-left: 12rpx;
+		}
+	}
+
+	.notice-swiper {
+		flex: 1;
+		height: 40rpx;
+		.swiper-item {
+			display: flex;
+			align-items: center;
+			.notice-text {
+				font-size: 26rpx;
+				color: #666;
+			}
+		}
+	}
+}
+
+</style>
+<!-- 
+<style lang="scss">
+/* 基础样式 */
+.container {
+	padding: 20rpx;
+	background: #f5f5f5;
+	min-height: 100vh;
+}
+
+/* 商铺头部 */
+.StoreName {
+	background: #fff;
+	padding: 30rpx;
+	border-radius: 16rpx;
+	margin-bottom: 20rpx;
+	position: relative;
+	
+	.logo {
+		width: 120rpx;
+		height: 120rpx;
+		border-radius: 8rpx;
+		margin-right: 20rpx;
+	}
+	
+	.shop-title {
+		font-size: 34rpx;
+		font-weight: bold;
+		color: #333;
+		vertical-align: middle;
+	}
+	
+	.complaint-btn {
+		position: absolute;
+		right: 30rpx;
+		top: 50%;
+		transform: translateY(-50%);
+		background: #f8f9fa;
+		padding: 10rpx 20rpx;
+		border-radius: 40rpx;
+		display: flex;
+		align-items: center;
+		
+		text {
+			font-size: 24rpx;
+			margin-left: 8rpx;
+		}
+	}
+}
+
+/* 信息区块 */
+.info-section {
+	background: #fff;
+	border-radius: 16rpx;
+	padding: 20rpx;
+	margin-bottom: 20rpx;
+	
+	.time {
+		display: flex;
+		justify-content: space-between;
+		padding: 20rpx 0;
+		
+		.info-item {
+			flex: 1;
+			display: flex;
+			align-items: center;
+			padding: 0 20rpx;
+			
+			.info-content {
+				margin-left: 20rpx;
+				
+				.info-label {
+					font-size: 26rpx;
+					color: #666;
+				}
+				
+				.info-value {
+					font-size: 28rpx;
+					color: #333;
+					
+					&.link {
+						color: #2979ff;
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+	}
+}
+
+/* 地址 */
+.address {
+	background: #fff;
+	padding: 25rpx;
+	border-radius: 16rpx;
+	margin-bottom: 20rpx;
+	display: flex;
+	align-items: center;
+	
+	.address-text {
+		font-size: 28rpx;
+		color: #333;
+		margin-left: 15rpx;
+	}
+}
+
+/* 公告 */
+.notice {
+	background: #fff;
+	padding: 25rpx;
+	border-radius: 16rpx;
+	margin-bottom: 20rpx;
+	display: flex;
+	align-items: center;
+	
+	.nleft {
+		display: flex;
+		align-items: center;
+		margin-right: 20rpx;
+		
+		.ntext {
+			font-size: 28rpx;
+			color: #333;
+			margin-left: 10rpx;
+		}
+	}
+	
+	.ncen {
+		flex: 1;
+		.swiper {
+			height: 40rpx;
+			
+			.swiitem {
+				font-size: 26rpx;
+				color: #666;
+				line-height: 40rpx;
+			}
+		}
+	}
+}
+
+.dishes {
+		display: flex;
+		flex-direction: column;
+		/* margin-top: 20rpx; */
+		margin-bottom: 180rpx;
+	}
+
+	.dishes>text {
+		color: black;
+		font-size: 30rpx;
+		font-weight: 600;
+	}
+
+	.dishes>.type {
+		margin-top: 20rpx;
+		display: flex;
+		flex-direction: row;
+		justify-content: start;
+		height: 240rpx;
+		width: 100%;
+		border-radius: 25rpx;
+		box-sizing: border-box;
+		background-color: white;
+	}
+</style>
+ -->
 
 <script>
 	import {
+		mapState,
+		mapMutations,
+		mapGetters
+	} from 'vuex';
+	import shopItem from '@/components/shop-item/shop-item.vue'
+	import menuBarVue from '../../components/menuBar.vue';
+	import inputBoxVue from '../../components/inputBox.vue';
+	
+	
+	import {
 		api
-	} from '@/api/index.js'
+	} from '@/api/index'
+	import usePage from '@/hooks/usePage';
+
 	export default {
 		data() {
 			return {
-				multiArray: [
-					[],
-					[],
-					[],
-				],
-				marketList:[],
-				selectedMarketIndex: 0,
-				selectedCountry: 'china',
-				multiIndex: [0, 0, 0],
-				activeTerm: 0,
-				leaseTerms: ['12个月', '24个月', '36个月'],
-				facilities: [{
-						name: '供水',
-						value: 'water',
-						icon: '/static/icon-water.png',
-						activeIcon: '/static/icon-water-active.png',
-						checked: false
-					},
-					{
-						name: '供电',
-						value: 'electric',
-						icon: '/static/icon-electric.png',
-						activeIcon: '/static/icon-electric-active.png',
-						checked: false
-					},
-					{
-						name: '排水',
-						value: 'drain',
-						icon: '/static/icon-drain.png',
-						activeIcon: '/static/icon-drain-active.png',
-						checked: false
-					},
-					{
-						name: '空调',
-						value: 'ac',
-						icon: '/static/icon-ac.png',
-						activeIcon: '/static/icon-ac-active.png',
-						checked: false
-					}
-				],
-				form: {
-					address: '',
-					area: '',
-					price: '',
-					details: ''
-				},
-				
+				cart: [],
+				totalPrice: 0,
+				showCartLayer: false,
+				cartItems: [],
+				pageData: [],
+				shopDetails: {},
+				shop_id: "",
+				urls1: [], // 摊主照片
+				urls2: [], // 营业执照图片
+				cart: false, // 购物车初始化弹窗,锁
+				show: false
 			}
 		},
-		computed:{
-			displayMarketList() {
-				return this.selectedCountry === 'china' ? this.marketList : ['暂时还没有数据'];
-			}
+		mixins: [usePage],
+		components: {
+			'shopItem':shopItem,
+			'menuBarVue':menuBarVue,
+			'inputBoxVue':inputBoxVue
 		},
-		async mounted() {
-			await this.initializePicker(); // 组件加载时初始化数据
+		computed: {
+			...mapState('cart', ['carts']),
+			...mapGetters('cart', ['getTempCount']),
+		},
+		onShow() {
+			this.loadPageData()
 		},
 		methods: {
-			bindMarketChange(e) {
-				this.selectedMarketIndex = e.detail.value;
-				const selectedMarket = this.marketList[this.selectedMarketIndex];
-				this.market_id = this.marketIdMap[selectedMarket] || null;
+			complaint(){
+				uni.navigateTo({
+					url:`/pages/merchantComplaints/merchantComplaints?id=${this.shopDetails.id}&title=${this.shopDetails.title}`,
+				})
 			},
-			async fetchProvinces() {
+			// 需要调起数字键盘
+			Keyboard(value){
+				this.$refs.inputBoxVueRef.show = true
+				this.$refs.inputBoxVueRef.cartItem = value
+			},
+			// 收起购物车
+			closeTan() {
+				if (this.$refs.shopitem.showCartLayer1) {
+					this.$refs.shopitem.showCartLayer1 = false
+				}
+			},
+			// 查看摊主照片
+			openAvater1() {
+				if (this.urls1[0].length > 1) {
+					uni.previewImage({
+						count: 1,
+						urls: this.urls1,
+						sizeType: ['original', 'compressed'],
+						sourceType: ['album'],
+						success: (res) => {}
+					})
+				} else {
+					uni.showToast({
+						title: '暂无图片',
+						icon: 'error'
+					})
+					// 如果没有图片,则关闭图片预览
+					// uni.closePreviewImage()
+				}
+
+			},
+			// 查看营业执照
+			openAvater2() {
+				if (this.urls2[0].length > 1) {
+					uni.previewImage({
+						count: 1,
+						urls: this.urls2,
+						sizeType: ['original', 'compressed'],
+						sourceType: ['album'],
+						success: (res) => {}
+					})
+				} else {
+					uni.showToast({
+						title: '暂无图片',
+						icon: 'error'
+					})
+					// 如果没有图片,则关闭图片预览
+					// uni.closePreviewImage()
+				}
+
+			},
+			...mapMutations('cart', ['addItem', 'subItem']),
+
+
+			// 首次加载，初始化
+			async loadShopDetails() {
 				try {
-					const response = await api.citylist({
-						level: 1,
-						limit: 100
+					// 获取当前页面
+					const pages = getCurrentPages();
+					const currentPage = pages[pages.length - 1];
+					// 从页面查询参数中获取 shop_id
+					const query = currentPage.options;
+					const shopId = Number(query.id);
+					const response = await api.shopDetail(shopId);
+					this.shop_id = shopId;
+					this.shopDetails = response.data.listdata[0];
+					this.urls1.push(this.shopDetails.facelogo)
+					this.urls2.push(this.shopDetails.businesslogo)
+					return response
+				} catch (error) {
+					console.error('获取摊主详情失败', error);
+					uni.showToast({
+						title: '获取摊主详情失败',
+						icon: 'none'
 					});
-					if (response.code === 200) {
-						this.provinceList = response.data.listdata;
-						return this.provinceList;
-					}
-					throw new Error('Failed to fetch provinces');
-				} catch (error) {
-					console.error('Failed to fetch provinces:', error);
-					throw error;
-				}
-			},
-			async fetchCities(provinceId) {
-				try {
-					const response = await api.citytree(provinceId);
-					if (response.code === 200 && Array.isArray(response.data)) {
-						this.cityList = response.data;
-						return response.data;
-					} else {
-						console.error('No cities data found');
-						return [];
-					}
-				} catch (error) {
-					console.error('Failed to fetch cities:', error);
-					return [];
-				}
-			},
-			async fetchAreas(cityId) {
-				try {
-					const response = await api.citytree(cityId);
-					if (response.code === 200 && Array.isArray(response.data)) {
-						this.districtList = response.data;
-						return response.data;
-					} else {
-						console.error('No areas data found');
-						return [];
-					}
-				} catch (error) {
-					console.error('Failed to fetch areas:', error);
-					return [];
-				}
-			},
-			async fetchOverseas() {
-				try {
-					const response = await api.countrylist(0, 200, 1);
-					if (response.code === 200) {
-						this.overseasCountries = response.data.listdata;
-						this.multiArray[0] = this.overseasCountries.map(c => c.shortname);
-						this.multiArray[1] = [];
-						this.multiArray[2] = [];
-						this.multiIndex = [0, 0, 0];
-						return this.overseasCountries;
-					} else {
-						throw new Error('Failed to fetch overseas continents');
-					}
-				} catch (error) {
-					console.error('Failed to fetch overseas continents:', error);
-					throw error;
-				}
-			},
-			
-			// 菜市场
-			async fetchMarkets(areaId) {
-				try {
-					const Limit = 100;
-					const response = await api.marketlist(areaId, Limit);
-					if (response.code === 200 && Array.isArray(response.data.listdata)) {
-						this.marketList = response.data.listdata.map(item => item.marketname);
-						this.marketIdMap = response.data.listdata.reduce((map, item) => {
-							map[item.marketname] = item.id;
-							return map;
-						}, {});
-					} else {
-						console.error('No market data found');
-						this.marketList = [];
-						this.marketIdMap = {};
-					}
-				} catch (error) {
-					console.error('Failed to fetch markets:', error);
-					this.marketList = [];
-					this.marketIdMap = {};
+
 				}
 			},
 
-			// 默认选中海南省定安县塔岭市场
-			async initializePicker() {
-				try {
-					if (this.selectedCountry === 'china') {
-						const provinces = await this.fetchProvinces();
-						this.multiArray[0] = provinces.map(item => item.name);
-						if (provinces.length > 0) {
+			async fetchData(params) {
+				const res = await this.loadShopDetails();
+				const {
+					title
+				} = res.data.listdata[0]
+				const pages = getCurrentPages();
+				const currentPage = pages[pages.length - 1];
+				const query = currentPage.options;
 
 
+				params = {
+					...params,
+					shop_id: Number(query.id) || null,
+				};
 
-							// const cities = await this.fetchCities(provinces[0].id);
-							const cities = await this.fetchCities(provinces[20].id);
+				const response = await api.getmarketCommdityList({
+					...params,
+					isshow: 1,
+				});
 
-
-
-							this.multiArray[1] = cities.map(item => item.name);
-							if (cities.length > 0) {
-								const areas = await this.fetchAreas(2306);
-
-								this.multiArray[2] = areas.map(item => item.name);
-							}
-						}
-						this.multiIndex = [20, 3, 6];
-
-
-					} else if (this.selectedCountry === 'overseas') {
-						const countries = await this.fetchOverseas();
-						this.multiArray[0] = countries.map(c => c.shortname);
-						this.multiArray[1] = [];
-						this.multiArray[2] = [];
-						this.multiIndex = [0, 0, 0];
+				response.data.listdata = response.data.listdata.map(e => {
+					return {
+						...e,
+						shopTitle: title
 					}
-				} catch (error) {
-					console.error('Failed to initialize picker:', error);
-				}
-				this.fetchMarkets(2313)
-				this.selectedMarketIndex = 1
+				})
+				return response.data;
 			},
 
-			async bindMultiPickerColumnChange(e) {
-				const column = e.detail.column;
-				const value = e.detail.value;
 
-				if (this.selectedCountry === 'china') {
-					if (column === 0) {
-						const selectedProvince = this.provinceList[value];
-						if (selectedProvince && selectedProvince.id !== undefined) {
-							const cities = await this.fetchCities(selectedProvince.id);
-							this.multiArray[1] = cities.map(item => item.name);
-							if (cities.length > 0) {
-								const areas = await this.fetchAreas(cities[0].id);
-								this.multiArray[2] = areas.map(item => item.name);
-							} else {
-								this.multiArray[2] = [];
-							}
-						}
-						this.multiIndex[1] = 0;
-						this.multiIndex[2] = 0;
-					} else if (column === 1) {
-						const selectedCity = this.cityList[value];
-						if (selectedCity && selectedCity.id !== undefined) {
-							const areas = await this.fetchAreas(selectedCity.id);
-							this.multiArray[2] = areas.map(item => item.name);
-						} else {
-							this.multiArray[2] = [];
-						}
-						this.multiIndex[2] = 0;
-					}
-				} else if (this.selectedCountry === 'overseas') {
-					if (column === 0) {
-						const selectedContinent = this.overseasCountries[value];
-						if (selectedContinent && selectedContinent.id !== undefined) {
-							await this.fetchOverseasCities(selectedContinent.id);
-						}
-						this.multiArray[2] = [];
-						this.multiIndex[1] = 0;
-						this.multiIndex[2] = 0;
-					} else if (column === 1) {
-						this.multiArray[2] = [];
-						this.multiIndex[2] = 0;
-					}
-				}
-
-				this.multiIndex[column] = value;
-				this.multiIndex = [...this.multiIndex];
+			goTorules() {
+				uni.navigateTo({
+					url: '/pages/rules/rules'
+				});
 			},
-			async bindMultiPickerChange(e) {
-				this.multiIndex = e.detail.value;
-				if (this.selectedCountry === 'china') {
-					const selectedCityIndex = this.multiIndex[1];
-					const selectedCityId = this.cityList[selectedCityIndex]?.id || null;
-					if (selectedCityId) {
-						await this.fetchAreas(selectedCityId);
-						this.area_id = this.districtList[this.multiIndex[2]]?.id || null;
-						await this.fetchMarkets(this.area_id);
-					}
-				} else if (this.selectedCountry === 'overseas') {
-					const selectedCountryIndex = this.multiIndex[0];
-					this.overseasCountryId = this.overseasCountries[selectedCountryIndex]?.id || null;
-					const selectedCityIndex = this.multiIndex[1];
-					if (this.overseasCountryId) {
-						await this.fetchOverseasCities(this.overseasCountryId);
-						this.overseasCityId = this.overseasCities[selectedCityIndex]?.id || null;
-					}
-				}
-			},
-			toggleFacility(index) {
-				this.facilities[index].checked = !this.facilities[index].checked
-			},
-			submitForm() {
-				// 提交逻辑
-			}
 		}
 	}
 </script>
-
-<style lang="scss">
-	.picker {
-		height: 150rpx;
-		width: 100%;
-		color: black;
-		line-height: 150rpx;
-		text-align: center;
-		box-sizing: border-box;
-		font-size: 30rpx;
-		padding: 0 10rpx;
-		overflow: hidden;
-		/* 隐藏超出部分 */
-	}
-
-	/* 基础样式 */
-	$primary-color: #2B6FF3;
-	$secondary-color: #8E9AB5;
-	$success-color: #4CAF50;
-
-	.container {
-		background: #F5F7FA;
-		min-height: 100vh;
-		padding: 40rpx 32rpx;
-	}
-
-	/* 头部样式 */
-	.header {
-		margin-bottom: 60rpx;
-
-		.title {
-			font-size: 48rpx;
-			font-weight: 700;
-			color: #1A2945;
-		}
-
-		.subtitle {
-			font-size: 32rpx;
-			color: $secondary-color;
-		}
-	}
-
-	/* 表单卡片 */
-	.form-card {
-		background: white;
-		border-radius: 24rpx;
-		padding: 32rpx;
-		margin-bottom: 32rpx;
-		box-shadow: 0 8rpx 24rpx rgba(43, 111, 243, 0.08);
-
-		.card-title {
-			font-size: 36rpx;
-			color: #1A2945;
-			margin-bottom: 40rpx;
-			display: flex;
-			align-items: center;
-
-			.icon {
-				width: 48rpx;
-				height: 48rpx;
-				margin-right: 16rpx;
-			}
-		}
-	}
-
-	/* 输入组件 */
-	.modern-input {
-		height: 96rpx;
-		padding: 0 32rpx;
-		font-size: 32rpx;
-		background: #F8F9FC;
-		border-radius: 16rpx;
-		color: #1A2945;
-	}
-
-	.input-group {
-		position: relative;
-
-		.unit {
-			position: absolute;
-			right: 32rpx;
-			top: 50%;
-			transform: translateY(-50%);
-			color: $secondary-color;
-		}
-
-		.input-icon {
-			width: 48rpx;
-			height: 48rpx;
-			position: absolute;
-			right: 32rpx;
-			top: 50%;
-			transform: translateY(-50%);
-		}
-	}
-
-	/* 双列布局 */
-	.grid {
-		display: flex;
-		gap: 32rpx;
-
-		.grid-item {
-			flex: 1;
-		}
-
-		.divider {
-			width: 2rpx;
-			background: #EEE;
-		}
-	}
-
-	/* 租期选择 */
-	.duration-picker {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 24rpx;
-
-		.duration-item {
-			height: 96rpx;
-			border-radius: 16rpx;
-			background: #F8F9FC;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			color: $secondary-color;
-			transition: all 0.2s;
-
-			&.active {
-				background: $primary-color;
-				color: white;
-				font-weight: 500;
-			}
-		}
-	}
-
-	/* 设施选择 */
-	.facility-grid {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 32rpx;
-
-		.facility-item {
-			height: 140rpx;
-			border: 2rpx solid #EEE;
-			border-radius: 16rpx;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-
-			&.active {
-				border-color: $primary-color;
-				background: rgba($primary-color, 0.05);
-			}
-
-			.facility-icon {
-				width: 64rpx;
-				height: 64rpx;
-				margin-bottom: 16rpx;
-			}
-		}
-	}
-
-	/* 上传组件 */
-	.upload-container {
-		border: 2rpx dashed #EEE;
-		border-radius: 16rpx;
-
-		.upload-card {
-			height: 200rpx;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-
-			.upload-icon {
-				width: 64rpx;
-				height: 64rpx;
-				margin-bottom: 16rpx;
-			}
-		}
-	}
-
-	/* 文本域 */
-	.modern-textarea {
-		width: 95%;
-		min-height: 200rpx;
-		padding: 32rpx;
-		background: #F8F9FC;
-		border-radius: 16rpx;
-		font-size: 32rpx;
-	}
-
-	/* 底部按钮 */
-	.footer {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 70%);
-		padding: 32rpx;
-
-		.submit-btn {
-			height: 96rpx;
-			background: linear-gradient(90deg, $primary-color 0%, #5A8BFF 100%);
-			border-radius: 64rpx;
-			color: white;
-			font-size: 36rpx;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			box-shadow: 0 12rpx 24rpx rgba(43, 111, 243, 0.3);
-
-			.btn-icon {
-				width: 48rpx;
-				height: 48rpx;
-				margin-left: 16rpx;
-			}
-		}
-	}
-
-	/* 占位符样式 */
-	.placeholder {
-		color: #C3CAD9 !important;
-		font-size: 32rpx !important;
-	}
-</style>

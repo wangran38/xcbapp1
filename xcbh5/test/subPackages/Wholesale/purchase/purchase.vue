@@ -66,7 +66,7 @@
             <text>{{ initDate(item.stoptime) }} 截止</text>
           </view>
           <view class="action-btn" @click.stop="contactSupplier(item.id)">
-            <text>立即联系</text>
+            <text>立即报价</text>
             <uni-icons type="arrow-right" size="14" color="#fff" />
           </view>
         </view>

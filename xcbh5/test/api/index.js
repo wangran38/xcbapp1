@@ -419,7 +419,7 @@ export const api = {
 	goodsinfoList(data){
 		return fetch('/api/farmers/goodsinfo/list', 'POST', data);
 	},
-	// 买家端预卖菜品列表
+	// 买家端和买家端预卖菜品列表
 	presaleList(data){
 		return fetch('/api/farmers/market/goodslist', 'POST', data);
 	},
@@ -471,7 +471,42 @@ export const api = {
 	// 菜品上市
 	foodOnSale(data){
 		return fetch('/api/farmers/market/addgoods', 'POST', data);
-	}
+	},
+	
+	// 菜品下市
+	XiaShiCity(data){
+		return fetch('/api/farmers/market/editgoods', 'POST', data);
+	},
+	
+	// 发布批发
+	publishWholesale(data){
+		return fetch('/api/user/sellinfo/add', 'POST', data);
+	},
+	// 批发列表
+	wholesaleList(data){
+		return fetch('/api/sellinfo/list', 'POST', data);
+	},
+	// 我的求购列表
+	myProcurementData(data){
+		return fetch('/api/user/buyinfo/mylist', 'POST', data);
+	},
+	// 我的供应列表
+	mySupplyData(data){
+		return fetch('/api/user/sellinfo/mylist', 'POST', data);
+	},
+	// 我的地址列表
+	myaddressData(data){
+		return fetch('/api/user/myaddress', 'POST', data);
+	},
+	// 添加我的地址
+	addMyAddress(data){
+		return fetch('/api/user/addaddress', 'POST', data);
+	},
+	// 编辑我的地址
+	editMyAddress(data){
+		return fetch('/api/user/editaddress', 'POST', data);
+	},
+	
 	
 	
 

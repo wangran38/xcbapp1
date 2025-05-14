@@ -37,12 +37,7 @@
 			<view >立即签到</view>
 		</view> -->
 
-		<view class="Notice">
-			<view style="font-size: 30rpx; font-weight: bold;">
-				{{getNowDate()}}
-			</view>
-			<view>今日打卡人次：{{signTotalData.todaynum}} <br>累计打卡人次：{{signTotalData.allnum}}</view>
-		</view>
+		
 	</view>
 </template>
 
@@ -50,62 +45,13 @@
 	import {
 		api
 	} from '@/api/index.js';
-	import {myMixin} from '@/utils/public.js'
 	export default {
-		mixins:[myMixin],
 		data() {
 			return {
-				signTotalData:{},
 				
 			}
-		},
-		async mounted() {
-			let res = await api.signTotal()
-			this.signTotalData = res.data
-		},
-		methods: {
-			getNowDate(){
-				return this.initDate(Date.now())
-			},
-			scan() {
-			  // 只允许通过相机扫码
-			  uni.scanCode({
-			    onlyFromCamera: true,
-			    success: function (res) {
-				  console.log(1);
-			      console.log('条码类型：' + res.scanType);
-			      console.log('条码内容：' + res.result);
-			
-			      // 检查是否是 URL，如果是 URL，则跳转
-			      const scannedUrl = res.result;
-			      if (scannedUrl.startsWith('http')) {
-					  console.log('这是一个有效的 URL');
-			        // 解码 URL
-			        const decodedUrl = decodeURIComponent(scannedUrl);
-					console.log('解码后的 URL:', decodedUrl);
-			        // 提取 hash 部分（即 # 后面的部分）
-			        const hashIndex = decodedUrl.indexOf('#');
-			        if (hashIndex !== -1) {
-			          const pagesPath = decodedUrl.substring(hashIndex + 1); // 例如 "/pages/Clock/Clock?time=1725806224"
-						console.log('提取到的页面路径:', pagesPath);
-			          // 执行页面跳转
-			          uni.navigateTo({
-			            url: pagesPath // 跳转到指定页面并带上参数
-			          });
-			        } else {
-			          console.warn('未能解析到有效的页面路径');
-			        }
-			      } else {
-			        // 处理非 URL 的结果
-			        console.warn('扫码结果不是有效的链接:', scannedUrl);
-			      }
-			    },
-			    fail: function (error) {
-			      console.error('扫码失败:', error);
-			    }
-			  });
-			}
 		}
+
 	}
 </script>
 

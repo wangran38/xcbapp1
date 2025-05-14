@@ -1,12 +1,12 @@
 <template>
 	<view class="container">
-		<view class="particle-bg">
+<!-- 		<view class="particle-bg">
 			<view v-for="i in 30" :key="i" class="particle" :style="{
         left: Math.random() * 100 + '%',
         top: Math.random() * 100 + '%',
         animationDelay: i * 0.2 + 's'
       }"></view>
-		</view>
+		</view> -->
 
 		<view class="search-bar">
 			<view style="display: flex;   align-items: center; border-radius: 20rpx;">
@@ -111,7 +111,7 @@
 				goodsData: [],
 				cartCount: 0,
 				queryData: {
-					category_id:null,
+					category_id: null,
 					goodsname: null,
 					page: 1,
 					limit: 5
@@ -129,7 +129,7 @@
 		methods: {
 			intiQuery() {
 				this.queryData = {
-					category_id:null,
+					category_id: null,
 					goodsname: null,
 					page: 1,
 					limit: 5
