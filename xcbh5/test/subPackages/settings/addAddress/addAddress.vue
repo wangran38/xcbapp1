@@ -1,13 +1,12 @@
 <template>
 	<view class="address-edit-page">
 		<!-- 头部 -->
-		<view class="app-bar">
+		<!-- 		<view class="app-bar">
 			<text class="title">{{ isEdit ? '编辑地址' : '新增地址' }}</text>
-		</view>
+		</view> -->
 
-		<!-- 表单区域 -->
-		<scroll-view scroll-y class="form-container">
-			<!-- 表单项 -->
+		<map :latitude="location.latitude" :longitude="location.longitude" :markers="markers" style="width: 100%; height: 100vh; position: absolute; "  v-if="mapKey"></map>
+		<scroll-view  scroll-y class="form-container" style="margin-top: 150rpx;">
 			<view class="form-item">
 				<text class="label">收货人</text>
 				<input v-model="formData.phonename" placeholder="请输入收货人姓名" class="input"
@@ -24,34 +23,35 @@
 
 			<view class="form-item">
 				<text class="label">所在地区</text>
-				<!-- <fegionSelection></fegionSelection> -->
-				<picker class="picker" mode="multiSelector" :range="multiArray" :value="multiIndex"
-					@change="bindMultiPickerChange" @columnchange="bindMultiPickerColumnChange">
-					<view class="picker-text">
-						{{ multiArray[0][multiIndex[0]] }} - {{ multiArray[1][multiIndex[1]] }}
-						-{{ selectedCountry === 'overseas' ? '' : multiArray[2][multiIndex[2]] }}
-					</view>
-				</picker>
+					<picker class="picker" mode="multiSelector" :range="multiArray" :value="multiIndex"
+						@change="bindMultiPickerChange" @columnchange="bindMultiPickerColumnChange">
+						<view class="picker-text">
+							{{ multiArray[0][multiIndex[0]] }} - {{ multiArray[1][multiIndex[1]] }}
+							-{{ selectedCountry === 'overseas' ? '' : multiArray[2][multiIndex[2]] }}
+						</view>
+					</picker>
+				
 				<text v-if="error.region" class="error-msg">请选择所在地区</text>
 			</view>
 
 			<view class="form-item">
 				<text class="label">详细地址</text>
-				<textarea v-model="formData.address" placeholder="街道、楼牌号等详细信息" class="textarea"
-					:class="{ error: error.address }" />
-				<text v-if="error.address" class="error-msg">请输入详细地址</text>
+				<!-- <button @click="selectLocation" style="margin-left: -44rpx;">位置选择</button> -->
+				<textarea  v-model="formData.address" placeholder="街道、楼牌号等详细信息" class="textarea"
+					:class="{ error: error.address }"   @click="selectLocation"/>
 			</view>
 
 			<view class="form-item switch-item">
-				<text class="label">设为默认地址</text>
+				<text class="label">默认地址</text>
 				<switch :checked="formData.isshow == 1 ? false:true" @change="toggleDefault" color="#1a73e8" />
+			</view>
+			<view class="save-footer">
+				<button class="save-btn" @click="handleSubmit">保存地址</button>
 			</view>
 		</scroll-view>
 
 
-		<view class="save-footer">
-			<button class="save-btn" @click="handleSubmit">保存地址</button>
-		</view>
+
 
 	</view>
 </template>
@@ -62,7 +62,8 @@
 	} from '@/utils/public.js'
 	import fegionSelection from '@/components/fegionSelection/fegionSelection.vue'
 	import {
-		api
+		api,
+		locationsKey
 	} from '@/api/index.js'
 
 	export default {
@@ -72,12 +73,14 @@
 		},
 		data() {
 			return {
+				mapKey: false,
 				selectedCountry: 'china',
 				multiArray: [
 					[],
 					[],
 					[]
 				],
+
 				area_id: null, // 所在区域id
 				multiIndex: [0, 0, 0],
 				isEdit: false,
@@ -94,12 +97,57 @@
 					region: false,
 					detail: false
 				},
+				location: {
+					latitude: null,
+					longitude: null,
+				},
+				markers:[]
+
 
 			}
 		},
 		onLoad(options) {
+			// api.addressResolution({
+			// 	address: '海南省琼海市会山镇大缴村'
+			// }).then(data => {
+			// 	console.log(data)
+			// })
+			uni.getLocation({
+				altitude: true,
+				isHighAccuracy: true,
+				highAccuracy: true,
+				type: 'gcj02',
+				success:(res)=> {
+					this.location.longitude = res.longitude
+					// 确保能看到标记点
+					this.location.latitude = res.latitude-0.005
+					
+					this.mapKey = true
+					
+					console.log(this.location)
+					this.markers.push({id:1,longitude:this.location.longitude,latitude:this.location.latitude+0.005,iconPath:'../../../static/selectlocation.png',width:30,height:30})
+					console.log(this.markers)
+					// 强制更新（针对小程序平台）
+					// this.$forceUpdate();
+					// uni.request({
+					// 	url:'https://restapi.amap.com/v3/assistant/coordinate/convert?parameters',
+					// 	method:'get',
+					// 	data:{
+					// 		key:locationsKey,
+					// 		localtion:`${res.longitude},${res.latitude}`
+					// 	},
+					// 	success:(res)=>{
+					// 		console.log(res)
+					// 	}
+					// })
+				},
+				fail(e) {
+					console.log(e)
+				}
+			})
+
 			this.initializePicker()
-			console.log(options)
+			// console.log(options)
 
 			if (JSON.parse(options.isEdit)) {
 				this.isEdit = true
@@ -109,6 +157,16 @@
 
 		},
 		methods: {
+			selectLocation() {
+				uni.chooseLocation({
+					success(res) {
+						this.formData.address = res.address
+					},
+					fail(e) {
+						console.log(e)
+					}
+				})
+			},
 			async fetchCities(provinceId) {
 				try {
 					const response = await api.citytree(provinceId);
@@ -232,7 +290,7 @@
 				}
 				this.fetchMarkets(2313)
 				this.selectedMarketIndex = 1
-				console.log(this.multiArray, this.multiIndex)
+				// console.log(this.multiArray, this.multiIndex)
 			},
 			async bindMultiPickerColumnChange(e) {
 				const column = e.detail.column;
@@ -294,35 +352,25 @@
 			},
 
 			validateForm() {
-				let isValid = true
-				const validations = {
-					phone: /^1[3-9]\d{9}$/.test(this.formData.phone),
-				}
-
-				Object.keys(validations).forEach(key => {
-					this.error[key] = !validations[key]
-					if (!validations[key]) isValid = false
-				})
-
-				return isValid
+				
 			},
 
 			async handleSubmit() {
 
-				if (!this.validateForm()) return
+				// if (!this.validateForm()) return
 				let res = null
-				
+
 
 				this.formData.area_id = this.area_id
 				if (!this.isEdit) {
 					// 新增接口
 					res = await api.addMyAddress(this.formData)
-					console.log(res)
+					// console.log(res)
 				} else {
 					// 编辑接口
-					console.log(this.formData)
+					// console.log(this.formData)
 					res = await api.editMyAddress(this.formData)
-					console.log(res)
+					// console.log(res)
 				}
 				if (res.code == 200) {
 					// 保存逻辑
@@ -355,6 +403,8 @@
 
 <style lang="scss" scoped>
 	.address-edit-page {
+		display: flex;
+		justify-content: left;
 		background: #f8f9fb;
 		min-height: 100vh;
 
@@ -374,18 +424,24 @@
 		}
 
 		.form-container {
+			position: fixed;
+			bottom: 0;
+			width: 700rpx;
 			padding: 32rpx;
-			padding-bottom: 160rpx;
 		}
 
 		.form-item {
+			display: flex;
+			justify-content: left;
+			align-items: center;
 			background: #fff;
-			border-radius: 16rpx;
-			padding: 32rpx;
-			margin-bottom: 24rpx;
+			// border-radius: 16rpx;
+			padding: 18rpx;
 			position: relative;
+			text-align: left;
 
 			.label {
+				width: 200rpx;
 				display: block;
 				color: #4a5568;
 				font-size: 30rpx;
@@ -433,15 +489,16 @@
 
 		.switch-item {
 			display: flex;
-			justify-content: space-between;
+			justify-content: left;
 			align-items: center;
 		}
 
 		.save-footer {
-			position: fixed;
-			bottom: 0;
-			left: 0;
-			right: 0;
+			z-index: 999;
+			// position: fixed;
+			// bottom: 0;
+			// left: 0;
+			// right: 0;
 			background: #fff;
 			padding: 24rpx 32rpx;
 			box-shadow: 0 -4rpx 12rpx rgba(0, 0, 0, 0.04);
@@ -462,7 +519,7 @@
 	@media (min-width: 768px) {
 		.address-edit-page {
 			.form-container {
-				max-width: 1200px;
+				max-width: 1000px;
 				margin: 0 auto;
 			}
 		}

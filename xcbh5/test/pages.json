@@ -7,6 +7,7 @@
 					"style": {
 						"navigationBarTitleText": "支付方式"
 					}
+					
 				},
 				{
 					"path": "collectOnDelivery/collectOnDelivery",
@@ -114,6 +115,13 @@
 					{
 						"navigationBarTitleText" : "我的采购"
 					}
+				},
+				{
+					"path" : "quotation/quotation",
+					"style" : 
+					{
+						"navigationBarTitleText" : "报价"
+					}
 				}
 			]
 		},
@@ -193,6 +201,13 @@
 					"style": {
 						"navigationBarTitleText": "免费买菜"
 					}
+				},
+				{
+					"path" : "statisticsMap/statisticsMap",
+					"style" : 
+					{
+						"navigationBarTitleText" : ""
+					}
 				}
 
 			]
@@ -204,6 +219,20 @@
 				"style" : 
 				{
 					"navigationBarTitleText" : "代销申请"
+				}
+			},
+			{
+				"path" : "billRecord/billRecord",
+				"style" : 
+				{
+					"navigationBarTitleText" : "账单记录"
+				}
+			},
+			{
+				"path" : "storeSettings/storeSettings",
+				"style" : 
+				{
+					"navigationBarTitleText" : "店铺设置"
 				}
 			}
 				
@@ -262,13 +291,13 @@
 			"style": {
 				"navigationBarTitleText": "首页"
 			}
+			
 		},
 		{
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "乡愁宝",
 				"disableScroll": true
-				// "enablePullDownRefresh": true
 			}
 		},
 		{
@@ -546,10 +575,12 @@
 				"navigationBarTitleText": ""
 			}
 		},
+		
 		{
 			"path": "pages/dynamics/dynamics",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "种养来历",
+				"disableScroll": true
 			}
 		},
 		{

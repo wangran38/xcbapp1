@@ -274,6 +274,20 @@
 .wxParse .audio.data-v-49e5f192, .wxParse .uni-audio-default.data-v-49e5f192 {
   display: block;
 }
+.filter-group.data-v-49e5f192 {
+  margin: 10rpx;
+  display: flex;
+  gap: 30rpx;
+  align-items: center;
+}
+.filter-btn.data-v-49e5f192 {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 24rpx;
+  border-radius: 40rpx;
+  background: #f5f7fa;
+  border: 1rpx solid #e4e7ed;
+}
 .search-bar.data-v-49e5f192 {
   margin: 15rpx;
   background: #FFF;

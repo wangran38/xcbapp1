@@ -131,7 +131,7 @@ export default {
       this.loading = true
       try {
         // 模拟接口请求
-        await new Promise(resolve => setTimeout(resolve, 800))
+        await new Promise(resolve => setTimeout(resolve, 100))
         this.orders = this.getMockData()
       } finally {
         this.loading = false

@@ -51,8 +51,19 @@
 						const token = uni.getStorageSync('token'); // 获取存储的token
 						if (!token) {
 							// 用户未登录
+							// uni.showModal({
+							// 	title: '提示',
+							// 	content: '请登录后再打卡',
+							// 	showCancel: false,
+							// 	success: () => {
+							// 		uni.navigateTo({
+							// 			url: '/pages/login/login', // 跳转到登录页面
+							// 		});
+							// 	}
+							// });
+							// return;
 							uni.showModal({
-								title: '提示',
+								title: '测试测试',
 								content: '请登录后再打卡',
 								showCancel: false,
 								success: () => {

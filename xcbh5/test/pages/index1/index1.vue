@@ -15,7 +15,9 @@
 				<picker class="picker" mode="multiSelector" :range="multiArray" :value="multiIndex"
 					@change="bindMultiPickerChange" @columnchange="bindMultiPickerColumnChange">
 					<view class="picker-text">
-						{{ multiArray[0][multiIndex[0]] }} - {{ multiArray[1][multiIndex[1]] ? multiArray[1][multiIndex[1]]: '暂无数据' }} -{{ selectedCountry === 'overseas' ? '' : multiArray[2][multiIndex[2]] }}
+						{{ multiArray[0][multiIndex[0]] }} -
+						{{ multiArray[1][multiIndex[1]] ? multiArray[1][multiIndex[1]]: '暂无数据' }}
+						-{{ selectedCountry === 'overseas' ? '' : multiArray[2][multiIndex[2]] }}
 					</view>
 				</picker>
 			</view>
@@ -27,8 +29,22 @@
 				</picker>
 			</view>
 			<button class="save" @click="saveData">立即逛</button>
+			<!-- <button @click="gotodemo">测试</button> -->
 		</view>
-<!-- 		<view style="color: white; margin: 20rpx; font-size: 25rpx; background-color: black; border: 5rpx solid lightslategray; padding: 20rpx;">
+		<uni-popup ref="popup">
+			<view class="bigBox">
+				<view class="title">是否允许我们进行消息推送?</view>
+				<view class="description">1.新订单通知 </view>
+				<view class="description">2.折扣菜品通知 </view>
+				<view style="display: flex;">
+					<button @click="openMessage" type="default"
+						style="width: 50%;background-color:#1AAD19;border-color:#1AAD19;color:#ffffff">允许</button>
+					<button @click="closeMessage" type="default"
+						style="width: 50%; background-color:#909399;border-color:#909399;color:#ffffff">拒绝</button>
+				</view>
+			</view>
+		</uni-popup>
+		<!-- 		<view style="color: white; margin: 20rpx; font-size: 25rpx; background-color: black; border: 5rpx solid lightslategray; padding: 20rpx;">
 			小程序使用体验上出现问题,请打热线电话联系我们我们将虚心接受您的意见并进行整改.
 			
 		</view>
@@ -49,7 +65,7 @@
 	export default {
 		data() {
 			return {
-				NoticeList:['赠送积分说明'],
+				NoticeList: ['赠送积分说明'],
 				selectedCountry: 'china',
 				multiArray: [
 					[],
@@ -69,8 +85,7 @@
 				overseasCities: [],
 				overseasCountryId: null,
 				overseasCityId: null,
-				signTotalData:{
-				}
+				signTotalData: {}
 				// marketName:'' // 市场名
 			};
 		},
@@ -94,22 +109,30 @@
 			}
 		},
 		async mounted() {
-			
+
 			await this.initializePicker(); // 组件加载时初始化数据
 			let res = await api.signTotal()
 			this.signTotalData = res.data
+
+
 		},
 		methods: {
-			goToJackpot(){
+			
+			gotodemo() {
 				uni.navigateTo({
-					url:"/pages/jackpot/jackpot"
+					url: "/pages/demo/demo"
+				})
+			},
+			goToJackpot() {
+				uni.navigateTo({
+					url: "/pages/jackpot/jackpot"
 				})
 			},
 			...mapMutations('location', ['setStatus']),
-			
+
 			goTorules(item) {
 				console.log(item)
-				switch (item){
+				switch (item) {
 					case '赠送积分说明':
 						uni.navigateTo({
 							url: '/pages/rules/rules'
@@ -119,7 +142,7 @@
 						uni.navigateTo({
 							url: '/pages/arrangeNotification/arrangeNotification'
 						});
-						
+
 						break;
 				}
 			},
@@ -130,24 +153,24 @@
 						const provinces = await this.fetchProvinces();
 						this.multiArray[0] = provinces.map(item => item.name);
 						if (provinces.length > 0) {
-							
-							
-							
+
+
+
 							// const cities = await this.fetchCities(provinces[0].id);
 							const cities = await this.fetchCities(provinces[20].id);
-							
-							
-							
+
+
+
 							this.multiArray[1] = cities.map(item => item.name);
 							if (cities.length > 0) {
 								const areas = await this.fetchAreas(2306);
-								
+
 								this.multiArray[2] = areas.map(item => item.name);
 							}
 						}
 						this.multiIndex = [20, 3, 6];
-						
-						
+
+
 					} else if (this.selectedCountry === 'overseas') {
 						const countries = await this.fetchOverseas();
 						this.multiArray[0] = countries.map(c => c.shortname);
@@ -160,14 +183,14 @@
 				}
 				this.fetchMarkets(2313)
 				this.selectedMarketIndex = 1
-				console.log(this.multiArray,this.multiIndex)
+				console.log(this.multiArray, this.multiIndex)
 			},
-			
-			
-			
-			
-			
-			
+
+
+
+
+
+
 			async fetchProvinces() {
 				try {
 					const response = await api.citylist({
@@ -368,10 +391,10 @@
 					area_id: this.area_id,
 					market_id: this.marketIdMap[this.displayMarketList[this.selectedMarketIndex]],
 					selectedMarketIndex: this.selectedMarketIndex,
-					marketName:this.displayMarketList[this.selectedMarketIndex]
+					marketName: this.displayMarketList[this.selectedMarketIndex]
 				};
-				
-				
+
+
 				this.setStatus()
 				// console.log(this.displayMarketList[this.selectedMarketIndex])
 				// console.log('Saving data:', savedData); // 这行可以帮助你调试
@@ -418,11 +441,36 @@
 
 
 <style>
+	.bigBox {
+		position: relative;
+		width: 500rpx;
+		height: 200rpx;
+		background-color: white;
+		padding: 30rpx;
+	}
+
+	.bigBox .title {
+		font-weight: bold;
+		position: absolute;
+		top: 10rpx;
+		left: 10rpx;
+		color: black;
+		text-align: left;
+
+	}
+
+	.bigBox .description {
+		margin: 20rpx;
+		color: black;
+		text-align: left;
+	}
+
 	.Notice {
 		margin: 50rpx;
 		text-align: center;
 		color: black;
 	}
+
 	.notice {
 		margin-top: 20rpx;
 		width: 100%;
@@ -436,37 +484,37 @@
 		box-sizing: border-box;
 		padding: 0 20rpx;
 	}
-	
+
 	.nlef {
 		width: 140rpx;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 	}
-	
+
 	.ntext {
 		color: #007aff;
 		font-weight: 600;
 		font-size: 28rpx;
 	}
-	
+
 	.nrig {
 		width: 50rpx;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 	}
-	
+
 	.ncen {
 		height: 100%;
 		flex: 1;
 	}
-	
+
 	.swiper {
 		height: 100%;
 		/* background-color: #007aff; */
 	}
-	
+
 	.swiitem {
 		height: 100%;
 		text-align: center;
@@ -476,18 +524,19 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 	}
-	
+
 	.dishes {
 		display: flex;
 		flex-direction: column;
 		margin-bottom: 180rpx;
 	}
-	
+
 	.dishes>text {
 		color: black;
 		font-size: 30rpx;
 		font-weight: 600;
 	}
+
 	.me-container {
 		overflow-x: hidden;
 		height: 100vh;
@@ -515,7 +564,7 @@
 		background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
 	}
 
-	.top {	
+	.top {
 		margin: 10% auto;
 		position: absolute;
 		font-size: 100rpx;

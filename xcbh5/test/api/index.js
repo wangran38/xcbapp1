@@ -12,7 +12,7 @@ export const UPLOAD_URL = 'https://image.xcbdsc.com'
 
 const WEBSOCKET_URL = "192.168.0.111:8088"
 
-
+export const  locationsKey = '9d721b642fb8ef1921e8986da474f65e'
 /**
  * 
  * @@param {url,parmas} 连接的路由地址，连接参数
@@ -32,18 +32,18 @@ export {getSocket}
 
 // 创建白名单，默认所有接口都需要传token，白名单中的接口不需要传token
 const whiteList = [
-	// '/api/cglist',
-	// '/api/citytree',
-	// '/api/citylist',
-	// '/api/marketlist',
-	// '/group1/upload',
-	// '/api/countrylist',
-	// '/api/user/rs',
-	// '/api/user/login',
-	// '/api/user/sign',
-	// '/api/market/commodity/list',
-	// '/api/shop/list',
-	// '/api/shop/lottery'
+	'/api/cglist',
+	'/api/citytree',
+	'/api/citylist',
+	'/api/marketlist',
+	'/group1/upload',
+	'/api/countrylist',
+	'/api/user/rs',
+	'/api/user/login',
+	'/api/user/sign',
+	'/api/market/commodity/list',
+	// '/api/shop/list', // 首页数据
+	'/api/shop/lottery'
 ] // 白名单
 
 /**
@@ -68,6 +68,30 @@ const checkToken = (url) => {
 // 通用的请求函数
 const fetch = (url, method, data = {}, headers = {}) => {
 	return new Promise((resolve, reject) => {
+		
+		// 校验白名单以外的接口 token是否存在，
+		// if (!whiteList.includes(url)){
+		// 	const token = uni.getStorageSync('token');
+			
+		// 	if (!token){
+		// 		uni.showModal({
+		// 			title: '提示',
+		// 			content: '登录状态失效',
+		// 			confirmText: '前往登录',
+		// 			success: ({
+		// 				confirm
+		// 			}) => {
+		// 				if (confirm) {
+		// 					uni.navigateTo({
+		// 						url: '/pages/login/login',
+		// 					});
+		// 				}
+		// 			},
+		// 		})
+		// 		reject("检测不到token",url)
+		// 	}
+			
+		// }
 		uni.request({
 			url: `${BASE_URL}${url}`,
 			method: method,
@@ -505,6 +529,17 @@ export const api = {
 	// 编辑我的地址
 	editMyAddress(data){
 		return fetch('/api/user/editaddress', 'POST', data);
+	},
+	delMyAddress(data){
+		return fetch('/api/user/deladdress', 'POST', data);
+	},
+	// 现金账单记录
+	shopmoneylist(data){
+		return fetch('/api/shop/shopmoneylist', 'POST', data);
+	},
+	// 根据地址获取经纬度
+	searchResolution(data){
+		return fetch('/api/get/lnglat', 'POST', data);
 	},
 	
 	

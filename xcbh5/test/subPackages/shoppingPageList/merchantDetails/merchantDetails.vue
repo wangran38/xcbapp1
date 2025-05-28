@@ -14,19 +14,18 @@
 					<text class="label">联系电话：</text>
 					<text>{{ merchantInfo.phone | hidePhone }}</text>
 				</view>
-
-				<!-- <view class="info-item">
-          <uni-icons type="shop-filled" size="18" color="#7A9D7E" />
-          <text class="label">在线营业时间：</text>
-          <text>{{ merchantInfo.businessHours }}</text>
-        </view> -->
+				
+				
+				
 
 				<view class="info-item">
 					<uni-icons type="location" size="18" color="#7A9D7E" />
 					<text class="label">所在地址：</text>
 					<text>{{ merchantInfo.address }}</text>
 				</view>
+				
 			</view>
+			<map :latitude="merchantInfo.lat" :longitude="merchantInfo.lng" style="width: 100%;" :markers="merchantInfo.markers"></map>
 		</scroll-view>
 
 		<!-- 预售商品 -->
@@ -37,6 +36,7 @@
 			</view>
 
 			<view class="goods-grid">
+				
 				<view class="goods-item" v-for="(item, index) in presaleList" :key="item.id"
 					@click="gotoGoods(item.id)">
 					<view class="presale-tag">预售中</view>
@@ -72,7 +72,10 @@
 			padding: 10rpx; margin: 20rpx; color: white; font-weight: bold;" @click.stop="goToBuy(item)">立即预购</view>
 					</view>
 				</view>
+				
+				
 			</view>
+			<view v-if="presaleList.length==0" style="position: absolute;left: 35%; top: 50%; font-size: 30rpx;">该农户暂未上传菜品</view>
 		</view>
 	</view>
 </template>
@@ -87,13 +90,16 @@
 		data() {
 			return {
 				merchantInfo: {
-					license: 'https://gimg2.baidu.com/image_search/src=https%3A%2F%2Fwww.generalwatertech.com%2Fuploadfiles%2F2020%2F01%2F20200109175314541.jpg%3FMS5qcGc%3D&refer=http%3A%2F%2Fwww.generalwatertech.com&app=2002&size=f10000,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1747797598&t=eef8bf02399dfce855a0cd57101aa19c',
-					company: '生生海鲜',
-					owner: '王启俊',
-					contact: '王启俊',
-					phone: '13800138000',
-					businessHours: '08:30-22:00',
-					address: '海南省定安县塔岭新区北源商贸广场2区10号楼'
+					// license: null,
+					// company: null,
+					// owner: null,
+					// contact: null,
+					// phone: null,
+					// businessHours: null,
+					// address: null,
+					// lat:null,
+					// lng:null,
+					// markers:[]
 				},
 				presaleList: [],
 				queryData: {
@@ -115,6 +121,10 @@
 		},
 		onLoad({query}) {
 			this.merchantInfo = JSON.parse(query)
+			// console.log(this.merchantInfo)
+			console.log(this.merchantInfo.lat)
+			this.merchantInfo.lat = this.merchantInfo.lat-0.1
+			this.merchantInfo.markers = [{id:1,longitude:this.merchantInfo.lng,latitude:this.merchantInfo.lat,iconPath:'../../../static/selectlocation.png',width:30,height:30}]
 			
 			this.queryData.farmers_id= parseInt(this.merchantInfo.id)
 			this.getPresaleData()

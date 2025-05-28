@@ -146,7 +146,16 @@
 		onLoad() {
 			// 初始化页面
 			this.initPage()
-
+			uni.getLocation({
+				altitude: true,
+				isHighAccuracy: true,
+				highAccuracy: true,
+				type: 'gcj02',
+				success:(res)=> {
+					uni.setStorageSync('userlocation', JSON.stringify(res));
+					console.log(res)
+				}
+			})
 		},
 		async onShow() {
 			let res = uni.getStorageSync('userSelection')
@@ -260,21 +269,28 @@
 				uni.scanCode({
 					onlyFromCamera: false,
 					success: async (res) => {
-						let data = await api.receiving({
-							out_trade_no: res.result
-						})
-						console.log(data)
-						if (data.code == 200) {
-							uni.showToast({
-								icon: 'success',
-								title: '核销成功'
+						if (res.result){
+							// 核销
+							let data = await api.receiving({
+								out_trade_no: res.result
 							})
-						} else {
-							uni.showToast({
-								icon: 'error',
-								title: '核销失败'
+							if (data.code == 200) {
+								uni.showToast({
+									icon: 'success',
+									title: '核销成功'
+								})
+							} else {
+								uni.showToast({
+									icon: 'error',
+									title: '核销失败'
+								})
+							}
+						}else{
+							uni.navigateTo({
+								url:'/'+res.path
 							})
 						}
+					
 					},
 					fail: function(error) {
 						console.error('扫码失败:', error);

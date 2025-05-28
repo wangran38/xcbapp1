@@ -1,82 +1,85 @@
 <template>
   <view class="container">
     <view class="dynamic-header">
-      <text class="header-title">种养来历</text>
+      <text class="header-title">种养朋友圈</text>
       <view class="header-gradient"></view>
-      <view style="margin: 5rpx; font-size: 25rpx;">在这里你可以了解到即将上市的菜品养殖、种植信息，持续更新中</view>
+      <view class="update-notice">按时间追溯农产品生长历程</view>
     </view>
 
-    <scroll-view 
-      class="smart-feed" 
-      scroll-y 
-	  @scrolltolower="loadMore"
-	  >
-      <view 
-        v-for="(post, index) in posts" 
-        :key="index"
-        class="neo-card">
-        <view class="user-header">
-          <view class="user-meta">
-			<view class="post-time">发布时间:{{initTime(post.created)}}</view>
-            <view class="username">{{post.farmersgoodsname}}</view>
-            
-          </view>
+    <scroll-view class="timeline-container" scroll-y @scrolltolower="loadMore">
+      <!-- 时间轴核心结构 -->
+      <view v-for="(group, date) in timelineGroups" :key="date" class="timeline-group">
+        <view class="timeline-date">
+          <view class="timeline-dot"></view>
+          <text class="date-label">{{date}}</text>
         </view>
-
-        <scroll-view 
-          class="media-scroller"
-          scroll-x
-          :scroll-with-animation="true"
-          :show-scrollbar="false">
-          <view class="media-container">
-            <view 
-              v-for="(item, idx) in post.imgs"
-              :key="idx"
-              class="media-item">
-              <image 
-                v-if="item.fileType === 'image'"
-                :src="item.path"
-                mode="aspectFill"
-                class="media-content" @click="viewImage(item.path)"/>
-              <video
-                v-else
-                :src="item.path"
-                controls
-                class="media-content"
-                objectFit="cover"></video>
+        
+        <view class="timeline-cards">
+          <view 
+            v-for="(post, index) in group" 
+            :key="index"
+            class="neo-card">
+            <!-- 原有卡片内容 -->
+            <view class="user-header">
+              <view class="post-time">发布时间:{{initTime(post.created)}}</view>
+              <view class="username">{{post.farmersgoodsname}}</view>
             </view>
-          </view>
-        </scroll-view>
-
-        <!-- 内容区域 -->
-        <view class="content-section">
-          <text class="post-content">{{post.content}}</text>
-          <view class="interaction-panel">
-            <view 
-              class="action-btn"
-              @click="toggleReaction(index)">
-              <uni-icons
-                :type="post.liked ? 'heart-filled' : 'heart'"
-                :color="post.liked ? '#FF6B6B' : '#7A9D7E'"
-                size="20" />
-              <text class="count">{{post.likes}}</text>
-            </view>
-            <view class="action-btn">
-              <uni-icons 
-                type="chat" 
-                color="#7A9D7E"
-                size="20" />
-              <text class="count">{{post.comments}}</text>
+            
+            <scroll-view 
+              class="media-scroller"
+              scroll-x
+              :scroll-with-animation="true"
+              :show-scrollbar="false">
+              <view class="media-container">
+                <view 
+                  v-for="(item, idx) in post.imgs"
+                  :key="idx"
+                  class="media-item">
+                  <image 
+                    v-if="item.fileType === 'image'"
+                    :src="item.path"
+                    mode="aspectFill"
+                    class="media-content" 
+                    @click="viewImage(item.path)"/>
+                  <video
+                    v-else
+                    :src="item.path"
+                    controls
+                    class="media-content"
+                    objectFit="cover"></video>
+                </view>
+              </view>
+            </scroll-view>
+            
+            <view class="content-section">
+              <text class="post-content">{{post.content}}</text>
+              <view class="interaction-panel">
+                <view class="action-btn" @click="toggleReaction(post.id)">
+                  <uni-icons
+                    :type="post.liked ? 'heart-filled' : 'heart'"
+                    :color="post.liked ? '#FF6B6B' : '#7A9D7E'"
+                    size="20" />
+                  <text class="count">{{post.likes}}</text>
+                </view>
+                <view class="action-btn">
+                  <uni-icons 
+                    type="chat" 
+                    color="#7A9D7E"
+                    size="20" />
+                  <text class="count">{{post.comments}}</text>
+                </view>
+              </view>
             </view>
           </view>
         </view>
       </view>
-	  <view v-if="posts.length<=0" style="text-align: center; line-height: 300rpx; font-size: 30rpx; font-weight: bold;">暂无数据</view>
+
+      <view v-if="posts.length<=0" class="empty-tip">
+        暂无种植记录
+      </view>
     </scroll-view>
   </view>
 </template>
-
-
 <script>
 	import {
 		api
@@ -94,7 +97,16 @@
 				}
 			}
 		},
-		
+		computed: {
+		    timelineGroups() {
+		      return this.posts.reduce((groups, post) => {
+		        const date = this.initDate(post.created)
+		        groups[date] = groups[date] || []
+		        groups[date].push(post)
+		        return groups
+		      }, {})
+		    }
+		  },
 		async onLoad(pramas) {
 			if(pramas.id){
 				this.queryData.farmersgoods_id = parseInt(pramas.id)
@@ -113,7 +125,9 @@
 				if (data.code == 200){
 					// 处理图片
 					let newList = data.data.listdata.map(item=>{
+						if (!item['imgs']) return item;
 						item['imgs'] = item['imgs'].split(',')
+						
 						let initData =  item['imgs'].map((anlien)=>{
 							if (anlien.slice(anlien.length-3) == 'mp4'){
 								return {
@@ -165,6 +179,109 @@ $primary-color: #7A9D7E;
 $text-primary: #2D4030;
 $text-secondary: #8C9B8E;
 
+
+.timeline-container {
+  position: relative;
+  padding: 20px 15px 15px 45px;
+  height: calc(100vh - 120px);
+}
+
+.timeline-group {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.timeline-date {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 2;
+}
+
+.timeline-dot {
+  width: 16px;
+  height: 16px;
+  background: #7A9D7E;
+  border-radius: 50%;
+  position: absolute;
+  left: -31px;
+  top: 3px;
+  border: 3px solid #f5f7f8;
+  box-shadow: 0 2px 4px rgba(122,157,126,0.2);
+}
+
+.date-label {
+  color: #5B7F61;
+  font-weight: 600;
+  font-size: 16px;
+  background: #f5f7f8;
+  padding: 4px 10px;
+  border-radius: 15px;
+  border: 1px solid #e0e6e1;
+}
+
+/* 时间线装饰 */
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  left: 38px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: repeating-linear-gradient(
+    180deg,
+    #7A9D7E 0px,
+    #7A9D7E 3px,
+    transparent 3px,
+    transparent 8px
+  );
+}
+
+.timeline-cards {
+  padding-left: 15px;
+}
+
+.timeline-cards .neo-card {
+	width: 620rpx;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.timeline-cards .neo-card::before {
+  content: '';
+  position: absolute;
+  left: -26px;
+  top: 24px;
+  width: 12px;
+  height: 12px;
+  background: #d0e0d3;
+  border-radius: 50%;
+}
+
+.empty-tip {
+  text-align: center;
+  padding: 50px 0;
+  color: #7A9D7E;
+  font-size: 16px;
+}
+
+/* 响应式优化 */
+@media (max-width: 480px) {
+  .timeline-container {
+    padding-left: 35px;
+  }
+  
+  .timeline-dot {
+    left: -26px;
+    width: 14px;
+    height: 14px;
+  }
+  
+  .timeline-container::before {
+    left: 28px;
+  }
+}
 .container {
   background: #f8faf7;
   min-height: 100vh;

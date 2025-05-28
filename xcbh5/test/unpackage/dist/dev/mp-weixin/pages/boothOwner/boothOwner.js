@@ -34,7 +34,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _boothOwner_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./boothOwner.vue?vue&type=script&lang=js& */ 325);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _boothOwner_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _boothOwner_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _boothOwner_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./boothOwner.vue?vue&type=style&index=0&lang=css& */ 327);
-/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 40);
+/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 32);
 
 var renderjs
 
@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 760))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 783))
     },
   }
 } catch (e) {
@@ -384,89 +384,30 @@ exports.default = void 0;
 //
 //
 //
+//
 var _default = {
   data: function data() {
     return {};
   },
-  onShow: function onShow() {
-
-    // if (this.checkToken()){
-    // 	uni.navigateTo({
-    // 		url:'/pages/login/login'
-    // 	})
-    // }
-  },
+  onShow: function onShow() {},
   methods: {
-    GotoTraceability: function GotoTraceability() {
-      uni.navigateTo({
-        url: '/subPackages/aHouseholder/Traceability/Traceability'
-      });
-    },
-    goToSalesApplication: function goToSalesApplication() {
-      uni.navigateTo({
-        url: '/subPackages/boothOwner/salesApplication/salesApplication'
-      });
-    },
-    gotopublish: function gotopublish() {
-      uni.navigateTo({
-        url: '/pages/publish/publish'
-      });
-    },
-    goTorelePage: function goTorelePage() {
-      uni.navigateTo({
-        url: '/pages/release/release'
-      });
-    },
-    goToapply: function goToapply() {
-      uni.navigateTo({
-        url: '/pages/Apply/Apply'
-      });
-    },
-    gotostalllist: function gotostalllist() {
-      uni.navigateTo({
-        url: '/pages/stalllist/stalllist'
-      });
-    },
-    gotoListDis: function gotoListDis() {
-      uni.navigateTo({
-        url: '/pages/Listed-Dishes/Listed-Dishes'
-      });
+    /**
+     * @description 路由跳转
+     */
+    goToRouter: function goToRouter(url) {
+      try {
+        uni.navigateTo({
+          url: url
+        });
+      } catch (_unused) {
+        uni.switchTab({
+          url: url
+        });
+      }
     },
     gotoOwneroders: function gotoOwneroders(orderStatus) {
       uni.navigateTo({
         url: "/pages/Ownerorders/Ownerorders?orderStatus=".concat(orderStatus)
-      });
-    },
-    gotowallet: function gotowallet() {
-      uni.navigateTo({
-        url: '/pages/wallet/wallet'
-      });
-    },
-    gotoPoints: function gotoPoints() {
-      uni.navigateTo({
-        url: '/pages/Points/Points'
-      });
-    },
-    gotoPointspayouts: function gotoPointspayouts() {
-      uni.navigateTo({
-        url: '/pages/pointspayouts/pointspayouts'
-      });
-    },
-    // 补充摊位资料页面
-    gotoEditshop: function gotoEditshop() {
-      uni.navigateTo({
-        url: '/pages/editshop/editshop'
-      });
-    },
-    // 银行卡
-    gotoBankCard: function gotoBankCard() {
-      uni.navigateTo({
-        url: '/pages/bankCard/bankCard'
-      });
-    },
-    gotoOpenAccountSharing: function gotoOpenAccountSharing() {
-      uni.navigateTo({
-        url: '/pages/OpenAccountSharing/OpenAccountSharing'
       });
     }
   }

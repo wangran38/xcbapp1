@@ -72,8 +72,8 @@
 					</view>
 				</view>
 			</view>
-			<button @click="gotoSupplement" type="default"
-				style="color:#ffffff;backgroundColor:#007aff;">{{BtnText}}</button>
+			<button @click="gotoSupplement"
+				style="color:#ffffff;background-color:#007aff;">{{BtnText}}</button>
 		</scroll-view>
 
 

@@ -24,7 +24,7 @@
 				</view>
 			</view>
 			<view class="item">
-				<view class="Recording">
+				<view class="Recording" @click="goToBillRecord">
 					<uni-icons custom-prefix="iconfont" type="icon-wodexiaofei" size="30" color="#007aff"></uni-icons>
 					<text class="text">账单记录</text>
 				</view>
@@ -57,6 +57,11 @@
 			}))
 		},
 		methods: {
+			goToBillRecord(){
+				uni.navigateTo({
+					url:'/subPackages/boothOwner/billRecord/billRecord'
+				})
+			},
 			goToweChatCashwWithdrawal(){
 				uni.navigateTo({
 					url:'/pages/weChatCashwWithdrawal/weChatCashwWithdrawal'

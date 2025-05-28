@@ -293,6 +293,7 @@
   padding-bottom: 120rpx;
 }
 .address-page .address-card.data-v-56fcd1a5 {
+  width: 700rpx;
   background: #fff;
   border-radius: 16rpx;
   margin-bottom: 24rpx;

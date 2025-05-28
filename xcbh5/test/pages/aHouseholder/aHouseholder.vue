@@ -6,17 +6,23 @@
 					我的户主
 				</view>
 				<view class="content">
-					<view class="item" @click="goToapply">
+					<view class="item" @click="goToRouter('/pages/onlineBooth/onlineBooth')">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe61a'}}</uni-icons>
 						<view class="add-dishes">
 							申请户主
 						</view>
 					</view>
 		
-					<view class="item" @click="gotoEditshop">
+					<view class="item" @click="goToRouter('/subPackages/aHouseholder/additionalInformation/additionalInformation')">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe61e;'}}</uni-icons>
 						<view class="add-dishes">
 							资料补充
+						</view>
+					</view>
+					<view class="item" @click="goToRouter('/subPackages/boothOwner/storeSettings/storeSettings')">
+						<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe61e;'}}</uni-icons>
+						<view class="add-dishes">
+							店铺设置
 						</view>
 					</view>
 					<!-- <view class="item">
@@ -50,7 +56,7 @@
 					我的菜品
 				</view>
 				<view class="content">
-					<view class="item" @click="gotoPreSale">
+					<view class="item" @click="goToRouter('/pages/preSale/preSale')">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe603;'}}</uni-icons>
 						<view class="add-dishes">
 							添加菜品
@@ -74,13 +80,13 @@
 							预卖菜品
 						</view>
 					</view> -->
-					<view class="item" @click="goToPreSoldDishesList">
+					<view class="item" @click="goToRouter('/subPackages/aHouseholder/PreSoldDishesList/PreSoldDishesList')">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe603;'}}</uni-icons>
 						<view class="add-dishes">
 							我的菜品
 						</view>
 					</view>
-					<view class="item" @click="goToAlreadyListed">
+					<view class="item" @click="goToRouter('/subPackages/aHouseholder/alreadyListed/alreadyListed')">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe689;'}}</uni-icons>
 						<view class="add-dishes">
 							上架菜品
@@ -127,14 +133,14 @@
 					我的收益
 				</view>
 				<view class="content">
-					<view class="item" @click="gotowallet">
+					<view class="item" @click="goToRouter('/pages/wallet/wallet')">
 						<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe613;'}}</uni-icons>
 						<view class="add-dishes">
 							钱包
 						</view>
 					</view>
 		
-					<view class="item" @click="gotoBankCard">
+					<view class="item" @click="goToRouter('/pages/bankCard/bankCard')">
 						<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe936;'}}</uni-icons>
 						<view class="add-dishes">
 							银行卡
@@ -159,91 +165,30 @@
 		},
 		
 		methods: {
-			goToAlreadyListed(){
-				uni.navigateTo({
-					url: '/subPackages/aHouseholder/alreadyListed/alreadyListed'
-				});
-			},
-			goToPreSoldDishesList(){
-				uni.navigateTo({
-					url: '/subPackages/aHouseholder/PreSoldDishesList/PreSoldDishesList'
-				});
-			},
-			gotoAdditionalinformation(){
-				uni.navigateTo({
-					url:'/pages/additionalinformation/additionalinformation'
-				})
-			},
-			gotoPreSale(){
-				uni.navigateTo({
-					url:'/pages/preSale/preSale'
-				})
-			},
-			// 检查是否token存在，存在则已登陆
-			checkToken() {
-				const token = uni.getStorageSync('token');
-				if (!token){
-					return true
+			/**
+			 * @description 路由跳转
+			 */
+			goToRouter(url) {
+				try {
+					uni.navigateTo({
+						url
+					});
+				} catch {
+					uni.switchTab({
+						url
+					});
 				}
-				return false
 			},
-			goToTraceability(){
-				uni.navigateTo({
-					url: '/subPackages/aHouseholder/Traceability/Traceability'
-				});
-			},
-			gotopublish() {
-				uni.navigateTo({
-					url: '/pages/publish/publish'
-				});
-			},
-			goTorelePage() {
-				uni.navigateTo({
-					url: '/subPackages/aHouseholder/publishDishes/publishDishes'
-				});
-			},
-			goToapply() {
-				uni.navigateTo({
-					url: '/pages/onlineBooth/onlineBooth'
-				});
-			},
-			gotostalllist() {
-				uni.navigateTo({
-					url: '/pages/stalllist/stalllist'
-				});
-			},
+			
+			
 			gotoOwneroders(orderStatus) {
 				uni.navigateTo({
 					url: `/pages/Ownerorders/Ownerorders?orderStatus=${orderStatus}`
 				});
 			},
-			gotowallet() {
-				uni.navigateTo({
-					url: '/pages/wallet/wallet'
-				});
-			},
-			gotoPoints() {
-				uni.navigateTo({
-					url: '/pages/Points/Points'
-				});
-			},
-			gotoPointspayouts() {
-				uni.navigateTo({
-					url: '/pages/pointspayouts/pointspayouts'
-				});
-			},
-			// 补充摊位资料页面
-			gotoEditshop() {
-				uni.navigateTo({
-					url: '/subPackages/aHouseholder/additionalInformation/additionalInformation'
-				});
-			},
-			// 银行卡
-			gotoBankCard() {
-				uni.navigateTo({
-					url: '/pages/bankCard/bankCard'
-				});
-			}
+
+			
+			
 		}
 	}
 </script>

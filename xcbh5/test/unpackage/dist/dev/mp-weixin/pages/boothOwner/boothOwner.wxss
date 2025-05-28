@@ -1,17 +1,17 @@
 
-.tip{
+.tip {
 	width: 100%;
 	height: 100%;
 	background-color: white;
 	position: fixed;
 }
-.mencheng{
+.mencheng {
 	border-radius: 10rpx;
 	background-color: yellowgreen;
 	margin-left: 40rpx;
 	transition: background-color .8s;
 }
-.items{
+.items {
 	text-align: center;
 	height: 100%;
 	justify-content: center;

@@ -101,13 +101,16 @@
         "merchantDetails/merchantDetails",
         "realTimeInfo/realTimeInfo",
         "realTimeInfoDetail/realTimeInfoDetail",
-        "freeGroceryShopping/freeGroceryShopping"
+        "freeGroceryShopping/freeGroceryShopping",
+        "statisticsMap/statisticsMap"
       ]
     },
     {
       "root": "subPackages/boothOwner",
       "pages": [
-        "salesApplication/salesApplication"
+        "salesApplication/salesApplication",
+        "billRecord/billRecord",
+        "storeSettings/storeSettings"
       ]
     },
     {
@@ -167,6 +170,14 @@
   },
   "__usePrivacyCheck__": true,
   "lazyCodeLoading": "requiredComponents",
-  "permission": {},
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于地址选择"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseLocation"
+  ],
   "usingComponents": {}
 }

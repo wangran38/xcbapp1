@@ -6,29 +6,35 @@
 					我的摊铺
 				</view>
 				<view class="content">
-					<view class="item" @click="goToapply">
+					<view class="item" @click="goToRouter('/pages/Apply/Apply')">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe61a'}}</uni-icons>
 						<view class="add-dishes">
 							注册摊位
 						</view>
 					</view>
-					<view class="item" @click="gotostalllist">
+					<view class="item" @click="goToRouter('/pages/stalllist/stalllist')">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe602;'}}</uni-icons>
 						<view class="add-dishes">
 							我的摊铺
 						</view>
 					</view>
-		
-					<view class="item" @click="gotoEditshop">
+
+					<view class="item" @click="goToRouter('/pages/editshop/editshop')">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe61e;'}}</uni-icons>
 						<view class="add-dishes">
 							补充资料
 						</view>
 					</view>
-					<view class="item" @click="goToSalesApplication">
+					<view class="item" @click="goToRouter('/subPackages/boothOwner/salesApplication/salesApplication')">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe61e;'}}</uni-icons>
 						<view class="add-dishes">
 							代销申请
+						</view>
+					</view>
+					<view class="item" @click="goToRouter('/subPackages/boothOwner/storeSettings/storeSettings')">
+						<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe61e;'}}</uni-icons>
+						<view class="add-dishes">
+							店铺设置
 						</view>
 					</view>
 					<!-- <view class="item">
@@ -62,25 +68,25 @@
 					我的菜品
 				</view>
 				<view class="content">
-					<view class="item" @click="goTorelePage">
+					<view class="item" @click="goToRouter('/pages/release/release')">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe6ee;'}}</uni-icons>
 						<view class="add-dishes">
 							添加菜品
 						</view>
 					</view>
-					<view class="item" @click="gotopublish">
+					<view class="item" @click="goToRouter('/pages/publish/publish')">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe603;'}}</uni-icons>
 						<view class="add-dishes">
 							我的菜品
 						</view>
 					</view>
-					<view class="item" @click="gotoListDis">
+					<view class="item" @click="goToRouter('/pages/Listed-Dishes/Listed-Dishes')">
 						<uni-icons fontFamily="CustomFont" :size="26" color="lightgreen">{{'&#xe689;'}}</uni-icons>
 						<view class="add-dishes">
 							上架菜品
 						</view>
 					</view>
-					<view class="item" @click="GotoTraceability">
+					<view class="item" @click="goToRouter('/subPackages/aHouseholder/Traceability/Traceability')">
 						<uni-icons type="plus" size="30"></uni-icons>
 						<view class="add-dishes">
 							溯源补充
@@ -99,9 +105,9 @@
 						</view>
 					</view> -->
 				</view>
-		
+
 			</view>
-		
+
 			<view class="orders">
 				<view class="title" @click="gotoOwneroders(0)">
 					我的订单
@@ -150,37 +156,32 @@
 					我的收益
 				</view>
 				<view class="content">
-					<view class="item" @click="gotowallet">
+					<view class="item" @click="goToRouter('/pages/wallet/wallet')">
 						<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe613;'}}</uni-icons>
 						<view class="add-dishes">
 							现金钱包
 						</view>
 					</view>
-					<view class="item" @click="gotoPoints">
+					<view class="item" @click="goToRouter('/pages/Points/Points')">
 						<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe673;'}}</uni-icons>
 						<view class="add-dishes">
 							积分钱包
 						</view>
 					</view>
-					<view class="item" @click="gotoPointspayouts">
+					<view class="item" @click="goToRouter('/pages/pointspayouts/pointspayouts')">
 						<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe682;'}}</uni-icons>
 						<view class="add-dishes">
 							积分结算
 						</view>
 					</view>
-		
-					<view class="item" @click="gotoBankCard">
+
+					<view class="item" @click="goToRouter('/pages/bankCard/bankCard')">
 						<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe936;'}}</uni-icons>
 						<view class="add-dishes">
 							银行卡
 						</view>
 					</view>
-<!-- 					<view class="item" @click="gotoOpenAccountSharing">
-						<uni-icons fontFamily="CustomFont" :size="26" color="yellow">{{'&#xe936;'}}</uni-icons>
-						<view class="add-dishes">
-							开通分账
-						</view>
-					</view> -->
+
 					<!-- <view class="item">
 						<uni-icons type="plus" size="30"></uni-icons>
 						<view class="add-dishes">
@@ -225,111 +226,58 @@
 
 			}
 		},
-		onShow() {
-
-			// if (this.checkToken()){
-			// 	uni.navigateTo({
-			// 		url:'/pages/login/login'
-			// 	})
-			// }
-		},
+		onShow() {},
 		methods: {
-			GotoTraceability(){
-				uni.navigateTo({
-					url: '/subPackages/aHouseholder/Traceability/Traceability'
-				});
+			/**
+			 * @description 路由跳转
+			 */
+			goToRouter(url) {
+				try {
+					uni.navigateTo({
+						url
+					});
+				} catch {
+					uni.switchTab({
+						url
+					});
+				}
 			},
-			goToSalesApplication(){
-				uni.navigateTo({
-					url: '/subPackages/boothOwner/salesApplication/salesApplication'
-				});
-			},
-			gotopublish() {
-				uni.navigateTo({
-					url: '/pages/publish/publish'
-				});
-			},
-			goTorelePage() {
-				uni.navigateTo({
-					url: '/pages/release/release'
-				});
-			},
-			goToapply() {
-				uni.navigateTo({
-					url: '/pages/Apply/Apply'
-				});
-			},
-			gotostalllist() {
-				uni.navigateTo({
-					url: '/pages/stalllist/stalllist'
-				});
-			},
-			gotoListDis() {
-				uni.navigateTo({
-					url: '/pages/Listed-Dishes/Listed-Dishes'
-				});
-			},
+
+
 			gotoOwneroders(orderStatus) {
 				uni.navigateTo({
 					url: `/pages/Ownerorders/Ownerorders?orderStatus=${orderStatus}`
 				});
 			},
-			gotowallet() {
-				uni.navigateTo({
-					url: '/pages/wallet/wallet'
-				});
-			},
-			gotoPoints() {
-				uni.navigateTo({
-					url: '/pages/Points/Points'
-				});
-			},
-			gotoPointspayouts() {
-				uni.navigateTo({
-					url: '/pages/pointspayouts/pointspayouts'
-				});
-			},
-			// 补充摊位资料页面
-			gotoEditshop() {
-				uni.navigateTo({
-					url: '/pages/editshop/editshop'
-				});
-			},
-			// 银行卡
-			gotoBankCard() {
-				uni.navigateTo({
-					url: '/pages/bankCard/bankCard'
-				});
-			},
-			gotoOpenAccountSharing(){
-				uni.navigateTo({
-					url: '/pages/OpenAccountSharing/OpenAccountSharing'
-				});
-			}
+
+
 		}
 	}
 </script>
 
 <style>
-	.tip{
+	.tip {
 		width: 100%;
 		height: 100%;
 		background-color: white;
 		position: fixed;
 	}
-	.mencheng{
+
+	.mencheng {
 		border-radius: 10rpx;
 		background-color: yellowgreen;
 		margin-left: 40rpx;
 		transition: background-color .8s;
 	}
-	.items{
+
+	.items {
 		text-align: center;
 		height: 100%;
 		justify-content: center;
 		align-items: center;
 		display: flex;
 	}
+
 	@font-face {
 		font-family: CustomFont;
 		src: url('../../static/maicai/iconfont.ttf');

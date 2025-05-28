@@ -93,16 +93,16 @@
     </view>
 
     <view class="footer">
-      <view class="total">
+<!--      <view class="total">
         <text>应付定金：</text>
         <text class="price">¥{{ totalDeposit }}</text>
-      </view>
+      </view> -->
       <button 
         class="submit-btn"
         :class="{ disabled: !formValid }"
         @click="handleSubmit"
       >
-        {{ formValid ? '支付定金' : '请完善信息' }}
+        {{ formValid ? '提交订单' : '请完善信息' }}
       </button>
     </view>
 

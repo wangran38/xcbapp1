@@ -1,15 +1,34 @@
 <template>
 	<view class="supply-container">
 		<view class="filter-section">
-			<view class="search-box">
-				<uni-icons type="search" size="18" color="#999" />
-				<input 
-					placeholder="输入商品关键词" 
-					v-model="searchText" 
-					@confirm="handleSearch" 
-					class="search-input" 
-				/>
+			<view class="search">
+				<uni-icons type="search" style="margin: 10rpx; font-size: 33rpx;"></uni-icons>
+				<input class="serchInput" type="text" placeholder="请输入关键字">
+				<view style="display: flex;">
+					<button class="btn" type="primary">搜索</button>
+					<button class="btn" type="warn">重置</button>
+				</view>
 			</view>
+			<view class="filter-group">
+			
+					<picker @change="categoryChange" :range="categories" range-key="label">
+						<view class="filter-btn">
+							<uni-icons type="tags" size="16" color="#3a7afe" /> 
+							<text class="btn-text">{{ categories[selectedCategoryIndex].label }}</text>
+							<uni-icons type="arrowdown" size="14" color="#3a7afe" />
+						</view>
+					</picker>
+					
+					<picker  :range="distances" range-key="label">
+						<view class="filter-btn">
+							<uni-icons type="tags" size="16" color="#3a7afe" />
+							<text class="btn-text">{{ distances[selectedCategoryIndex].label }}</text>
+							<uni-icons type="arrowdown" size="14" color="#3a7afe" />
+						</view>
+					</picker>
+			
+				</view>
+			
 		</view>
 
 		<!-- 商品列表 -->
@@ -82,6 +101,30 @@ import { api } from '@/api/index.js'
 export default {
 	data() {
 		return {
+			distances:[
+				{
+					label: '离我最近',
+					value: ''
+				},
+				{
+					label: '离我最远',
+					value: ''
+				},
+			],
+			categories: [{
+				label: '所有分类',
+				value: ''
+			},
+			{
+				label: '菜类',
+				value: ''
+			},
+			{
+				label: '肉类',
+				value: ''
+			}
+			],
+			selectedCategoryIndex:0,
 			searchText: '',
 			goodsList: [],
 			page: 1,
@@ -154,6 +197,49 @@ export default {
 </script>
 
 <style lang="scss">
+	.search {
+		height: 60rpx;
+		/* border-radius: 50rpx; */
+		padding: 5rpx;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border: 1rpx solid #dcdfe6;
+		overflow: hidden;
+		border-radius: 15rpx;
+	}
+	
+	.search .btn {
+		height: 50%;
+		text-align: center;
+		margin: 0;
+		border-radius: 0;
+		margin: 5rpx;
+		border-radius: 15rpx;
+	}
+	
+	.search .serchInput {
+		color:black;
+		font-size: 30rpx;
+		margin: 0;
+		height: 100%;
+		
+	}
+	
+	.filter-group {
+		margin:10rpx;
+		display: flex;
+		gap: 30rpx;
+		align-items: center;
+		.filter-btn {
+			display: flex;
+			align-items: center;
+			padding: 12rpx 24rpx;
+			border-radius: 40rpx;
+			background: #f5f7fa;
+			border: 1rpx solid #e4e7ed;
+		}
+	}
 .supply-container {
 	padding: 20rpx;
 	background: #f5f5f5;

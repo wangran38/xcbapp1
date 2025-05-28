@@ -41,18 +41,17 @@
 							<uni-icons type="trash" size="18" />
 							<text>删除</text>
 						</view>
-						<view class="divider"></view>
-						<view class="action-btn">
+						<!-- <view class="divider"></view> -->
+						<!-- <view class="action-btn">
 							<uni-icons type="link" size="18" />
 							<text>复制</text>
-						</view>
+						</view> -->
 					</view>
 					</div>
 				</view>
 			</view>
 			<!-- 空状态 -->
 			<view v-if="addressData.length === 0" class="empty-state">
-				<image src="/static/empty-address.svg" class="empty-image" />
 				<text class="empty-text">还没有收货地址哦</text>
 			</view>
 		</scroll-view>
@@ -74,22 +73,7 @@
 	export default {
 		data() {
 			return {
-				addressData: [{
-						id: 1,
-						contact: "王启俊",
-						phone: "17788430977",
-						region: ["海南省", "琼海市", "先锋社区"],
-						detail: "五楼301",
-						isDefault: true
-					},
-					{
-						id: 2,
-						contact: "王启俊",
-						phone: "17788430977",
-						region: ["海南省", "定安县", "塔岭农贸菜市场"],
-						detail: "一号铺面",
-						isDefault: false
-					}
+				addressData: [
 				],
 				formData:{
 					page:1,
@@ -100,6 +84,7 @@
 		onShow() {
 			this.getAddressData()
 		},
+		
 		methods: {
 			async getAddressData(){
 				let res = await api.myaddressData(this.formData)
@@ -120,13 +105,27 @@
 					url: `/subPackages/settings/addAddress/addAddress?isEdit=true&jsonData=${jsonData}`
 				});
 			},
-			deleteAddress(index) {
+			deleteAddress(item) {
 				uni.showModal({
 					title: '确认删除',
 					content: '确定要删除这个地址吗？',
-					success: (res) => {
-						if (res.confirm) {
-							this.addressData.splice(index, 1);
+					success: async (res) => {
+						console.log(res)
+						if (res.confirm){
+							let data = await api.delMyAddress({id:item.Id})
+							console.log(data)
+							if (data.code == 200){
+								uni.showToast({
+									icon:'success',
+									title:data.message || data.msg
+								})
+								this.getAddressData()
+							}else{
+								uni.showToast({
+									icon:'error',
+									title:data.message || data.msg
+								})
+							}
 						}
 					}
 				});
@@ -162,6 +161,7 @@
 		}
 
 		.address-card {
+			width: 700rpx;
 			background: #fff;
 			border-radius: 16rpx;
 			margin-bottom: 24rpx;

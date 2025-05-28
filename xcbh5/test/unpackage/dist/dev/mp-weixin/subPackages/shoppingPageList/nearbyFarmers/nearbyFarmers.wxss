@@ -274,12 +274,25 @@
 .wxParse .audio.data-v-06b36029, .wxParse .uni-audio-default.data-v-06b36029 {
   display: block;
 }
+.filter-group.data-v-06b36029 {
+  margin: 10rpx;
+  display: flex;
+  gap: 30rpx;
+  align-items: center;
+}
+.filter-btn.data-v-06b36029 {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 24rpx;
+  border-radius: 40rpx;
+  background: #f5f7fa;
+  border: 1rpx solid #e4e7ed;
+}
 .container.data-v-06b36029 {
   background: #f8f8f8;
   min-height: 100vh;
 }
 .search-bar.data-v-06b36029 {
-  display: flex;
   padding: 20rpx 30rpx;
   background: #fff;
 }
@@ -321,6 +334,8 @@
   align-items: center;
 }
 .farmer-card .card-body.data-v-06b36029 {
+  display: flex;
+  justify-content: space-between;
   padding: 24rpx;
 }
 .farmer-card .card-body .info-item.data-v-06b36029 {

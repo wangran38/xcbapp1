@@ -34,7 +34,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dynamics_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dynamics.vue?vue&type=script&lang=js& */ 426);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _dynamics_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _dynamics_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _dynamics_vue_vue_type_style_index_0_id_7d8f25f4_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dynamics.vue?vue&type=style&index=0&id=7d8f25f4&lang=scss&scoped=true& */ 428);
-/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 40);
+/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 32);
 
 var renderjs
 
@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 760))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 783))
     },
   }
 } catch (e) {
@@ -125,12 +125,19 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l0 = _vm.__map(_vm.posts, function (post, index) {
-    var $orig = _vm.__get_orig(post)
-    var m0 = _vm.initTime(post.created)
+  var l1 = _vm.__map(_vm.timelineGroups, function (group, date) {
+    var $orig = _vm.__get_orig(group)
+    var l0 = _vm.__map(group, function (post, index) {
+      var $orig = _vm.__get_orig(post)
+      var m0 = _vm.initTime(post.created)
+      return {
+        $orig: $orig,
+        m0: m0,
+      }
+    })
     return {
       $orig: $orig,
-      m0: m0,
+      l0: l0,
     }
   })
   var g0 = _vm.posts.length
@@ -138,7 +145,7 @@ var render = function () {
     {},
     {
       $root: {
-        l0: l0,
+        l1: l1,
         g0: g0,
       },
     }
@@ -183,11 +190,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 54));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 46));
 var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
-var _index = __webpack_require__(/*! @/api/index.js */ 30);
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 48));
+var _index = __webpack_require__(/*! @/api/index.js */ 49);
 var _public = __webpack_require__(/*! @/utils/public.js */ 190);
+//
+//
+//
 //
 //
 //
@@ -278,17 +288,28 @@ var _default = {
       }
     };
   },
+  computed: {
+    timelineGroups: function timelineGroups() {
+      var _this = this;
+      return this.posts.reduce(function (groups, post) {
+        var date = _this.initDate(post.created);
+        groups[date] = groups[date] || [];
+        groups[date].push(post);
+        return groups;
+      }, {});
+    }
+  },
   onLoad: function onLoad(pramas) {
-    var _this = this;
+    var _this2 = this;
     return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
       return _regenerator.default.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               if (pramas.id) {
-                _this.queryData.farmersgoods_id = parseInt(pramas.id);
+                _this2.queryData.farmersgoods_id = parseInt(pramas.id);
               }
-              _this.getData();
+              _this2.getData();
             case 2:
             case "end":
               return _context.stop();
@@ -305,7 +326,7 @@ var _default = {
       });
     },
     getData: function getData() {
-      var _this2 = this;
+      var _this3 = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
         var data, newList;
         return _regenerator.default.wrap(function _callee2$(_context2) {
@@ -313,12 +334,13 @@ var _default = {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return _index.api.dynamicsDataList(_this2.queryData);
+                return _index.api.dynamicsDataList(_this3.queryData);
               case 2:
                 data = _context2.sent;
                 if (data.code == 200) {
                   // 处理图片
                   newList = data.data.listdata.map(function (item) {
+                    if (!item['imgs']) return item;
                     item['imgs'] = item['imgs'].split(',');
                     var initData = item['imgs'].map(function (anlien) {
                       if (anlien.slice(anlien.length - 3) == 'mp4') {
@@ -336,8 +358,8 @@ var _default = {
                     item['imgs'] = initData;
                     return item;
                   });
-                  _this2.posts = [].concat((0, _toConsumableArray2.default)(_this2.posts), (0, _toConsumableArray2.default)(newList));
-                  _this2.noMore = newList.length < _this2.queryData.limit;
+                  _this3.posts = [].concat((0, _toConsumableArray2.default)(_this3.posts), (0, _toConsumableArray2.default)(newList));
+                  _this3.noMore = newList.length < _this3.queryData.limit;
                 }
               case 4:
               case "end":

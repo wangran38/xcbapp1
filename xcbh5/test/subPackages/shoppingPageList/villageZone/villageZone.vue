@@ -23,6 +23,25 @@
 				@click="stopSearch">
 				清空</view>
 		</view>
+		<view class="filter-group">
+		
+			<picker @change="categoryChange" :range="pricesort" range-key="label">
+				<view class="filter-btn">
+					<uni-icons type="tags" size="16" color="#3a7afe" /> 
+					<text class="btn-text">{{ pricesort[selectedCategoryIndex].label }}</text>
+					<uni-icons type="arrowdown" size="14" color="#3a7afe" />
+				</view>
+			</picker>
+			
+			<picker  :range="distances" range-key="label">
+				<view class="filter-btn">
+					<uni-icons type="tags" size="16" color="#3a7afe" />
+					<text class="btn-text">{{ distances[selectedCategoryIndex].label }}</text>
+					<uni-icons type="arrowdown" size="14" color="#3a7afe" />
+				</view>
+			</picker>
+		
+		</view>
 
 
 		<view class="uni-margin-wrap">
@@ -105,6 +124,27 @@
 		mixins: [myMixin],
 		data() {
 			return {
+				distances:[
+					{
+						label: '离我最近',
+						value: ''
+					},
+					{
+						label: '离我最远',
+						value: ''
+					},
+				],
+				pricesort: [{
+					label: '价格最高',
+					value: ''
+				},
+				{
+					label: '价格最少',
+					value: ''
+				},
+				],
+				selectedCategoryIndex:0,
+				
 				selectedCategoryId: 0,
 				activeCategory: 0,
 				categories: [],
@@ -166,7 +206,8 @@
 			},
 			async fetchCategories() {
 				const response = await api.cglist()
-				this.categories = response.data.listdata
+				console.log(response)
+				this.categories = [{title:'全部'},...response.data.listdata]
 				// console.log(this.categories)
 			},
 			async getGoodsData(isRefresh = false) {
@@ -232,6 +273,21 @@
 </script>
 
 <style lang="scss" scoped>
+	.filter-group {
+		margin:10rpx;
+		display: flex;
+		gap: 30rpx;
+		align-items: center;
+	}
+	
+	.filter-btn {
+		display: flex;
+		align-items: center;
+		padding: 12rpx 24rpx;
+		border-radius: 40rpx;
+		background: #f5f7fa;
+		border: 1rpx solid #e4e7ed;
+	}
 	.search-bar {
 		margin: 15rpx;
 		background: #FFF;

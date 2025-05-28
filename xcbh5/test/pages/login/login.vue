@@ -75,7 +75,7 @@
 						const token = response.data.token;
 						// 保存token
 						uni.setStorageSync('token', token);
-
+						
 						let promise = new Promise((res, rej) => {
 							if (this.form.password == '123456') {
 								uni.showToast({
@@ -98,8 +98,9 @@
 									title: '正在登录.....',
 									duration: 2000
 								})
+								
 								setTimeout(() => {
-									console.log(code,"正在登录")
+									// console.log(code,"正在登录")
 									return code
 								}, 1500)
 							}else{
@@ -139,7 +140,7 @@
 			},
 			gotoUptdatePwd() {
 				uni.navigateTo({
-					url: '/pages/updatePwd/updatePwd'
+					url: '/subPackages/settings/updatePwd/updatePwd'
 				})
 			}
 		}

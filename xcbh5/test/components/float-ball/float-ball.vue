@@ -1,7 +1,9 @@
 <template>
 	<movable-area class="float-container" :style="[containerStyle]">
-		<movable-view class="main-ball" :x="position.x" :y="position.y" direction="all" inertia out-of-bounds="false"
-			@change="handleDrag" @touchstart="handleTouchStart" @touchend="handleTouchEnd" :disabled="isExpanded">
+<!-- 		<movable-view class="main-ball" :x="position.x" :y="position.y" direction="all" inertia out-of-bounds="false"
+			@change="handleDrag" @touchstart="handleTouchStart" @touchend="handleTouchEnd" :disabled="isExpanded"> -->
+			<movable-view class="main-ball" :x="position.x" :y="position.y" direction="all" inertia out-of-bounds="false"
+				 @touchstart="handleTouchStart" @touchend="handleTouchEnd" :disabled="isExpanded">
 			<view class="ball-core" :class="{ expanded: isExpanded }" @click.stop="toggleMenu">
 				{{ isExpanded ? '×' : '+' }}
 			</view>
@@ -19,10 +21,14 @@
 		props: {
 			menuList: {
 				type: Array,
-				default: () => [{
-						path: '/pages/myComplaint/myComplaint',
-						label: '我的投诉'
-					}
+				default: () => [
+					{
+					path: '/pages/myComplaint/myComplaint',
+					label: '我的投诉'
+				},{
+					path:'/pages/orders/orders',
+					label:'我的订单'
+				}
 				]
 			}
 		},
@@ -64,16 +70,16 @@
 				this.isDragging = false
 			},
 
-			handleDrag(e) {
-				// 判断是否为有效拖拽（Y轴移动超过5px）
-				if (Math.abs(e.touches[0].clientY - this.startY) > 5) {
-					this.isDragging = true
-					this.position = {
-						x: e.detail.x,
-						y: e.detail.y
-					}
-				}
-			},
+			// handleDrag(e) {
+			// 	// 判断是否为有效拖拽（Y轴移动超过5px）
+			// 	if (Math.abs(e.touches[0].clientY - this.startY) > 5) {
+			// 		this.isDragging = true
+			// 		this.position = {
+			// 			x: e.detail.x,
+			// 			y: e.detail.y
+			// 		}
+			// 	}
+			// },
 
 			handleTouchEnd() {
 				if (!this.isDragging) return
@@ -101,12 +107,12 @@
 					url: path
 				})
 			},
-			containerStyle() {
-				return {
-					width: `${this.systemInfo.windowWidth}px`,
-					height: `${this.systemInfo.windowHeight}px`
-				}
-			},
+			// containerStyle() {
+			// 	return {
+			// 		width: `${this.systemInfo.windowWidth}px`,
+			// 		height: `${this.systemInfo.windowHeight}px`
+			// 	}
+			// },
 			layoutParams() {
 				const count = this.menuList.length
 				const minRadius = 60 // 基础半径

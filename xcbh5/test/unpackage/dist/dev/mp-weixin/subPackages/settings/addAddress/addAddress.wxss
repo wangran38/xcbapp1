@@ -275,6 +275,8 @@
   display: block;
 }
 .address-edit-page.data-v-2fb4599a {
+  display: flex;
+  justify-content: left;
   background: #f8f9fb;
   min-height: 100vh;
 }
@@ -292,17 +294,22 @@
   margin-left: 24rpx;
 }
 .address-edit-page .form-container.data-v-2fb4599a {
+  position: fixed;
+  bottom: 0;
+  width: 700rpx;
   padding: 32rpx;
-  padding-bottom: 160rpx;
 }
 .address-edit-page .form-item.data-v-2fb4599a {
+  display: flex;
+  justify-content: left;
+  align-items: center;
   background: #fff;
-  border-radius: 16rpx;
-  padding: 32rpx;
-  margin-bottom: 24rpx;
+  padding: 18rpx;
   position: relative;
+  text-align: left;
 }
 .address-edit-page .form-item .label.data-v-2fb4599a {
+  width: 200rpx;
   display: block;
   color: #4a5568;
   font-size: 30rpx;
@@ -344,14 +351,11 @@
 }
 .address-edit-page .switch-item.data-v-2fb4599a {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   align-items: center;
 }
 .address-edit-page .save-footer.data-v-2fb4599a {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  z-index: 999;
   background: #fff;
   padding: 24rpx 32rpx;
   box-shadow: 0 -4rpx 12rpx rgba(0, 0, 0, 0.04);
@@ -368,7 +372,7 @@
 }
 @media (min-width: 768px) {
 .address-edit-page .form-container.data-v-2fb4599a {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 }

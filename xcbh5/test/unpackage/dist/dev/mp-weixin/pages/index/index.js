@@ -35,7 +35,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _index_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index.vue?vue&type=style&index=0&lang=scss& */ 66);
 /* harmony import */ var _index_vue_vue_type_style_index_1_lang_scss___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./index.vue?vue&type=style&index=1&lang=scss& */ 68);
-/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 40);
+/* harmony import */ var _D_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js */ 32);
 
 var renderjs
 
@@ -103,10 +103,10 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 760))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 783))
     },
     uniLoadMore: function () {
-      return Promise.all(/*! import() | uni_modules/uni-load-more/components/uni-load-more/uni-load-more */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-load-more/components/uni-load-more/uni-load-more")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue */ 768))
+      return Promise.all(/*! import() | uni_modules/uni-load-more/components/uni-load-more/uni-load-more */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-load-more/components/uni-load-more/uni-load-more")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue */ 791))
     },
   }
 } catch (e) {
@@ -170,10 +170,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 54));
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 46));
 var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 56));
-var _index = __webpack_require__(/*! ../../api/index.js */ 30);
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 48));
+var _index = __webpack_require__(/*! ../../api/index.js */ 49);
 var _usePage = _interopRequireDefault(__webpack_require__(/*! @/hooks/usePage */ 65));
 //
 //
@@ -251,7 +251,7 @@ var _usePage = _interopRequireDefault(__webpack_require__(/*! @/hooks/usePage */
 //
 var floatBall = function floatBall() {
   __webpack_require__.e(/*! require.ensure | components/float-ball/float-ball */ "components/float-ball/float-ball").then((function () {
-    return resolve(__webpack_require__(/*! @/components/float-ball/float-ball.vue */ 779));
+    return resolve(__webpack_require__(/*! @/components/float-ball/float-ball.vue */ 802));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {
@@ -320,6 +320,16 @@ var _default = {
   onLoad: function onLoad() {
     // 初始化页面
     this.initPage();
+    uni.getLocation({
+      altitude: true,
+      isHighAccuracy: true,
+      highAccuracy: true,
+      type: 'gcj02',
+      success: function success(res) {
+        uni.setStorageSync('userlocation', JSON.stringify(res));
+        console.log(res);
+      }
+    });
   },
   onShow: function onShow() {
     var _this = this;
@@ -516,13 +526,16 @@ var _default = {
               while (1) {
                 switch (_context6.prev = _context6.next) {
                   case 0:
-                    _context6.next = 2;
+                    if (!res.result) {
+                      _context6.next = 7;
+                      break;
+                    }
+                    _context6.next = 3;
                     return _index.api.receiving({
                       out_trade_no: res.result
                     });
-                  case 2:
+                  case 3:
                     data = _context6.sent;
-                    console.log(data);
                     if (data.code == 200) {
                       uni.showToast({
                         icon: 'success',
@@ -534,7 +547,13 @@ var _default = {
                         title: '核销失败'
                       });
                     }
-                  case 5:
+                    _context6.next = 8;
+                    break;
+                  case 7:
+                    uni.navigateTo({
+                      url: '/' + res.path
+                    });
+                  case 8:
                   case "end":
                     return _context6.stop();
                 }

@@ -103,7 +103,12 @@
         "usingComponents" : true,
         "__usePrivacyCheck__" : true,
         "lazyCodeLoading" : "requiredComponents",
-        "permission" : {},
+        "permission" : {
+            "scope.userLocation" : {
+                "desc" : "用于地址选择"
+            }
+        },
+        "requiredPrivateInfos" : [ "getLocation", "chooseLocation" ], // 配置地图api
         "optimization" : {
             "subPackages" : true
         }
@@ -112,6 +117,15 @@
     "h5" : {
         "router" : {
             "mode" : "hash"
+        },
+        "sdkConfigs" : {
+            "maps" : {
+                "amap" : {
+                    "key" : "9d721b642fb8ef1921e8986da474f65e",
+                    "securityJsCode" : "9d721b642fb8ef1921e8986da474f65e",
+                    "serviceHost" : "9d721b642fb8ef1921e8986da474f65e"
+                }
+            }
         }
     },
     "fallbackLocale" : "zh-Hans"

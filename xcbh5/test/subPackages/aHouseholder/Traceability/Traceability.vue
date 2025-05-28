@@ -2,7 +2,7 @@
   <view class="traceability-page">
     <!-- 功能描述展示区域 -->
     <view class="function-description">
-      <text class="description-title">产品溯源信息录入功能介绍</text>
+      <text class="description-title">产品溯源信息录入功能介绍\n</text>
       <text class="description-text">在本APP中，添加产品溯源信息对您的摊位来说意义重大哦！通过完善产品溯源相关内容，像产品的生源地、生产日期、饲料及农药等详细信息，能够让您摊位所售卖的产品信息更加透明、可追溯。这有助于提高客户对产品质量和安全性的信任度，同时平台会根据摊位是否完整准确地添加产品溯源信息，将具备完整溯源信息的摊位优先推荐给客户，使您的摊位在众多摊位中更具竞争力，更易被客户发现和选择，进而提升摊位的经营效益呢，所以请您认真填写以下溯源信息呀。</text>
     </view>
     <uni-popup ref="popup" type="bottom" border-radius="10px 10px 0 0">
@@ -312,7 +312,7 @@
 
  .form-table th {
     /* width: 30%; */
-    font-size: 40rpx;
+    font-size: 30rpx;
 	font-weight: bold;
     color: #666;
   }
