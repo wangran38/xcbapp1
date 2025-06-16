@@ -75,7 +75,7 @@
 				
 				
 			</view>
-			<view v-if="presaleList.length==0" style="position: absolute;left: 35%; top: 50%; font-size: 30rpx;">该农户暂未上传菜品</view>
+			<view v-if="presaleList.length==0" style="position: absolute;left: 35%; top: 70%; font-size: 30rpx;">该农户暂未上传菜品</view>
 		</view>
 	</view>
 </template>

@@ -49,12 +49,12 @@
 		
 
 		<button @click="goTofreeGroceryShopping">参与活动说明</button>
-		<view class="Notice">
+	<!-- 	<view class="Notice">
 			<view style="text-align: center; font-size: 40rpx;">
 				{{getNowDate()}}
 			</view>
 			<view>今日打卡人次：{{signTotalData.todaynum}} <br>累计打卡人次：{{signTotalData.allnum}}</view>
-		</view>
+		</view> -->
 	</view>
 </template>
 

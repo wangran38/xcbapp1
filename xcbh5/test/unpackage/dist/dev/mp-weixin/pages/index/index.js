@@ -103,10 +103,10 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 783))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 788))
     },
     uniLoadMore: function () {
-      return Promise.all(/*! import() | uni_modules/uni-load-more/components/uni-load-more/uni-load-more */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-load-more/components/uni-load-more/uni-load-more")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue */ 791))
+      return Promise.all(/*! import() | uni_modules/uni-load-more/components/uni-load-more/uni-load-more */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-load-more/components/uni-load-more/uni-load-more")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue */ 796))
     },
   }
 } catch (e) {
@@ -251,7 +251,7 @@ var _usePage = _interopRequireDefault(__webpack_require__(/*! @/hooks/usePage */
 //
 var floatBall = function floatBall() {
   __webpack_require__.e(/*! require.ensure | components/float-ball/float-ball */ "components/float-ball/float-ball").then((function () {
-    return resolve(__webpack_require__(/*! @/components/float-ball/float-ball.vue */ 802));
+    return resolve(__webpack_require__(/*! @/components/float-ball/float-ball.vue */ 807));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {
@@ -547,13 +547,14 @@ var _default = {
                         title: '核销失败'
                       });
                     }
-                    _context6.next = 8;
+                    _context6.next = 9;
                     break;
                   case 7:
+                    console.log(res.path);
                     uni.navigateTo({
                       url: '/' + res.path
                     });
-                  case 8:
+                  case 9:
                   case "end":
                     return _context6.stop();
                 }

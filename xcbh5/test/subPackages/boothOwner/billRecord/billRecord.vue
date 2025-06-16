@@ -197,32 +197,32 @@
 	}
 
 	/* 暗黑模式适配 */
-	@media (prefers-color-scheme: dark) {
-		.container {
-			background: #121212;
+	// @media (prefers-color-scheme: dark) {
+	// 	.container {
+	// 		// background: #121212;
 
-			.header {
-				.filter-btn {
-					background: #2d2d2d;
-					color: #ddd;
-				}
-			}
+	// 		.header {
+	// 			.filter-btn {
+	// 				background: #2d2d2d;
+	// 				color: #ddd;
+	// 			}
+	// 		}
 
-			.record-card {
-				background: #242424;
+	// 		.record-card {
+	// 			background: #242424;
 
-				.card-content {
-					.left-section {
-						.time {
-							color: #888;
-						}
+	// 			.card-content {
+	// 				.left-section {
+	// 					.time {
+	// 						color: #888;
+	// 					}
 
-						.amount {
-							color: #eee;
-						}
-					}
-				}
-			}
-		}
-	}
+	// 					.amount {
+	// 						color: #eee;
+	// 					}
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// }
 </style>

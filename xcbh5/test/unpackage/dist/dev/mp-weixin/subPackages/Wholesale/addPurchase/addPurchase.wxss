@@ -274,13 +274,12 @@
 .wxParse .audio, .wxParse .uni-audio-default {
   display: block;
 }
-.range-picker {
-  display: flex;
-  align-items: center;
-}
  .uni-forms-item__label {
   font-size: 30rpx;
   width: auto !important;
+}
+ .uni-forms-item {
+  align-items: center;
 }
  .distraction {
   font-size: 30rpx !important;

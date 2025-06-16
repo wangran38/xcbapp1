@@ -10,7 +10,9 @@
           @change="val => setForm('notifyEnabled', val.detail.value)" 
           color="#4CD964"
         /> -->
-		<view><button @click="switchMessage" :style="messageStatus ?'background-color:#1AAD19;border-color:#1AAD19;color:#ffffff':'background-color:#aa0000;border-color:#aa0000;color:#ffffff'">{{messageStatusText}}</button></view>
+		<view>
+			<button :disabled="!messageStatus" @click="switchMessage" :style="messageStatus ?'background-color:#1AAD19;border-color:#1AAD19;color:#ffffff':'background-color:#aa0000;border-color:#aa0000;color:#ffffff'">{{messageStatusText}}</button>
+		</view>
       </view>
     </view>
 
@@ -51,8 +53,6 @@
 	  <view class="setting-item">
 	    <text>客户自取</text>
 	    <switch 
-	      :checked="form.deliveryEnabled" 
-	      @change="val => setForm('deliveryEnabled', val.detail.value)"
 	      color="#4CD964"
 	    />
 	  </view>
@@ -75,7 +75,7 @@ export default {
       },
       showRatioPicker: false,
 	  messageStatusText:null,
-	  messageStatus:null
+	  messageStatus:''
     }
   },
   onLoad() {
@@ -90,14 +90,14 @@ export default {
 		uni.getSetting({
 			withSubscriptions: true, // 同时获取用户的订阅消息状态
 			success: (res) => {
-				console.log(res.subscriptionsSetting)
+				console.log(res)
 				if (!res.subscriptionsSetting.mainSwitch) {
 					// 如果没有订阅就弹窗提醒用户订阅
 					this.messageStatus = true
-					this.messageStatusText = '开启'
+					this.messageStatusText = '订阅'
 				} else {
 					this.messageStatus = false
-					this.messageStatusText = '关闭'
+					this.messageStatusText = '已订阅'
 					console.log("用户已订阅")
 				}
 		
@@ -114,13 +114,11 @@ export default {
 	  		success: (res) => {
 	  			if (res['PN8Vc4Z5rWUHi05A6F-J73TkkpF4iHxkEtA6bIoFUPw'] == 'accept'){
 					this.messageStatus = false
-					this.messageStatusText = '关闭'
+					this.messageStatusText = '已订阅'
 				}else{
 					this.messageStatus = true
-					this.messageStatusText = '开启'
-				}
-
-				
+					this.messageStatusText = '订阅'
+				}				
 	  		},
 	  		fail: (err) => {
 	  			console.log(err)

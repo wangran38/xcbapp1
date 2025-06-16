@@ -53,9 +53,7 @@ export default {
       downloadPercent: 0,
       updating: false,
       updateContent: [
-        '新增会员积分体系',
-        '优化商品搜索体验',
-        '修复支付页面闪退问题'
+        '关闭线上调试',
       ],
 	  downloading:false
     }

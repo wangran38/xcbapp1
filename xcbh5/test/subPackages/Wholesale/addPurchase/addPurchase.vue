@@ -25,8 +25,8 @@
 				</uni-forms-item>
 
 
-
-				<uni-forms-item label="收货地址" required name="deliveryAddress" class="range-picker">
+				<uni-forms-item  label="收货地址" required name="deliveryAddress"
+					class="range-picker">
 					<picker class="picker" mode="multiSelector" :range="multiArray" :value="multiIndex"
 						@change="bindMultiPickerChange" @columnchange="bindMultiPickerColumnChange">
 						<view style="font-size: 25rpx;">
@@ -35,6 +35,7 @@
 						</view>
 					</picker>
 				</uni-forms-item>
+
 				<uni-forms-item label="详细地址" name="byaddress">
 					<uni-easyinput v-model="formData.byaddress" placeholder="请输入详细地址" />
 				</uni-forms-item>
@@ -53,8 +54,12 @@
 	import {
 		api
 	} from '@/api/index.js';
+	import {
+		myMixin
+	} from '@/utils/public.js'
 
 	export default {
+		mixins: [myMixin],
 		data() {
 			const today = Date.now();
 
@@ -237,7 +242,11 @@
 						icon: 'error',
 						title: data.msg || data.message
 					})
+
 				} else {
+					setTimeout(() => {
+						this.customizeBack()
+					}, 2000)
 					uni.showToast({
 						icon: 'success',
 						title: data.msg || data.message
@@ -264,10 +273,6 @@
 </script>
 
 <style lang="scss">
-	.range-picker {
-		display: flex;
-		align-items: center;
-	}
 
 	/deep/ .uni-forms-item__label {
 		font-size: 30rpx;
@@ -276,6 +281,7 @@
 	}
 
 	/deep/ .uni-forms-item {
+		align-items: center;
 		// background-color: red;
 	}
 

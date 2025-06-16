@@ -81,6 +81,7 @@
 					"path": "purchase/purchase",
 					"style": {
 						"navigationBarTitleText": "采购"
+						// "disableScroll": true
 					}
 				},
 				{

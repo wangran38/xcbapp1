@@ -71,7 +71,11 @@
 	import {
 		useUpload,
 	} from '@/hooks/useUpload.js'
+	import {
+		myMixin
+	} from '@/utils/public.js'
 	export default {
+		mixins: [myMixin],
 		data() {
 			return {
 				multiArray: [
@@ -308,6 +312,9 @@
 						icon: 'success'
 					})
 					this.initFormData()
+					setTimeout(() => {
+						this.customizeBack()
+					}, 2000)
 				} else {
 					uni.showToast({
 						title: '发布失败',

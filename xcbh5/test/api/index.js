@@ -40,7 +40,7 @@ const whiteList = [
 	'/api/countrylist',
 	'/api/user/rs',
 	'/api/user/login',
-	'/api/user/sign',
+	// '/api/user/sign',
 	'/api/market/commodity/list',
 	// '/api/shop/list', // 首页数据
 	'/api/shop/lottery'

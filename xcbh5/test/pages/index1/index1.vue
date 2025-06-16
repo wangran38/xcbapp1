@@ -31,19 +31,8 @@
 			<button class="save" @click="saveData">立即逛</button>
 			<!-- <button @click="gotodemo">测试</button> -->
 		</view>
-		<uni-popup ref="popup">
-			<view class="bigBox">
-				<view class="title">是否允许我们进行消息推送?</view>
-				<view class="description">1.新订单通知 </view>
-				<view class="description">2.折扣菜品通知 </view>
-				<view style="display: flex;">
-					<button @click="openMessage" type="default"
-						style="width: 50%;background-color:#1AAD19;border-color:#1AAD19;color:#ffffff">允许</button>
-					<button @click="closeMessage" type="default"
-						style="width: 50%; background-color:#909399;border-color:#909399;color:#ffffff">拒绝</button>
-				</view>
-			</view>
-		</uni-popup>
+		
+		<button style="margin: 50rpx;" @click="goToJackpot">免费卖菜</button>
 		<!-- 		<view style="color: white; margin: 20rpx; font-size: 25rpx; background-color: black; border: 5rpx solid lightslategray; padding: 20rpx;">
 			小程序使用体验上出现问题,请打热线电话联系我们我们将虚心接受您的意见并进行整改.
 			
@@ -183,7 +172,7 @@
 				}
 				this.fetchMarkets(2313)
 				this.selectedMarketIndex = 1
-				console.log(this.multiArray, this.multiIndex)
+				// console.log(this.multiArray, this.multiIndex)
 			},
 
 

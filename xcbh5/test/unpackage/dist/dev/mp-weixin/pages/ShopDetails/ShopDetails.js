@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 783))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 788))
     },
   }
 } catch (e) {
@@ -175,17 +175,17 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var shopItem = function shopItem() {
   __webpack_require__.e(/*! require.ensure | components/shop-item/shop-item */ "components/shop-item/shop-item").then((function () {
-    return resolve(__webpack_require__(/*! @/components/shop-item/shop-item.vue */ 809));
+    return resolve(__webpack_require__(/*! @/components/shop-item/shop-item.vue */ 814));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var menuBarVue = function menuBarVue() {
   __webpack_require__.e(/*! require.ensure | components/menuBar */ "components/menuBar").then((function () {
-    return resolve(__webpack_require__(/*! ../../components/menuBar.vue */ 816));
+    return resolve(__webpack_require__(/*! @/components/menuBar.vue */ 821));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var inputBoxVue = function inputBoxVue() {
   Promise.all(/*! require.ensure | components/inputBox */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/inputBox")]).then((function () {
-    return resolve(__webpack_require__(/*! ../../components/inputBox.vue */ 823));
+    return resolve(__webpack_require__(/*! @/components/inputBox.vue */ 828));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {
@@ -206,9 +206,9 @@ var _default = {
   },
   mixins: [_usePage.default],
   components: {
-    'shopItem': shopItem,
-    'menuBarVue': menuBarVue,
-    'inputBoxVue': inputBoxVue
+    shopItem: shopItem,
+    menuBarVue: menuBarVue,
+    inputBoxVue: inputBoxVue
   },
   computed: _objectSpread(_objectSpread({}, (0, _vuex.mapState)('cart', ['carts'])), (0, _vuex.mapGetters)('cart', ['getTempCount'])),
   onShow: function onShow() {

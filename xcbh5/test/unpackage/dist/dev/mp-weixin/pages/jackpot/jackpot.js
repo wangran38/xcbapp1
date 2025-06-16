@@ -127,7 +127,6 @@ var render = function () {
       m3: m3,
     }
   })
-  var m4 = _vm.getNowDate()
   _vm.$mp.data = Object.assign(
     {},
     {
@@ -136,7 +135,6 @@ var render = function () {
         l0: l0,
         l1: l1,
         l2: l2,
-        m4: m4,
       },
     }
   )

@@ -1,139 +1,1128 @@
 
- .uni-date__x-input {
-    font-size: 22px !important;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 页面整体样式 */
 .traceability-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f8f8f8;
-    padding: 30px;
-    box-sizing: border-box;
+  padding: 30rpx;
+  background-color: #f5f7fa;
+  min-height: 100vh;
 }
-.function-description {
-    width: 100%;
-    max-width: 600px;
-    background-color: #fdfdfd;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
+/* 顶部状态与标题 */
+.header-container {
+  margin-bottom: 30rpx;
 }
-.description-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
+.progress-bar {
+  height: 12rpx;
+  background-color: #e5e9f2;
+  border-radius: 6rpx;
+  margin-bottom: 20rpx;
+  overflow: hidden;
 }
-.description-text {
-    font-size: 18px;
-    color: #666;
-    line-height: 1.5;
+.progress-value {
+  height: 100%;
+  background-color: #36a3ff;
+  border-radius: 6rpx;
+  transition: width 0.3s ease;
 }
+.header-content {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+}
+.header-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+.header-subtitle {
+  font-size: 26rpx;
+  color: #666;
+}
+/* 消费视角提示 */
+.consumer-tip {
+  background-color: #fffbeb;
+  border-radius: 12rpx;
+  padding: 20rpx 30rpx;
+  margin-bottom: 30rpx;
+}
+.tip-text {
+  font-size: 26rpx;
+  color: #8c6d31;
+  line-height: 1.5;
+}
+/* 表单容器 */
 .form-container {
-    width: 100%;
-    max-width: 600px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    padding: 30px;
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
 }
-.form-table {
-    width: 100%;
-    border-collapse: collapse;
+/* 表单分区 */
+.form-section {
+  margin-bottom: 40rpx;
 }
-.form-table ._tr {
-    border: 1px solid #ccc;
-    border-bottom: none;
-    /* 去掉默认的下边框，避免重复 */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #eee;
+  margin-bottom: 30rpx;
 }
-.form-table ._tr:last-child {
-    border-bottom: 1px solid #ccc;
-    /* 最后一行保留下边框 */
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
 }
-.form-table ._th,
- .form-table ._td {
-    padding: 15px;
-    text-align: left;
+.section-desc {
+  font-size: 24rpx;
+  color: #999;
+  padding: 4rpx 12rpx;
+  background-color: #f5f7fa;
+  border-radius: 8rpx;
 }
-.form-table ._th {
-    /* width: 30%; */
-    font-size: 30rpx;
-	font-weight: bold;
-    color: #666;
+/* 表单项目 */
+.form-item {
+  margin-bottom: 30rpx;
 }
-.form-table ._td {
-    width: 70%;
+.item-label {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 16rpx;
+  display: flex;
+  align-items: center;
 }
+.required-mark {
+  color: #ff4d4f;
+  margin-left: 4rpx;
+}
+.item-content {
+  position: relative;
+}
+/* 选择器样式 */
+.picker-text {
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #eee;
+  font-size: 28rpx;
+  color: #666;
+  position: relative;
+}
+.picker-text::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 24rpx;
+  height: 24rpx;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='%23999' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+}
+/* 位置选择器 */
+.location-picker {
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #eee;
+  font-size: 28rpx;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.location-text {
+  flex: 1;
+}
+/* 输入字段 */
 .input-field {
-    width: 100%;
-    border-bottom: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 20px;
-    cursor: pointer;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #eee;
+  font-size: 28rpx;
+  color: #666;
+  position: relative;
+}
+.input-field::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 24rpx;
+  height: 24rpx;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='%23999' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+}
+/* 上传容器 */
+.upload-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+.upload-box {
+  width: calc(33.33% - 14rpx);
+  height: 200rpx;
+  border-radius: 12rpx;
+  position: relative;
+  overflow: hidden;
+  background-color: #f5f7fa;
+  border: 1rpx dashed #ddd;
+}
+.upload-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.delete-btn {
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.add-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.upload-text {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+/* 提交按钮 */
+.submit-container {
+  margin: 40rpx 0;
 }
 .submit-button {
-    width: 100%;
-    background-color: #007aff;
-    color: white;
-    border-radius: 5px;
-    padding: 15px;
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 30px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  width: 100%;
+  height: 90rpx;
+  background-color: #36a3ff;
+  color: #fff;
+  border-radius: 12rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: 0 8rpx 24rpx rgba(54, 163, 255, 0.3);
+  transition: all 0.3s ease;
 }
-.submit-button:hover {
-    background-color: #005580;
+.submit-button:active {
+  background-color: #1890ff;
+  box-shadow: 0 4rpx 12rpx rgba(54, 163, 255, 0.3);
 }
-.input-field:focus {
-    border-color: #007aff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 122, 255, 0.4);
+.submit-button:disabled {
+  background-color: #e6f7ff;
+  color: #36a3ff;
+  box-shadow: none;
+  cursor: not-allowed;
 }
-
-/* 弹出层相关样式优化 */
-.uni-popup {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* 底部提示 */
+.footer-tip {
+  font-size: 24rpx;
+  color: #999;
+  text-align: center;
+  margin-bottom: 40rpx;
 }
+/* 弹出层样式 */
 .popup-content {
-    width: 80%;
-    text-align: center;
+  padding: 40rpx 30rpx;
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
 }
-
-/* 弹出层内 input 框样式优化 */
 .popup-input {
-    text-align: left;
-    width: 100%;
-    padding: 20px;
-    border: none;
-    font-size: 20px;
-    color: #333;
-    transition: all 0.3s ease;
-    background-color: transparent;
-}
-.popup-input:focus {
-    border-bottom-color: #005580;
-    outline: none;
-    box-shadow: 0 3px 8px rgba(0, 85, 128, 0.4);
-}
-
-/* 新增弹出层背景样式 */
-.popup-content:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 10px 10px 0 0;
-    z-index: -1;
+  width: 100%;
+  height: 88rpx;
+  border: none;
+  border-bottom: 1rpx solid #eee;
+  font-size: 32rpx;
+  color: #333;
+  outline: none;
 }
 

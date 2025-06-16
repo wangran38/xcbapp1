@@ -286,6 +286,7 @@
 								})
 							}
 						}else{
+							console.log(res.path)
 							uni.navigateTo({
 								url:'/'+res.path
 							})

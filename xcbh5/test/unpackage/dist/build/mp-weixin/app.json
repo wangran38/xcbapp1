@@ -84,7 +84,8 @@
         "addPurchase/addPurchase",
         "wholesaleNavigation/wholesaleNavigation",
         "mySupply/mySupply",
-        "myProcurement/myProcurement"
+        "myProcurement/myProcurement",
+        "quotation/quotation"
       ]
     },
     {

@@ -2,11 +2,12 @@
 	<view class="bigBox" @click="close" v-show="show" :animation="animationData">
 		<view class="body" v-show="show" @click.stop="">
 			<view class="value">
-				
+
 				<text style="font-size: 30rpx;">{{value}}</text>
-				<test style="position: absolute; left: 20rpx; color: gray;">{{cartItem.commodity_name}} ￥{{cartItem.price}}元/{{cartItem.weight_name}}</test>
-				<test style="position: absolute; right: 20rpx; color: gray;">{{singleItemPrice}}元</test>
-				
+				<text style="position: absolute; left: 20rpx; color: gray;">{{cartItem.commodity_name}}
+					￥{{cartItem.price}}元/{{cartItem.weight_name}}</text>
+				<text style="position: absolute; right: 20rpx; color: gray;">{{singleItemPrice}}元</text>
+
 			</view>
 			<view class="function">
 				<view class="nums">
@@ -44,7 +45,7 @@
 					'7', '8', '9',
 					'0', '.', '取消'
 				],
-				unit:'',
+				unit: '',
 				funs: [
 					'删除',
 					'清空',
@@ -52,7 +53,7 @@
 				],
 				lock: true, // 键盘锁
 				animationData: {},
-				cartItem:0
+				cartItem: 0
 			};
 		},
 		watch: {
@@ -76,7 +77,7 @@
 						this.value = oldValue
 					}
 				} catch {}
-				
+
 				// 以下三行是用于实时同步，数字键盘中的输入框和购物车商品中的的数值对应
 				let value = Number(Number(this.value))
 				this.cartItem.count = value
@@ -87,7 +88,7 @@
 			// 监听数字键盘是否弹起
 			show(newValue, oldValue) {
 				// this.cartItem = this.cartItem
-				
+
 				// 数字回显
 				if (newValue) {
 					this.value = this.getTempCount(this.cartItem.id) + ''
@@ -96,8 +97,8 @@
 		},
 		computed: {
 			...mapGetters('cart', ['getTempCount']),
-			singleItemPrice(){
-				return  new Decimal(this.cartItem.price).mul(new Decimal(this.value)).toNumber()
+			singleItemPrice() {
+				return new Decimal(this.cartItem.price).mul(new Decimal(this.value)).toNumber()
 			}
 		},
 		methods: {

@@ -8,7 +8,7 @@
 				{{ isExpanded ? '×' : '+' }}
 			</view>
 
-			<view v-for="(item, index) in menuList" :key="item.path" class="sub-item" :style="[getSubStyle(index)]"
+			<view  v-show="isShowItem" v-for="(item, index) in menuList" :key="item.path" class="sub-item" :style="[getSubStyle(index)]"
 				@tap.stop="navigateTo(item.path)">
 				{{ item.label }}
 			</view>
@@ -34,6 +34,7 @@
 		},
 		data() {
 			return {
+				isShowItem:false,
 				position: {
 					x: 0,
 					y: 0
@@ -95,8 +96,11 @@
 					windowWidth - 60 :
 					20
 			},
-
+			
+			
 			toggleMenu() {
+				this.isShowItem = !this.isShowItem
+				console.log(this.isShowItem)
 				if (this.isDragging) return
 				this.isExpanded = !this.isExpanded
 			},

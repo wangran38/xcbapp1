@@ -63,7 +63,7 @@
 							// });
 							// return;
 							uni.showModal({
-								title: '测试测试',
+								// title: '测试测试',
 								content: '请登录后再打卡',
 								showCancel: false,
 								success: () => {

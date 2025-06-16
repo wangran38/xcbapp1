@@ -55,7 +55,7 @@
 				query: {
 					category_name: null, // 分类
 					page: 1,
-					limit: 10
+					limit: 10,
 				},
 				newsList: [
 
@@ -99,7 +99,8 @@
 							name: item
 						}
 					})
-					this.categories = [...newList]
+					console.log(newList)
+					this.categories = [{id:-1,name:'全部'},...newList]
 				}
 			},
 

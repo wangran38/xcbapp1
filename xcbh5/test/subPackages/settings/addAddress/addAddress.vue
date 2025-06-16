@@ -159,7 +159,7 @@
 		methods: {
 			selectLocation() {
 				uni.chooseLocation({
-					success(res) {
+					success:(res)=>{
 						this.formData.address = res.address
 					},
 					fail(e) {

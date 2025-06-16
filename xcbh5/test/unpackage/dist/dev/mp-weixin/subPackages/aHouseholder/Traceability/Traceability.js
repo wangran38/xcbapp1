@@ -100,11 +100,11 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
-    uniPopup: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-popup/components/uni-popup/uni-popup */ "uni_modules/uni-popup/components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-popup/components/uni-popup/uni-popup.vue */ 776))
-    },
     uniDatetimePicker: function () {
-      return Promise.all(/*! import() | uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue */ 830))
+      return Promise.all(/*! import() | uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue */ 835))
+    },
+    uniPopup: function () {
+      return __webpack_require__.e(/*! import() | uni_modules/uni-popup/components/uni-popup/uni-popup */ "uni_modules/uni-popup/components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-popup/components/uni-popup/uni-popup.vue */ 861))
     },
   }
 } catch (e) {
@@ -161,268 +161,505 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(wx) {
 
-
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
 var _index = __webpack_require__(/*! @/api/index.js */ 49);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var _default = {
   data: function data() {
     return {
       TraceabilityInfo: {
         Students: "",
-        // 生源地
+        // 产地
         productionDate: "",
         // 生产日期
+        batchNumber: "",
+        // 批次号
+        // 种植类
+        pesticideName: "",
+        // 农药名称
+        pesticideTimes: "",
+        // 农药使用次数
+        lastPesticideDate: "",
+        // 最后一次使用日期
+        irrigationWater: "",
+        // 灌溉水源
+        plantingCycle: "",
+        // 种植周期
+        soilType: "",
+        // 土壤类型
+        // 养殖类
         feedName: "",
         // 饲料名称
         feedSource: "",
         // 饲料来源
-        feedFactoryAddress: "",
-        // 饲料厂家地址
-        feedFactoryPhone: "",
-        // 饲料厂家电话
-        pesticideName: "",
-        // 农药名称
-        pesticideSource: "",
-        // 农药来源
-        storePhone: '',
-        // 药店电话
-        storeAddress: '',
-        // 店铺地址
-        notes: ''
+        breedingCycle: "",
+        // 养殖周期
+        epidemicPrevention: "",
+        // 防疫记录
+        breedingEnvironment: "",
+        // 养殖环境描述
+        breedingMethod: "",
+        // 养殖方式
+        // 加工类
+        processingMaterials: "",
+        // 加工原料
+        foodAdditives: "",
+        // 食品添加剂
+        processingTechnology: "",
+        // 加工工艺
+        processingEnvironment: "",
+        // 加工环境检测
+        processingEquipment: "",
+        // 加工设备编号
+        // 其他类
+        productMaterial: "",
+        // 产品材质
+        manufacturer: "",
+        // 生产厂家
+        manufacturerAddress: "",
+        // 生产地址
+        manufacturerPhone: "",
+        // 联系电话
+        productCertification: "",
+        // 产品认证
+        // 通用
+        transportMethod: "",
+        // 运输方式
+        storageConditions: "",
+        // 储存条件
+        shelfLife: "",
+        // 保质期
+        nutritionValue: "",
+        // 营养价值
+        cookingMethod: "",
+        // 食用方法
+        notes: "" // 备注
       },
+
       CLASSIFICATION: ['种植', '养殖', '加工', '其他'],
+      classificationIndex: 0,
+      // 产品分类索引
       index: 0,
       commodityLis: [],
       // 已上架的菜品
       commodityTempLis: [],
       // 临时展示的上架菜品
       currentInputValue: "",
-      // 临时变量
-      currentInputField: ""
+      // 临时输入值
+      currentInputField: "",
+      isSubmitting: false,
+      // 提交状态
+      // 证书图片
+      certificateImages: [],
+      // 通用凭证图片
+      feedCertImages: [],
+      // 饲料检测报告
+      pesticideCertImages: [],
+      // 农残检测报告
+      processingCertImages: [],
+      // 加工卫生许可证
+      otherCertImages: [] // 其他类安全检测报告
     };
   },
-  onLoad: function onLoad() {
-    var _this = this;
-    _index.api.myShoplist({
-      isshow: 1
-    }).then(function (data) {
-      _this.commodityLis = data.data.listdata;
-      _this.commodityTempLis = _this.commodityLis.map(function (item) {
-        return item.commodity_name;
+
+  computed: {
+    // 表单完成率
+    formCompletionRate: function formCompletionRate() {
+      var _this = this;
+      var requiredFields = ['Students', 'productionDate', {
+        key: 'feedName',
+        show: this.classificationIndex === 1
+      }, {
+        key: 'pesticideName',
+        show: this.classificationIndex === 0
+      }, {
+        key: 'processingMaterials',
+        show: this.classificationIndex === 2
+      }, {
+        key: 'productMaterial',
+        show: this.classificationIndex === 3
+      },
+      // 证书检查
+      {
+        key: 'feedCertImages',
+        show: this.classificationIndex === 1,
+        check: function check() {
+          return _this.feedCertImages.length > 0;
+        }
+      }, {
+        key: 'pesticideCertImages',
+        show: this.classificationIndex === 0,
+        check: function check() {
+          return _this.pesticideCertImages.length > 0;
+        }
+      }, {
+        key: 'processingCertImages',
+        show: this.classificationIndex === 2,
+        check: function check() {
+          return _this.processingCertImages.length > 0;
+        }
+      }, {
+        key: 'otherCertImages',
+        show: this.classificationIndex === 3,
+        check: function check() {
+          return _this.otherCertImages.length > 0;
+        }
+      }];
+      var completed = 0;
+      var total = 0;
+      requiredFields.forEach(function (field) {
+        if (field.show === undefined || field.show) {
+          total++;
+          if (field.check) {
+            completed += field.check() ? 1 : 0;
+          } else {
+            completed += _this.TraceabilityInfo[field.key] ? 1 : 0;
+          }
+        }
       });
-    });
+      return Math.round(completed / total * 100);
+    }
+  },
+  onLoad: function onLoad() {
+    this.loadCommodityList();
   },
   methods: {
-    bindPickerChange: function bindPickerChange(e) {
-      this.index = e.detail.value;
-    },
-    submit: function submit() {
-      // 构建请求参数
-      _index.api.addTraceability({
-        commodity_id: this.commodityLis[this.index].id,
-        baddress: this.TraceabilityInfo.Students,
-        btime: this.TraceabilityInfo.productionDate,
-        fodder: this.TraceabilityInfo.feedName,
-        fodderfrom: this.TraceabilityInfo.feedSource,
-        fodderaddress: this.TraceabilityInfo.feedFactoryAddress,
-        fodderphone: this.TraceabilityInfo.feedFactoryPhone,
-        pesticide: this.TraceabilityInfo.pesticideName,
-        pesticidefrom: this.TraceabilityInfo.pesticideSource,
-        pesticideaddress: this.TraceabilityInfo.storeAddress,
-        pesticidephone: this.TraceabilityInfo.storePhone
+    // 加载商品列表
+    loadCommodityList: function loadCommodityList() {
+      var _this2 = this;
+      _index.api.myShoplist({
+        isshow: 1
       }).then(function (data) {
-        console.log(data);
+        _this2.commodityLis = data.data.listdata || [];
+        _this2.commodityTempLis = _this2.commodityLis.map(function (item) {
+          return item.commodity_name;
+        });
+      }).catch(function (err) {
+        console.error('加载商品列表失败', err);
       });
     },
-    // 打开蒙层
+    // 产品分类选择
+    changeClassification: function changeClassification(e) {
+      this.classificationIndex = e.detail.value;
+    },
+    // 打开地图选择地址
+    openLocationPicker: function openLocationPicker() {
+      var _this3 = this;
+      wx.chooseLocation({
+        success: function success(res) {
+          _this3.TraceabilityInfo.Students = res.name + res.address;
+          wx.showToast({
+            title: '已选择地址',
+            icon: 'success',
+            duration: 1500
+          });
+        }
+      });
+    },
+    // 选择各类证书图片
+    chooseFeedCertificate: function chooseFeedCertificate() {
+      var _this4 = this;
+      wx.chooseImage({
+        count: 3 - this.feedCertImages.length,
+        success: function success(res) {
+          _this4.feedCertImages = _this4.feedCertImages.concat(res.tempFilePaths);
+        }
+      });
+    },
+    choosePesticideCertificate: function choosePesticideCertificate() {
+      var _this5 = this;
+      wx.chooseImage({
+        count: 3 - this.pesticideCertImages.length,
+        success: function success(res) {
+          _this5.pesticideCertImages = _this5.pesticideCertImages.concat(res.tempFilePaths);
+        }
+      });
+    },
+    chooseProcessingCertificate: function chooseProcessingCertificate() {
+      var _this6 = this;
+      wx.chooseImage({
+        count: 3 - this.processingCertImages.length,
+        success: function success(res) {
+          _this6.processingCertImages = _this6.processingCertImages.concat(res.tempFilePaths);
+        }
+      });
+    },
+    chooseOtherCertificate: function chooseOtherCertificate() {
+      var _this7 = this;
+      wx.chooseImage({
+        count: 3 - this.otherCertImages.length,
+        success: function success(res) {
+          _this7.otherCertImages = _this7.otherCertImages.concat(res.tempFilePaths);
+        }
+      });
+    },
+    chooseCertificateImage: function chooseCertificateImage() {
+      var _this8 = this;
+      wx.chooseImage({
+        count: 3 - this.certificateImages.length,
+        success: function success(res) {
+          _this8.certificateImages = _this8.certificateImages.concat(res.tempFilePaths);
+        }
+      });
+    },
+    // 删除证书图片
+    deleteCertificate: function deleteCertificate(index, type) {
+      if (type === 'feed') {
+        this.feedCertImages.splice(index, 1);
+      } else if (type === 'pesticide') {
+        this.pesticideCertImages.splice(index, 1);
+      } else if (type === 'processing') {
+        this.processingCertImages.splice(index, 1);
+      } else if (type === 'other') {
+        this.otherCertImages.splice(index, 1);
+      } else {
+        this.certificateImages.splice(index, 1);
+      }
+    },
+    // 提交表单
+    submit: function submit() {
+      var _this9 = this;
+      // 基础验证
+      if (!this.TraceabilityInfo.Students) {
+        wx.showToast({
+          title: '请填写产地',
+          icon: 'none'
+        });
+        return;
+      }
+      if (!this.TraceabilityInfo.productionDate) {
+        wx.showToast({
+          title: '请选择生产日期',
+          icon: 'none'
+        });
+        return;
+      }
+
+      // 分类验证
+      if (this.classificationIndex === 1) {
+        if (!this.TraceabilityInfo.feedName) {
+          wx.showToast({
+            title: '请填写饲料名称',
+            icon: 'none'
+          });
+          return;
+        }
+        if (!this.TraceabilityInfo.feedSource) {
+          wx.showToast({
+            title: '请填写饲料来源',
+            icon: 'none'
+          });
+          return;
+        }
+        if (this.feedCertImages.length === 0) {
+          wx.showToast({
+            title: '请上传饲料检测报告',
+            icon: 'none'
+          });
+          return;
+        }
+      }
+      if (this.classificationIndex === 0) {
+        if (!this.TraceabilityInfo.pesticideName) {
+          wx.showToast({
+            title: '请填写农药名称',
+            icon: 'none'
+          });
+          return;
+        }
+        if (this.pesticideCertImages.length === 0) {
+          wx.showToast({
+            title: '请上传农残检测报告',
+            icon: 'none'
+          });
+          return;
+        }
+      }
+      if (this.classificationIndex === 2) {
+        if (!this.TraceabilityInfo.processingMaterials) {
+          wx.showToast({
+            title: '请填写加工原料',
+            icon: 'none'
+          });
+          return;
+        }
+        if (this.processingCertImages.length === 0) {
+          wx.showToast({
+            title: '请上传加工卫生许可证',
+            icon: 'none'
+          });
+          return;
+        }
+      }
+      if (this.classificationIndex === 3) {
+        if (!this.TraceabilityInfo.productMaterial) {
+          wx.showToast({
+            title: '请填写产品材质',
+            icon: 'none'
+          });
+          return;
+        }
+        if (!this.TraceabilityInfo.manufacturer) {
+          wx.showToast({
+            title: '请填写生产厂家',
+            icon: 'none'
+          });
+          return;
+        }
+        if (!this.TraceabilityInfo.manufacturerAddress) {
+          wx.showToast({
+            title: '请填写生产地址',
+            icon: 'none'
+          });
+          return;
+        }
+        if (this.otherCertImages.length === 0) {
+          wx.showToast({
+            title: '请上传安全检测报告',
+            icon: 'none'
+          });
+          return;
+        }
+      }
+      this.isSubmitting = true;
+
+      // 构建参数并提交
+      var params = _objectSpread(_objectSpread({}, this.TraceabilityInfo), {}, {
+        commodity_id: this.commodityLis[this.index].commodity_id,
+        classification: this.classificationIndex,
+        formCompletionRate: this.formCompletionRate
+      });
+
+      // 上传图片
+      var uploadTasks = [];
+      if (this.certificateImages.length > 0) {
+        uploadTasks.push(this.uploadImages(this.certificateImages, 'certificate'));
+      }
+      if (this.classificationIndex === 0 && this.pesticideCertImages.length > 0) {
+        uploadTasks.push(this.uploadImages(this.pesticideCertImages, 'pesticide'));
+      }
+      if (this.classificationIndex === 1 && this.feedCertImages.length > 0) {
+        uploadTasks.push(this.uploadImages(this.feedCertImages, 'feed'));
+      }
+      if (this.classificationIndex === 2 && this.processingCertImages.length > 0) {
+        uploadTasks.push(this.uploadImages(this.processingCertImages, 'processing'));
+      }
+      if (this.classificationIndex === 3 && this.otherCertImages.length > 0) {
+        uploadTasks.push(this.uploadImages(this.otherCertImages, 'other'));
+      }
+
+      // 等待所有图片上传完成后提交表单
+      Promise.all(uploadTasks).then(function (results) {
+        // 处理上传结果
+        results.forEach(function (result) {
+          if (result.type === 'certificate') {
+            params.certificateUrls = result.urls;
+          } else if (result.type === 'pesticide') {
+            params.pesticideCertUrls = result.urls;
+          } else if (result.type === 'feed') {
+            params.feedCertUrls = result.urls;
+          } else if (result.type === 'processing') {
+            params.processingCertUrls = result.urls;
+          } else if (result.type === 'other') {
+            params.otherCertUrls = result.urls;
+          }
+        });
+
+        // 提交表单数据
+        _index.api.submitTraceabilityInfo(params).then(function (res) {
+          wx.showToast({
+            title: '提交成功',
+            icon: 'success',
+            duration: 2000
+          });
+
+          // 返回上一页
+          setTimeout(function () {
+            wx.navigateBack();
+          }, 2000);
+        }).catch(function (err) {
+          wx.showToast({
+            title: '提交失败',
+            icon: 'none',
+            duration: 2000
+          });
+          console.error('提交失败', err);
+        }).finally(function () {
+          _this9.isSubmitting = false;
+        });
+      }).catch(function (err) {
+        wx.showToast({
+          title: '图片上传失败',
+          icon: 'none',
+          duration: 2000
+        });
+        console.error('图片上传失败', err);
+        _this9.isSubmitting = false;
+      });
+    },
+    // 上传图片
+    uploadImages: function uploadImages(filePaths, type) {
+      return new Promise(function (resolve, reject) {
+        var urls = [];
+        var uploadedCount = 0;
+        filePaths.forEach(function (filePath, index) {
+          wx.uploadFile({
+            url: 'https://your-api-domain.com/upload',
+            // 替换为实际的上传接口
+            filePath: filePath,
+            name: 'file',
+            formData: {
+              type: type
+            },
+            success: function success(res) {
+              var data = JSON.parse(res.data);
+              if (data.code === 0) {
+                urls.push(data.data.url);
+              } else {
+                reject(new Error("\u56FE\u7247\u4E0A\u4F20\u5931\u8D25: ".concat(data.msg)));
+              }
+            },
+            fail: function fail(err) {
+              reject(err);
+            },
+            complete: function complete() {
+              uploadedCount++;
+              if (uploadedCount === filePaths.length) {
+                resolve({
+                  type: type,
+                  urls: urls
+                });
+              }
+            }
+          });
+        });
+      });
+    },
+    // 打开弹出层
     openPopup: function openPopup(field) {
       this.currentInputField = field;
+      this.currentInputValue = this.TraceabilityInfo[field] || '';
       this.$refs.popup.open();
     },
-    handleInputBlur: function handleInputBlur() {
-      // 失去焦点时也关闭弹框
+    // 处理输入确认
+    handleInputConfirm: function handleInputConfirm() {
+      if (this.currentInputField) {
+        this.TraceabilityInfo[this.currentInputField] = this.currentInputValue;
+      }
       this.$refs.popup.close();
     }
   }
 };
 exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
 
 /***/ }),
 

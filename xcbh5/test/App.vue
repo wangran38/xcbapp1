@@ -4,6 +4,10 @@
 	export default {
 		onLaunch: function() {},
 		onShow() {
+			// 开启线上调试
+			// uni.setEnableDebug({
+			//     enableDebug: false
+			// })
 			const updateManager = uni.getUpdateManager()
 			// 请求完新版本信息的回调
 			updateManager.onCheckForUpdate(res => {

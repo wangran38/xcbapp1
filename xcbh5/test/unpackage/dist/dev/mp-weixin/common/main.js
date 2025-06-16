@@ -108,6 +108,10 @@ var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 25));
 var _default = {
   onLaunch: function onLaunch() {},
   onShow: function onShow() {
+    // 开启线上调试
+    // uni.setEnableDebug({
+    //     enableDebug: false
+    // })
     var updateManager = uni.getUpdateManager();
     // 请求完新版本信息的回调
     updateManager.onCheckForUpdate(function (res) {
