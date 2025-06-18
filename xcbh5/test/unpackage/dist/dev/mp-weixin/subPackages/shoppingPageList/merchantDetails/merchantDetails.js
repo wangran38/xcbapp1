@@ -125,7 +125,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var f0 = _vm._f("hidePhone")(_vm.merchantInfo.phone)
+  var m0 = !_vm.isLogin ? _vm.hidePhone(_vm.merchantInfo.phone) : null
   var g0 = _vm.presaleList.length
   var l0 = _vm.__map(_vm.presaleList, function (item, index) {
     var $orig = _vm.__get_orig(item)
@@ -133,11 +133,11 @@ var render = function () {
       item.goodstotal > 0
         ? Math.min((item.selltotal / item.goodstotal) * 100, 100)
         : null
-    var m0 = _vm.getChineseTimeDiff(Date.now(), item.sellendtime)
+    var m1 = _vm.getChineseTimeDiff(Date.now(), item.sellendtime)
     return {
       $orig: $orig,
       g1: g1,
-      m0: m0,
+      m1: m1,
     }
   })
   var g2 = _vm.presaleList.length
@@ -145,7 +145,7 @@ var render = function () {
     {},
     {
       $root: {
-        f0: f0,
+        m0: m0,
         g0: g0,
         l0: l0,
         g2: g2,
@@ -299,19 +299,9 @@ var _default = {
       queryData: {
         page: 1,
         limit: 10
-      }
+      },
+      isLogin: true
     };
-  },
-  filters: {
-    hidePhone: function hidePhone(val) {
-      return val.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
-    },
-    countdown: function countdown(timestamp) {
-      var diff = timestamp - Date.now();
-      var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      var hours = Math.floor(diff % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
-      return "".concat(days, "\u5929").concat(hours, "\u5C0F\u65F6");
-    }
   },
   onLoad: function onLoad(_ref) {
     var query = _ref.query;
@@ -329,6 +319,10 @@ var _default = {
     }];
     this.queryData.farmers_id = parseInt(this.merchantInfo.id);
     this.getPresaleData();
+    var token = uni.getStorageSync('token');
+    if (!token) {
+      this.isLogin = false;
+    }
   },
   methods: {
     gotoGoods: function gotoGoods(id) {

@@ -294,16 +294,14 @@
   height: 80rpx;
   border-radius: 40rpx;
   display: flex;
-  align-items: center;
   padding: 0 30rpx;
-  margin-bottom: 30rpx;
   box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.06);
 }
 .search-bar .search-input.data-v-49e5f192 {
   flex: 1;
   height: 100%;
   font-size: 28rpx;
-  margin-left: 20rpx;
+  margin-left: 10rpx;
 }
 .search-bar .placeholder-style.data-v-49e5f192 {
   color: #CCC;

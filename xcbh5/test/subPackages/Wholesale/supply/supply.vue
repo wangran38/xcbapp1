@@ -1,386 +1,440 @@
 <template>
-	<view class="supply-container">
-		<view class="filter-section">
-			<view class="search">
-				<uni-icons type="search" style="margin: 10rpx; font-size: 33rpx;"></uni-icons>
-				<input class="serchInput" type="text" placeholder="请输入关键字">
-				<view style="display: flex;">
-					<button class="btn" type="primary">搜索</button>
-					<button class="btn" type="warn">重置</button>
-				</view>
-			</view>
-			<view class="filter-group">
+  <view class="supply-container">
+    <!-- 筛选搜索区域 -->
+    <view class="filter-section">
+      <!-- 搜索 + 按钮区域 -->
+      <view class="search-bar">
+        <input
+          class="search-input"
+          type="text"
+          placeholder="请输入关键字"
+          v-model="searchText"
+        />
+        <button class="search-btn" @click="handleSearch">搜索</button>
+        <button class="reset-btn" @click="handleReset">重置</button>
+      </view>
+      <!-- 分类筛选区域 -->
+      <view class="filter-group">
+        <picker
+          @change="categoryChange"
+          :range="categories"
+          range-key="label"
+        >
+          <view class="filter-btn">
+            {{ categories[selectedCategoryIndex].label }}
+          </view>
+        </picker>
+        <picker :range="distances" range-key="label">
+          <view class="filter-btn">
+            {{ distances[selectedDistanceIndex].label }}
+          </view>
+        </picker>
+      </view>
+    </view>
 
-				<picker @change="categoryChange" :range="categories" range-key="label">
-					<view class="filter-btn">
-						<uni-icons type="tags" size="16" color="#3a7afe" />
-						<text class="btn-text">{{ categories[selectedCategoryIndex].label }}</text>
-						<uni-icons type="arrowdown" size="14" color="#3a7afe" />
-					</view>
-				</picker>
+    <!-- 商品列表区域 -->
+    <scroll-view
+      class="goods-list"
+      scroll-y
+      @scrolltolower="loadMore"
+      :scroll-with-animation="true"
+    >
+      <view class="goods-grid">
+        <view
+          class="goods-card"
+          v-for="(item, index) in goodsList"
+          :key="index"
+          @click="goDetail(item.id)"
+        >
+          <!-- 商品图片 -->
+          <view class="image-container">
+            <image
+              class="goods-image"
+              :src="item.selllogo"
+              mode="aspectFill"
+              :lazy-load="true"
+            />
+            <view class="goods-tag" v-if="item.tag">
+              {{ item.tag }}
+            </view>
+          </view>
+          <!-- 商品信息 -->
+          <view class="goods-content">
+            <text class="goods-title">{{ item.selltitle }}</text>
+            <view class="price-section">
+              <text class="current-price">￥{{ item.marketprice }}</text>
+              <text class="original-price" v-if="item.price">
+                ￥{{ item.price }}
+              </text>
+            </view>
+            <view class="action-bar">
+              <view class="sales-info">
+                <uni-icons type="shop" size="12" color="#666"></uni-icons>
+                <text>{{ item.stoptime }}人付款</text>
+              </view>
+              <view class="contact-btn" @click.stop="contactNow">
+                <text>询底价</text>
+                <uni-icons type="arrow-right" size="14" color="#fff"></uni-icons>
+              </view>
+            </view>
+            <view class="location-info">
+              <uni-icons type="location" size="12" color="#666"></uni-icons>
+              <text>{{ item.selladdress }}</text>
+            </view>
+          </view>
+        </view>
+      </view>
 
-				<picker :range="distances" range-key="label">
-					<view class="filter-btn">
-						<uni-icons type="tags" size="16" color="#3a7afe" />
-						<text class="btn-text">{{ distances[selectedCategoryIndex].label }}</text>
-						<uni-icons type="arrowdown" size="14" color="#3a7afe" />
-					</view>
-				</picker>
-
-			</view>
-
-		</view>
-
-		<!-- 商品列表 -->
-		<scroll-view class="goods-list" scroll-y @scrolltolower="loadMore" :scroll-with-animation="true">
-			<view class="goods-grid">
-				<view class="goods-card" v-for="item in goodsList" :key="item.id" @click="goDetail(item.id)">
-					<view class="image-container">
-						<image class="goods-image" :src="item.selllogo" mode="aspectFill" :lazy-load="true" />
-						<view v-if="item.tag" class="goods-tag">
-							{{ item.tag }}
-						</view>
-					</view>
-
-					<view class="goods-content">
-						<text class="goods-title">{{ item.selltitle }}</text>
-
-						<view class="price-section">
-							<text class="current-price">￥{{ item.marketprice }}</text>
-							<text class="original-price" v-if="item.price">￥{{ item.price }}</text>
-						</view>
-
-						<view class="action-bar">
-							<view class="sales-info">
-								<uni-icons type="shop" size="12" color="#666" />
-								<text>{{ item.stoptime }}人付款</text>
-							</view>
-							<view class="contact-btn" @click.stop="contactNow">
-								<text>询底价</text>
-								<uni-icons type="arrow-right" size="14" color="#fff" />
-							</view>
-						</view>
-
-						<view class="location-info">
-							<uni-icons type="location" size="12" color="#666" />
-							<text>{{ item.selladdress }}</text>
-						</view>
-					</view>
-				</view>
-			</view>
-
-			<view class="load-status">
-				<text v-if="loading" class="loading-text">加载中...</text>
-				<text v-else-if="noMore" class="no-more">—— 没有更多了 ——</text>
-			</view>
-		</scroll-view>
-	</view>
+      <!-- 加载状态 -->
+      <view class="load-status">
+        <text v-if="loading" class="loading-text">加载中...</text>
+        <text v-else-if="noMore" class="no-more">—— 没有更多了 ——</text>
+      </view>
+    </scroll-view>
+  </view>
 </template>
 
 <script>
-	import {
-		api
-	} from '@/api/index.js'
+import { api } from '@/api/index.js'
 
-	export default {
-		data() {
-			return {
-				distances: [{
-						label: '离我最近',
-						value: ''
-					},
-					{
-						label: '离我最远',
-						value: ''
-					},
-				],
-				categories: [{
-						label: '所有分类',
-						value: ''
-					},
-					{
-						label: '菜类',
-						value: ''
-					},
-					{
-						label: '肉类',
-						value: ''
-					}
-				],
-				selectedCategoryIndex: 0,
-				searchText: '',
-				goodsList: [],
-				page: 1,
-				loading: false,
-				noMore: false,
-				queryData: {
-					page: 1,
-					limit: 10
-				}
-			}
-		},
-		onLoad() {
-			this.loadData()
-		},
-		methods: {
-			async loadData() {
-				if (this.loading || this.noMore) return
-
-				this.loading = true
-				try {
-					const res = await api.wholesaleList(this.queryData)
-
-					this.goodsList = res.data.listdata
-					if (res.data.listdata.length === 0) {
-						this.noMore = true
-						return
-					}
-
-					this.page++
-				} catch (error) {
-					console.log(error)
-				} finally {
-					this.loading = false
-				}
-			},
-
-			processGoodsData(list) {
-				return list.map(item => ({
-					...item,
-					marketprice: Number(item.marketprice).toFixed(2),
-					price: item.price ? Number(item.price).toFixed(2) : null,
-				}))
-			},
-
-
-			handleSearch() {
-				this.resetList()
-				this.loadData()
-			},
-
-			loadMore() {
-				if (!this.noMore) this.loadData()
-			},
-
-			resetList() {
-				this.goodsList = []
-				this.page = 1
-				this.noMore = false
-			},
-
-			contactNow() {
-				uni.showToast({
-					title: '已发送联系请求',
-					icon: 'none'
-				})
-			},
-
-			goDetail(id) {
-				uni.navigateTo({
-					url: `/pages/goods/detail?id=${id}`
-				})
-			}
-		}
-	}
+export default {
+  data() {
+    return {
+      // 搜索关键字
+      searchText: '',
+      // 分类数据
+      categories: [
+        { label: '所有分类', value: '' },
+        { label: '菜类', value: '' },
+        { label: '肉类', value: '' }
+      ],
+      selectedCategoryIndex: 0,
+      // 距离筛选
+      distances: [
+        { label: '离我最近', value: '' },
+        { label: '离我最远', value: '' }
+      ],
+      selectedDistanceIndex: 0,
+      // 商品列表
+      goodsList: [],
+      page: 1,
+      loading: false,
+      noMore: false,
+      queryData: {
+        page: 1,
+        limit: 10
+      }
+    }
+  },
+  onLoad() {
+    this.loadData()
+  },
+  methods: {
+    // 加载数据
+    async loadData() {
+      if (this.loading || this.noMore) return
+      this.loading = true
+      try {
+        const res = await api.wholesaleList(this.queryData)
+        this.goodsList = res.data.listdata
+        if (res.data.listdata.length === 0) {
+          this.noMore = true
+          return
+        }
+        this.page++
+      } catch (error) {
+        console.log(error)
+      } finally {
+        this.loading = false
+      }
+    },
+    // 处理搜索
+    handleSearch() {
+      this.resetList()
+      this.loadData()
+    },
+    // 重置筛选
+    handleReset() {
+      this.searchText = ''
+      this.selectedCategoryIndex = 0
+      this.selectedDistanceIndex = 0
+      this.resetList()
+      this.loadData()
+    },
+    // 加载更多
+    loadMore() {
+      if (!this.noMore) this.loadData()
+    },
+    // 重置列表
+    resetList() {
+      this.goodsList = []
+      this.page = 1
+      this.noMore = false
+    },
+    // 联系商家
+    contactNow() {
+      uni.showToast({
+        title: '已发送联系请求',
+        icon: 'none'
+      })
+    },
+    // 跳转详情
+    goDetail(id) {
+      uni.navigateTo({
+        url: `/pages/goods/detail?id=${id}`
+      })
+    },
+    // 分类改变
+    categoryChange(e) {
+      this.selectedCategoryIndex = e.detail.value
+      this.resetList()
+      this.loadData()
+    }
+  }
+}
 </script>
 
 <style lang="scss">
-	.search {
-		height: 60rpx;
-		/* border-radius: 50rpx; */
-		padding: 5rpx;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		border: 1rpx solid #dcdfe6;
-		overflow: hidden;
-		border-radius: 15rpx;
-	}
+/* 定义主题色等变量，方便统一调整 */
+$primary-color: #409eff;
+$success-color: #67c23a;
+$warning-color: #e6a23c;
+$danger-color: #f56c6c;
+$info-color: #909399;
 
-	.search .btn {
-		height: 50%;
-		text-align: center;
-		margin: 0;
-		border-radius: 0;
-		margin: 5rpx;
-		border-radius: 15rpx;
-	}
+$bg-color: #f5f7fa;
+$white: #fff;
+$gray-light: #e5e7eb;
+$text-main: #303133;
+$text-secondary: #606266;
+$text-placeholder: #909399;
 
-	.search .serchInput {
-		color: black;
-		font-size: 30rpx;
-		margin: 0;
-		height: 100%;
+.supply-container {
+  padding: 24rpx;
+  background-color: $bg-color;
+  min-height: 100vh;
+}
 
-	}
+/* 筛选区域 */
+.filter-section {
+  margin-bottom: 24rpx;
+}
 
-	.filter-group {
-		margin: 10rpx;
-		display: flex;
-		gap: 30rpx;
-		align-items: center;
+/* 搜索栏 */
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
 
-		.filter-btn {
-			display: flex;
-			align-items: center;
-			padding: 12rpx 24rpx;
-			border-radius: 40rpx;
-			background: #f5f7fa;
-			border: 1rpx solid #e4e7ed;
-		}
-	}
+  .search-input {
+    flex: 1;
+    height: 88rpx;
+    line-height: 88rpx;
+    padding: 0 24rpx;
+    border: none;
+    background-color: $white;
+    font-size: 28rpx;
+    color: $text-main;
+    &::placeholder {
+      color: $text-placeholder;
+    }
+  }
 
-	.supply-container {
-		padding: 20rpx;
-		background: #f5f5f5;
-		min-height: 100vh;
-	}
+  .search-btn,
+  .reset-btn {
+    height: 88rpx;
+    line-height: 88rpx;
+    padding: 0 36rpx;
+    border: none;
+    color: $white;
+    font-size: 28rpx;
+    cursor: pointer;
+    transition: all 0.3s ease;
+	margin: 10rpx;
+  }
 
-	.filter-section {
-		margin-bottom: 20rpx;
+  .search-btn {
+    background: linear-gradient(90deg, #66b1ff, $primary-color);
+	
+    &:hover {
+      opacity: 0.9;
+    }
+  }
 
-		.search-box {
-			display: flex;
-			align-items: center;
-			background: #fff;
-			border-radius: 48rpx;
-			padding: 0 28rpx;
-			height: 80rpx;
+  .reset-btn {
+    background: linear-gradient(90deg, #f78989, $danger-color);
+    margin-left: 12rpx;
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
 
-			.search-input {
-				flex: 1;
-				font-size: 28rpx;
-				padding: 0 20rpx;
-				color: #333;
-			}
-		}
-	}
+/* 分类筛选 */
+.filter-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-	.goods-list {
-		height: calc(100vh - 120rpx);
+  .filter-btn {
+    padding: 14rpx 28rpx;
+    background-color: $white;
+    border: 1rpx solid $gray-light;
+    border-radius: 44rpx;
+    font-size: 28rpx;
+    color: $text-secondary;
+    transition: all 0.3s ease;
+    &:hover {
+      border-color: $primary-color;
+      color: $primary-color;
+    }
+  }
+}
 
-		.goods-grid {
-			display: grid;
-			grid-template-columns: repeat(2, 1fr);
-			gap: 20rpx;
-			padding-bottom: 40rpx;
-		}
+/* 商品列表 */
+.goods-list {
+  height: calc(100vh - 260rpx); /* 留出筛选区域高度 */
+}
 
-		.goods-card {
-			background: #fff;
-			border-radius: 16rpx;
-			overflow: hidden;
-			box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.04);
-		}
+.goods-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24rpx;
+}
 
-		.image-container {
-			position: relative;
-			aspect-ratio: 1/1;
+.goods-card {
+  background-color: $white;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+  &:hover {
+    box-shadow: 0 6rpx 24rpx rgba(0, 0, 0, 0.05);
+    transform: translateY(-2rpx);
+  }
+}
 
-			.goods-image {
-				width: 100%;
-				height: 100%;
-			}
+.image-container {
+  position: relative;
+  aspect-ratio: 1/1;
+  overflow: hidden;
 
-			.goods-tag {
-				position: absolute;
-				top: 10rpx;
-				left: 10rpx;
-				background: #ff4444;
-				color: #fff;
-				padding: 4rpx 16rpx;
-				border-radius: 8rpx;
-				font-size: 22rpx;
-			}
-		}
+  .goods-image {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
 
-		.goods-content {
-			padding: 20rpx;
+  .goods-tag {
+    position: absolute;
+    top: 12rpx;
+    left: 12rpx;
+    background: $danger-color;
+    color: $white;
+    padding: 6rpx 18rpx;
+    border-radius: 8rpx;
+    font-size: 22rpx;
+    opacity: 0.9;
+  }
+}
 
-			.goods-title {
-				font-size: 28rpx;
-				color: #333;
-				line-height: 1.4;
-				display: -webkit-box;
-				-webkit-box-orient: vertical;
-				-webkit-line-clamp: 2;
-				overflow: hidden;
-				min-height: 80rpx;
-				margin-bottom: 16rpx;
-			}
+.goods-content {
+  padding: 24rpx;
 
-			.price-section {
-				display: flex;
-				align-items: baseline;
-				margin-bottom: 20rpx;
+  .goods-title {
+    font-size: 28rpx;
+    color: $text-main;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    min-height: 80rpx;
+    margin-bottom: 16rpx;
+  }
 
-				.current-price {
-					color: #ff4444;
-					font-size: 32rpx;
-					font-weight: 600;
-					margin-right: 12rpx;
-				}
+  .price-section {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 20rpx;
 
-				.original-price {
-					color: #999;
-					font-size: 24rpx;
-					text-decoration: line-through;
-				}
-			}
+    .current-price {
+      color: $danger-color;
+      font-size: 34rpx;
+      font-weight: 600;
+      margin-right: 12rpx;
+    }
 
-			.action-bar {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				margin-bottom: 16rpx;
+    .original-price {
+      color: $text-placeholder;
+      font-size: 24rpx;
+      text-decoration: line-through;
+    }
+  }
 
-				.sales-info {
-					display: flex;
-					align-items: center;
-					color: #666;
-					font-size: 24rpx;
+  .action-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16rpx;
 
-					.uni-icons {
-						margin-right: 6rpx;
-					}
-				}
+    .sales-info {
+      display: flex;
+      align-items: center;
+      color: $text-secondary;
+      font-size: 24rpx;
 
-				.contact-btn {
-					background: linear-gradient(90deg, #2979FF, #00B8FF);
-					border-radius: 40rpx;
-					padding: 8rpx 24rpx;
-					display: flex;
-					align-items: center;
+      .uni-icons {
+        margin-right: 6rpx;
+      }
+    }
 
-					text {
-						color: #fff;
-						font-size: 24rpx;
-						margin-right: 8rpx;
-					}
-				}
-			}
+    .contact-btn {
+      background: linear-gradient(90deg, #66b1ff, $primary-color);
+      border-radius: 40rpx;
+      padding: 8rpx 24rpx;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+      &:hover {
+        opacity: 0.9;
+      }
 
-			.location-info {
-				display: flex;
-				align-items: center;
-				color: #666;
-				font-size: 24rpx;
+      text {
+        color: $white;
+        font-size: 24rpx;
+        margin-right: 8rpx;
+      }
+    }
+  }
 
-				.uni-icons {
-					margin-right: 6rpx;
-				}
-			}
-		}
-	}
+  .location-info {
+    display: flex;
+    align-items: center;
+    color: $text-secondary;
+    font-size: 24rpx;
 
-	.load-status {
-		padding: 30rpx 0;
-		text-align: center;
-		font-size: 26rpx;
-		color: #999;
+    .uni-icons {
+      margin-right: 6rpx;
+    }
+  }
+}
 
-		.no-more {
-			color: #666;
-		}
-	}
+/* 加载状态 */
+.load-status {
+  padding: 30rpx 0;
+  text-align: center;
+  font-size: 26rpx;
+  color: $text-placeholder;
+
+  .no-more {
+    color: $text-secondary;
+  }
+}
 </style>

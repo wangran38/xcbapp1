@@ -2265,6 +2265,10 @@ var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 48));
 var myMixin = {
   methods: {
+    // 手机号隐藏处理
+    hidePhone: function hidePhone(val) {
+      return val.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
+    },
     // 获取今天日期
     getNowDate: function getNowDate() {
       return this.initDate(Date.now());

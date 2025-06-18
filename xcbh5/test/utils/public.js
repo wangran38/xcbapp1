@@ -1,5 +1,9 @@
 export const myMixin = {
   methods: {
+	  // 手机号隐藏处理
+	  hidePhone(val){
+		  return val.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
+	  },
 	  // 获取今天日期
 	  getNowDate(){
 	  	return this.initDate(Date.now())
@@ -43,7 +47,6 @@ export const myMixin = {
      * {returns} timeStr   格式化后的时间
      */
     initTime(str) {
-		
       let timestamp = new Date(str).getTime()
       var time = String(timestamp).length === 10 ? new Date(parseInt(timestamp) * 1000) : new Date(parseInt(
         timestamp))

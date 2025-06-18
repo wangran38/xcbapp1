@@ -1,20 +1,20 @@
 <template>
   <view class="container">
     <!-- 订单通知设置 -->
-    <view class="settings-group">
+<!--    <view class="settings-group">
       <text class="group-title">订单通知</text>
       <view class="setting-item">
         <view>开启新订单通知</view>
-        <!-- <switch 
+        <switch 
           :checked="form.notifyEnabled" 
           @change="val => setForm('notifyEnabled', val.detail.value)" 
           color="#4CD964"
-        /> -->
+        />
 		<view>
 			<button :disabled="!messageStatus" @click="switchMessage" :style="messageStatus ?'background-color:#1AAD19;border-color:#1AAD19;color:#ffffff':'background-color:#aa0000;border-color:#aa0000;color:#ffffff'">{{messageStatusText}}</button>
 		</view>
       </view>
-    </view>
+    </view> -->
 
     <!-- 支付方式设置 -->
     <view class="settings-group">

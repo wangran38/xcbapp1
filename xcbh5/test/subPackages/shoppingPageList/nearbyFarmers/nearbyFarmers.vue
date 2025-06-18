@@ -85,7 +85,7 @@
 							</view>
 						</view>
 						<image style="width: 150rpx; height: 150rpx;"
-							:src="facelogo ? facelogo : 'https://b0.bdstatic.com/0df6c8c7f109aa7b67e7cb15e6f8d025.jpg@h_1280'">
+							:src="farmer.logo ? farmer.logo : 'https://b0.bdstatic.com/0df6c8c7f109aa7b67e7cb15e6f8d025.jpg@h_1280'">
 						</image>
 					</view>
 

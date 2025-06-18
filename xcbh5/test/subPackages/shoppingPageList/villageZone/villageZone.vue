@@ -7,22 +7,24 @@
         animationDelay: i * 0.2 + 's'
       }"></view>
 		</view> -->
-
-		<view class="search-bar">
-			<view style="display: flex;   align-items: center; border-radius: 20rpx;">
-				<view style="padding: 20rpx;"><uni-icons color="#999999" size="20" type="search" /></view>
-				<input type="text" placeholder="搜索菜品" v-model="queryData.goodsname" />
+		<view style="display: flex; align-items: center;">
+			<view class="search-bar">
+				<view style="display: flex;   align-items: center; border-radius: 20rpx;">
+					<view style="padding: 20rpx;"><uni-icons color="#999999" size="20" type="search" /></view>
+					<input type="text" placeholder="搜索菜品" v-model="queryData.goodsname" />
+				</view>
 			</view>
-
 			<view
-				style="background-color: #007aff; color: white; width: 120rpx; height: 80rpx; line-height: 80rpx; text-align: center; border-radius: 10rpx; margin: 10rpx;"
+				style="background-color: #007aff; color: white; width: 120rpx; height: 80rpx; line-height: 80rpx; text-align: center; border-radius: 10rpx; margin: 0 10rpx 0 0;"
 				@click="startSearch">
 				搜索</view>
 			<view
-				style="background-color: red; color: white;width: 120rpx; height: 80rpx; line-height: 80rpx; text-align: center; border-radius: 10rpx; margin: 10rpx;"
+				style="background-color: red; color: white;width: 120rpx; height: 80rpx; line-height: 80rpx; text-align: center; border-radius: 10rpx;  margin: 0 10rpx 0 0;"
 				@click="stopSearch">
 				清空</view>
 		</view>
+
+
 		<view class="filter-group">
 		
 			<picker @change="categoryChange" :range="pricesort" range-key="label">
@@ -289,21 +291,20 @@
 		border: 1rpx solid #e4e7ed;
 	}
 	.search-bar {
+
 		margin: 15rpx;
 		background: #FFF;
 		height: 80rpx;
 		border-radius: 40rpx;
 		display: flex;
-		align-items: center;
 		padding: 0 30rpx;
-		margin-bottom: 30rpx;
 		box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.06);
 
 		.search-input {
 			flex: 1;
 			height: 100%;
 			font-size: 28rpx;
-			margin-left: 20rpx;
+			margin-left: 10rpx;
 		}
 
 		.placeholder-style {

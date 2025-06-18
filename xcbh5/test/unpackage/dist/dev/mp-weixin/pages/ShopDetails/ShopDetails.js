@@ -125,6 +125,15 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var m0 = !_vm.isLogin ? _vm.hidePhone(_vm.shopDetails.contactphone) : null
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        m0: m0,
+      },
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -171,6 +180,7 @@ var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/run
 var _vuex = __webpack_require__(/*! vuex */ 34);
 var _index = __webpack_require__(/*! @/api/index */ 49);
 var _usePage = _interopRequireDefault(__webpack_require__(/*! @/hooks/usePage */ 65));
+var _public = __webpack_require__(/*! @/utils/public.js */ 190);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var shopItem = function shopItem() {
@@ -202,9 +212,9 @@ var _default = {
       urls1: [],
       // 摊主照片
       urls2: []
-    }, (0, _defineProperty2.default)(_ref, "cart", false), (0, _defineProperty2.default)(_ref, "show", false), _ref;
+    }, (0, _defineProperty2.default)(_ref, "cart", false), (0, _defineProperty2.default)(_ref, "show", false), (0, _defineProperty2.default)(_ref, "isLogin", true), _ref;
   },
-  mixins: [_usePage.default],
+  mixins: [_usePage.default, _public.myMixin],
   components: {
     shopItem: shopItem,
     menuBarVue: menuBarVue,
@@ -212,6 +222,10 @@ var _default = {
   },
   computed: _objectSpread(_objectSpread({}, (0, _vuex.mapState)('cart', ['carts'])), (0, _vuex.mapGetters)('cart', ['getTempCount'])),
   onShow: function onShow() {
+    var token = uni.getStorageSync('token');
+    if (!token) {
+      this.isLogin = false;
+    }
     this.loadPageData();
   },
   methods: _objectSpread(_objectSpread({

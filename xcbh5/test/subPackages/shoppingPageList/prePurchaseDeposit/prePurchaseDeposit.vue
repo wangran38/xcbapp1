@@ -1,124 +1,100 @@
 <template>
   <view class="container">
+    <!-- 商品主图卡片 -->
     <view class="product-card">
-      <text class="title">{{ product.goodsname }}</text>
-      <view class="price-info">
-        <text class="deposit">单价：¥{{ product.presaleprice }}</text>
+      <image 
+        class="product-image" 
+        :src="product.imglogo" 
+        mode="aspectFill"
+      ></image>
+      <view class="product-info">
+        <text class="product-name">{{ product.goodsname }}</text>
+        <text class="product-tag">预售商品</text>
+        <view class="product-price-row">
+          <text class="product-price">¥{{ product.price }}</text>
+          <text class="product-unit">{{ product.unit }}</text>
+        </view>
+        <text class="product-stock">库存: {{ product.stock || '充足' }}</text>
       </view>
     </view>
 
-    <view class="form-item">
-      <text class="label">购买数量</text>
-      <view class="number-selector">
-        <button 
-          class="btn minus" 
-          :class="{ disabled: quantity <= 1 }"
-          @click="changeQuantity(-1)"
-        >-</button>
-        <input 
-          class="input" 
-          type="number" 
-          :value="quantity"
-          @input="handleInput"
-          :min="1"
-          :max="99"
-        />
-        <button 
-          class="btn plus" 
-          :class="{ disabled: quantity >= 99 }"
-          @click="changeQuantity(1)"
-        >+</button>
-		<text style="font-size: 35rpx; position: absolute; right: 60rpx;">{{product.unit}}</text>
+    <!-- 购买区域卡片 -->
+    <view class="purchase-card">
+      <view class="form-group quantity-group">
+        <text class="form-label">购买数量</text>
+        <view class="quantity-selector">
+          <button 
+            class="quantity-btn minus" 
+            :class="{'disabled': quantity <= 1}"
+            @click="changeQuantity(-1)"
+            :disabled="quantity <= 1"
+          >-</button>
+          <input 
+            class="quantity-input" 
+            type="number" 
+            :value="quantity"
+            @input="handleInput"
+            :min="1"
+            :max="99"
+            placeholder="请输入数量"
+          />
+          <button 
+            class="quantity-btn plus" 
+            :class="{'disabled': quantity >= 99}"
+            @click="changeQuantity(1)"
+            :disabled="quantity >= 99"
+          >+</button>
+        </view>
       </view>
-    </view>
 
-    <view class="form-item">
-      <text class="label">选择提货点</text>
-	  <!-- <view style="font-weight: bold; font-size: 25rpx;">{{deliveryPoints.length<=0? '暂无数据':''}}</view> -->
-      <scroll-view scroll-y class="delivery-list">
-<!--        <view 
-          v-for="point in deliveryPoints"
-          :key="point.id"
-          class="delivery-item"
-          :class="{ active: selectedPoint === point.id }"
-          @click="selectPoint(point.id)"
-        >
-          <view class="point-info">
-            <text class="name">{{ point.name }}</text>
-            <text class="address">{{ point.address }}</text>
+      <view class="form-group pickup-group">
+        <text class="form-label">提货点</text>
+        <view class="pickup-list">
+          <view 
+            v-for="(point, index) in deliveryPoints"
+            :key="index"
+            class="pickup-item"
+            :class="{'selected': selectedPoint === point.id}"
+            @click="selectPoint(point.id)"
+          >
+            <view class="point-info">
+              <text class="point-name">{{ point.name }}</text>
+              <text class="point-address">{{ point.address }}</text>
+            </view>
+            <view class="pickup-check" v-if="selectedPoint === point.id">
+              <uni-icons type="check" size="24" />
+            </view>
           </view>
-          <view class="distance">
-            <text>{{ point.distance }}km</text>
-            <uni-icons 
-              v-if="selectedPoint === point.id"
-              type="checkmarkempty" 
-              color="#07c160"
-              size="20"
-            />
-          </view>
-        </view> -->
-		
-		<view
-		  class="delivery-item"
-		  :class="{ active: selectedPoint === product.id }"
-		  @click="selectPoint(product.id)"
-		  v-if=" product.pickaddress"
-		>
-		  <view class="point-info">
-		    <text class="name">{{ product.pickaddress }}</text>
-		    <!-- <text class="address">{{ product.pickaddress }}</text> -->
-		  </view>
-		  <view class="distance">
-		    <!-- <text>{{ product.distance }}km</text> -->
-		    <uni-icons 
-		      v-if="selectedPoint === product.id"
-		      type="checkmarkempty" 
-		      color="#07c160"
-		      size="20"
-		    />
-		  </view>
-		 
-		</view>
-		 <view v-else style="font-weight: bold; color: gray">暂无取货点</view>
-      </scroll-view>
-    </view>
-
-    <view class="form-item">
-      <text class="label">预售规则</text>
-      <view class="rules">
-        <view v-for="(rule,index) in shortRules" :key="index" class="rule-item">
-          {{ index + 1 }}. {{ rule }}
+          <view v-if="!deliveryPoints.length" class="no-point">暂无可用提货点</view>
         </view>
       </view>
     </view>
 
+    <!-- 规则说明卡片 -->
+    <view class="rules-card">
+      <text class="section-title">预售规则</text>
+      <view class="rules-list">
+        <view v-for="(rule, index) in shortRules" :key="index" class="rule-item">
+          <text class="rule-text">{{ index + 1 }}. {{ rule }}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部操作栏 -->
     <view class="footer">
-<!--      <view class="total">
-        <text>应付定金：</text>
-        <text class="price">¥{{ totalDeposit }}</text>
-      </view> -->
+      <view class="total-info">
+        <text class="total-label">总计：</text>
+        <text class="total-amount">¥{{ totalAmount }}</text>
+      </view>
       <button 
         class="submit-btn"
-        :class="{ disabled: !formValid }"
+        :class="{'disabled': !formValid}"
         @click="handleSubmit"
+        :disabled="!formValid"
       >
-        {{ formValid ? '提交订单' : '请完善信息' }}
+        {{ formValid ? '立即预订' : '请完善信息' }}
       </button>
     </view>
-
-    <uni-popup ref="popup" type="bottom">
-      <view class="rules-popup">
-        <view class="popup-header">
-          <text>完整预售规则</text>
-          <uni-icons type="close" size="24" @click="showRulesPopup = false"/>
-        </view>
-        <scroll-view scroll-y class="rules-content">
-          <view v-for="(rule,index) in fullRules" :key="index" class="rule-item">
-            {{ index + 1 }}. {{ rule }}
-          </view>
-        </scroll-view>
-      </view>
-    </uni-popup>
   </view>
 </template>
 
@@ -130,265 +106,364 @@ export default {
       },
       quantity: 1,
       selectedPoint: null,
-      showRulesPopup: false,
       deliveryPoints: [
-        {
-          id: 1,
-          name: "绿鲜社区店",
-          address: "朝阳区光华路8号",
-          distance: 1.2
-        },
-        // {
-        //   id: 2,
-        //   name: "智慧生活超市",
-        //   address: "海淀区中关村大街12号",
-        //   distance: 2.5
-        // }
+        // { id: 1, name: '绿鲜社区店', address: '朝阳区光华路8号' },
+        // { id: 2, name: '智慧生活超市', address: '海淀区中关村大街12号' },
+        // { id: 3, name: '生鲜便利店', address: '西城区西单北大街109号' }
       ],
       shortRules: [
-        "定金支付后不可退换"
-      ],
-      fullRules: [
-        "定金用于锁定商品购买资格，支付后不可退换",
-        "每周二18:00前可在小程序修改提货点和配送时间",
-        "尾款需在商品到货后3日内完成支付",
-        "逾期未付尾款视为自动放弃，定金不予退还",
-        "商品价格波动不影响已支付定金订单",
-        "最终商品以实际到货为准，保持合理误差"
+        '定金支付后不可退换',
+        // '提货时需出示订单二维码',
+        // '预售商品到货后统一配送'
       ]
     }
   },
   onLoad({query}) {
-  	this.product =  JSON.parse(query)
-	console.log(this.product)
+  	this.product = JSON.parse(query)
+	console.log(this.product.pickaddress)
+	this.deliveryPoints = [{id:1,name:this.product.pickaddress,address:this.product.pickaddress}]
   },
   computed: {
-    totalDeposit() {
-      return (this.product.presaleprice * this.quantity /3).toFixed(2)
+    totalAmount() {
+      return (this.product.presaleprice * this.quantity).toFixed(2);
     },
     formValid() {
-      return this.selectedPoint !== null && this.quantity >= 1
+      return this.selectedPoint !== null && this.quantity >= 1;
     }
   },
   methods: {
     changeQuantity(step) {
-      this.quantity = Math.max(1, Math.min(99, this.quantity + step))
+      this.quantity = Math.max(1, Math.min(99, this.quantity + step));
     },
     handleInput(e) {
-      let val = parseInt(e.detail.value) || 1
-      this.quantity = Math.max(1, Math.min(99, val))
+      const val = parseInt(e.detail.value) || 1;
+      this.quantity = Math.max(1, Math.min(99, val));
     },
     selectPoint(id) {
-      this.selectedPoint = this.selectedPoint === id ? null : id
+      this.selectedPoint = id;
     },
     handleSubmit() {
       if (!this.formValid) {
         uni.showToast({
-          title: '请选择提货点',
+          title: '请确认提货点和数量',
           icon: 'none'
-        })
-        return
+        });
+        return;
       }
-
-      uni.showLoading({ title: '提交中...' })
-      setTimeout(() => {
-        uni.hideLoading()
-        uni.navigateTo({
-          url: '/pages/order/result?status=success'
-        })
-      }, 1500)
+      uni.showToast({
+        title: '预订成功',
+        icon: 'success'
+      });
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+/* 基础布局 */
 .container {
-  padding: 24rpx;
-  min-height: 100vh;
-  background: #f8f8f8;
+  padding: 30rpx;
+  background-color: #f5f5f5;
 }
 
+/* 商品主图卡片 */
 .product-card {
-  background: #fff;
-  border-radius: 16rpx;
-  padding: 32rpx;
-  margin-bottom: 24rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 6rpx 20rpx rgba(0,0,0,0.08);
+  margin-bottom: 30rpx;
+  position: relative;
+  
+  .product-image {
+    width: 100%;
+    height: 400rpx;
+  }
+  
+  .product-info {
+    padding: 30rpx;
+    
+    .product-name {
+      font-size: 36rpx;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 15rpx;
+      display: block;
+    }
+    
+    .product-tag {
+      display: inline-block;
+      background-color: #ff4d4f;
+      color: #fff;
+      font-size: 24rpx;
+      padding: 4rpx 12rpx;
+      border-radius: 4rpx;
+      margin-bottom: 20rpx;
+      display: block;
+    }
+    
+    .product-price-row {
+      display: flex;
+      align-items: baseline;
+      margin-bottom: 15rpx;
+      
+      .product-price {
+        color: #ff4d4f;
+        font-size: 56rpx;
+        font-weight: 800;
+        margin-right: 10rpx;
+      }
+      
+      .product-unit {
+        color: #666;
+        font-size: 28rpx;
+      }
+    }
+    
+    .product-stock {
+      color: #07c160;
+      font-size: 28rpx;
+      font-weight: 500;
+    }
+  }
+}
 
-  .title {
+/* 购买区域卡片 */
+.purchase-card {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 6rpx 20rpx rgba(0,0,0,0.08);
+  margin-bottom: 30rpx;
+  
+  .form-group {
+    margin-bottom: 30rpx;
+    
+    .form-label {
+      font-size: 32rpx;
+      color: #333;
+      font-weight: 500;
+      margin-bottom: 20rpx;
+      display: block;
+      position: relative;
+      padding-left: 15rpx;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 6rpx;
+        height: 26rpx;
+        background-color: #007aff;
+        border-radius: 3rpx;
+      }
+    }
+  }
+  
+  /* 数量选择器强化设计 */
+  .quantity-group {
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+      border: 3rpx solid #e5e5e5;
+      border-radius: 12rpx;
+      overflow: hidden;
+      box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.05);
+      
+      .quantity-btn {
+        width: 110rpx;
+        height: 110rpx;
+        line-height: 110rpx;
+        font-size: 52rpx;
+        color: #333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f9f9f9;
+        transition: all 0.2s;
+        
+        &.minus {
+          color: #ff5252;
+        }
+        
+        &.plus {
+          color: #07c160;
+        }
+        
+        &.disabled {
+          color: #ccc;
+          background-color: #f5f5f5;
+          cursor: not-allowed;
+        }
+        
+        &:active {
+          background-color: #f0f0f0;
+        }
+      }
+      
+      .quantity-input {
+        flex: 1;
+        height: 110rpx;
+        text-align: center;
+        font-size: 44rpx;
+        color: #333;
+        border: none;
+        outline: none;
+        background-color: #fff;
+      }
+    }
+  }
+  
+  /* 自提点强化设计 */
+  .pickup-group {
+    .pickup-list {
+      .pickup-item {
+        padding: 25rpx 0;
+        border-bottom: 1rpx solid #f5f5f5;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        transition: all 0.3s;
+        
+        &:last-child {
+          border-bottom: none;
+        }
+        
+        &.selected {
+          &::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8rpx;
+            height: 40rpx;
+            background-color: #07c160;
+            border-radius: 4rpx;
+          }
+        }
+        
+        .point-info {
+          .point-name {
+            font-size: 32rpx;
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 5rpx;
+          }
+          
+          .point-address {
+            font-size: 28rpx;
+            color: #666;
+          }
+        }
+        
+        .pickup-check {
+          color: #07c160;
+          font-size: 32rpx;
+        }
+      }
+      
+      .no-point {
+        padding: 25rpx 0;
+        font-size: 28rpx;
+        color: #999;
+        text-align: center;
+      }
+    }
+  }
+}
+
+/* 规则说明卡片 */
+.rules-card {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 6rpx 20rpx rgba(0,0,0,0.08);
+  margin-bottom: 120rpx;
+  
+  .section-title {
     font-size: 32rpx;
     font-weight: 600;
     color: #333;
-    display: block;
-    margin-bottom: 16rpx;
-  }
-
-  .price-info {
-    .deposit {
-      color: #e4393c;
-      font-size: 36rpx;
-      margin-right: 16rpx;
-    }
-    .final {
-      color: #999;
-      font-size: 24rpx;
-    }
-  }
-}
-
-.form-item {
-  background: #fff;
-  padding: 32rpx;
-  margin-bottom: 24rpx;
-  border-radius: 16rpx;
-
-  .label {
-    font-size: 30rpx;
-    color: #333;
-    margin-bottom: 24rpx;
-    display: block;
-  }
-}
-
-.number-selector {
-  display: flex;
-  align-items: center;
-  
-  .btn {
-    width: 64rpx;
-    height: 64rpx;
-    line-height: 64rpx;
-    border-radius: 8rpx;
-    background: #f0f0f0;
-    font-size: 36rpx;
+    margin-bottom: 25rpx;
+    padding-left: 15rpx;
+    position: relative;
     
-    &.disabled {
-      opacity: 0.5;
-    }
-    
-    &.plus {
-      color: #07c160;
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6rpx;
+      height: 26rpx;
+      background-color: #007aff;
+      border-radius: 3rpx;
     }
   }
   
-  .input {
-    width: 100rpx;
-    height: 64rpx;
-    margin: 0 20rpx;
-    text-align: center;
-    border: 1rpx solid #eee;
-    border-radius: 8rpx;
-    font-size: 32rpx;
-  }
-}
-
-.delivery-list {
-  max-height: 500rpx;
-  
-  .delivery-item {
-    padding: 24rpx;
-    margin: 12rpx 0;
-    border: 1rpx solid #eee;
-    border-radius: 8rpx;
-    display: flex;
-    justify-content: space-between;
-    
-    &.active {
-      border-color: #07c160;
-      background: #f8fff8;
-    }
-
-    .name {
-      font-size: 28rpx;
-      display: block;
-      margin-bottom: 8rpx;
-    }
-    
-    .address {
-      color: #666;
-      font-size: 24rpx;
-    }
-    
-    .distance {
-      color: #666;
-      display: flex;
-      align-items: center;
+  .rules-list {
+    .rule-item {
+      margin-bottom: 20rpx;
+      
+      .rule-text {
+        font-size: 28rpx;
+        color: #666;
+        line-height: 1.6;
+      }
     }
   }
 }
 
-.rules {
-  .rule-item {
-    color: #666;
-    font-size: 26rpx;
-    line-height: 1.6;
-    margin-bottom: 12rpx;
-  }
-  
-  .view-detail {
-    color: #07c160;
-    margin-top: 16rpx;
-    display: block;
-  }
-}
-
+/* 底部操作栏 */
 .footer {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 100rpx;
-  background: #fff;
+  height: 120rpx;
+  background-color: #fff;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0 32rpx;
-  box-shadow: 0 -2rpx 12rpx rgba(0,0,0,0.05);
-
-  .total {
-    .price {
-      color: #e4393c;
-      font-size: 36rpx;
+  padding: 0 30rpx;
+  box-shadow: 0 -4rpx 12rpx rgba(0,0,0,0.05);
+  z-index: 10;
+  
+  .total-info {
+    flex: 1;
+    
+    .total-label {
+      font-size: 32rpx;
+      color: #333;
+    }
+    
+    .total-amount {
+      color: #ff4d4f;
+      font-size: 40rpx;
       font-weight: bold;
+      margin-left: 10rpx;
     }
   }
-
+  
   .submit-btn {
-    background-color: #007aff;
-    color: white;
+    background-color: #ff4d4f;
+    color: #fff;
     width: 300rpx;
-    border-radius: 50rpx;
-    font-size: 30rpx;
+    height: 80rpx;
+    border-radius: 40rpx;
+    font-size: 34rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6rpx 16rpx rgba(255,77,79,0.3);
     
     &.disabled {
-      background: #ccc;
-    }
-  }
-}
-
-.rules-popup {
-  background: #fff;
-  padding: 40rpx;
-  border-radius: 24rpx 24rpx 0 0;
-  max-height: 70vh;
-
-  .popup-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 32rpx;
-    font-size: 32rpx;
-    font-weight: 500;
-  }
-
-  .rules-content {
-    max-height: 60vh;
-    
-    .rule-item {
-      color: #666;
-      font-size: 28rpx;
-      line-height: 1.6;
-      margin-bottom: 24rpx;
+      background-color: #ccc;
+      box-shadow: none;
+      cursor: not-allowed;
     }
   }
 }

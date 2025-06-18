@@ -66,8 +66,8 @@
 		</view>
 		<!-- 支付按钮区 -->
 		<view class="payment-btn-area">
-			<button type="primary" @tap="prepay"
-				:disabled="isTimeOut ||!selectedPaymentMethod">{{isPayment?'已支付':'立即付款'}}</button>
+			<button type="primary" @tap="prepay" :disabled="isTimeOut ||!selectedPaymentMethod"
+				open-type="getAuthorize">{{isPayment?'已支付':'立即付款'}}</button>
 		</view>
 		<!-- 支付提示区 -->
 		<view class="payment-tips">
@@ -202,7 +202,7 @@
 			},
 
 			// 调用微信支付方法
-			async startPayment(out_trade_no){
+			async startPayment(out_trade_no) {
 				// 获取微信支付需要的参数
 				let data = await api.wechatpay({
 					out_trade_no: this.out_trade_no
@@ -221,7 +221,7 @@
 							let idReseponse = await api.bindingOpenid({
 								code: res.code
 							})
-							console.log(idReseponse,data)
+							console.log(idReseponse, data)
 							if (idReseponse.code == 200) {
 								let data = await api.wechatpay({
 									out_trade_no: this.out_trade_no
@@ -232,13 +232,13 @@
 									uni.requestPayment({
 										...data.data,
 									})
-								}else{
+								} else {
 									uni.showToast({
 										title: data.message,
 										icon: 'error'
 									})
 								}
-	
+
 							} else {
 								uni.showToast({
 									title: idReseponse.message,
@@ -264,8 +264,50 @@
 						case 1:
 							this.startPayment(this.out_trade_no)
 							break;
+
 							// 积分支付
 						case 2:
+							//#ifdef  MP-WEIXIN
+							/**
+							 * 
+							 * 用户订阅消息
+							 */
+							uni.getSetting({
+								withSubscriptions: true, // 同时获取用户的订阅消息状态
+								success: (res) => {
+									if (!res.subscriptionsSetting.mainSwitch) {
+										// 开启订阅消息
+										// uni.requestSubscribeMessage({
+										// 	tmplIds: [
+										// 		'PN8Vc4Z5rWUHi05A6F-J73TkkpF4iHxkEtA6bIoFUPw'],
+										// 	success: (res) => {
+										// 		if (res[
+										// 				'PN8Vc4Z5rWUHi05A6F-J73TkkpF4iHxkEtA6bIoFUPw'] ==
+										// 			'accept') {
+										// 		} else {
+										// 		}
+										// 	},
+										// 	fail: (err) => {
+										// 		console.log(err)
+										// 	},
+										// })
+										// 如果没有订阅就弹窗提醒用户订阅
+										uni.openSetting({
+											withSubscriptions: true, // 这里设置为true，以便获取订阅消息的设置状态
+											success(res) {
+												console.log(res.subscriptionsSetting);
+												// 根据res.subscriptionsSetting判断用户是否已经开启了订阅消息
+											}
+										});
+									} else {
+										console.log("用户已订阅")
+									}
+
+								}
+							})
+							//#endif
+
+
 							let response = await api.payscore({
 								out_trade_no: this.out_trade_no
 							})
@@ -284,18 +326,19 @@
 									url: `/pages/orders/orders?orderStatus=3`
 								});
 
-							} 
-							else {
+							} else {
 								uni.showToast({
 									title: response.msg || response.message,
 									icon: 'error'
 								})
 							}
+
 							break;
 						case 3:
 							console.log("数字人民币")
 							break;
 					}
+
 				} else {
 					uni.showToast({
 						title: '暂未开通' + this.paymentMethods[this.selectedPaymentMethod - 1].title,

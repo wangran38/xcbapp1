@@ -4,8 +4,7 @@
 			<view class="value">
 
 				<text style="font-size: 30rpx;">{{value}}</text>
-				<text style="position: absolute; left: 20rpx; color: gray;">{{cartItem.commodity_name}}
-					￥{{cartItem.price}}元/{{cartItem.weight_name}}</text>
+				<text style="position: absolute; left: 20rpx; color: gray;">{{cartItem.commodity_name}}￥{{cartItem.price}}元/{{cartItem.weight_name}}</text>
 				<text style="position: absolute; right: 20rpx; color: gray;">{{singleItemPrice}}元</text>
 
 			</view>

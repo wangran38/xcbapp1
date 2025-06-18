@@ -103,9 +103,6 @@ try {
     uniIcons: function () {
       return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 788))
     },
-    uniPopup: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-popup/components/uni-popup/uni-popup */ "uni_modules/uni-popup/components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-popup/components/uni-popup/uni-popup.vue */ 861))
-    },
   }
 } catch (e) {
   if (
@@ -128,11 +125,15 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  if (!_vm._isMounted) {
-    _vm.e0 = function ($event) {
-      _vm.showRulesPopup = false
+  var g0 = _vm.deliveryPoints.length
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        g0: g0,
+      },
     }
-  }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -272,63 +273,36 @@ exports.default = void 0;
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _default = {
   data: function data() {
     return {
       product: {},
       quantity: 1,
       selectedPoint: null,
-      showRulesPopup: false,
-      deliveryPoints: [{
-        id: 1,
-        name: "绿鲜社区店",
-        address: "朝阳区光华路8号",
-        distance: 1.2
-      }
-      // {
-      //   id: 2,
-      //   name: "智慧生活超市",
-      //   address: "海淀区中关村大街12号",
-      //   distance: 2.5
-      // }
+      deliveryPoints: [
+        // { id: 1, name: '绿鲜社区店', address: '朝阳区光华路8号' },
+        // { id: 2, name: '智慧生活超市', address: '海淀区中关村大街12号' },
+        // { id: 3, name: '生鲜便利店', address: '西城区西单北大街109号' }
       ],
-
-      shortRules: ["定金支付后不可退换"],
-      fullRules: ["定金用于锁定商品购买资格，支付后不可退换", "每周二18:00前可在小程序修改提货点和配送时间", "尾款需在商品到货后3日内完成支付", "逾期未付尾款视为自动放弃，定金不予退还", "商品价格波动不影响已支付定金订单", "最终商品以实际到货为准，保持合理误差"]
+      shortRules: ['定金支付后不可退换'
+      // '提货时需出示订单二维码',
+      // '预售商品到货后统一配送'
+      ]
     };
   },
   onLoad: function onLoad(_ref) {
     var query = _ref.query;
     this.product = JSON.parse(query);
-    console.log(this.product);
+    console.log(this.product.pickaddress);
+    this.deliveryPoints = [{
+      id: 1,
+      name: this.product.pickaddress,
+      address: this.product.pickaddress
+    }];
   },
   computed: {
-    totalDeposit: function totalDeposit() {
-      return (this.product.presaleprice * this.quantity / 3).toFixed(2);
+    totalAmount: function totalAmount() {
+      return (this.product.presaleprice * this.quantity).toFixed(2);
     },
     formValid: function formValid() {
       return this.selectedPoint !== null && this.quantity >= 1;
@@ -343,25 +317,20 @@ var _default = {
       this.quantity = Math.max(1, Math.min(99, val));
     },
     selectPoint: function selectPoint(id) {
-      this.selectedPoint = this.selectedPoint === id ? null : id;
+      this.selectedPoint = id;
     },
     handleSubmit: function handleSubmit() {
       if (!this.formValid) {
         uni.showToast({
-          title: '请选择提货点',
+          title: '请确认提货点和数量',
           icon: 'none'
         });
         return;
       }
-      uni.showLoading({
-        title: '提交中...'
+      uni.showToast({
+        title: '预订成功',
+        icon: 'success'
       });
-      setTimeout(function () {
-        uni.hideLoading();
-        uni.navigateTo({
-          url: '/pages/order/result?status=success'
-        });
-      }, 1500);
     }
   }
 };

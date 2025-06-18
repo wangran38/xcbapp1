@@ -428,21 +428,59 @@ var _default = {
             switch (_context5.prev = _context5.next) {
               case 0:
                 if (!_this4.supportMethod.includes(_this4.selectedPaymentMethod)) {
-                  _context5.next = 16;
+                  _context5.next = 17;
                   break;
                 }
                 _context5.t0 = _this4.selectedPaymentMethod;
-                _context5.next = _context5.t0 === 1 ? 4 : _context5.t0 === 2 ? 6 : _context5.t0 === 3 ? 12 : 14;
+                _context5.next = _context5.t0 === 1 ? 4 : _context5.t0 === 2 ? 6 : _context5.t0 === 3 ? 13 : 15;
                 break;
               case 4:
                 _this4.startPayment(_this4.out_trade_no);
-                return _context5.abrupt("break", 14);
+                return _context5.abrupt("break", 15);
               case 6:
-                _context5.next = 8;
+                /**
+                 * 
+                 * 用户订阅消息
+                 */
+                uni.getSetting({
+                  withSubscriptions: true,
+                  // 同时获取用户的订阅消息状态
+                  success: function success(res) {
+                    if (!res.subscriptionsSetting.mainSwitch) {
+                      // 开启订阅消息
+                      // uni.requestSubscribeMessage({
+                      // 	tmplIds: [
+                      // 		'PN8Vc4Z5rWUHi05A6F-J73TkkpF4iHxkEtA6bIoFUPw'],
+                      // 	success: (res) => {
+                      // 		if (res[
+                      // 				'PN8Vc4Z5rWUHi05A6F-J73TkkpF4iHxkEtA6bIoFUPw'] ==
+                      // 			'accept') {
+                      // 		} else {
+                      // 		}
+                      // 	},
+                      // 	fail: (err) => {
+                      // 		console.log(err)
+                      // 	},
+                      // })
+                      // 如果没有订阅就弹窗提醒用户订阅
+                      uni.openSetting({
+                        withSubscriptions: true,
+                        // 这里设置为true，以便获取订阅消息的设置状态
+                        success: function success(res) {
+                          console.log(res.subscriptionsSetting);
+                          // 根据res.subscriptionsSetting判断用户是否已经开启了订阅消息
+                        }
+                      });
+                    } else {
+                      console.log("用户已订阅");
+                    }
+                  }
+                });
+                _context5.next = 9;
                 return _api.api.payscore({
                   out_trade_no: _this4.out_trade_no
                 });
-              case 8:
+              case 9:
                 response = _context5.sent;
                 console.log(response);
                 if (response.code == 200) {
@@ -464,19 +502,19 @@ var _default = {
                     icon: 'error'
                   });
                 }
-                return _context5.abrupt("break", 14);
-              case 12:
+                return _context5.abrupt("break", 15);
+              case 13:
                 console.log("数字人民币");
-                return _context5.abrupt("break", 14);
-              case 14:
-                _context5.next = 17;
+                return _context5.abrupt("break", 15);
+              case 15:
+                _context5.next = 18;
                 break;
-              case 16:
+              case 17:
                 uni.showToast({
                   title: '暂未开通' + _this4.paymentMethods[_this4.selectedPaymentMethod - 1].title,
                   icon: 'error'
                 });
-              case 17:
+              case 18:
               case "end":
                 return _context5.stop();
             }

@@ -166,21 +166,110 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 46));
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
 var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 48));
 var _index = __webpack_require__(/*! @/api/index.js */ 49);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
-      distances: [{
-        label: '离我最近',
-        value: ''
-      }, {
-        label: '离我最远',
-        value: ''
-      }],
+      // 搜索关键字
+      searchText: '',
+      // 分类数据
       categories: [{
         label: '所有分类',
         value: ''
@@ -192,7 +281,16 @@ var _default = {
         value: ''
       }],
       selectedCategoryIndex: 0,
-      searchText: '',
+      // 距离筛选
+      distances: [{
+        label: '离我最近',
+        value: ''
+      }, {
+        label: '离我最远',
+        value: ''
+      }],
+      selectedDistanceIndex: 0,
+      // 商品列表
       goodsList: [],
       page: 1,
       loading: false,
@@ -207,6 +305,7 @@ var _default = {
     this.loadData();
   },
   methods: {
+    // 加载数据
     loadData: function loadData() {
       var _this = this;
       return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
@@ -254,36 +353,47 @@ var _default = {
         }, _callee, null, [[3, 14, 17, 20]]);
       }))();
     },
-    processGoodsData: function processGoodsData(list) {
-      return list.map(function (item) {
-        return _objectSpread(_objectSpread({}, item), {}, {
-          marketprice: Number(item.marketprice).toFixed(2),
-          price: item.price ? Number(item.price).toFixed(2) : null
-        });
-      });
-    },
+    // 处理搜索
     handleSearch: function handleSearch() {
       this.resetList();
       this.loadData();
     },
+    // 重置筛选
+    handleReset: function handleReset() {
+      this.searchText = '';
+      this.selectedCategoryIndex = 0;
+      this.selectedDistanceIndex = 0;
+      this.resetList();
+      this.loadData();
+    },
+    // 加载更多
     loadMore: function loadMore() {
       if (!this.noMore) this.loadData();
     },
+    // 重置列表
     resetList: function resetList() {
       this.goodsList = [];
       this.page = 1;
       this.noMore = false;
     },
+    // 联系商家
     contactNow: function contactNow() {
       uni.showToast({
         title: '已发送联系请求',
         icon: 'none'
       });
     },
+    // 跳转详情
     goDetail: function goDetail(id) {
       uni.navigateTo({
         url: "/pages/goods/detail?id=".concat(id)
       });
+    },
+    // 分类改变
+    categoryChange: function categoryChange(e) {
+      this.selectedCategoryIndex = e.detail.value;
+      this.resetList();
+      this.loadData();
     }
   }
 };

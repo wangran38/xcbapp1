@@ -12,7 +12,7 @@
 				<view class="info-item">
 					<uni-icons type="phone" size="18" color="#7A9D7E" />
 					<text class="label">联系电话：</text>
-					<text>{{ merchantInfo.phone | hidePhone }}</text>
+					<text>{{ isLogin? merchantInfo.phone:hidePhone(merchantInfo.phone) }}</text>
 				</view>
 				
 				
@@ -105,20 +105,11 @@
 				queryData: {
 					page: 1,
 					limit: 10
-				}
+				},
+				isLogin:true
 			}
 		},
-		filters: {
-			hidePhone(val) {
-				return val.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
-			},
-			countdown(timestamp) {
-				const diff = timestamp - Date.now()
-				const days = Math.floor(diff / (1000 * 60 * 60 * 24))
-				const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-				return `${days}天${hours}小时`
-			}
-		},
+
 		onLoad({query}) {
 			this.merchantInfo = JSON.parse(query)
 			// console.log(this.merchantInfo)
@@ -128,6 +119,11 @@
 			
 			this.queryData.farmers_id= parseInt(this.merchantInfo.id)
 			this.getPresaleData()
+			
+			const token = uni.getStorageSync('token');
+			if (!token){
+				this.isLogin = false
+			}
 		},
 		methods: {
 			gotoGoods(id){

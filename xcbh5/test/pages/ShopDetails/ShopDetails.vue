@@ -30,7 +30,7 @@
 				<view class="time">
 					<view class="business-hours">
 						<view @click="handleScrollToLower">电话:</view>
-						<view class="hour">{{ shopDetails.contactphone}}</view>
+						<view class="hour">{{ isLogin ? shopDetails.contactphone : hidePhone(shopDetails.contactphone)}}</view>
 					</view>
 
 					<view class="phone">
@@ -112,6 +112,7 @@
 			api
 		} from '@/api/index'
 		import usePage from '@/hooks/usePage';
+		import {myMixin} from '@/utils/public.js'
 
 		export default {
 			data() {
@@ -126,10 +127,11 @@
 					urls1: [], // 摊主照片
 					urls2: [], // 营业执照图片
 					cart: false, // 购物车初始化弹窗,锁
-					show: false
+					show: false,
+					isLogin:true,
 				}
 			},
-			mixins: [usePage],
+			mixins: [usePage,myMixin],
 			components: {
 				shopItem,
 				menuBarVue,
@@ -140,6 +142,10 @@
 				...mapGetters('cart', ['getTempCount']),
 			},
 			onShow() {
+				const token = uni.getStorageSync('token');
+				if (!token){
+					this.isLogin = false
+				}
 				this.loadPageData()
 			},
 			methods: {
