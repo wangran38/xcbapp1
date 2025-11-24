@@ -1,0 +1,85 @@
+
+.me-container {
+		overflow: hidden;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0 1.25rem 0 0.3125rem;
+		color: white;
+		z-index: 1;
+		background-color: #f8f8f8;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		position: relative;
+		height: calc(100vh - 0.3125rem);
+}
+.disheslist {
+		width: 100%;
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		margin-top: 0.625rem;
+}
+.type {
+		margin-left: 0.9375rem;
+		padding: 0.625rem;
+		height: 6.25rem;
+		width: 90%;
+		display: flex;
+		flex-direction: row;
+		background-color: white;
+		justify-content: flex-start;
+		align-items: center;
+		margin-bottom: 0.9375rem;
+		border-radius: 0.3125rem;
+		box-shadow: 0.15625rem 0.15625rem 0.15625rem 0.15625rem rgba(0, 0, 0, .3);
+}
+.type-image {
+		border: 1px solid aqua;
+		width: 6.25rem;
+		height: 6.25rem;
+		border-radius: 0.625rem;
+		background-color: #007aff;
+}
+.regard {
+		flex: 1;
+		/* width: 30%; */
+		height: 5.625rem;
+		color: black;
+		font-size: 0.9375rem;
+		font-weight: 600;
+		/* 		display: flex;
+		flex-direction: column;
+		justify-content: space-around; */
+		margin-left: 0.625rem;
+}
+.function {
+		display: flex;
+		height: 100%;
+		width: 4.6875rem;
+		margin-right: 0;
+		justify-content: end;
+		align-items: center;
+}
+.rigicon {
+		margin: 0.15625rem;
+		padding: 0.5625rem;
+		height: 2.1875rem;
+		width: 3.4375rem;
+		background-color: #007aff;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 0.9375rem;
+}
+.disabled {
+		background-color: #d3d3d3;
+		/* 灰色背景 */
+		cursor: not-allowed;
+		/* 更改鼠标样式为禁用状态 */
+}
+.loading {
+		text-align: center;
+		padding: 0.625rem;
+		color: #999;
+}

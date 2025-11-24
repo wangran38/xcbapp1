@@ -1,0 +1,174 @@
+{
+  "pages": [
+    "pages/index1/index1",
+    "pages/index/index",
+    "pages/login/login",
+    "pages/register/register",
+    "pages/select/select",
+    "pages/sVegetables/sVegetables",
+    "pages/user/user",
+    "pages/ShopDetails/ShopDetails",
+    "pages/Apply/Apply",
+    "pages/Buy/Buy",
+    "pages/publish/publish",
+    "pages/release/release",
+    "pages/stalllist/stalllist",
+    "pages/coupons/coupons",
+    "pages/lottery/lottery",
+    "pages/rules/rules",
+    "pages/jackpot/jackpot",
+    "pages/orders/orders",
+    "pages/Stalls-dishes/Stalls-dishes",
+    "pages/Listed-Dishes/Listed-Dishes",
+    "pages/usecoupons/usecoupons",
+    "pages/Clock/Clock",
+    "pages/clock-records/clock-records",
+    "pages/MyPoints-records/MyPoints-records",
+    "pages/Ownerorders/Ownerorders",
+    "pages/wallet/wallet",
+    "pages/Points/Points",
+    "pages/pointspayouts/pointspayouts",
+    "pages/Settrecords/Settrecords",
+    "pages/editshop/editshop",
+    "pages/bankCard/bankCard",
+    "pages/addCard/addCard",
+    "pages/onlineBooth/onlineBooth",
+    "pages/boothOwner/boothOwner",
+    "pages/aHouseholder/aHouseholder",
+    "pages/userServiceAgreement/userServiceAgreement",
+    "pages/privacyAgreement/privacyAgreement",
+    "pages/OpenAccountSharing/OpenAccountSharing",
+    "pages/arrangeNotification/arrangeNotification",
+    "pages/weChatCashwWithdrawal/weChatCashwWithdrawal",
+    "pages/billRecord/billRecord",
+    "pages/wholesale/wholesale",
+    "pages/prizeDraw/prizeDraw",
+    "pages/preSale/preSale",
+    "pages/additionalinformation/additionalinformation",
+    "pages/Presalemenulist/Presalemenulist",
+    "pages/dynamics/dynamics",
+    "pages/demo/demo",
+    "pages/merchantComplaints/merchantComplaints",
+    "pages/myComplaint/myComplaint",
+    "pages/test/test",
+    "pages/complaintDetails/complaintDetails",
+    "pages/settings/settings"
+  ],
+  "subPackages": [
+    {
+      "root": "subPackages/PaymentModule",
+      "pages": [
+        "PaymentMethod/PaymentMethod",
+        "collectOnDelivery/collectOnDelivery"
+      ]
+    },
+    {
+      "root": "subPackages/aHouseholder",
+      "pages": [
+        "additionalInformation/additionalInformation",
+        "publishDishes/publishDishes",
+        "Traceability/Traceability",
+        "lookTraceability/lookTraceability",
+        "PreSoldDishesList/PreSoldDishesList",
+        "modifyPreSoldDishes/modifyPreSoldDishes",
+        "beListed/beListed",
+        "alreadyListed/alreadyListed"
+      ]
+    },
+    {
+      "root": "subPackages/Wholesale",
+      "pages": [
+        "supply/supply",
+        "purchase/purchase",
+        "addSupply/addSupply",
+        "addPurchase/addPurchase",
+        "wholesaleNavigation/wholesaleNavigation",
+        "mySupply/mySupply",
+        "myProcurement/myProcurement",
+        "quotation/quotation"
+      ]
+    },
+    {
+      "root": "subPackages/shoppingPageList",
+      "pages": [
+        "villageZone/villageZone",
+        "nearbyFarmers/nearbyFarmers",
+        "agriculturalAssistanceZone/agriculturalAssistanceZone",
+        "official/official",
+        "rentalStorefront/rentalStorefront",
+        "rentalStorefrontList/rentalStorefrontList",
+        "prePurchaseOrder/prePurchaseOrder",
+        "prePurchaseDeposit/prePurchaseDeposit",
+        "merchantDetails/merchantDetails",
+        "realTimeInfo/realTimeInfo",
+        "realTimeInfoDetail/realTimeInfoDetail",
+        "freeGroceryShopping/freeGroceryShopping",
+        "statisticsMap/statisticsMap"
+      ]
+    },
+    {
+      "root": "subPackages/boothOwner",
+      "pages": [
+        "salesApplication/salesApplication",
+        "billRecord/billRecord",
+        "storeSettings/storeSettings"
+      ]
+    },
+    {
+      "root": "subPackages/settings",
+      "pages": [
+        "user-edit/user-edit",
+        "updatePwd/updatePwd",
+        "aboutUs/aboutUs",
+        "version/version",
+        "myAddress/myAddress",
+        "addAddress/addAddress"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#333333",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "selectedIconPath": "static/image/area_s.png",
+        "iconPath": "static/image/area.png",
+        "pagePath": "pages/index1/index1",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "static/image/home_s.png",
+        "iconPath": "static/image/home.png",
+        "pagePath": "pages/index/index",
+        "text": "买菜"
+      },
+      {
+        "selectedIconPath": "static/image/wholesaleActive.png",
+        "iconPath": "static/image/wholesale.png",
+        "pagePath": "pages/wholesale/wholesale",
+        "text": "批发"
+      },
+      {
+        "selectedIconPath": "static/image/selling_s.png",
+        "iconPath": "static/image/selling.png",
+        "pagePath": "pages/sVegetables/sVegetables",
+        "text": "卖菜"
+      },
+      {
+        "selectedIconPath": "static/image/user_s.png",
+        "iconPath": "static/image/user.png",
+        "pagePath": "pages/user/user",
+        "text": "我的"
+      }
+    ]
+  },
+  "component2": true,
+  "usingComponents": {}
+}

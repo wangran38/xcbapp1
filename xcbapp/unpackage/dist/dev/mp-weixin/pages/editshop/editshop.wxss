@@ -1,0 +1,292 @@
+
+.me-container {
+		overflow: hidden;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0rpx 40rpx 0 40rpx;
+		color: white;
+		z-index: 1;
+		background-color: #f8f8f8;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+}
+.basicsinfo {
+		height: 250rpx;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		margin-top: 20rpx;
+		border: 1px solid #ccc;
+}
+text {
+		color: black;
+		height: 50rpx;
+		line-height: 50rpx;
+}
+.item-info {
+		height: 200rpx;
+		width: 100%;
+		background-color: white;
+}
+.name {
+		height: 100rpx;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		border-bottom: 1px solid #ccc;
+		margin: 0 20rpx;
+}
+.name>text {
+		height: 100rpx;
+		width: 200rpx;
+		line-height: 100rpx;
+		text-align: left;
+}
+.name>input {
+		height: 100rpx;
+		width: 100%;
+		color: black;
+}
+.phone {
+		height: 100rpx;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		margin: 0 20rpx;
+}
+.phone>text {
+		height: 100rpx;
+		width: 200rpx;
+		line-height: 100rpx;
+		text-align: left;
+}
+.phone>input {
+		height: 100rpx;
+		width: 100%;
+		color: black;
+}
+.store {
+		height: 385rpx;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		margin-top: 30rpx;
+		border: 1px solid #ccc;
+}
+.storename {
+		height: 100rpx;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		/* margin: 0 20rpx; */
+		padding: 0 20rpx;
+		border-bottom: 1px solid #ccc;
+		background-color: white;
+}
+.storename>text {
+		height: 100rpx;
+		width: 200rpx;
+		line-height: 100rpx;
+		text-align: left;
+}
+.storename>input {
+		height: 100rpx;
+		width: 100%;
+		color: black;
+}
+.area {
+		height: 100rpx;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		/* margin: 0 20rpx; */
+		padding: 0 20rpx;
+		border-bottom: 1px solid #ccc;
+		background-color: white;
+}
+.area>text {
+		height: 100rpx;
+		width: 200rpx;
+		line-height: 100rpx;
+		text-align: left;
+}
+.picker {
+		height: 100rpx;
+		width: 100%;
+		color: black;
+		line-height: 100rpx;
+		box-sizing: border-box;
+		overflow: hidden; /* 隐藏超出部分 */
+}
+.picker-text {
+	  white-space: nowrap; /* 禁止换行 */
+	  overflow: hidden; /* 隐藏超出部分 */
+	  text-overflow: ellipsis; /* 超出部分显示省略号 */
+	  line-height: 100rpx;
+	  box-sizing: border-box;
+	  /* font-size: 30rpx; */
+	  /* padding: 0 10rpx; */
+}
+.Address {
+		height: 100rpx;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		/* margin: 0 20rpx; */
+		padding: 0 20rpx;
+		border-bottom: 1px solid #ccc;
+		background-color: white;
+}
+.Address>text {
+		height: 100rpx;
+		width: 200rpx;
+		line-height: 100rpx;
+		text-align: left;
+}
+
+	/* .Address>input {
+		height: 100rpx;
+		width: 100%;
+		color: black;
+	} */
+.Category {
+		height: 100rpx;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		/* margin: 0 20rpx; */
+		padding: 0 20rpx;
+		border-bottom: 1px solid #ccc;
+		background-color: white;
+}
+.Category>text {
+		height: 100rpx;
+		width: 200rpx;
+		line-height: 100rpx;
+		text-align: left;
+}
+.Categorypicker {
+		height: 100rpx;
+		width: 100%;
+		color: black;
+		line-height: 100rpx;
+		box-sizing: border-box;
+}
+.stallphone {
+		height: 100rpx;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		border-bottom: 1px solid #ccc;
+		/* margin: 0 20rpx; */
+		padding: 0 20rpx;
+		background-color: white;
+}
+.stallphone>text {
+		height: 100rpx;
+		width: 200rpx;
+		line-height: 100rpx;
+		text-align: left;
+}
+.stallphone>input {
+		height: 100rpx;
+		width: 100%;
+		color: black;
+}
+.BL {
+		height: 100rpx;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		/* margin: 0 20rpx; */
+		padding: 0 20rpx;
+		border-bottom: 1px solid #ccc;
+		background-color: white;
+}
+.BL>text {
+		height: 100rpx;
+		width: 200rpx;
+		line-height: 100rpx;
+		text-align: left;
+}
+.BLpicker {
+		height: 100rpx;
+		width: 100%;
+		color: black;
+		line-height: 100rpx;
+		box-sizing: border-box;
+}
+.BL1 {
+		height: 100rpx;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		/* margin: 0 20rpx; */
+		padding: 0 20rpx;
+		background-color: white;
+		border-bottom: 1px solid #ccc;
+}
+.BL1>text {
+		height: 100rpx;
+		width: 200rpx;
+		line-height: 100rpx;
+		text-align: left;
+}
+.BLpicker {
+		height: 100rpx;
+		width: 100%;
+		color: black;
+		line-height: 100rpx;
+		box-sizing: border-box;
+}
+.illustrate {
+		height: 200rpx;
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: left;
+		/* margin: 0 20rpx; */
+		padding: 0 20rpx;
+		box-sizing: border-box;
+		background-color: white;
+}
+.illustrate>text {
+		height: 200rpx;
+		width: 200rpx;
+		max-width: 200rpx;
+		/* 或者一个适合的最大宽度 */
+		line-height: 1.2;
+		text-align: left;
+		box-sizing: border-box;
+		word-wrap: break-word;
+		/* 允许长单词换行 */
+		overflow-wrap: break-word;
+		display: flex;
+		align-items: center;
+		border-right: 1px solid #ccc;
+}
+.illustrate>textarea {
+		height: 100rpx;
+		width: 100%;
+		color: black;
+}
+.submit {
+		overflow: hidden;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0rpx 40rpx 0 40rpx;
+		margin-top: 30rpx;
+}

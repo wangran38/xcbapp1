@@ -1,0 +1,1 @@
+{"version":3,"file":"quotation.js","sources":["D:/HBuilderX/plugins/uniapp-cli-vite/uniPage:/c3ViUGFja2FnZXNcV2hvbGVzYWxlXHF1b3RhdGlvblxxdW90YXRpb24udnVl"],"sourcesContent":["import MiniProgramPage from 'E:/小程序转app/xcbapp/subPackages/Wholesale/quotation/quotation.vue'\nwx.createPage(MiniProgramPage)"],"names":[],"mappings":";;;;;;;AACA,GAAG,WAAW,eAAe;"}

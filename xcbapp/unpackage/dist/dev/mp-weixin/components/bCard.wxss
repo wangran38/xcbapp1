@@ -1,0 +1,75 @@
+
+.tag{
+		position: absolute;
+		bottom: 10rpx;
+}
+.card {
+		background-color: indianred;
+		margin: 10rpx 10rpx 10rpx 0;
+		height: 100rpx;
+		border-radius: 15px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		display: flex;
+		padding: 20px;
+		color: white;
+		font-family: Arial, sans-serif;
+		position: relative;
+}
+.card-icon image {
+		width: 100rpx;
+		height: 100rpx;
+		border-radius: 50%;
+}
+.card-title {
+		font-size: 35rpx;
+		margin: 3rpx 0 0 10rpx;
+		flex: 1;
+		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.edit {
+		right: 30rpx;
+		top: 110rpx;
+		position: absolute;
+}
+.lift {
+		position: absolute;
+		color: black;
+		right: 90rpx;
+		top: 110rpx;
+		background-color: white;
+		border-radius: 15px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		padding: 10rpx;
+		font-size: 26rpx;
+}
+.num {
+		display: flex;
+}
+.num>view:first-child {
+		margin-top: 5rpx;
+		font-size: 30rpx;
+		color: gainsboro;
+}
+.num>view:last-child {
+		font-size: 30rpx;
+		color: white;
+}
+.add {
+		line-height: 18rpx;
+		height: 20rpx;
+		background-color: white;
+		color: black;
+		font-size: 20rpx;
+		font-family: 'Courier New', Courier, monospace;
+}
+
+
+	/* 过渡效果 */
+.fade-enter-active,
+	.fade-leave-active {
+		transition: opacity .5s;
+}
+.fade-enter,
+	.fade-leave-to {
+		opacity: 0;
+}

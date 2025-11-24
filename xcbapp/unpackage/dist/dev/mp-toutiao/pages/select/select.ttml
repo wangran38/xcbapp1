@@ -1,0 +1,1 @@
+<view class="select"><view class="vip"><button data-event-opts="{{[['tap',[['navigateToLogin',['$event']]]]]}}" class="blue-button" bindtap="__e">选择会员登录</button></view><view class="Owner"><button data-event-opts="{{[['tap',[['navigateToLogin',['$event']]]]]}}" class="blue-button" bindtap="__e">选择摊主登录</button></view></view>

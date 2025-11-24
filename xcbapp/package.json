@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "@dcloudio/uni-ui": "^1.5.6",
+    "compressorjs": "^1.2.1",
+    "dayjs": "^1.11.13",
+    "decimal": "^0.0.2",
+    "vue-lazyload": "^3.0.0",
+    "vuex": "^4.1.0",
+    "vuex-persistedstate": "^4.1.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+    "@vue/cli-service": "^5.0.8",
+    "vue-template-compiler": "^2.6.14"
+  }
+}

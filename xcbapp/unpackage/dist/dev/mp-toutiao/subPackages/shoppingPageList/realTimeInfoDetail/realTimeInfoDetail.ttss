@@ -1,0 +1,7 @@
+
+.content {
+		padding: 30rpx;
+		/* 在这里调整，整体字体大小 */
+		font-size: 35rpx;
+}
+

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "上市",
+  "usingComponents": {
+    "one-vue": "./componment/one",
+    "two-vue": "./componment/two",
+    "three-vue": "./componment/three",
+    "describe-vue": "./componment/describe"
+  }
+}

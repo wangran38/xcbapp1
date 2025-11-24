@@ -1,0 +1,1 @@
+<view class="container data-v-18c23aba"><canvas class="canvas data-v-18c23aba" style="{{'width:'+(canvasWidth+'px')+';'+('height:'+(canvasHeight+'px')+';')}}" canvas-id="pureCanvas"></canvas><button data-event-opts="{{[['tap',[['saveCanvasImage',['$event']]]]]}}" class="save-btn data-v-18c23aba" bindtap="__e">保存图片到相册</button></view>

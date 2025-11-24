@@ -1,0 +1,98 @@
+
+.me-container {
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0 0.78125rem 0 0.78125rem;
+		color: white;
+		z-index: 1;
+		background-color: #f8f8f8;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+}
+.title {
+		font-size: 1.09375rem;
+		color: black;
+		text-align: center;
+		margin-top: 1.5625rem;
+}
+.records {
+		width: 100%;
+		height: 1.5625rem;
+		margin-top: 0.9375rem;
+		color: black;
+		/* background-color: aqua; */
+		display: flex;
+}
+.market {
+		width: 50%;
+		height: 100%;
+		/* background-color: bisque; */
+		text-align: center;
+}
+
+	/* .phone {
+		width: 35%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	} */
+.time {
+		flex: 1;
+		height: 100%;
+		/* background-color: aqua; */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+}
+.record-item {
+		width: 100%;
+		color: black;
+		/* background-color: #D3D3D3; */
+	    display: flex;
+		margin-top: 0.3125rem;
+	    margin-bottom: 0.3125rem; /* 记录项之间的间距 */
+		border-bottom: 1px solid #ccc;
+}
+.record-item .market {
+	    width: 50%; /* 设置固定宽度 */
+		height: 3.75rem;
+		line-height: 3.75rem;
+		text-align: center;
+		overflow: hidden; /* 隐藏超出的内容 */
+		white-space: nowrap; /* 强制不换行 */
+		text-overflow: ellipsis; /* 显示省略号 */
+}
+	
+	/* .record-item .phone {
+	    width: 30%; 
+		height: 120rpx;
+		line-height: 120rpx;
+		overflow: hidden; 
+		white-space: nowrap; 
+		text-overflow: ellipsis; 
+	} */
+.record-item .time {
+	    flex: 1; /* 占据剩余空间 */
+		height: 3.75rem;
+		line-height: 3.75rem;
+		overflow: hidden; /* 隐藏超出的内容 */
+		white-space: nowrap; /* 强制不换行 */
+		text-overflow: ellipsis; /* 显示省略号 */
+}
+.lottery{
+		position: fixed;
+		left: 50%;
+		bottom: 1.5625rem;
+		width: 90%;
+		height: 3.75rem;
+		color: white;
+		background-color: #007aff;
+		transform: translateX(-50%);
+		border-radius: 0.625rem;
+		text-align: center;
+		line-height: 3.75rem;
+		font-size: 1.09375rem;
+}
+

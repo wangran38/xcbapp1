@@ -1,0 +1,228 @@
+
+/* 页面基础样式 */
+.agent-data-page.data-v-7170c164 {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  font-size: 14px;
+  padding-bottom: 30px;
+}
+
+/* 页面标题 */
+.page-header.data-v-7170c164 {
+  text-align: center;
+  padding: 30px 20px 20px;
+}
+.header-title.data-v-7170c164 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 8px;
+}
+.header-subtitle.data-v-7170c164 {
+  font-size: 13px;
+  color: #718096;
+}
+
+/* 数据容器 */
+.data-container.data-v-7170c164 {
+  width: 92%;
+  margin: 0 auto;
+}
+
+/* 数据卡片样式（复用申请表卡片风格） */
+.data-card.data-v-7170c164 {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+/* section头部（复用申请表风格） */
+.section-header.data-v-7170c164 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.section-icon.data-v-7170c164 {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background-color: rgba(66, 133, 244, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+.data-card:nth-child(2) .section-icon.data-v-7170c164 {
+  background-color: rgba(251, 188, 5, 0.1);
+}
+.data-card:nth-child(3) .section-icon.data-v-7170c164 {
+  background-color: rgba(52, 168, 83, 0.1);
+}
+.data-card:nth-child(4) .section-icon.data-v-7170c164 {
+  background-color: rgba(234, 67, 53, 0.1);
+}
+.section-name.data-v-7170c164 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #2d3748;
+}
+
+/* 核心数据网格 */
+.data-grid.data-v-7170c164 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.data-item.data-v-7170c164 {
+  background-color: #f9fafb;
+  border-radius: 8px;
+  padding: 14px;
+}
+.data-label.data-v-7170c164 {
+  font-size: 13px;
+  color: #718096;
+  margin-bottom: 6px;
+}
+.data-value.data-v-7170c164 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 4px;
+}
+.data-desc.data-v-7170c164 {
+  font-size: 12px;
+  color: #999;
+}
+
+/* 业绩目标进度 */
+.target-progress.data-v-7170c164 {
+  padding: 8px 0;
+}
+.target-info.data-v-7170c164 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.target-label.data-v-7170c164 {
+  font-size: 14px;
+  color: #718096;
+}
+.target-value.data-v-7170c164 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #4285F4;
+}
+.progress-bar.data-v-7170c164 {
+  height: 8px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.progress-fill.data-v-7170c164 {
+  height: 100%;
+  background-color: #4285F4;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+.target-detail.data-v-7170c164 {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #999;
+}
+
+/* 订单列表 */
+.order-list.data-v-7170c164 {
+  margin-top: 8px;
+}
+.order-item.data-v-7170c164 {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+.order-item.data-v-7170c164:last-child {
+  border-bottom: none;
+}
+.order-no.data-v-7170c164 {
+  font-size: 14px;
+  color: #2d3748;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.order-date.data-v-7170c164 {
+  font-size: 12px;
+  color: #999;
+}
+.order-amount.data-v-7170c164 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2d3748;
+  text-align: right;
+  margin-bottom: 4px;
+}
+.order-status.data-v-7170c164 {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  display: inline-block;
+  float: right;
+}
+.status-pending.data-v-7170c164 {
+  background-color: rgba(251, 188, 5, 0.1);
+  color: #FBBC05;
+}
+.status-paid.data-v-7170c164 {
+  background-color: rgba(52, 168, 83, 0.1);
+  color: #34A853;
+}
+.status-shipped.data-v-7170c164 {
+  background-color: rgba(66, 133, 244, 0.1);
+  color: #4285F4;
+}
+.status-completed.data-v-7170c164 {
+  background-color: rgba(103, 80, 229, 0.1);
+  color: #6750E3;
+}
+.status-cancelled.data-v-7170c164 {
+  background-color: rgba(234, 67, 53, 0.1);
+  color: #EA4335;
+}
+.view-all.data-v-7170c164 {
+  text-align: center;
+  font-size: 13px;
+  color: #4285F4;
+  margin-top: 16px;
+  cursor: pointer;
+}
+
+/* 趋势筛选 */
+.trend-filter.data-v-7170c164 {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 16px;
+  color: #4285F4;
+  font-size: 13px;
+}
+.filter-text.data-v-7170c164 {
+  margin-right: 6px;
+}
+
+/* 趋势图表 */
+.trend-chart.data-v-7170c164 {
+  height: 220px;
+  width: 100%;
+}
+
+/* 响应式调整 */
+@media (min-width: 768px) {
+.data-container.data-v-7170c164 {
+    width: 60%;
+    max-width: 500px;
+}
+}

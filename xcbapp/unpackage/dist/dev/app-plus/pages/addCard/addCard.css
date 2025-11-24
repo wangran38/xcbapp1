@@ -1,0 +1,96 @@
+
+/* 添加银行卡页面样式 */
+.bigBox {
+  padding: 1rem;
+  background: #f8f9fa;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+.title {
+  font-size: 1.25rem;
+  color: #2c3e50;
+  font-weight: 600;
+  text-align: center;
+  padding: 1.5rem 0;
+  position: relative;
+}
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3.75rem;
+  height: 0.25rem;
+  background: #4a90e2;
+  border-radius: 0.25rem;
+}
+.card {
+  background: #fff;
+  border-radius: 0.75rem;
+  padding: 1.5rem 1rem;
+  box-shadow: 0 0.25rem 0.75rem rgba(28, 55, 99, 0.06);
+}
+.item-info > uni-view {
+  margin-bottom: 1.5rem;
+  border-bottom: 0.0625rem solid #f0f3fa;
+  padding-bottom: 0.75rem;
+}
+.name uni-label, 
+.cardnum uni-label {
+  width: 6.25rem;
+  flex-shrink: 0;
+  font-size: 0.875rem;
+  color: #666;
+  padding-right: 1rem;
+}
+uni-input {
+  flex: 1;
+  font-size: 0.875rem;
+  color: #333;
+  padding: 0.75rem 0;
+  min-height: 3rem;
+}
+uni-radio-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+uni-radio {
+  /* margin: 16rpx 48rpx 16rpx 0; */
+  transform: scale(0.9);
+}
+uni-radio .wx-radio-input {
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+  border-color: #c0c4cc !important;
+}
+uni-radio .wx-radio-input.wx-radio-input-checked {
+  background: #4a90e2 !important;
+  border-color: #4a90e2 !important;
+}
+uni-button[type=primary] {
+  background: linear-gradient(135deg, #4a90e2, #6ca3f0);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  height: auto;
+  line-height: 1.5;
+  padding: 0.875rem;
+  margin-top: 2rem;
+  transition: all 0.2s;
+}
+uni-button[type=primary]:active {
+  opacity: 0.9;
+  transform: translateY(0.0625rem);
+}
+
+/* 输入框聚焦效果 */
+uni-input:focus {
+  border-bottom-color: #4a90e2;
+  caret-color: #4a90e2;
+}
+
+/* 错误提示适配 */
+uni-toast {
+  z-index: 9999 !important;
+}

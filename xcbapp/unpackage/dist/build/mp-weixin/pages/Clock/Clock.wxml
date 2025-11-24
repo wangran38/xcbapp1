@@ -1,0 +1,1 @@
+<view class="me-container"><view class="content"><view class="state">{{''+(isSignedIn?'已打卡':'此次未打卡')+''}}</view></view></view>

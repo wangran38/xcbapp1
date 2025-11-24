@@ -1,0 +1,726 @@
+{
+	"subPackages": [
+		{
+			"root": "subPackages/PaymentModule",
+			"pages": [{
+					"path": "PaymentMethod/PaymentMethod",
+					"style": {
+						"navigationBarTitleText": "支付方式"
+					}
+				},
+				{
+					"path": "collectOnDelivery/collectOnDelivery",
+					"style": {
+						"navigationBarTitleText": "订单状态"
+					}
+				}
+			]
+		},
+		{
+			"root": "subPackages/agent",
+			"pages": [{
+				"path" : "cooperation/cooperation",
+				"style" : 
+				{
+					"navigationBarTitleText" : "申请合作"
+				}
+			},
+			{
+				"path" : "datacenter/datacenter",
+				"style" : 
+				{
+					"navigationBarTitleText" : "数据中心"
+				}
+			}
+			]
+		},
+		{
+			"root": "subPackages/aHouseholder",
+			"pages": [{
+					"path": "additionalInformation/additionalInformation",
+					"style": {
+						"navigationBarTitleText": "补充资料"
+					}
+				},
+				{
+					"path": "publishDishes/publishDishes",
+					"style": {
+						"navigationBarTitleText": "发布菜品"
+					}
+				},
+				{
+					"path": "Traceability/Traceability",
+					"style": {
+						"navigationBarTitleText": "溯源信息补充"
+					}
+				},
+				{
+					"path": "lookTraceability/lookTraceability",
+					"style": {
+						"navigationBarTitleText": "查看溯源信息"
+					}
+				},
+				{
+					"path": "PreSoldDishesList/PreSoldDishesList",
+					"style": {
+						"navigationBarTitleText": "预卖菜品"
+					}
+				},
+				{
+					"path": "modifyPreSoldDishes/modifyPreSoldDishes",
+					"style": {
+						"navigationBarTitleText": "修改预卖菜品"
+					}
+				},
+				{
+					"path": "beListed/beListed",
+					"style": {
+						"navigationBarTitleText": "上市"
+					}
+				},
+				{
+					"path": "alreadyListed/alreadyListed",
+					"style": {
+						"navigationBarTitleText": "已上架"
+					}
+				}
+			]
+		},
+		{
+			"root": "subPackages/Wholesale",
+			"pages": [{
+					"path": "supply/supply",
+					"style": {
+						"navigationBarTitleText": "供应"
+					}
+				},
+				{
+					"path": "purchase/purchase",
+					"style": {
+						"navigationBarTitleText": "采购"
+						// "disableScroll": true
+					}
+				},
+				{
+					"path": "addSupply/addSupply",
+					"style": {
+						"navigationBarTitleText": "发布供应"
+					}
+				},
+				{
+					"path": "addPurchase/addPurchase",
+					"style": {
+						"navigationBarTitleText": "发布采购"
+					}
+				},
+				{
+					"path" : "wholesaleNavigation/wholesaleNavigation",
+					"style" : 
+					{
+						"navigationBarTitleText" : "我的批发"
+					}
+				},
+				{
+					"path" : "mySupply/mySupply",
+					"style" : 
+					{
+						"navigationBarTitleText" : "我的供应"
+					}
+				},
+				{
+					"path" : "myProcurement/myProcurement",
+					"style" : 
+					{
+						"navigationBarTitleText" : "我的采购"
+					}
+				},
+				{
+					"path" : "quotation/quotation",
+					"style" : 
+					{
+						"navigationBarTitleText" : "报价"
+					}
+				}
+			]
+		},
+		{
+			"root": "subPackages/shoppingPageList",
+			"pages": [{
+					"path": "villageZone/villageZone",
+					"style": {
+						"navigationBarTitleText": "预卖菜品"
+					}
+				},
+				{
+					"path": "nearbyFarmers/nearbyFarmers",
+					"style": {
+						"navigationBarTitleText": "附近农户"
+					}
+				},
+				{
+					"path": "agriculturalAssistanceZone/agriculturalAssistanceZone",
+					"style": {
+						"navigationBarTitleText": "扶贫专区"
+					}
+				},
+				{
+					"path": "official/official",
+					"style": {
+						"navigationBarTitleText": "官方直营"
+					}
+				},
+				{
+					"path": "rentalStorefront/rentalStorefront",
+					"style": {
+						"navigationBarTitleText": "铺面详情"
+						// "disableScroll": true
+					}
+				},
+				{
+					"path": "rentalStorefrontList/rentalStorefrontList",
+					"style": {
+						"navigationBarTitleText": "铺面列表"
+					}
+				},
+				{
+					"path": "prePurchaseOrder/prePurchaseOrder",
+					"style": {
+						"navigationBarTitleText": "预购订单"
+					}
+				},
+				{
+					"path": "prePurchaseDeposit/prePurchaseDeposit",
+					"style": {
+						"navigationBarTitleText": "预买"
+					}
+				},
+				{
+					"path": "merchantDetails/merchantDetails",
+					"style": {
+						"navigationBarTitleText": "农户详情"
+						// "disableScroll": true
+					}
+				},
+				{
+					"path": "realTimeInfo/realTimeInfo",
+					"style": {
+						"navigationBarTitleText": "资讯",
+						"disableScroll": true
+					}
+				},
+				{
+					"path": "realTimeInfoDetail/realTimeInfoDetail",
+					"style": {
+						"navigationBarTitleText": "新闻详情"
+					}
+				},
+				{
+					"path": "freeGroceryShopping/freeGroceryShopping",
+					"style": {
+						"navigationBarTitleText": "免费买菜"
+					}
+				},
+				{
+					"path" : "statisticsMap/statisticsMap",
+					"style" : 
+					{
+						"navigationBarTitleText" : ""
+					}
+				}
+
+			]
+		},
+		{
+			"root": "subPackages/boothOwner",
+			"pages":[{
+				"path" : "salesApplication/salesApplication",
+				"style" : 
+				{
+					"navigationBarTitleText" : "代销申请"
+				}
+			},
+			{
+				"path" : "billRecord/billRecord",
+				"style" : 
+				{
+					"navigationBarTitleText" : "账单记录"
+				}
+			},
+			{
+				"path" : "storeSettings/storeSettings",
+				"style" : 
+				{
+					"navigationBarTitleText" : "店铺设置"
+				}
+			}
+				
+			]
+		},
+		{
+			"root": "subPackages/settings",
+			"pages":[
+				{
+					"path" : "user-edit/user-edit",
+					"style" : 
+					{
+						"navigationBarTitleText" : "修改信息"
+					}
+				},
+				{
+					"path": "updatePwd/updatePwd",
+					"style": {
+						"navigationBarTitleText": "更新密码",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path" : "aboutUs/aboutUs",
+					"style" : 
+					{
+						"navigationBarTitleText" : "关于我们"
+					}
+				},
+				{
+					"path" : "version/version",
+					"style" : 
+					{
+						"navigationBarTitleText" : "版本更新"
+					}
+				},
+				{
+					"path" : "myAddress/myAddress",
+					"style" : 
+					{
+						"navigationBarTitleText" : "我的地址"
+					}
+				},
+				{
+					"path" : "addAddress/addAddress",
+					"style" : 
+					{
+						"navigationBarTitleText" : "地址"
+					}
+				}
+			]
+		}
+	],
+	"pages": [
+		// {
+		// 	"path": "pages/test/test",
+		// 	"style": {
+		// 		"navigationBarTitleText": ""
+		// 	}
+		// },
+		{
+			"path": "pages/index1/index1",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+			
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "农链天下",
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		},
+		{
+			"path": "pages/select/select",
+			"style": {
+				"navigationBarTitleText": "选择登录"
+			}
+		},
+		{
+			"path": "pages/sVegetables/sVegetables",
+			"style": {
+				"navigationBarTitleText": "卖菜"
+			}
+		},
+		{
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		},
+		{
+			"path": "pages/ShopDetails/ShopDetails",
+			"style": {
+				"navigationBarTitleText": "摊主详情",
+				"app-plus": {
+					"softinputMode": "adjustResize"
+				}
+			}
+		},
+		{
+			"path": "pages/Apply/Apply",
+			"style": {
+				"navigationBarTitleText": "摊主申请"
+			}
+		},
+		{
+			"path": "pages/Buy/Buy",
+			"style": {
+				"navigationBarTitleText": "提交订单"
+			}
+		},
+		{
+			"path": "pages/publish/publish",
+			"style": {
+				"navigationBarTitleText": "菜品新增"
+			}
+		},
+		{
+			"path": "pages/release/release",
+			"style": {
+				"navigationBarTitleText": "发布"
+			}
+		},
+		{
+			"path": "pages/stalllist/stalllist",
+			"style": {
+				"navigationBarTitleText": "摊位列表"
+			}
+		},
+		{
+			"path": "pages/coupons/coupons",
+			"style": {
+				"navigationBarTitleText": "奖品"
+			}
+		},
+		{
+			"path": "pages/lottery/lottery",
+			"style": {
+				"navigationBarTitleText": "抽奖"
+			}
+		},
+		{
+			"path": "pages/rules/rules",
+			"style": {
+				"navigationBarTitleText": "积分活动说明"
+			}
+		},
+		{
+			"path": "pages/jackpot/jackpot",
+			"style": {
+				"navigationBarTitleText": "摇号结果"
+			}
+		},
+		{
+			"path": "pages/orders/orders",
+			"style": {
+				"navigationBarTitleText": "订单"
+			}
+		},
+		{
+			"path": "pages/Stalls-dishes/Stalls-dishes",
+			"style": {
+				"navigationBarTitleText": "菜品"
+			}
+		},
+		{
+			"path": "pages/Listed-Dishes/Listed-Dishes",
+			"style": {
+				"navigationBarTitleText": "上架菜品"
+			}
+		},
+		{
+			"path": "pages/usecoupons/usecoupons",
+			"style": {
+				"navigationBarTitleText": "使用优惠卷"
+			}
+		},
+		{
+			"path": "pages/Clock/Clock",
+			"style": {
+				"navigationBarTitleText": "签到"
+			}
+		},
+		{
+			"path": "pages/clock-records/clock-records",
+			"style": {
+				"navigationBarTitleText": "打卡记录"
+			}
+		},
+		{
+			"path": "pages/MyPoints-records/MyPoints-records",
+			"style": {
+				"navigationBarTitleText": "我的积分"
+			}
+		},
+		{
+			"path": "pages/Ownerorders/Ownerorders",
+			"style": {
+				"navigationBarTitleText": "摊主订单"
+			}
+		},
+		{
+			"path": "pages/wallet/wallet",
+			"style": {
+				"navigationBarTitleText": "钱包"
+			}
+		},
+		{
+			"path": "pages/Points/Points",
+			"style": {
+				"navigationBarTitleText": "积分钱包"
+			}
+		},
+		{
+			"path": "pages/pointspayouts/pointspayouts",
+			"style": {
+				"navigationBarTitleText": "积分提现"
+			}
+		},
+		{
+			"path": "pages/Settrecords/Settrecords",
+			"style": {
+				"navigationBarTitleText": "积分结算记录"
+			}
+		},
+		{
+			"path": "pages/editshop/editshop",
+			"style": {
+				"navigationBarTitleText": "补充摊铺信息",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/bankCard/bankCard",
+			"style": {
+				"navigationBarTitleText": "银行卡",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/addCard/addCard",
+			"style": {
+				"navigationBarTitleText": "添加银行卡",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/onlineBooth/onlineBooth",
+			"style": {
+				"navigationBarTitleText": "网络摊位",
+				"enablePullDownRefresh": false
+			}
+		},
+	
+		{
+			"path": "pages/boothOwner/boothOwner",
+			"style": {
+				"navigationBarTitleText": "摊主"
+			}
+		},
+		{
+			"path": "pages/aHouseholder/aHouseholder",
+			"style": {
+				"navigationBarTitleText": "户主"
+			}
+		},
+		{
+			"path": "pages/userServiceAgreement/userServiceAgreement",
+			"style": {
+				"navigationBarTitleText": "用户服务协议",
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/privacyAgreement/privacyAgreement",
+			"style": {
+				"navigationBarTitleText": "隐私协议",
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/OpenAccountSharing/OpenAccountSharing",
+			"style": {
+				"navigationBarTitleText": "开通分账"
+			}
+		},
+		{
+			"path": "pages/arrangeNotification/arrangeNotification",
+			"style": {
+				"navigationBarTitleText": "通知"
+			}
+		},
+		{
+			"path": "pages/weChatCashwWithdrawal/weChatCashwWithdrawal",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/billRecord/billRecord",
+			"style": {
+				"navigationBarTitleText": "账单记录"
+			}
+		},
+		{
+			"path": "pages/wholesale/wholesale",
+			"style": {
+				"navigationBarTitleText": "批发"
+			}
+		},
+		{
+			"path": "pages/prizeDraw/prizeDraw",
+			"style": {
+				"navigationBarTitleText": "抽奖"
+			}
+		},
+		{
+			"path": "pages/preSale/preSale",
+			"style": {
+				"navigationBarTitleText": "预卖"
+			}
+		},
+		{
+			"path": "pages/additionalinformation/additionalinformation",
+			"style": {
+				"navigationBarTitleText": "补充资料",
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/Presalemenulist/Presalemenulist",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		
+		{
+			"path": "pages/dynamics/dynamics",
+			"style": {
+				"navigationBarTitleText": "种养来历",
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/demo/demo",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/merchantComplaints/merchantComplaints",
+			"style": {
+				"navigationBarTitleText": "投诉商家"
+			}
+		},
+		{
+			"path": "pages/myComplaint/myComplaint",
+			"style": {
+				"navigationBarTitleText": "我的投诉"
+			}
+		},
+		
+		{
+			"path": "pages/complaintDetails/complaintDetails",
+			"style": {
+				"navigationBarTitleText": "投诉详情",
+				"disableScroll": true
+			}
+		},
+		{
+			"path" : "pages/settings/settings",
+			"style" : 
+			{
+				"navigationBarTitleText" : "设置"
+			}
+		},
+		{
+			"path" : "pages/commodityDetail/commodityDetail",
+			"style" : 
+			{
+				"navigationBarTitleText" : "商品详情"
+			}
+		},
+		{
+			"path" : "pages/invitation/invitation",
+			"style" : 
+			{
+				"navigationBarTitleText" : "邀请好友"
+			}
+		},
+		{
+			"path" : "pages/earningsRecord/earningsRecord",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		},
+		{
+			"path" : "pages/certification/certification",
+			"style" : 
+			{
+				"navigationBarTitleText" : "认证"
+			}
+		},
+		{
+			"path" : "pages/agent/agent",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			// "background": "#efeff4"
+			"titleNView": false //禁用原生导航栏 
+		}
+	},
+	"tabBar": {
+		"color": "#666666",
+		"selectedColor": "#333333",
+		"backgroundColor": "#FFFFFF",
+		"list": [{
+				"selectedIconPath": "static/image/area_s.png",
+				"iconPath": "static/image/area.png",
+				"pagePath": "pages/index1/index1",
+				"text": "首页"
+			},
+			{
+				"selectedIconPath": "static/image/home_s.png",
+				"iconPath": "static/image/home.png",
+				"pagePath": "pages/index/index",
+				"text": "买菜"
+			},
+			{
+				"selectedIconPath": "static/image/wholesaleActive.png",
+				"iconPath": "static/image/wholesale.png",
+				"pagePath": "pages/wholesale/wholesale",
+				"text": "批发"
+			},
+			{
+				"selectedIconPath": "static/image/selling_s.png",
+				"iconPath": "static/image/selling.png",
+				"pagePath": "pages/sVegetables/sVegetables",
+				"text": "卖菜"
+			},
+			{
+				"selectedIconPath": "static/image/user_s.png",
+				"iconPath": "static/image/user.png",
+				"pagePath": "pages/user/user",
+				"text": "我的"
+			}
+		]
+	}
+}

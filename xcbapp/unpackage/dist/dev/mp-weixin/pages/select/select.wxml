@@ -1,0 +1,1 @@
+<view class="select"><view class="vip"><button class="blue-button" bindtap="{{a}}">选择会员登录</button></view><view class="Owner"><button class="blue-button" bindtap="{{b}}">选择摊主登录</button></view></view>

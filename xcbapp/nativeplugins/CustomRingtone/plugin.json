@@ -1,0 +1,9 @@
+{
+  "name": "CustomRingtone",
+  "id": "com.merchantapp.ringtone",
+  "version": "1.0.0",
+  "description": "仅用于打包自定义铃声的资源插件",
+  "platforms": {
+    "android": {}  // 声明支持安卓平台，无复杂逻辑
+  }
+}

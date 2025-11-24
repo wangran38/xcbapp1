@@ -1,0 +1,35 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 4764281 */
+  src: url('iconfont.woff2?t=1739782989289') format('woff2'),
+       url('iconfont.woff?t=1739782989289') format('woff'),
+       url('iconfont.ttf?t=1739782989289') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-a-001_yinhangka:before {
+  content: "\e605";
+}
+
+.icon-tixianyinhangqia:before {
+  content: "\e619";
+}
+
+.icon-shuzirenmingbi:before {
+  content: "\e78c";
+}
+
+.icon-icon_jifenzhifu:before {
+  content: "\e614";
+}
+
+.icon-wechat_pay:before {
+  content: "\e600";
+}
+

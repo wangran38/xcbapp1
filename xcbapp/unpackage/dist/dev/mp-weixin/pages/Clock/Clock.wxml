@@ -1,0 +1,1 @@
+<view class="me-container"><view class="content"><view class="state">{{a}}</view></view></view>

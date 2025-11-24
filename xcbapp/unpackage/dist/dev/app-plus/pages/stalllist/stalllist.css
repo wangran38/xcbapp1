@@ -1,0 +1,193 @@
+
+.me-container {
+		overflow: hidden;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0 0.9375rem 0 0.9375rem;
+		color: white;
+		z-index: 1;
+		background-color: #f4f4f4;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+}
+.item-list {
+		height: 6.25rem;
+		width: 100%;
+		margin-top: 0.46875rem;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		background-color: #ffffff;
+		border-radius: 0.625rem;
+}
+.logo {
+		height: 5.625rem;
+		width: 30%;
+		text-align: center;
+		line-height: 6.25rem;
+		background-color: #1296db;
+		border-radius: 0.625rem;
+		/* padding: 10rpx 10rpx; */
+}
+.logos {
+		height: 5.625rem;
+		width: 100%;
+		border-radius: 0.625rem;
+}
+.info {
+		height: 6.25rem;
+		width: 50%;
+		margin-left: 0.3125rem;
+		/* 设置info和logo之间的间距 */
+		display: flex;
+		flex-direction: column;
+		/* justify-content: space-between; */
+		flex: 1;
+		/* 确保info占据剩余空间 */
+		overflow: hidden;
+		/* 确保内容不溢出 */
+}
+.message {
+		width: 100%;
+		margin: 0.3125rem;
+		/* 调整这个值以改变上下间距 */
+		color: black;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+}
+.interface {
+		height: 100%;
+		width: 20%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-left: auto;
+		/* 设置interface与info的间距 */
+		position: relative;
+		/* margin-right: 0rpx; */
+		/* background-color: #1296db; */
+}
+.interface>.edit {
+		text-align: center;
+		color: white;
+		font-size: 0.9375rem;
+		width: 3.125rem;
+		height: 1.5625rem;
+		line-height: 1.5625rem;
+		background-color: #1296db;
+		border-radius: 0.625rem;
+		margin-bottom: 0.625rem;
+}
+.interface>.delete {
+		text-align: center;
+		color: white;
+		font-size: 0.9375rem;
+		width: 3.125rem;
+		height: 1.5625rem;
+		line-height: 1.5625rem;
+		background-color: #ff1909;
+		border-radius: 0.625rem;
+}
+.loading {
+		text-align: center;
+		padding: 0.625rem;
+		color: #999;
+}
+.popup-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.5);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 1000;
+		color: black;
+}
+.popup {
+		position: relative;
+		width: 80%;
+		max-width: 18.75rem;
+		background-color: white;
+		border-radius: 0.625rem;
+		padding: 0.625rem;
+		box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+.popup-header {
+		font-size: 1.125rem;
+		font-weight: bold;
+		margin-bottom: 0.625rem;
+		text-align: center;
+}
+.popup-content {
+		/* 这里你可以添加弹出层内容的样式 */
+		display: flex;
+		width: 100%;
+		padding: 0.9375rem;
+		box-sizing: border-box;
+		justify-content: center;
+		align-items: center;
+}
+.popup-footer {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 0.3125rem;
+}
+.close-button {
+		position: absolute;
+		top: 0.15625rem;
+		right: 0.15625rem;
+		font-size: 1.25rem;
+		color: black;
+		cursor: pointer;
+		z-index: 10;
+		width: 2.5rem;
+		height: 2.5rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #ffffff;
+		border-radius: 50%;
+		box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.1);
+}
+.cimg {
+		width: 3.125rem;
+		height: 3.125rem;
+}
+.content {
+		width: 100%;
+		height: 6.25rem;
+}
+.cuisine {
+		height: 3.125rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+}
+.editimg {
+		width: 100%;
+		height: 3.125rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+}
+.title {
+		font-size: 1.09375rem;
+}
+.shuru {
+		width: auto;
+		height: 3.125rem;
+		display: flex;
+		justify-content: end;
+		align-items: center;
+}
+.shurucon {
+		text-align: right;
+		font-size: 1.09375rem;
+}

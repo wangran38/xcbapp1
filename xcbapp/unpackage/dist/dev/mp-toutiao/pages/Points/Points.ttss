@@ -1,0 +1,71 @@
+
+.me-container {
+	overflow: hidden;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0rpx 30rpx 0 30rpx;
+	color: white;
+	z-index: 1;
+	background-color: #f8f8f8;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	/* 从顶部开始布局 */
+	position: relative;
+	/* 确保子元素的绝对定位是相对于这个容器 */
+	height: calc(100vh -10rpx);
+	/* 确保容器占满整个视口高度 */
+	color: black;
+}
+.asset {
+	box-sizing: border-box;
+	/* height: 200rpx; */
+	width: 100%;
+	padding: 20rpx;
+	margin-top: 30rpx;
+	border-radius: 20rpx;
+	background-color: white;
+}
+.card {
+	box-sizing: border-box;
+	padding: 20rpx;
+	background-color: #007aff;
+	border-radius: 20rpx;
+	color: white;
+}
+.money {
+	font-size: 40rpx;
+}
+.bottom {
+	margin-top: 60rpx;
+	/* background-color: aliceblue; */
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 60rpx;
+}
+.recharge,
+.consume,
+.Not-received {
+	width: 33%;
+	text-align: left;
+}
+.Cumulative-top-ups {
+	font-size: 40rpx;
+}
+.item {
+	margin-top: 60rpx;
+	display: flex;
+	justify-content: space-around;
+}
+.Recording {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.text {
+	color: #cbcbcb;
+	margin-top: 10rpx;
+	text-align: center;
+}
+

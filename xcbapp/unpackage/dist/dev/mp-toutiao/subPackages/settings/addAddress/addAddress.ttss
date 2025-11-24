@@ -1,0 +1,379 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+/**
+ * author: Di (微信小程序开发工程师)
+ * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
+ *         垂直微信小程序开发交流社区
+ *
+ * github地址: https://github.com/icindy/wxParse
+ *
+ * for: 微信小程序富文本解析
+ * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
+ */
+/**
+ * 请在全局下引入该文件，@import '/static/wxParse.css';
+ */
+.wxParse.data-v-2fb4599a {
+  -webkit-user-select: none;
+          user-select: none;
+  width: 100%;
+  font-family: Helvetica, "PingFangSC", 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
+  color: #333;
+  line-height: 1.5;
+  font-size: 1em;
+  text-align: justify;
+  /* //左右两端对齐 */
+}
+.wxParse view.data-v-2fb4599a, .wxParse uni-view.data-v-2fb4599a {
+  word-break: break-word;
+}
+.wxParse .p.data-v-2fb4599a {
+  padding-bottom: 0.5em;
+  clear: both;
+  /* letter-spacing: 0;//字间距 */
+}
+.wxParse .inline.data-v-2fb4599a {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+.wxParse .div.data-v-2fb4599a {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+.wxParse .h1.data-v-2fb4599a {
+  font-size: 2em;
+  line-height: 1.2em;
+  margin: 0.67em 0;
+}
+.wxParse .h2.data-v-2fb4599a {
+  font-size: 1.5em;
+  margin: 0.83em 0;
+}
+.wxParse .h3.data-v-2fb4599a {
+  font-size: 1.17em;
+  margin: 1em 0;
+}
+.wxParse .h4.data-v-2fb4599a {
+  margin: 1.33em 0;
+}
+.wxParse .h5.data-v-2fb4599a {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+.wxParse .h6.data-v-2fb4599a {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+.wxParse .h1.data-v-2fb4599a,
+.wxParse .h2.data-v-2fb4599a,
+.wxParse .h3.data-v-2fb4599a,
+.wxParse .h4.data-v-2fb4599a,
+.wxParse .h5.data-v-2fb4599a,
+.wxParse .h6.data-v-2fb4599a,
+.wxParse .b.data-v-2fb4599a,
+.wxParse .strong.data-v-2fb4599a {
+  font-weight: bolder;
+}
+.wxParse .i.data-v-2fb4599a,
+.wxParse .cite.data-v-2fb4599a,
+.wxParse .em.data-v-2fb4599a,
+.wxParse .var.data-v-2fb4599a,
+.wxParse .address.data-v-2fb4599a {
+  font-style: italic;
+}
+.wxParse .spaceshow.data-v-2fb4599a {
+  white-space: pre;
+}
+.wxParse .pre.data-v-2fb4599a,
+.wxParse .tt.data-v-2fb4599a,
+.wxParse .code.data-v-2fb4599a,
+.wxParse .kbd.data-v-2fb4599a,
+.wxParse .samp.data-v-2fb4599a {
+  font-family: monospace;
+}
+.wxParse .pre.data-v-2fb4599a {
+  overflow: auto;
+  background: #f5f5f5;
+  padding: 16rpx;
+  white-space: pre;
+  margin: 1em 0rpx;
+  font-size: 24rpx;
+}
+.wxParse .code.data-v-2fb4599a {
+  overflow: auto;
+  padding: 16rpx;
+  white-space: pre;
+  margin: 1em 0rpx;
+  background: #f5f5f5;
+  font-size: 24rpx;
+}
+.wxParse .big.data-v-2fb4599a {
+  font-size: 1.17em;
+}
+.wxParse .small.data-v-2fb4599a,
+.wxParse .sub.data-v-2fb4599a,
+.wxParse .sup.data-v-2fb4599a {
+  font-size: 0.83em;
+}
+.wxParse .sub.data-v-2fb4599a {
+  vertical-align: sub;
+}
+.wxParse .sup.data-v-2fb4599a {
+  vertical-align: super;
+}
+.wxParse .s.data-v-2fb4599a,
+.wxParse .strike.data-v-2fb4599a,
+.wxParse .del.data-v-2fb4599a {
+  text-decoration: line-through;
+}
+.wxParse .strong.data-v-2fb4599a,
+.wxParse .text.data-v-2fb4599a,
+.wxParse .span.data-v-2fb4599a,
+.wxParse .s.data-v-2fb4599a {
+  display: inline;
+}
+.wxParse .a.data-v-2fb4599a {
+  color: deepskyblue;
+}
+.wxParse .video.data-v-2fb4599a {
+  text-align: center;
+  margin: 22rpx 0;
+}
+.wxParse .video-video.data-v-2fb4599a {
+  width: 100%;
+}
+.wxParse .uni-image.data-v-2fb4599a {
+  height: 100px !important;
+  width: 100px !important;
+}
+.wxParse .img.data-v-2fb4599a {
+  height: 600rpx !important;
+  display: block;
+  height: 100rpx;
+  margin-bottom: 0em;
+  /* //与p标签底部padding同时修改 */
+  overflow: hidden;
+}
+.wxParse .blockquote.data-v-2fb4599a {
+  margin: 10rpx 0;
+  padding: 22rpx 0 22rpx 22rpx;
+  font-family: Courier, Calibri, "宋体";
+  background: #f5f5f5;
+  border-left: 6rpx solid #dbdbdb;
+}
+.wxParse .blockquote .p.data-v-2fb4599a {
+  margin: 0;
+}
+.wxParse .ul.data-v-2fb4599a, .wxParse .ol.data-v-2fb4599a {
+  display: block;
+  margin: 1em 0;
+  padding-left: 2em;
+}
+.wxParse .ol.data-v-2fb4599a {
+  list-style-type: disc;
+}
+.wxParse .ol.data-v-2fb4599a {
+  list-style-type: decimal;
+}
+.wxParse .ol > weixin-parse-template.data-v-2fb4599a, .wxParse .ul > weixin-parse-template.data-v-2fb4599a {
+  display: list-item;
+  align-items: baseline;
+  text-align: match-parent;
+}
+.wxParse .ol > .li.data-v-2fb4599a, .wxParse .ul > .li.data-v-2fb4599a {
+  display: list-item;
+  align-items: baseline;
+  text-align: match-parent;
+}
+.wxParse .ul .ul.data-v-2fb4599a, .wxParse .ol .ul.data-v-2fb4599a {
+  list-style-type: circle;
+}
+.wxParse .ol .ol .ul.data-v-2fb4599a, .wxParse .ol .ul .ul.data-v-2fb4599a, .wxParse .ul .ol .ul.data-v-2fb4599a, .wxParse .ul .ul .ul.data-v-2fb4599a {
+  list-style-type: square;
+}
+.wxParse .u.data-v-2fb4599a {
+  text-decoration: underline;
+}
+.wxParse .hide.data-v-2fb4599a {
+  display: none;
+}
+.wxParse .del.data-v-2fb4599a {
+  display: inline;
+}
+.wxParse .figure.data-v-2fb4599a {
+  overflow: hidden;
+}
+.wxParse .tablebox.data-v-2fb4599a {
+  overflow: auto;
+  background-color: #f5f5f5;
+  background: #f5f5f5;
+  font-size: 13px;
+  padding: 8px;
+}
+.wxParse .table .table.data-v-2fb4599a, .wxParse .table.data-v-2fb4599a {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  /* 内边框 */
+  /* width: 100%; */
+  overflow: auto;
+  white-space: pre;
+}
+.wxParse .tbody.data-v-2fb4599a {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  /* 内边框 */
+  border: 1px solid #dadada;
+}
+.wxParse .table .thead.data-v-2fb4599a, .wxParse .table .tfoot.data-v-2fb4599a, .wxParse .table .th.data-v-2fb4599a {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  background: #ececec;
+  font-weight: 40;
+}
+.wxParse .table .tr.data-v-2fb4599a {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  /* border: 2px solid #F0AD4E; */
+  overflow: auto;
+}
+.wxParse .table .th.data-v-2fb4599a,
+.wxParse .table .td.data-v-2fb4599a {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  border: 2rpx solid #dadada;
+  overflow: auto;
+}
+.wxParse .audio.data-v-2fb4599a, .wxParse .uni-audio-default.data-v-2fb4599a {
+  display: block;
+}
+.address-edit-page.data-v-2fb4599a {
+  display: flex;
+  justify-content: left;
+  background: #f8f9fb;
+  min-height: 100vh;
+}
+.address-edit-page .app-bar.data-v-2fb4599a {
+  display: flex;
+  align-items: center;
+  padding: 48rpx 32rpx 24rpx;
+  background: #fff;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+.address-edit-page .app-bar .title.data-v-2fb4599a {
+  font-size: 36rpx;
+  font-weight: 500;
+  color: #2d3742;
+  margin-left: 24rpx;
+}
+.address-edit-page .form-container.data-v-2fb4599a {
+  position: fixed;
+  bottom: 0;
+  width: 700rpx;
+  padding: 32rpx;
+}
+.address-edit-page .form-item.data-v-2fb4599a {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  background: #fff;
+  padding: 18rpx;
+  position: relative;
+  text-align: left;
+}
+.address-edit-page .form-item .label.data-v-2fb4599a {
+  width: 200rpx;
+  display: block;
+  color: #4a5568;
+  font-size: 30rpx;
+  margin-bottom: 24rpx;
+}
+.address-edit-page .form-item .input.data-v-2fb4599a,
+.address-edit-page .form-item .region-picker.data-v-2fb4599a,
+.address-edit-page .form-item .textarea.data-v-2fb4599a {
+  width: 600rpx;
+  height: 88rpx;
+  padding: 0 24rpx;
+  border: 1px solid #e2e8f0;
+  border-radius: 12rpx;
+  font-size: 30rpx;
+}
+.address-edit-page .form-item .input.error.data-v-2fb4599a,
+.address-edit-page .form-item .region-picker.error.data-v-2fb4599a,
+.address-edit-page .form-item .textarea.error.data-v-2fb4599a {
+  border-color: #ef4444;
+}
+.address-edit-page .form-item .region-picker.data-v-2fb4599a {
+  display: flex;
+  align-items: center;
+  color: #718096;
+}
+.address-edit-page .form-item .region-picker .placeholder.data-v-2fb4599a {
+  color: #a0aec0;
+}
+.address-edit-page .form-item .textarea.data-v-2fb4599a {
+  height: 200rpx;
+  padding: 24rpx;
+  line-height: 1.6;
+}
+.address-edit-page .form-item .error-msg.data-v-2fb4599a {
+  color: #ef4444;
+  font-size: 24rpx;
+  margin-top: 12rpx;
+  display: block;
+}
+.address-edit-page .switch-item.data-v-2fb4599a {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.address-edit-page .save-footer.data-v-2fb4599a {
+  z-index: 999;
+  background: #fff;
+  padding: 24rpx 32rpx;
+  box-shadow: 0 -4rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+.address-edit-page .save-footer .save-btn.data-v-2fb4599a {
+  background: #1a73e8;
+  color: #fff;
+  height: 96rpx;
+  border-radius: 48rpx;
+  font-size: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 768px) {
+.address-edit-page .form-container.data-v-2fb4599a {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+}
+

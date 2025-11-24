@@ -1,0 +1,394 @@
+/* 水平间距 */
+/* 水平间距 */
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+/**
+ * author: Di (微信小程序开发工程师)
+ * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
+ *         垂直微信小程序开发交流社区
+ *
+ * github地址: https://github.com/icindy/wxParse
+ *
+ * for: 微信小程序富文本解析
+ * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
+ */
+/**
+ * 请在全局下引入该文件，@import '/static/wxParse.css';
+ */
+.wxParse[data-v-8bd8dfff] {
+  -webkit-user-select: none;
+          user-select: none;
+  width: 100%;
+  font-family: Helvetica, "PingFangSC", "Microsoft Yahei", "微软雅黑", Arial, sans-serif;
+  color: #333;
+  line-height: 1.5;
+  font-size: 1em;
+  text-align: justify;
+  /* //左右两端对齐 */
+}
+.wxParse uni-view[data-v-8bd8dfff], .wxParse uni-view[data-v-8bd8dfff] {
+  word-break: break-word;
+}
+.wxParse .p[data-v-8bd8dfff] {
+  padding-bottom: 0.5em;
+  clear: both;
+  /* letter-spacing: 0;//字间距 */
+}
+.wxParse .inline[data-v-8bd8dfff] {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+.wxParse .div[data-v-8bd8dfff] {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+.wxParse .h1[data-v-8bd8dfff] {
+  font-size: 2em;
+  line-height: 1.2em;
+  margin: 0.67em 0;
+}
+.wxParse .h2[data-v-8bd8dfff] {
+  font-size: 1.5em;
+  margin: 0.83em 0;
+}
+.wxParse .h3[data-v-8bd8dfff] {
+  font-size: 1.17em;
+  margin: 1em 0;
+}
+.wxParse .h4[data-v-8bd8dfff] {
+  margin: 1.33em 0;
+}
+.wxParse .h5[data-v-8bd8dfff] {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+.wxParse .h6[data-v-8bd8dfff] {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+.wxParse .h1[data-v-8bd8dfff],
+.wxParse .h2[data-v-8bd8dfff],
+.wxParse .h3[data-v-8bd8dfff],
+.wxParse .h4[data-v-8bd8dfff],
+.wxParse .h5[data-v-8bd8dfff],
+.wxParse .h6[data-v-8bd8dfff],
+.wxParse .b[data-v-8bd8dfff],
+.wxParse .strong[data-v-8bd8dfff] {
+  font-weight: bolder;
+}
+.wxParse .i[data-v-8bd8dfff],
+.wxParse .cite[data-v-8bd8dfff],
+.wxParse .em[data-v-8bd8dfff],
+.wxParse .var[data-v-8bd8dfff],
+.wxParse .address[data-v-8bd8dfff] {
+  font-style: italic;
+}
+.wxParse .spaceshow[data-v-8bd8dfff] {
+  white-space: pre;
+}
+.wxParse .pre[data-v-8bd8dfff],
+.wxParse .tt[data-v-8bd8dfff],
+.wxParse .code[data-v-8bd8dfff],
+.wxParse .kbd[data-v-8bd8dfff],
+.wxParse .samp[data-v-8bd8dfff] {
+  font-family: monospace;
+}
+.wxParse .pre[data-v-8bd8dfff] {
+  overflow: auto;
+  background: #f5f5f5;
+  padding: 0.5rem;
+  white-space: pre;
+  margin: 1em 0;
+  font-size: 0.75rem;
+}
+.wxParse .code[data-v-8bd8dfff] {
+  overflow: auto;
+  padding: 0.5rem;
+  white-space: pre;
+  margin: 1em 0;
+  background: #f5f5f5;
+  font-size: 0.75rem;
+}
+.wxParse .big[data-v-8bd8dfff] {
+  font-size: 1.17em;
+}
+.wxParse .small[data-v-8bd8dfff],
+.wxParse .sub[data-v-8bd8dfff],
+.wxParse .sup[data-v-8bd8dfff] {
+  font-size: 0.83em;
+}
+.wxParse .sub[data-v-8bd8dfff] {
+  vertical-align: sub;
+}
+.wxParse .sup[data-v-8bd8dfff] {
+  vertical-align: super;
+}
+.wxParse .s[data-v-8bd8dfff],
+.wxParse .strike[data-v-8bd8dfff],
+.wxParse .del[data-v-8bd8dfff] {
+  text-decoration: line-through;
+}
+.wxParse .strong[data-v-8bd8dfff],
+.wxParse .text[data-v-8bd8dfff],
+.wxParse .span[data-v-8bd8dfff],
+.wxParse .s[data-v-8bd8dfff] {
+  display: inline;
+}
+.wxParse .a[data-v-8bd8dfff] {
+  color: deepskyblue;
+}
+.wxParse .video[data-v-8bd8dfff] {
+  text-align: center;
+  margin: 0.6875rem 0;
+}
+.wxParse .video-video[data-v-8bd8dfff] {
+  width: 100%;
+}
+.wxParse .uni-image[data-v-8bd8dfff] {
+  height: 100px !important;
+  width: 100px !important;
+}
+.wxParse .img[data-v-8bd8dfff] {
+  height: 18.75rem !important;
+  display: block;
+  height: 3.125rem;
+  margin-bottom: 0em;
+  /* //与p标签底部padding同时修改 */
+  overflow: hidden;
+}
+.wxParse .blockquote[data-v-8bd8dfff] {
+  margin: 0.3125rem 0;
+  padding: 0.6875rem 0 0.6875rem 0.6875rem;
+  font-family: Courier, Calibri, "宋体";
+  background: #f5f5f5;
+  border-left: 0.1875rem solid #dbdbdb;
+}
+.wxParse .blockquote .p[data-v-8bd8dfff] {
+  margin: 0;
+}
+.wxParse .ul[data-v-8bd8dfff], .wxParse .ol[data-v-8bd8dfff] {
+  display: block;
+  margin: 1em 0;
+  padding-left: 2em;
+}
+.wxParse .ol[data-v-8bd8dfff] {
+  list-style-type: disc;
+}
+.wxParse .ol[data-v-8bd8dfff] {
+  list-style-type: decimal;
+}
+.wxParse .ol > weixin-parse-template[data-v-8bd8dfff], .wxParse .ul > weixin-parse-template[data-v-8bd8dfff] {
+  display: list-item;
+  align-items: baseline;
+  text-align: match-parent;
+}
+.wxParse .ol > .li[data-v-8bd8dfff], .wxParse .ul > .li[data-v-8bd8dfff] {
+  display: list-item;
+  align-items: baseline;
+  text-align: match-parent;
+}
+.wxParse .ul .ul[data-v-8bd8dfff], .wxParse .ol .ul[data-v-8bd8dfff] {
+  list-style-type: circle;
+}
+.wxParse .ol .ol .ul[data-v-8bd8dfff], .wxParse .ol .ul .ul[data-v-8bd8dfff], .wxParse .ul .ol .ul[data-v-8bd8dfff], .wxParse .ul .ul .ul[data-v-8bd8dfff] {
+  list-style-type: square;
+}
+.wxParse .u[data-v-8bd8dfff] {
+  text-decoration: underline;
+}
+.wxParse .hide[data-v-8bd8dfff] {
+  display: none;
+}
+.wxParse .del[data-v-8bd8dfff] {
+  display: inline;
+}
+.wxParse .figure[data-v-8bd8dfff] {
+  overflow: hidden;
+}
+.wxParse .tablebox[data-v-8bd8dfff] {
+  overflow: auto;
+  background-color: #f5f5f5;
+  background: #f5f5f5;
+  font-size: 13px;
+  padding: 8px;
+}
+.wxParse .table .table[data-v-8bd8dfff], .wxParse .table[data-v-8bd8dfff] {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  /* 内边框 */
+  /* width: 100%; */
+  overflow: auto;
+  white-space: pre;
+}
+.wxParse .tbody[data-v-8bd8dfff] {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  /* 内边框 */
+  border: 1px solid #dadada;
+}
+.wxParse .table .thead[data-v-8bd8dfff], .wxParse .table .tfoot[data-v-8bd8dfff], .wxParse .table .th[data-v-8bd8dfff] {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  background: #ececec;
+  font-weight: 40;
+}
+.wxParse .table .tr[data-v-8bd8dfff] {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  /* border: 2px solid #F0AD4E; */
+  overflow: auto;
+}
+.wxParse .table .th[data-v-8bd8dfff],
+.wxParse .table .td[data-v-8bd8dfff] {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  border: 0.0625rem solid #dadada;
+  overflow: auto;
+}
+.wxParse .audio[data-v-8bd8dfff], .wxParse .uni-audio-default[data-v-8bd8dfff] {
+  display: block;
+}
+.container[data-v-8bd8dfff] {
+  background-color: #f8f8f8;
+  height: 100vh;
+  box-sizing: border-box;
+}
+.category-tabs[data-v-8bd8dfff] {
+  background: #fff;
+  padding: 0.625rem 0;
+  white-space: nowrap;
+  box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.06);
+}
+.category-tabs .tab-wrapper[data-v-8bd8dfff] {
+  display: inline-flex;
+  padding: 0 0.9375rem;
+}
+.category-tabs .tab-item[data-v-8bd8dfff] {
+  position: relative;
+  padding: 0.5rem 1.25rem;
+  margin-right: 1.25rem;
+  font-size: 0.9375rem;
+  color: #666;
+  transition: color 0.2s;
+}
+.category-tabs .tab-item[data-v-8bd8dfff]::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 0.125rem;
+  background: #007AFF;
+  transition: all 0.3s;
+}
+.category-tabs .tab-item.active[data-v-8bd8dfff] {
+  color: #007AFF;
+  font-weight: 500;
+}
+.category-tabs .tab-item.active[data-v-8bd8dfff]::after {
+  left: 0;
+  width: 100%;
+}
+.dish-list[data-v-8bd8dfff] {
+  padding: 0.9375rem;
+  box-sizing: border-box;
+}
+.dish-card[data-v-8bd8dfff] {
+  display: flex;
+  background: #fff;
+  border-radius: 0.75rem;
+  margin-bottom: 0.9375rem;
+  padding: 0.75rem;
+  box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.04);
+}
+.dish-card .dish-image[data-v-8bd8dfff] {
+  width: 6.875rem;
+  height: 6.875rem;
+  border-radius: 0.375rem;
+  flex-shrink: 0;
+  background: #f5f5f5;
+}
+.dish-card .dish-content[data-v-8bd8dfff] {
+  flex: 1;
+  margin-left: 0.75rem;
+  position: relative;
+  padding-right: 5rem;
+}
+.dish-card .dish-content .dish-name[data-v-8bd8dfff] {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.4;
+}
+.dish-card .dish-content .dish-price[data-v-8bd8dfff] {
+  display: block;
+  color: #ff4444;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+.dish-card .dish-content .dish-stock[data-v-8bd8dfff] {
+  display: block;
+  font-size: 0.8125rem;
+  color: #999;
+}
+.dish-card .dish-content .off-shelf-btn[data-v-8bd8dfff] {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 0 1.25rem;
+  height: 2rem;
+  line-height: 2rem;
+  font-size: 0.875rem;
+  background: #f8f8f8;
+  color: #666;
+  border-radius: 1.25rem;
+}
+.dish-card .dish-content .off-shelf-btn[data-v-8bd8dfff]::after {
+  border: none;
+}
+.dish-card .dish-content .off-shelf-btn[disabled][data-v-8bd8dfff] {
+  opacity: 0.6;
+}
+.empty-wrapper[data-v-8bd8dfff] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3.125rem 0;
+}
+.empty-wrapper .empty-image[data-v-8bd8dfff] {
+  width: 8.75rem;
+  height: 8.75rem;
+  opacity: 0.8;
+}
+.empty-wrapper .empty-text[data-v-8bd8dfff] {
+  color: #999;
+  font-size: 0.9375rem;
+  margin-top: 0.625rem;
+}
+
+/* 多行省略 */

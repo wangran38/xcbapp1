@@ -1,0 +1,54 @@
+
+.Notice uni-view{
+		font-size: 0.78125rem;
+		font-weight: bold;
+		background-color: white;
+		/* display: inline; */
+}
+.one,.two,.three,.four{
+		text-indent: 0.9375rem;
+}
+.me-container {
+		position: relative;
+		width: 100%;
+		height: 200vh;
+		box-sizing: border-box;
+		padding: 0 1.5625rem 0 1.5625rem;
+		color: white;
+		z-index: 1;
+		background-color: #d1d1d1;
+		display: flex;
+		flex-direction: column;
+		/* justify-content: center; */
+		color: black;
+}
+.title {
+		height: 3.125rem;
+		text-align: center;
+		line-height: 3.125rem;
+		font-size: 1.0625rem;
+		/* margin-top: 30rpx; */
+		margin-bottom: 0.9375rem;
+		/* background-color: aqua; */
+}
+.fixd{
+		height: 3.125rem;
+		width: 80%;
+		color: white;
+		font-size: 0.9375rem;
+		position: relative;
+		top: 0.9375rem;
+		left: 50%; /* 使元素相对于视口宽度居中 */
+		transform: translateX(-50%); /* 将元素向左移动一半的自身宽度，实现居中对齐 */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #007aff;
+		border-radius: 0.625rem;
+}
+.luokuan{
+		margin-top: 0.625rem;
+		text-align: right;
+		font-size: 0.78125rem;
+		font-weight: bold;
+}

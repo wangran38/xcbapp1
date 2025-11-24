@@ -1,0 +1,1 @@
+<view class="content"><text style="font-size:25rpx;font-weight:bold">发布时间:{{a}}</text></view>

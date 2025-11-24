@@ -1,0 +1,1 @@
+<view class="container data-v-df1b4024"><canvas canvas-id="pureCanvas" style="{{'width:' + a + ';' + ('height:' + b)}}" class="canvas data-v-df1b4024"></canvas><button bindtap="{{c}}" class="save-btn data-v-df1b4024"> 保存图片到相册 </button></view>

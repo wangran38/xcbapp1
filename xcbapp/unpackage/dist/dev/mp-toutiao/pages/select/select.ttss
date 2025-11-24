@@ -1,0 +1,20 @@
+
+.select{
+	height: auto;
+	margin: 50% 30rpx;
+	display: flex;
+	flex-direction: column;	
+	justify-content: space-between; /* 垂直方向为上中下 */
+}
+.vip{
+	margin-bottom: 100rpx;
+}
+.blue-button {
+    background-color: #007aff; /* 蓝色 */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+

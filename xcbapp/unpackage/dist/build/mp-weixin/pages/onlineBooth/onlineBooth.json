@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "网络摊位",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "uni-steps": "/uni_modules/uni-steps/components/uni-steps/uni-steps",
+    "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons",
+    "uni-card": "/uni_modules/uni-card/components/uni-card/uni-card",
+    "pop-vue": "/pages/onlineBooth/components/pop"
+  }
+}
