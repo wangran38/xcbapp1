@@ -81,6 +81,7 @@
 			 */
 			saveCanvasImage() {
 				// 1. 先检查是否有保存图片的权限
+				
 				uni.getSetting({
 					success: (res) => {
 						// 没有权限则申请

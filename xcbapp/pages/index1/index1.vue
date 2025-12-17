@@ -32,7 +32,7 @@
 			<!-- <button @click="gotodemo">测试</button> -->
 		</view>
 		
-		<button style="margin: 50rpx;" @click="goToJackpot">免费卖菜</button>
+		<button style="margin: 50rpx;" @click="goToJackpot">免费买菜</button>
 		<!-- 		<view style="color: white; margin: 20rpx; font-size: 25rpx; background-color: black; border: 5rpx solid lightslategray; padding: 20rpx;">
 			小程序使用体验上出现问题,请打热线电话联系我们我们将虚心接受您的意见并进行整改.
 			
@@ -384,7 +384,8 @@
 				};
 
 
-				this.setStatus()
+				// this.setStatus()   注释无用代码
+				
 				// console.log(this.displayMarketList[this.selectedMarketIndex])
 				// console.log('Saving data:', savedData); // 这行可以帮助你调试
 				uni.setStorageSync('userSelection', savedData);

@@ -1,1 +1,0 @@
-<view><picker mode="multiSelector" value="{{areaIndex}}" range="{{areaData}}" data-event-opts="{{[['columnchange',[['bindPickerChange',['$event']]]]]}}" bindcolumnchange="__e"><view class="uni-input">{{areaData[0]+"-"+areaData[1][areaIndex[1]]+"-"+areaData[2][areaIndex[2]]}}</view></picker></view>

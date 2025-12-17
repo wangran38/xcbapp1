@@ -1,26 +1,6 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import createPersistedState from 'vuex-persistedstate';
+import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
-import cart from './modules/cart.js';
-import location from './modules/location.js';
+const pinia = createPinia()
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
-  modules: {
-    cart,
-	location
-  },
-  plugins: [
-    createPersistedState({
-      // 指定需要持久化的模块
-      paths: ['cart'],
-	   storage: {
-	        getItem: (key) => uni.getStorageSync(key),
-	        setItem: (key, val) => uni.setStorageSync(key, val),
-	        removeItem: (key) => uni.removeStorageSync(key)
-	    }
-    }),
-  ],
-});
+export default pinia

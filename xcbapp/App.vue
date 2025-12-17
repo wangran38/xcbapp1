@@ -252,7 +252,7 @@
 				successCallback: () => {},
 				failCallback: () => {}
 			}
-
+			// #ifdef MP-WEIXIN
 			uni.getSetting({
 				withSubscriptions: true,
 				success: (res) => {
@@ -316,9 +316,13 @@
 					console.error('获取设置失败', err)
 				}
 			})
-
-
-
+				
+			// #endif
+			
+			
+			
+			
+			// #ifdef MP-WEIXIN
 			const updateManager = uni.getUpdateManager()
 			// 请求完新版本信息的回调
 			updateManager.onCheckForUpdate(res => {
@@ -342,11 +346,11 @@
 			updateManager.onUpdateFailed(res => {
 				console.error(res)
 			})
-
+			
+			// #endif
 
 		},
-
-
+			
 
 		onHide: function() {
 			console.log('App Hide')
@@ -374,6 +378,8 @@
 
 	page {
 		background-color: #f5f5f5;
+		position: relative;
+		top: var(--status-bar-height);
 	}
 
 	/* #endif */

@@ -83,6 +83,7 @@ export default {
 		},
 
 		saveCanvasImage() {
+			// #ifdef MP-WEIXIN
 			uni.getSetting({
 				success: (res) => {
 					if (!res.authSetting['scope.writePhotosAlbum']) {
@@ -102,6 +103,7 @@ export default {
 					}
 				}
 			})
+			// #endif
 		},
 
 		// 加载图片为本地路径

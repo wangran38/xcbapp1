@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "上市",
-  "usingComponents": {
-    "one-vue": "/subPackages/aHouseholder/beListed/componment/one",
-    "two-vue": "/subPackages/aHouseholder/beListed/componment/two",
-    "three-vue": "/subPackages/aHouseholder/beListed/componment/three",
-    "describe-vue": "/subPackages/aHouseholder/beListed/componment/describe"
-  }
-}

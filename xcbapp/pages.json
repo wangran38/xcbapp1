@@ -31,6 +31,12 @@
 				{
 					"navigationBarTitleText" : "数据中心"
 				}
+			},
+			{
+				"path": "AgentRevenue/AgentRevenue",
+				"style": {
+					"navigationBarTitleText": ""
+				}
 			}
 			]
 		},

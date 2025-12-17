@@ -18,35 +18,28 @@
 								</view>
 							</view>
 							<view class="content1">
-								<view class="item" v-for="item in getCartsByShopId(shop_id)" :key="item.id">
+								<view class="item" v-for="item in getCartsByShopId" :key="item.id">
 									<view class="biaoti1">
 										<view>{{item.shopTitle}}</view>
-										<!-- <uni-icons type="right" size="14"color="#ccc"></uni-icons> -->
 										<view><uni-icons type="right" size="14" color="#ccc"></uni-icons></view>
 									</view>
 									<view class="neirong1">
 										<view class="left">
 											<image class="shopimg1" :src="item.imglogo" mode="aspectFill"></image>
 										</view>
-
 										<view class="content1">
-											<!-- <text>标题</text> -->
 											<view class="shoptitle1">{{item.commodity_name}}</view>
-											<!-- <view class="">价格</view> -->
 											<view class="shopprice1">¥ {{item.price.toFixed(2)}}</view>
 										</view>
-
 										<view class="right">
 											<view class="btn1" @click="subItem(item)">-</view>
-											<view class="count1">{{ getTempCount(item.id) }}</view>
+											<view class="count1">{{ cartStore.getTempCount(item.id) }}</view>
 											<view class="btn2" @click="addItem(item)">+</view>
 										</view>
 									</view>
 								</view>
 							</view>
-
 						</view>
-
 					</view>
 				</scroll-view>
 			</view>
@@ -55,9 +48,9 @@
 				<view class="car" @click.stop="clickCart">
 					<view class="cart-icon-wrapper">
 						<uni-icons type="cart" size="40" color="white"></uni-icons>
-						<view class="badge">{{ cartsLengthByShopId(shop_id) }}</view>
+						<view class="badge">{{ cartsLengthByShopId }}</view>
 					</view>
-					<view class="pri">¥ {{ cartTotalByShopId(shop_id) }}</view>
+					<view class="pri">¥ {{ cartTotalByShopId }}</view>
 				</view>
 				<view class="sett" @click="goToBuyPage">
 					去结算
@@ -68,10 +61,13 @@
 
 <script>
 	import {
-		mapState,
-		mapGetters,
-		mapMutations
-	} from 'vuex';
+		useCartStore
+	} from '@/store/cart';
+	// 2. 导入 Vue 计算属性（用于映射 Pinia 状态）
+	import {
+		computed
+	} from 'vue';
+
 	export default {
 		name: "shop-item",
 		props: {
@@ -82,43 +78,89 @@
 		},
 		data() {
 			return {
-				showCartLayer1: false
+				showCartLayer1: false,
+				// 3. 初始化 cartStore 实例（选项式 API 中挂载到实例）
+				cartStore: null
 			};
 		},
+		created() {
+			// 4. 在创建钩子中获取 Pinia 实例（确保组件生命周期内可访问）
+			this.cartStore = useCartStore();
+		},
 		computed: {
-			...mapState('cart', ['carts']),
-			...mapGetters('cart', ['cartTotalByShopId', 'getTempCount', 'cartsLengthByShopId', 'getCartsByShopId']),
+			// 5. 替换 mapState('cart', ['carts'])：直接访问 Pinia 状态
+			carts() {
+				return this.cartStore.carts; // Pinia 状态直接访问
+			},
+			getCartsByShopId() {
+				return this.carts.filter(item => item.shop_id === this.shop_id);
+			},
+			// 商品总价
+			cartTotalByShopId() {
+				// console.log("数值发生变化", this.carts);
+				// 空值防护 + reduce 简化计算
+				if (!Array.isArray(this.carts)) return 0;
+				const total = this.carts.reduce((sum, item) => {
+					// 容错：item 不存在/价格/数量为空时，按 0 计算
+					const price = Number(item?.price) || 0;
+					const count = Number(item?.tempCount) || 0;
+					return sum + price * count;
+				}, 0);
+				// 保留 2 位小数（电商场景必备）
+				return Number(total.toFixed(2));
+			},
+			cartsLengthByShopId() {
+				// 计算当前店铺的购物车商品总数（按数量累加）
+				return this.getCartsByShopId.reduce((count, item) => {
+					return count + (item.tempCount || 1);
+				}, 0);
+			},
+			getTempCount() {
+				// 封装：根据商品 ID 获取数量（对应原 Vuex 的 getTempCount）
+				return (itemId) => {
+					const item = this.carts.find(i => i.id === itemId);
+					return item ? item.quantity || 1 : 0;
+				};
+			}
 		},
 		methods: {
-			...mapMutations('cart', ['addItem', 'subItem', 'clearCart']),
+			addItem(item) {
+				this.cartStore.addItem(item);
+			},
+			subItem(item) {
+				this.cartStore.subItem(item);
+			},
+			clearCart() {
+				// 清空当前店铺的购物车（而非全部）
+				// 方案 A：如果 Pinia 有 clearCartByShopId 方法（推荐）
+				// this.cartStore.clearCartByShopId(this.shop_id);
+
+				// 方案 B：组件内过滤（如果 Pinia 未定义）
+				this.cartStore.carts = this.cartStore.carts.filter(
+					item => item.shop_id !== this.shop_id
+				);
+				console.log('当前店铺购物车已清空');
+			},
+			// 原有交互方法不变
 			clickCart() {
-				console.log(this.showCartLayer1)
-				this.showCartLayer1 = !this.showCartLayer1
+				console.log(this.showCartLayer1);
+				this.showCartLayer1 = !this.showCartLayer1;
 			},
 			goToBuyPage() {
 				uni.navigateTo({
 					url: `/pages/Buy/Buy?id=${this.shop_id}`
 				});
-			},
-
-			// 清空购物车
-			clearCart() {
-				// this.clearCart();
-				this.$store.commit('cart/clearCart');
-				console.log('clearCart method called');
 			}
 		}
-
-	}
+	};
 </script>
-
 <style scoped>
 	.delete1 {
 		font-size: 33rpx;
 	}
 
 	.shoplist {
-		
+
 		position: fixed;
 		bottom: 0;
 		width: 100%;
@@ -320,7 +362,7 @@
 		width: 100%;
 		padding: 20rpx;
 		box-sizing: border-box;
-		
+
 	}
 
 	.top1 {

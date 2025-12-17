@@ -3,7 +3,7 @@
     "appid" : "__UNI__600C35E",
     "description" : "一个让农民先富起来的平台",
     "versionName" : "2.3.0",
-    "versionCode" : 370,
+    "versionCode" : 375,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
@@ -21,7 +21,9 @@
         "modules" : {
             "Push" : {},
             "Camera" : {},
-            "Payment" : {}
+            "Payment" : {},
+            "VideoPlayer" : {},
+            "Barcode" : {}
         },
         /* 应用发布信息 */
         "distribute" : {
@@ -65,7 +67,7 @@
                 "push" : {},
                 "payment" : {
                     "weixin" : {
-                        "__platform__" : [ "ios", "android" ],
+                        "__platform__" : [ "android" ],
                         "appid" : "wx6823c63b646d3ca3",
                         "UniversalLinks" : ""
                     }

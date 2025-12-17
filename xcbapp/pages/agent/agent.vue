@@ -20,6 +20,14 @@
 							数据中心
 						</view>
 					</view>
+					<view v-if="showStatus==2" class="item"
+						@click="goToRouter('/subPackages/agent/AgentRevenue/AgentRevenue')">
+						<uni-icons fontFamily="CustomFont" :size="26" color="lightblue">{{'&#xe61a'}}</uni-icons>
+						<view class="add-dishes">
+							收益
+						</view>
+					</view>
+					
 				</view>
 
 			</view>

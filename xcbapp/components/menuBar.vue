@@ -1,7 +1,7 @@
 <template>
 	<view class="box" @click="show=false">
 		<image :src="item.imglogo" mode="aspectFill" @click="openBigImg(item.imglogo)"></image>
-		<view class="regard" >
+		<view class="regard">
 			<view class="typetitle">
 				<view>
 					<text class="ellipsis">{{item.commodity_name}}</text>
@@ -35,99 +35,99 @@
 </template>
 
 <script>
-	import {
-		mapState,
-		mapMutations,
-		mapGetters
-	} from 'vuex';
-	import {
-		api
-	} from '@/api/index.js'
+	import { useCartStore } from '@/store/cart';
+	import { api } from '@/api/index.js';
+
 	export default {
 		name: "menuBarVue",
+		props: ['item'], // 保留原有 props
 		data() {
 			return {
 				show: false,
 				count: '',
 				OpenImg: false,
-				selectImgUrl: null
+				selectImgUrl: null,
+				cartStore: null // 2. 初始化 Pinia 实例容器
 			};
 		},
+		created() {
+			this.cartStore = useCartStore();
+			
+			// console.log('这是父组件的传值',this.item)
+		},
+		computed: {
+			getTempCount() {
+				return (itemId) => {
+					const targetGoods = this.cartStore.carts.find(
+						goods => goods.id === itemId && goods.shop_id === this.item.shop_id
+					);
+					
+					return targetGoods ? targetGoods.tempCount:0
+				};
+			}
+		},
 		methods: {
-			viewDetail(){
+			viewDetail() {
 				uni.navigateTo({
-					url:`/pages/commodityDetail/commodityDetail?query=${JSON.stringify(this.item)}`
-				})
+					url: `/pages/commodityDetail/commodityDetail?query=${JSON.stringify(this.item)}`
+				});
 			},
-			// 放大图片
+			// 放大图片（保留原有逻辑）
 			openBigImg(url) {
 				// this.OpenImg = true
 				// this.selectImgUrl = url
 			},
-			changeTextarea(e) {
-
-			},
-			// 加一
+			changeTextarea(e) {},
 			add() {
-				this.addItem(this.item)
-				this.count = ''
+				this.cartStore.addItem(this.item);
+				this.count = '';
 			},
-			// 减一
 			reduce() {
-				console.log(this.item)
-				this.subItem(this.item)
-				this.count = ''
+				console.log(this.item);
+				// 调用 Pinia 的 subItem action（确保 Pinia 中已定义该方法）
+				this.cartStore.subItem({
+					id: this.item.id,
+					shop_id: this.item.shop_id // 传递 shop_id 用于精准匹配
+				});
+				this.count = '';
 			},
-			// isNumeric(str) {
-			//     return /^\d+$/.test(str);
-			// },
-
-			// int float  校验
+			// 数值校验（保留原有逻辑）
 			isNumeric(str) {
 				return /^\d+(\.\d+)?$/.test(str);
 			},
-			// 结束输入值
+			// 结束输入值：替换原 Vuex 的 anyNumber mutation
 			overInput(e) {
-				// 判断是否是正确数值
 				if (this.isNumeric(e.detail.value)) {
-					let value = Number(Number(e.detail.value).toFixed(1))
-					this.item.count = value
-
-					this.anyNumber(this.item) // store保存数量
-					this.count = value // input表单保存备份
+					let value = Number(Number(e.detail.value).toFixed(1));
+					// 调用 Pinia 的 anyNumber action（更新指定商品的数量）
+					this.cartStore.anyNumber({
+						...this.item,
+						quantity: value // 传入新数量
+					});
+					this.count = value; // 备份输入值
 				} else {
 					uni.showToast({
 						title: '数值有误',
 						icon: 'error'
-					})
-					this.count = ''
+					});
+					this.count = '';
 				}
-				this.show = false
+				this.show = false;
 			},
-
-
-			// 弹出键盘
 			showInput() {
-				this.$emit('showKeyboard', this.item)
+				this.$emit('showKeyboard', this.item);
 				// this.count = ''
 				// this.show = true
 			},
 			goToSuyuan(item) {
 				uni.navigateTo({
 					url: `/subPackages/aHouseholder/lookTraceability/lookTraceability?commodity_id=${item.id}`,
-				})
-			},
-
-			...mapMutations('cart', ['addItem', 'subItem', 'anyNumber']),
-		},
-		props: ['item'],
-		computed: {
-			// ...mapState('cart', ['carts']),
-			// ...mapGetters('cart', ['getTempCount']),
-		},
-	}
+				});
+			}
+			// 5. 移除原 Vuex 的 mapMutations 扩展（已替换为 Pinia 直接调用）
+		}
+	};
 </script>
-
 <style>
 	.showImg {
 		position: relative;

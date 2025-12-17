@@ -4,8 +4,8 @@
     "compressorjs": "^1.2.1",
     "dayjs": "^1.11.13",
     "decimal": "^0.0.2",
+    "pinia": "^2.1.7",
     "vue-lazyload": "^3.0.0",
-    "vuex": "^4.1.0",
     "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {

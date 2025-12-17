@@ -54,6 +54,7 @@
 				<view class="dish-list">
 					<view class="dish-card" v-for="item in pageData" :key="item.id">
 						<!-- <menuBarVue :item="item" class="count" @showKeyboard="Keyboard"></menuBarVue> -->
+						<menuBarVue :item="item" class="count" @showKeyboard="Keyboard"></menuBarVue>
 					</view>
 					<view class="empty-state" v-if="pageData.length === 0">
 						<uni-icons type="empty" size="40" color="#999"></uni-icons>
@@ -64,7 +65,7 @@
 			<shopItem :shop_id="shop_id" ref="shopitem"></shopItem>
 
 		</view>
-
+		
 	</scroll-view>
 
 
@@ -72,31 +73,24 @@
 
 
 <script>
-	import {
-		mapState,
-		mapMutations,
-		mapGetters
-	} from 'vuex';
+	import { useCartStore } from '@/store/cart'; // 引入 Pinia Cart Store
+
 	import shopItem from '@/components/shop-item/shop-item.vue'
 	import menuBarVue from '@/components/menuBar.vue';
 	import inputBoxVue from '@/components/inputBox.vue';
 
-
-	import {
-		api
-	} from '@/api/index'
+	import { api } from '@/api/index'
 	import usePage from '@/hooks/usePage';
-	import {
-		myMixin
-	} from '@/utils/public.js'
+	import { myMixin } from '@/utils/public.js'
 
 	export default {
 		data() {
 			return {
-				cart: [],
-				totalPrice: 0,
+				// 修改点 2: 移除 Vuex 映射的状态，直接从 Store 访问
+				// cart: [], // 不再需要
+				// totalPrice: 0, // 如果需要，可从 Pinia Getter 获取
 				showCartLayer: false,
-				cartItems: [],
+				// cartItems: [], // 不再需要，直接使用 cartStore.carts
 				pageData: [],
 				shopDetails: {},
 				shop_id: "",
@@ -118,10 +112,21 @@
 			menuBarVue,
 			inputBoxVue
 		},
-		computed: {
-			...mapState('cart', ['carts']),
-			...mapGetters('cart', ['getTempCount']),
+		// 修改点 3: 使用 setup() 函数获取 Pinia Store 实例
+		setup() {
+			// 获取 Cart Store 实例
+			const cartStore = useCartStore();
+
+			// 将 cartStore 暴露给模板和 methods
+			return {
+				cartStore
+			};
 		},
+		// 修改点 4: 移除 Vuex 的 computed 映射
+		// computed: {
+		// 	...mapState('cart', ['carts']),
+		// 	...mapGetters('cart', ['getTempCount']),
+		// },
 		onShow() {
 			const token = uni.getStorageSync('token');
 			if (!token) {
@@ -195,6 +200,7 @@
 			},
 			// 需要调起数字键盘
 			Keyboard(value) {
+				console.log("调用自定义键盘")
 				this.$refs.inputBoxVueRef.show = true
 				this.$refs.inputBoxVueRef.cartItem = value
 			},
@@ -206,12 +212,11 @@
 			},
 			// 查看摊主照片
 			openAvater1() {
-				if (this.urls1[0].length > 1) {
+				if (this.urls1[0] && this.urls1[0].length > 1) {
 					uni.previewImage({
 						count: 1,
 						urls: this.urls1,
 						sizeType: ['original', 'compressed'],
-						sourceType: ['album'],
 						success: (res) => {}
 					})
 				} else {
@@ -219,19 +224,17 @@
 						title: '暂无图片',
 						icon: 'error'
 					})
-					// 如果没有图片,则关闭图片预览
-					// uni.closePreviewImage()
 				}
 
 			},
 			// 查看营业执照
 			openAvater2() {
-				if (this.urls2[0].length > 1) {
+				// 修改点 5: 修复 urls2 的判断逻辑
+				if (this.urls2[0] && this.urls2[0].length > 1) {
 					uni.previewImage({
 						count: 1,
 						urls: this.urls2,
 						sizeType: ['original', 'compressed'],
-						sourceType: ['album'],
 						success: (res) => {}
 					})
 				} else {
@@ -239,21 +242,21 @@
 						title: '暂无图片',
 						icon: 'error'
 					})
-					// 如果没有图片,则关闭图片预览
-					// uni.closePreviewImage()
 				}
 
 			},
-			...mapMutations('cart', ['addItem', 'subItem']),
-
+			// 修改点 6: 移除 Vuex 的 mutations 映射
+			// ...mapMutations('cart', ['addItem', 'subItem']),
 
 			// 首次加载，初始化
 			async loadShopDetails() {
 				try {
-					const response = await api.shopDetail(this.shopId);
+					// 修改点 7: 修复一个潜在的 bug，原代码中使用了 this.shopId，但 data 中定义的是 this.shop_id
+					const response = await api.shopDetail(this.shop_id); 
 					this.shopDetails = response.data.listdata[0];
-					this.urls1.push(this.shopDetails.facelogo)
-					this.urls2.push(this.shopDetails.businesslogo)
+					// 确保 urls1 和 urls2 是数组，并正确 push
+					if (this.shopDetails.facelogo) this.urls1.push(this.shopDetails.facelogo);
+					if (this.shopDetails.businesslogo) this.urls2.push(this.shopDetails.businesslogo);
 					return response
 				} catch (error) {
 					console.error('获取摊主详情失败', error);
@@ -261,21 +264,19 @@
 						title: '获取摊主详情失败',
 						icon: 'none'
 					});
-
+					// 即使出错也返回一个对象，防止后续代码报错
+					return { data: { listdata: [{}] } };
 				}
 			},
 
 			async fetchData(params) {
 				const res = await this.loadShopDetails();
-				const {
-					title
-				} = res.data.listdata[0]
+				const { title } = res.data.listdata[0] || {}; // 增加容错
 
 				params = {
 					...params,
 					shop_id: this.shop_id || null,
 				};
-				// console.log(params)
 				const response = await api.getmarketCommdityList({
 					...params,
 					// isshow: 1,
@@ -290,7 +291,6 @@
 				return response.data;
 			},
 
-
 			goTorules() {
 				uni.navigateTo({
 					url: '/pages/rules/rules'
@@ -299,7 +299,6 @@
 		}
 	}
 </script>
-
 
 <style lang="scss">
 	// /deep/ .uni-list-item__extra-text{

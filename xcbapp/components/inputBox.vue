@@ -4,7 +4,8 @@
 			<view class="value">
 
 				<text style="font-size: 30rpx;">{{value}}</text>
-				<text style="position: absolute; left: 20rpx; color: gray;">{{cartItem.commodity_name}}￥{{cartItem.price}}元/{{cartItem.weight_name}}</text>
+				<text
+					style="position: absolute; left: 20rpx; color: gray;">{{cartItem.commodity_name}}￥{{cartItem.price}}元/{{cartItem.weight_name}}</text>
 				<text style="position: absolute; right: 20rpx; color: gray;">{{singleItemPrice}}元</text>
 
 			</view>
@@ -26,18 +27,20 @@
 </template>
 
 <script>
-	import Decimal from 'decimal'
-	import {
-		mapState,
-		mapMutations,
-		mapGetters
-	} from 'vuex';
 	export default {
 		name: "inputBox",
+		props: {
+			// 接收父组件传入的购物车项（必传）
+			initialCartItem: {
+				type: Object,
+				required: true,
+				default: () => ({})
+			}
+		},
 		data() {
 			return {
 				show: false,
-				value: '等待输入......',
+				value: '', // 初始值改为空字符串，而非非数字文本
 				keys: [
 					'1', '2', '3',
 					'4', '5', '6',
@@ -45,128 +48,165 @@
 					'0', '.', '取消'
 				],
 				unit: '',
-				funs: [
-					'删除',
-					'清空',
-					'确定',
-				],
+				funs: ['删除', '清空', '确定'],
 				lock: true, // 键盘锁
 				animationData: {},
-				cartItem: 0
+				cartItem: {} // 初始化为空对象，而非数字 0
 			};
 		},
 		watch: {
 			value(newValue, oldValue) {
-				// 检测到小数点开头自动补0
-				if (newValue[0] == '.') {
-					this.value = '0' + this.value
-				}
-				let pub = newValue.split('.')
-				// 检查是否出现多个小数点,出现则限制输入
-				if (newValue.split('.').length - 1 > 1) {
-					this.value = oldValue
-				}
-				// 检查开头不能出现两个00
-				if (newValue == '00') {
-					this.value = oldValue
-				}
-				// 限制小数点后只能出现一位
-				try {
-					if (newValue.split('.')[1].length >= 2) {
-						this.value = oldValue
-					}
-				} catch {}
+				if (!newValue) return; // 空值直接返回，避免后续计算
 
-				// 以下三行是用于实时同步，数字键盘中的输入框和购物车商品中的的数值对应
-				let value = Number(Number(this.value))
-				this.cartItem.count = value
-				this.anyNumber(this.cartItem) // store保存数量
+				// 1. 检测小数点开头，自动补0
+				if (newValue[0] === '.') {
+					this.value = '0' + newValue;
+					return; // 补0后终止当前逻辑，避免重复处理
+				}
 
+				// 2. 限制多个小数点
+				const dotCount = (newValue.match(/\./g) || []).length;
+				if (dotCount > 1) {
+					this.value = oldValue;
+					return;
+				}
+
+				// 3. 限制开头多个0（仅允许 0 或 0.xx，不允许 00/000）
+				if (newValue.length > 1 && newValue[0] === '0' && newValue[1] !== '.') {
+					this.value = oldValue;
+					return;
+				}
+
+				// 4. 限制小数点后最多1位
+				const dotIndex = newValue.indexOf('.');
+				if (dotIndex > -1 && newValue.length - dotIndex > 2) {
+					this.value = oldValue;
+					return;
+				}
+
+				// 5. 同步到购物车项（空值防护）
+				if (this.cartItem && typeof this.cartItem === 'object') {
+					const numValue = Number(this.value) || 0;
+					this.cartItem.count = numValue;
+					this.anyNumber(this.cartItem); // 同步到store
+				}
 			},
 
 			// 监听数字键盘是否弹起
-			show(newValue, oldValue) {
-				// this.cartItem = this.cartItem
-
-				// 数字回显
+			show(newValue) {
 				if (newValue) {
-					this.value = this.getTempCount(this.cartItem.id) + ''
+					// 弹起时初始化购物车项 + 回显数量
+					this.cartItem = { ...this.initialCartItem }; // 深拷贝父组件传入的初始值
+					this.value = this.getTempCount(this.cartItem.id) + '' || '';
 				}
 			}
 		},
 		computed: {
-			...mapGetters('cart', ['getTempCount']),
+			// 计算单商品总价（空值防护 + Decimal 正确使用）
 			singleItemPrice() {
-				return new Decimal(this.cartItem.price).mul(new Decimal(this.value)).toNumber()
+				if (!this.cartItem || !this.cartItem.price || !this.value) return 0;
+
+				// Decimal 容错：确保传入数字类型
+				const price = new Decimal(Number(this.cartItem.price) || 0);
+				const count = new Decimal(Number(this.value) || 0);
+				return price.mul(count).toNumber().toFixed(2); // 保留2位小数
 			}
 		},
 		methods: {
-			// state购物车自定义数量
-			...mapMutations('cart', ['anyNumber']),
+			// 校验是否为数字
 			isNumeric(str) {
 				return /^\d+(\.\d+)?$/.test(str);
 			},
+
 			// 收起键盘
 			close() {
-				this.show = false
+				this.show = false;
 			},
 
 			// 输入数字
 			inputNum(num) {
-				if (this.value == '0') {
-					this.value = num
-				} else {
-					this.value += num
+				// 空值时输入0，直接赋值
+				if (this.value === '' && num === '0') {
+					this.value = '0';
+					return;
 				}
+				// 非空时拼接
+				this.value += num;
+			},
 
-			},
 			// 功能函数
-			func(lable) {
-				switch (lable) {
+			func(label) {
+				switch (label) {
 					case '删除':
-						this.remove()
-						break
+						this.remove();
+						break;
 					case '取消':
-						this.close()
-						break
+						this.close();
+						break;
 					case '清空':
-						this.clear()
-						break
+						this.clear();
+						break;
 					case '确定':
-						this.sure()
-						// 确定值之前，需要检测是否为正常数字， 和转换为数字类型
-						break
+						this.sure();
+						break;
 				}
 			},
+
+			// 删除最后一位
 			remove() {
-				this.value = this.value.substring(0, this.value.length - 1)
+				if (this.value) {
+					this.value = this.value.substring(0, this.value.length - 1);
+				}
 			},
 
 			// 清空值
 			clear() {
-				this.value = ''
+				this.value = '';
+				// 清空时同步购物车数量为0
+				if (this.cartItem) {
+					this.cartItem.count = 0;
+					this.anyNumber(this.cartItem);
+				}
 			},
 
 			// 确认提交
 			sure() {
-				// 输入值为0或者为空，就清空
-				if (!this.value) {
-					this.cartItem.count = 0
-					this.anyNumber(this.cartItem) // store保存数量
-					this.show = false
+				// 空值/非数字处理
+				if (!this.value || !this.isNumeric(this.value)) {
+					this.cartItem.count = 0;
+					this.anyNumber(this.cartItem);
+					this.show = false;
+					return;
 				}
-				// 判断是否为数字
-				if (this.isNumeric(this.value)) {
-					let value = Number(Number(this.value))
-					this.cartItem.count = value
-					this.anyNumber(this.cartItem) // store保存数量
-					this.show = false
-				} else {}
+
+				// 合法数字处理
+				const value = Number(this.value);
+				this.cartItem.count = value;
+				this.anyNumber(this.cartItem);
+				this.show = false;
 			},
+
+			// 【实现缺失的方法】获取临时数量（示例：从本地/store获取）
+			getTempCount(id) {
+				// 这里替换为你的实际逻辑，比如从Pinia/本地存储获取
+				const cartList = uni.getStorageSync('cartList') || [];
+				const item = cartList.find(item => item.id === id);
+				return item?.count || 0;
+			},
+
+			// 【实现缺失的方法】同步数量到store（示例）
+			anyNumber(cartItem) {
+				// 这里替换为你的Pinia同步逻辑，比如：
+				// const cartStore = useCartStore()
+				// cartStore.changeGoodsNum(cartItem.id, cartItem.count)
+				uni.setStorageSync('cartList', (uni.getStorageSync('cartList') || []).map(item => {
+					if (item.id === cartItem.id) return { ...item, count: cartItem.count };
+					return item;
+				}));
+			}
 		}
 	}
 </script>
-
 <style>
 	.bigBox {
 		z-index: 100000;

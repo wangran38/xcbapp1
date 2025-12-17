@@ -172,7 +172,7 @@
 				type: 'gcj02',
 				success: (res) => {
 					uni.setStorageSync('userlocation', JSON.stringify(res));
-					console.log(res)
+					// console.log(res)
 				}
 			})
 		},

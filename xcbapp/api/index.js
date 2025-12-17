@@ -570,10 +570,24 @@ export const api = {
 		return fetch('/api/agentuser/info', 'POST', data);
 	},
 	
-	// 邀请用户收益
+	// 用户推广收益
 	userRevenue(data){
 		return fetch('/api/my/getusermoneylist', 'POST', data);
 	},
+	// 商家推广收益
+	merchantRevenue(data){
+		return fetch('/api/my/getshopusermoneylist', 'POST', data);
+	},
+	
+	// 市县代理商推广收益
+	cityAgentRevenue(data){
+		return fetch('/api/my/getcitymoneylist', 'POST', data);
+	},
+	appWeiXin(data){
+		return fetch('/api/app/pay', 'POST', data);
+	}
+	
+	
 	
 	
 }

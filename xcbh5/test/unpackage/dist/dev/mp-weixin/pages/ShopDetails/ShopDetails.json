@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "摊主详情",
-  "usingComponents": {
-    "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons",
-    "shop-item": "/components/shop-item/shop-item",
-    "menu-bar-vue": "/components/menuBar",
-    "input-box-vue": "/components/inputBox"
-  }
-}

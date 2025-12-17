@@ -155,6 +155,7 @@
 				})
 			}
 
+
 		},
 		onUnload() {
 			clearInterval(this.PaymentTimer);
@@ -204,14 +205,45 @@
 			// 调用微信支付方法
 			async startPayment(out_trade_no) {
 				// 获取微信支付需要的参数
-				let data = await api.wechatpay({
+				// let data = await api.wechatpay({
+				// 	out_trade_no: this.out_trade_no
+				// })
+				
+				let data = await api.appWeiXin({
 					out_trade_no: this.out_trade_no
 				})
+				console.log("订单号：",this.out_trade_no)
+				console.log(data)
 				if (data.code == 200) {
 					data.data.timeStamp += ''
+
+					// #ifdef MP-WEIXIN
+					console.log("执行wx")
 					uni.requestPayment({
 						...data.data,
 					})
+					// #endif
+
+					// #ifdef APP-PLUS
+					console.log("执行app")
+					plus.payment.getChannels(function(s) {
+						// console.log(channels)
+						if (s.length >= 1) {
+							console.log("通道存在")
+							plus.payment.request(
+								s, {
+									...data.data,
+								}, (res) => {
+									console.log(res)
+								}, (err) => {
+									console.log(err)
+								})
+						}
+					}, function(e) {
+						alert("获取支付通道列表失败：" + e.message);
+					});
+
+					// #endif
 
 				} else if (data.code == 202) { // 未绑定uid就自动绑定并重新支付
 					uni.login({
@@ -229,9 +261,12 @@
 								if (data.code == 200) {
 									data.data.timeStamp += ''
 									// 重新支付
+									// #ifdef MP-WEIXIN
 									uni.requestPayment({
 										...data.data,
 									})
+									// #endif
+
 								} else {
 									uni.showToast({
 										title: data.message,
@@ -262,6 +297,7 @@
 					switch (this.selectedPaymentMethod) {
 						// 微信支付
 						case 1:
+							// console.log(plus.payment.request,"这是app请求端口")
 							this.startPayment(this.out_trade_no)
 							break;
 

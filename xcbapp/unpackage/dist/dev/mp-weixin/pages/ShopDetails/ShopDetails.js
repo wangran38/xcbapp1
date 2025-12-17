@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const store_cart = require("../../store/cart.js");
 const api_index = require("../../api/index.js");
 const hooks_usePage = require("../../hooks/usePage.js");
 const utils_public = require("../../utils/public.js");
@@ -9,10 +10,11 @@ const inputBoxVue = () => "../../components/inputBox.js";
 const _sfc_main = {
   data() {
     return {
-      cart: [],
-      totalPrice: 0,
+      // 修改点 2: 移除 Vuex 映射的状态，直接从 Store 访问
+      // cart: [], // 不再需要
+      // totalPrice: 0, // 如果需要，可从 Pinia Getter 获取
       showCartLayer: false,
-      cartItems: [],
+      // cartItems: [], // 不再需要，直接使用 cartStore.carts
       pageData: [],
       shopDetails: {},
       shop_id: "",
@@ -38,10 +40,18 @@ const _sfc_main = {
     menuBarVue,
     inputBoxVue
   },
-  computed: {
-    ...common_vendor.mapState("cart", ["carts"]),
-    ...common_vendor.mapGetters("cart", ["getTempCount"])
+  // 修改点 3: 使用 setup() 函数获取 Pinia Store 实例
+  setup() {
+    const cartStore = store_cart.useCartStore();
+    return {
+      cartStore
+    };
   },
+  // 修改点 4: 移除 Vuex 的 computed 映射
+  // computed: {
+  // 	...mapState('cart', ['carts']),
+  // 	...mapGetters('cart', ['getTempCount']),
+  // },
   onShow() {
     const token = common_vendor.index.getStorageSync("token");
     if (!token) {
@@ -118,12 +128,11 @@ const _sfc_main = {
     },
     // 查看摊主照片
     openAvater1() {
-      if (this.urls1[0].length > 1) {
+      if (this.urls1[0] && this.urls1[0].length > 1) {
         common_vendor.index.previewImage({
           count: 1,
           urls: this.urls1,
           sizeType: ["original", "compressed"],
-          sourceType: ["album"],
           success: (res) => {
           }
         });
@@ -136,12 +145,11 @@ const _sfc_main = {
     },
     // 查看营业执照
     openAvater2() {
-      if (this.urls2[0].length > 1) {
+      if (this.urls2[0] && this.urls2[0].length > 1) {
         common_vendor.index.previewImage({
           count: 1,
           urls: this.urls2,
           sizeType: ["original", "compressed"],
-          sourceType: ["album"],
           success: (res) => {
           }
         });
@@ -152,28 +160,30 @@ const _sfc_main = {
         });
       }
     },
-    ...common_vendor.mapMutations("cart", ["addItem", "subItem"]),
+    // 修改点 6: 移除 Vuex 的 mutations 映射
+    // ...mapMutations('cart', ['addItem', 'subItem']),
     // 首次加载，初始化
     async loadShopDetails() {
       try {
-        const response = await api_index.api.shopDetail(this.shopId);
+        const response = await api_index.api.shopDetail(this.shop_id);
         this.shopDetails = response.data.listdata[0];
-        this.urls1.push(this.shopDetails.facelogo);
-        this.urls2.push(this.shopDetails.businesslogo);
+        if (this.shopDetails.facelogo)
+          this.urls1.push(this.shopDetails.facelogo);
+        if (this.shopDetails.businesslogo)
+          this.urls2.push(this.shopDetails.businesslogo);
         return response;
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/ShopDetails/ShopDetails.vue:259", "获取摊主详情失败", error);
+        common_vendor.index.__f__("error", "at pages/ShopDetails/ShopDetails.vue:262", "获取摊主详情失败", error);
         common_vendor.index.showToast({
           title: "获取摊主详情失败",
           icon: "none"
         });
+        return { data: { listdata: [{}] } };
       }
     },
     async fetchData(params) {
       const res = await this.loadShopDetails();
-      const {
-        title
-      } = res.data.listdata[0];
+      const { title } = res.data.listdata[0] || {};
       params = {
         ...params,
         shop_id: this.shop_id || null

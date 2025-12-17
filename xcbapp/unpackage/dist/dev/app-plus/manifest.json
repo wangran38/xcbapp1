@@ -8,7 +8,7 @@
   "name": "农链天下(商家版)",
   "version": {
     "name": "2.3.0",
-    "code": 370
+    "code": 375
   },
   "description": "一个让农民先富起来的平台",
   "developer": {
@@ -20,6 +20,8 @@
     "Push": {},
     "Camera": {},
     "Payment": {},
+    "VideoPlayer": {},
+    "Barcode": {},
     "UniNView": {
       "description": "UniNView原生渲染"
     }
@@ -119,7 +121,6 @@
         "payment": {
           "weixin": {
             "__platform__": [
-              "ios",
               "android"
             ],
             "appid": "wx6823c63b646d3ca3",

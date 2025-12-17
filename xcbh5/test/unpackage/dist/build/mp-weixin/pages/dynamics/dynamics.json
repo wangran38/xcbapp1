@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "种养来历",
-  "disableScroll": true,
-  "usingComponents": {
-    "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons"
-  }
-}

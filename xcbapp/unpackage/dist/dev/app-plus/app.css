@@ -2674,6 +2674,8 @@
 }
 body {
   background-color: #f5f5f5;
+  position: relative;
+  top: var(--status-bar-height);
 }
 .example-info {
   font-size: 14px;
