@@ -1,6 +1,67 @@
 <template>
 	<view class="address-page">
-		
+		<view class="app-bar">
+			<text class="title">我的地址</text>
+		</view>
+
+		<!-- 地址列表 -->
+		<scroll-view scroll-y class="address-list">
+			<!-- 地址卡片 -->
+			<view v-for="item in addressData" :key="item.Id" class="address-card"
+				:class="{ 'default-card': item.isshow==2 }">
+				<view class="card-content">
+					<!-- 地址头 -->
+					<view class="card-header">
+						<text class="contact">{{ item.phonename }}</text>
+						<view class="header-right">
+							<text v-if="item.isshow == 2" class="default-badge">默认</text>
+							<text class="phone">{{ item.phone }}</text>
+						</view>
+					</view>
+
+					<!-- 地址详情 -->
+					<view class="address-detail">
+						<text class="region">{{ item.area_id}}</text>
+						<text class="detail">{{ item.address }}</text>
+					</view>
+
+					<!-- 操作按钮 -->
+					<view class="action-bar">
+						<!-- <view class="action-btn" @click="toggleDefault(index)">
+							<uni-icons :type="item.isDefault ? 'star-filled' : 'star'" size="18" />
+							<text>{{ item.isDefault ? '默认地址' : '设为默认' }}</text>
+						</view> -->
+						<view class="divider"></view>
+						<view class="action-btn" @click="editAddress(item)">
+							<uni-icons type="compose" size="18" />
+							<text>编辑</text>
+						</view>
+						<view class="divider"></view>
+						<view class="action-btn delete" @click="deleteAddress(item)">
+							<uni-icons type="trash" size="18" />
+							<text>删除</text>
+						</view>
+						<!-- <view class="divider"></view> -->
+						<!-- <view class="action-btn">
+							<uni-icons type="link" size="18" />
+							<text>复制</text>
+						</view> -->
+					</view>
+				</view>
+			</view>
+			<!-- 空状态 -->
+			<view v-if="addressData.length === 0" class="empty-state">
+				<text class="empty-text">还没有收货地址哦</text>
+			</view>
+		</scroll-view>
+
+		<!-- 底部操作栏 -->
+		<view class="bottom-bar">
+			<button class="add-btn" @click="addNewAddress">
+				<uni-icons type="plus" size="20" color="#fff" />
+				<text>新增地址</text>
+			</button>
+		</view>
 	</view>
 </template>
 

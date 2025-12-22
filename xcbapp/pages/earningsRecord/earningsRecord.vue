@@ -1,18 +1,17 @@
 <template>
   <view class="reward-page">
-    <!-- 顶部导航栏 -->
-    <view class="navbar">
+<!--    <view class="navbar">
       <text class="nav-title">邀请奖励记录</text>
-    </view>
+    </view> -->
 
     <view class="overview-card">
       <view class="overview-item">
-        <text class="overview-label">累计邀请奖励 (元)</text>
-        <text class="overview-value">¥ {{totalMoney}}</text>
+        <text class="overview-label">累计邀请奖励 (积分)</text>
+        <text class="overview-value"> {{totalMoney.toFixed(2)}}</text>
       </view>
       <view class="overview-item">
-        <text class="overview-label">本月新增奖励 (元)</text>
-        <text class="overview-value today-value">¥ 0</text>
+        <text class="overview-label">本月新增奖励 (积分)</text>
+        <text class="overview-value today-value"> 0</text>
       </view>
     </view>
 
@@ -33,7 +32,7 @@
             <text class="item-from">来自：推广个人收益</text>
           </view>
         </view>
-        <text class="item-amount">+¥{{ item.level6money }}</text>
+        <text class="item-amount">+¥{{ item.level6money.toFixed(2) }}</text>
       </view>
 
       <!-- 空状态提示 -->

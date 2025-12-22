@@ -9160,7 +9160,7 @@ This will fail in production.`);
       cartTotalByShopId() {
         if (!Array.isArray(this.carts))
           return 0;
-        const total = this.carts.reduce((sum, item) => {
+        const total = this.getCartsByShopId.reduce((sum, item) => {
           const price = Number(item == null ? void 0 : item.price) || 0;
           const count = Number(item == null ? void 0 : item.tempCount) || 0;
           return sum + price * count;
@@ -9190,11 +9190,11 @@ This will fail in production.`);
         this.cartStore.carts = this.cartStore.carts.filter(
           (item) => item.shop_id !== this.shop_id
         );
-        formatAppLog("log", "at components/shop-item/shop-item.vue:142", "当前店铺购物车已清空");
+        formatAppLog("log", "at components/shop-item/shop-item.vue:140", "当前店铺购物车已清空");
       },
       // 原有交互方法不变
       clickCart() {
-        formatAppLog("log", "at components/shop-item/shop-item.vue:146", this.showCartLayer1);
+        formatAppLog("log", "at components/shop-item/shop-item.vue:144", this.showCartLayer1);
         this.showCartLayer1 = !this.showCartLayer1;
       },
       goToBuyPage() {
@@ -32976,25 +32976,9 @@ ${o3}
     const _component_posterVue = vue.resolveComponent("posterVue");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "invite-page" }, [
-      vue.createElementVNode("view", { class: "invite-reward card" }, [
-        vue.createElementVNode("view", { class: "reward-title" }, [
-          vue.createVNode(_component_uni_icons, {
-            type: "gift",
-            size: "24",
-            color: "#FF7A45"
-          }),
-          vue.createElementVNode("text", null, "邀请福利")
-        ]),
-        vue.createElementVNode("view", { class: "reward-list" }, [
-          vue.createElementVNode("view", { class: "reward-item" }, [
-            vue.createElementVNode("text", { class: "reward-tag" }, "好友奖励"),
-            vue.createElementVNode("text", { class: "reward-content" }, "新用户注册即得20元无门槛券")
-          ]),
-          vue.createElementVNode("view", { class: "reward-item" }, [
-            vue.createElementVNode("text", { class: "reward-tag" }, "你的奖励"),
-            vue.createElementVNode("text", { class: "reward-content" }, "好友首次消费后，你得15元现金+500积分")
-          ])
-        ])
+      vue.createElementVNode("view", { class: "invite-header" }, [
+        vue.createElementVNode("text", { class: "header-title" }, "邀请好友，共赢福利"),
+        vue.createElementVNode("text", { class: "header-desc" }, "每成功邀请1位好友，双方都能获得奖励")
       ]),
       vue.createElementVNode("view", { class: "invite-core card" }, [
         vue.createElementVNode("view", { class: "core-title" }, "分享你的专属邀请码"),
@@ -33083,8 +33067,8 @@ ${o3}
             }, {
               default: vue.withCtx(() => [
                 vue.createElementVNode("view", { class: "rules-content" }, [
-                  vue.createElementVNode("view", { class: "rule-item" }, "（通过自己二维码发展的农户商户获得收益）：10%"),
-                  vue.createElementVNode("view", { class: "rule-item" }, "（通过扫自己二维码发展的消费者会员获得）：10%")
+                  vue.createElementVNode("view", { class: "rule-item" }, "通过自己二维码发展的农户商户获得收益：10%"),
+                  vue.createElementVNode("view", { class: "rule-item" }, "通过扫自己二维码发展的消费者会员获得：10%")
                 ])
               ]),
               _: 1
@@ -33141,30 +33125,27 @@ ${o3}
         if (data.code == 200) {
           this.totalMoney = data.data.totalMoney;
           this.rewardRecords = [...this.rewardRecords, ...data.data.listdata];
-          formatAppLog("log", "at pages/earningsRecord/earningsRecord.vue:81", data);
+          formatAppLog("log", "at pages/earningsRecord/earningsRecord.vue:80", data);
         }
       }
     }
   };
   function _sfc_render$R(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "reward-page" }, [
-      vue.createElementVNode("view", { class: "navbar" }, [
-        vue.createElementVNode("text", { class: "nav-title" }, "邀请奖励记录")
-      ]),
       vue.createElementVNode("view", { class: "overview-card" }, [
         vue.createElementVNode("view", { class: "overview-item" }, [
-          vue.createElementVNode("text", { class: "overview-label" }, "累计邀请奖励 (元)"),
+          vue.createElementVNode("text", { class: "overview-label" }, "累计邀请奖励 (积分)"),
           vue.createElementVNode(
             "text",
             { class: "overview-value" },
-            "¥ " + vue.toDisplayString($data.totalMoney),
+            vue.toDisplayString($data.totalMoney.toFixed(2)),
             1
             /* TEXT */
           )
         ]),
         vue.createElementVNode("view", { class: "overview-item" }, [
-          vue.createElementVNode("text", { class: "overview-label" }, "本月新增奖励 (元)"),
-          vue.createElementVNode("text", { class: "overview-value today-value" }, "¥ 0")
+          vue.createElementVNode("text", { class: "overview-label" }, "本月新增奖励 (积分)"),
+          vue.createElementVNode("text", { class: "overview-value today-value" }, " 0")
         ])
       ]),
       vue.createElementVNode("view", { class: "explanation" }, [
@@ -33200,7 +33181,7 @@ ${o3}
               vue.createElementVNode(
                 "text",
                 { class: "item-amount" },
-                "+¥" + vue.toDisplayString(item.level6money),
+                "+¥" + vue.toDisplayString(item.level6money.toFixed(2)),
                 1
                 /* TEXT */
               )
@@ -45716,7 +45697,7 @@ ${o3}
         });
       },
       editAddress(item) {
-        formatAppLog("log", "at subPackages/settings/myAddress/myAddress.vue:39", item);
+        formatAppLog("log", "at subPackages/settings/myAddress/myAddress.vue:100", item);
         let jsonData = JSON.stringify(item);
         uni.navigateTo({
           url: `/subPackages/settings/addAddress/addAddress?isEdit=true&jsonData=${jsonData}`
@@ -45727,10 +45708,10 @@ ${o3}
           title: "确认删除",
           content: "确定要删除这个地址吗？",
           success: async (res) => {
-            formatAppLog("log", "at subPackages/settings/myAddress/myAddress.vue:51", res);
+            formatAppLog("log", "at subPackages/settings/myAddress/myAddress.vue:112", res);
             if (res.confirm) {
               let data = await api.delMyAddress({ id: item.Id });
-              formatAppLog("log", "at subPackages/settings/myAddress/myAddress.vue:54", data);
+              formatAppLog("log", "at subPackages/settings/myAddress/myAddress.vue:115", data);
               if (data.code == 200) {
                 uni.showToast({
                   icon: "success",
@@ -45754,7 +45735,119 @@ ${o3}
     }
   };
   function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", { class: "address-page" });
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "address-page" }, [
+      vue.createElementVNode("view", { class: "app-bar" }, [
+        vue.createElementVNode("text", { class: "title" }, "我的地址")
+      ]),
+      vue.createElementVNode("scroll-view", {
+        "scroll-y": "",
+        class: "address-list"
+      }, [
+        (vue.openBlock(true), vue.createElementBlock(
+          vue.Fragment,
+          null,
+          vue.renderList($data.addressData, (item) => {
+            return vue.openBlock(), vue.createElementBlock(
+              "view",
+              {
+                key: item.Id,
+                class: vue.normalizeClass(["address-card", { "default-card": item.isshow == 2 }])
+              },
+              [
+                vue.createElementVNode("view", { class: "card-content" }, [
+                  vue.createElementVNode("view", { class: "card-header" }, [
+                    vue.createElementVNode(
+                      "text",
+                      { class: "contact" },
+                      vue.toDisplayString(item.phonename),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createElementVNode("view", { class: "header-right" }, [
+                      item.isshow == 2 ? (vue.openBlock(), vue.createElementBlock("text", {
+                        key: 0,
+                        class: "default-badge"
+                      }, "默认")) : vue.createCommentVNode("v-if", true),
+                      vue.createElementVNode(
+                        "text",
+                        { class: "phone" },
+                        vue.toDisplayString(item.phone),
+                        1
+                        /* TEXT */
+                      )
+                    ])
+                  ]),
+                  vue.createElementVNode("view", { class: "address-detail" }, [
+                    vue.createElementVNode(
+                      "text",
+                      { class: "region" },
+                      vue.toDisplayString(item.area_id),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createElementVNode(
+                      "text",
+                      { class: "detail" },
+                      vue.toDisplayString(item.address),
+                      1
+                      /* TEXT */
+                    )
+                  ]),
+                  vue.createElementVNode("view", { class: "action-bar" }, [
+                    vue.createElementVNode("view", { class: "divider" }),
+                    vue.createElementVNode("view", {
+                      class: "action-btn",
+                      onClick: ($event) => $options.editAddress(item)
+                    }, [
+                      vue.createVNode(_component_uni_icons, {
+                        type: "compose",
+                        size: "18"
+                      }),
+                      vue.createElementVNode("text", null, "编辑")
+                    ], 8, ["onClick"]),
+                    vue.createElementVNode("view", { class: "divider" }),
+                    vue.createElementVNode("view", {
+                      class: "action-btn delete",
+                      onClick: ($event) => $options.deleteAddress(item)
+                    }, [
+                      vue.createVNode(_component_uni_icons, {
+                        type: "trash",
+                        size: "18"
+                      }),
+                      vue.createElementVNode("text", null, "删除")
+                    ], 8, ["onClick"])
+                  ])
+                ])
+              ],
+              2
+              /* CLASS */
+            );
+          }),
+          128
+          /* KEYED_FRAGMENT */
+        )),
+        $data.addressData.length === 0 ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 0,
+          class: "empty-state"
+        }, [
+          vue.createElementVNode("text", { class: "empty-text" }, "还没有收货地址哦")
+        ])) : vue.createCommentVNode("v-if", true)
+      ]),
+      vue.createElementVNode("view", { class: "bottom-bar" }, [
+        vue.createElementVNode("button", {
+          class: "add-btn",
+          onClick: _cache[0] || (_cache[0] = (...args) => $options.addNewAddress && $options.addNewAddress(...args))
+        }, [
+          vue.createVNode(_component_uni_icons, {
+            type: "plus",
+            size: "20",
+            color: "#fff"
+          }),
+          vue.createElementVNode("text", null, "新增地址")
+        ])
+      ])
+    ]);
   }
   const SubPackagesSettingsMyAddressMyAddress = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__scopeId", "data-v-9e1740bb"], ["__file", "E:/小程序转app/xcbapp/subPackages/settings/myAddress/myAddress.vue"]]);
   const _sfc_main$2 = {

@@ -97,10 +97,8 @@
 			},
 			// 商品总价
 			cartTotalByShopId() {
-				// console.log("数值发生变化", this.carts);
-				// 空值防护 + reduce 简化计算
 				if (!Array.isArray(this.carts)) return 0;
-				const total = this.carts.reduce((sum, item) => {
+				const total = this.getCartsByShopId.reduce((sum, item) => {
 					// 容错：item 不存在/价格/数量为空时，按 0 计算
 					const price = Number(item?.price) || 0;
 					const count = Number(item?.tempCount) || 0;

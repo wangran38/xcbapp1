@@ -245,6 +245,8 @@ export default {
 	}
 	
 	.search .btn {
+		width: 130rpx;
+		font-size: 25rpx;
 		height: 50%;
 		text-align: center;
 		margin: 0;

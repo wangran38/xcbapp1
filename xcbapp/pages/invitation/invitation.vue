@@ -1,21 +1,11 @@
 <template>
 	<view class="invite-page">
-		<view class="invite-reward card">
-			<view class="reward-title">
-				<uni-icons type="gift" size="24" color="#FF7A45"></uni-icons>
-				<text>邀请福利</text>
-			</view>
-			<view class="reward-list">
-				<view class="reward-item">
-					<text class="reward-tag">好友奖励</text>
-					<text class="reward-content">新用户注册即得20元无门槛券</text>
-				</view>
-				<view class="reward-item">
-					<text class="reward-tag">你的奖励</text>
-					<text class="reward-content">好友首次消费后，你得15元现金+500积分</text>
-				</view>
-			</view>
+		<!-- 1. 顶部标题区 -->
+		<view class="invite-header">
+			<text class="header-title">邀请好友，共赢福利</text>
+			<text class="header-desc">每成功邀请1位好友，双方都能获得奖励</text>
 		</view>
+
 
 
 		<!-- <posterVue></posterVue> -->
@@ -82,8 +72,8 @@
 			<uni-collapse>
 				<uni-collapse-item title="邀请规则说明" :title-style="{ fontSize: '24rpx', color: '#666' }">
 					<view class="rules-content">
-						<view class="rule-item">（通过自己二维码发展的农户商户获得收益）：10%</view>
-						<view class="rule-item">（通过扫自己二维码发展的消费者会员获得）：10%</view>
+						<view class="rule-item">通过自己二维码发展的农户商户获得收益：10%</view>
+						<view class="rule-item">通过扫自己二维码发展的消费者会员获得：10%</view>
 					</view>
 				</uni-collapse-item>
 			</uni-collapse>
