@@ -1,24 +1,36 @@
 <template>
-	<view class="bigBox" @click="close" v-show="show" :animation="animationData">
-		<view class="body" v-show="show" @click.stop="">
-			<view class="value">
-
-				<text style="font-size: 30rpx;">{{value}}</text>
-				<text
-					style="position: absolute; left: 20rpx; color: gray;">{{cartItem.commodity_name}}￥{{cartItem.price}}元/{{cartItem.weight_name}}</text>
-				<text style="position: absolute; right: 20rpx; color: gray;">{{singleItemPrice}}元</text>
-
-			</view>
-			<view class="function">
-				<view class="nums">
-					<view class="num" v-for="item in keys" :key="item"
-						@click.stop="item != '取消' ? inputNum(item): func(item)">
-						{{item}}
+	<view class="number-keyboard-mask" @click="close" v-show="show" :animation="animationData">
+		<view class="number-keyboard-wrapper" v-show="show" @click.stop="">
+			<view class="keyboard-input-area">
+				<view class="goods-info">
+					<text class="goods-name">{{ cartItem.commodity_name || '商品' }}</text>
+					<text class="goods-price">￥{{ cartItem.price || 0 }}元</text>
+				</view>
+				<view class="input-price-wrap">
+					<text class="input-value">{{ value || '0' }}</text>
+					<view class="total-price">
+						<text class="total-label">合计：</text>
+						<text class="total-money">￥{{ singleItemPrice }}</text>
 					</view>
 				</view>
-				<view class="funs">
-					<view class="fun" v-for="item in funs" @click.stop="func(item)">
-						{{item}}
+			</view>
+			<view class="keyboard-area">
+				<view class="number-keys">
+					<view class="number-key" v-for="item in keys" :key="item"
+						@click.stop="item !== '取消' ? inputNum(item) : func(item)">
+						<!-- 区分取消按钮样式 -->
+						<text class="key-text" :class="{ cancelKey: item === '取消' }">{{ item }}</text>
+					</view>
+				</view>
+				<view class="function-keys">
+					<view class="func-key delete-key" @click.stop="func('删除')">
+						<text class="func-text">删除</text>
+					</view>
+					<view class="func-key clear-key" @click.stop="func('清空')">
+						<text class="func-text">清空</text>
+					</view>
+					<view class="func-key confirm-key" @click.stop="func('确定')">
+						<text class="func-text confirm-text">确定</text>
 					</view>
 				</view>
 			</view>
@@ -27,20 +39,15 @@
 </template>
 
 <script>
+	// import Decimal from 'decimal'
+	import { useCartStore } from '@/store/cart';
+
 	export default {
 		name: "inputBox",
-		props: {
-			// 接收父组件传入的购物车项（必传）
-			initialCartItem: {
-				type: Object,
-				required: true,
-				default: () => ({})
-			}
-		},
 		data() {
 			return {
 				show: false,
-				value: '', // 初始值改为空字符串，而非非数字文本
+				value: '', // 保持字符串类型，方便小数点处理
 				keys: [
 					'1', '2', '3',
 					'4', '5', '6',
@@ -51,69 +58,72 @@
 				funs: ['删除', '清空', '确定'],
 				lock: true, // 键盘锁
 				animationData: {},
-				cartItem: {} // 初始化为空对象，而非数字 0
+				cartItem: {}, // 商品信息
+				cartStore: {}
 			};
 		},
 		watch: {
 			value(newValue, oldValue) {
-				if (!newValue) return; // 空值直接返回，避免后续计算
+				const newStrValue = String(newValue).trim();
+				const oldStrValue = String(oldValue).trim();
 
-				// 1. 检测小数点开头，自动补0
-				if (newValue[0] === '.') {
-					this.value = '0' + newValue;
-					return; // 补0后终止当前逻辑，避免重复处理
-				}
-
-				// 2. 限制多个小数点
-				const dotCount = (newValue.match(/\./g) || []).length;
-				if (dotCount > 1) {
-					this.value = oldValue;
+				// 避免无限循环
+				if (newStrValue !== this.value) {
+					this.value = newStrValue;
 					return;
 				}
 
-				// 3. 限制开头多个0（仅允许 0 或 0.xx，不允许 00/000）
-				if (newValue.length > 1 && newValue[0] === '0' && newValue[1] !== '.') {
-					this.value = oldValue;
+				if (!newStrValue) return;
+
+				// 开头是小数点，自动补0
+				if (newStrValue.charAt(0) === '.') {
+					this.value = `0${newStrValue}`;
 					return;
 				}
 
-				// 4. 限制小数点后最多1位
-				const dotIndex = newValue.indexOf('.');
-				if (dotIndex > -1 && newValue.length - dotIndex > 2) {
-					this.value = oldValue;
+				// 限制最多1个小数点
+				const dotArr = newStrValue.split('.');
+				if (dotArr.length - 1 > 1) {
+					this.value = oldStrValue;
 					return;
 				}
 
-				// 5. 同步到购物车项（空值防护）
-				if (this.cartItem && typeof this.cartItem === 'object') {
-					const numValue = Number(this.value) || 0;
-					this.cartItem.count = numValue;
-					this.anyNumber(this.cartItem); // 同步到store
+				// 整数部分不能以多个0开头（如001 → 01/1）
+				if (newStrValue.startsWith('00') && dotArr.length === 1) {
+					this.value = oldStrValue;
+					return;
+				}
+
+				// 限制小数点后最多2位（金额/价格常用）
+				if (dotArr.length === 2 && dotArr[1].length > 1) {
+					this.value = oldStrValue;
 				}
 			},
 
 			// 监听数字键盘是否弹起
 			show(newValue) {
 				if (newValue) {
-					// 弹起时初始化购物车项 + 回显数量
-					this.cartItem = { ...this.initialCartItem }; // 深拷贝父组件传入的初始值
-					this.value = this.getTempCount(this.cartItem.id) + '' || '';
+					// 弹起时初始化购物车项 + 回显数量（转为字符串，保持类型一致）
+					const tempCount = this.cartStore.getTempCount(this.cartItem.id) || 0;
+					this.value = String(tempCount);
 				}
 			}
 		},
 		computed: {
-			// 计算单商品总价（空值防护 + Decimal 正确使用）
 			singleItemPrice() {
-				if (!this.cartItem || !this.cartItem.price || !this.value) return 0;
-
-				// Decimal 容错：确保传入数字类型
-				const price = new Decimal(Number(this.cartItem.price) || 0);
-				const count = new Decimal(Number(this.value) || 0);
-				return price.mul(count).toNumber().toFixed(2); // 保留2位小数
+				// 空值防护，确保是有效数字
+				const price = Number(this.cartItem.price) || 0;
+				const count = Number(this.value) || 0;
+				
+				// 使用Decimal避免精度丢失，保留2位小数（金额场景）
+				return (price*count).toFixed(2);
 			}
 		},
+		created() {
+			this.cartStore = useCartStore();
+		},
 		methods: {
-			// 校验是否为数字
+			// 校验是否为数字（支持小数）
 			isNumeric(str) {
 				return /^\d+(\.\d+)?$/.test(str);
 			},
@@ -123,15 +133,31 @@
 				this.show = false;
 			},
 
-			// 输入数字
+			// 输入数字/小数点
 			inputNum(num) {
-				// 空值时输入0，直接赋值
-				if (this.value === '' && num === '0') {
-					this.value = '0';
+				let currentValue = String(this.value).trim();
+
+				if (num === '.') {
+					// 已有小数点，不重复输入
+					if (currentValue.includes('.')) return;
+					// 空值时，输入0.
+					if (!currentValue) {
+						this.value = '0.';
+						return;
+					}
+					// 正常添加小数点
+					this.value = `${currentValue}.`;
 					return;
 				}
-				// 非空时拼接
-				this.value += num;
+
+				// 处理数字输入
+				if (currentValue === '0') {
+					// 0后面直接输数字，替换0（如0→1，而非01）
+					this.value = num;
+				} else {
+					// 拼接数字
+					this.value = `${currentValue}${num}`;
+				}
 			},
 
 			// 功能函数
@@ -154,16 +180,16 @@
 
 			// 删除最后一位
 			remove() {
-				if (this.value) {
-					this.value = this.value.substring(0, this.value.length - 1);
-				}
+				if (!this.value) return;
+				// 字符串截取，保持类型一致
+				this.value = this.value.substring(0, this.value.length - 1);
 			},
 
-			// 清空值
+			// 清空值（设为空字符串，保持类型一致）
 			clear() {
 				this.value = '';
 				// 清空时同步购物车数量为0
-				if (this.cartItem) {
+				if (this.cartItem.id) {
 					this.cartItem.count = 0;
 					this.anyNumber(this.cartItem);
 				}
@@ -171,111 +197,185 @@
 
 			// 确认提交
 			sure() {
-				// 空值/非数字处理
-				if (!this.value || !this.isNumeric(this.value)) {
-					this.cartItem.count = 0;
-					this.anyNumber(this.cartItem);
-					this.show = false;
-					return;
+				// 空值/非数字处理，默认数量为0
+				let finalCount = 0;
+				if (this.value && this.isNumeric(this.value)) {
+					finalCount = Number(this.value);
 				}
 
-				// 合法数字处理
-				const value = Number(this.value);
-				this.cartItem.count = value;
-				this.anyNumber(this.cartItem);
+				// 同步购物车数量
+				if (this.cartItem.id) {
+					this.cartItem.count = finalCount;
+					this.anyNumber(this.cartItem);
+				}
+
 				this.show = false;
 			},
 
-			// 【实现缺失的方法】获取临时数量（示例：从本地/store获取）
-			getTempCount(id) {
-				// 这里替换为你的实际逻辑，比如从Pinia/本地存储获取
-				const cartList = uni.getStorageSync('cartList') || [];
-				const item = cartList.find(item => item.id === id);
-				return item?.count || 0;
-			},
-
-			// 【实现缺失的方法】同步数量到store（示例）
 			anyNumber(cartItem) {
-				// 这里替换为你的Pinia同步逻辑，比如：
-				// const cartStore = useCartStore()
-				// cartStore.changeGoodsNum(cartItem.id, cartItem.count)
-				uni.setStorageSync('cartList', (uni.getStorageSync('cartList') || []).map(item => {
-					if (item.id === cartItem.id) return { ...item, count: cartItem.count };
-					return item;
-				}));
+				this.cartStore.anyNumber(cartItem)
 			}
 		}
 	}
 </script>
-<style>
-	.bigBox {
-		z-index: 100000;
-		width: 100%;
-		height: 100%;
-		position: fixed;
-	}
 
-	.body {
-		background-color: white;
-		position: absolute;
-		bottom: 0;
+<style scoped>
+	/* 样式不变，保留原有样式 */
+	.number-keyboard-mask {
+		position: fixed;
+		top: 0;
 		left: 0;
 		right: 0;
-	}
-
-	.function {
-		font-size: 30rpx;
+		bottom: 0;
+		z-index: 99999;
+		background-color: rgba(0, 0, 0, 0.6);
 		display: flex;
-		padding: 10rpx;
-		background-color: gainsboro;
+		align-items: flex-end;
 	}
 
-	.value {
-		border: 1rpx solid black;
-		/* background-color:#007aff ; */
-		border-radius: 10rpx;
-		text-align: center;
-		line-height: 80rpx;
-		font-size: 30rpx;
-		height: 80rpx;
+	.number-keyboard-wrapper {
+		width: 100%;
+		background-color: #ffffff;
+		border-top-left-radius: 24rpx;
+		border-top-right-radius: 24rpx;
+		padding: 30rpx 20rpx;
+		box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.1);
 	}
 
-	.nums {
-		width: 600rpx;
+	.keyboard-input-area {
+		margin-bottom: 30rpx;
+	}
+
+	.goods-info {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 20rpx;
+		padding: 0 10rpx;
+	}
+
+	.goods-name {
+		font-size: 28rpx;
+		color: #333333;
+		font-weight: 500;
+		max-width: 400rpx;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.goods-price {
+		font-size: 26rpx;
+		color: #666666;
+	}
+
+	.input-price-wrap {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 20rpx 10rpx;
+		background-color: #f8f9fa;
+		border-radius: 16rpx;
+	}
+
+	.input-value {
+		font-size: 36rpx;
+		color: #1a1a1a;
+		font-weight: 600;
+	}
+
+	.total-price {
+		display: flex;
+		align-items: center;
+	}
+
+	.total-label {
+		font-size: 26rpx;
+		color: #666666;
+		margin-right: 8rpx;
+	}
+
+	.total-money {
+		font-size: 32rpx;
+		color: #e53e3e;
+		font-weight: 600;
+	}
+
+	.number-keys {
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: flex-start;
-
+		justify-content: space-between;
+		margin-bottom: 20rpx;
 	}
 
-	.num {
-		margin: 5rpx;
+	.number-key {
+		width: 31%;
+		height: 100rpx;
+		margin-bottom: 16rpx;
+		background-color: #f8f9fa;
+		border-radius: 16rpx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.2s ease;
+	}
+
+	.number-key:active {
+		background-color: #e9ecef;
+		transform: scale(0.96);
+	}
+
+	.key-text {
+		font-size: 32rpx;
+		color: #1a1a1a;
+		font-weight: 500;
+	}
+
+	.cancelKey {
+		color: #666666;
+		font-size: 28rpx;
+	}
+
+	.function-keys {
+		display: flex;
+		justify-content: space-between;
+		gap: 16rpx;
+	}
+
+	.func-key {
 		flex: 1;
-		width: calc((100% - 10px) / 2);
-		min-width: calc((100% - 10px) / 4);
-		max-width: calc((100% - 10px) / 3);
-		border-radius: 10rpx;
-		text-align: center;
-		height: 90rpx;
-		line-height: 90rpx;
-		background-color: white;
+		height: 100rpx;
+		border-radius: 16rpx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.2s ease;
 	}
 
-	.fun {
-		border-radius: 5rpx;
-		margin: 5rpx;
-		text-align: center;
-		line-height: 120rpx;
-		width: 180rpx;
-		height: 125rpx;
-		background-color: #b9bcc4;
+	.func-key:active {
+		transform: scale(0.96);
 	}
 
-	.num:active {
-		background-color: gray;
+	.func-text {
+		font-size: 28rpx;
+		font-weight: 500;
+		color: #ffffff;
 	}
 
-	.fun:active {
-		background-color: white;
+	.delete-key {
+		background-color: #6c757d;
+	}
+
+	.clear-key {
+		background-color: #6c757d;
+	}
+
+	.confirm-key {
+		background-color: #e53e3e;
+	}
+
+	.confirm-text {
+		font-size: 30rpx;
+		font-weight: 600;
 	}
 </style>

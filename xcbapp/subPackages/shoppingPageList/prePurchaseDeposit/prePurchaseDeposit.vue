@@ -214,8 +214,7 @@
 </template>
 
 <script>
-	// 1. 引入依赖（确保项目已安装对应包）
-	import Decimal from 'decimal'
+	import Decimal from 'decimal.js'
 	import {
 		myMixin
 	} from '@/utils/public.js'

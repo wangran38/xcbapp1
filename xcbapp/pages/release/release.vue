@@ -17,7 +17,7 @@
 			<view class="price">
 				<text class="title">分类</text>
 				<view class="item">
-					<picker class="picker" :range="pickerRange" :value="selectedCategoryIndex"
+					<picker  style="margin-top: 35rpx;" class="picker" :range="pickerRange" :value="selectedCategoryIndex"
 						@change="onCategoryChange">
 						<view class="picker-text">{{ pickerRange[selectedCategoryIndex] }}</view>
 					</picker>
@@ -268,7 +268,7 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		/* flex: 1; */
+		
 	}
 
 	.img {

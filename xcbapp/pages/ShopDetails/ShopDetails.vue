@@ -37,9 +37,11 @@
 					</uni-list>
 				</uni-collapse-item>
 			</uni-collapse>
-			<!-- 3. 菜品搜索区：还原原按钮风格，解决大小不一 -->
 			<view class="dishes">
-				<view class="search-bar">
+				
+				<mButtonVue  :isShowbutton2="true" @btn1="searchCommodity"  @btn2="cancelSearch"  :placeholder="'请输入菜品名称'"></mButtonVue>
+				
+				<!-- <view class="search-bar">
 					<uni-easyinput type="text" :adjust-position="true" v-model="commodity_name" 
 						placeholder="请输入菜品名称" :clearable="false"
 						placeholder-style="{ color: '#999', fontSize: '24rpx' }"
@@ -48,7 +50,7 @@
 						<button class="save search-btn" @click="searchCommodity">搜索</button>
 						<button class="save reset-btn" @click="cancelSearch">清空</button>
 					</view>
-				</view>
+				</view> -->
 				
 				
 				<view class="dish-list">
@@ -82,6 +84,7 @@
 	import { api } from '@/api/index'
 	import usePage from '@/hooks/usePage';
 	import { myMixin } from '@/utils/public.js'
+	import mButtonVue from '@/components/public/mButton/mButton.vue'
 
 	export default {
 		data() {
@@ -110,7 +113,8 @@
 		components: {
 			shopItem,
 			menuBarVue,
-			inputBoxVue
+			inputBoxVue,
+			mButtonVue
 		},
 		// 修改点 3: 使用 setup() 函数获取 Pinia Store 实例
 		setup() {
@@ -168,6 +172,7 @@
 				}
 
 			},
+			
 			// 取消搜索
 			async cancelSearch() {
 				this.commodity_name = null
@@ -182,7 +187,8 @@
 				this.hasMore = true // 开启下滑加载
 			},
 			// 搜索菜品
-			async searchCommodity() {
+			async searchCommodity(value) {
+				this.commodity_name  = value
 				this.pageData = []
 				// 默认加载一百条搜索数据，
 				let res = await this.fetchData({

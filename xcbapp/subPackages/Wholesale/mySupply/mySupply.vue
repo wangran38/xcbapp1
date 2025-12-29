@@ -57,8 +57,12 @@
 	import {
 		myMixin
 	} from '@/utils/public.js'
+	import mButtonVue from '@/components/public/mButton/mButton.vue'
 
 	export default {
+		components: {
+			mButtonVue
+		},
 		data() {
 			return {
 				queryData: {

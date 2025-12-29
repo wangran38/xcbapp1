@@ -814,7 +814,6 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		/* flex: 1; */
 }
 .img {
 		height: 3.125rem;

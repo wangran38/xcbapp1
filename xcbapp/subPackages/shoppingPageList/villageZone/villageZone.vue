@@ -7,7 +7,7 @@
         animationDelay: i * 0.2 + 's'
       }"></view>
 		</view> -->
-		<view style="display: flex; align-items: center;">
+		<!-- <view style="display: flex; align-items: center;">
 			<view class="search-bar">
 				<view style="display: flex;   align-items: center; border-radius: 20rpx;">
 					<view style="padding: 20rpx;"><uni-icons color="#999999" size="20" type="search" /></view>
@@ -22,7 +22,8 @@
 				style="background-color: red; color: white;width: 120rpx; height: 80rpx; line-height: 80rpx; text-align: center; border-radius: 10rpx;  margin: 0 10rpx 0 0;"
 				@click="stopSearch">
 				清空</view>
-		</view>
+		</view> -->
+		<mButtonVue  @btn1="startSearch"  @btn2="stopSearch"  :isShowbutton2="true" :placeholder="'搜索菜品'"></mButtonVue>
 
 
 		<view class="filter-group">
@@ -122,8 +123,12 @@
 	import {
 		myMixin
 	} from '@/utils/public.js'
+	import mButtonVue from '@/components/public/mButton/mButton.vue'
 	export default {
 		mixins: [myMixin],
+		components: {
+			mButtonVue
+		},
 		data() {
 			return {
 				distances:[
@@ -178,8 +183,11 @@
 				}
 			},
 			// 开始搜索
-			startSearch() {
+			startSearch(value) {
+				this.queryData.goodsname = value   // 保存子组件传值
+				
 				this.queryData.category_id = null
+				
 				this.noMore = false
 				this.goodsData = [] // 清空原来的数据
 				this.getGoodsData()

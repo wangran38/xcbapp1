@@ -1,6 +1,90 @@
 <template>
 	<view class="container">
-			
+			<view class="detail-panel">
+				<view class="panel-content" v-if="showDetail">
+					<image :src="product.detailImage || '/static/images/detail-placeholder.png'" mode="widthFix" class="detail-image"></image>
+					<view class="detail-text">
+						<view class="detail-section" v-for="(section, index) in (product.details || [])" :key="index">
+							<text class="detail-section-title">{{ section.title || '商品说明' }}</text>
+							<text class="detail-section-content">{{ section.content || '暂无详细描述' }}</text>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="info-card">
+				<view class="info-item">
+					<uni-icons type="person" size="18" color="#7A9D7E" />
+					<text class="label">农户名称：</text>
+					<text>{{ merchantInfo.farmersname }}</text>
+				</view>
+
+				<view class="info-item">
+					<uni-icons type="phone" size="18" color="#7A9D7E" />
+					<text class="label">联系电话：</text>
+					<text>{{ isLogin? merchantInfo.phone:hidePhone(merchantInfo.phone) }}</text>
+				</view>
+				
+				
+				
+
+				<view class="info-item">
+					<uni-icons type="location" size="18" color="#7A9D7E" />
+					<text class="label">所在地址：</text>
+					<text>{{ merchantInfo.address }}</text>
+				</view>
+				
+			</view>
+			<map :latitude="merchantInfo.lat" :longitude="merchantInfo.lng" style="width: 100%;" :markers="merchantInfo.markers"></map>
+
+		<!-- 预售商品 -->
+		<view class="presale-section">
+			<view class="section-header">
+				<text class="title">预售商品</text>
+				<text class="count">共{{ presaleList.length }}件</text>
+			</view>
+
+			<view class="goods-grid">
+				
+				<view class="goods-item" v-for="(item, index) in presaleList" :key="item.id"
+					@click="gotoGoods(item.id)">
+					<view class="presale-tag">预售中</view>
+					<image :src="item.imglogo" class="goods-image" mode="aspectFill" lazy-load />
+
+					<view class="goods-info">
+						<text class="goods-title">{{ item.goodsname }}</text>
+
+						<view class="price-row">
+							<text class="presale-price">¥{{ item.price   }}</text>
+							<text class="original-price">¥{{ item.presaleprice }}</text>
+						</view>
+
+						<view class="progress-row">
+							<view class="progress-bar">
+								<progress
+									:percent="(	item.goodstotal > 0 ? Math.min((item.selltotal / item.goodstotal) * 100, 100) : 0)"
+									stroke-width="4" activeColor="green" />
+							</view>
+							<text class="sold-text">已售{{ item.selltotal }}/{{ item.goodstotal }}</text>
+							<view class="countdown" style="color: red; font-weight: bold;">
+								<text>已有0人参与预购</text>
+							</view>
+						</view>
+
+						<view class="countdown">
+							<uni-icons type="calendar" size="14" color="#999" />
+							<text>剩余{{ getChineseTimeDiff(Date.now(),item.sellendtime) }}</text>
+						</view>
+
+
+						<view style="background-color: #007aff; text-align: center; border-radius: 5%;
+			padding: 10rpx; margin: 20rpx; color: white; font-weight: bold;" @click.stop="goToBuy(item)">立即预购</view>
+					</view>
+				</view>
+				
+				
+			</view>
+			<view v-if="presaleList.length==0" style="position: absolute;left: 35%; top: 70%; font-size: 30rpx;">该农户暂未上传菜品</view>
+		</view>
 	</view>
 </template>
 
@@ -36,19 +120,22 @@
 		},
 
 		onLoad({query}) {
-			this.merchantInfo = JSON.parse(query)
-			// console.log(this.merchantInfo)
-			console.log(this.merchantInfo.lat)
-			this.merchantInfo.lat = this.merchantInfo.lat-0.1
-			this.merchantInfo.markers = [{id:1,longitude:this.merchantInfo.lng,latitude:this.merchantInfo.lat,iconPath:'../../../static/selectlocation.png',width:30,height:30}]
-			
-			this.queryData.farmers_id= parseInt(this.merchantInfo.id)
-			this.getPresaleData()
-			
-			const token = uni.getStorageSync('token');
-			if (!token){
-				this.isLogin = false
+			try{
+				this.merchantInfo = JSON.parse(query)
+				this.merchantInfo.lat = this.merchantInfo.lat-0.1
+				this.merchantInfo.markers = [{id:1,longitude:this.merchantInfo.lng,latitude:this.merchantInfo.lat,iconPath:'../../../static/selectlocation.png',width:30,height:30}]
+				
+				this.queryData.farmers_id= parseInt(this.merchantInfo.id)
+				this.getPresaleData()
+				
+				const token = uni.getStorageSync('token');
+				if (!token){
+					this.isLogin = false
+				}
+			}catch(e){
+				console.error(e)
 			}
+			
 		},
 		methods: {
 			// 展开/收起商品详情

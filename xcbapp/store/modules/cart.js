@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import Decimal from 'decimal'
+import Decimal from 'decimal.js'
 
 export const useCartStore = defineStore('cart', {
   // 状态：相当于 Vuex 的 state

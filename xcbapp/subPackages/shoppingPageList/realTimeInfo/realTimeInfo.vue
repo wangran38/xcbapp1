@@ -1,12 +1,13 @@
 <template>
 	<view class="news-container">
-		<view class="search-bar">
+		<!-- 		<view class="search-bar">
 			<view class="search-box">
 				<uni-icons type="search" size="18" color="#999" />
 				<input class="search-input" placeholder="请输入关键词搜索" placeholder-class="placeholder"
 					@input="onSearchInput" />
 			</view>
-		</view>
+		</view> -->
+		<mButtonVue @btn1="startSearch" @btn2="stopSearch" :isShowbutton2="true" :placeholder="'输入关键词搜索'"></mButtonVue>
 
 		<scroll-view class="category-nav" scroll-x>
 			<view v-for="(item, index) in categories" :key="item.id" class="category-item"
@@ -44,8 +45,12 @@
 	import {
 		myMixin
 	} from '@/utils/public.js'
+	import mButtonVue from '@/components/public/mButton/mButton.vue'
 	export default {
 		mixins: [myMixin],
+		components: {
+			mButtonVue
+		},
 		data() {
 			return {
 				activeCategory: 0,
@@ -60,7 +65,7 @@
 				newsList: [
 
 				],
-				isNext:false
+				isNext: false
 			}
 		},
 		mounted() {
@@ -75,7 +80,7 @@
 				this.query.page = 1
 				// 解除翻页锁
 				this.isNext = false
-				
+
 				// 更新数据
 				this.query.category_name = this.categories[newValue].name
 				this.getData(true)
@@ -83,9 +88,9 @@
 		},
 		methods: {
 			// 翻页
-			changePage(){
-				if (!this.isNext){
-					this.query.page+=1
+			changePage() {
+				if (!this.isNext) {
+					this.query.page += 1
 					this.getData()
 				}
 			},
@@ -100,19 +105,22 @@
 						}
 					})
 					console.log(newList)
-					this.categories = [{id:-1,name:'全部'},...newList]
+					this.categories = [{
+						id: -1,
+						name: '全部'
+					}, ...newList]
 				}
 			},
 
-			async getData(lock=false) {
+			async getData(lock = false) {
 				let data = await api.informationData(this.query)
 				if (data.code == 200) {
-					if (!lock){
+					if (!lock) {
 						this.newsList = [...this.newsList, ...data.data.listdata]
-					}else{
+					} else {
 						this.newsList = data.data.listdata
 					}
-					this.isNext = data.data.listdata.length < this.query.limit ? true : false   // 判断是否还能继续翻页
+					this.isNext = data.data.listdata.length < this.query.limit ? true : false // 判断是否还能继续翻页
 				}
 			},
 			calcScrollHeight() {
@@ -170,6 +178,7 @@
 	}
 
 	.category-nav {
+		margin-top: 10rpx;
 		white-space: nowrap;
 		background: #fff;
 		padding: 20rpx 0;

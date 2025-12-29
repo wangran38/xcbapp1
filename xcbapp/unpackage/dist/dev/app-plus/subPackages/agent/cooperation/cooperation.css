@@ -782,8 +782,6 @@
   text-align: center;
 }
 
-	/* 原有样式不变，新增以下样式 */
-	/* 表单包裹层：用于定位加载遮罩 */
 .form-wrapper[data-v-15a01c95] {
 		position: relative;
 }

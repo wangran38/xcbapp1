@@ -110,7 +110,7 @@ if (uni.restoreGlobal) {
         },
         fail: (err) => {
           reject(err);
-          formatAppLog("log", "at api/index.js:131", "error", err);
+          formatAppLog("log", "at api/index.js:133", "error", err);
         }
       });
     });
@@ -542,8 +542,17 @@ if (uni.restoreGlobal) {
     cityAgentRevenue(data) {
       return fetch("/api/my/getcitymoneylist", "POST", data);
     },
+    /**
+     * 暂时不使用
+     */
     appWeiXin(data) {
       return fetch("/api/app/pay", "POST", data);
+    },
+    /**
+     *省级代理商收益接口
+     */
+    getpromoneylist(data) {
+      return fetch("/api/my/getpromoneylist", "POST", data);
     }
   };
   const request = {
@@ -1460,8 +1469,8 @@ if (uni.restoreGlobal) {
         handler(payload);
       });
     });
-    this._subscribers.slice().forEach(function(sub) {
-      return sub(mutation, this$1$1.state);
+    this._subscribers.slice().forEach(function(sub2) {
+      return sub2(mutation, this$1$1.state);
     });
     if (options && options.silent) {
       console.warn(
@@ -1483,10 +1492,10 @@ if (uni.restoreGlobal) {
       return;
     }
     try {
-      this._actionSubscribers.slice().filter(function(sub) {
-        return sub.before;
-      }).forEach(function(sub) {
-        return sub.before(action, this$1$1.state);
+      this._actionSubscribers.slice().filter(function(sub2) {
+        return sub2.before;
+      }).forEach(function(sub2) {
+        return sub2.before(action, this$1$1.state);
       });
     } catch (e2) {
       {
@@ -1500,10 +1509,10 @@ if (uni.restoreGlobal) {
     return new Promise(function(resolve, reject) {
       result.then(function(res) {
         try {
-          this$1$1._actionSubscribers.filter(function(sub) {
-            return sub.after;
-          }).forEach(function(sub) {
-            return sub.after(action, this$1$1.state);
+          this$1$1._actionSubscribers.filter(function(sub2) {
+            return sub2.after;
+          }).forEach(function(sub2) {
+            return sub2.after(action, this$1$1.state);
           });
         } catch (e2) {
           {
@@ -1514,10 +1523,10 @@ if (uni.restoreGlobal) {
         resolve(res);
       }, function(error2) {
         try {
-          this$1$1._actionSubscribers.filter(function(sub) {
-            return sub.error;
-          }).forEach(function(sub) {
-            return sub.error(action, this$1$1.state, error2);
+          this$1$1._actionSubscribers.filter(function(sub2) {
+            return sub2.error;
+          }).forEach(function(sub2) {
+            return sub2.error(action, this$1$1.state, error2);
           });
         } catch (e2) {
           {
@@ -1625,29 +1634,6 @@ if (uni.restoreGlobal) {
     });
     return res;
   });
-  var mapGetters = normalizeNamespace(function(namespace, getters) {
-    var res = {};
-    if (!isValidMap(getters)) {
-      console.error("[vuex] mapGetters: mapper parameter must be either an Array or an Object");
-    }
-    normalizeMap(getters).forEach(function(ref) {
-      var key = ref.key;
-      var val = ref.val;
-      val = namespace + val;
-      res[key] = function mappedGetter() {
-        if (namespace && !getModuleByNamespace(this.$store, "mapGetters", namespace)) {
-          return;
-        }
-        if (!(val in this.$store.getters)) {
-          console.error("[vuex] unknown getter: " + val);
-          return;
-        }
-        return this.$store.getters[val];
-      };
-      res[key].vuex = true;
-    });
-    return res;
-  });
   function normalizeMap(map) {
     if (!isValidMap(map)) {
       return [];
@@ -1686,7 +1672,7 @@ if (uni.restoreGlobal) {
     }
     return target;
   };
-  const _sfc_main$2b = {
+  const _sfc_main$2c = {
     data() {
       return {
         NoticeList: ["赠送积分说明"],
@@ -2020,7 +2006,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$2a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2b(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "top" }, " 农链天下 "),
       vue.createElementVNode("view", { class: "region" }, [
@@ -2094,7 +2080,7 @@ if (uni.restoreGlobal) {
       }, "免费买菜")
     ]);
   }
-  const PagesIndex1Index1 = /* @__PURE__ */ _export_sfc(_sfc_main$2b, [["render", _sfc_render$2a], ["__file", "E:/小程序转app/xcbapp/pages/index1/index1.vue"]]);
+  const PagesIndex1Index1 = /* @__PURE__ */ _export_sfc(_sfc_main$2c, [["render", _sfc_render$2b], ["__file", "E:/小程序转app/xcbapp/pages/index1/index1.vue"]]);
   const fontData = [
     {
       "font_class": "arrow-down",
@@ -2745,7 +2731,7 @@ if (uni.restoreGlobal) {
     const reg = /^[0-9]*$/g;
     return typeof val === "number" || reg.test(val) ? val + "px" : val;
   };
-  const _sfc_main$2a = {
+  const _sfc_main$2b = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -2799,7 +2785,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$29(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2a(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "text",
       {
@@ -2814,7 +2800,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$2a, [["render", _sfc_render$29], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$2b, [["render", _sfc_render$2a], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
   const isObject = (val) => val !== null && typeof val === "object";
   const defaultDelimiters = ["{", "}"];
   class BaseFormatter {
@@ -2846,15 +2832,15 @@ if (uni.restoreGlobal) {
           tokens.push({ type: "text", value: text });
         }
         text = "";
-        let sub = "";
+        let sub2 = "";
         char = format[position++];
         while (char !== void 0 && char !== endDelimiter) {
-          sub += char;
+          sub2 += char;
           char = format[position++];
         }
         const isClosed = char === endDelimiter;
-        const type = RE_TOKEN_LIST_VALUE.test(sub) ? "list" : isClosed && RE_TOKEN_NAMED_VALUE.test(sub) ? "named" : "unknown";
-        tokens.push({ value: sub, type });
+        const type = RE_TOKEN_LIST_VALUE.test(sub2) ? "list" : isClosed && RE_TOKEN_NAMED_VALUE.test(sub2) ? "named" : "unknown";
+        tokens.push({ value: sub2, type });
       } else {
         text += char;
       }
@@ -3128,7 +3114,7 @@ if (uni.restoreGlobal) {
   const {
     t: t$5
   } = initVueI18n(messages$1);
-  const _sfc_main$29 = {
+  const _sfc_main$2a = {
     name: "UniLoadMore",
     emits: ["clickLoadMore"],
     props: {
@@ -3210,7 +3196,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$28(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$29(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "uni-load-more",
       onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args))
@@ -3285,8 +3271,8 @@ if (uni.restoreGlobal) {
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1$7 = /* @__PURE__ */ _export_sfc(_sfc_main$29, [["render", _sfc_render$28], ["__scopeId", "data-v-9245e42c"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue"]]);
-  const _sfc_main$28 = {
+  const __easycom_1$7 = /* @__PURE__ */ _export_sfc(_sfc_main$2a, [["render", _sfc_render$29], ["__scopeId", "data-v-9245e42c"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue"]]);
+  const _sfc_main$29 = {
     props: {
       menuList: {
         type: Array,
@@ -3420,7 +3406,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$27(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$28(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "movable-area",
       {
@@ -3471,7 +3457,89 @@ if (uni.restoreGlobal) {
       /* STYLE */
     );
   }
-  const floatBall = /* @__PURE__ */ _export_sfc(_sfc_main$28, [["render", _sfc_render$27], ["__scopeId", "data-v-cb34b40c"], ["__file", "E:/小程序转app/xcbapp/components/float-ball/float-ball.vue"]]);
+  const floatBall = /* @__PURE__ */ _export_sfc(_sfc_main$29, [["render", _sfc_render$28], ["__scopeId", "data-v-cb34b40c"], ["__file", "E:/小程序转app/xcbapp/components/float-ball/float-ball.vue"]]);
+  const _sfc_main$28 = {
+    name: "mButton",
+    data() {
+      return {
+        value: null
+      };
+    },
+    methods: {
+      /**
+       * 触发父组件事件
+       */
+      btn1() {
+        this.$emit("btn1", this.value);
+      },
+      btn2() {
+        this.value = "";
+        this.$emit("btn2", this.value);
+      }
+    },
+    props: {
+      placeholder: {
+        required: false,
+        default: "请输入关键字"
+      },
+      // 提示词
+      buttonText1: {
+        required: false,
+        default: "搜索"
+      },
+      // 按钮文字
+      buttonText2: {
+        required: false,
+        default: "清空"
+      },
+      isShowbutton2: {
+        default: false
+      }
+    }
+  };
+  function _sfc_render$27(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "search-container" }, [
+      vue.createElementVNode("view", { class: "search-bar" }, [
+        vue.createVNode(_component_uni_icons, {
+          type: "search",
+          size: "18",
+          color: "#b2b2b2"
+        }),
+        vue.withDirectives(vue.createElementVNode("input", {
+          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.value = $event),
+          class: "search-input",
+          placeholder: $props.placeholder,
+          "placeholder-class": "placeholder-style"
+        }, null, 8, ["placeholder"]), [
+          [vue.vModelText, $data.value]
+        ]),
+        vue.createElementVNode(
+          "button",
+          {
+            class: "search-btn",
+            onClick: _cache[1] || (_cache[1] = (...args) => $options.btn1 && $options.btn1(...args))
+          },
+          vue.toDisplayString($props.buttonText1),
+          1
+          /* TEXT */
+        ),
+        $props.isShowbutton2 ? (vue.openBlock(), vue.createElementBlock(
+          "button",
+          {
+            key: 0,
+            class: "search-btn",
+            onClick: _cache[2] || (_cache[2] = (...args) => $options.btn2 && $options.btn2(...args)),
+            style: { "background-color": "red" }
+          },
+          vue.toDisplayString($props.buttonText2),
+          1
+          /* TEXT */
+        )) : vue.createCommentVNode("v-if", true)
+      ])
+    ]);
+  }
+  const mButtonVue = /* @__PURE__ */ _export_sfc(_sfc_main$28, [["render", _sfc_render$27], ["__scopeId", "data-v-e3b8d142"], ["__file", "E:/小程序转app/xcbapp/components/public/mButton/mButton.vue"]]);
   const usePage = {
     data() {
       return {
@@ -3549,7 +3617,8 @@ if (uni.restoreGlobal) {
   };
   const _sfc_main$27 = {
     components: {
-      floatBall
+      floatBall,
+      mButtonVue
     },
     data() {
       return {
@@ -3639,6 +3708,10 @@ if (uni.restoreGlobal) {
     },
     mixins: [usePage],
     methods: {
+      settingValue(value) {
+        this.searchParams.title = value;
+        this.reloadData();
+      },
       changePrompt(e2) {
         this.prompt = !this.prompt;
       },
@@ -3648,7 +3721,7 @@ if (uni.restoreGlobal) {
       },
       goToshoppingPageList(item) {
         if (item.path) {
-          formatAppLog("log", "at pages/index/index.vue:201", item.path);
+          formatAppLog("log", "at pages/index/index.vue:209", item.path);
           uni.navigateTo({
             url: item.path
           });
@@ -3696,7 +3769,7 @@ if (uni.restoreGlobal) {
         try {
           const userSelection = uni.getStorageSync("userSelection");
           if (!userSelection) {
-            formatAppLog("warn", "at pages/index/index.vue:258", "未找到 userSelection");
+            formatAppLog("warn", "at pages/index/index.vue:266", "未找到 userSelection");
             return;
           }
           const {
@@ -3704,7 +3777,7 @@ if (uni.restoreGlobal) {
             area_id
           } = userSelection;
           if (!market_id || !area_id) {
-            formatAppLog("warn", "at pages/index/index.vue:269", "未找到市场 ID 或区域 ID");
+            formatAppLog("warn", "at pages/index/index.vue:277", "未找到市场 ID 或区域 ID");
             return;
           }
           const response = await api.marketlist(parseInt(area_id));
@@ -3712,11 +3785,11 @@ if (uni.restoreGlobal) {
           if (marketData) {
             this.currentMarketName = marketData.marketname || "未知市场";
           } else {
-            formatAppLog("warn", "at pages/index/index.vue:280", "未找到对应的市场");
+            formatAppLog("warn", "at pages/index/index.vue:288", "未找到对应的市场");
             this.currentMarketName = "未知市场";
           }
         } catch (error2) {
-          formatAppLog("error", "at pages/index/index.vue:284", "获取市场名称失败:", error2);
+          formatAppLog("error", "at pages/index/index.vue:292", "获取市场名称失败:", error2);
         }
       },
       navigateToShopDetails(id) {
@@ -3749,14 +3822,14 @@ if (uni.restoreGlobal) {
                 });
               }
             } else {
-              formatAppLog("log", "at pages/index/index.vue:319", res.path);
+              formatAppLog("log", "at pages/index/index.vue:327", res.path);
               uni.navigateTo({
                 url: "/" + res.path
               });
             }
           },
           fail: function(error2) {
-            formatAppLog("error", "at pages/index/index.vue:327", "扫码失败:", error2);
+            formatAppLog("error", "at pages/index/index.vue:335", "扫码失败:", error2);
           }
         });
       }
@@ -3764,6 +3837,7 @@ if (uni.restoreGlobal) {
   };
   function _sfc_render$26(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
+    const _component_mButtonVue = vue.resolveComponent("mButtonVue");
     const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$7);
     const _component_floatBall = vue.resolveComponent("floatBall");
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
@@ -3784,7 +3858,7 @@ if (uni.restoreGlobal) {
             vue.createElementVNode("text", { class: "notice-modal__content-text" }, " 亲爱的用户：\\n 通知\\n 因“农链天下”系统升级建设，自2025年10月9日起暂停一周一次的免费赠送积分活动，恢复时间待定。在此之前的赠送积分不影响正常使用，特此通知！ ")
           ]),
           vue.createElementVNode("view", { style: { "margin-bottom": "10rpx", "font-size": "25rpx" } }, [
-            vue.createTextVNode("不再提示"),
+            vue.createTextVNode("不再提示 "),
             vue.createElementVNode("radio", {
               checked: $data.prompt,
               onClick: _cache[1] || (_cache[1] = (...args) => $options.changePrompt && $options.changePrompt(...args)),
@@ -3828,33 +3902,10 @@ if (uni.restoreGlobal) {
           onClick: $options.scan
         }, null, 8, ["onClick"])
       ]),
-      vue.createElementVNode("view", { class: "search-container" }, [
-        vue.createElementVNode("view", { class: "search-bar" }, [
-          vue.createVNode(_component_uni_icons, {
-            type: "search",
-            size: "18",
-            color: "#b2b2b2"
-          }),
-          vue.withDirectives(vue.createElementVNode(
-            "input",
-            {
-              class: "search-input",
-              placeholder: "搜索摊位/商品",
-              "placeholder-class": "placeholder-style",
-              "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => $data.searchParams.title = $event)
-            },
-            null,
-            512
-            /* NEED_PATCH */
-          ), [
-            [vue.vModelText, $data.searchParams.title]
-          ]),
-          vue.createElementVNode("button", {
-            class: "search-btn",
-            onClick: _cache[5] || (_cache[5] = (...args) => _ctx.reloadData && _ctx.reloadData(...args))
-          }, "搜索")
-        ])
-      ]),
+      vue.createVNode(_component_mButtonVue, {
+        onBtn1: $options.settingValue,
+        placeholder: "搜索摊位/商品"
+      }, null, 8, ["onBtn1"]),
       vue.createElementVNode("scroll-view", {
         class: "category-nav",
         "scroll-x": "",
@@ -3918,7 +3969,7 @@ if (uni.restoreGlobal) {
           class: "stall-list",
           "scroll-y": "true",
           "scroll-x": "false",
-          onScrolltolower: _cache[6] || (_cache[6] = (...args) => _ctx.handleScrollToLower && _ctx.handleScrollToLower(...args))
+          onScrolltolower: _cache[4] || (_cache[4] = (...args) => _ctx.handleScrollToLower && _ctx.handleScrollToLower(...args))
         },
         [
           vue.createElementVNode("view", { class: "stall-grid" }, [
@@ -4834,7 +4885,7 @@ if (uni.restoreGlobal) {
     }
     return value instanceof Blob || Object.prototype.toString.call(value) === "[object Blob]";
   };
-  var DEFAULTS = {
+  var DEFAULTS$1 = {
     /**
      * Indicates if output the original image instead of the compressed one
      * when the size of the compressed image is greater than the original one's
@@ -5162,7 +5213,7 @@ if (uni.restoreGlobal) {
       this.file = file;
       this.exif = [];
       this.image = new Image();
-      this.options = _objectSpread2(_objectSpread2({}, DEFAULTS), options);
+      this.options = _objectSpread2(_objectSpread2({}, DEFAULTS$1), options);
       this.aborted = false;
       this.result = null;
       this.init();
@@ -5507,7 +5558,7 @@ if (uni.restoreGlobal) {
     }, {
       key: "setDefaults",
       value: function setDefaults(options) {
-        _extends(DEFAULTS, options);
+        _extends(DEFAULTS$1, options);
       }
     }]);
     return Compressor2;
@@ -6628,7 +6679,7 @@ if (uni.restoreGlobal) {
       })) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_2$3 = /* @__PURE__ */ _export_sfc(_sfc_main$1$, [["render", _sfc_render$1_], ["__scopeId", "data-v-c2f1266a"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-list/components/uni-list/uni-list.vue"]]);
+  const __easycom_2$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1$, [["render", _sfc_render$1_], ["__scopeId", "data-v-c2f1266a"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-list/components/uni-list/uni-list.vue"]]);
   const _sfc_main$1_ = {
     name: "uniCollapseItem",
     props: {
@@ -6992,499 +7043,7 @@ if (uni.restoreGlobal) {
       vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
     ]);
   }
-  const __easycom_2$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1Z, [["render", _sfc_render$1Y], ["__scopeId", "data-v-3f050360"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue"]]);
-  function obj2strClass(obj) {
-    let classess = "";
-    for (let key in obj) {
-      const val = obj[key];
-      if (val) {
-        classess += `${key} `;
-      }
-    }
-    return classess;
-  }
-  function obj2strStyle(obj) {
-    let style = "";
-    for (let key in obj) {
-      const val = obj[key];
-      style += `${key}:${val};`;
-    }
-    return style;
-  }
-  const _sfc_main$1Y = {
-    name: "uni-easyinput",
-    emits: [
-      "click",
-      "iconClick",
-      "update:modelValue",
-      "input",
-      "focus",
-      "blur",
-      "confirm",
-      "clear",
-      "eyes",
-      "change",
-      "keyboardheightchange"
-    ],
-    model: {
-      prop: "modelValue",
-      event: "update:modelValue"
-    },
-    options: {
-      virtualHost: true
-    },
-    inject: {
-      form: {
-        from: "uniForm",
-        default: null
-      },
-      formItem: {
-        from: "uniFormItem",
-        default: null
-      }
-    },
-    props: {
-      name: String,
-      value: [Number, String],
-      modelValue: [Number, String],
-      type: {
-        type: String,
-        default: "text"
-      },
-      clearable: {
-        type: Boolean,
-        default: true
-      },
-      autoHeight: {
-        type: Boolean,
-        default: false
-      },
-      placeholder: {
-        type: String,
-        default: " "
-      },
-      placeholderStyle: String,
-      focus: {
-        type: Boolean,
-        default: false
-      },
-      disabled: {
-        type: Boolean,
-        default: false
-      },
-      maxlength: {
-        type: [Number, String],
-        default: 140
-      },
-      confirmType: {
-        type: String,
-        default: "done"
-      },
-      clearSize: {
-        type: [Number, String],
-        default: 24
-      },
-      inputBorder: {
-        type: Boolean,
-        default: true
-      },
-      prefixIcon: {
-        type: String,
-        default: ""
-      },
-      suffixIcon: {
-        type: String,
-        default: ""
-      },
-      trim: {
-        type: [Boolean, String],
-        default: false
-      },
-      cursorSpacing: {
-        type: Number,
-        default: 0
-      },
-      passwordIcon: {
-        type: Boolean,
-        default: true
-      },
-      adjustPosition: {
-        type: Boolean,
-        default: true
-      },
-      primaryColor: {
-        type: String,
-        default: "#2979ff"
-      },
-      styles: {
-        type: Object,
-        default() {
-          return {
-            color: "#333",
-            backgroundColor: "#fff",
-            disableColor: "#F7F6F6",
-            borderColor: "#e5e5e5"
-          };
-        }
-      },
-      errorMessage: {
-        type: [String, Boolean],
-        default: ""
-      }
-    },
-    data() {
-      return {
-        focused: false,
-        val: "",
-        showMsg: "",
-        border: false,
-        isFirstBorder: false,
-        showClearIcon: false,
-        showPassword: false,
-        focusShow: false,
-        localMsg: "",
-        isEnter: false
-        // 用于判断当前是否是使用回车操作
-      };
-    },
-    computed: {
-      // 输入框内是否有值
-      isVal() {
-        const val = this.val;
-        if (val || val === 0) {
-          return true;
-        }
-        return false;
-      },
-      msg() {
-        return this.localMsg || this.errorMessage;
-      },
-      // 因为uniapp的input组件的maxlength组件必须要数值，这里转为数值，用户可以传入字符串数值
-      inputMaxlength() {
-        return Number(this.maxlength);
-      },
-      // 处理外层样式的style
-      boxStyle() {
-        return `color:${this.inputBorder && this.msg ? "#e43d33" : this.styles.color};`;
-      },
-      // input 内容的类和样式处理
-      inputContentClass() {
-        return obj2strClass({
-          "is-input-border": this.inputBorder,
-          "is-input-error-border": this.inputBorder && this.msg,
-          "is-textarea": this.type === "textarea",
-          "is-disabled": this.disabled,
-          "is-focused": this.focusShow
-        });
-      },
-      inputContentStyle() {
-        const focusColor = this.focusShow ? this.primaryColor : this.styles.borderColor;
-        const borderColor = this.inputBorder && this.msg ? "#dd524d" : focusColor;
-        return obj2strStyle({
-          "border-color": borderColor || "#e5e5e5",
-          "background-color": this.disabled ? this.styles.disableColor : this.styles.backgroundColor
-        });
-      },
-      // input右侧样式
-      inputStyle() {
-        const paddingRight = this.type === "password" || this.clearable || this.prefixIcon ? "" : "10px";
-        return obj2strStyle({
-          "padding-right": paddingRight,
-          "padding-left": this.prefixIcon ? "" : "10px"
-        });
-      }
-    },
-    watch: {
-      value(newVal) {
-        this.val = newVal;
-      },
-      modelValue(newVal) {
-        this.val = newVal;
-      },
-      focus(newVal) {
-        this.$nextTick(() => {
-          this.focused = this.focus;
-          this.focusShow = this.focus;
-        });
-      }
-    },
-    created() {
-      this.init();
-      if (this.form && this.formItem) {
-        this.$watch("formItem.errMsg", (newVal) => {
-          this.localMsg = newVal;
-        });
-      }
-    },
-    mounted() {
-      this.$nextTick(() => {
-        this.focused = this.focus;
-        this.focusShow = this.focus;
-      });
-    },
-    methods: {
-      /**
-       * 初始化变量值
-       */
-      init() {
-        if (this.value || this.value === 0) {
-          this.val = this.value;
-        } else if (this.modelValue || this.modelValue === 0 || this.modelValue === "") {
-          this.val = this.modelValue;
-        } else {
-          this.val = null;
-        }
-      },
-      /**
-       * 点击图标时触发
-       * @param {Object} type
-       */
-      onClickIcon(type) {
-        this.$emit("iconClick", type);
-      },
-      /**
-       * 显示隐藏内容，密码框时生效
-       */
-      onEyes() {
-        this.showPassword = !this.showPassword;
-        this.$emit("eyes", this.showPassword);
-      },
-      /**
-       * 输入时触发
-       * @param {Object} event
-       */
-      onInput(event) {
-        let value = event.detail.value;
-        if (this.trim) {
-          if (typeof this.trim === "boolean" && this.trim) {
-            value = this.trimStr(value);
-          }
-          if (typeof this.trim === "string") {
-            value = this.trimStr(value, this.trim);
-          }
-        }
-        if (this.errMsg)
-          this.errMsg = "";
-        this.val = value;
-        this.$emit("input", value);
-        this.$emit("update:modelValue", value);
-      },
-      /**
-       * 外部调用方法
-       * 获取焦点时触发
-       * @param {Object} event
-       */
-      onFocus() {
-        this.$nextTick(() => {
-          this.focused = true;
-        });
-        this.$emit("focus", null);
-      },
-      _Focus(event) {
-        this.focusShow = true;
-        this.$emit("focus", event);
-      },
-      /**
-       * 外部调用方法
-       * 失去焦点时触发
-       * @param {Object} event
-       */
-      onBlur() {
-        this.focused = false;
-        this.$emit("blur", null);
-      },
-      _Blur(event) {
-        event.detail.value;
-        this.focusShow = false;
-        this.$emit("blur", event);
-        if (this.isEnter === false) {
-          this.$emit("change", this.val);
-        }
-        if (this.form && this.formItem) {
-          const { validateTrigger } = this.form;
-          if (validateTrigger === "blur") {
-            this.formItem.onFieldChange();
-          }
-        }
-      },
-      /**
-       * 按下键盘的发送键
-       * @param {Object} e
-       */
-      onConfirm(e2) {
-        this.$emit("confirm", this.val);
-        this.isEnter = true;
-        this.$emit("change", this.val);
-        this.$nextTick(() => {
-          this.isEnter = false;
-        });
-      },
-      /**
-       * 清理内容
-       * @param {Object} event
-       */
-      onClear(event) {
-        this.val = "";
-        this.$emit("input", "");
-        this.$emit("update:modelValue", "");
-        this.$emit("clear");
-      },
-      /**
-       * 键盘高度发生变化的时候触发此事件
-       * 兼容性：微信小程序2.7.0+、App 3.1.0+
-       * @param {Object} event
-       */
-      onkeyboardheightchange(event) {
-        this.$emit("keyboardheightchange", event);
-      },
-      /**
-       * 去除空格
-       */
-      trimStr(str, pos = "both") {
-        if (pos === "both") {
-          return str.trim();
-        } else if (pos === "left") {
-          return str.trimLeft();
-        } else if (pos === "right") {
-          return str.trimRight();
-        } else if (pos === "start") {
-          return str.trimStart();
-        } else if (pos === "end") {
-          return str.trimEnd();
-        } else if (pos === "all") {
-          return str.replace(/\s+/g, "");
-        } else if (pos === "none") {
-          return str;
-        }
-        return str;
-      }
-    }
-  };
-  function _sfc_render$1X(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    return vue.openBlock(), vue.createElementBlock(
-      "view",
-      {
-        class: vue.normalizeClass(["uni-easyinput", { "uni-easyinput-error": $options.msg }]),
-        style: vue.normalizeStyle($options.boxStyle)
-      },
-      [
-        vue.createElementVNode(
-          "view",
-          {
-            class: vue.normalizeClass(["uni-easyinput__content", $options.inputContentClass]),
-            style: vue.normalizeStyle($options.inputContentStyle)
-          },
-          [
-            $props.prefixIcon ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
-              key: 0,
-              class: "content-clear-icon",
-              type: $props.prefixIcon,
-              color: "#c0c4cc",
-              onClick: _cache[0] || (_cache[0] = ($event) => $options.onClickIcon("prefix")),
-              size: "22"
-            }, null, 8, ["type"])) : vue.createCommentVNode("v-if", true),
-            vue.renderSlot(_ctx.$slots, "left", {}, void 0, true),
-            $props.type === "textarea" ? (vue.openBlock(), vue.createElementBlock("textarea", {
-              key: 1,
-              class: vue.normalizeClass(["uni-easyinput__content-textarea", { "input-padding": $props.inputBorder }]),
-              name: $props.name,
-              value: $data.val,
-              placeholder: $props.placeholder,
-              placeholderStyle: $props.placeholderStyle,
-              disabled: $props.disabled,
-              "placeholder-class": "uni-easyinput__placeholder-class",
-              maxlength: $options.inputMaxlength,
-              focus: $data.focused,
-              autoHeight: $props.autoHeight,
-              "cursor-spacing": $props.cursorSpacing,
-              "adjust-position": $props.adjustPosition,
-              onInput: _cache[1] || (_cache[1] = (...args) => $options.onInput && $options.onInput(...args)),
-              onBlur: _cache[2] || (_cache[2] = (...args) => $options._Blur && $options._Blur(...args)),
-              onFocus: _cache[3] || (_cache[3] = (...args) => $options._Focus && $options._Focus(...args)),
-              onConfirm: _cache[4] || (_cache[4] = (...args) => $options.onConfirm && $options.onConfirm(...args)),
-              onKeyboardheightchange: _cache[5] || (_cache[5] = (...args) => $options.onkeyboardheightchange && $options.onkeyboardheightchange(...args))
-            }, null, 42, ["name", "value", "placeholder", "placeholderStyle", "disabled", "maxlength", "focus", "autoHeight", "cursor-spacing", "adjust-position"])) : (vue.openBlock(), vue.createElementBlock("input", {
-              key: 2,
-              type: $props.type === "password" ? "text" : $props.type,
-              class: "uni-easyinput__content-input",
-              style: vue.normalizeStyle($options.inputStyle),
-              name: $props.name,
-              value: $data.val,
-              password: !$data.showPassword && $props.type === "password",
-              placeholder: $props.placeholder,
-              placeholderStyle: $props.placeholderStyle,
-              "placeholder-class": "uni-easyinput__placeholder-class",
-              disabled: $props.disabled,
-              maxlength: $options.inputMaxlength,
-              focus: $data.focused,
-              confirmType: $props.confirmType,
-              "cursor-spacing": $props.cursorSpacing,
-              "adjust-position": $props.adjustPosition,
-              onFocus: _cache[6] || (_cache[6] = (...args) => $options._Focus && $options._Focus(...args)),
-              onBlur: _cache[7] || (_cache[7] = (...args) => $options._Blur && $options._Blur(...args)),
-              onInput: _cache[8] || (_cache[8] = (...args) => $options.onInput && $options.onInput(...args)),
-              onConfirm: _cache[9] || (_cache[9] = (...args) => $options.onConfirm && $options.onConfirm(...args)),
-              onKeyboardheightchange: _cache[10] || (_cache[10] = (...args) => $options.onkeyboardheightchange && $options.onkeyboardheightchange(...args))
-            }, null, 44, ["type", "name", "value", "password", "placeholder", "placeholderStyle", "disabled", "maxlength", "focus", "confirmType", "cursor-spacing", "adjust-position"])),
-            $props.type === "password" && $props.passwordIcon ? (vue.openBlock(), vue.createElementBlock(
-              vue.Fragment,
-              { key: 3 },
-              [
-                $options.isVal ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
-                  key: 0,
-                  class: vue.normalizeClass(["content-clear-icon", { "is-textarea-icon": $props.type === "textarea" }]),
-                  type: $data.showPassword ? "eye-slash-filled" : "eye-filled",
-                  size: 22,
-                  color: $data.focusShow ? $props.primaryColor : "#c0c4cc",
-                  onClick: $options.onEyes
-                }, null, 8, ["class", "type", "color", "onClick"])) : vue.createCommentVNode("v-if", true)
-              ],
-              64
-              /* STABLE_FRAGMENT */
-            )) : vue.createCommentVNode("v-if", true),
-            $props.suffixIcon ? (vue.openBlock(), vue.createElementBlock(
-              vue.Fragment,
-              { key: 4 },
-              [
-                $props.suffixIcon ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
-                  key: 0,
-                  class: "content-clear-icon",
-                  type: $props.suffixIcon,
-                  color: "#c0c4cc",
-                  onClick: _cache[11] || (_cache[11] = ($event) => $options.onClickIcon("suffix")),
-                  size: "22"
-                }, null, 8, ["type"])) : vue.createCommentVNode("v-if", true)
-              ],
-              64
-              /* STABLE_FRAGMENT */
-            )) : (vue.openBlock(), vue.createElementBlock(
-              vue.Fragment,
-              { key: 5 },
-              [
-                $props.clearable && $options.isVal && !$props.disabled && $props.type !== "textarea" ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
-                  key: 0,
-                  class: vue.normalizeClass(["content-clear-icon", { "is-textarea-icon": $props.type === "textarea" }]),
-                  type: "clear",
-                  size: $props.clearSize,
-                  color: $options.msg ? "#dd524d" : $data.focusShow ? $props.primaryColor : "#c0c4cc",
-                  onClick: $options.onClear
-                }, null, 8, ["class", "size", "color", "onClick"])) : vue.createCommentVNode("v-if", true)
-              ],
-              64
-              /* STABLE_FRAGMENT */
-            )),
-            vue.renderSlot(_ctx.$slots, "right", {}, void 0, true)
-          ],
-          6
-          /* CLASS, STYLE */
-        )
-      ],
-      6
-      /* CLASS, STYLE */
-    );
-  }
-  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1Y, [["render", _sfc_render$1X], ["__scopeId", "data-v-09fd5285"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
+  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1Z, [["render", _sfc_render$1Y], ["__scopeId", "data-v-3f050360"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue"]]);
   var isVue2 = false;
   function set(target, key, val) {
     if (Array.isArray(target)) {
@@ -8927,147 +8486,2522 @@ This will fail in production.`);
     useStore.$id = id;
     return useStore;
   }
-  var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
-  function getDefaultExportFromCjs(x) {
-    return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
+  var lookup = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    62,
+    0,
+    62,
+    0,
+    63,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    0,
+    0,
+    0,
+    0,
+    63,
+    0,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51
+  ];
+  function base64Decode(source, target) {
+    var sourceLength = source.length;
+    var paddingLength = source[sourceLength - 2] === "=" ? 2 : source[sourceLength - 1] === "=" ? 1 : 0;
+    var tmp;
+    var byteIndex = 0;
+    var baseLength = sourceLength - paddingLength & 4294967292;
+    for (var i2 = 0; i2 < baseLength; i2 += 4) {
+      tmp = lookup[source.charCodeAt(i2)] << 18 | lookup[source.charCodeAt(i2 + 1)] << 12 | lookup[source.charCodeAt(i2 + 2)] << 6 | lookup[source.charCodeAt(i2 + 3)];
+      target[byteIndex++] = tmp >> 16 & 255;
+      target[byteIndex++] = tmp >> 8 & 255;
+      target[byteIndex++] = tmp & 255;
+    }
+    if (paddingLength === 1) {
+      tmp = lookup[source.charCodeAt(i2)] << 10 | lookup[source.charCodeAt(i2 + 1)] << 4 | lookup[source.charCodeAt(i2 + 2)] >> 2;
+      target[byteIndex++] = tmp >> 8 & 255;
+      target[byteIndex++] = tmp & 255;
+    }
+    if (paddingLength === 2) {
+      tmp = lookup[source.charCodeAt(i2)] << 2 | lookup[source.charCodeAt(i2 + 1)] >> 4;
+      target[byteIndex++] = tmp & 255;
+    }
   }
-  var decimal = { exports: {} };
+  const crypto = {
+    getRandomValues(arr) {
+      if (!(arr instanceof Int8Array || arr instanceof Uint8Array || arr instanceof Int16Array || arr instanceof Uint16Array || arr instanceof Int32Array || arr instanceof Uint32Array || arr instanceof Uint8ClampedArray)) {
+        throw new Error("Expected an integer array");
+      }
+      if (arr.byteLength > 65536) {
+        throw new Error("Can only request a maximum of 65536 bytes");
+      }
+      var crypto2 = requireNativePlugin("DCloud-Crypto");
+      base64Decode(crypto2.getRandomValues(arr.byteLength), new Uint8Array(
+        arr.buffer,
+        arr.byteOffset,
+        arr.byteLength
+      ));
+      return arr;
+    }
+  };
   /*!
-   * decimal-js: Decimal Javascript Library v0.0.2
-   * https://github.com/shinuza/decimal-js/
-  */
-  (function(module) {
-    (function() {
-      var ROOT = this;
-      var DECIMAL_SEPARATOR = ".";
-      var Decimal2 = function(num) {
-        if (this.constructor != Decimal2) {
-          return new Decimal2(num);
+   *  decimal.js v10.4.3
+   *  An arbitrary-precision Decimal type for JavaScript.
+   *  https://github.com/MikeMcl/decimal.js
+   *  Copyright (c) 2022 Michael Mclaughlin <M8ch88l@gmail.com>
+   *  MIT Licence
+   */
+  var EXP_LIMIT = 9e15, MAX_DIGITS = 1e9, NUMERALS = "0123456789abcdef", LN10 = "2.3025850929940456840179914546843642076011014886287729760333279009675726096773524802359972050895982983419677840422862486334095254650828067566662873690987816894829072083255546808437998948262331985283935053089653777326288461633662222876982198867465436674744042432743651550489343149393914796194044002221051017141748003688084012647080685567743216228355220114804663715659121373450747856947683463616792101806445070648000277502684916746550586856935673420670581136429224554405758925724208241314695689016758940256776311356919292033376587141660230105703089634572075440370847469940168269282808481184289314848524948644871927809676271275775397027668605952496716674183485704422507197965004714951050492214776567636938662976979522110718264549734772662425709429322582798502585509785265383207606726317164309505995087807523710333101197857547331541421808427543863591778117054309827482385045648019095610299291824318237525357709750539565187697510374970888692180205189339507238539205144634197265287286965110862571492198849978748873771345686209167058", PI = "3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113305305488204665213841469519415116094330572703657595919530921861173819326117931051185480744623799627495673518857527248912279381830119491298336733624406566430860213949463952247371907021798609437027705392171762931767523846748184676694051320005681271452635608277857713427577896091736371787214684409012249534301465495853710507922796892589235420199561121290219608640344181598136297747713099605187072113499999983729780499510597317328160963185950244594553469083026425223082533446850352619311881710100031378387528865875332083814206171776691473035982534904287554687311595628638823537875937519577818577805321712268066130019278766111959092164201989380952572010654858632789", DEFAULTS = {
+    // These values must be integers within the stated ranges (inclusive).
+    // Most of these values can be changed at run-time using the `Decimal.config` method.
+    // The maximum number of significant digits of the result of a calculation or base conversion.
+    // E.g. `Decimal.config({ precision: 20 });`
+    precision: 20,
+    // 1 to MAX_DIGITS
+    // The rounding mode used when rounding to `precision`.
+    //
+    // ROUND_UP         0 Away from zero.
+    // ROUND_DOWN       1 Towards zero.
+    // ROUND_CEIL       2 Towards +Infinity.
+    // ROUND_FLOOR      3 Towards -Infinity.
+    // ROUND_HALF_UP    4 Towards nearest neighbour. If equidistant, up.
+    // ROUND_HALF_DOWN  5 Towards nearest neighbour. If equidistant, down.
+    // ROUND_HALF_EVEN  6 Towards nearest neighbour. If equidistant, towards even neighbour.
+    // ROUND_HALF_CEIL  7 Towards nearest neighbour. If equidistant, towards +Infinity.
+    // ROUND_HALF_FLOOR 8 Towards nearest neighbour. If equidistant, towards -Infinity.
+    //
+    // E.g.
+    // `Decimal.rounding = 4;`
+    // `Decimal.rounding = Decimal.ROUND_HALF_UP;`
+    rounding: 4,
+    // 0 to 8
+    // The modulo mode used when calculating the modulus: a mod n.
+    // The quotient (q = a / n) is calculated according to the corresponding rounding mode.
+    // The remainder (r) is calculated as: r = a - n * q.
+    //
+    // UP         0 The remainder is positive if the dividend is negative, else is negative.
+    // DOWN       1 The remainder has the same sign as the dividend (JavaScript %).
+    // FLOOR      3 The remainder has the same sign as the divisor (Python %).
+    // HALF_EVEN  6 The IEEE 754 remainder function.
+    // EUCLID     9 Euclidian division. q = sign(n) * floor(a / abs(n)). Always positive.
+    //
+    // Truncated division (1), floored division (3), the IEEE 754 remainder (6), and Euclidian
+    // division (9) are commonly used for the modulus operation. The other rounding modes can also
+    // be used, but they may not give useful results.
+    modulo: 1,
+    // 0 to 9
+    // The exponent value at and beneath which `toString` returns exponential notation.
+    // JavaScript numbers: -7
+    toExpNeg: -7,
+    // 0 to -EXP_LIMIT
+    // The exponent value at and above which `toString` returns exponential notation.
+    // JavaScript numbers: 21
+    toExpPos: 21,
+    // 0 to EXP_LIMIT
+    // The minimum exponent value, beneath which underflow to zero occurs.
+    // JavaScript numbers: -324  (5e-324)
+    minE: -EXP_LIMIT,
+    // -1 to -EXP_LIMIT
+    // The maximum exponent value, above which overflow to Infinity occurs.
+    // JavaScript numbers: 308  (1.7976931348623157e+308)
+    maxE: EXP_LIMIT,
+    // 1 to EXP_LIMIT
+    // Whether to use cryptographically-secure random number generation, if available.
+    crypto: false
+    // true/false
+  }, inexact, quadrant, external = true, decimalError = "[DecimalError] ", invalidArgument = decimalError + "Invalid argument: ", precisionLimitExceeded = decimalError + "Precision limit exceeded", cryptoUnavailable = decimalError + "crypto unavailable", tag = "[object Decimal]", mathfloor = Math.floor, mathpow = Math.pow, isBinary = /^0b([01]+(\.[01]*)?|\.[01]+)(p[+-]?\d+)?$/i, isHex = /^0x([0-9a-f]+(\.[0-9a-f]*)?|\.[0-9a-f]+)(p[+-]?\d+)?$/i, isOctal = /^0o([0-7]+(\.[0-7]*)?|\.[0-7]+)(p[+-]?\d+)?$/i, isDecimal = /^(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i, BASE = 1e7, LOG_BASE = 7, MAX_SAFE_INTEGER = 9007199254740991, LN10_PRECISION = LN10.length - 1, PI_PRECISION = PI.length - 1, P$1 = { toStringTag: tag };
+  P$1.absoluteValue = P$1.abs = function() {
+    var x = new this.constructor(this);
+    if (x.s < 0)
+      x.s = 1;
+    return finalise(x);
+  };
+  P$1.ceil = function() {
+    return finalise(new this.constructor(this), this.e + 1, 2);
+  };
+  P$1.clampedTo = P$1.clamp = function(min2, max2) {
+    var k, x = this, Ctor = x.constructor;
+    min2 = new Ctor(min2);
+    max2 = new Ctor(max2);
+    if (!min2.s || !max2.s)
+      return new Ctor(NaN);
+    if (min2.gt(max2))
+      throw Error(invalidArgument + max2);
+    k = x.cmp(min2);
+    return k < 0 ? min2 : x.cmp(max2) > 0 ? max2 : new Ctor(x);
+  };
+  P$1.comparedTo = P$1.cmp = function(y2) {
+    var i2, j2, xdL, ydL, x = this, xd = x.d, yd = (y2 = new x.constructor(y2)).d, xs2 = x.s, ys2 = y2.s;
+    if (!xd || !yd) {
+      return !xs2 || !ys2 ? NaN : xs2 !== ys2 ? xs2 : xd === yd ? 0 : !xd ^ xs2 < 0 ? 1 : -1;
+    }
+    if (!xd[0] || !yd[0])
+      return xd[0] ? xs2 : yd[0] ? -ys2 : 0;
+    if (xs2 !== ys2)
+      return xs2;
+    if (x.e !== y2.e)
+      return x.e > y2.e ^ xs2 < 0 ? 1 : -1;
+    xdL = xd.length;
+    ydL = yd.length;
+    for (i2 = 0, j2 = xdL < ydL ? xdL : ydL; i2 < j2; ++i2) {
+      if (xd[i2] !== yd[i2])
+        return xd[i2] > yd[i2] ^ xs2 < 0 ? 1 : -1;
+    }
+    return xdL === ydL ? 0 : xdL > ydL ^ xs2 < 0 ? 1 : -1;
+  };
+  P$1.cosine = P$1.cos = function() {
+    var pr, rm, x = this, Ctor = x.constructor;
+    if (!x.d)
+      return new Ctor(NaN);
+    if (!x.d[0])
+      return new Ctor(1);
+    pr = Ctor.precision;
+    rm = Ctor.rounding;
+    Ctor.precision = pr + Math.max(x.e, x.sd()) + LOG_BASE;
+    Ctor.rounding = 1;
+    x = cosine(Ctor, toLessThanHalfPi(Ctor, x));
+    Ctor.precision = pr;
+    Ctor.rounding = rm;
+    return finalise(quadrant == 2 || quadrant == 3 ? x.neg() : x, pr, rm, true);
+  };
+  P$1.cubeRoot = P$1.cbrt = function() {
+    var e2, m2, n2, r2, rep, s2, sd, t2, t3, t3plusx, x = this, Ctor = x.constructor;
+    if (!x.isFinite() || x.isZero())
+      return new Ctor(x);
+    external = false;
+    s2 = x.s * mathpow(x.s * x, 1 / 3);
+    if (!s2 || Math.abs(s2) == 1 / 0) {
+      n2 = digitsToString(x.d);
+      e2 = x.e;
+      if (s2 = (e2 - n2.length + 1) % 3)
+        n2 += s2 == 1 || s2 == -2 ? "0" : "00";
+      s2 = mathpow(n2, 1 / 3);
+      e2 = mathfloor((e2 + 1) / 3) - (e2 % 3 == (e2 < 0 ? -1 : 2));
+      if (s2 == 1 / 0) {
+        n2 = "5e" + e2;
+      } else {
+        n2 = s2.toExponential();
+        n2 = n2.slice(0, n2.indexOf("e") + 1) + e2;
+      }
+      r2 = new Ctor(n2);
+      r2.s = x.s;
+    } else {
+      r2 = new Ctor(s2.toString());
+    }
+    sd = (e2 = Ctor.precision) + 3;
+    for (; ; ) {
+      t2 = r2;
+      t3 = t2.times(t2).times(t2);
+      t3plusx = t3.plus(x);
+      r2 = divide$1(t3plusx.plus(x).times(t2), t3plusx.plus(t3), sd + 2, 1);
+      if (digitsToString(t2.d).slice(0, sd) === (n2 = digitsToString(r2.d)).slice(0, sd)) {
+        n2 = n2.slice(sd - 3, sd + 1);
+        if (n2 == "9999" || !rep && n2 == "4999") {
+          if (!rep) {
+            finalise(t2, e2 + 1, 0);
+            if (t2.times(t2).times(t2).eq(x)) {
+              r2 = t2;
+              break;
+            }
+          }
+          sd += 4;
+          rep = 1;
+        } else {
+          if (!+n2 || !+n2.slice(1) && n2.charAt(0) == "5") {
+            finalise(r2, e2 + 1, 1);
+            m2 = !r2.times(r2).times(r2).eq(x);
+          }
+          break;
         }
-        if (num instanceof Decimal2) {
-          return num;
+      }
+    }
+    external = true;
+    return finalise(r2, e2, Ctor.rounding, m2);
+  };
+  P$1.decimalPlaces = P$1.dp = function() {
+    var w2, d2 = this.d, n2 = NaN;
+    if (d2) {
+      w2 = d2.length - 1;
+      n2 = (w2 - mathfloor(this.e / LOG_BASE)) * LOG_BASE;
+      w2 = d2[w2];
+      if (w2)
+        for (; w2 % 10 == 0; w2 /= 10)
+          n2--;
+      if (n2 < 0)
+        n2 = 0;
+    }
+    return n2;
+  };
+  P$1.dividedBy = P$1.div = function(y2) {
+    return divide$1(this, new this.constructor(y2));
+  };
+  P$1.dividedToIntegerBy = P$1.divToInt = function(y2) {
+    var x = this, Ctor = x.constructor;
+    return finalise(divide$1(x, new Ctor(y2), 0, 1, 1), Ctor.precision, Ctor.rounding);
+  };
+  P$1.equals = P$1.eq = function(y2) {
+    return this.cmp(y2) === 0;
+  };
+  P$1.floor = function() {
+    return finalise(new this.constructor(this), this.e + 1, 3);
+  };
+  P$1.greaterThan = P$1.gt = function(y2) {
+    return this.cmp(y2) > 0;
+  };
+  P$1.greaterThanOrEqualTo = P$1.gte = function(y2) {
+    var k = this.cmp(y2);
+    return k == 1 || k === 0;
+  };
+  P$1.hyperbolicCosine = P$1.cosh = function() {
+    var k, n2, pr, rm, len, x = this, Ctor = x.constructor, one = new Ctor(1);
+    if (!x.isFinite())
+      return new Ctor(x.s ? 1 / 0 : NaN);
+    if (x.isZero())
+      return one;
+    pr = Ctor.precision;
+    rm = Ctor.rounding;
+    Ctor.precision = pr + Math.max(x.e, x.sd()) + 4;
+    Ctor.rounding = 1;
+    len = x.d.length;
+    if (len < 32) {
+      k = Math.ceil(len / 3);
+      n2 = (1 / tinyPow(4, k)).toString();
+    } else {
+      k = 16;
+      n2 = "2.3283064365386962890625e-10";
+    }
+    x = taylorSeries(Ctor, 1, x.times(n2), new Ctor(1), true);
+    var cosh2_x, i2 = k, d8 = new Ctor(8);
+    for (; i2--; ) {
+      cosh2_x = x.times(x);
+      x = one.minus(cosh2_x.times(d8.minus(cosh2_x.times(d8))));
+    }
+    return finalise(x, Ctor.precision = pr, Ctor.rounding = rm, true);
+  };
+  P$1.hyperbolicSine = P$1.sinh = function() {
+    var k, pr, rm, len, x = this, Ctor = x.constructor;
+    if (!x.isFinite() || x.isZero())
+      return new Ctor(x);
+    pr = Ctor.precision;
+    rm = Ctor.rounding;
+    Ctor.precision = pr + Math.max(x.e, x.sd()) + 4;
+    Ctor.rounding = 1;
+    len = x.d.length;
+    if (len < 3) {
+      x = taylorSeries(Ctor, 2, x, x, true);
+    } else {
+      k = 1.4 * Math.sqrt(len);
+      k = k > 16 ? 16 : k | 0;
+      x = x.times(1 / tinyPow(5, k));
+      x = taylorSeries(Ctor, 2, x, x, true);
+      var sinh2_x, d5 = new Ctor(5), d16 = new Ctor(16), d20 = new Ctor(20);
+      for (; k--; ) {
+        sinh2_x = x.times(x);
+        x = x.times(d5.plus(sinh2_x.times(d16.times(sinh2_x).plus(d20))));
+      }
+    }
+    Ctor.precision = pr;
+    Ctor.rounding = rm;
+    return finalise(x, pr, rm, true);
+  };
+  P$1.hyperbolicTangent = P$1.tanh = function() {
+    var pr, rm, x = this, Ctor = x.constructor;
+    if (!x.isFinite())
+      return new Ctor(x.s);
+    if (x.isZero())
+      return new Ctor(x);
+    pr = Ctor.precision;
+    rm = Ctor.rounding;
+    Ctor.precision = pr + 7;
+    Ctor.rounding = 1;
+    return divide$1(x.sinh(), x.cosh(), Ctor.precision = pr, Ctor.rounding = rm);
+  };
+  P$1.inverseCosine = P$1.acos = function() {
+    var halfPi, x = this, Ctor = x.constructor, k = x.abs().cmp(1), pr = Ctor.precision, rm = Ctor.rounding;
+    if (k !== -1) {
+      return k === 0 ? x.isNeg() ? getPi(Ctor, pr, rm) : new Ctor(0) : new Ctor(NaN);
+    }
+    if (x.isZero())
+      return getPi(Ctor, pr + 4, rm).times(0.5);
+    Ctor.precision = pr + 6;
+    Ctor.rounding = 1;
+    x = x.asin();
+    halfPi = getPi(Ctor, pr + 4, rm).times(0.5);
+    Ctor.precision = pr;
+    Ctor.rounding = rm;
+    return halfPi.minus(x);
+  };
+  P$1.inverseHyperbolicCosine = P$1.acosh = function() {
+    var pr, rm, x = this, Ctor = x.constructor;
+    if (x.lte(1))
+      return new Ctor(x.eq(1) ? 0 : NaN);
+    if (!x.isFinite())
+      return new Ctor(x);
+    pr = Ctor.precision;
+    rm = Ctor.rounding;
+    Ctor.precision = pr + Math.max(Math.abs(x.e), x.sd()) + 4;
+    Ctor.rounding = 1;
+    external = false;
+    x = x.times(x).minus(1).sqrt().plus(x);
+    external = true;
+    Ctor.precision = pr;
+    Ctor.rounding = rm;
+    return x.ln();
+  };
+  P$1.inverseHyperbolicSine = P$1.asinh = function() {
+    var pr, rm, x = this, Ctor = x.constructor;
+    if (!x.isFinite() || x.isZero())
+      return new Ctor(x);
+    pr = Ctor.precision;
+    rm = Ctor.rounding;
+    Ctor.precision = pr + 2 * Math.max(Math.abs(x.e), x.sd()) + 6;
+    Ctor.rounding = 1;
+    external = false;
+    x = x.times(x).plus(1).sqrt().plus(x);
+    external = true;
+    Ctor.precision = pr;
+    Ctor.rounding = rm;
+    return x.ln();
+  };
+  P$1.inverseHyperbolicTangent = P$1.atanh = function() {
+    var pr, rm, wpr, xsd, x = this, Ctor = x.constructor;
+    if (!x.isFinite())
+      return new Ctor(NaN);
+    if (x.e >= 0)
+      return new Ctor(x.abs().eq(1) ? x.s / 0 : x.isZero() ? x : NaN);
+    pr = Ctor.precision;
+    rm = Ctor.rounding;
+    xsd = x.sd();
+    if (Math.max(xsd, pr) < 2 * -x.e - 1)
+      return finalise(new Ctor(x), pr, rm, true);
+    Ctor.precision = wpr = xsd - x.e;
+    x = divide$1(x.plus(1), new Ctor(1).minus(x), wpr + pr, 1);
+    Ctor.precision = pr + 4;
+    Ctor.rounding = 1;
+    x = x.ln();
+    Ctor.precision = pr;
+    Ctor.rounding = rm;
+    return x.times(0.5);
+  };
+  P$1.inverseSine = P$1.asin = function() {
+    var halfPi, k, pr, rm, x = this, Ctor = x.constructor;
+    if (x.isZero())
+      return new Ctor(x);
+    k = x.abs().cmp(1);
+    pr = Ctor.precision;
+    rm = Ctor.rounding;
+    if (k !== -1) {
+      if (k === 0) {
+        halfPi = getPi(Ctor, pr + 4, rm).times(0.5);
+        halfPi.s = x.s;
+        return halfPi;
+      }
+      return new Ctor(NaN);
+    }
+    Ctor.precision = pr + 6;
+    Ctor.rounding = 1;
+    x = x.div(new Ctor(1).minus(x.times(x)).sqrt().plus(1)).atan();
+    Ctor.precision = pr;
+    Ctor.rounding = rm;
+    return x.times(2);
+  };
+  P$1.inverseTangent = P$1.atan = function() {
+    var i2, j2, k, n2, px, t2, r2, wpr, x2, x = this, Ctor = x.constructor, pr = Ctor.precision, rm = Ctor.rounding;
+    if (!x.isFinite()) {
+      if (!x.s)
+        return new Ctor(NaN);
+      if (pr + 4 <= PI_PRECISION) {
+        r2 = getPi(Ctor, pr + 4, rm).times(0.5);
+        r2.s = x.s;
+        return r2;
+      }
+    } else if (x.isZero()) {
+      return new Ctor(x);
+    } else if (x.abs().eq(1) && pr + 4 <= PI_PRECISION) {
+      r2 = getPi(Ctor, pr + 4, rm).times(0.25);
+      r2.s = x.s;
+      return r2;
+    }
+    Ctor.precision = wpr = pr + 10;
+    Ctor.rounding = 1;
+    k = Math.min(28, wpr / LOG_BASE + 2 | 0);
+    for (i2 = k; i2; --i2)
+      x = x.div(x.times(x).plus(1).sqrt().plus(1));
+    external = false;
+    j2 = Math.ceil(wpr / LOG_BASE);
+    n2 = 1;
+    x2 = x.times(x);
+    r2 = new Ctor(x);
+    px = x;
+    for (; i2 !== -1; ) {
+      px = px.times(x2);
+      t2 = r2.minus(px.div(n2 += 2));
+      px = px.times(x2);
+      r2 = t2.plus(px.div(n2 += 2));
+      if (r2.d[j2] !== void 0)
+        for (i2 = j2; r2.d[i2] === t2.d[i2] && i2--; )
+          ;
+    }
+    if (k)
+      r2 = r2.times(2 << k - 1);
+    external = true;
+    return finalise(r2, Ctor.precision = pr, Ctor.rounding = rm, true);
+  };
+  P$1.isFinite = function() {
+    return !!this.d;
+  };
+  P$1.isInteger = P$1.isInt = function() {
+    return !!this.d && mathfloor(this.e / LOG_BASE) > this.d.length - 2;
+  };
+  P$1.isNaN = function() {
+    return !this.s;
+  };
+  P$1.isNegative = P$1.isNeg = function() {
+    return this.s < 0;
+  };
+  P$1.isPositive = P$1.isPos = function() {
+    return this.s > 0;
+  };
+  P$1.isZero = function() {
+    return !!this.d && this.d[0] === 0;
+  };
+  P$1.lessThan = P$1.lt = function(y2) {
+    return this.cmp(y2) < 0;
+  };
+  P$1.lessThanOrEqualTo = P$1.lte = function(y2) {
+    return this.cmp(y2) < 1;
+  };
+  P$1.logarithm = P$1.log = function(base) {
+    var isBase10, d2, denominator, k, inf, num, sd, r2, arg = this, Ctor = arg.constructor, pr = Ctor.precision, rm = Ctor.rounding, guard = 5;
+    if (base == null) {
+      base = new Ctor(10);
+      isBase10 = true;
+    } else {
+      base = new Ctor(base);
+      d2 = base.d;
+      if (base.s < 0 || !d2 || !d2[0] || base.eq(1))
+        return new Ctor(NaN);
+      isBase10 = base.eq(10);
+    }
+    d2 = arg.d;
+    if (arg.s < 0 || !d2 || !d2[0] || arg.eq(1)) {
+      return new Ctor(d2 && !d2[0] ? -1 / 0 : arg.s != 1 ? NaN : d2 ? 0 : 1 / 0);
+    }
+    if (isBase10) {
+      if (d2.length > 1) {
+        inf = true;
+      } else {
+        for (k = d2[0]; k % 10 === 0; )
+          k /= 10;
+        inf = k !== 1;
+      }
+    }
+    external = false;
+    sd = pr + guard;
+    num = naturalLogarithm(arg, sd);
+    denominator = isBase10 ? getLn10(Ctor, sd + 10) : naturalLogarithm(base, sd);
+    r2 = divide$1(num, denominator, sd, 1);
+    if (checkRoundingDigits(r2.d, k = pr, rm)) {
+      do {
+        sd += 10;
+        num = naturalLogarithm(arg, sd);
+        denominator = isBase10 ? getLn10(Ctor, sd + 10) : naturalLogarithm(base, sd);
+        r2 = divide$1(num, denominator, sd, 1);
+        if (!inf) {
+          if (+digitsToString(r2.d).slice(k + 1, k + 15) + 1 == 1e14) {
+            r2 = finalise(r2, pr + 1, 0);
+          }
+          break;
         }
-        this.internal = String(num);
-        this.as_int = as_integer(this.internal);
-        this.add = function(target) {
-          var operands = [this, new Decimal2(target)];
-          operands.sort(function(x2, y3) {
-            return x2.as_int.exp - y3.as_int.exp;
-          });
-          var smallest = operands[0].as_int.exp;
-          var biggest = operands[1].as_int.exp;
-          var x = Number(format(operands[1].as_int.value, biggest - smallest));
-          var y2 = Number(operands[0].as_int.value);
-          var result = String(x + y2);
-          return Decimal2(format(result, smallest));
-        };
-        this.sub = function(target) {
-          return Decimal2(this.add(target * -1));
-        };
-        this.mul = function(target) {
-          target = new Decimal2(target);
-          var result = String(this.as_int.value * target.as_int.value);
-          var exp = this.as_int.exp + target.as_int.exp;
-          return Decimal2(format(result, exp));
-        };
-        this.div = function(target) {
-          target = new Decimal2(target);
-          var smallest = Math.min(this.as_int.exp, target.as_int.exp);
-          var x = Decimal2.mul(Math.pow(10, Math.abs(smallest)), this);
-          var y2 = Decimal2.mul(Math.pow(10, Math.abs(smallest)), target);
-          return Decimal2(x / y2);
-        };
-        this.toString = function() {
-          return this.internal;
-        };
-        this.toNumber = function() {
-          return Number(this.internal);
-        };
-      };
-      var as_integer = function(number2) {
-        number2 = String(number2);
-        var value, exp, tokens = number2.split(DECIMAL_SEPARATOR), integer = tokens[0], fractional = tokens[1];
-        if (!fractional) {
-          var trailing_zeros = integer.match(/0+$/);
-          if (trailing_zeros) {
-            var length = trailing_zeros[0].length;
-            value = integer.substr(0, integer.length - length);
-            exp = length;
+      } while (checkRoundingDigits(r2.d, k += 10, rm));
+    }
+    external = true;
+    return finalise(r2, pr, rm);
+  };
+  P$1.minus = P$1.sub = function(y2) {
+    var d2, e2, i2, j2, k, len, pr, rm, xd, xe2, xLTy, yd, x = this, Ctor = x.constructor;
+    y2 = new Ctor(y2);
+    if (!x.d || !y2.d) {
+      if (!x.s || !y2.s)
+        y2 = new Ctor(NaN);
+      else if (x.d)
+        y2.s = -y2.s;
+      else
+        y2 = new Ctor(y2.d || x.s !== y2.s ? x : NaN);
+      return y2;
+    }
+    if (x.s != y2.s) {
+      y2.s = -y2.s;
+      return x.plus(y2);
+    }
+    xd = x.d;
+    yd = y2.d;
+    pr = Ctor.precision;
+    rm = Ctor.rounding;
+    if (!xd[0] || !yd[0]) {
+      if (yd[0])
+        y2.s = -y2.s;
+      else if (xd[0])
+        y2 = new Ctor(x);
+      else
+        return new Ctor(rm === 3 ? -0 : 0);
+      return external ? finalise(y2, pr, rm) : y2;
+    }
+    e2 = mathfloor(y2.e / LOG_BASE);
+    xe2 = mathfloor(x.e / LOG_BASE);
+    xd = xd.slice();
+    k = xe2 - e2;
+    if (k) {
+      xLTy = k < 0;
+      if (xLTy) {
+        d2 = xd;
+        k = -k;
+        len = yd.length;
+      } else {
+        d2 = yd;
+        e2 = xe2;
+        len = xd.length;
+      }
+      i2 = Math.max(Math.ceil(pr / LOG_BASE), len) + 2;
+      if (k > i2) {
+        k = i2;
+        d2.length = 1;
+      }
+      d2.reverse();
+      for (i2 = k; i2--; )
+        d2.push(0);
+      d2.reverse();
+    } else {
+      i2 = xd.length;
+      len = yd.length;
+      xLTy = i2 < len;
+      if (xLTy)
+        len = i2;
+      for (i2 = 0; i2 < len; i2++) {
+        if (xd[i2] != yd[i2]) {
+          xLTy = xd[i2] < yd[i2];
+          break;
+        }
+      }
+      k = 0;
+    }
+    if (xLTy) {
+      d2 = xd;
+      xd = yd;
+      yd = d2;
+      y2.s = -y2.s;
+    }
+    len = xd.length;
+    for (i2 = yd.length - len; i2 > 0; --i2)
+      xd[len++] = 0;
+    for (i2 = yd.length; i2 > k; ) {
+      if (xd[--i2] < yd[i2]) {
+        for (j2 = i2; j2 && xd[--j2] === 0; )
+          xd[j2] = BASE - 1;
+        --xd[j2];
+        xd[i2] += BASE;
+      }
+      xd[i2] -= yd[i2];
+    }
+    for (; xd[--len] === 0; )
+      xd.pop();
+    for (; xd[0] === 0; xd.shift())
+      --e2;
+    if (!xd[0])
+      return new Ctor(rm === 3 ? -0 : 0);
+    y2.d = xd;
+    y2.e = getBase10Exponent(xd, e2);
+    return external ? finalise(y2, pr, rm) : y2;
+  };
+  P$1.modulo = P$1.mod = function(y2) {
+    var q2, x = this, Ctor = x.constructor;
+    y2 = new Ctor(y2);
+    if (!x.d || !y2.s || y2.d && !y2.d[0])
+      return new Ctor(NaN);
+    if (!y2.d || x.d && !x.d[0]) {
+      return finalise(new Ctor(x), Ctor.precision, Ctor.rounding);
+    }
+    external = false;
+    if (Ctor.modulo == 9) {
+      q2 = divide$1(x, y2.abs(), 0, 3, 1);
+      q2.s *= y2.s;
+    } else {
+      q2 = divide$1(x, y2, 0, Ctor.modulo, 1);
+    }
+    q2 = q2.times(y2);
+    external = true;
+    return x.minus(q2);
+  };
+  P$1.naturalExponential = P$1.exp = function() {
+    return naturalExponential(this);
+  };
+  P$1.naturalLogarithm = P$1.ln = function() {
+    return naturalLogarithm(this);
+  };
+  P$1.negated = P$1.neg = function() {
+    var x = new this.constructor(this);
+    x.s = -x.s;
+    return finalise(x);
+  };
+  P$1.plus = P$1.add = function(y2) {
+    var carry, d2, e2, i2, k, len, pr, rm, xd, yd, x = this, Ctor = x.constructor;
+    y2 = new Ctor(y2);
+    if (!x.d || !y2.d) {
+      if (!x.s || !y2.s)
+        y2 = new Ctor(NaN);
+      else if (!x.d)
+        y2 = new Ctor(y2.d || x.s === y2.s ? x : NaN);
+      return y2;
+    }
+    if (x.s != y2.s) {
+      y2.s = -y2.s;
+      return x.minus(y2);
+    }
+    xd = x.d;
+    yd = y2.d;
+    pr = Ctor.precision;
+    rm = Ctor.rounding;
+    if (!xd[0] || !yd[0]) {
+      if (!yd[0])
+        y2 = new Ctor(x);
+      return external ? finalise(y2, pr, rm) : y2;
+    }
+    k = mathfloor(x.e / LOG_BASE);
+    e2 = mathfloor(y2.e / LOG_BASE);
+    xd = xd.slice();
+    i2 = k - e2;
+    if (i2) {
+      if (i2 < 0) {
+        d2 = xd;
+        i2 = -i2;
+        len = yd.length;
+      } else {
+        d2 = yd;
+        e2 = k;
+        len = xd.length;
+      }
+      k = Math.ceil(pr / LOG_BASE);
+      len = k > len ? k + 1 : len + 1;
+      if (i2 > len) {
+        i2 = len;
+        d2.length = 1;
+      }
+      d2.reverse();
+      for (; i2--; )
+        d2.push(0);
+      d2.reverse();
+    }
+    len = xd.length;
+    i2 = yd.length;
+    if (len - i2 < 0) {
+      i2 = len;
+      d2 = yd;
+      yd = xd;
+      xd = d2;
+    }
+    for (carry = 0; i2; ) {
+      carry = (xd[--i2] = xd[i2] + yd[i2] + carry) / BASE | 0;
+      xd[i2] %= BASE;
+    }
+    if (carry) {
+      xd.unshift(carry);
+      ++e2;
+    }
+    for (len = xd.length; xd[--len] == 0; )
+      xd.pop();
+    y2.d = xd;
+    y2.e = getBase10Exponent(xd, e2);
+    return external ? finalise(y2, pr, rm) : y2;
+  };
+  P$1.precision = P$1.sd = function(z2) {
+    var k, x = this;
+    if (z2 !== void 0 && z2 !== !!z2 && z2 !== 1 && z2 !== 0)
+      throw Error(invalidArgument + z2);
+    if (x.d) {
+      k = getPrecision(x.d);
+      if (z2 && x.e + 1 > k)
+        k = x.e + 1;
+    } else {
+      k = NaN;
+    }
+    return k;
+  };
+  P$1.round = function() {
+    var x = this, Ctor = x.constructor;
+    return finalise(new Ctor(x), x.e + 1, Ctor.rounding);
+  };
+  P$1.sine = P$1.sin = function() {
+    var pr, rm, x = this, Ctor = x.constructor;
+    if (!x.isFinite())
+      return new Ctor(NaN);
+    if (x.isZero())
+      return new Ctor(x);
+    pr = Ctor.precision;
+    rm = Ctor.rounding;
+    Ctor.precision = pr + Math.max(x.e, x.sd()) + LOG_BASE;
+    Ctor.rounding = 1;
+    x = sine(Ctor, toLessThanHalfPi(Ctor, x));
+    Ctor.precision = pr;
+    Ctor.rounding = rm;
+    return finalise(quadrant > 2 ? x.neg() : x, pr, rm, true);
+  };
+  P$1.squareRoot = P$1.sqrt = function() {
+    var m2, n2, sd, r2, rep, t2, x = this, d2 = x.d, e2 = x.e, s2 = x.s, Ctor = x.constructor;
+    if (s2 !== 1 || !d2 || !d2[0]) {
+      return new Ctor(!s2 || s2 < 0 && (!d2 || d2[0]) ? NaN : d2 ? x : 1 / 0);
+    }
+    external = false;
+    s2 = Math.sqrt(+x);
+    if (s2 == 0 || s2 == 1 / 0) {
+      n2 = digitsToString(d2);
+      if ((n2.length + e2) % 2 == 0)
+        n2 += "0";
+      s2 = Math.sqrt(n2);
+      e2 = mathfloor((e2 + 1) / 2) - (e2 < 0 || e2 % 2);
+      if (s2 == 1 / 0) {
+        n2 = "5e" + e2;
+      } else {
+        n2 = s2.toExponential();
+        n2 = n2.slice(0, n2.indexOf("e") + 1) + e2;
+      }
+      r2 = new Ctor(n2);
+    } else {
+      r2 = new Ctor(s2.toString());
+    }
+    sd = (e2 = Ctor.precision) + 3;
+    for (; ; ) {
+      t2 = r2;
+      r2 = t2.plus(divide$1(x, t2, sd + 2, 1)).times(0.5);
+      if (digitsToString(t2.d).slice(0, sd) === (n2 = digitsToString(r2.d)).slice(0, sd)) {
+        n2 = n2.slice(sd - 3, sd + 1);
+        if (n2 == "9999" || !rep && n2 == "4999") {
+          if (!rep) {
+            finalise(t2, e2 + 1, 0);
+            if (t2.times(t2).eq(x)) {
+              r2 = t2;
+              break;
+            }
+          }
+          sd += 4;
+          rep = 1;
+        } else {
+          if (!+n2 || !+n2.slice(1) && n2.charAt(0) == "5") {
+            finalise(r2, e2 + 1, 1);
+            m2 = !r2.times(r2).eq(x);
+          }
+          break;
+        }
+      }
+    }
+    external = true;
+    return finalise(r2, e2, Ctor.rounding, m2);
+  };
+  P$1.tangent = P$1.tan = function() {
+    var pr, rm, x = this, Ctor = x.constructor;
+    if (!x.isFinite())
+      return new Ctor(NaN);
+    if (x.isZero())
+      return new Ctor(x);
+    pr = Ctor.precision;
+    rm = Ctor.rounding;
+    Ctor.precision = pr + 10;
+    Ctor.rounding = 1;
+    x = x.sin();
+    x.s = 1;
+    x = divide$1(x, new Ctor(1).minus(x.times(x)).sqrt(), pr + 10, 0);
+    Ctor.precision = pr;
+    Ctor.rounding = rm;
+    return finalise(quadrant == 2 || quadrant == 4 ? x.neg() : x, pr, rm, true);
+  };
+  P$1.times = P$1.mul = function(y2) {
+    var carry, e2, i2, k, r2, rL, t2, xdL, ydL, x = this, Ctor = x.constructor, xd = x.d, yd = (y2 = new Ctor(y2)).d;
+    y2.s *= x.s;
+    if (!xd || !xd[0] || !yd || !yd[0]) {
+      return new Ctor(!y2.s || xd && !xd[0] && !yd || yd && !yd[0] && !xd ? NaN : !xd || !yd ? y2.s / 0 : y2.s * 0);
+    }
+    e2 = mathfloor(x.e / LOG_BASE) + mathfloor(y2.e / LOG_BASE);
+    xdL = xd.length;
+    ydL = yd.length;
+    if (xdL < ydL) {
+      r2 = xd;
+      xd = yd;
+      yd = r2;
+      rL = xdL;
+      xdL = ydL;
+      ydL = rL;
+    }
+    r2 = [];
+    rL = xdL + ydL;
+    for (i2 = rL; i2--; )
+      r2.push(0);
+    for (i2 = ydL; --i2 >= 0; ) {
+      carry = 0;
+      for (k = xdL + i2; k > i2; ) {
+        t2 = r2[k] + yd[i2] * xd[k - i2 - 1] + carry;
+        r2[k--] = t2 % BASE | 0;
+        carry = t2 / BASE | 0;
+      }
+      r2[k] = (r2[k] + carry) % BASE | 0;
+    }
+    for (; !r2[--rL]; )
+      r2.pop();
+    if (carry)
+      ++e2;
+    else
+      r2.shift();
+    y2.d = r2;
+    y2.e = getBase10Exponent(r2, e2);
+    return external ? finalise(y2, Ctor.precision, Ctor.rounding) : y2;
+  };
+  P$1.toBinary = function(sd, rm) {
+    return toStringBinary(this, 2, sd, rm);
+  };
+  P$1.toDecimalPlaces = P$1.toDP = function(dp, rm) {
+    var x = this, Ctor = x.constructor;
+    x = new Ctor(x);
+    if (dp === void 0)
+      return x;
+    checkInt32(dp, 0, MAX_DIGITS);
+    if (rm === void 0)
+      rm = Ctor.rounding;
+    else
+      checkInt32(rm, 0, 8);
+    return finalise(x, dp + x.e + 1, rm);
+  };
+  P$1.toExponential = function(dp, rm) {
+    var str, x = this, Ctor = x.constructor;
+    if (dp === void 0) {
+      str = finiteToString(x, true);
+    } else {
+      checkInt32(dp, 0, MAX_DIGITS);
+      if (rm === void 0)
+        rm = Ctor.rounding;
+      else
+        checkInt32(rm, 0, 8);
+      x = finalise(new Ctor(x), dp + 1, rm);
+      str = finiteToString(x, true, dp + 1);
+    }
+    return x.isNeg() && !x.isZero() ? "-" + str : str;
+  };
+  P$1.toFixed = function(dp, rm) {
+    var str, y2, x = this, Ctor = x.constructor;
+    if (dp === void 0) {
+      str = finiteToString(x);
+    } else {
+      checkInt32(dp, 0, MAX_DIGITS);
+      if (rm === void 0)
+        rm = Ctor.rounding;
+      else
+        checkInt32(rm, 0, 8);
+      y2 = finalise(new Ctor(x), dp + x.e + 1, rm);
+      str = finiteToString(y2, false, dp + y2.e + 1);
+    }
+    return x.isNeg() && !x.isZero() ? "-" + str : str;
+  };
+  P$1.toFraction = function(maxD) {
+    var d2, d0, d1, d22, e2, k, n2, n0, n1, pr, q2, r2, x = this, xd = x.d, Ctor = x.constructor;
+    if (!xd)
+      return new Ctor(x);
+    n1 = d0 = new Ctor(1);
+    d1 = n0 = new Ctor(0);
+    d2 = new Ctor(d1);
+    e2 = d2.e = getPrecision(xd) - x.e - 1;
+    k = e2 % LOG_BASE;
+    d2.d[0] = mathpow(10, k < 0 ? LOG_BASE + k : k);
+    if (maxD == null) {
+      maxD = e2 > 0 ? d2 : n1;
+    } else {
+      n2 = new Ctor(maxD);
+      if (!n2.isInt() || n2.lt(n1))
+        throw Error(invalidArgument + n2);
+      maxD = n2.gt(d2) ? e2 > 0 ? d2 : n1 : n2;
+    }
+    external = false;
+    n2 = new Ctor(digitsToString(xd));
+    pr = Ctor.precision;
+    Ctor.precision = e2 = xd.length * LOG_BASE * 2;
+    for (; ; ) {
+      q2 = divide$1(n2, d2, 0, 1, 1);
+      d22 = d0.plus(q2.times(d1));
+      if (d22.cmp(maxD) == 1)
+        break;
+      d0 = d1;
+      d1 = d22;
+      d22 = n1;
+      n1 = n0.plus(q2.times(d22));
+      n0 = d22;
+      d22 = d2;
+      d2 = n2.minus(q2.times(d22));
+      n2 = d22;
+    }
+    d22 = divide$1(maxD.minus(d0), d1, 0, 1, 1);
+    n0 = n0.plus(d22.times(n1));
+    d0 = d0.plus(d22.times(d1));
+    n0.s = n1.s = x.s;
+    r2 = divide$1(n1, d1, e2, 1).minus(x).abs().cmp(divide$1(n0, d0, e2, 1).minus(x).abs()) < 1 ? [n1, d1] : [n0, d0];
+    Ctor.precision = pr;
+    external = true;
+    return r2;
+  };
+  P$1.toHexadecimal = P$1.toHex = function(sd, rm) {
+    return toStringBinary(this, 16, sd, rm);
+  };
+  P$1.toNearest = function(y2, rm) {
+    var x = this, Ctor = x.constructor;
+    x = new Ctor(x);
+    if (y2 == null) {
+      if (!x.d)
+        return x;
+      y2 = new Ctor(1);
+      rm = Ctor.rounding;
+    } else {
+      y2 = new Ctor(y2);
+      if (rm === void 0) {
+        rm = Ctor.rounding;
+      } else {
+        checkInt32(rm, 0, 8);
+      }
+      if (!x.d)
+        return y2.s ? x : y2;
+      if (!y2.d) {
+        if (y2.s)
+          y2.s = x.s;
+        return y2;
+      }
+    }
+    if (y2.d[0]) {
+      external = false;
+      x = divide$1(x, y2, 0, rm, 1).times(y2);
+      external = true;
+      finalise(x);
+    } else {
+      y2.s = x.s;
+      x = y2;
+    }
+    return x;
+  };
+  P$1.toNumber = function() {
+    return +this;
+  };
+  P$1.toOctal = function(sd, rm) {
+    return toStringBinary(this, 8, sd, rm);
+  };
+  P$1.toPower = P$1.pow = function(y2) {
+    var e2, k, pr, r2, rm, s2, x = this, Ctor = x.constructor, yn = +(y2 = new Ctor(y2));
+    if (!x.d || !y2.d || !x.d[0] || !y2.d[0])
+      return new Ctor(mathpow(+x, yn));
+    x = new Ctor(x);
+    if (x.eq(1))
+      return x;
+    pr = Ctor.precision;
+    rm = Ctor.rounding;
+    if (y2.eq(1))
+      return finalise(x, pr, rm);
+    e2 = mathfloor(y2.e / LOG_BASE);
+    if (e2 >= y2.d.length - 1 && (k = yn < 0 ? -yn : yn) <= MAX_SAFE_INTEGER) {
+      r2 = intPow(Ctor, x, k, pr);
+      return y2.s < 0 ? new Ctor(1).div(r2) : finalise(r2, pr, rm);
+    }
+    s2 = x.s;
+    if (s2 < 0) {
+      if (e2 < y2.d.length - 1)
+        return new Ctor(NaN);
+      if ((y2.d[e2] & 1) == 0)
+        s2 = 1;
+      if (x.e == 0 && x.d[0] == 1 && x.d.length == 1) {
+        x.s = s2;
+        return x;
+      }
+    }
+    k = mathpow(+x, yn);
+    e2 = k == 0 || !isFinite(k) ? mathfloor(yn * (Math.log("0." + digitsToString(x.d)) / Math.LN10 + x.e + 1)) : new Ctor(k + "").e;
+    if (e2 > Ctor.maxE + 1 || e2 < Ctor.minE - 1)
+      return new Ctor(e2 > 0 ? s2 / 0 : 0);
+    external = false;
+    Ctor.rounding = x.s = 1;
+    k = Math.min(12, (e2 + "").length);
+    r2 = naturalExponential(y2.times(naturalLogarithm(x, pr + k)), pr);
+    if (r2.d) {
+      r2 = finalise(r2, pr + 5, 1);
+      if (checkRoundingDigits(r2.d, pr, rm)) {
+        e2 = pr + 10;
+        r2 = finalise(naturalExponential(y2.times(naturalLogarithm(x, e2 + k)), e2), e2 + 5, 1);
+        if (+digitsToString(r2.d).slice(pr + 1, pr + 15) + 1 == 1e14) {
+          r2 = finalise(r2, pr + 1, 0);
+        }
+      }
+    }
+    r2.s = s2;
+    external = true;
+    Ctor.rounding = rm;
+    return finalise(r2, pr, rm);
+  };
+  P$1.toPrecision = function(sd, rm) {
+    var str, x = this, Ctor = x.constructor;
+    if (sd === void 0) {
+      str = finiteToString(x, x.e <= Ctor.toExpNeg || x.e >= Ctor.toExpPos);
+    } else {
+      checkInt32(sd, 1, MAX_DIGITS);
+      if (rm === void 0)
+        rm = Ctor.rounding;
+      else
+        checkInt32(rm, 0, 8);
+      x = finalise(new Ctor(x), sd, rm);
+      str = finiteToString(x, sd <= x.e || x.e <= Ctor.toExpNeg, sd);
+    }
+    return x.isNeg() && !x.isZero() ? "-" + str : str;
+  };
+  P$1.toSignificantDigits = P$1.toSD = function(sd, rm) {
+    var x = this, Ctor = x.constructor;
+    if (sd === void 0) {
+      sd = Ctor.precision;
+      rm = Ctor.rounding;
+    } else {
+      checkInt32(sd, 1, MAX_DIGITS);
+      if (rm === void 0)
+        rm = Ctor.rounding;
+      else
+        checkInt32(rm, 0, 8);
+    }
+    return finalise(new Ctor(x), sd, rm);
+  };
+  P$1.toString = function() {
+    var x = this, Ctor = x.constructor, str = finiteToString(x, x.e <= Ctor.toExpNeg || x.e >= Ctor.toExpPos);
+    return x.isNeg() && !x.isZero() ? "-" + str : str;
+  };
+  P$1.truncated = P$1.trunc = function() {
+    return finalise(new this.constructor(this), this.e + 1, 1);
+  };
+  P$1.valueOf = P$1.toJSON = function() {
+    var x = this, Ctor = x.constructor, str = finiteToString(x, x.e <= Ctor.toExpNeg || x.e >= Ctor.toExpPos);
+    return x.isNeg() ? "-" + str : str;
+  };
+  function digitsToString(d2) {
+    var i2, k, ws2, indexOfLastWord = d2.length - 1, str = "", w2 = d2[0];
+    if (indexOfLastWord > 0) {
+      str += w2;
+      for (i2 = 1; i2 < indexOfLastWord; i2++) {
+        ws2 = d2[i2] + "";
+        k = LOG_BASE - ws2.length;
+        if (k)
+          str += getZeroString(k);
+        str += ws2;
+      }
+      w2 = d2[i2];
+      ws2 = w2 + "";
+      k = LOG_BASE - ws2.length;
+      if (k)
+        str += getZeroString(k);
+    } else if (w2 === 0) {
+      return "0";
+    }
+    for (; w2 % 10 === 0; )
+      w2 /= 10;
+    return str + w2;
+  }
+  function checkInt32(i2, min2, max2) {
+    if (i2 !== ~~i2 || i2 < min2 || i2 > max2) {
+      throw Error(invalidArgument + i2);
+    }
+  }
+  function checkRoundingDigits(d2, i2, rm, repeating) {
+    var di, k, r2, rd;
+    for (k = d2[0]; k >= 10; k /= 10)
+      --i2;
+    if (--i2 < 0) {
+      i2 += LOG_BASE;
+      di = 0;
+    } else {
+      di = Math.ceil((i2 + 1) / LOG_BASE);
+      i2 %= LOG_BASE;
+    }
+    k = mathpow(10, LOG_BASE - i2);
+    rd = d2[di] % k | 0;
+    if (repeating == null) {
+      if (i2 < 3) {
+        if (i2 == 0)
+          rd = rd / 100 | 0;
+        else if (i2 == 1)
+          rd = rd / 10 | 0;
+        r2 = rm < 4 && rd == 99999 || rm > 3 && rd == 49999 || rd == 5e4 || rd == 0;
+      } else {
+        r2 = (rm < 4 && rd + 1 == k || rm > 3 && rd + 1 == k / 2) && (d2[di + 1] / k / 100 | 0) == mathpow(10, i2 - 2) - 1 || (rd == k / 2 || rd == 0) && (d2[di + 1] / k / 100 | 0) == 0;
+      }
+    } else {
+      if (i2 < 4) {
+        if (i2 == 0)
+          rd = rd / 1e3 | 0;
+        else if (i2 == 1)
+          rd = rd / 100 | 0;
+        else if (i2 == 2)
+          rd = rd / 10 | 0;
+        r2 = (repeating || rm < 4) && rd == 9999 || !repeating && rm > 3 && rd == 4999;
+      } else {
+        r2 = ((repeating || rm < 4) && rd + 1 == k || !repeating && rm > 3 && rd + 1 == k / 2) && (d2[di + 1] / k / 1e3 | 0) == mathpow(10, i2 - 3) - 1;
+      }
+    }
+    return r2;
+  }
+  function convertBase(str, baseIn, baseOut) {
+    var j2, arr = [0], arrL, i2 = 0, strL = str.length;
+    for (; i2 < strL; ) {
+      for (arrL = arr.length; arrL--; )
+        arr[arrL] *= baseIn;
+      arr[0] += NUMERALS.indexOf(str.charAt(i2++));
+      for (j2 = 0; j2 < arr.length; j2++) {
+        if (arr[j2] > baseOut - 1) {
+          if (arr[j2 + 1] === void 0)
+            arr[j2 + 1] = 0;
+          arr[j2 + 1] += arr[j2] / baseOut | 0;
+          arr[j2] %= baseOut;
+        }
+      }
+    }
+    return arr.reverse();
+  }
+  function cosine(Ctor, x) {
+    var k, len, y2;
+    if (x.isZero())
+      return x;
+    len = x.d.length;
+    if (len < 32) {
+      k = Math.ceil(len / 3);
+      y2 = (1 / tinyPow(4, k)).toString();
+    } else {
+      k = 16;
+      y2 = "2.3283064365386962890625e-10";
+    }
+    Ctor.precision += k;
+    x = taylorSeries(Ctor, 1, x.times(y2), new Ctor(1));
+    for (var i2 = k; i2--; ) {
+      var cos2x = x.times(x);
+      x = cos2x.times(cos2x).minus(cos2x).times(8).plus(1);
+    }
+    Ctor.precision -= k;
+    return x;
+  }
+  var divide$1 = /* @__PURE__ */ function() {
+    function multiplyInteger(x, k, base) {
+      var temp, carry = 0, i2 = x.length;
+      for (x = x.slice(); i2--; ) {
+        temp = x[i2] * k + carry;
+        x[i2] = temp % base | 0;
+        carry = temp / base | 0;
+      }
+      if (carry)
+        x.unshift(carry);
+      return x;
+    }
+    function compare(a2, b2, aL, bL) {
+      var i2, r2;
+      if (aL != bL) {
+        r2 = aL > bL ? 1 : -1;
+      } else {
+        for (i2 = r2 = 0; i2 < aL; i2++) {
+          if (a2[i2] != b2[i2]) {
+            r2 = a2[i2] > b2[i2] ? 1 : -1;
+            break;
+          }
+        }
+      }
+      return r2;
+    }
+    function subtract(a2, b2, aL, base) {
+      var i2 = 0;
+      for (; aL--; ) {
+        a2[aL] -= i2;
+        i2 = a2[aL] < b2[aL] ? 1 : 0;
+        a2[aL] = i2 * base + a2[aL] - b2[aL];
+      }
+      for (; !a2[0] && a2.length > 1; )
+        a2.shift();
+    }
+    return function(x, y2, pr, rm, dp, base) {
+      var cmp, e2, i2, k, logBase, more, prod, prodL, q2, qd, rem, remL, rem0, sd, t2, xi, xL, yd0, yL, yz, Ctor = x.constructor, sign2 = x.s == y2.s ? 1 : -1, xd = x.d, yd = y2.d;
+      if (!xd || !xd[0] || !yd || !yd[0]) {
+        return new Ctor(
+          // Return NaN if either NaN, or both Infinity or 0.
+          !x.s || !y2.s || (xd ? yd && xd[0] == yd[0] : !yd) ? NaN : (
+            // Return ±0 if x is 0 or y is ±Infinity, or return ±Infinity as y is 0.
+            xd && xd[0] == 0 || !yd ? sign2 * 0 : sign2 / 0
+          )
+        );
+      }
+      if (base) {
+        logBase = 1;
+        e2 = x.e - y2.e;
+      } else {
+        base = BASE;
+        logBase = LOG_BASE;
+        e2 = mathfloor(x.e / logBase) - mathfloor(y2.e / logBase);
+      }
+      yL = yd.length;
+      xL = xd.length;
+      q2 = new Ctor(sign2);
+      qd = q2.d = [];
+      for (i2 = 0; yd[i2] == (xd[i2] || 0); i2++)
+        ;
+      if (yd[i2] > (xd[i2] || 0))
+        e2--;
+      if (pr == null) {
+        sd = pr = Ctor.precision;
+        rm = Ctor.rounding;
+      } else if (dp) {
+        sd = pr + (x.e - y2.e) + 1;
+      } else {
+        sd = pr;
+      }
+      if (sd < 0) {
+        qd.push(1);
+        more = true;
+      } else {
+        sd = sd / logBase + 2 | 0;
+        i2 = 0;
+        if (yL == 1) {
+          k = 0;
+          yd = yd[0];
+          sd++;
+          for (; (i2 < xL || k) && sd--; i2++) {
+            t2 = k * base + (xd[i2] || 0);
+            qd[i2] = t2 / yd | 0;
+            k = t2 % yd | 0;
+          }
+          more = k || i2 < xL;
+        } else {
+          k = base / (yd[0] + 1) | 0;
+          if (k > 1) {
+            yd = multiplyInteger(yd, k, base);
+            xd = multiplyInteger(xd, k, base);
+            yL = yd.length;
+            xL = xd.length;
+          }
+          xi = yL;
+          rem = xd.slice(0, yL);
+          remL = rem.length;
+          for (; remL < yL; )
+            rem[remL++] = 0;
+          yz = yd.slice();
+          yz.unshift(0);
+          yd0 = yd[0];
+          if (yd[1] >= base / 2)
+            ++yd0;
+          do {
+            k = 0;
+            cmp = compare(yd, rem, yL, remL);
+            if (cmp < 0) {
+              rem0 = rem[0];
+              if (yL != remL)
+                rem0 = rem0 * base + (rem[1] || 0);
+              k = rem0 / yd0 | 0;
+              if (k > 1) {
+                if (k >= base)
+                  k = base - 1;
+                prod = multiplyInteger(yd, k, base);
+                prodL = prod.length;
+                remL = rem.length;
+                cmp = compare(prod, rem, prodL, remL);
+                if (cmp == 1) {
+                  k--;
+                  subtract(prod, yL < prodL ? yz : yd, prodL, base);
+                }
+              } else {
+                if (k == 0)
+                  cmp = k = 1;
+                prod = yd.slice();
+              }
+              prodL = prod.length;
+              if (prodL < remL)
+                prod.unshift(0);
+              subtract(rem, prod, remL, base);
+              if (cmp == -1) {
+                remL = rem.length;
+                cmp = compare(yd, rem, yL, remL);
+                if (cmp < 1) {
+                  k++;
+                  subtract(rem, yL < remL ? yz : yd, remL, base);
+                }
+              }
+              remL = rem.length;
+            } else if (cmp === 0) {
+              k++;
+              rem = [0];
+            }
+            qd[i2++] = k;
+            if (cmp && rem[0]) {
+              rem[remL++] = xd[xi] || 0;
+            } else {
+              rem = [xd[xi]];
+              remL = 1;
+            }
+          } while ((xi++ < xL || rem[0] !== void 0) && sd--);
+          more = rem[0] !== void 0;
+        }
+        if (!qd[0])
+          qd.shift();
+      }
+      if (logBase == 1) {
+        q2.e = e2;
+        inexact = more;
+      } else {
+        for (i2 = 1, k = qd[0]; k >= 10; k /= 10)
+          i2++;
+        q2.e = i2 + e2 * logBase - 1;
+        finalise(q2, dp ? pr + q2.e + 1 : pr, rm, more);
+      }
+      return q2;
+    };
+  }();
+  function finalise(x, sd, rm, isTruncated) {
+    var digits2, i2, j2, k, rd, roundUp, w2, xd, xdi, Ctor = x.constructor;
+    out:
+      if (sd != null) {
+        xd = x.d;
+        if (!xd)
+          return x;
+        for (digits2 = 1, k = xd[0]; k >= 10; k /= 10)
+          digits2++;
+        i2 = sd - digits2;
+        if (i2 < 0) {
+          i2 += LOG_BASE;
+          j2 = sd;
+          w2 = xd[xdi = 0];
+          rd = w2 / mathpow(10, digits2 - j2 - 1) % 10 | 0;
+        } else {
+          xdi = Math.ceil((i2 + 1) / LOG_BASE);
+          k = xd.length;
+          if (xdi >= k) {
+            if (isTruncated) {
+              for (; k++ <= xdi; )
+                xd.push(0);
+              w2 = rd = 0;
+              digits2 = 1;
+              i2 %= LOG_BASE;
+              j2 = i2 - LOG_BASE + 1;
+            } else {
+              break out;
+            }
           } else {
-            value = integer;
-            exp = 0;
+            w2 = k = xd[xdi];
+            for (digits2 = 1; k >= 10; k /= 10)
+              digits2++;
+            i2 %= LOG_BASE;
+            j2 = i2 - LOG_BASE + digits2;
+            rd = j2 < 0 ? 0 : w2 / mathpow(10, digits2 - j2 - 1) % 10 | 0;
+          }
+        }
+        isTruncated = isTruncated || sd < 0 || xd[xdi + 1] !== void 0 || (j2 < 0 ? w2 : w2 % mathpow(10, digits2 - j2 - 1));
+        roundUp = rm < 4 ? (rd || isTruncated) && (rm == 0 || rm == (x.s < 0 ? 3 : 2)) : rd > 5 || rd == 5 && (rm == 4 || isTruncated || rm == 6 && // Check whether the digit to the left of the rounding digit is odd.
+        (i2 > 0 ? j2 > 0 ? w2 / mathpow(10, digits2 - j2) : 0 : xd[xdi - 1]) % 10 & 1 || rm == (x.s < 0 ? 8 : 7));
+        if (sd < 1 || !xd[0]) {
+          xd.length = 0;
+          if (roundUp) {
+            sd -= x.e + 1;
+            xd[0] = mathpow(10, (LOG_BASE - sd % LOG_BASE) % LOG_BASE);
+            x.e = -sd || 0;
+          } else {
+            xd[0] = x.e = 0;
+          }
+          return x;
+        }
+        if (i2 == 0) {
+          xd.length = xdi;
+          k = 1;
+          xdi--;
+        } else {
+          xd.length = xdi + 1;
+          k = mathpow(10, LOG_BASE - i2);
+          xd[xdi] = j2 > 0 ? (w2 / mathpow(10, digits2 - j2) % mathpow(10, j2) | 0) * k : 0;
+        }
+        if (roundUp) {
+          for (; ; ) {
+            if (xdi == 0) {
+              for (i2 = 1, j2 = xd[0]; j2 >= 10; j2 /= 10)
+                i2++;
+              j2 = xd[0] += k;
+              for (k = 1; j2 >= 10; j2 /= 10)
+                k++;
+              if (i2 != k) {
+                x.e++;
+                if (xd[0] == BASE)
+                  xd[0] = 1;
+              }
+              break;
+            } else {
+              xd[xdi] += k;
+              if (xd[xdi] != BASE)
+                break;
+              xd[xdi--] = 0;
+              k = 1;
+            }
+          }
+        }
+        for (i2 = xd.length; xd[--i2] === 0; )
+          xd.pop();
+      }
+    if (external) {
+      if (x.e > Ctor.maxE) {
+        x.d = null;
+        x.e = NaN;
+      } else if (x.e < Ctor.minE) {
+        x.e = 0;
+        x.d = [0];
+      }
+    }
+    return x;
+  }
+  function finiteToString(x, isExp, sd) {
+    if (!x.isFinite())
+      return nonFiniteToString(x);
+    var k, e2 = x.e, str = digitsToString(x.d), len = str.length;
+    if (isExp) {
+      if (sd && (k = sd - len) > 0) {
+        str = str.charAt(0) + "." + str.slice(1) + getZeroString(k);
+      } else if (len > 1) {
+        str = str.charAt(0) + "." + str.slice(1);
+      }
+      str = str + (x.e < 0 ? "e" : "e+") + x.e;
+    } else if (e2 < 0) {
+      str = "0." + getZeroString(-e2 - 1) + str;
+      if (sd && (k = sd - len) > 0)
+        str += getZeroString(k);
+    } else if (e2 >= len) {
+      str += getZeroString(e2 + 1 - len);
+      if (sd && (k = sd - e2 - 1) > 0)
+        str = str + "." + getZeroString(k);
+    } else {
+      if ((k = e2 + 1) < len)
+        str = str.slice(0, k) + "." + str.slice(k);
+      if (sd && (k = sd - len) > 0) {
+        if (e2 + 1 === len)
+          str += ".";
+        str += getZeroString(k);
+      }
+    }
+    return str;
+  }
+  function getBase10Exponent(digits2, e2) {
+    var w2 = digits2[0];
+    for (e2 *= LOG_BASE; w2 >= 10; w2 /= 10)
+      e2++;
+    return e2;
+  }
+  function getLn10(Ctor, sd, pr) {
+    if (sd > LN10_PRECISION) {
+      external = true;
+      if (pr)
+        Ctor.precision = pr;
+      throw Error(precisionLimitExceeded);
+    }
+    return finalise(new Ctor(LN10), sd, 1, true);
+  }
+  function getPi(Ctor, sd, rm) {
+    if (sd > PI_PRECISION)
+      throw Error(precisionLimitExceeded);
+    return finalise(new Ctor(PI), sd, rm, true);
+  }
+  function getPrecision(digits2) {
+    var w2 = digits2.length - 1, len = w2 * LOG_BASE + 1;
+    w2 = digits2[w2];
+    if (w2) {
+      for (; w2 % 10 == 0; w2 /= 10)
+        len--;
+      for (w2 = digits2[0]; w2 >= 10; w2 /= 10)
+        len++;
+    }
+    return len;
+  }
+  function getZeroString(k) {
+    var zs2 = "";
+    for (; k--; )
+      zs2 += "0";
+    return zs2;
+  }
+  function intPow(Ctor, x, n2, pr) {
+    var isTruncated, r2 = new Ctor(1), k = Math.ceil(pr / LOG_BASE + 4);
+    external = false;
+    for (; ; ) {
+      if (n2 % 2) {
+        r2 = r2.times(x);
+        if (truncate(r2.d, k))
+          isTruncated = true;
+      }
+      n2 = mathfloor(n2 / 2);
+      if (n2 === 0) {
+        n2 = r2.d.length - 1;
+        if (isTruncated && r2.d[n2] === 0)
+          ++r2.d[n2];
+        break;
+      }
+      x = x.times(x);
+      truncate(x.d, k);
+    }
+    external = true;
+    return r2;
+  }
+  function isOdd(n2) {
+    return n2.d[n2.d.length - 1] & 1;
+  }
+  function maxOrMin(Ctor, args, ltgt) {
+    var y2, x = new Ctor(args[0]), i2 = 0;
+    for (; ++i2 < args.length; ) {
+      y2 = new Ctor(args[i2]);
+      if (!y2.s) {
+        x = y2;
+        break;
+      } else if (x[ltgt](y2)) {
+        x = y2;
+      }
+    }
+    return x;
+  }
+  function naturalExponential(x, sd) {
+    var denominator, guard, j2, pow2, sum2, t2, wpr, rep = 0, i2 = 0, k = 0, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
+    if (!x.d || !x.d[0] || x.e > 17) {
+      return new Ctor(x.d ? !x.d[0] ? 1 : x.s < 0 ? 0 : 1 / 0 : x.s ? x.s < 0 ? 0 : x : 0 / 0);
+    }
+    if (sd == null) {
+      external = false;
+      wpr = pr;
+    } else {
+      wpr = sd;
+    }
+    t2 = new Ctor(0.03125);
+    while (x.e > -2) {
+      x = x.times(t2);
+      k += 5;
+    }
+    guard = Math.log(mathpow(2, k)) / Math.LN10 * 2 + 5 | 0;
+    wpr += guard;
+    denominator = pow2 = sum2 = new Ctor(1);
+    Ctor.precision = wpr;
+    for (; ; ) {
+      pow2 = finalise(pow2.times(x), wpr, 1);
+      denominator = denominator.times(++i2);
+      t2 = sum2.plus(divide$1(pow2, denominator, wpr, 1));
+      if (digitsToString(t2.d).slice(0, wpr) === digitsToString(sum2.d).slice(0, wpr)) {
+        j2 = k;
+        while (j2--)
+          sum2 = finalise(sum2.times(sum2), wpr, 1);
+        if (sd == null) {
+          if (rep < 3 && checkRoundingDigits(sum2.d, wpr - guard, rm, rep)) {
+            Ctor.precision = wpr += 10;
+            denominator = pow2 = t2 = new Ctor(1);
+            i2 = 0;
+            rep++;
+          } else {
+            return finalise(sum2, Ctor.precision = pr, rm, external = true);
           }
         } else {
-          value = parseInt(number2.split(DECIMAL_SEPARATOR).join(""), 10);
-          exp = fractional.length * -1;
+          Ctor.precision = pr;
+          return sum2;
         }
-        return {
-          "value": value,
-          "exp": exp
-        };
-      };
-      var neg_exp = function(str, position) {
-        position = Math.abs(position);
-        var offset = position - str.length;
-        var sep = DECIMAL_SEPARATOR;
-        if (offset >= 0) {
-          str = zero(offset) + str;
-          sep = "0.";
-        }
-        var length = str.length;
-        var head = str.substr(0, length - position);
-        var tail = str.substring(length - position, length);
-        return head + sep + tail;
-      };
-      var pos_exp = function(str, exp) {
-        var zeros = zero(exp);
-        return String(str + zeros);
-      };
-      var format = function(num, exp) {
-        num = String(num);
-        var func2 = exp >= 0 ? pos_exp : neg_exp;
-        return func2(num, exp);
-      };
-      var zero = function(exp) {
-        return new Array(exp + 1).join("0");
-      };
-      var methods = ["add", "mul", "sub", "div"];
-      for (var i2 = 0; i2 < methods.length; i2++) {
-        (function(method) {
-          Decimal2[method] = function(a2, b2) {
-            return new Decimal2(a2)[method](b2);
-          };
-        })(methods[i2]);
       }
-      if (module.exports) {
-        module.exports = Decimal2;
+      sum2 = t2;
+    }
+  }
+  function naturalLogarithm(y2, sd) {
+    var c2, c0, denominator, e2, numerator, rep, sum2, t2, wpr, x1, x2, n2 = 1, guard = 10, x = y2, xd = x.d, Ctor = x.constructor, rm = Ctor.rounding, pr = Ctor.precision;
+    if (x.s < 0 || !xd || !xd[0] || !x.e && xd[0] == 1 && xd.length == 1) {
+      return new Ctor(xd && !xd[0] ? -1 / 0 : x.s != 1 ? NaN : xd ? 0 : x);
+    }
+    if (sd == null) {
+      external = false;
+      wpr = pr;
+    } else {
+      wpr = sd;
+    }
+    Ctor.precision = wpr += guard;
+    c2 = digitsToString(xd);
+    c0 = c2.charAt(0);
+    if (Math.abs(e2 = x.e) < 15e14) {
+      while (c0 < 7 && c0 != 1 || c0 == 1 && c2.charAt(1) > 3) {
+        x = x.times(y2);
+        c2 = digitsToString(x.d);
+        c0 = c2.charAt(0);
+        n2++;
+      }
+      e2 = x.e;
+      if (c0 > 1) {
+        x = new Ctor("0." + c2);
+        e2++;
       } else {
-        ROOT.Decimal = Decimal2;
+        x = new Ctor(c0 + "." + c2.slice(1));
       }
-    })();
-  })(decimal);
-  var decimalExports = decimal.exports;
-  const Decimal$1 = /* @__PURE__ */ getDefaultExportFromCjs(decimalExports);
+    } else {
+      t2 = getLn10(Ctor, wpr + 2, pr).times(e2 + "");
+      x = naturalLogarithm(new Ctor(c0 + "." + c2.slice(1)), wpr - guard).plus(t2);
+      Ctor.precision = pr;
+      return sd == null ? finalise(x, pr, rm, external = true) : x;
+    }
+    x1 = x;
+    sum2 = numerator = x = divide$1(x.minus(1), x.plus(1), wpr, 1);
+    x2 = finalise(x.times(x), wpr, 1);
+    denominator = 3;
+    for (; ; ) {
+      numerator = finalise(numerator.times(x2), wpr, 1);
+      t2 = sum2.plus(divide$1(numerator, new Ctor(denominator), wpr, 1));
+      if (digitsToString(t2.d).slice(0, wpr) === digitsToString(sum2.d).slice(0, wpr)) {
+        sum2 = sum2.times(2);
+        if (e2 !== 0)
+          sum2 = sum2.plus(getLn10(Ctor, wpr + 2, pr).times(e2 + ""));
+        sum2 = divide$1(sum2, new Ctor(n2), wpr, 1);
+        if (sd == null) {
+          if (checkRoundingDigits(sum2.d, wpr - guard, rm, rep)) {
+            Ctor.precision = wpr += guard;
+            t2 = numerator = x = divide$1(x1.minus(1), x1.plus(1), wpr, 1);
+            x2 = finalise(x.times(x), wpr, 1);
+            denominator = rep = 1;
+          } else {
+            return finalise(sum2, Ctor.precision = pr, rm, external = true);
+          }
+        } else {
+          Ctor.precision = pr;
+          return sum2;
+        }
+      }
+      sum2 = t2;
+      denominator += 2;
+    }
+  }
+  function nonFiniteToString(x) {
+    return String(x.s * x.s / 0);
+  }
+  function parseDecimal(x, str) {
+    var e2, i2, len;
+    if ((e2 = str.indexOf(".")) > -1)
+      str = str.replace(".", "");
+    if ((i2 = str.search(/e/i)) > 0) {
+      if (e2 < 0)
+        e2 = i2;
+      e2 += +str.slice(i2 + 1);
+      str = str.substring(0, i2);
+    } else if (e2 < 0) {
+      e2 = str.length;
+    }
+    for (i2 = 0; str.charCodeAt(i2) === 48; i2++)
+      ;
+    for (len = str.length; str.charCodeAt(len - 1) === 48; --len)
+      ;
+    str = str.slice(i2, len);
+    if (str) {
+      len -= i2;
+      x.e = e2 = e2 - i2 - 1;
+      x.d = [];
+      i2 = (e2 + 1) % LOG_BASE;
+      if (e2 < 0)
+        i2 += LOG_BASE;
+      if (i2 < len) {
+        if (i2)
+          x.d.push(+str.slice(0, i2));
+        for (len -= LOG_BASE; i2 < len; )
+          x.d.push(+str.slice(i2, i2 += LOG_BASE));
+        str = str.slice(i2);
+        i2 = LOG_BASE - str.length;
+      } else {
+        i2 -= len;
+      }
+      for (; i2--; )
+        str += "0";
+      x.d.push(+str);
+      if (external) {
+        if (x.e > x.constructor.maxE) {
+          x.d = null;
+          x.e = NaN;
+        } else if (x.e < x.constructor.minE) {
+          x.e = 0;
+          x.d = [0];
+        }
+      }
+    } else {
+      x.e = 0;
+      x.d = [0];
+    }
+    return x;
+  }
+  function parseOther(x, str) {
+    var base, Ctor, divisor, i2, isFloat, len, p2, xd, xe2;
+    if (str.indexOf("_") > -1) {
+      str = str.replace(/(\d)_(?=\d)/g, "$1");
+      if (isDecimal.test(str))
+        return parseDecimal(x, str);
+    } else if (str === "Infinity" || str === "NaN") {
+      if (!+str)
+        x.s = NaN;
+      x.e = NaN;
+      x.d = null;
+      return x;
+    }
+    if (isHex.test(str)) {
+      base = 16;
+      str = str.toLowerCase();
+    } else if (isBinary.test(str)) {
+      base = 2;
+    } else if (isOctal.test(str)) {
+      base = 8;
+    } else {
+      throw Error(invalidArgument + str);
+    }
+    i2 = str.search(/p/i);
+    if (i2 > 0) {
+      p2 = +str.slice(i2 + 1);
+      str = str.substring(2, i2);
+    } else {
+      str = str.slice(2);
+    }
+    i2 = str.indexOf(".");
+    isFloat = i2 >= 0;
+    Ctor = x.constructor;
+    if (isFloat) {
+      str = str.replace(".", "");
+      len = str.length;
+      i2 = len - i2;
+      divisor = intPow(Ctor, new Ctor(base), i2, i2 * 2);
+    }
+    xd = convertBase(str, base, BASE);
+    xe2 = xd.length - 1;
+    for (i2 = xe2; xd[i2] === 0; --i2)
+      xd.pop();
+    if (i2 < 0)
+      return new Ctor(x.s * 0);
+    x.e = getBase10Exponent(xd, xe2);
+    x.d = xd;
+    external = false;
+    if (isFloat)
+      x = divide$1(x, divisor, len * 4);
+    if (p2)
+      x = x.times(Math.abs(p2) < 54 ? mathpow(2, p2) : Decimal.pow(2, p2));
+    external = true;
+    return x;
+  }
+  function sine(Ctor, x) {
+    var k, len = x.d.length;
+    if (len < 3) {
+      return x.isZero() ? x : taylorSeries(Ctor, 2, x, x);
+    }
+    k = 1.4 * Math.sqrt(len);
+    k = k > 16 ? 16 : k | 0;
+    x = x.times(1 / tinyPow(5, k));
+    x = taylorSeries(Ctor, 2, x, x);
+    var sin2_x, d5 = new Ctor(5), d16 = new Ctor(16), d20 = new Ctor(20);
+    for (; k--; ) {
+      sin2_x = x.times(x);
+      x = x.times(d5.plus(sin2_x.times(d16.times(sin2_x).minus(d20))));
+    }
+    return x;
+  }
+  function taylorSeries(Ctor, n2, x, y2, isHyperbolic) {
+    var j2, t2, u2, x2, pr = Ctor.precision, k = Math.ceil(pr / LOG_BASE);
+    external = false;
+    x2 = x.times(x);
+    u2 = new Ctor(y2);
+    for (; ; ) {
+      t2 = divide$1(u2.times(x2), new Ctor(n2++ * n2++), pr, 1);
+      u2 = isHyperbolic ? y2.plus(t2) : y2.minus(t2);
+      y2 = divide$1(t2.times(x2), new Ctor(n2++ * n2++), pr, 1);
+      t2 = u2.plus(y2);
+      if (t2.d[k] !== void 0) {
+        for (j2 = k; t2.d[j2] === u2.d[j2] && j2--; )
+          ;
+        if (j2 == -1)
+          break;
+      }
+      j2 = u2;
+      u2 = y2;
+      y2 = t2;
+      t2 = j2;
+    }
+    external = true;
+    t2.d.length = k + 1;
+    return t2;
+  }
+  function tinyPow(b2, e2) {
+    var n2 = b2;
+    while (--e2)
+      n2 *= b2;
+    return n2;
+  }
+  function toLessThanHalfPi(Ctor, x) {
+    var t2, isNeg = x.s < 0, pi = getPi(Ctor, Ctor.precision, 1), halfPi = pi.times(0.5);
+    x = x.abs();
+    if (x.lte(halfPi)) {
+      quadrant = isNeg ? 4 : 1;
+      return x;
+    }
+    t2 = x.divToInt(pi);
+    if (t2.isZero()) {
+      quadrant = isNeg ? 3 : 2;
+    } else {
+      x = x.minus(t2.times(pi));
+      if (x.lte(halfPi)) {
+        quadrant = isOdd(t2) ? isNeg ? 2 : 3 : isNeg ? 4 : 1;
+        return x;
+      }
+      quadrant = isOdd(t2) ? isNeg ? 1 : 4 : isNeg ? 3 : 2;
+    }
+    return x.minus(pi).abs();
+  }
+  function toStringBinary(x, baseOut, sd, rm) {
+    var base, e2, i2, k, len, roundUp, str, xd, y2, Ctor = x.constructor, isExp = sd !== void 0;
+    if (isExp) {
+      checkInt32(sd, 1, MAX_DIGITS);
+      if (rm === void 0)
+        rm = Ctor.rounding;
+      else
+        checkInt32(rm, 0, 8);
+    } else {
+      sd = Ctor.precision;
+      rm = Ctor.rounding;
+    }
+    if (!x.isFinite()) {
+      str = nonFiniteToString(x);
+    } else {
+      str = finiteToString(x);
+      i2 = str.indexOf(".");
+      if (isExp) {
+        base = 2;
+        if (baseOut == 16) {
+          sd = sd * 4 - 3;
+        } else if (baseOut == 8) {
+          sd = sd * 3 - 2;
+        }
+      } else {
+        base = baseOut;
+      }
+      if (i2 >= 0) {
+        str = str.replace(".", "");
+        y2 = new Ctor(1);
+        y2.e = str.length - i2;
+        y2.d = convertBase(finiteToString(y2), 10, base);
+        y2.e = y2.d.length;
+      }
+      xd = convertBase(str, 10, base);
+      e2 = len = xd.length;
+      for (; xd[--len] == 0; )
+        xd.pop();
+      if (!xd[0]) {
+        str = isExp ? "0p+0" : "0";
+      } else {
+        if (i2 < 0) {
+          e2--;
+        } else {
+          x = new Ctor(x);
+          x.d = xd;
+          x.e = e2;
+          x = divide$1(x, y2, sd, rm, 0, base);
+          xd = x.d;
+          e2 = x.e;
+          roundUp = inexact;
+        }
+        i2 = xd[sd];
+        k = base / 2;
+        roundUp = roundUp || xd[sd + 1] !== void 0;
+        roundUp = rm < 4 ? (i2 !== void 0 || roundUp) && (rm === 0 || rm === (x.s < 0 ? 3 : 2)) : i2 > k || i2 === k && (rm === 4 || roundUp || rm === 6 && xd[sd - 1] & 1 || rm === (x.s < 0 ? 8 : 7));
+        xd.length = sd;
+        if (roundUp) {
+          for (; ++xd[--sd] > base - 1; ) {
+            xd[sd] = 0;
+            if (!sd) {
+              ++e2;
+              xd.unshift(1);
+            }
+          }
+        }
+        for (len = xd.length; !xd[len - 1]; --len)
+          ;
+        for (i2 = 0, str = ""; i2 < len; i2++)
+          str += NUMERALS.charAt(xd[i2]);
+        if (isExp) {
+          if (len > 1) {
+            if (baseOut == 16 || baseOut == 8) {
+              i2 = baseOut == 16 ? 4 : 3;
+              for (--len; len % i2; len++)
+                str += "0";
+              xd = convertBase(str, base, baseOut);
+              for (len = xd.length; !xd[len - 1]; --len)
+                ;
+              for (i2 = 1, str = "1."; i2 < len; i2++)
+                str += NUMERALS.charAt(xd[i2]);
+            } else {
+              str = str.charAt(0) + "." + str.slice(1);
+            }
+          }
+          str = str + (e2 < 0 ? "p" : "p+") + e2;
+        } else if (e2 < 0) {
+          for (; ++e2; )
+            str = "0" + str;
+          str = "0." + str;
+        } else {
+          if (++e2 > len)
+            for (e2 -= len; e2--; )
+              str += "0";
+          else if (e2 < len)
+            str = str.slice(0, e2) + "." + str.slice(e2);
+        }
+      }
+      str = (baseOut == 16 ? "0x" : baseOut == 2 ? "0b" : baseOut == 8 ? "0o" : "") + str;
+    }
+    return x.s < 0 ? "-" + str : str;
+  }
+  function truncate(arr, len) {
+    if (arr.length > len) {
+      arr.length = len;
+      return true;
+    }
+  }
+  function abs(x) {
+    return new this(x).abs();
+  }
+  function acos(x) {
+    return new this(x).acos();
+  }
+  function acosh(x) {
+    return new this(x).acosh();
+  }
+  function add(x, y2) {
+    return new this(x).plus(y2);
+  }
+  function asin(x) {
+    return new this(x).asin();
+  }
+  function asinh(x) {
+    return new this(x).asinh();
+  }
+  function atan(x) {
+    return new this(x).atan();
+  }
+  function atanh(x) {
+    return new this(x).atanh();
+  }
+  function atan2(y2, x) {
+    y2 = new this(y2);
+    x = new this(x);
+    var r2, pr = this.precision, rm = this.rounding, wpr = pr + 4;
+    if (!y2.s || !x.s) {
+      r2 = new this(NaN);
+    } else if (!y2.d && !x.d) {
+      r2 = getPi(this, wpr, 1).times(x.s > 0 ? 0.25 : 0.75);
+      r2.s = y2.s;
+    } else if (!x.d || y2.isZero()) {
+      r2 = x.s < 0 ? getPi(this, pr, rm) : new this(0);
+      r2.s = y2.s;
+    } else if (!y2.d || x.isZero()) {
+      r2 = getPi(this, wpr, 1).times(0.5);
+      r2.s = y2.s;
+    } else if (x.s < 0) {
+      this.precision = wpr;
+      this.rounding = 1;
+      r2 = this.atan(divide$1(y2, x, wpr, 1));
+      x = getPi(this, wpr, 1);
+      this.precision = pr;
+      this.rounding = rm;
+      r2 = y2.s < 0 ? r2.minus(x) : r2.plus(x);
+    } else {
+      r2 = this.atan(divide$1(y2, x, wpr, 1));
+    }
+    return r2;
+  }
+  function cbrt(x) {
+    return new this(x).cbrt();
+  }
+  function ceil(x) {
+    return finalise(x = new this(x), x.e + 1, 2);
+  }
+  function clamp(x, min2, max2) {
+    return new this(x).clamp(min2, max2);
+  }
+  function config$1(obj) {
+    if (!obj || typeof obj !== "object")
+      throw Error(decimalError + "Object expected");
+    var i2, p2, v2, useDefaults = obj.defaults === true, ps2 = [
+      "precision",
+      1,
+      MAX_DIGITS,
+      "rounding",
+      0,
+      8,
+      "toExpNeg",
+      -EXP_LIMIT,
+      0,
+      "toExpPos",
+      0,
+      EXP_LIMIT,
+      "maxE",
+      0,
+      EXP_LIMIT,
+      "minE",
+      -EXP_LIMIT,
+      0,
+      "modulo",
+      0,
+      9
+    ];
+    for (i2 = 0; i2 < ps2.length; i2 += 3) {
+      if (p2 = ps2[i2], useDefaults)
+        this[p2] = DEFAULTS[p2];
+      if ((v2 = obj[p2]) !== void 0) {
+        if (mathfloor(v2) === v2 && v2 >= ps2[i2 + 1] && v2 <= ps2[i2 + 2])
+          this[p2] = v2;
+        else
+          throw Error(invalidArgument + p2 + ": " + v2);
+      }
+    }
+    if (p2 = "crypto", useDefaults)
+      this[p2] = DEFAULTS[p2];
+    if ((v2 = obj[p2]) !== void 0) {
+      if (v2 === true || v2 === false || v2 === 0 || v2 === 1) {
+        if (v2) {
+          if (typeof crypto != "undefined" && crypto && (crypto.getRandomValues || crypto.randomBytes)) {
+            this[p2] = true;
+          } else {
+            throw Error(cryptoUnavailable);
+          }
+        } else {
+          this[p2] = false;
+        }
+      } else {
+        throw Error(invalidArgument + p2 + ": " + v2);
+      }
+    }
+    return this;
+  }
+  function cos(x) {
+    return new this(x).cos();
+  }
+  function cosh(x) {
+    return new this(x).cosh();
+  }
+  function clone(obj) {
+    var i2, p2, ps2;
+    function Decimal2(v2) {
+      var e2, i3, t2, x = this;
+      if (!(x instanceof Decimal2))
+        return new Decimal2(v2);
+      x.constructor = Decimal2;
+      if (isDecimalInstance(v2)) {
+        x.s = v2.s;
+        if (external) {
+          if (!v2.d || v2.e > Decimal2.maxE) {
+            x.e = NaN;
+            x.d = null;
+          } else if (v2.e < Decimal2.minE) {
+            x.e = 0;
+            x.d = [0];
+          } else {
+            x.e = v2.e;
+            x.d = v2.d.slice();
+          }
+        } else {
+          x.e = v2.e;
+          x.d = v2.d ? v2.d.slice() : v2.d;
+        }
+        return;
+      }
+      t2 = typeof v2;
+      if (t2 === "number") {
+        if (v2 === 0) {
+          x.s = 1 / v2 < 0 ? -1 : 1;
+          x.e = 0;
+          x.d = [0];
+          return;
+        }
+        if (v2 < 0) {
+          v2 = -v2;
+          x.s = -1;
+        } else {
+          x.s = 1;
+        }
+        if (v2 === ~~v2 && v2 < 1e7) {
+          for (e2 = 0, i3 = v2; i3 >= 10; i3 /= 10)
+            e2++;
+          if (external) {
+            if (e2 > Decimal2.maxE) {
+              x.e = NaN;
+              x.d = null;
+            } else if (e2 < Decimal2.minE) {
+              x.e = 0;
+              x.d = [0];
+            } else {
+              x.e = e2;
+              x.d = [v2];
+            }
+          } else {
+            x.e = e2;
+            x.d = [v2];
+          }
+          return;
+        } else if (v2 * 0 !== 0) {
+          if (!v2)
+            x.s = NaN;
+          x.e = NaN;
+          x.d = null;
+          return;
+        }
+        return parseDecimal(x, v2.toString());
+      } else if (t2 !== "string") {
+        throw Error(invalidArgument + v2);
+      }
+      if ((i3 = v2.charCodeAt(0)) === 45) {
+        v2 = v2.slice(1);
+        x.s = -1;
+      } else {
+        if (i3 === 43)
+          v2 = v2.slice(1);
+        x.s = 1;
+      }
+      return isDecimal.test(v2) ? parseDecimal(x, v2) : parseOther(x, v2);
+    }
+    Decimal2.prototype = P$1;
+    Decimal2.ROUND_UP = 0;
+    Decimal2.ROUND_DOWN = 1;
+    Decimal2.ROUND_CEIL = 2;
+    Decimal2.ROUND_FLOOR = 3;
+    Decimal2.ROUND_HALF_UP = 4;
+    Decimal2.ROUND_HALF_DOWN = 5;
+    Decimal2.ROUND_HALF_EVEN = 6;
+    Decimal2.ROUND_HALF_CEIL = 7;
+    Decimal2.ROUND_HALF_FLOOR = 8;
+    Decimal2.EUCLID = 9;
+    Decimal2.config = Decimal2.set = config$1;
+    Decimal2.clone = clone;
+    Decimal2.isDecimal = isDecimalInstance;
+    Decimal2.abs = abs;
+    Decimal2.acos = acos;
+    Decimal2.acosh = acosh;
+    Decimal2.add = add;
+    Decimal2.asin = asin;
+    Decimal2.asinh = asinh;
+    Decimal2.atan = atan;
+    Decimal2.atanh = atanh;
+    Decimal2.atan2 = atan2;
+    Decimal2.cbrt = cbrt;
+    Decimal2.ceil = ceil;
+    Decimal2.clamp = clamp;
+    Decimal2.cos = cos;
+    Decimal2.cosh = cosh;
+    Decimal2.div = div;
+    Decimal2.exp = exp;
+    Decimal2.floor = floor;
+    Decimal2.hypot = hypot;
+    Decimal2.ln = ln;
+    Decimal2.log = log;
+    Decimal2.log10 = log10;
+    Decimal2.log2 = log2;
+    Decimal2.max = max;
+    Decimal2.min = min;
+    Decimal2.mod = mod;
+    Decimal2.mul = mul;
+    Decimal2.pow = pow;
+    Decimal2.random = random$1;
+    Decimal2.round = round$1;
+    Decimal2.sign = sign;
+    Decimal2.sin = sin;
+    Decimal2.sinh = sinh;
+    Decimal2.sqrt = sqrt;
+    Decimal2.sub = sub;
+    Decimal2.sum = sum;
+    Decimal2.tan = tan;
+    Decimal2.tanh = tanh;
+    Decimal2.trunc = trunc;
+    if (obj === void 0)
+      obj = {};
+    if (obj) {
+      if (obj.defaults !== true) {
+        ps2 = ["precision", "rounding", "toExpNeg", "toExpPos", "maxE", "minE", "modulo", "crypto"];
+        for (i2 = 0; i2 < ps2.length; )
+          if (!obj.hasOwnProperty(p2 = ps2[i2++]))
+            obj[p2] = this[p2];
+      }
+    }
+    Decimal2.config(obj);
+    return Decimal2;
+  }
+  function div(x, y2) {
+    return new this(x).div(y2);
+  }
+  function exp(x) {
+    return new this(x).exp();
+  }
+  function floor(x) {
+    return finalise(x = new this(x), x.e + 1, 3);
+  }
+  function hypot() {
+    var i2, n2, t2 = new this(0);
+    external = false;
+    for (i2 = 0; i2 < arguments.length; ) {
+      n2 = new this(arguments[i2++]);
+      if (!n2.d) {
+        if (n2.s) {
+          external = true;
+          return new this(1 / 0);
+        }
+        t2 = n2;
+      } else if (t2.d) {
+        t2 = t2.plus(n2.times(n2));
+      }
+    }
+    external = true;
+    return t2.sqrt();
+  }
+  function isDecimalInstance(obj) {
+    return obj instanceof Decimal || obj && obj.toStringTag === tag || false;
+  }
+  function ln(x) {
+    return new this(x).ln();
+  }
+  function log(x, y2) {
+    return new this(x).log(y2);
+  }
+  function log2(x) {
+    return new this(x).log(2);
+  }
+  function log10(x) {
+    return new this(x).log(10);
+  }
+  function max() {
+    return maxOrMin(this, arguments, "lt");
+  }
+  function min() {
+    return maxOrMin(this, arguments, "gt");
+  }
+  function mod(x, y2) {
+    return new this(x).mod(y2);
+  }
+  function mul(x, y2) {
+    return new this(x).mul(y2);
+  }
+  function pow(x, y2) {
+    return new this(x).pow(y2);
+  }
+  function random$1(sd) {
+    var d2, e2, k, n2, i2 = 0, r2 = new this(1), rd = [];
+    if (sd === void 0)
+      sd = this.precision;
+    else
+      checkInt32(sd, 1, MAX_DIGITS);
+    k = Math.ceil(sd / LOG_BASE);
+    if (!this.crypto) {
+      for (; i2 < k; )
+        rd[i2++] = Math.random() * 1e7 | 0;
+    } else if (crypto.getRandomValues) {
+      d2 = crypto.getRandomValues(new Uint32Array(k));
+      for (; i2 < k; ) {
+        n2 = d2[i2];
+        if (n2 >= 429e7) {
+          d2[i2] = crypto.getRandomValues(new Uint32Array(1))[0];
+        } else {
+          rd[i2++] = n2 % 1e7;
+        }
+      }
+    } else if (crypto.randomBytes) {
+      d2 = crypto.randomBytes(k *= 4);
+      for (; i2 < k; ) {
+        n2 = d2[i2] + (d2[i2 + 1] << 8) + (d2[i2 + 2] << 16) + ((d2[i2 + 3] & 127) << 24);
+        if (n2 >= 214e7) {
+          crypto.randomBytes(4).copy(d2, i2);
+        } else {
+          rd.push(n2 % 1e7);
+          i2 += 4;
+        }
+      }
+      i2 = k / 4;
+    } else {
+      throw Error(cryptoUnavailable);
+    }
+    k = rd[--i2];
+    sd %= LOG_BASE;
+    if (k && sd) {
+      n2 = mathpow(10, LOG_BASE - sd);
+      rd[i2] = (k / n2 | 0) * n2;
+    }
+    for (; rd[i2] === 0; i2--)
+      rd.pop();
+    if (i2 < 0) {
+      e2 = 0;
+      rd = [0];
+    } else {
+      e2 = -1;
+      for (; rd[0] === 0; e2 -= LOG_BASE)
+        rd.shift();
+      for (k = 1, n2 = rd[0]; n2 >= 10; n2 /= 10)
+        k++;
+      if (k < LOG_BASE)
+        e2 -= LOG_BASE - k;
+    }
+    r2.e = e2;
+    r2.d = rd;
+    return r2;
+  }
+  function round$1(x) {
+    return finalise(x = new this(x), x.e + 1, this.rounding);
+  }
+  function sign(x) {
+    x = new this(x);
+    return x.d ? x.d[0] ? x.s : 0 * x.s : x.s || NaN;
+  }
+  function sin(x) {
+    return new this(x).sin();
+  }
+  function sinh(x) {
+    return new this(x).sinh();
+  }
+  function sqrt(x) {
+    return new this(x).sqrt();
+  }
+  function sub(x, y2) {
+    return new this(x).sub(y2);
+  }
+  function sum() {
+    var i2 = 0, args = arguments, x = new this(args[i2]);
+    external = false;
+    for (; x.s && ++i2 < args.length; )
+      x = x.plus(args[i2]);
+    external = true;
+    return finalise(x, this.precision, this.rounding);
+  }
+  function tan(x) {
+    return new this(x).tan();
+  }
+  function tanh(x) {
+    return new this(x).tanh();
+  }
+  function trunc(x) {
+    return finalise(x = new this(x), x.e + 1, 1);
+  }
+  P$1[Symbol.for("nodejs.util.inspect.custom")] = P$1.toString;
+  P$1[Symbol.toStringTag] = "Decimal";
+  var Decimal = P$1.constructor = clone(DEFAULTS);
+  LN10 = new Decimal(LN10);
+  PI = new Decimal(PI);
   const useCartStore = defineStore("cart", {
     // 状态：相当于 Vuex 的 state
     state: () => ({
       carts: []
     }),
     getters: {
-      // 计算指定店铺的总价
+      // 计算指定店铺的总价（用 Decimal 累加，避免精度偏差）
       cartTotalByShopId: (state) => (shopId) => {
-        let tempcount = 0;
-        state.carts.filter((item) => {
+        let total = new Decimal(0);
+        state.carts.forEach((item) => {
           if (item.shop_id == shopId) {
-            tempcount += item.price * item.tempCount;
+            const price = new Decimal(item.price || 0);
+            const tempCount = new Decimal(item.tempCount || 0);
+            total = total.plus(price.mul(tempCount));
           }
         });
-        return tempcount;
+        return total.toFixed(2);
       },
-      // 获取指定商品的数量
+      // 获取指定商品的数量（返回 Decimal 处理后的数值，避免精度偏差）
       getTempCount: (state) => (id) => {
         const item = state.carts.find((i2) => i2.id === id);
-        return item ? item.tempCount : 0;
+        if (!item)
+          return 0;
+        return new Decimal(item.tempCount || 0).toNumber();
       },
       // 计算指定店铺的商品数量
       cartsLengthByShopId: (state) => (shopId) => {
@@ -9079,27 +11013,28 @@ This will fail in production.`);
       }
     },
     actions: {
-      // 数量加1
+      // 数量加1（用 Decimal 精确计算）
       addItem(item) {
         const index2 = this.carts.findIndex((i2) => i2.id === item.id);
         if (index2 !== -1) {
-          const currentCount = Number(this.carts[index2].tempCount) || 0;
-          this.carts[index2].tempCount = currentCount + 1;
+          const currentCount = new Decimal(this.carts[index2].tempCount || 0);
+          this.carts[index2].tempCount = currentCount.plus(1).toFixed(2);
         } else {
           this.carts.push({
             ...item,
             tempCount: 1
-            // 首次添加确保是有效数字
+            // 首次添加为整数，无精度问题
           });
         }
       },
-      // 数量减一
+      // 数量减一（用 Decimal 精确计算）
       subItem(item) {
         const index2 = this.carts.findIndex((i2) => i2.id === item.id);
         if (index2 !== -1) {
-          if (this.carts[index2].tempCount > 1) {
-            const currentCount = Number(this.carts[index2].tempCount) || 0;
-            this.carts[index2].tempCount = currentCount - 1;
+          const currentCount = new Decimal(this.carts[index2].tempCount || 0);
+          const newCount = currentCount.minus(1);
+          if (newCount.greaterThan(1)) {
+            this.carts[index2].tempCount = newCount.toFixed(2);
           } else {
             this.carts.splice(index2, 1);
           }
@@ -9107,30 +11042,31 @@ This will fail in production.`);
       },
       // 清空购物车
       clearCart() {
-        formatAppLog("log", "at store/cart.js:81", "clearCart action triggered");
+        formatAppLog("log", "at store/cart.js:85", "clearCart action triggered");
         this.carts = [];
       },
-      // 任意输入数量
+      // 任意输入数量（用 Decimal 处理赋值和比较）
       anyNumber(item) {
         const index2 = this.carts.findIndex((i2) => i2.id === item.id);
+        const inputCount = new Decimal(item.count || 0);
         if (index2 !== -1) {
-          if (item.count < 0.1) {
+          if (inputCount.lessThan(0.1)) {
             this.carts.splice(index2, 1);
           } else {
-            this.carts[index2].tempCount = item.count;
+            this.carts[index2].tempCount = inputCount.toFixed(2);
           }
         } else {
-          if (item.count >= 0.1) {
+          if (inputCount.greaterThanOrEqualTo(0.1)) {
             this.carts.push({
               ...item,
-              tempCount: item.count
+              tempCount: inputCount.toFixed(2)
             });
           }
         }
       }
     }
   });
-  const _sfc_main$1X = {
+  const _sfc_main$1Y = {
     name: "shop-item",
     props: {
       shop_id: {
@@ -9160,17 +11096,12 @@ This will fail in production.`);
       cartTotalByShopId() {
         if (!Array.isArray(this.carts))
           return 0;
-        const total = this.getCartsByShopId.reduce((sum, item) => {
+        const total = this.getCartsByShopId.reduce((sum2, item) => {
           const price = Number(item == null ? void 0 : item.price) || 0;
           const count = Number(item == null ? void 0 : item.tempCount) || 0;
-          return sum + price * count;
+          return sum2 + price * count;
         }, 0);
         return Number(total.toFixed(2));
-      },
-      cartsLengthByShopId() {
-        return this.getCartsByShopId.reduce((count, item) => {
-          return count + (item.tempCount || 1);
-        }, 0);
       },
       getTempCount() {
         return (itemId) => {
@@ -9190,11 +11121,11 @@ This will fail in production.`);
         this.cartStore.carts = this.cartStore.carts.filter(
           (item) => item.shop_id !== this.shop_id
         );
-        formatAppLog("log", "at components/shop-item/shop-item.vue:140", "当前店铺购物车已清空");
+        formatAppLog("log", "at components/shop-item/shop-item.vue:129", "当前店铺购物车已清空");
       },
       // 原有交互方法不变
       clickCart() {
-        formatAppLog("log", "at components/shop-item/shop-item.vue:144", this.showCartLayer1);
+        formatAppLog("log", "at components/shop-item/shop-item.vue:133", this.showCartLayer1);
         this.showCartLayer1 = !this.showCartLayer1;
       },
       goToBuyPage() {
@@ -9204,7 +11135,7 @@ This will fail in production.`);
       }
     }
   };
-  function _sfc_render$1W(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1X(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "shoplist" }, [
       $data.showCartLayer1 ? (vue.openBlock(), vue.createElementBlock("view", {
@@ -9332,7 +11263,7 @@ This will fail in production.`);
             vue.createElementVNode(
               "view",
               { class: "badge" },
-              vue.toDisplayString($options.cartsLengthByShopId),
+              vue.toDisplayString($data.cartStore.cartsLengthByShopId($props.shop_id)),
               1
               /* TEXT */
             )
@@ -9352,8 +11283,8 @@ This will fail in production.`);
       ])
     ]);
   }
-  const shopItem = /* @__PURE__ */ _export_sfc(_sfc_main$1X, [["render", _sfc_render$1W], ["__scopeId", "data-v-a8327be0"], ["__file", "E:/小程序转app/xcbapp/components/shop-item/shop-item.vue"]]);
-  const _sfc_main$1W = {
+  const shopItem = /* @__PURE__ */ _export_sfc(_sfc_main$1Y, [["render", _sfc_render$1X], ["__scopeId", "data-v-a8327be0"], ["__file", "E:/小程序转app/xcbapp/components/shop-item/shop-item.vue"]]);
+  const _sfc_main$1X = {
     name: "menuBarVue",
     props: ["item"],
     // 保留原有 props
@@ -9438,7 +11369,7 @@ This will fail in production.`);
       // 5. 移除原 Vuex 的 mapMutations 扩展（已替换为 Pinia 直接调用）
     }
   };
-  function _sfc_render$1V(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1W(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "box",
@@ -9541,22 +11472,14 @@ This will fail in production.`);
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const menuBarVue = /* @__PURE__ */ _export_sfc(_sfc_main$1W, [["render", _sfc_render$1V], ["__scopeId", "data-v-757745aa"], ["__file", "E:/小程序转app/xcbapp/components/menuBar.vue"]]);
-  const _sfc_main$1V = {
+  const menuBarVue = /* @__PURE__ */ _export_sfc(_sfc_main$1X, [["render", _sfc_render$1W], ["__scopeId", "data-v-757745aa"], ["__file", "E:/小程序转app/xcbapp/components/menuBar.vue"]]);
+  const _sfc_main$1W = {
     name: "inputBox",
-    props: {
-      // 接收父组件传入的购物车项（必传）
-      initialCartItem: {
-        type: Object,
-        required: true,
-        default: () => ({})
-      }
-    },
     data() {
       return {
         show: false,
         value: "",
-        // 初始值改为空字符串，而非非数字文本
+        // 保持字符串类型，方便小数点处理
         keys: [
           "1",
           "2",
@@ -9576,58 +11499,58 @@ This will fail in production.`);
         lock: true,
         // 键盘锁
         animationData: {},
-        cartItem: {}
-        // 初始化为空对象，而非数字 0
+        cartItem: {},
+        // 商品信息
+        cartStore: {}
       };
     },
     watch: {
       value(newValue, oldValue) {
-        if (!newValue)
-          return;
-        if (newValue[0] === ".") {
-          this.value = "0" + newValue;
-          return;
-        }
-        const dotCount = (newValue.match(/\./g) || []).length;
-        if (dotCount > 1) {
-          this.value = oldValue;
+        const newStrValue = String(newValue).trim();
+        const oldStrValue = String(oldValue).trim();
+        if (newStrValue !== this.value) {
+          this.value = newStrValue;
           return;
         }
-        if (newValue.length > 1 && newValue[0] === "0" && newValue[1] !== ".") {
-          this.value = oldValue;
+        if (!newStrValue)
+          return;
+        if (newStrValue.charAt(0) === ".") {
+          this.value = `0${newStrValue}`;
           return;
         }
-        const dotIndex = newValue.indexOf(".");
-        if (dotIndex > -1 && newValue.length - dotIndex > 2) {
-          this.value = oldValue;
+        const dotArr = newStrValue.split(".");
+        if (dotArr.length - 1 > 1) {
+          this.value = oldStrValue;
           return;
         }
-        if (this.cartItem && typeof this.cartItem === "object") {
-          const numValue = Number(this.value) || 0;
-          this.cartItem.count = numValue;
-          this.anyNumber(this.cartItem);
+        if (newStrValue.startsWith("00") && dotArr.length === 1) {
+          this.value = oldStrValue;
+          return;
+        }
+        if (dotArr.length === 2 && dotArr[1].length > 1) {
+          this.value = oldStrValue;
         }
       },
       // 监听数字键盘是否弹起
       show(newValue) {
         if (newValue) {
-          this.cartItem = { ...this.initialCartItem };
-          this.value = this.getTempCount(this.cartItem.id) + "" || "";
+          const tempCount = this.cartStore.getTempCount(this.cartItem.id) || 0;
+          this.value = String(tempCount);
         }
       }
     },
     computed: {
-      // 计算单商品总价（空值防护 + Decimal 正确使用）
       singleItemPrice() {
-        if (!this.cartItem || !this.cartItem.price || !this.value)
-          return 0;
-        const price = new Decimal(Number(this.cartItem.price) || 0);
-        const count = new Decimal(Number(this.value) || 0);
-        return price.mul(count).toNumber().toFixed(2);
+        const price = Number(this.cartItem.price) || 0;
+        const count = Number(this.value) || 0;
+        return (price * count).toFixed(2);
       }
     },
+    created() {
+      this.cartStore = useCartStore();
+    },
     methods: {
-      // 校验是否为数字
+      // 校验是否为数字（支持小数）
       isNumeric(str) {
         return /^\d+(\.\d+)?$/.test(str);
       },
@@ -9635,13 +11558,24 @@ This will fail in production.`);
       close() {
         this.show = false;
       },
-      // 输入数字
+      // 输入数字/小数点
       inputNum(num) {
-        if (this.value === "" && num === "0") {
-          this.value = "0";
+        let currentValue = String(this.value).trim();
+        if (num === ".") {
+          if (currentValue.includes("."))
+            return;
+          if (!currentValue) {
+            this.value = "0.";
+            return;
+          }
+          this.value = `${currentValue}.`;
           return;
         }
-        this.value += num;
+        if (currentValue === "0") {
+          this.value = num;
+        } else {
+          this.value = `${currentValue}${num}`;
+        }
       },
       // 功能函数
       func(label) {
@@ -9662,113 +11596,131 @@ This will fail in production.`);
       },
       // 删除最后一位
       remove() {
-        if (this.value) {
-          this.value = this.value.substring(0, this.value.length - 1);
-        }
+        if (!this.value)
+          return;
+        this.value = this.value.substring(0, this.value.length - 1);
       },
-      // 清空值
+      // 清空值（设为空字符串，保持类型一致）
       clear() {
         this.value = "";
-        if (this.cartItem) {
+        if (this.cartItem.id) {
           this.cartItem.count = 0;
           this.anyNumber(this.cartItem);
         }
       },
       // 确认提交
       sure() {
-        if (!this.value || !this.isNumeric(this.value)) {
-          this.cartItem.count = 0;
-          this.anyNumber(this.cartItem);
-          this.show = false;
-          return;
+        let finalCount = 0;
+        if (this.value && this.isNumeric(this.value)) {
+          finalCount = Number(this.value);
         }
-        const value = Number(this.value);
-        this.cartItem.count = value;
-        this.anyNumber(this.cartItem);
+        if (this.cartItem.id) {
+          this.cartItem.count = finalCount;
+          this.anyNumber(this.cartItem);
+        }
         this.show = false;
       },
-      // 【实现缺失的方法】获取临时数量（示例：从本地/store获取）
-      getTempCount(id) {
-        const cartList = uni.getStorageSync("cartList") || [];
-        const item = cartList.find((item2) => item2.id === id);
-        return (item == null ? void 0 : item.count) || 0;
-      },
-      // 【实现缺失的方法】同步数量到store（示例）
       anyNumber(cartItem) {
-        uni.setStorageSync("cartList", (uni.getStorageSync("cartList") || []).map((item) => {
-          if (item.id === cartItem.id)
-            return { ...item, count: cartItem.count };
-          return item;
-        }));
+        this.cartStore.anyNumber(cartItem);
       }
     }
   };
-  function _sfc_render$1U(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1V(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.withDirectives((vue.openBlock(), vue.createElementBlock("view", {
-      class: "bigBox",
-      onClick: _cache[1] || (_cache[1] = (...args) => $options.close && $options.close(...args)),
+      class: "number-keyboard-mask",
+      onClick: _cache[4] || (_cache[4] = (...args) => $options.close && $options.close(...args)),
       animation: $data.animationData
     }, [
       vue.withDirectives(vue.createElementVNode(
         "view",
         {
-          class: "body",
-          onClick: _cache[0] || (_cache[0] = vue.withModifiers(() => {
+          class: "number-keyboard-wrapper",
+          onClick: _cache[3] || (_cache[3] = vue.withModifiers(() => {
           }, ["stop"]))
         },
         [
-          vue.createElementVNode("view", { class: "value" }, [
-            vue.createElementVNode(
-              "text",
-              { style: { "font-size": "30rpx" } },
-              vue.toDisplayString($data.value),
-              1
-              /* TEXT */
-            ),
-            vue.createElementVNode(
-              "text",
-              { style: { "position": "absolute", "left": "20rpx", "color": "gray" } },
-              vue.toDisplayString($data.cartItem.commodity_name) + "￥" + vue.toDisplayString($data.cartItem.price) + "元/" + vue.toDisplayString($data.cartItem.weight_name),
-              1
-              /* TEXT */
-            ),
-            vue.createElementVNode(
-              "text",
-              { style: { "position": "absolute", "right": "20rpx", "color": "gray" } },
-              vue.toDisplayString($options.singleItemPrice) + "元",
-              1
-              /* TEXT */
-            )
+          vue.createElementVNode("view", { class: "keyboard-input-area" }, [
+            vue.createElementVNode("view", { class: "goods-info" }, [
+              vue.createElementVNode(
+                "text",
+                { class: "goods-name" },
+                vue.toDisplayString($data.cartItem.commodity_name || "商品"),
+                1
+                /* TEXT */
+              ),
+              vue.createElementVNode(
+                "text",
+                { class: "goods-price" },
+                "￥" + vue.toDisplayString($data.cartItem.price || 0) + "元",
+                1
+                /* TEXT */
+              )
+            ]),
+            vue.createElementVNode("view", { class: "input-price-wrap" }, [
+              vue.createElementVNode(
+                "text",
+                { class: "input-value" },
+                vue.toDisplayString($data.value || "0"),
+                1
+                /* TEXT */
+              ),
+              vue.createElementVNode("view", { class: "total-price" }, [
+                vue.createElementVNode("text", { class: "total-label" }, "合计："),
+                vue.createElementVNode(
+                  "text",
+                  { class: "total-money" },
+                  "￥" + vue.toDisplayString($options.singleItemPrice),
+                  1
+                  /* TEXT */
+                )
+              ])
+            ])
           ]),
-          vue.createElementVNode("view", { class: "function" }, [
-            vue.createElementVNode("view", { class: "nums" }, [
+          vue.createElementVNode("view", { class: "keyboard-area" }, [
+            vue.createElementVNode("view", { class: "number-keys" }, [
               (vue.openBlock(true), vue.createElementBlock(
                 vue.Fragment,
                 null,
                 vue.renderList($data.keys, (item) => {
                   return vue.openBlock(), vue.createElementBlock("view", {
-                    class: "num",
+                    class: "number-key",
                     key: item,
-                    onClick: vue.withModifiers(($event) => item != "取消" ? $options.inputNum(item) : $options.func(item), ["stop"])
-                  }, vue.toDisplayString(item), 9, ["onClick"]);
+                    onClick: vue.withModifiers(($event) => item !== "取消" ? $options.inputNum(item) : $options.func(item), ["stop"])
+                  }, [
+                    vue.createElementVNode(
+                      "text",
+                      {
+                        class: vue.normalizeClass(["key-text", { cancelKey: item === "取消" }])
+                      },
+                      vue.toDisplayString(item),
+                      3
+                      /* TEXT, CLASS */
+                    )
+                  ], 8, ["onClick"]);
                 }),
                 128
                 /* KEYED_FRAGMENT */
               ))
             ]),
-            vue.createElementVNode("view", { class: "funs" }, [
-              (vue.openBlock(true), vue.createElementBlock(
-                vue.Fragment,
-                null,
-                vue.renderList($data.funs, (item) => {
-                  return vue.openBlock(), vue.createElementBlock("view", {
-                    class: "fun",
-                    onClick: vue.withModifiers(($event) => $options.func(item), ["stop"])
-                  }, vue.toDisplayString(item), 9, ["onClick"]);
-                }),
-                256
-                /* UNKEYED_FRAGMENT */
-              ))
+            vue.createElementVNode("view", { class: "function-keys" }, [
+              vue.createElementVNode("view", {
+                class: "func-key delete-key",
+                onClick: _cache[0] || (_cache[0] = vue.withModifiers(($event) => $options.func("删除"), ["stop"]))
+              }, [
+                vue.createElementVNode("text", { class: "func-text" }, "删除")
+              ]),
+              vue.createElementVNode("view", {
+                class: "func-key clear-key",
+                onClick: _cache[1] || (_cache[1] = vue.withModifiers(($event) => $options.func("清空"), ["stop"]))
+              }, [
+                vue.createElementVNode("text", { class: "func-text" }, "清空")
+              ]),
+              vue.createElementVNode("view", {
+                class: "func-key confirm-key",
+                onClick: _cache[2] || (_cache[2] = vue.withModifiers(($event) => $options.func("确定"), ["stop"]))
+              }, [
+                vue.createElementVNode("text", { class: "func-text confirm-text" }, "确定")
+              ])
             ])
           ])
         ],
@@ -9781,7 +11733,7 @@ This will fail in production.`);
       [vue.vShow, $data.show]
     ]);
   }
-  const inputBoxVue = /* @__PURE__ */ _export_sfc(_sfc_main$1V, [["render", _sfc_render$1U], ["__scopeId", "data-v-c235284e"], ["__file", "E:/小程序转app/xcbapp/components/inputBox.vue"]]);
+  const inputBoxVue = /* @__PURE__ */ _export_sfc(_sfc_main$1W, [["render", _sfc_render$1V], ["__scopeId", "data-v-c235284e"], ["__file", "E:/小程序转app/xcbapp/components/inputBox.vue"]]);
   const myMixin = {
     methods: {
       /**
@@ -9900,7 +11852,7 @@ This will fail in production.`);
       }
     }
   };
-  const _sfc_main$1U = {
+  const _sfc_main$1V = {
     data() {
       return {
         // 修改点 2: 移除 Vuex 映射的状态，直接从 Store 访问
@@ -9931,7 +11883,8 @@ This will fail in production.`);
     components: {
       shopItem,
       menuBarVue,
-      inputBoxVue
+      inputBoxVue,
+      mButtonVue
     },
     // 修改点 3: 使用 setup() 函数获取 Pinia Store 实例
     setup() {
@@ -9993,7 +11946,8 @@ This will fail in production.`);
         this.hasMore = true;
       },
       // 搜索菜品
-      async searchCommodity() {
+      async searchCommodity(value) {
+        this.commodity_name = value;
         this.pageData = [];
         let res = await this.fetchData({
           commodity_name: this.commodity_name,
@@ -10010,7 +11964,7 @@ This will fail in production.`);
       },
       // 需要调起数字键盘
       Keyboard(value) {
-        formatAppLog("log", "at pages/ShopDetails/ShopDetails.vue:203", "调用自定义键盘");
+        formatAppLog("log", "at pages/ShopDetails/ShopDetails.vue:209", "调用自定义键盘");
         this.$refs.inputBoxVueRef.show = true;
         this.$refs.inputBoxVueRef.cartItem = value;
       },
@@ -10067,7 +12021,7 @@ This will fail in production.`);
             this.urls2.push(this.shopDetails.businesslogo);
           return response;
         } catch (error2) {
-          formatAppLog("error", "at pages/ShopDetails/ShopDetails.vue:262", "获取摊主详情失败", error2);
+          formatAppLog("error", "at pages/ShopDetails/ShopDetails.vue:268", "获取摊主详情失败", error2);
           uni.showToast({
             title: "获取摊主详情失败",
             icon: "none"
@@ -10101,14 +12055,14 @@ This will fail in production.`);
       }
     }
   };
-  function _sfc_render$1T(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1U(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_inputBoxVue = vue.resolveComponent("inputBoxVue");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_1$5);
-    const _component_uni_list = resolveEasycom(vue.resolveDynamicComponent("uni-list"), __easycom_2$3);
+    const _component_uni_list = resolveEasycom(vue.resolveDynamicComponent("uni-list"), __easycom_2$2);
     const _component_uni_collapse_item = resolveEasycom(vue.resolveDynamicComponent("uni-collapse-item"), __easycom_1$4);
-    const _component_uni_collapse = resolveEasycom(vue.resolveDynamicComponent("uni-collapse"), __easycom_2$2);
-    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2$1);
+    const _component_uni_collapse = resolveEasycom(vue.resolveDynamicComponent("uni-collapse"), __easycom_2$1);
+    const _component_mButtonVue = vue.resolveComponent("mButtonVue");
     const _component_menuBarVue = vue.resolveComponent("menuBarVue");
     const _component_shopItem = vue.resolveComponent("shopItem");
     return vue.openBlock(), vue.createElementBlock(
@@ -10116,9 +12070,9 @@ This will fail in production.`);
       {
         class: "Stallholder",
         "scroll-y": "true",
-        onScrolltolower: _cache[4] || (_cache[4] = (...args) => _ctx.handleScrollToLower && _ctx.handleScrollToLower(...args)),
+        onScrolltolower: _cache[1] || (_cache[1] = (...args) => _ctx.handleScrollToLower && _ctx.handleScrollToLower(...args)),
         style: { height: "100vh" },
-        onClick: _cache[5] || (_cache[5] = (...args) => $options.closeTan && $options.closeTan(...args))
+        onClick: _cache[2] || (_cache[2] = (...args) => $options.closeTan && $options.closeTan(...args))
       },
       [
         vue.createVNode(
@@ -10218,28 +12172,12 @@ This will fail in production.`);
             /* STABLE */
           }),
           vue.createElementVNode("view", { class: "dishes" }, [
-            vue.createElementVNode("view", { class: "search-bar" }, [
-              vue.createVNode(_component_uni_easyinput, {
-                type: "text",
-                "adjust-position": true,
-                modelValue: $data.commodity_name,
-                "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.commodity_name = $event),
-                placeholder: "请输入菜品名称",
-                clearable: false,
-                "placeholder-style": "{ color: '#999', fontSize: '24rpx' }",
-                class: "search-input"
-              }, null, 8, ["modelValue"]),
-              vue.createElementVNode("view", { class: "search-btn-group" }, [
-                vue.createElementVNode("button", {
-                  class: "save search-btn",
-                  onClick: _cache[2] || (_cache[2] = (...args) => $options.searchCommodity && $options.searchCommodity(...args))
-                }, "搜索"),
-                vue.createElementVNode("button", {
-                  class: "save reset-btn",
-                  onClick: _cache[3] || (_cache[3] = (...args) => $options.cancelSearch && $options.cancelSearch(...args))
-                }, "清空")
-              ])
-            ]),
+            vue.createVNode(_component_mButtonVue, {
+              isShowbutton2: true,
+              onBtn1: $options.searchCommodity,
+              onBtn2: $options.cancelSearch,
+              placeholder: "请输入菜品名称"
+            }, null, 8, ["onBtn1", "onBtn2"]),
             vue.createElementVNode("view", { class: "dish-list" }, [
               (vue.openBlock(true), vue.createElementBlock(
                 vue.Fragment,
@@ -10282,8 +12220,8 @@ This will fail in production.`);
       /* NEED_HYDRATION */
     );
   }
-  const PagesShopDetailsShopDetails = /* @__PURE__ */ _export_sfc(_sfc_main$1U, [["render", _sfc_render$1T], ["__file", "E:/小程序转app/xcbapp/pages/ShopDetails/ShopDetails.vue"]]);
-  const _sfc_main$1T = {
+  const PagesShopDetailsShopDetails = /* @__PURE__ */ _export_sfc(_sfc_main$1V, [["render", _sfc_render$1U], ["__file", "E:/小程序转app/xcbapp/pages/ShopDetails/ShopDetails.vue"]]);
+  const _sfc_main$1U = {
     data() {
       return {
         multiArray: [
@@ -10562,7 +12500,7 @@ This will fail in production.`);
       }
     }
   };
-  function _sfc_render$1S(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1T(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "form-card" }, [
@@ -10851,7 +12789,7 @@ This will fail in production.`);
       ])
     ]);
   }
-  const PagesApplyApply = /* @__PURE__ */ _export_sfc(_sfc_main$1T, [["render", _sfc_render$1S], ["__scopeId", "data-v-cdb56d2d"], ["__file", "E:/小程序转app/xcbapp/pages/Apply/Apply.vue"]]);
+  const PagesApplyApply = /* @__PURE__ */ _export_sfc(_sfc_main$1U, [["render", _sfc_render$1T], ["__scopeId", "data-v-cdb56d2d"], ["__file", "E:/小程序转app/xcbapp/pages/Apply/Apply.vue"]]);
   const subPackages = [
     {
       root: "subPackages/PaymentModule",
@@ -11501,6 +13439,12 @@ This will fail in production.`);
     },
     {
       path: "pages/agent/agent",
+      style: {
+        navigationBarTitleText: ""
+      }
+    },
+    {
+      path: "components/public/mButton1/mButton1",
       style: {
         navigationBarTitleText: ""
       }
@@ -14960,7 +16904,7 @@ ${o3}
       }
     }
   };
-  const _sfc_main$1S = {
+  const _sfc_main$1T = {
     name: "UniDataPickerView",
     emits: ["nodeclick", "change", "datachange", "update:modelValue"],
     mixins: [dataPicker],
@@ -15064,7 +17008,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1R(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1S(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-data-pickerview" }, [
       !_ctx.isCloudDataList ? (vue.openBlock(), vue.createElementBlock("scroll-view", {
@@ -15154,8 +17098,8 @@ ${o3}
       ])
     ]);
   }
-  const DataPickerView = /* @__PURE__ */ _export_sfc(_sfc_main$1S, [["render", _sfc_render$1R], ["__scopeId", "data-v-91ec6a82"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-data-picker/components/uni-data-pickerview/uni-data-pickerview.vue"]]);
-  const _sfc_main$1R = {
+  const DataPickerView = /* @__PURE__ */ _export_sfc(_sfc_main$1T, [["render", _sfc_render$1S], ["__scopeId", "data-v-91ec6a82"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-data-picker/components/uni-data-pickerview/uni-data-pickerview.vue"]]);
+  const _sfc_main$1S = {
     name: "UniDataPicker",
     emits: ["popupopened", "popupclosed", "nodeclick", "input", "change", "update:modelValue", "inputclick"],
     mixins: [dataPicker],
@@ -15359,7 +17303,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1Q(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1R(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$7);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_data_picker_view = vue.resolveComponent("data-picker-view");
@@ -15525,7 +17469,7 @@ ${o3}
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$1R, [["render", _sfc_render$1Q], ["__scopeId", "data-v-2653531e"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-data-picker/components/uni-data-picker/uni-data-picker.vue"]]);
+  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$1S, [["render", _sfc_render$1R], ["__scopeId", "data-v-2653531e"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-data-picker/components/uni-data-picker/uni-data-picker.vue"]]);
   let Calendar$1 = class Calendar {
     constructor({
       selected,
@@ -15881,7 +17825,7 @@ ${o3}
     }
     return value;
   }
-  const _sfc_main$1Q = {
+  const _sfc_main$1R = {
     props: {
       weeks: {
         type: Object,
@@ -15915,7 +17859,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1P(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1Q(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -15971,7 +17915,7 @@ ${o3}
       /* CLASS, NEED_HYDRATION */
     );
   }
-  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$1Q, [["render", _sfc_render$1P], ["__scopeId", "data-v-3c762a01"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
+  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$1R, [["render", _sfc_render$1Q], ["__scopeId", "data-v-3c762a01"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
   const en$1 = {
     "uni-datetime-picker.selectDate": "select date",
     "uni-datetime-picker.selectTime": "select time",
@@ -16046,7 +17990,7 @@ ${o3}
   const {
     t: t$3
   } = initVueI18n(i18nMessages);
-  const _sfc_main$1P = {
+  const _sfc_main$1Q = {
     name: "UniDatetimePicker",
     data() {
       return {
@@ -16650,7 +18594,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1O(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1P(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-datetime-picker" }, [
       vue.createElementVNode("view", {
         onClick: _cache[0] || (_cache[0] = (...args) => $options.initTimePicker && $options.initTimePicker(...args))
@@ -16925,11 +18869,11 @@ ${o3}
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$1P, [["render", _sfc_render$1O], ["__scopeId", "data-v-1d532b70"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
+  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$1Q, [["render", _sfc_render$1P], ["__scopeId", "data-v-1d532b70"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
   const {
     t: t$2
   } = initVueI18n(i18nMessages);
-  const _sfc_main$1O = {
+  const _sfc_main$1P = {
     components: {
       calendarItem,
       timePicker: TimePicker
@@ -17410,7 +19354,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1N(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1O(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_calendar_item = vue.resolveComponent("calendar-item");
     const _component_time_picker = vue.resolveComponent("time-picker");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
@@ -17703,8 +19647,8 @@ ${o3}
       /* NEED_HYDRATION */
     );
   }
-  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$1O, [["render", _sfc_render$1N], ["__scopeId", "data-v-1d379219"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
-  const _sfc_main$1N = {
+  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$1P, [["render", _sfc_render$1O], ["__scopeId", "data-v-1d379219"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
+  const _sfc_main$1O = {
     name: "UniDatetimePicker",
     options: {
       virtualHost: true
@@ -18360,7 +20304,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1M(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1N(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_time_picker = vue.resolveComponent("time-picker");
     const _component_Calendar = vue.resolveComponent("Calendar");
@@ -18704,8 +20648,8 @@ ${o3}
       }, null, 8, ["date", "defTime", "start-date", "end-date", "selectableTimes", "startPlaceholder", "endPlaceholder", "default-value", "pleStatus", "range", "hasTime", "hideSecond", "onConfirm", "onMaskClose", "onChange"])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1N, [["render", _sfc_render$1M], ["__scopeId", "data-v-9802168a"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
-  const _sfc_main$1M = {
+  const __easycom_4$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1O, [["render", _sfc_render$1N], ["__scopeId", "data-v-9802168a"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
+  const _sfc_main$1N = {
     data() {
       return {
         methodItems: [{
@@ -18975,9 +20919,9 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1L(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1M(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_data_picker = resolveEasycom(vue.resolveDynamicComponent("uni-data-picker"), __easycom_0$3);
-    const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$1);
+    const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$2);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("scroll-view", {
         class: "Stallholder",
@@ -19104,8 +21048,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesBuyBuy = /* @__PURE__ */ _export_sfc(_sfc_main$1M, [["render", _sfc_render$1L], ["__scopeId", "data-v-4ca90ae6"], ["__file", "E:/小程序转app/xcbapp/pages/Buy/Buy.vue"]]);
-  const _sfc_main$1L = {
+  const PagesBuyBuy = /* @__PURE__ */ _export_sfc(_sfc_main$1N, [["render", _sfc_render$1M], ["__scopeId", "data-v-4ca90ae6"], ["__file", "E:/小程序转app/xcbapp/pages/Buy/Buy.vue"]]);
+  const _sfc_main$1M = {
     data() {
       return {
         pageData: [],
@@ -19384,7 +21328,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1K(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1L(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode(
@@ -19679,8 +21623,8 @@ ${o3}
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const PagesPublishPublish = /* @__PURE__ */ _export_sfc(_sfc_main$1L, [["render", _sfc_render$1K], ["__file", "E:/小程序转app/xcbapp/pages/publish/publish.vue"]]);
-  const _sfc_main$1K = {
+  const PagesPublishPublish = /* @__PURE__ */ _export_sfc(_sfc_main$1M, [["render", _sfc_render$1L], ["__file", "E:/小程序转app/xcbapp/pages/publish/publish.vue"]]);
+  const _sfc_main$1L = {
     data() {
       return {
         Image: "",
@@ -19831,7 +21775,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1J(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1K(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "content" }, [
@@ -19866,6 +21810,7 @@ ${o3}
           vue.createElementVNode("text", { class: "title" }, "分类"),
           vue.createElementVNode("view", { class: "item" }, [
             vue.createElementVNode("picker", {
+              style: { "margin-top": "35rpx" },
               class: "picker",
               range: $data.pickerRange,
               value: $data.selectedCategoryIndex,
@@ -19917,8 +21862,8 @@ ${o3}
       vue.createElementVNode("text", { style: { "color": "red", "margin-top": "30rpx", "font-size": "30rpx" } }, "注意：添加菜品后要在菜品列表里面选择上架")
     ]);
   }
-  const PagesReleaseRelease = /* @__PURE__ */ _export_sfc(_sfc_main$1K, [["render", _sfc_render$1J], ["__file", "E:/小程序转app/xcbapp/pages/release/release.vue"]]);
-  const _sfc_main$1J = {
+  const PagesReleaseRelease = /* @__PURE__ */ _export_sfc(_sfc_main$1L, [["render", _sfc_render$1K], ["__file", "E:/小程序转app/xcbapp/pages/release/release.vue"]]);
+  const _sfc_main$1K = {
     data() {
       return {
         pageData: [],
@@ -20056,7 +22001,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1I(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1J(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode(
         "scroll-view",
@@ -20198,8 +22143,8 @@ ${o3}
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const PagesStalllistStalllist = /* @__PURE__ */ _export_sfc(_sfc_main$1J, [["render", _sfc_render$1I], ["__file", "E:/小程序转app/xcbapp/pages/stalllist/stalllist.vue"]]);
-  const _sfc_main$1I = {
+  const PagesStalllistStalllist = /* @__PURE__ */ _export_sfc(_sfc_main$1K, [["render", _sfc_render$1J], ["__file", "E:/小程序转app/xcbapp/pages/stalllist/stalllist.vue"]]);
+  const _sfc_main$1J = {
     data() {
       return {
         pageData: []
@@ -20223,7 +22168,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1H(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1I(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "content" }, [
         vue.createElementVNode(
@@ -20283,8 +22228,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesCouponsCoupons = /* @__PURE__ */ _export_sfc(_sfc_main$1I, [["render", _sfc_render$1H], ["__file", "E:/小程序转app/xcbapp/pages/coupons/coupons.vue"]]);
-  const _sfc_main$1H = {
+  const PagesCouponsCoupons = /* @__PURE__ */ _export_sfc(_sfc_main$1J, [["render", _sfc_render$1I], ["__file", "E:/小程序转app/xcbapp/pages/coupons/coupons.vue"]]);
+  const _sfc_main$1I = {
     data() {
       return {};
     },
@@ -20302,7 +22247,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1G(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1H(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "first" }, [
         vue.createElementVNode("image", {
@@ -20375,8 +22320,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesLotteryLottery = /* @__PURE__ */ _export_sfc(_sfc_main$1H, [["render", _sfc_render$1G], ["__file", "E:/小程序转app/xcbapp/pages/lottery/lottery.vue"]]);
-  const _sfc_main$1G = {
+  const PagesLotteryLottery = /* @__PURE__ */ _export_sfc(_sfc_main$1I, [["render", _sfc_render$1H], ["__file", "E:/小程序转app/xcbapp/pages/lottery/lottery.vue"]]);
+  const _sfc_main$1H = {
     data() {
       return {};
     },
@@ -20415,7 +22360,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1F(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1G(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "title" }, " 喜讯 "),
       vue.createElementVNode("view", { class: "content" }, [
@@ -20441,8 +22386,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesRulesRules = /* @__PURE__ */ _export_sfc(_sfc_main$1G, [["render", _sfc_render$1F], ["__file", "E:/小程序转app/xcbapp/pages/rules/rules.vue"]]);
-  const _sfc_main$1F = {
+  const PagesRulesRules = /* @__PURE__ */ _export_sfc(_sfc_main$1H, [["render", _sfc_render$1G], ["__file", "E:/小程序转app/xcbapp/pages/rules/rules.vue"]]);
+  const _sfc_main$1G = {
     data() {
       return {
         pagedData: [],
@@ -20499,7 +22444,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1E(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1F(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "item" }, [
         vue.createElementVNode("view", { class: "top" }, [
@@ -20587,7 +22532,499 @@ ${o3}
       }, "参与活动说明")
     ]);
   }
-  const PagesJackpotJackpot = /* @__PURE__ */ _export_sfc(_sfc_main$1F, [["render", _sfc_render$1E], ["__file", "E:/小程序转app/xcbapp/pages/jackpot/jackpot.vue"]]);
+  const PagesJackpotJackpot = /* @__PURE__ */ _export_sfc(_sfc_main$1G, [["render", _sfc_render$1F], ["__file", "E:/小程序转app/xcbapp/pages/jackpot/jackpot.vue"]]);
+  function obj2strClass(obj) {
+    let classess = "";
+    for (let key in obj) {
+      const val = obj[key];
+      if (val) {
+        classess += `${key} `;
+      }
+    }
+    return classess;
+  }
+  function obj2strStyle(obj) {
+    let style = "";
+    for (let key in obj) {
+      const val = obj[key];
+      style += `${key}:${val};`;
+    }
+    return style;
+  }
+  const _sfc_main$1F = {
+    name: "uni-easyinput",
+    emits: [
+      "click",
+      "iconClick",
+      "update:modelValue",
+      "input",
+      "focus",
+      "blur",
+      "confirm",
+      "clear",
+      "eyes",
+      "change",
+      "keyboardheightchange"
+    ],
+    model: {
+      prop: "modelValue",
+      event: "update:modelValue"
+    },
+    options: {
+      virtualHost: true
+    },
+    inject: {
+      form: {
+        from: "uniForm",
+        default: null
+      },
+      formItem: {
+        from: "uniFormItem",
+        default: null
+      }
+    },
+    props: {
+      name: String,
+      value: [Number, String],
+      modelValue: [Number, String],
+      type: {
+        type: String,
+        default: "text"
+      },
+      clearable: {
+        type: Boolean,
+        default: true
+      },
+      autoHeight: {
+        type: Boolean,
+        default: false
+      },
+      placeholder: {
+        type: String,
+        default: " "
+      },
+      placeholderStyle: String,
+      focus: {
+        type: Boolean,
+        default: false
+      },
+      disabled: {
+        type: Boolean,
+        default: false
+      },
+      maxlength: {
+        type: [Number, String],
+        default: 140
+      },
+      confirmType: {
+        type: String,
+        default: "done"
+      },
+      clearSize: {
+        type: [Number, String],
+        default: 24
+      },
+      inputBorder: {
+        type: Boolean,
+        default: true
+      },
+      prefixIcon: {
+        type: String,
+        default: ""
+      },
+      suffixIcon: {
+        type: String,
+        default: ""
+      },
+      trim: {
+        type: [Boolean, String],
+        default: false
+      },
+      cursorSpacing: {
+        type: Number,
+        default: 0
+      },
+      passwordIcon: {
+        type: Boolean,
+        default: true
+      },
+      adjustPosition: {
+        type: Boolean,
+        default: true
+      },
+      primaryColor: {
+        type: String,
+        default: "#2979ff"
+      },
+      styles: {
+        type: Object,
+        default() {
+          return {
+            color: "#333",
+            backgroundColor: "#fff",
+            disableColor: "#F7F6F6",
+            borderColor: "#e5e5e5"
+          };
+        }
+      },
+      errorMessage: {
+        type: [String, Boolean],
+        default: ""
+      }
+    },
+    data() {
+      return {
+        focused: false,
+        val: "",
+        showMsg: "",
+        border: false,
+        isFirstBorder: false,
+        showClearIcon: false,
+        showPassword: false,
+        focusShow: false,
+        localMsg: "",
+        isEnter: false
+        // 用于判断当前是否是使用回车操作
+      };
+    },
+    computed: {
+      // 输入框内是否有值
+      isVal() {
+        const val = this.val;
+        if (val || val === 0) {
+          return true;
+        }
+        return false;
+      },
+      msg() {
+        return this.localMsg || this.errorMessage;
+      },
+      // 因为uniapp的input组件的maxlength组件必须要数值，这里转为数值，用户可以传入字符串数值
+      inputMaxlength() {
+        return Number(this.maxlength);
+      },
+      // 处理外层样式的style
+      boxStyle() {
+        return `color:${this.inputBorder && this.msg ? "#e43d33" : this.styles.color};`;
+      },
+      // input 内容的类和样式处理
+      inputContentClass() {
+        return obj2strClass({
+          "is-input-border": this.inputBorder,
+          "is-input-error-border": this.inputBorder && this.msg,
+          "is-textarea": this.type === "textarea",
+          "is-disabled": this.disabled,
+          "is-focused": this.focusShow
+        });
+      },
+      inputContentStyle() {
+        const focusColor = this.focusShow ? this.primaryColor : this.styles.borderColor;
+        const borderColor = this.inputBorder && this.msg ? "#dd524d" : focusColor;
+        return obj2strStyle({
+          "border-color": borderColor || "#e5e5e5",
+          "background-color": this.disabled ? this.styles.disableColor : this.styles.backgroundColor
+        });
+      },
+      // input右侧样式
+      inputStyle() {
+        const paddingRight = this.type === "password" || this.clearable || this.prefixIcon ? "" : "10px";
+        return obj2strStyle({
+          "padding-right": paddingRight,
+          "padding-left": this.prefixIcon ? "" : "10px"
+        });
+      }
+    },
+    watch: {
+      value(newVal) {
+        this.val = newVal;
+      },
+      modelValue(newVal) {
+        this.val = newVal;
+      },
+      focus(newVal) {
+        this.$nextTick(() => {
+          this.focused = this.focus;
+          this.focusShow = this.focus;
+        });
+      }
+    },
+    created() {
+      this.init();
+      if (this.form && this.formItem) {
+        this.$watch("formItem.errMsg", (newVal) => {
+          this.localMsg = newVal;
+        });
+      }
+    },
+    mounted() {
+      this.$nextTick(() => {
+        this.focused = this.focus;
+        this.focusShow = this.focus;
+      });
+    },
+    methods: {
+      /**
+       * 初始化变量值
+       */
+      init() {
+        if (this.value || this.value === 0) {
+          this.val = this.value;
+        } else if (this.modelValue || this.modelValue === 0 || this.modelValue === "") {
+          this.val = this.modelValue;
+        } else {
+          this.val = null;
+        }
+      },
+      /**
+       * 点击图标时触发
+       * @param {Object} type
+       */
+      onClickIcon(type) {
+        this.$emit("iconClick", type);
+      },
+      /**
+       * 显示隐藏内容，密码框时生效
+       */
+      onEyes() {
+        this.showPassword = !this.showPassword;
+        this.$emit("eyes", this.showPassword);
+      },
+      /**
+       * 输入时触发
+       * @param {Object} event
+       */
+      onInput(event) {
+        let value = event.detail.value;
+        if (this.trim) {
+          if (typeof this.trim === "boolean" && this.trim) {
+            value = this.trimStr(value);
+          }
+          if (typeof this.trim === "string") {
+            value = this.trimStr(value, this.trim);
+          }
+        }
+        if (this.errMsg)
+          this.errMsg = "";
+        this.val = value;
+        this.$emit("input", value);
+        this.$emit("update:modelValue", value);
+      },
+      /**
+       * 外部调用方法
+       * 获取焦点时触发
+       * @param {Object} event
+       */
+      onFocus() {
+        this.$nextTick(() => {
+          this.focused = true;
+        });
+        this.$emit("focus", null);
+      },
+      _Focus(event) {
+        this.focusShow = true;
+        this.$emit("focus", event);
+      },
+      /**
+       * 外部调用方法
+       * 失去焦点时触发
+       * @param {Object} event
+       */
+      onBlur() {
+        this.focused = false;
+        this.$emit("blur", null);
+      },
+      _Blur(event) {
+        event.detail.value;
+        this.focusShow = false;
+        this.$emit("blur", event);
+        if (this.isEnter === false) {
+          this.$emit("change", this.val);
+        }
+        if (this.form && this.formItem) {
+          const { validateTrigger } = this.form;
+          if (validateTrigger === "blur") {
+            this.formItem.onFieldChange();
+          }
+        }
+      },
+      /**
+       * 按下键盘的发送键
+       * @param {Object} e
+       */
+      onConfirm(e2) {
+        this.$emit("confirm", this.val);
+        this.isEnter = true;
+        this.$emit("change", this.val);
+        this.$nextTick(() => {
+          this.isEnter = false;
+        });
+      },
+      /**
+       * 清理内容
+       * @param {Object} event
+       */
+      onClear(event) {
+        this.val = "";
+        this.$emit("input", "");
+        this.$emit("update:modelValue", "");
+        this.$emit("clear");
+      },
+      /**
+       * 键盘高度发生变化的时候触发此事件
+       * 兼容性：微信小程序2.7.0+、App 3.1.0+
+       * @param {Object} event
+       */
+      onkeyboardheightchange(event) {
+        this.$emit("keyboardheightchange", event);
+      },
+      /**
+       * 去除空格
+       */
+      trimStr(str, pos = "both") {
+        if (pos === "both") {
+          return str.trim();
+        } else if (pos === "left") {
+          return str.trimLeft();
+        } else if (pos === "right") {
+          return str.trimRight();
+        } else if (pos === "start") {
+          return str.trimStart();
+        } else if (pos === "end") {
+          return str.trimEnd();
+        } else if (pos === "all") {
+          return str.replace(/\s+/g, "");
+        } else if (pos === "none") {
+          return str;
+        }
+        return str;
+      }
+    }
+  };
+  function _sfc_render$1E(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
+    return vue.openBlock(), vue.createElementBlock(
+      "view",
+      {
+        class: vue.normalizeClass(["uni-easyinput", { "uni-easyinput-error": $options.msg }]),
+        style: vue.normalizeStyle($options.boxStyle)
+      },
+      [
+        vue.createElementVNode(
+          "view",
+          {
+            class: vue.normalizeClass(["uni-easyinput__content", $options.inputContentClass]),
+            style: vue.normalizeStyle($options.inputContentStyle)
+          },
+          [
+            $props.prefixIcon ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
+              key: 0,
+              class: "content-clear-icon",
+              type: $props.prefixIcon,
+              color: "#c0c4cc",
+              onClick: _cache[0] || (_cache[0] = ($event) => $options.onClickIcon("prefix")),
+              size: "22"
+            }, null, 8, ["type"])) : vue.createCommentVNode("v-if", true),
+            vue.renderSlot(_ctx.$slots, "left", {}, void 0, true),
+            $props.type === "textarea" ? (vue.openBlock(), vue.createElementBlock("textarea", {
+              key: 1,
+              class: vue.normalizeClass(["uni-easyinput__content-textarea", { "input-padding": $props.inputBorder }]),
+              name: $props.name,
+              value: $data.val,
+              placeholder: $props.placeholder,
+              placeholderStyle: $props.placeholderStyle,
+              disabled: $props.disabled,
+              "placeholder-class": "uni-easyinput__placeholder-class",
+              maxlength: $options.inputMaxlength,
+              focus: $data.focused,
+              autoHeight: $props.autoHeight,
+              "cursor-spacing": $props.cursorSpacing,
+              "adjust-position": $props.adjustPosition,
+              onInput: _cache[1] || (_cache[1] = (...args) => $options.onInput && $options.onInput(...args)),
+              onBlur: _cache[2] || (_cache[2] = (...args) => $options._Blur && $options._Blur(...args)),
+              onFocus: _cache[3] || (_cache[3] = (...args) => $options._Focus && $options._Focus(...args)),
+              onConfirm: _cache[4] || (_cache[4] = (...args) => $options.onConfirm && $options.onConfirm(...args)),
+              onKeyboardheightchange: _cache[5] || (_cache[5] = (...args) => $options.onkeyboardheightchange && $options.onkeyboardheightchange(...args))
+            }, null, 42, ["name", "value", "placeholder", "placeholderStyle", "disabled", "maxlength", "focus", "autoHeight", "cursor-spacing", "adjust-position"])) : (vue.openBlock(), vue.createElementBlock("input", {
+              key: 2,
+              type: $props.type === "password" ? "text" : $props.type,
+              class: "uni-easyinput__content-input",
+              style: vue.normalizeStyle($options.inputStyle),
+              name: $props.name,
+              value: $data.val,
+              password: !$data.showPassword && $props.type === "password",
+              placeholder: $props.placeholder,
+              placeholderStyle: $props.placeholderStyle,
+              "placeholder-class": "uni-easyinput__placeholder-class",
+              disabled: $props.disabled,
+              maxlength: $options.inputMaxlength,
+              focus: $data.focused,
+              confirmType: $props.confirmType,
+              "cursor-spacing": $props.cursorSpacing,
+              "adjust-position": $props.adjustPosition,
+              onFocus: _cache[6] || (_cache[6] = (...args) => $options._Focus && $options._Focus(...args)),
+              onBlur: _cache[7] || (_cache[7] = (...args) => $options._Blur && $options._Blur(...args)),
+              onInput: _cache[8] || (_cache[8] = (...args) => $options.onInput && $options.onInput(...args)),
+              onConfirm: _cache[9] || (_cache[9] = (...args) => $options.onConfirm && $options.onConfirm(...args)),
+              onKeyboardheightchange: _cache[10] || (_cache[10] = (...args) => $options.onkeyboardheightchange && $options.onkeyboardheightchange(...args))
+            }, null, 44, ["type", "name", "value", "password", "placeholder", "placeholderStyle", "disabled", "maxlength", "focus", "confirmType", "cursor-spacing", "adjust-position"])),
+            $props.type === "password" && $props.passwordIcon ? (vue.openBlock(), vue.createElementBlock(
+              vue.Fragment,
+              { key: 3 },
+              [
+                $options.isVal ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
+                  key: 0,
+                  class: vue.normalizeClass(["content-clear-icon", { "is-textarea-icon": $props.type === "textarea" }]),
+                  type: $data.showPassword ? "eye-slash-filled" : "eye-filled",
+                  size: 22,
+                  color: $data.focusShow ? $props.primaryColor : "#c0c4cc",
+                  onClick: $options.onEyes
+                }, null, 8, ["class", "type", "color", "onClick"])) : vue.createCommentVNode("v-if", true)
+              ],
+              64
+              /* STABLE_FRAGMENT */
+            )) : vue.createCommentVNode("v-if", true),
+            $props.suffixIcon ? (vue.openBlock(), vue.createElementBlock(
+              vue.Fragment,
+              { key: 4 },
+              [
+                $props.suffixIcon ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
+                  key: 0,
+                  class: "content-clear-icon",
+                  type: $props.suffixIcon,
+                  color: "#c0c4cc",
+                  onClick: _cache[11] || (_cache[11] = ($event) => $options.onClickIcon("suffix")),
+                  size: "22"
+                }, null, 8, ["type"])) : vue.createCommentVNode("v-if", true)
+              ],
+              64
+              /* STABLE_FRAGMENT */
+            )) : (vue.openBlock(), vue.createElementBlock(
+              vue.Fragment,
+              { key: 5 },
+              [
+                $props.clearable && $options.isVal && !$props.disabled && $props.type !== "textarea" ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
+                  key: 0,
+                  class: vue.normalizeClass(["content-clear-icon", { "is-textarea-icon": $props.type === "textarea" }]),
+                  type: "clear",
+                  size: $props.clearSize,
+                  color: $options.msg ? "#dd524d" : $data.focusShow ? $props.primaryColor : "#c0c4cc",
+                  onClick: $options.onClear
+                }, null, 8, ["class", "size", "color", "onClick"])) : vue.createCommentVNode("v-if", true)
+              ],
+              64
+              /* STABLE_FRAGMENT */
+            )),
+            vue.renderSlot(_ctx.$slots, "right", {}, void 0, true)
+          ],
+          6
+          /* CLASS, STYLE */
+        )
+      ],
+      6
+      /* CLASS, STYLE */
+    );
+  }
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$1F, [["render", _sfc_render$1E], ["__scopeId", "data-v-09fd5285"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
   const _sfc_main$1E = {
     name: "UniSection",
     emits: ["click"],
@@ -21019,8 +23456,8 @@ ${o3}
     }
     return result;
   }
-  function range(min = 0, max = 0, value = 0) {
-    return Math.max(min, Math.min(max, Number(value)));
+  function range(min2 = 0, max2 = 0, value = 0) {
+    return Math.max(min2, Math.min(max2, Number(value)));
   }
   function getPx(value, unit = false) {
     if (number(value)) {
@@ -21044,10 +23481,10 @@ ${o3}
   function sys() {
     return uni.getSystemInfoSync();
   }
-  function random(min, max) {
-    if (min >= 0 && max > 0 && max >= min) {
-      const gab = max - min + 1;
-      return Math.floor(Math.random() * gab + min);
+  function random(min2, max2) {
+    if (min2 >= 0 && max2 > 0 && max2 >= min2) {
+      const gab = max2 - min2 + 1;
+      return Math.floor(Math.random() * gab + min2);
     }
     return 0;
   }
@@ -21118,28 +23555,28 @@ ${o3}
       return obj;
     if (cache.has(obj))
       return cache.get(obj);
-    let clone;
+    let clone2;
     if (obj instanceof Date) {
-      clone = new Date(obj.getTime());
+      clone2 = new Date(obj.getTime());
     } else if (obj instanceof RegExp) {
-      clone = new RegExp(obj);
+      clone2 = new RegExp(obj);
     } else if (obj instanceof Map) {
-      clone = new Map(Array.from(obj, ([key, value]) => [key, deepClone(value, cache)]));
+      clone2 = new Map(Array.from(obj, ([key, value]) => [key, deepClone(value, cache)]));
     } else if (obj instanceof Set) {
-      clone = new Set(Array.from(obj, (value) => deepClone(value, cache)));
+      clone2 = new Set(Array.from(obj, (value) => deepClone(value, cache)));
     } else if (Array.isArray(obj)) {
-      clone = obj.map((value) => deepClone(value, cache));
+      clone2 = obj.map((value) => deepClone(value, cache));
     } else if (Object.prototype.toString.call(obj) === "[object Object]") {
-      clone = Object.create(Object.getPrototypeOf(obj));
-      cache.set(obj, clone);
+      clone2 = Object.create(Object.getPrototypeOf(obj));
+      cache.set(obj, clone2);
       for (const [key, value] of Object.entries(obj)) {
-        clone[key] = deepClone(value, cache);
+        clone2[key] = deepClone(value, cache);
       }
     } else {
-      clone = Object.assign({}, obj);
+      clone2 = Object.assign({}, obj);
     }
-    cache.set(obj, clone);
-    return clone;
+    cache.set(obj, clone2);
+    return clone2;
   }
   function deepMerge(target = {}, source = {}) {
     target = deepClone(target);
@@ -24061,7 +26498,7 @@ ${o3}
     }
   };
   function _sfc_render$1z(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2$1);
+    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2);
     const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_1$3);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uv_qrcode = resolveEasycom(vue.resolveDynamicComponent("uv-qrcode"), __easycom_3$1);
@@ -26693,7 +29130,7 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$1i, [["render", _sfc_render$1h], ["__scopeId", "data-v-ae4bee67"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-card/components/uni-card/uni-card.vue"]]);
+  const __easycom_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1i, [["render", _sfc_render$1h], ["__scopeId", "data-v-ae4bee67"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-card/components/uni-card/uni-card.vue"]]);
   const _sfc_main$1h = {
     name: "pop",
     data() {
@@ -27194,7 +29631,7 @@ ${o3}
     const _component_popVue = vue.resolveComponent("popVue");
     const _component_uni_steps = resolveEasycom(vue.resolveDynamicComponent("uni-steps"), __easycom_0$1);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_2);
+    const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_4$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createVNode(_component_popVue, {
         ref: "pop",
@@ -28256,10 +30693,10 @@ ${o3}
         return filtered.slice(0, this.currentPage * this.pageSize);
       },
       totalIncome() {
-        return this.bills.filter((item) => item.type === "income").reduce((sum, item) => sum + Number(item.amount), 0).toFixed(2);
+        return this.bills.filter((item) => item.type === "income").reduce((sum2, item) => sum2 + Number(item.amount), 0).toFixed(2);
       },
       totalExpense() {
-        return this.bills.filter((item) => item.type === "expense").reduce((sum, item) => sum + Number(item.amount), 0).toFixed(2);
+        return this.bills.filter((item) => item.type === "expense").reduce((sum2, item) => sum2 + Number(item.amount), 0).toFixed(2);
       },
       navBarStyle() {
         return {
@@ -28339,7 +30776,7 @@ ${o3}
   function _sfc_render$17(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_1$5);
-    const _component_uni_list = resolveEasycom(vue.resolveDynamicComponent("uni-list"), __easycom_2$3);
+    const _component_uni_list = resolveEasycom(vue.resolveDynamicComponent("uni-list"), __easycom_2$2);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode(
         "view",
@@ -28909,13 +31346,13 @@ ${o3}
         exclusiveMinimum,
         exclusiveMaximum
       } = rule;
-      let min = exclusiveMinimum ? value <= minimum : value < minimum;
-      let max = exclusiveMaximum ? value >= maximum : value > maximum;
-      if (minimum !== void 0 && min) {
+      let min2 = exclusiveMinimum ? value <= minimum : value < minimum;
+      let max2 = exclusiveMaximum ? value >= maximum : value > maximum;
+      if (minimum !== void 0 && min2) {
         return formatMessage(rule, rule.errorMessage || message["number"][exclusiveMinimum ? "exclusiveMinimum" : "minimum"]);
-      } else if (maximum !== void 0 && max) {
+      } else if (maximum !== void 0 && max2) {
         return formatMessage(rule, rule.errorMessage || message["number"][exclusiveMaximum ? "exclusiveMaximum" : "maximum"]);
-      } else if (minimum !== void 0 && maximum !== void 0 && (min || max)) {
+      } else if (minimum !== void 0 && maximum !== void 0 && (min2 || max2)) {
         return formatMessage(rule, rule.errorMessage || message["number"].range);
       }
       return null;
@@ -28924,14 +31361,14 @@ ${o3}
       if (!types.string(value) && !types.array(value)) {
         return formatMessage(rule, rule.errorMessage || message.pattern.mismatch);
       }
-      let min = rule.minLength;
-      let max = rule.maxLength;
+      let min2 = rule.minLength;
+      let max2 = rule.maxLength;
       let val = value.length;
-      if (min !== void 0 && val < min) {
+      if (min2 !== void 0 && val < min2) {
         return formatMessage(rule, rule.errorMessage || message["length"].minLength);
-      } else if (max !== void 0 && val > max) {
+      } else if (max2 !== void 0 && val > max2) {
         return formatMessage(rule, rule.errorMessage || message["length"].maxLength);
-      } else if (min !== void 0 && max !== void 0 && (val < min || val > max)) {
+      } else if (min2 !== void 0 && max2 !== void 0 && (val < min2 || val > max2)) {
         return formatMessage(rule, rule.errorMessage || message["length"].range);
       }
       return null;
@@ -29668,7 +32105,7 @@ ${o3}
   };
   function _sfc_render$13(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2$1);
+    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2);
     const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_5);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "progress-steps" }, [
@@ -30613,6 +33050,10 @@ ${o3}
     );
   }
   const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$12, [["render", _sfc_render$11], ["__scopeId", "data-v-462874dd"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
+  var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+  function getDefaultExportFromCjs(x) {
+    return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
+  }
   var dayjs_min = { exports: {} };
   (function(module, exports) {
     !function(t2, e2) {
@@ -32461,6 +34902,9 @@ ${o3}
   }
   const PagesSettingsSettings = /* @__PURE__ */ _export_sfc(_sfc_main$W, [["render", _sfc_render$V], ["__file", "E:/小程序转app/xcbapp/pages/settings/settings.vue"]]);
   const _sfc_main$V = {
+    created() {
+      this.cartStore = useCartStore();
+    },
     async onLoad({
       query
     }) {
@@ -32530,14 +34974,11 @@ ${o3}
     },
     methods: {
       initCount() {
-        let oldCount = this.getTempCount()(this.product.id);
+        let oldCount = this.cartStore.getTempCount(this.product.id);
         if (oldCount > 1) {
           this.count = oldCount;
         }
       },
-      ...mapGetters("cart", ["getTempCount"]),
-      ...mapMutations("cart", ["addItem", "anyNumber", "subItem"]),
-      // 分享
       onShare() {
       },
       // 取消
@@ -32552,7 +34993,7 @@ ${o3}
       // 确定加入购物车
       confirmAddToCart() {
         this.product.count = this.count;
-        this.anyNumber(this.product);
+        this.cartStore.anyNumber(this.product);
         uni.showToast({
           icon: "success",
           title: "已加入"
@@ -32972,7 +35413,7 @@ ${o3}
   function _sfc_render$S(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_collapse_item = resolveEasycom(vue.resolveDynamicComponent("uni-collapse-item"), __easycom_1$4);
-    const _component_uni_collapse = resolveEasycom(vue.resolveDynamicComponent("uni-collapse"), __easycom_2$2);
+    const _component_uni_collapse = resolveEasycom(vue.resolveDynamicComponent("uni-collapse"), __easycom_2$1);
     const _component_posterVue = vue.resolveComponent("posterVue");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "invite-page" }, [
@@ -34024,14 +36465,13 @@ ${o3}
         },
         // 实时错误提示
         errorTips: {},
-        // 地区选择
-        regionRange: [
+        multiArray: [
+          [],
           [],
           []
         ],
-        provinceMapData: [],
-        cityMapData: [],
-        regionIndex: [0, 0],
+        provinceList: [],
+        multiIndex: [0, 0, 0],
         agentTypeList: [
           [
             "省级",
@@ -34054,74 +36494,9 @@ ${o3}
       if (data.code == 200) {
         this.formData.userid = data.data.userid;
       }
-      this.initRegion();
+      this.initializePicker();
     },
     methods: {
-      // 获取城市数据
-      async getCityData(pid) {
-        if (!pid) {
-          formatAppLog("warn", "at subPackages/agent/cooperation/cooperation.vue:174", "缺少省份ID，无法获取城市数据");
-          return;
-        }
-        this.regionIndex[1] = 0;
-        this.cityMapData = [];
-        this.regionRange.splice(1, 1, []);
-        try {
-          const data = await api.citytree(pid);
-          if (data.code === 200 && Array.isArray(data.data)) {
-            const cityIds = [];
-            const cityNames = [];
-            data.data.forEach((item) => {
-              cityIds.push(item.id);
-              cityNames.push(item.name);
-            });
-            this.cityMapData = cityIds;
-            this.regionRange[1] = cityNames;
-          } else {
-            formatAppLog("warn", "at subPackages/agent/cooperation/cooperation.vue:195", "城市数据返回格式异常", data);
-          }
-        } catch (error2) {
-          formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:198", "获取城市数据失败", error2);
-        } finally {
-          this.$nextTick(() => {
-            this.$forceUpdate();
-          });
-        }
-      },
-      // 初始化地区
-      async initRegion() {
-        let data = await api.citylist({
-          "level": 1,
-          "limit": 100
-        });
-        if (data.code == 200) {
-          data.data.listdata.forEach((item) => {
-            this.provinceMapData.push(item.id);
-            this.regionRange[0].push(item.name);
-          });
-        }
-        this.getCityData(this.provinceMapData[0]);
-      },
-      // 导航返回
-      navigateBack() {
-        uni.navigateBack({
-          delta: 1
-        });
-      },
-      // 手机号输入处理
-      handlePhoneInput(e2) {
-        this.formData.phone = e2.detail.value.replace(/\D/g, "").slice(0, 11);
-      },
-      // 地区选择列变化
-      onRegionColumnChange({
-        detail
-      }) {
-        formatAppLog("log", "at subPackages/agent/cooperation/cooperation.vue:237", detail);
-        if (detail.column == 0) {
-          this.regionIndex[0] = detail.value;
-          this.getCityData(this.provinceMapData[detail.value]);
-        }
-      },
       onAgentTypeChange({
         detail
       }) {
@@ -34130,11 +36505,104 @@ ${o3}
           this.$forceUpdate();
         });
       },
-      // 地区选择确认
-      onRegionChange({
-        detail
-      }) {
-        this.regionIndex = detail.value;
+      async fetchProvinces() {
+        try {
+          const response = await api.citylist({
+            level: 1,
+            limit: 100
+          });
+          if (response.code === 200) {
+            this.provinceList = response.data.listdata;
+            return this.provinceList;
+          }
+          throw new Error("Failed to fetch provinces");
+        } catch (error2) {
+          formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:209", "Failed to fetch provinces:", error2);
+          throw error2;
+        }
+      },
+      async fetchCities(provinceId) {
+        try {
+          const response = await api.citytree(provinceId);
+          if (response.code === 200 && Array.isArray(response.data)) {
+            return response.data;
+          } else {
+            formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:221", "No cities data found");
+            return [];
+          }
+        } catch (error2) {
+          formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:225", "Failed to fetch cities:", error2);
+          return [];
+        }
+      },
+      async fetchAreas(cityId) {
+        try {
+          const response = await api.citytree(cityId);
+          if (response.code === 200 && Array.isArray(response.data)) {
+            return response.data;
+          } else {
+            formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:237", "No areas data found");
+            return [];
+          }
+        } catch (error2) {
+          formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:241", "Failed to fetch areas:", error2);
+          return [];
+        }
+      },
+      bindMultiPickerChange(e2) {
+        this.multiIndex = e2.detail.value;
+        const selectedProvince = this.multiArray[0][this.multiIndex[0]];
+        const selectedProvinceId = this.provinceList[this.multiIndex[0]].id;
+        const selectedCity = this.multiArray[1][this.multiIndex[1]];
+        const selectedArea = this.multiArray[2][this.multiIndex[2]];
+        const selectedAreaId = this.districtList[this.multiIndex[2]].id;
+        formatAppLog("log", "at subPackages/agent/cooperation/cooperation.vue:252", "选择的省市区:", selectedProvince, selectedCity, selectedArea);
+        this.area_id = selectedAreaId;
+        this.formData.city = selectedAreaId;
+        this.formData.province = selectedProvinceId;
+      },
+      async bindMultiPickerColumnChange(e2) {
+        const column = e2.detail.column;
+        const value = e2.detail.value;
+        this.multiIndex[column] = value;
+        if (column === 0) {
+          const provinceId = this.provinceList[value].id;
+          const cities = await this.fetchCities(provinceId);
+          this.cityList = cities;
+          this.multiArray[1] = cities.map((item) => item.name);
+          this.multiArray[2] = cities ? cities[0].Children.map((item) => item.name) : [];
+          this.multiIndex[1] = 0;
+          this.multiIndex[2] = 0;
+        } else if (column === 1) {
+          const cityId = this.cityList[value].id;
+          const areas = await this.fetchAreas(cityId);
+          this.districtList = areas;
+          this.multiArray[2] = areas.map((item) => item.name);
+          this.multiIndex[2] = 0;
+        }
+        this.multiIndex = [...this.multiIndex];
+      },
+      async initializePicker() {
+        try {
+          const provinces = await this.fetchProvinces();
+          this.multiArray[0] = provinces.map((item) => item.name);
+          const cities = await this.fetchCities(provinces[0].id);
+          this.multiArray[1] = cities.map((item) => item.name);
+          const areas = await this.fetchAreas(cities[0].id);
+          this.multiArray[2] = areas.map((item) => item.name);
+          this.multiIndex = [0, 0, 0];
+        } catch (error2) {
+          formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:293", "Failed to initialize picker:", error2);
+        }
+      },
+      navigateBack() {
+        uni.navigateBack({
+          delta: 1
+        });
+      },
+      // 手机号输入处理
+      handlePhoneInput(e2) {
+        this.formData.phone = e2.detail.value.replace(/\D/g, "").slice(0, 11);
       },
       // 单个字段验证
       validateField(field) {
@@ -34191,7 +36659,7 @@ ${o3}
         });
         return isPass;
       },
-      // 提交表单（新增等待遮罩逻辑）
+      // 提交表单
       async submitForm() {
         switch (this.agentTypeList[0][this.agentTypeIndex[0]]) {
           case "省级":
@@ -34201,8 +36669,6 @@ ${o3}
             this.formData.type = 2;
             break;
         }
-        this.formData.province = this.provinceMapData[this.regionIndex[0]];
-        this.formData.city = this.cityMapData[this.regionIndex[1]];
         this.formData.agentType = Number(this.agentTypeIndex[0]) + 1;
         await api.agentApply(this.formData);
         this.isSubmit = true;
@@ -34347,59 +36813,61 @@ ${o3}
               ]),
               vue.createElementVNode("view", { class: "form-group" }, [
                 vue.createElementVNode("view", { class: "form-label required" }, "代理区域"),
-                vue.createElementVNode("picker", {
-                  mode: "multiSelector",
-                  range: $data.regionRange,
-                  value: $data.regionIndex,
-                  onChange: _cache[4] || (_cache[4] = (...args) => $options.onRegionChange && $options.onRegionChange(...args)),
-                  onColumnchange: _cache[5] || (_cache[5] = (...args) => $options.onRegionColumnChange && $options.onRegionColumnChange(...args)),
-                  class: "form-picker"
-                }, [
-                  vue.createElementVNode(
-                    "view",
-                    { class: "picker-view" },
-                    vue.toDisplayString($data.regionIndex[0] !== null ? `${$data.regionRange[0][$data.regionIndex[0]]} - ${$data.regionRange[1][$data.regionIndex[1]]}` : "选择区域"),
-                    1
-                    /* TEXT */
-                  )
-                ], 40, ["range", "value"]),
-                $data.errorTips.region ? (vue.openBlock(), vue.createElementBlock(
-                  "view",
-                  {
-                    key: 0,
-                    class: "error-tip"
-                  },
-                  vue.toDisplayString($data.errorTips.region),
-                  1
-                  /* TEXT */
-                )) : vue.createCommentVNode("v-if", true)
+                vue.createElementVNode("view", { class: "form-picker" }, [
+                  vue.createElementVNode("picker", {
+                    mode: "multiSelector",
+                    range: $data.multiArray,
+                    value: $data.multiIndex,
+                    onChange: _cache[4] || (_cache[4] = (...args) => $options.bindMultiPickerChange && $options.bindMultiPickerChange(...args)),
+                    onColumnchange: _cache[5] || (_cache[5] = (...args) => $options.bindMultiPickerColumnChange && $options.bindMultiPickerColumnChange(...args))
+                  }, [
+                    vue.createElementVNode("view", { class: "compact-picker" }, [
+                      vue.createElementVNode("view", null, [
+                        vue.createElementVNode(
+                          "text",
+                          { class: "province" },
+                          vue.toDisplayString($data.multiArray[0][$data.multiIndex[0]] || "省"),
+                          1
+                          /* TEXT */
+                        ),
+                        vue.createElementVNode("text", { class: "separator" }, "-"),
+                        vue.createElementVNode(
+                          "text",
+                          { class: "city" },
+                          vue.toDisplayString($data.multiArray[1][$data.multiIndex[1]] || "市"),
+                          1
+                          /* TEXT */
+                        ),
+                        vue.createElementVNode("text", { class: "separator" }, "-"),
+                        vue.createElementVNode(
+                          "text",
+                          { class: "district" },
+                          vue.toDisplayString($data.multiArray[2][$data.multiIndex[2]] || "区"),
+                          1
+                          /* TEXT */
+                        )
+                      ])
+                    ])
+                  ], 40, ["range", "value"])
+                ])
               ]),
               vue.createElementVNode("view", { class: "form-group" }, [
                 vue.createElementVNode("view", { class: "form-label required" }, "代理级别"),
-                vue.createElementVNode("picker", {
-                  mode: "multiSelector",
-                  class: "form-picker",
-                  range: $data.agentTypeList,
-                  onChange: _cache[6] || (_cache[6] = (...args) => $options.onAgentTypeChange && $options.onAgentTypeChange(...args))
-                }, [
-                  vue.createElementVNode(
-                    "view",
-                    { class: "picker-view" },
-                    vue.toDisplayString($data.agentTypeIndex[0] !== null ? `${$data.agentTypeList[0][$data.agentTypeIndex[0]]}` : "选择代理级别"),
-                    1
-                    /* TEXT */
-                  )
-                ], 40, ["range"]),
-                $data.errorTips.region ? (vue.openBlock(), vue.createElementBlock(
-                  "view",
-                  {
-                    key: 0,
-                    class: "error-tip"
-                  },
-                  vue.toDisplayString($data.errorTips.region),
-                  1
-                  /* TEXT */
-                )) : vue.createCommentVNode("v-if", true)
+                vue.createElementVNode("view", { class: "form-picker" }, [
+                  vue.createElementVNode("picker", {
+                    mode: "multiSelector",
+                    range: $data.agentTypeList,
+                    onChange: _cache[6] || (_cache[6] = (...args) => $options.onAgentTypeChange && $options.onAgentTypeChange(...args))
+                  }, [
+                    vue.createElementVNode(
+                      "view",
+                      { class: "picker-view" },
+                      vue.toDisplayString($data.agentTypeIndex[0] !== null ? `${$data.agentTypeList[0][$data.agentTypeIndex[0]]}` : "选择代理级别"),
+                      1
+                      /* TEXT */
+                    )
+                  ], 40, ["range"])
+                ])
               ]),
               vue.createElementVNode("view", { class: "form-group" }, [
                 vue.createElementVNode("view", { class: "form-label" }, "补充说明"),
@@ -34476,344 +36944,130 @@ ${o3}
     ]);
   }
   const SubPackagesAgentCooperationCooperation = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render$M], ["__scopeId", "data-v-15a01c95"], ["__file", "E:/小程序转app/xcbapp/subPackages/agent/cooperation/cooperation.vue"]]);
+  function formatDate(dateStr, fmt = "YYYY-MM-DD HH:mm") {
+    if (!dateStr)
+      return "";
+    const date2 = new Date(dateStr);
+    const year = date2.getFullYear();
+    const month = (date2.getMonth() + 1).toString().padStart(2, "0");
+    const day = date2.getDate().toString().padStart(2, "0");
+    const hours = date2.getHours().toString().padStart(2, "0");
+    const minutes = date2.getMinutes().toString().padStart(2, "0");
+    return fmt.replace("YYYY", year).replace("MM", month).replace("DD", day).replace("HH", hours).replace("mm", minutes);
+  }
   const _sfc_main$M = {
     data() {
       return {
-        // 核心数据
-        coreData: {
-          totalSales: 0,
-          monthSales: 0,
-          totalOrders: 0,
-          monthOrders: 0,
-          totalCustomers: 0,
-          newCustomers: 0,
-          totalProfit: 0,
-          monthProfit: 0,
-          targetRate: 0,
-          targetAmount: 0,
-          completedAmount: 0
-        },
-        // 近期订单
-        recentOrders: [],
-        // 趋势筛选
-        trendRange: ["近7天", "近30天", "近90天"],
-        selectedTrendRange: 1,
-        // 图表数据
-        trendData: {},
-        // 图表配置
-        chartOpts: {
-          color: ["#4285F4"],
-          padding: [15, 15, 0, 15],
-          legend: { show: false },
-          xAxis: {
-            type: "grid",
-            gridType: "dash",
-            dashLength: 2,
-            axisLine: false,
-            labelCount: 5,
-            fontSize: 11,
-            color: "#999"
-          },
-          yAxis: {
-            gridType: "dash",
-            dashLength: 2,
-            axisLine: false,
-            labelCount: 4,
-            fontSize: 11,
-            color: "#999"
-          },
-          extra: {
-            line: { width: 2, type: "curve" }
-          }
+        // 数据列表（通用格式，可根据实际业务调整字段）
+        dataList: [],
+        query: {
+          pagg: 1,
+          limit: 10
         }
       };
     },
     onLoad() {
-      this.loadData();
+      this.loadDataList();
     },
     methods: {
-      // 加载数据
-      async loadData() {
+      // 加载数据列表
+      async loadDataList() {
         try {
-          uni.showLoading({ title: "加载中...", mask: true });
-          const [coreRes, orderRes, trendRes] = await Promise.all([
-            api.getAgentCoreData(),
-            api.getRecentOrders({ limit: 5 }),
-            api.getSalesTrend({ range: this.trendRange[this.selectedTrendRange] })
-          ]);
-          if (coreRes.code === 200) {
-            this.coreData = coreRes.data;
-          }
-          if (orderRes.code === 200) {
-            this.recentOrders = orderRes.data;
-          }
-          if (trendRes.code === 200) {
-            this.trendData = trendRes.data;
+          uni.showLoading({
+            title: "加载中...",
+            mask: true
+          });
+          const res = await api.getpromoneylist(this.query);
+          if (res.code === 200) {
+            formatAppLog("log", "at subPackages/agent/datacenter/datacenter.vue:86", res.data);
+            this.dataList = [...this.dataList, ...res.data.listdata];
           }
         } catch (error2) {
-          formatAppLog("error", "at subPackages/agent/datacenter/datacenter.vue:208", "数据加载失败:", error2);
-          uni.showToast({ title: "数据加载失败", icon: "none", duration: 2e3 });
+          formatAppLog("error", "at subPackages/agent/datacenter/datacenter.vue:90", "列表数据加载失败:", error2);
+          uni.showToast({
+            title: "数据加载失败",
+            icon: "none",
+            duration: 2e3
+          });
         } finally {
           uni.hideLoading();
         }
       },
-      // 切换趋势时间范围
-      changeTrendRange(e2) {
-        this.selectedTrendRange = e2.detail.value;
-        this.loadData();
-      },
       // 格式化日期
       formatDate(dateStr) {
-        return formatDate(dateStr, "YYYY-MM-DD HH:mm");
+        return formatDate(dateStr);
       },
-      // 订单状态文本
+      // 状态文本转换
       getStatusText(status) {
         const statusMap = {
-          "PENDING": "待支付",
-          "PAID": "已支付",
-          "SHIPPED": "已发货",
-          "COMPLETED": "已完成",
-          "CANCELLED": "已取消"
+          "PENDING": "待处理",
+          "PAID": "已完成",
+          "SHIPPED": "已执行",
+          "COMPLETED": "已归档",
+          "CANCELLED": "已作废"
         };
-        return statusMap[status] || status;
+        return statusMap[status] || "未知状态";
       },
-      // 查看全部订单
-      viewAllOrders() {
-        uni.navigateTo({ url: "/pages/agent/all-orders" });
+      // 查看全部数据
+      viewAllData() {
+        uni.navigateTo({
+          url: "/pages/agent/all-data"
+        });
       }
     }
   };
   function _sfc_render$L(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    return vue.openBlock(), vue.createElementBlock("view", { class: "agent-data-page" }, [
+    return vue.openBlock(), vue.createElementBlock("view", { class: "data-list-page" }, [
       vue.createElementVNode("view", { class: "page-header" }, [
-        vue.createElementVNode("view", { class: "header-title" }, "代理商数据中心"),
-        vue.createElementVNode("view", { class: "header-subtitle" }, "实时查看您的业务数据概况")
+        vue.createElementVNode("view", { class: "header-title" }, "数据中心")
       ]),
-      vue.createElementVNode("view", { class: "data-container" }, [
-        vue.createElementVNode("view", { class: "data-card" }, [
-          vue.createElementVNode("view", { class: "section-header" }, [
-            vue.createElementVNode("view", { class: "section-icon" }, [
-              vue.createVNode(_component_uni_icons, {
-                type: "chart",
-                size: "20",
-                color: "#4285F4"
-              })
-            ]),
-            vue.createElementVNode("view", { class: "section-name" }, "核心业务数据")
-          ]),
-          vue.createElementVNode("view", { class: "data-grid" }, [
-            vue.createElementVNode("view", { class: "data-item" }, [
-              vue.createElementVNode("view", { class: "data-label" }, "累计销售额"),
-              vue.createElementVNode(
-                "view",
-                { class: "data-value" },
-                "¥" + vue.toDisplayString($data.coreData.totalSales.toLocaleString()),
-                1
-                /* TEXT */
-              ),
-              vue.createElementVNode(
-                "view",
-                { class: "data-desc" },
-                "本月：¥" + vue.toDisplayString($data.coreData.monthSales.toLocaleString()),
-                1
-                /* TEXT */
-              )
-            ]),
-            vue.createElementVNode("view", { class: "data-item" }, [
-              vue.createElementVNode("view", { class: "data-label" }, "累计订单数"),
-              vue.createElementVNode(
-                "view",
-                { class: "data-value" },
-                vue.toDisplayString($data.coreData.totalOrders.toLocaleString()),
-                1
-                /* TEXT */
-              ),
-              vue.createElementVNode(
-                "view",
-                { class: "data-desc" },
-                "本月：" + vue.toDisplayString($data.coreData.monthOrders.toLocaleString()),
-                1
-                /* TEXT */
-              )
-            ]),
-            vue.createElementVNode("view", { class: "data-item" }, [
-              vue.createElementVNode("view", { class: "data-label" }, "服务客户数"),
-              vue.createElementVNode(
-                "view",
-                { class: "data-value" },
-                vue.toDisplayString($data.coreData.totalCustomers.toLocaleString()),
-                1
-                /* TEXT */
-              ),
-              vue.createElementVNode(
-                "view",
-                { class: "data-desc" },
-                "新增：" + vue.toDisplayString($data.coreData.newCustomers.toLocaleString()),
-                1
-                /* TEXT */
-              )
-            ]),
-            vue.createElementVNode("view", { class: "data-item" }, [
-              vue.createElementVNode("view", { class: "data-label" }, "累计收益"),
-              vue.createElementVNode(
-                "view",
-                { class: "data-value" },
-                "¥" + vue.toDisplayString($data.coreData.totalProfit.toLocaleString()),
-                1
-                /* TEXT */
-              ),
-              vue.createElementVNode(
-                "view",
-                { class: "data-desc" },
-                "本月：¥" + vue.toDisplayString($data.coreData.monthProfit.toLocaleString()),
-                1
-                /* TEXT */
-              )
-            ])
-          ])
+      vue.createElementVNode("view", { class: "list-container" }, [
+        vue.createElementVNode("view", { class: "data-list" }, [
+          (vue.openBlock(true), vue.createElementBlock(
+            vue.Fragment,
+            null,
+            vue.renderList($data.dataList, (item) => {
+              return vue.openBlock(), vue.createElementBlock("view", {
+                class: "list-item",
+                key: item.id
+              }, [
+                vue.createElementVNode("view", { class: "item-left" }, [
+                  vue.createElementVNode(
+                    "view",
+                    { class: "item-title" },
+                    vue.toDisplayString(item.out_trade_no),
+                    1
+                    /* TEXT */
+                  ),
+                  vue.createElementVNode(
+                    "view",
+                    { class: "item-desc" },
+                    vue.toDisplayString(item.level2money),
+                    1
+                    /* TEXT */
+                  ),
+                  vue.createElementVNode(
+                    "view",
+                    { class: "item-time" },
+                    vue.toDisplayString($options.formatDate(item.createTime)),
+                    1
+                    /* TEXT */
+                  )
+                ])
+              ]);
+            }),
+            128
+            /* KEYED_FRAGMENT */
+          ))
         ]),
-        vue.createElementVNode("view", { class: "data-card" }, [
-          vue.createElementVNode("view", { class: "target-progress" }, [
-            vue.createElementVNode("view", { class: "target-info" }, [
-              vue.createElementVNode("view", { class: "target-label" }, "业绩达成率"),
-              vue.createElementVNode(
-                "view",
-                { class: "target-value" },
-                vue.toDisplayString($data.coreData.targetRate) + "%",
-                1
-                /* TEXT */
-              )
-            ]),
-            vue.createElementVNode("view", { class: "progress-bar" }, [
-              vue.createElementVNode(
-                "view",
-                {
-                  class: "progress-fill",
-                  style: vue.normalizeStyle({ width: $data.coreData.targetRate + "%" })
-                },
-                null,
-                4
-                /* STYLE */
-              )
-            ]),
-            vue.createElementVNode("view", { class: "target-detail" }, [
-              vue.createElementVNode(
-                "view",
-                { class: "detail-item" },
-                "目标：¥" + vue.toDisplayString($data.coreData.targetAmount.toLocaleString()),
-                1
-                /* TEXT */
-              ),
-              vue.createElementVNode(
-                "view",
-                { class: "detail-item" },
-                "已完成：¥" + vue.toDisplayString($data.coreData.completedAmount.toLocaleString()),
-                1
-                /* TEXT */
-              )
-            ])
-          ])
-        ]),
-        vue.createElementVNode("view", { class: "data-card" }, [
-          vue.createElementVNode("view", { class: "section-header" }, [
-            vue.createElementVNode("view", { class: "section-icon" }, [
-              vue.createVNode(_component_uni_icons, {
-                type: "orders-o",
-                size: "20",
-                color: "#34A853"
-              })
-            ]),
-            vue.createElementVNode("view", { class: "section-name" }, "近期订单明细")
-          ]),
-          vue.createElementVNode("view", { class: "order-list" }, [
-            (vue.openBlock(true), vue.createElementBlock(
-              vue.Fragment,
-              null,
-              vue.renderList($data.recentOrders, (order) => {
-                return vue.openBlock(), vue.createElementBlock("view", {
-                  class: "order-item",
-                  key: order.id
-                }, [
-                  vue.createElementVNode("view", { class: "order-left" }, [
-                    vue.createElementVNode(
-                      "view",
-                      { class: "order-no" },
-                      "订单号：" + vue.toDisplayString(order.orderNo),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "view",
-                      { class: "order-date" },
-                      vue.toDisplayString($options.formatDate(order.createTime)),
-                      1
-                      /* TEXT */
-                    )
-                  ]),
-                  vue.createElementVNode("view", { class: "order-right" }, [
-                    vue.createElementVNode(
-                      "view",
-                      { class: "order-amount" },
-                      "¥" + vue.toDisplayString(order.amount.toFixed(2)),
-                      1
-                      /* TEXT */
-                    ),
-                    vue.createElementVNode(
-                      "view",
-                      {
-                        class: vue.normalizeClass(["order-status", "status-" + order.status])
-                      },
-                      vue.toDisplayString($options.getStatusText(order.status)),
-                      3
-                      /* TEXT, CLASS */
-                    )
-                  ])
-                ]);
-              }),
-              128
-              /* KEYED_FRAGMENT */
-            )),
-            vue.createElementVNode("view", {
-              class: "view-all",
-              onClick: _cache[0] || (_cache[0] = (...args) => $options.viewAllOrders && $options.viewAllOrders(...args))
-            }, "查看全部订单 →")
-          ])
-        ]),
-        vue.createElementVNode("view", { class: "data-card" }, [
-          vue.createElementVNode("view", { class: "section-header" }, [
-            vue.createElementVNode("view", { class: "section-icon" }, [
-              vue.createVNode(_component_uni_icons, {
-                type: "calendar",
-                size: "20",
-                color: "#EA4335"
-              })
-            ]),
-            vue.createElementVNode("view", { class: "section-name" }, "数据统计趋势")
-          ]),
-          vue.createElementVNode("view", { class: "trend-filter" }, [
-            vue.createElementVNode("picker", {
-              mode: "selector",
-              range: $data.trendRange,
-              value: $data.selectedTrendRange,
-              onChange: _cache[1] || (_cache[1] = (...args) => $options.changeTrendRange && $options.changeTrendRange(...args))
-            }, [
-              vue.createElementVNode(
-                "view",
-                { class: "filter-text" },
-                vue.toDisplayString($data.trendRange[$data.selectedTrendRange]),
-                1
-                /* TEXT */
-              ),
-              vue.createVNode(_component_uni_icons, {
-                type: "down",
-                size: "14",
-                class: "filter-icon"
-              })
-            ], 40, ["range", "value"])
-          ]),
-          vue.createElementVNode("view", { class: "trend-chart" })
-        ])
+        $data.dataList.length === 0 ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 0,
+          class: "list-footer"
+        }, " 暂无数据可展示 ")) : (vue.openBlock(), vue.createElementBlock("view", {
+          key: 1,
+          class: "list-footer",
+          onClick: _cache[0] || (_cache[0] = (...args) => $options.viewAllData && $options.viewAllData(...args))
+        }, " 查看全部数据 → "))
       ])
     ]);
   }
@@ -36622,7 +38876,7 @@ ${o3}
   };
   function _sfc_render$C(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$1);
+    const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$2);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "form-card" }, [
         vue.createElementVNode("view", { class: "section-title" }, [
@@ -37109,7 +39363,7 @@ ${o3}
   };
   function _sfc_render$B(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$1);
+    const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$2);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "form-card" }, [
         vue.createElementVNode("view", { class: "section-title" }, [
@@ -37562,7 +39816,7 @@ ${o3}
   };
   function _sfc_render$A(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$1);
+    const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$2);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "form-card" }, [
         vue.createElementVNode("view", { class: "section-title" }, [
@@ -38375,21 +40629,39 @@ ${o3}
   }
   const SubPackagesAHouseholderAlreadyListedAlreadyListed = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__scopeId", "data-v-8bd8dfff"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/alreadyListed/alreadyListed.vue"]]);
   const _sfc_main$x = {
+    components: {
+      mButtonVue
+    },
     data() {
       return {
         // 搜索关键字
         searchText: "",
         // 分类数据
         categories: [
-          { label: "所有分类", value: "" },
-          { label: "菜类", value: "" },
-          { label: "肉类", value: "" }
+          {
+            label: "所有分类",
+            value: ""
+          },
+          {
+            label: "菜类",
+            value: ""
+          },
+          {
+            label: "肉类",
+            value: ""
+          }
         ],
         selectedCategoryIndex: 0,
         // 距离筛选
         distances: [
-          { label: "离我最近", value: "" },
-          { label: "离我最远", value: "" }
+          {
+            label: "离我最近",
+            value: ""
+          },
+          {
+            label: "离我最远",
+            value: ""
+          }
         ],
         selectedDistanceIndex: 0,
         // 商品列表
@@ -38419,16 +40691,18 @@ ${o3}
             this.noMore = true;
             return;
           }
+          formatAppLog("log", "at subPackages/Wholesale/supply/supply.vue:150", res);
           this.page++;
         } catch (error2) {
-          formatAppLog("log", "at subPackages/Wholesale/supply/supply.vue:146", error2);
+          formatAppLog("log", "at subPackages/Wholesale/supply/supply.vue:153", error2);
         } finally {
           this.loading = false;
         }
       },
       // 处理搜索
-      handleSearch() {
+      handleSearch(value) {
         this.resetList();
+        this.queryData.selltitle = value;
         this.loadData();
       },
       // 重置筛选
@@ -38449,6 +40723,7 @@ ${o3}
         this.goodsList = [];
         this.page = 1;
         this.noMore = false;
+        this.queryData.selltitle = null;
       },
       // 联系商家
       contactNow() {
@@ -38472,36 +40747,19 @@ ${o3}
     }
   };
   function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_mButtonVue = vue.resolveComponent("mButtonVue");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "supply-container" }, [
       vue.createElementVNode("view", { class: "filter-section" }, [
-        vue.createElementVNode("view", { class: "search-bar" }, [
-          vue.withDirectives(vue.createElementVNode(
-            "input",
-            {
-              class: "search-input",
-              type: "text",
-              placeholder: "请输入关键字",
-              "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.searchText = $event)
-            },
-            null,
-            512
-            /* NEED_PATCH */
-          ), [
-            [vue.vModelText, $data.searchText]
-          ]),
-          vue.createElementVNode("button", {
-            class: "search-btn",
-            onClick: _cache[1] || (_cache[1] = (...args) => $options.handleSearch && $options.handleSearch(...args))
-          }, "搜索"),
-          vue.createElementVNode("button", {
-            class: "reset-btn",
-            onClick: _cache[2] || (_cache[2] = (...args) => $options.handleReset && $options.handleReset(...args))
-          }, "重置")
-        ]),
+        vue.createVNode(_component_mButtonVue, {
+          onBtn1: $options.handleSearch,
+          onBtn2: $options.handleReset,
+          isShowbutton2: true,
+          placeholder: "输入关键词搜索"
+        }, null, 8, ["onBtn1", "onBtn2"]),
         vue.createElementVNode("view", { class: "filter-group" }, [
           vue.createElementVNode("picker", {
-            onChange: _cache[3] || (_cache[3] = (...args) => $options.categoryChange && $options.categoryChange(...args)),
+            onChange: _cache[0] || (_cache[0] = (...args) => $options.categoryChange && $options.categoryChange(...args)),
             range: $data.categories,
             "range-key": "label"
           }, [
@@ -38532,7 +40790,7 @@ ${o3}
         {
           class: "goods-list",
           "scroll-y": "",
-          onScrolltolower: _cache[5] || (_cache[5] = (...args) => $options.loadMore && $options.loadMore(...args)),
+          onScrolltolower: _cache[2] || (_cache[2] = (...args) => $options.loadMore && $options.loadMore(...args)),
           "scroll-with-animation": true
         },
         [
@@ -38608,7 +40866,7 @@ ${o3}
                       ]),
                       vue.createElementVNode("view", {
                         class: "contact-btn",
-                        onClick: _cache[4] || (_cache[4] = vue.withModifiers((...args) => $options.contactNow && $options.contactNow(...args), ["stop"]))
+                        onClick: _cache[1] || (_cache[1] = vue.withModifiers((...args) => $options.contactNow && $options.contactNow(...args), ["stop"]))
                       }, [
                         vue.createElementVNode("text", null, "询底价"),
                         vue.createVNode(_component_uni_icons, {
@@ -38657,26 +40915,57 @@ ${o3}
   const SubPackagesWholesaleSupplySupply = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/supply/supply.vue"]]);
   const _sfc_main$w = {
     mixins: [myMixin],
+    components: {
+      mButtonVue
+    },
     data() {
       return {
         categories: [
-          { label: "全部采购", value: "all" },
-          { label: "肉类", value: "material" },
-          { label: "蔬菜", value: "equipment" },
-          { label: "蛋类", value: "service" }
+          {
+            label: "全部采购",
+            value: "all"
+          },
+          {
+            label: "肉类",
+            value: "material"
+          },
+          {
+            label: "蔬菜",
+            value: "equipment"
+          },
+          {
+            label: "蛋类",
+            value: "service"
+          }
         ],
         sortOptions: [
-          { label: "智能排序", value: "default" },
-          { label: "预算最高", value: "budget_desc" },
-          { label: "最新发布", value: "newest" }
+          {
+            label: "智能排序",
+            value: "default"
+          },
+          {
+            label: "预算最高",
+            value: "budget_desc"
+          },
+          {
+            label: "最新发布",
+            value: "newest"
+          }
         ],
-        selectedCategory: { label: "全部采购", value: "all" },
-        selectedSort: { label: "智能排序", value: "default" },
+        selectedCategory: {
+          label: "全部采购",
+          value: "all"
+        },
+        selectedSort: {
+          label: "智能排序",
+          value: "default"
+        },
         purchaseList: [],
         page: 1,
         loading: false,
         noMore: false,
         query: {
+          infotitle: null,
           area_id: null,
           stoptime: null,
           page: 1,
@@ -38713,6 +41002,19 @@ ${o3}
       this.loadData();
     },
     methods: {
+      handleSearch(value) {
+        this.resetList();
+        this.query.infotitle = value;
+        this.loadData();
+      },
+      // 重置筛选
+      handleReset() {
+        this.searchText = "";
+        this.selectedCategoryIndex = 0;
+        this.selectedDistanceIndex = 0;
+        this.resetList();
+        this.loadData();
+      },
       // 加载数据
       async loadData() {
         if (this.loading || this.noMore)
@@ -38720,8 +41022,9 @@ ${o3}
         this.loading = true;
         try {
           let data = await api.buyinfoList(this.query);
+          formatAppLog("log", "at subPackages/Wholesale/purchase/purchase.vue:209", this.query, "这是请求参数");
+          formatAppLog("log", "at subPackages/Wholesale/purchase/purchase.vue:210", data.data.listdata, "这是响应数据");
           this.purchaseList = [...this.purchaseList, ...data.data.listdata];
-          formatAppLog("log", "at subPackages/Wholesale/purchase/purchase.vue:181", this.purchaseList);
           this.page++;
           this.noMore = this.page > 2;
         } finally {
@@ -38749,7 +41052,7 @@ ${o3}
         this.page = 1;
         this.purchaseList = [];
         this.noMore = false;
-        this.loadData();
+        this.query.infotitle = null;
       },
       // 查看详情
       viewDetail(id) {
@@ -38761,36 +41064,22 @@ ${o3}
       contactSupplier(id) {
         uni.showActionSheet({
           items: ["在线沟通", "电话联系", "邮件联系"],
-          success: (res) => formatAppLog("log", "at subPackages/Wholesale/purchase/purchase.vue:227", "联系方式:", res.tapIndex)
+          success: (res) => formatAppLog("log", "at subPackages/Wholesale/purchase/purchase.vue:259", "联系方式:", res.tapIndex)
         });
       }
     }
   };
   function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_mButtonVue = vue.resolveComponent("mButtonVue");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "purchase-container" }, [
       vue.createElementVNode("view", { class: "filter-bar" }, [
-        vue.createElementVNode("view", { class: "search" }, [
-          vue.createVNode(_component_uni_icons, {
-            type: "search",
-            style: { "margin": "10rpx", "font-size": "33rpx" }
-          }),
-          vue.createElementVNode("input", {
-            class: "serchInput",
-            type: "text",
-            placeholder: "请输入关键字"
-          }),
-          vue.createElementVNode("view", { style: { "display": "flex" } }, [
-            vue.createElementVNode("button", {
-              class: "btn",
-              type: "primary"
-            }, "搜索"),
-            vue.createElementVNode("button", {
-              class: "btn",
-              type: "warn"
-            }, "重置")
-          ])
-        ]),
+        vue.createVNode(_component_mButtonVue, {
+          onBtn1: $options.handleSearch,
+          onBtn2: $options.handleReset,
+          isShowbutton2: true,
+          placeholder: "输入关键词搜索"
+        }, null, 8, ["onBtn1", "onBtn2"]),
         vue.createElementVNode("view", { class: "filter-group" }, [
           vue.createElementVNode("picker", {
             onChange: _cache[0] || (_cache[0] = (...args) => $options.categoryChange && $options.categoryChange(...args)),
@@ -39090,11 +41379,11 @@ ${o3}
             this.cityList = response.data;
             return response.data;
           } else {
-            formatAppLog("error", "at subPackages/Wholesale/addSupply/addSupply.vue:157", "No cities data found");
+            formatAppLog("error", "at subPackages/Wholesale/addSupply/addSupply.vue:217", "No cities data found");
             return [];
           }
         } catch (error2) {
-          formatAppLog("error", "at subPackages/Wholesale/addSupply/addSupply.vue:161", "Failed to fetch cities:", error2);
+          formatAppLog("error", "at subPackages/Wholesale/addSupply/addSupply.vue:221", "Failed to fetch cities:", error2);
           return [];
         }
       },
@@ -39105,11 +41394,11 @@ ${o3}
             this.districtList = response.data;
             return response.data;
           } else {
-            formatAppLog("error", "at subPackages/Wholesale/addSupply/addSupply.vue:172", "No areas data found");
+            formatAppLog("error", "at subPackages/Wholesale/addSupply/addSupply.vue:232", "No areas data found");
             return [];
           }
         } catch (error2) {
-          formatAppLog("error", "at subPackages/Wholesale/addSupply/addSupply.vue:176", "Failed to fetch areas:", error2);
+          formatAppLog("error", "at subPackages/Wholesale/addSupply/addSupply.vue:236", "Failed to fetch areas:", error2);
           return [];
         }
       },
@@ -39125,7 +41414,7 @@ ${o3}
           }
           throw new Error("Failed to fetch provinces");
         } catch (error2) {
-          formatAppLog("error", "at subPackages/Wholesale/addSupply/addSupply.vue:193", "Failed to fetch provinces:", error2);
+          formatAppLog("error", "at subPackages/Wholesale/addSupply/addSupply.vue:253", "Failed to fetch provinces:", error2);
           throw error2;
         }
       },
@@ -39139,7 +41428,7 @@ ${o3}
           this.multiArray[2] = areas.map((item) => item.name);
           this.multiIndex = [0, 0, 0];
         } catch (error2) {
-          formatAppLog("log", "at subPackages/Wholesale/addSupply/addSupply.vue:207", error2);
+          formatAppLog("log", "at subPackages/Wholesale/addSupply/addSupply.vue:267", error2);
         }
       },
       // 上传菜品图片
@@ -39150,7 +41439,7 @@ ${o3}
           sourceType: ["album", "camera"],
           success: async (res) => {
             const tempFilePaths = res.tempFilePaths;
-            formatAppLog("log", "at subPackages/Wholesale/addSupply/addSupply.vue:219", res);
+            formatAppLog("log", "at subPackages/Wholesale/addSupply/addSupply.vue:279", res);
             if (tempFilePaths.length > 0) {
               const {
                 upload,
@@ -39191,7 +41480,233 @@ ${o3}
     }
   };
   function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", { class: "create-container" });
+    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2);
+    const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_3);
+    const _component_uni_data_select = resolveEasycom(vue.resolveDynamicComponent("uni-data-select"), __easycom_4);
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
+    const _component_uni_card = resolveEasycom(vue.resolveDynamicComponent("uni-card"), __easycom_4$1);
+    const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_5);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "create-container" }, [
+      vue.createVNode(_component_uni_forms, {
+        ref: "formRef",
+        model: $data.formData,
+        rules: $data.formRules
+      }, {
+        default: vue.withCtx(() => [
+          vue.createVNode(_component_uni_card, { title: "基本信息" }, {
+            default: vue.withCtx(() => [
+              vue.createVNode(_component_uni_forms_item, {
+                label: "供应商品",
+                required: "",
+                name: "selltitle",
+                labelWidth: "80px"
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_uni_easyinput, {
+                    modelValue: $data.formData.selltitle,
+                    "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.formData.selltitle = $event),
+                    placeholder: "输入商品名称"
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+                /* STABLE */
+              }),
+              vue.createVNode(_component_uni_forms_item, {
+                label: "产品类目",
+                required: "",
+                name: "category",
+                labelWidth: "80px"
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_uni_data_select, {
+                    modelValue: $data.formData.category_id,
+                    "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.formData.category_id = $event),
+                    localdata: $data.categories
+                  }, null, 8, ["modelValue", "localdata"])
+                ]),
+                _: 1
+                /* STABLE */
+              }),
+              vue.createVNode(_component_uni_forms_item, {
+                label: "库存",
+                required: "",
+                name: "category",
+                labelWidth: "80px"
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_uni_easyinput, {
+                    modelValue: $data.formData.sellnumber,
+                    "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => $data.formData.sellnumber = $event),
+                    modelModifiers: { number: true },
+                    placeholder: "输入库存"
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+                /* STABLE */
+              }),
+              vue.createVNode(_component_uni_forms_item, {
+                label: "单位",
+                required: "",
+                name: "category",
+                labelWidth: "80px"
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_uni_easyinput, {
+                    modelValue: $data.formData.unit,
+                    "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $data.formData.unit = $event),
+                    placeholder: "输入单位"
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+                /* STABLE */
+              }),
+              vue.createElementVNode("view", { style: { "color": "darkgray" } }, [
+                vue.createVNode(_component_uni_icons, { type: "help-filled" }),
+                vue.createTextVNode(" 市场价和批发价用于对比，实际以批发价为标准")
+              ]),
+              vue.createVNode(_component_uni_forms_item, {
+                label: "市场价",
+                required: "",
+                name: "category",
+                labelWidth: "80px"
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_uni_easyinput, {
+                    modelValue: $data.formData.price,
+                    "onUpdate:modelValue": _cache[4] || (_cache[4] = ($event) => $data.formData.price = $event),
+                    modelModifiers: { number: true },
+                    placeholder: "输入市场价"
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+                /* STABLE */
+              }),
+              vue.createVNode(_component_uni_forms_item, {
+                label: "批发价",
+                required: "",
+                name: "category",
+                labelWidth: "80px"
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_uni_easyinput, {
+                    modelValue: $data.formData.marketprice,
+                    "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => $data.formData.marketprice = $event),
+                    modelModifiers: { number: true },
+                    placeholder: "输入批发价"
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+                /* STABLE */
+              }),
+              vue.createVNode(_component_uni_forms_item, {
+                label: "供应地区",
+                required: "",
+                name: "category",
+                labelWidth: "80px"
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createElementVNode("view", { style: { "display": "flex", "align-items": "center", "height": "70rpx" } }, [
+                    vue.createElementVNode("picker", {
+                      class: "picker",
+                      mode: "multiSelector",
+                      range: $data.multiArray,
+                      value: $data.multiIndex,
+                      onChange: _cache[6] || (_cache[6] = (...args) => $options.bindMultiPickerChange && $options.bindMultiPickerChange(...args)),
+                      onColumnchange: _cache[7] || (_cache[7] = (...args) => $options.bindMultiPickerColumnChange && $options.bindMultiPickerColumnChange(...args))
+                    }, [
+                      vue.createElementVNode(
+                        "view",
+                        { style: { "font-size": "25rpx" } },
+                        vue.toDisplayString($data.multiArray[0][$data.multiIndex[0]]) + " - " + vue.toDisplayString($data.multiArray[1][$data.multiIndex[1]]) + " -" + vue.toDisplayString($data.selectedCountry === "overseas" ? "" : $data.multiArray[2][$data.multiIndex[2]]),
+                        1
+                        /* TEXT */
+                      )
+                    ], 40, ["range", "value"])
+                  ])
+                ]),
+                _: 1
+                /* STABLE */
+              }),
+              vue.createVNode(_component_uni_forms_item, {
+                label: "详细地址",
+                required: "",
+                name: "category",
+                labelWidth: "80px"
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode(_component_uni_easyinput, {
+                    modelValue: $data.formData.selladdress,
+                    "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => $data.formData.selladdress = $event),
+                    placeholder: "输入详细地址"
+                  }, null, 8, ["modelValue"])
+                ]),
+                _: 1
+                /* STABLE */
+              })
+            ]),
+            _: 1
+            /* STABLE */
+          }),
+          vue.createVNode(_component_uni_card, { title: "产品图片" }, {
+            default: vue.withCtx(() => [
+              vue.createElementVNode("view", {
+                class: "imgIcon",
+                onClick: _cache[9] || (_cache[9] = (...args) => $options.uploadcuisine && $options.uploadcuisine(...args))
+              }, [
+                vue.withDirectives(vue.createVNode(
+                  _component_uni_icons,
+                  {
+                    type: "plusempty",
+                    size: "50"
+                  },
+                  null,
+                  512
+                  /* NEED_PATCH */
+                ), [
+                  [vue.vShow, !$data.formData.selllogo]
+                ]),
+                vue.withDirectives(vue.createElementVNode("image", {
+                  src: $data.formData.selllogo,
+                  alt: "",
+                  style: { "width": "100%", "height": "100%" }
+                }, null, 8, ["src"]), [
+                  [vue.vShow, $data.formData.selllogo]
+                ])
+              ])
+            ]),
+            _: 1
+            /* STABLE */
+          }),
+          vue.createVNode(_component_uni_card, { title: "供应说明" }, {
+            default: vue.withCtx(() => [
+              vue.withDirectives(vue.createElementVNode(
+                "textarea",
+                {
+                  "onUpdate:modelValue": _cache[10] || (_cache[10] = ($event) => $data.formData.content = $event),
+                  style: { "box-shadow": "rgba(0, 0, 0, 0.08) 0px 0px 3px 1px", "width": "100%", "padding": "5rpx" }
+                },
+                null,
+                512
+                /* NEED_PATCH */
+              ), [
+                [vue.vModelText, $data.formData.content]
+              ])
+            ]),
+            _: 1
+            /* STABLE */
+          }),
+          vue.createElementVNode("view", { class: "submit-bar" }, [
+            vue.createElementVNode("view", {
+              class: "submit-btn",
+              onClick: _cache[11] || (_cache[11] = (...args) => $options.handleSubmit && $options.handleSubmit(...args)),
+              disabled: $data.submitting
+            }, vue.toDisplayString($data.submitting ? "提交中..." : "立即发布"), 9, ["disabled"])
+          ])
+        ]),
+        _: 1
+        /* STABLE */
+      }, 8, ["model", "rules"])
+    ]);
   }
   const SubPackagesWholesaleAddSupplyAddSupply = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/addSupply/addSupply.vue"]]);
   const _sfc_main$u = {
@@ -39384,12 +41899,12 @@ ${o3}
   };
   function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_1$3);
-    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2$1);
+    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2);
     const _component_goods_picker = vue.resolveComponent("goods-picker");
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_3);
     const _component_uni_data_select = resolveEasycom(vue.resolveDynamicComponent("uni-data-select"), __easycom_4);
-    const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$1);
+    const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$2);
     const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_5);
     return vue.openBlock(), vue.createElementBlock("view", { class: "purchase-container" }, [
       vue.createVNode(
@@ -39627,6 +42142,9 @@ ${o3}
   const SubPackagesWholesaleWholesaleNavigationWholesaleNavigation = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/wholesaleNavigation/wholesaleNavigation.vue"]]);
   const _imports_0$2 = "/static/empty-supply.png";
   const _sfc_main$s = {
+    components: {
+      mButtonVue
+    },
     data() {
       return {
         queryData: {
@@ -39654,7 +42172,7 @@ ${o3}
     methods: {
       async getData() {
         let data = await api.mySupplyData(this.queryData);
-        formatAppLog("log", "at subPackages/Wholesale/mySupply/mySupply.vue:91", data);
+        formatAppLog("log", "at subPackages/Wholesale/mySupply/mySupply.vue:95", data);
         if (data.code == 200) {
           this.dataTotal = data.data.totalnum;
           this.supplyData = [...this.supplyData, ...data.data.listdata];
@@ -39960,6 +42478,9 @@ ${o3}
   const SubPackagesWholesaleQuotationQuotation = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/quotation/quotation.vue"]]);
   const _sfc_main$p = {
     mixins: [myMixin],
+    components: {
+      mButtonVue
+    },
     data() {
       return {
         distances: [
@@ -40014,7 +42535,8 @@ ${o3}
         };
       },
       // 开始搜索
-      startSearch() {
+      startSearch(value) {
+        this.queryData.goodsname = value;
         this.queryData.category_id = null;
         this.noMore = false;
         this.goodsData = [];
@@ -40028,13 +42550,13 @@ ${o3}
         this.getGoodsData();
       },
       goToDynamics(item) {
-        formatAppLog("log", "at subPackages/shoppingPageList/villageZone/villageZone.vue:196", item);
+        formatAppLog("log", "at subPackages/shoppingPageList/villageZone/villageZone.vue:204", item);
         uni.navigateTo({
           url: `/pages/dynamics/dynamics?id=${item.id}`
         });
       },
       switchClass(index2) {
-        formatAppLog("log", "at subPackages/shoppingPageList/villageZone/villageZone.vue:202", index2);
+        formatAppLog("log", "at subPackages/shoppingPageList/villageZone/villageZone.vue:210", index2);
         this.selectedCategoryId = index2;
         this.goodsData = [];
         this.noMore = false;
@@ -40044,7 +42566,7 @@ ${o3}
       },
       async fetchCategories() {
         const response = await api.cglist();
-        formatAppLog("log", "at subPackages/shoppingPageList/villageZone/villageZone.vue:212", response);
+        formatAppLog("log", "at subPackages/shoppingPageList/villageZone/villageZone.vue:220", response);
         this.categories = [{ title: "全部" }, ...response.data.listdata];
       },
       async getGoodsData(isRefresh = false) {
@@ -40102,46 +42624,19 @@ ${o3}
     }
   };
   function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_mButtonVue = vue.resolveComponent("mButtonVue");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
-      vue.createElementVNode("view", { style: { "display": "flex", "align-items": "center" } }, [
-        vue.createElementVNode("view", { class: "search-bar" }, [
-          vue.createElementVNode("view", { style: { "display": "flex", "align-items": "center", "border-radius": "20rpx" } }, [
-            vue.createElementVNode("view", { style: { "padding": "20rpx" } }, [
-              vue.createVNode(_component_uni_icons, {
-                color: "#999999",
-                size: "20",
-                type: "search"
-              })
-            ]),
-            vue.withDirectives(vue.createElementVNode(
-              "input",
-              {
-                type: "text",
-                placeholder: "搜索菜品",
-                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.queryData.goodsname = $event)
-              },
-              null,
-              512
-              /* NEED_PATCH */
-            ), [
-              [vue.vModelText, $data.queryData.goodsname]
-            ])
-          ])
-        ]),
-        vue.createElementVNode("view", {
-          style: { "background-color": "#007aff", "color": "white", "width": "120rpx", "height": "80rpx", "line-height": "80rpx", "text-align": "center", "border-radius": "10rpx", "margin": "0 10rpx 0 0" },
-          onClick: _cache[1] || (_cache[1] = (...args) => $options.startSearch && $options.startSearch(...args))
-        }, " 搜索"),
-        vue.createElementVNode("view", {
-          style: { "background-color": "red", "color": "white", "width": "120rpx", "height": "80rpx", "line-height": "80rpx", "text-align": "center", "border-radius": "10rpx", "margin": "0 10rpx 0 0" },
-          onClick: _cache[2] || (_cache[2] = (...args) => $options.stopSearch && $options.stopSearch(...args))
-        }, " 清空")
-      ]),
+      vue.createVNode(_component_mButtonVue, {
+        onBtn1: $options.startSearch,
+        onBtn2: $options.stopSearch,
+        isShowbutton2: true,
+        placeholder: "搜索菜品"
+      }, null, 8, ["onBtn1", "onBtn2"]),
       vue.createElementVNode("view", { class: "filter-group" }, [
         vue.createElementVNode("picker", {
-          onChange: _cache[3] || (_cache[3] = (...args) => _ctx.categoryChange && _ctx.categoryChange(...args)),
+          onChange: _cache[0] || (_cache[0] = (...args) => _ctx.categoryChange && _ctx.categoryChange(...args)),
           range: $data.pricesort,
           "range-key": "label"
         }, [
@@ -40235,7 +42730,7 @@ ${o3}
         {
           class: "goods-scroll",
           "scroll-y": "",
-          onScrolltolower: _cache[4] || (_cache[4] = (...args) => $options.loadMore && $options.loadMore(...args))
+          onScrolltolower: _cache[1] || (_cache[1] = (...args) => $options.loadMore && $options.loadMore(...args))
         },
         [
           vue.createElementVNode("view", { class: "goods-waterfall" }, [
@@ -40368,6 +42863,9 @@ ${o3}
   }
   const SubPackagesShoppingPageListVillageZoneVillageZone = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-8ec1e1a2"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/villageZone/villageZone.vue"]]);
   const _sfc_main$o = {
+    components: {
+      mButtonVue
+    },
     mixins: [myMixin],
     data() {
       return {
@@ -40433,7 +42931,8 @@ ${o3}
         };
       },
       // 开始搜索
-      startSearch() {
+      startSearch(value) {
+        this.formdata.farmersname = value;
         this.farmers = [];
         this.getData();
       },
@@ -40448,7 +42947,7 @@ ${o3}
         if (data.code = 200) {
           this.farmers = [...this.farmers, ...data.data.listdata];
         }
-        formatAppLog("log", "at subPackages/shoppingPageList/nearbyFarmers/nearbyFarmers.vue:203", this.farmers);
+        formatAppLog("log", "at subPackages/shoppingPageList/nearbyFarmers/nearbyFarmers.vue:210", this.farmers);
       },
       handleContact(farmer) {
         uni.makePhoneCall({
@@ -40463,44 +42962,19 @@ ${o3}
     }
   };
   function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_mButtonVue = vue.resolveComponent("mButtonVue");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "search-bar" }, [
-        vue.createElementVNode("view", { style: { "display": "flex" } }, [
-          vue.createElementVNode("view", { style: { "display": "flex", "background-color": "rgb(245, 245, 245)", "align-items": "center", "border-radius": "20rpx" } }, [
-            vue.createElementVNode("view", { style: { "padding": "20rpx" } }, [
-              vue.createVNode(_component_uni_icons, {
-                color: "#999999",
-                size: "20",
-                type: "search"
-              })
-            ]),
-            vue.withDirectives(vue.createElementVNode(
-              "input",
-              {
-                type: "text",
-                placeholder: "搜索农户姓名或地址",
-                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.formdata.farmersname = $event)
-              },
-              null,
-              512
-              /* NEED_PATCH */
-            ), [
-              [vue.vModelText, $data.formdata.farmersname]
-            ])
-          ]),
-          vue.createElementVNode("view", {
-            style: { "background-color": "#007aff", "color": "white", "width": "120rpx", "height": "80rpx", "line-height": "80rpx", "text-align": "center", "border-radius": "10rpx", "margin": "10rpx" },
-            onClick: _cache[1] || (_cache[1] = (...args) => $options.startSearch && $options.startSearch(...args))
-          }, " 搜索"),
-          vue.createElementVNode("view", {
-            style: { "background-color": "red", "color": "white", "width": "120rpx", "height": "80rpx", "line-height": "80rpx", "text-align": "center", "border-radius": "10rpx", "margin": "10rpx" },
-            onClick: _cache[2] || (_cache[2] = (...args) => $options.stopSearch && $options.stopSearch(...args))
-          }, " 清空")
-        ]),
+        vue.createVNode(_component_mButtonVue, {
+          onBtn1: $options.startSearch,
+          onBtn2: $options.stopSearch,
+          isShowbutton2: true,
+          placeholder: "搜索农户姓名或地址"
+        }, null, 8, ["onBtn1", "onBtn2"]),
         vue.createElementVNode("view", { class: "filter-group" }, [
           vue.createElementVNode("picker", {
-            onChange: _cache[3] || (_cache[3] = (...args) => _ctx.categoryChange && _ctx.categoryChange(...args)),
+            onChange: _cache[0] || (_cache[0] = (...args) => _ctx.categoryChange && _ctx.categoryChange(...args)),
             range: $data.categories,
             "range-key": "label"
           }, [
@@ -40549,7 +43023,7 @@ ${o3}
             ])
           ], 8, ["range"]),
           vue.createElementVNode("view", {
-            onClick: _cache[4] || (_cache[4] = ($event) => $options.goToRouter("/subPackages/shoppingPageList/statisticsMap/statisticsMap")),
+            onClick: _cache[1] || (_cache[1] = ($event) => $options.goToRouter("/subPackages/shoppingPageList/statisticsMap/statisticsMap")),
             style: { "position": "absolute", "right": "40rpx", "background-color": "#007aff", "padding": "10rpx", "color": "white", "border-radius": "10rpx" }
           }, "地图查看")
         ])
@@ -41088,9 +43562,9 @@ ${o3}
   function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_1$3);
-    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2$1);
+    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2);
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_3);
-    const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$1);
+    const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$2);
     const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_5);
     return vue.openBlock(), vue.createElementBlock("view", { class: "rental-page" }, [
       vue.createElementVNode("swiper", {
@@ -41512,14 +43986,14 @@ ${o3}
                     (vue.openBlock(true), vue.createElementBlock(
                       vue.Fragment,
                       null,
-                      vue.renderList(stall.features, (tag, tagIndex) => {
+                      vue.renderList(stall.features, (tag2, tagIndex) => {
                         return vue.openBlock(), vue.createElementBlock(
                           "text",
                           {
                             key: tagIndex,
                             class: "tag"
                           },
-                          " #" + vue.toDisplayString(tag),
+                          " #" + vue.toDisplayString(tag2),
                           1
                           /* TEXT */
                         );
@@ -41581,7 +44055,7 @@ ${o3}
         ).length;
       },
       totalAmount() {
-        return this.orders.reduce((sum, o2) => sum + (o2.deposit + o2.finalPayment), 0).toFixed(2);
+        return this.orders.reduce((sum2, o2) => sum2 + (o2.deposit + o2.finalPayment), 0).toFixed(2);
       }
     },
     mounted() {
@@ -41901,7 +44375,7 @@ ${o3}
         if (isNaN(this.fromData.money) || isNaN(this.fromData.goods_num) || this.fromData.goods_num < 1) {
           return 0;
         }
-        return new Decimal$1(this.fromData.money).mul(this.fromData.goods_num).toNumber();
+        return new Decimal(this.fromData.money).mul(this.fromData.goods_num).toNumber();
       }
     },
     // 8. 方法定义
@@ -41911,7 +44385,7 @@ ${o3}
         this.productImages = [this.product.imglogo];
         data.data.listdata.forEach((item) => {
           if (item.imgs.split(",").length > 1 && this.productImages.length < 10) {
-            formatAppLog("log", "at subPackages/shoppingPageList/prePurchaseDeposit/prePurchaseDeposit.vue:336", item.imgs.split(","));
+            formatAppLog("log", "at subPackages/shoppingPageList/prePurchaseDeposit/prePurchaseDeposit.vue:335", item.imgs.split(","));
             this.productImages = [...this.productImages, ...item.imgs.split(",")];
           }
         });
@@ -42001,7 +44475,7 @@ ${o3}
             this.fromData.goods_arr = [];
           }
         } catch (err) {
-          formatAppLog("error", "at subPackages/shoppingPageList/prePurchaseDeposit/prePurchaseDeposit.vue:439", "提交订单异常：", err);
+          formatAppLog("error", "at subPackages/shoppingPageList/prePurchaseDeposit/prePurchaseDeposit.vue:438", "提交订单异常：", err);
           uni.showToast({
             title: "网络异常，请稍后重试",
             icon: "error",
@@ -42058,7 +44532,7 @@ ${o3}
             });
           }
         } catch (err) {
-          formatAppLog("error", "at subPackages/shoppingPageList/prePurchaseDeposit/prePurchaseDeposit.vue:504", "支付异常：", err);
+          formatAppLog("error", "at subPackages/shoppingPageList/prePurchaseDeposit/prePurchaseDeposit.vue:503", "支付异常：", err);
           uni.showToast({
             title: "支付服务异常",
             icon: "error",
@@ -42097,7 +44571,7 @@ ${o3}
             });
           }
         } catch (err) {
-          formatAppLog("error", "at subPackages/shoppingPageList/prePurchaseDeposit/prePurchaseDeposit.vue:548", "绑定OpenID异常：", err);
+          formatAppLog("error", "at subPackages/shoppingPageList/prePurchaseDeposit/prePurchaseDeposit.vue:547", "绑定OpenID异常：", err);
           uni.showToast({
             title: "绑定服务异常",
             icon: "none",
@@ -42518,15 +44992,18 @@ ${o3}
       };
     },
     onLoad({ query }) {
-      this.merchantInfo = JSON.parse(query);
-      formatAppLog("log", "at subPackages/shoppingPageList/merchantDetails/merchantDetails.vue:41", this.merchantInfo.lat);
-      this.merchantInfo.lat = this.merchantInfo.lat - 0.1;
-      this.merchantInfo.markers = [{ id: 1, longitude: this.merchantInfo.lng, latitude: this.merchantInfo.lat, iconPath: "../../../static/selectlocation.png", width: 30, height: 30 }];
-      this.queryData.farmers_id = parseInt(this.merchantInfo.id);
-      this.getPresaleData();
-      const token = uni.getStorageSync("token");
-      if (!token) {
-        this.isLogin = false;
+      try {
+        this.merchantInfo = JSON.parse(query);
+        this.merchantInfo.lat = this.merchantInfo.lat - 0.1;
+        this.merchantInfo.markers = [{ id: 1, longitude: this.merchantInfo.lng, latitude: this.merchantInfo.lat, iconPath: "../../../static/selectlocation.png", width: 30, height: 30 }];
+        this.queryData.farmers_id = parseInt(this.merchantInfo.id);
+        this.getPresaleData();
+        const token = uni.getStorageSync("token");
+        if (!token) {
+          this.isLogin = false;
+        }
+      } catch (e2) {
+        formatAppLog("error", "at subPackages/shoppingPageList/merchantDetails/merchantDetails.vue:136", e2);
       }
     },
     methods: {
@@ -42556,11 +45033,214 @@ ${o3}
     }
   };
   function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", { class: "container" });
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
+      vue.createElementVNode("view", { class: "detail-panel" }, [
+        $data.showDetail ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 0,
+          class: "panel-content"
+        }, [
+          vue.createElementVNode("image", {
+            src: _ctx.product.detailImage || "/static/images/detail-placeholder.png",
+            mode: "widthFix",
+            class: "detail-image"
+          }, null, 8, ["src"]),
+          vue.createElementVNode("view", { class: "detail-text" }, [
+            (vue.openBlock(true), vue.createElementBlock(
+              vue.Fragment,
+              null,
+              vue.renderList(_ctx.product.details || [], (section, index2) => {
+                return vue.openBlock(), vue.createElementBlock("view", {
+                  class: "detail-section",
+                  key: index2
+                }, [
+                  vue.createElementVNode(
+                    "text",
+                    { class: "detail-section-title" },
+                    vue.toDisplayString(section.title || "商品说明"),
+                    1
+                    /* TEXT */
+                  ),
+                  vue.createElementVNode(
+                    "text",
+                    { class: "detail-section-content" },
+                    vue.toDisplayString(section.content || "暂无详细描述"),
+                    1
+                    /* TEXT */
+                  )
+                ]);
+              }),
+              128
+              /* KEYED_FRAGMENT */
+            ))
+          ])
+        ])) : vue.createCommentVNode("v-if", true)
+      ]),
+      vue.createElementVNode("view", { class: "info-card" }, [
+        vue.createElementVNode("view", { class: "info-item" }, [
+          vue.createVNode(_component_uni_icons, {
+            type: "person",
+            size: "18",
+            color: "#7A9D7E"
+          }),
+          vue.createElementVNode("text", { class: "label" }, "农户名称："),
+          vue.createElementVNode(
+            "text",
+            null,
+            vue.toDisplayString($data.merchantInfo.farmersname),
+            1
+            /* TEXT */
+          )
+        ]),
+        vue.createElementVNode("view", { class: "info-item" }, [
+          vue.createVNode(_component_uni_icons, {
+            type: "phone",
+            size: "18",
+            color: "#7A9D7E"
+          }),
+          vue.createElementVNode("text", { class: "label" }, "联系电话："),
+          vue.createElementVNode(
+            "text",
+            null,
+            vue.toDisplayString($data.isLogin ? $data.merchantInfo.phone : _ctx.hidePhone($data.merchantInfo.phone)),
+            1
+            /* TEXT */
+          )
+        ]),
+        vue.createElementVNode("view", { class: "info-item" }, [
+          vue.createVNode(_component_uni_icons, {
+            type: "location",
+            size: "18",
+            color: "#7A9D7E"
+          }),
+          vue.createElementVNode("text", { class: "label" }, "所在地址："),
+          vue.createElementVNode(
+            "text",
+            null,
+            vue.toDisplayString($data.merchantInfo.address),
+            1
+            /* TEXT */
+          )
+        ])
+      ]),
+      vue.createElementVNode("map", {
+        latitude: $data.merchantInfo.lat,
+        longitude: $data.merchantInfo.lng,
+        style: { "width": "100%" },
+        markers: $data.merchantInfo.markers
+      }, null, 8, ["latitude", "longitude", "markers"]),
+      vue.createElementVNode("view", { class: "presale-section" }, [
+        vue.createElementVNode("view", { class: "section-header" }, [
+          vue.createElementVNode("text", { class: "title" }, "预售商品"),
+          vue.createElementVNode(
+            "text",
+            { class: "count" },
+            "共" + vue.toDisplayString($data.presaleList.length) + "件",
+            1
+            /* TEXT */
+          )
+        ]),
+        vue.createElementVNode("view", { class: "goods-grid" }, [
+          (vue.openBlock(true), vue.createElementBlock(
+            vue.Fragment,
+            null,
+            vue.renderList($data.presaleList, (item, index2) => {
+              return vue.openBlock(), vue.createElementBlock("view", {
+                class: "goods-item",
+                key: item.id,
+                onClick: ($event) => $options.gotoGoods(item.id)
+              }, [
+                vue.createElementVNode("view", { class: "presale-tag" }, "预售中"),
+                vue.createElementVNode("image", {
+                  src: item.imglogo,
+                  class: "goods-image",
+                  mode: "aspectFill",
+                  "lazy-load": ""
+                }, null, 8, ["src"]),
+                vue.createElementVNode("view", { class: "goods-info" }, [
+                  vue.createElementVNode(
+                    "text",
+                    { class: "goods-title" },
+                    vue.toDisplayString(item.goodsname),
+                    1
+                    /* TEXT */
+                  ),
+                  vue.createElementVNode("view", { class: "price-row" }, [
+                    vue.createElementVNode(
+                      "text",
+                      { class: "presale-price" },
+                      "¥" + vue.toDisplayString(item.price),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createElementVNode(
+                      "text",
+                      { class: "original-price" },
+                      "¥" + vue.toDisplayString(item.presaleprice),
+                      1
+                      /* TEXT */
+                    )
+                  ]),
+                  vue.createElementVNode("view", { class: "progress-row" }, [
+                    vue.createElementVNode("view", { class: "progress-bar" }, [
+                      vue.createElementVNode("progress", {
+                        percent: item.goodstotal > 0 ? Math.min(item.selltotal / item.goodstotal * 100, 100) : 0,
+                        "stroke-width": "4",
+                        activeColor: "green"
+                      }, null, 8, ["percent"])
+                    ]),
+                    vue.createElementVNode(
+                      "text",
+                      { class: "sold-text" },
+                      "已售" + vue.toDisplayString(item.selltotal) + "/" + vue.toDisplayString(item.goodstotal),
+                      1
+                      /* TEXT */
+                    ),
+                    vue.createElementVNode("view", {
+                      class: "countdown",
+                      style: { "color": "red", "font-weight": "bold" }
+                    }, [
+                      vue.createElementVNode("text", null, "已有0人参与预购")
+                    ])
+                  ]),
+                  vue.createElementVNode("view", { class: "countdown" }, [
+                    vue.createVNode(_component_uni_icons, {
+                      type: "calendar",
+                      size: "14",
+                      color: "#999"
+                    }),
+                    vue.createElementVNode(
+                      "text",
+                      null,
+                      "剩余" + vue.toDisplayString(_ctx.getChineseTimeDiff(Date.now(), item.sellendtime)),
+                      1
+                      /* TEXT */
+                    )
+                  ]),
+                  vue.createElementVNode("view", {
+                    style: { "background-color": "#007aff", "text-align": "center", "border-radius": "5%", "padding": "10rpx", "margin": "20rpx", "color": "white", "font-weight": "bold" },
+                    onClick: vue.withModifiers(($event) => $options.goToBuy(item), ["stop"])
+                  }, "立即预购", 8, ["onClick"])
+                ])
+              ], 8, ["onClick"]);
+            }),
+            128
+            /* KEYED_FRAGMENT */
+          ))
+        ]),
+        $data.presaleList.length == 0 ? (vue.openBlock(), vue.createElementBlock("view", {
+          key: 0,
+          style: { "position": "absolute", "left": "35%", "top": "70%", "font-size": "30rpx" }
+        }, "该农户暂未上传菜品")) : vue.createCommentVNode("v-if", true)
+      ])
+    ]);
   }
   const SubPackagesShoppingPageListMerchantDetailsMerchantDetails = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/merchantDetails/merchantDetails.vue"]]);
   const _sfc_main$g = {
     mixins: [myMixin],
+    components: {
+      mButtonVue
+    },
     data() {
       return {
         activeCategory: 0,
@@ -42608,8 +45288,11 @@ ${o3}
               name: item
             };
           });
-          formatAppLog("log", "at subPackages/shoppingPageList/realTimeInfo/realTimeInfo.vue:102", newList);
-          this.categories = [{ id: -1, name: "全部" }, ...newList];
+          formatAppLog("log", "at subPackages/shoppingPageList/realTimeInfo/realTimeInfo.vue:107", newList);
+          this.categories = [{
+            id: -1,
+            name: "全部"
+          }, ...newList];
         }
       },
       async getData(lock = false) {
@@ -42644,29 +45327,15 @@ ${o3}
     }
   };
   function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_mButtonVue = vue.resolveComponent("mButtonVue");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "news-container" }, [
-      vue.createElementVNode("view", { class: "search-bar" }, [
-        vue.createElementVNode("view", { class: "search-box" }, [
-          vue.createVNode(_component_uni_icons, {
-            type: "search",
-            size: "18",
-            color: "#999"
-          }),
-          vue.createElementVNode(
-            "input",
-            {
-              class: "search-input",
-              placeholder: "请输入关键词搜索",
-              "placeholder-class": "placeholder",
-              onInput: _cache[0] || (_cache[0] = (...args) => $options.onSearchInput && $options.onSearchInput(...args))
-            },
-            null,
-            32
-            /* NEED_HYDRATION */
-          )
-        ])
-      ]),
+      vue.createVNode(_component_mButtonVue, {
+        onBtn1: _ctx.startSearch,
+        onBtn2: _ctx.stopSearch,
+        isShowbutton2: true,
+        placeholder: "输入关键词搜索"
+      }, null, 8, ["onBtn1", "onBtn2"]),
       vue.createElementVNode("scroll-view", {
         class: "category-nav",
         "scroll-x": ""
@@ -42701,7 +45370,7 @@ ${o3}
           class: "news-list",
           "scroll-y": "",
           style: vue.normalizeStyle({ height: $data.scrollHeight + "px" }),
-          onScrolltolower: _cache[1] || (_cache[1] = (...args) => $options.changePage && $options.changePage(...args))
+          onScrolltolower: _cache[0] || (_cache[0] = (...args) => $options.changePage && $options.changePage(...args))
         },
         [
           (vue.openBlock(true), vue.createElementBlock(
@@ -46572,19 +49241,19 @@ ${o3}
         }
       },
       /** 提示用户开启通知 */
-      noticMsgTool() {
-        uni.showModal({
-          title: "通知权限提醒",
-          content: "您还没有开启通知权限，无法接收消息，请前往设置！",
-          showCancel: false,
-          confirmText: "去设置",
-          success: (res) => {
-            if (res.confirm) {
-              this.openNotificationSettings();
-            }
-          }
-        });
-      },
+      // noticMsgTool() {
+      // 	uni.showModal({
+      // 		title: '通知权限提醒',
+      // 		content: '您还没有开启通知权限，无法接收消息，请前往设置！',
+      // 		showCancel: false,
+      // 		confirmText: '去设置',
+      // 		success: res => {
+      // 			if (res.confirm) {
+      // 				this.openNotificationSettings();
+      // 			}
+      // 		},
+      // 	});
+      // },
       /** 打开系统通知设置 */
       openNotificationSettings() {
         const main = plus.android.runtimeMainActivity();

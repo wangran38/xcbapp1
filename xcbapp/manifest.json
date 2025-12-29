@@ -2,8 +2,8 @@
     "name" : "农链天下(商家版)",
     "appid" : "__UNI__600C35E",
     "description" : "一个让农民先富起来的平台",
-    "versionName" : "2.3.0",
-    "versionCode" : 375,
+    "versionName" : "2.3.1",
+    "versionCode" : 380,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
@@ -23,7 +23,9 @@
             "Camera" : {},
             "Payment" : {},
             "VideoPlayer" : {},
-            "Barcode" : {}
+            "Barcode" : {},
+            "Maps" : {},
+            "Share" : {}
         },
         /* 应用发布信息 */
         "distribute" : {
@@ -68,6 +70,19 @@
                 "payment" : {
                     "weixin" : {
                         "__platform__" : [ "android" ],
+                        "appid" : "wx6823c63b646d3ca3",
+                        "UniversalLinks" : ""
+                    }
+                },
+                "maps" : {
+                    "amap" : {
+                        "name" : "amapl33ULL9X",
+                        "appkey_ios" : "''",
+                        "appkey_android" : "4f12a799ac5cb32468f09788db85db49"
+                    }
+                },
+                "share" : {
+                    "weixin" : {
                         "appid" : "wx6823c63b646d3ca3",
                         "UniversalLinks" : ""
                     }

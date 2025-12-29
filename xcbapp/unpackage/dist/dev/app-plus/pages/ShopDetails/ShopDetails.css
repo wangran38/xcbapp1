@@ -2490,400 +2490,6 @@
   flex-direction: column;
   background-color: #fff;
 }
-/* 水平间距 */
-/* 水平间距 */
-/**
- * 这里是uni-app内置的常用样式变量
- *
- * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
- * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
- *
- */
-/**
- * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
- *
- * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
- */
-/* 颜色变量 */
-/* 行为相关颜色 */
-/* 文字基本颜色 */
-/* 背景颜色 */
-/* 边框颜色 */
-/* 尺寸变量 */
-/* 文字尺寸 */
-/* 图片尺寸 */
-/* Border Radius */
-/* 水平间距 */
-/* 垂直间距 */
-/* 透明度 */
-/* 文章场景相关 */
-/**
- * author: Di (微信小程序开发工程师)
- * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
- *         垂直微信小程序开发交流社区
- *
- * github地址: https://github.com/icindy/wxParse
- *
- * for: 微信小程序富文本解析
- * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
- */
-/**
- * 请在全局下引入该文件，@import '/static/wxParse.css';
- */
-.wxParse[data-v-09fd5285] {
-  -webkit-user-select: none;
-          user-select: none;
-  width: 100%;
-  font-family: Helvetica, "PingFangSC", "Microsoft Yahei", "微软雅黑", Arial, sans-serif;
-  color: #333;
-  line-height: 1.5;
-  font-size: 1em;
-  text-align: justify;
-  /* //左右两端对齐 */
-}
-.wxParse uni-view[data-v-09fd5285], .wxParse uni-view[data-v-09fd5285] {
-  word-break: break-word;
-}
-.wxParse .p[data-v-09fd5285] {
-  padding-bottom: 0.5em;
-  clear: both;
-  /* letter-spacing: 0;//字间距 */
-}
-.wxParse .inline[data-v-09fd5285] {
-  display: inline;
-  margin: 0;
-  padding: 0;
-}
-.wxParse .div[data-v-09fd5285] {
-  margin: 0;
-  padding: 0;
-  display: block;
-}
-.wxParse .h1[data-v-09fd5285] {
-  font-size: 2em;
-  line-height: 1.2em;
-  margin: 0.67em 0;
-}
-.wxParse .h2[data-v-09fd5285] {
-  font-size: 1.5em;
-  margin: 0.83em 0;
-}
-.wxParse .h3[data-v-09fd5285] {
-  font-size: 1.17em;
-  margin: 1em 0;
-}
-.wxParse .h4[data-v-09fd5285] {
-  margin: 1.33em 0;
-}
-.wxParse .h5[data-v-09fd5285] {
-  font-size: 0.83em;
-  margin: 1.67em 0;
-}
-.wxParse .h6[data-v-09fd5285] {
-  font-size: 0.83em;
-  margin: 1.67em 0;
-}
-.wxParse .h1[data-v-09fd5285],
-.wxParse .h2[data-v-09fd5285],
-.wxParse .h3[data-v-09fd5285],
-.wxParse .h4[data-v-09fd5285],
-.wxParse .h5[data-v-09fd5285],
-.wxParse .h6[data-v-09fd5285],
-.wxParse .b[data-v-09fd5285],
-.wxParse .strong[data-v-09fd5285] {
-  font-weight: bolder;
-}
-.wxParse .i[data-v-09fd5285],
-.wxParse .cite[data-v-09fd5285],
-.wxParse .em[data-v-09fd5285],
-.wxParse .var[data-v-09fd5285],
-.wxParse .address[data-v-09fd5285] {
-  font-style: italic;
-}
-.wxParse .spaceshow[data-v-09fd5285] {
-  white-space: pre;
-}
-.wxParse .pre[data-v-09fd5285],
-.wxParse .tt[data-v-09fd5285],
-.wxParse .code[data-v-09fd5285],
-.wxParse .kbd[data-v-09fd5285],
-.wxParse .samp[data-v-09fd5285] {
-  font-family: monospace;
-}
-.wxParse .pre[data-v-09fd5285] {
-  overflow: auto;
-  background: #f5f5f5;
-  padding: 0.5rem;
-  white-space: pre;
-  margin: 1em 0;
-  font-size: 0.75rem;
-}
-.wxParse .code[data-v-09fd5285] {
-  overflow: auto;
-  padding: 0.5rem;
-  white-space: pre;
-  margin: 1em 0;
-  background: #f5f5f5;
-  font-size: 0.75rem;
-}
-.wxParse .big[data-v-09fd5285] {
-  font-size: 1.17em;
-}
-.wxParse .small[data-v-09fd5285],
-.wxParse .sub[data-v-09fd5285],
-.wxParse .sup[data-v-09fd5285] {
-  font-size: 0.83em;
-}
-.wxParse .sub[data-v-09fd5285] {
-  vertical-align: sub;
-}
-.wxParse .sup[data-v-09fd5285] {
-  vertical-align: super;
-}
-.wxParse .s[data-v-09fd5285],
-.wxParse .strike[data-v-09fd5285],
-.wxParse .del[data-v-09fd5285] {
-  text-decoration: line-through;
-}
-.wxParse .strong[data-v-09fd5285],
-.wxParse .text[data-v-09fd5285],
-.wxParse .span[data-v-09fd5285],
-.wxParse .s[data-v-09fd5285] {
-  display: inline;
-}
-.wxParse .a[data-v-09fd5285] {
-  color: deepskyblue;
-}
-.wxParse .video[data-v-09fd5285] {
-  text-align: center;
-  margin: 0.6875rem 0;
-}
-.wxParse .video-video[data-v-09fd5285] {
-  width: 100%;
-}
-.wxParse .uni-image[data-v-09fd5285] {
-  height: 100px !important;
-  width: 100px !important;
-}
-.wxParse .img[data-v-09fd5285] {
-  height: 18.75rem !important;
-  display: block;
-  height: 3.125rem;
-  margin-bottom: 0em;
-  /* //与p标签底部padding同时修改 */
-  overflow: hidden;
-}
-.wxParse .blockquote[data-v-09fd5285] {
-  margin: 0.3125rem 0;
-  padding: 0.6875rem 0 0.6875rem 0.6875rem;
-  font-family: Courier, Calibri, "宋体";
-  background: #f5f5f5;
-  border-left: 0.1875rem solid #dbdbdb;
-}
-.wxParse .blockquote .p[data-v-09fd5285] {
-  margin: 0;
-}
-.wxParse .ul[data-v-09fd5285], .wxParse .ol[data-v-09fd5285] {
-  display: block;
-  margin: 1em 0;
-  padding-left: 2em;
-}
-.wxParse .ol[data-v-09fd5285] {
-  list-style-type: disc;
-}
-.wxParse .ol[data-v-09fd5285] {
-  list-style-type: decimal;
-}
-.wxParse .ol > weixin-parse-template[data-v-09fd5285], .wxParse .ul > weixin-parse-template[data-v-09fd5285] {
-  display: list-item;
-  align-items: baseline;
-  text-align: match-parent;
-}
-.wxParse .ol > .li[data-v-09fd5285], .wxParse .ul > .li[data-v-09fd5285] {
-  display: list-item;
-  align-items: baseline;
-  text-align: match-parent;
-}
-.wxParse .ul .ul[data-v-09fd5285], .wxParse .ol .ul[data-v-09fd5285] {
-  list-style-type: circle;
-}
-.wxParse .ol .ol .ul[data-v-09fd5285], .wxParse .ol .ul .ul[data-v-09fd5285], .wxParse .ul .ol .ul[data-v-09fd5285], .wxParse .ul .ul .ul[data-v-09fd5285] {
-  list-style-type: square;
-}
-.wxParse .u[data-v-09fd5285] {
-  text-decoration: underline;
-}
-.wxParse .hide[data-v-09fd5285] {
-  display: none;
-}
-.wxParse .del[data-v-09fd5285] {
-  display: inline;
-}
-.wxParse .figure[data-v-09fd5285] {
-  overflow: hidden;
-}
-.wxParse .tablebox[data-v-09fd5285] {
-  overflow: auto;
-  background-color: #f5f5f5;
-  background: #f5f5f5;
-  font-size: 13px;
-  padding: 8px;
-}
-.wxParse .table .table[data-v-09fd5285], .wxParse .table[data-v-09fd5285] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  /* 内边框 */
-  /* width: 100%; */
-  overflow: auto;
-  white-space: pre;
-}
-.wxParse .tbody[data-v-09fd5285] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  /* 内边框 */
-  border: 1px solid #dadada;
-}
-.wxParse .table .thead[data-v-09fd5285], .wxParse .table .tfoot[data-v-09fd5285], .wxParse .table .th[data-v-09fd5285] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  background: #ececec;
-  font-weight: 40;
-}
-.wxParse .table .tr[data-v-09fd5285] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  /* border: 2px solid #F0AD4E; */
-  overflow: auto;
-}
-.wxParse .table .th[data-v-09fd5285],
-.wxParse .table .td[data-v-09fd5285] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  border: 0.0625rem solid #dadada;
-  overflow: auto;
-}
-.wxParse .audio[data-v-09fd5285], .wxParse .uni-audio-default[data-v-09fd5285] {
-  display: block;
-}
-.uni-easyinput[data-v-09fd5285] {
-  width: 100%;
-  flex: 1;
-  position: relative;
-  text-align: left;
-  color: #333;
-  font-size: 14px;
-}
-.uni-easyinput__content[data-v-09fd5285] {
-  flex: 1;
-  width: 100%;
-  display: flex;
-  box-sizing: border-box;
-  flex-direction: row;
-  align-items: center;
-  border-color: #fff;
-  transition-property: border-color;
-  transition-duration: 0.3s;
-}
-.uni-easyinput__content-input[data-v-09fd5285] {
-  width: auto;
-  position: relative;
-  overflow: hidden;
-  flex: 1;
-  line-height: 1;
-  font-size: 14px;
-  height: 35px;
-  /*ifdef H5*/
-  /*endif*/
-}
-.uni-easyinput__content-input[data-v-09fd5285] ::-ms-reveal {
-  display: none;
-}
-.uni-easyinput__content-input[data-v-09fd5285] ::-ms-clear {
-  display: none;
-}
-.uni-easyinput__content-input[data-v-09fd5285] ::-o-clear {
-  display: none;
-}
-.uni-easyinput__placeholder-class[data-v-09fd5285] {
-  color: #999;
-  font-size: 12px;
-}
-.is-textarea[data-v-09fd5285] {
-  align-items: flex-start;
-}
-.is-textarea-icon[data-v-09fd5285] {
-  margin-top: 5px;
-}
-.uni-easyinput__content-textarea[data-v-09fd5285] {
-  position: relative;
-  overflow: hidden;
-  flex: 1;
-  line-height: 1.5;
-  font-size: 14px;
-  margin: 6px;
-  margin-left: 0;
-  height: 80px;
-  min-height: 80px;
-  min-height: 80px;
-  width: auto;
-}
-.input-padding[data-v-09fd5285] {
-  padding-left: 10px;
-}
-.content-clear-icon[data-v-09fd5285] {
-  padding: 0 5px;
-}
-.label-icon[data-v-09fd5285] {
-  margin-right: 5px;
-  margin-top: -1px;
-}
-.is-input-border[data-v-09fd5285] {
-  display: flex;
-  box-sizing: border-box;
-  flex-direction: row;
-  align-items: center;
-  border: 1px solid #F0F0F0;
-  border-radius: 4px;
-}
-.uni-error-message[data-v-09fd5285] {
-  position: absolute;
-  bottom: -17px;
-  left: 0;
-  line-height: 12px;
-  color: #e43d33;
-  font-size: 12px;
-  text-align: left;
-}
-.uni-error-msg--boeder[data-v-09fd5285] {
-  position: relative;
-  bottom: 0;
-  line-height: 22px;
-}
-.is-input-error-border[data-v-09fd5285] {
-  border-color: #e43d33;
-}
-.is-input-error-border .uni-easyinput__placeholder-class[data-v-09fd5285] {
-  color: #f29e99;
-}
-.uni-easyinput--border[data-v-09fd5285] {
-  margin-bottom: 0;
-  padding: 10px 15px;
-  border-top: 1px #eee solid;
-}
-.uni-easyinput-error[data-v-09fd5285] {
-  padding-bottom: 0;
-}
-.is-first-border[data-v-09fd5285] {
-  border: none;
-}
-.is-disabled[data-v-09fd5285] {
-  background-color: #f7f6f6;
-  color: #d5d5d5;
-}
-.is-disabled .uni-easyinput__placeholder-class[data-v-09fd5285] {
-  color: #d5d5d5;
-  font-size: 12px;
-}
 
 .delete1[data-v-a8327be0] {
 		font-size: 1.03125rem;
@@ -3420,68 +3026,445 @@ uni-image[data-v-757745aa] {
 }
 
 
-.bigBox[data-v-c235284e] {
-		z-index: 100000;
-		width: 100%;
-		height: 100%;
+	/* 样式不变，保留原有样式 */
+.number-keyboard-mask[data-v-c235284e] {
 		position: fixed;
-}
-.body[data-v-c235284e] {
-		background-color: white;
-		position: absolute;
-		bottom: 0;
+		top: 0;
 		left: 0;
 		right: 0;
-}
-.function[data-v-c235284e] {
-		font-size: 0.9375rem;
+		bottom: 0;
+		z-index: 99999;
+		background-color: rgba(0, 0, 0, 0.6);
 		display: flex;
-		padding: 0.3125rem;
-		background-color: gainsboro;
+		align-items: flex-end;
 }
-.value[data-v-c235284e] {
-		border: 0.03125rem solid black;
-		/* background-color:#007aff ; */
-		border-radius: 0.3125rem;
-		text-align: center;
-		line-height: 2.5rem;
-		font-size: 0.9375rem;
-		height: 2.5rem;
+.number-keyboard-wrapper[data-v-c235284e] {
+		width: 100%;
+		background-color: #ffffff;
+		border-top-left-radius: 0.75rem;
+		border-top-right-radius: 0.75rem;
+		padding: 0.9375rem 0.625rem;
+		box-shadow: 0 -0.125rem 0.625rem rgba(0, 0, 0, 0.1);
 }
-.nums[data-v-c235284e] {
-		width: 18.75rem;
+.keyboard-input-area[data-v-c235284e] {
+		margin-bottom: 0.9375rem;
+}
+.goods-info[data-v-c235284e] {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 0.625rem;
+		padding: 0 0.3125rem;
+}
+.goods-name[data-v-c235284e] {
+		font-size: 0.875rem;
+		color: #333333;
+		font-weight: 500;
+		max-width: 12.5rem;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+}
+.goods-price[data-v-c235284e] {
+		font-size: 0.8125rem;
+		color: #666666;
+}
+.input-price-wrap[data-v-c235284e] {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0.625rem 0.3125rem;
+		background-color: #f8f9fa;
+		border-radius: 0.5rem;
+}
+.input-value[data-v-c235284e] {
+		font-size: 1.125rem;
+		color: #1a1a1a;
+		font-weight: 600;
+}
+.total-price[data-v-c235284e] {
+		display: flex;
+		align-items: center;
+}
+.total-label[data-v-c235284e] {
+		font-size: 0.8125rem;
+		color: #666666;
+		margin-right: 0.25rem;
+}
+.total-money[data-v-c235284e] {
+		font-size: 1rem;
+		color: #e53e3e;
+		font-weight: 600;
+}
+.number-keys[data-v-c235284e] {
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: flex-start;
+		justify-content: space-between;
+		margin-bottom: 0.625rem;
 }
-.num[data-v-c235284e] {
-		margin: 0.15625rem;
+.number-key[data-v-c235284e] {
+		width: 31%;
+		height: 3.125rem;
+		margin-bottom: 0.5rem;
+		background-color: #f8f9fa;
+		border-radius: 0.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.2s ease;
+}
+.number-key[data-v-c235284e]:active {
+		background-color: #e9ecef;
+		transform: scale(0.96);
+}
+.key-text[data-v-c235284e] {
+		font-size: 1rem;
+		color: #1a1a1a;
+		font-weight: 500;
+}
+.cancelKey[data-v-c235284e] {
+		color: #666666;
+		font-size: 0.875rem;
+}
+.function-keys[data-v-c235284e] {
+		display: flex;
+		justify-content: space-between;
+		gap: 0.5rem;
+}
+.func-key[data-v-c235284e] {
 		flex: 1;
-		width: calc((100% - 10px) / 2);
-		min-width: calc((100% - 10px) / 4);
-		max-width: calc((100% - 10px) / 3);
-		border-radius: 0.3125rem;
-		text-align: center;
-		height: 2.8125rem;
-		line-height: 2.8125rem;
-		background-color: white;
+		height: 3.125rem;
+		border-radius: 0.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.2s ease;
 }
-.fun[data-v-c235284e] {
-		border-radius: 0.15625rem;
-		margin: 0.15625rem;
-		text-align: center;
-		line-height: 3.75rem;
-		width: 5.625rem;
-		height: 3.90625rem;
-		background-color: #b9bcc4;
+.func-key[data-v-c235284e]:active {
+		transform: scale(0.96);
 }
-.num[data-v-c235284e]:active {
-		background-color: gray;
+.func-text[data-v-c235284e] {
+		font-size: 0.875rem;
+		font-weight: 500;
+		color: #ffffff;
 }
-.fun[data-v-c235284e]:active {
-		background-color: white;
+.delete-key[data-v-c235284e] {
+		background-color: #6c757d;
+}
+.clear-key[data-v-c235284e] {
+		background-color: #6c757d;
+}
+.confirm-key[data-v-c235284e] {
+		background-color: #e53e3e;
+}
+.confirm-text[data-v-c235284e] {
+		font-size: 0.9375rem;
+		font-weight: 600;
 }
 
+/* 水平间距 */
+/* 水平间距 */
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+/**
+ * author: Di (微信小程序开发工程师)
+ * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
+ *         垂直微信小程序开发交流社区
+ *
+ * github地址: https://github.com/icindy/wxParse
+ *
+ * for: 微信小程序富文本解析
+ * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
+ */
+/**
+ * 请在全局下引入该文件，@import '/static/wxParse.css';
+ */
+.wxParse[data-v-e3b8d142] {
+  -webkit-user-select: none;
+          user-select: none;
+  width: 100%;
+  font-family: Helvetica, "PingFangSC", "Microsoft Yahei", "微软雅黑", Arial, sans-serif;
+  color: #333;
+  line-height: 1.5;
+  font-size: 1em;
+  text-align: justify;
+  /* //左右两端对齐 */
+}
+.wxParse uni-view[data-v-e3b8d142], .wxParse uni-view[data-v-e3b8d142] {
+  word-break: break-word;
+}
+.wxParse .p[data-v-e3b8d142] {
+  padding-bottom: 0.5em;
+  clear: both;
+  /* letter-spacing: 0;//字间距 */
+}
+.wxParse .inline[data-v-e3b8d142] {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+.wxParse .div[data-v-e3b8d142] {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+.wxParse .h1[data-v-e3b8d142] {
+  font-size: 2em;
+  line-height: 1.2em;
+  margin: 0.67em 0;
+}
+.wxParse .h2[data-v-e3b8d142] {
+  font-size: 1.5em;
+  margin: 0.83em 0;
+}
+.wxParse .h3[data-v-e3b8d142] {
+  font-size: 1.17em;
+  margin: 1em 0;
+}
+.wxParse .h4[data-v-e3b8d142] {
+  margin: 1.33em 0;
+}
+.wxParse .h5[data-v-e3b8d142] {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+.wxParse .h6[data-v-e3b8d142] {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+.wxParse .h1[data-v-e3b8d142],
+.wxParse .h2[data-v-e3b8d142],
+.wxParse .h3[data-v-e3b8d142],
+.wxParse .h4[data-v-e3b8d142],
+.wxParse .h5[data-v-e3b8d142],
+.wxParse .h6[data-v-e3b8d142],
+.wxParse .b[data-v-e3b8d142],
+.wxParse .strong[data-v-e3b8d142] {
+  font-weight: bolder;
+}
+.wxParse .i[data-v-e3b8d142],
+.wxParse .cite[data-v-e3b8d142],
+.wxParse .em[data-v-e3b8d142],
+.wxParse .var[data-v-e3b8d142],
+.wxParse .address[data-v-e3b8d142] {
+  font-style: italic;
+}
+.wxParse .spaceshow[data-v-e3b8d142] {
+  white-space: pre;
+}
+.wxParse .pre[data-v-e3b8d142],
+.wxParse .tt[data-v-e3b8d142],
+.wxParse .code[data-v-e3b8d142],
+.wxParse .kbd[data-v-e3b8d142],
+.wxParse .samp[data-v-e3b8d142] {
+  font-family: monospace;
+}
+.wxParse .pre[data-v-e3b8d142] {
+  overflow: auto;
+  background: #f5f5f5;
+  padding: 0.5rem;
+  white-space: pre;
+  margin: 1em 0;
+  font-size: 0.75rem;
+}
+.wxParse .code[data-v-e3b8d142] {
+  overflow: auto;
+  padding: 0.5rem;
+  white-space: pre;
+  margin: 1em 0;
+  background: #f5f5f5;
+  font-size: 0.75rem;
+}
+.wxParse .big[data-v-e3b8d142] {
+  font-size: 1.17em;
+}
+.wxParse .small[data-v-e3b8d142],
+.wxParse .sub[data-v-e3b8d142],
+.wxParse .sup[data-v-e3b8d142] {
+  font-size: 0.83em;
+}
+.wxParse .sub[data-v-e3b8d142] {
+  vertical-align: sub;
+}
+.wxParse .sup[data-v-e3b8d142] {
+  vertical-align: super;
+}
+.wxParse .s[data-v-e3b8d142],
+.wxParse .strike[data-v-e3b8d142],
+.wxParse .del[data-v-e3b8d142] {
+  text-decoration: line-through;
+}
+.wxParse .strong[data-v-e3b8d142],
+.wxParse .text[data-v-e3b8d142],
+.wxParse .span[data-v-e3b8d142],
+.wxParse .s[data-v-e3b8d142] {
+  display: inline;
+}
+.wxParse .a[data-v-e3b8d142] {
+  color: deepskyblue;
+}
+.wxParse .video[data-v-e3b8d142] {
+  text-align: center;
+  margin: 0.6875rem 0;
+}
+.wxParse .video-video[data-v-e3b8d142] {
+  width: 100%;
+}
+.wxParse .uni-image[data-v-e3b8d142] {
+  height: 100px !important;
+  width: 100px !important;
+}
+.wxParse .img[data-v-e3b8d142] {
+  height: 18.75rem !important;
+  display: block;
+  height: 3.125rem;
+  margin-bottom: 0em;
+  /* //与p标签底部padding同时修改 */
+  overflow: hidden;
+}
+.wxParse .blockquote[data-v-e3b8d142] {
+  margin: 0.3125rem 0;
+  padding: 0.6875rem 0 0.6875rem 0.6875rem;
+  font-family: Courier, Calibri, "宋体";
+  background: #f5f5f5;
+  border-left: 0.1875rem solid #dbdbdb;
+}
+.wxParse .blockquote .p[data-v-e3b8d142] {
+  margin: 0;
+}
+.wxParse .ul[data-v-e3b8d142], .wxParse .ol[data-v-e3b8d142] {
+  display: block;
+  margin: 1em 0;
+  padding-left: 2em;
+}
+.wxParse .ol[data-v-e3b8d142] {
+  list-style-type: disc;
+}
+.wxParse .ol[data-v-e3b8d142] {
+  list-style-type: decimal;
+}
+.wxParse .ol > weixin-parse-template[data-v-e3b8d142], .wxParse .ul > weixin-parse-template[data-v-e3b8d142] {
+  display: list-item;
+  align-items: baseline;
+  text-align: match-parent;
+}
+.wxParse .ol > .li[data-v-e3b8d142], .wxParse .ul > .li[data-v-e3b8d142] {
+  display: list-item;
+  align-items: baseline;
+  text-align: match-parent;
+}
+.wxParse .ul .ul[data-v-e3b8d142], .wxParse .ol .ul[data-v-e3b8d142] {
+  list-style-type: circle;
+}
+.wxParse .ol .ol .ul[data-v-e3b8d142], .wxParse .ol .ul .ul[data-v-e3b8d142], .wxParse .ul .ol .ul[data-v-e3b8d142], .wxParse .ul .ul .ul[data-v-e3b8d142] {
+  list-style-type: square;
+}
+.wxParse .u[data-v-e3b8d142] {
+  text-decoration: underline;
+}
+.wxParse .hide[data-v-e3b8d142] {
+  display: none;
+}
+.wxParse .del[data-v-e3b8d142] {
+  display: inline;
+}
+.wxParse .figure[data-v-e3b8d142] {
+  overflow: hidden;
+}
+.wxParse .tablebox[data-v-e3b8d142] {
+  overflow: auto;
+  background-color: #f5f5f5;
+  background: #f5f5f5;
+  font-size: 13px;
+  padding: 8px;
+}
+.wxParse .table .table[data-v-e3b8d142], .wxParse .table[data-v-e3b8d142] {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  /* 内边框 */
+  /* width: 100%; */
+  overflow: auto;
+  white-space: pre;
+}
+.wxParse .tbody[data-v-e3b8d142] {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  /* 内边框 */
+  border: 1px solid #dadada;
+}
+.wxParse .table .thead[data-v-e3b8d142], .wxParse .table .tfoot[data-v-e3b8d142], .wxParse .table .th[data-v-e3b8d142] {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  background: #ececec;
+  font-weight: 40;
+}
+.wxParse .table .tr[data-v-e3b8d142] {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  /* border: 2px solid #F0AD4E; */
+  overflow: auto;
+}
+.wxParse .table .th[data-v-e3b8d142],
+.wxParse .table .td[data-v-e3b8d142] {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  border: 0.0625rem solid #dadada;
+  overflow: auto;
+}
+.wxParse .audio[data-v-e3b8d142], .wxParse .uni-audio-default[data-v-e3b8d142] {
+  display: block;
+}
+.search-container .search-bar[data-v-e3b8d142] {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 1.5rem;
+  padding: 0.3125rem 0.3125rem 0.3125rem 0.75rem;
+  height: 2.5rem;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.06);
+}
+.search-container .search-bar .search-input[data-v-e3b8d142] {
+  flex: 1;
+  font-size: 0.875rem;
+  padding: 0 0.625rem;
+  color: #333;
+}
+.search-container .search-bar .search-btn[data-v-e3b8d142] {
+  font-size: 0.875rem;
+  color: #fff;
+  background: #4a90e2;
+  border-radius: 1.125rem;
+  padding: 0 1.125rem;
+  height: 2rem;
+  line-height: 2rem;
+}
+.search-container .search-bar .search-btn[data-v-e3b8d142]::after {
+  border: none;
+}
 /* 水平间距 */
 /* 水平间距 */
 /**

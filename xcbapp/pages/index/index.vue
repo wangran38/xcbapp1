@@ -5,12 +5,14 @@
 			<view class="notice-modal__mask" @click="handleClose"></view>
 			<view class="notice-modal__box">
 				<text class="notice-modal__title">重要公告</text>
-				<scroll-view class="notice-modal__content" scroll-y >
+				<scroll-view class="notice-modal__content" scroll-y>
 					<text class="notice-modal__content-text">
-						亲爱的用户：\n 	通知\n 	因“农链天下”系统升级建设，自2025年10月9日起暂停一周一次的免费赠送积分活动，恢复时间待定。在此之前的赠送积分不影响正常使用，特此通知！ 	
+						亲爱的用户：\n 通知\n 因“农链天下”系统升级建设，自2025年10月9日起暂停一周一次的免费赠送积分活动，恢复时间待定。在此之前的赠送积分不影响正常使用，特此通知！
 					</text>
 				</scroll-view>
-				<view style="margin-bottom: 10rpx; font-size: 25rpx;">不再提示<radio :checked="prompt"  @click="changePrompt" style="margin-left: 10rpx;"/></view>
+				<view style="margin-bottom: 10rpx; font-size: 25rpx;">不再提示
+					<radio :checked="prompt" @click="changePrompt" style="margin-left: 10rpx;" />
+				</view>
 				<button class="notice-modal__confirm" @click="handleClose" hover-class="notice-modal__confirm--hover">
 					我知道了
 				</button>
@@ -28,15 +30,16 @@
 			<uni-icons class="scan-btn" type="scan" size="32" @click="scan" />
 		</view>
 
-		<!-- 搜索模块 -->
-		<view class="search-container">
+		<!-- 		<view class="search-container">
 			<view class="search-bar">
 				<uni-icons type="search" size="18" color="#b2b2b2" />
 				<input class="search-input" placeholder="搜索摊位/商品" placeholder-class="placeholder-style"
 					v-model="searchParams.title" />
 				<button class="search-btn" @click="reloadData">搜索</button>
 			</view>
-		</view>
+		</view> -->
+
+		<mButtonVue  @btn1="settingValue"  :placeholder="'搜索摊位/商品'"></mButtonVue>
 
 		<!-- 分类导航 -->
 		<!-- <view style="border-bottom: 3rpx solid lightblue; width: 90rpx; margin: 5rpx;">活动页面</view> -->
@@ -94,16 +97,17 @@
 		api
 	} from '../../api/index.js'
 	import floatBall from '@/components/float-ball/float-ball.vue'
-
+	import mButtonVue from '@/components/public/mButton/mButton.vue'
 	import usePage from '@/hooks/usePage';
 
 	export default {
 		components: {
-			floatBall
+			floatBall,
+			mButtonVue
 		},
 		data() {
 			return {
-				prompt:true,
+				prompt: true,
 				showNotice: false,
 				menuItems: [],
 				tabs: [{
@@ -183,18 +187,22 @@
 				this.initPage()
 			}
 			// 
-			if (!uni.getStorageSync('prompt')){
+			if (!uni.getStorageSync('prompt')) {
 				this.showNotice = true
 			}
 		},
 		mixins: [usePage],
 		methods: {
-			changePrompt(e){
+			settingValue(value){
+				this.searchParams.title = value
+				this.reloadData()
+			},
+			changePrompt(e) {
 				this.prompt = !this.prompt
 			},
 			handleClose() {
 				this.showNotice = false
-				uni.setStorageSync('prompt',this.prompt)
+				uni.setStorageSync('prompt', this.prompt)
 			},
 			goToshoppingPageList(item) {
 				if (item.path) {
@@ -335,20 +343,11 @@
 
 
 <style lang="scss">
-	// /deep/ .uni-radio-input{
-	// 	margin-left: 10rpx;
-	// 	width: 25rpx;
-	// 	height: 25rpx;
-	// 	background-color: #1677ff;
-	// 	color: #fff;
-	// }
-	/* 弹框外层容器：全屏覆盖 */
 	.notice-modal {
 		position: fixed;
 		top: 0;
 		left: 0;
 		z-index: 9999;
-		/* 确保在最上层（覆盖导航栏、tabbar） */
 		width: 100%;
 		height: 100%;
 		display: flex;
@@ -358,7 +357,6 @@
 		box-sizing: border-box;
 	}
 
-	/* 遮罩层 */
 	.notice-modal__mask {
 		position: absolute;
 		top: 0;
@@ -367,7 +365,6 @@
 		height: 100%;
 		background-color: rgba(0, 0, 0, 0.5);
 		backdrop-filter: blur(2px);
-		/* 背景模糊（多端兼容） */
 	}
 
 	/* 弹框主体 */
@@ -602,41 +599,6 @@
 		}
 	}
 
-	/* 搜索模块样式 */
-	.search-container {
-		.search-bar {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			background: #fff;
-			border-radius: 48rpx;
-			// padding: 0 24rpx;
-			padding: 10rpx 10rpx 10rpx 24rpx;
-			height: 80rpx;
-			box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
-
-			.search-input {
-				flex: 1;
-				font-size: 28rpx;
-				padding: 0 20rpx;
-				color: #333;
-			}
-
-			.search-btn {
-				font-size: 28rpx;
-				color: #fff;
-				background: #4a90e2;
-				border-radius: 36rpx;
-				padding: 0 36rpx;
-				height: 64rpx;
-				line-height: 64rpx;
-
-				&::after {
-					border: none
-				}
-			}
-		}
-	}
 
 	/* 分类导航样式 */
 	.category-nav {

@@ -48,7 +48,7 @@
 				<view class="car" @click.stop="clickCart">
 					<view class="cart-icon-wrapper">
 						<uni-icons type="cart" size="40" color="white"></uni-icons>
-						<view class="badge">{{ cartsLengthByShopId }}</view>
+						<view class="badge">{{ cartStore.cartsLengthByShopId(shop_id) }}</view>
 					</view>
 					<view class="pri">¥ {{ cartTotalByShopId }}</view>
 				</view>
@@ -107,12 +107,6 @@
 				// 保留 2 位小数（电商场景必备）
 				return Number(total.toFixed(2));
 			},
-			cartsLengthByShopId() {
-				// 计算当前店铺的购物车商品总数（按数量累加）
-				return this.getCartsByShopId.reduce((count, item) => {
-					return count + (item.tempCount || 1);
-				}, 0);
-			},
 			getTempCount() {
 				// 封装：根据商品 ID 获取数量（对应原 Vuex 的 getTempCount）
 				return (itemId) => {
@@ -129,11 +123,6 @@
 				this.cartStore.subItem(item);
 			},
 			clearCart() {
-				// 清空当前店铺的购物车（而非全部）
-				// 方案 A：如果 Pinia 有 clearCartByShopId 方法（推荐）
-				// this.cartStore.clearCartByShopId(this.shop_id);
-
-				// 方案 B：组件内过滤（如果 Pinia 未定义）
 				this.cartStore.carts = this.cartStore.carts.filter(
 					item => item.shop_id !== this.shop_id
 				);

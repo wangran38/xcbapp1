@@ -1,6 +1,66 @@
 <template>
 	<view class="create-container">
-		
+		<uni-forms ref="formRef" :model="formData" :rules="formRules">
+			<uni-card title="基本信息">
+				<uni-forms-item label="供应商品" required name="selltitle" labelWidth="80px">
+					<uni-easyinput v-model="formData.selltitle" placeholder="输入商品名称" />
+				</uni-forms-item>
+				<uni-forms-item label="产品类目" required name="category" labelWidth="80px">
+					<uni-data-select v-model="formData.category_id" :localdata="categories"></uni-data-select>
+				</uni-forms-item>
+				<uni-forms-item label="库存" required name="category" labelWidth="80px">
+					<uni-easyinput v-model.number="formData.sellnumber" placeholder="输入库存" />
+				</uni-forms-item>
+				<uni-forms-item label="单位" required name="category" labelWidth="80px">
+					<uni-easyinput v-model="formData.unit" placeholder="输入单位" />
+				</uni-forms-item>
+				<view style="color:darkgray"><uni-icons type="help-filled"></uni-icons> 市场价和批发价用于对比，实际以批发价为标准</view>
+				<uni-forms-item label="市场价" required name="category" labelWidth="80px">
+					<uni-easyinput v-model.number="formData.price" placeholder="输入市场价" />
+				</uni-forms-item>
+				<uni-forms-item label="批发价" required name="category" labelWidth="80px">
+					<uni-easyinput v-model.number="formData.marketprice" placeholder="输入批发价" />
+				</uni-forms-item>
+
+
+				<uni-forms-item label="供应地区" required name="category" labelWidth="80px">
+					<view style="display: flex;  align-items: center; height: 70rpx; ">
+						<picker class="picker" mode="multiSelector" :range="multiArray" :value="multiIndex"
+							@change="bindMultiPickerChange" @columnchange="bindMultiPickerColumnChange">
+							<view style="font-size: 25rpx;">
+								{{ multiArray[0][multiIndex[0]] }} - {{ multiArray[1][multiIndex[1]] }}
+								-{{ selectedCountry === 'overseas' ? '' : multiArray[2][multiIndex[2]] }}
+							</view>
+						</picker>
+					</view>
+				</uni-forms-item>
+				<uni-forms-item label="详细地址" required name="category" labelWidth="80px">
+					<uni-easyinput v-model="formData.selladdress" placeholder="输入详细地址" />
+				</uni-forms-item>
+
+			</uni-card>
+
+			<uni-card title="产品图片" >
+				<view class="imgIcon" @click="uploadcuisine">
+					<uni-icons type="plusempty" size="50" v-show="!formData.selllogo"></uni-icons>
+					<image v-show="formData.selllogo" :src="formData.selllogo" alt="" style="width: 100%; height: 100%;"></image>
+				</view>
+				<!-- 				<uni-file-picker v-model="formData.selllogo" fileMediatype="image" limit="1" :image-styles="imageStyles"
+					@select="handleImageSelect" /> -->
+			</uni-card>
+
+			<uni-card title="供应说明">
+				<textarea v-model="formData.content"
+					style="box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 3px 1px; width: 100%; padding: 5rpx;"></textarea>
+			</uni-card>
+
+
+			<view class="submit-bar">
+				<view class="submit-btn" @click="handleSubmit" :disabled="submitting">
+					{{ submitting ? '提交中...' : '立即发布' }}
+				</view>
+			</view>
+		</uni-forms>
 	</view>
 </template>
 

@@ -9,7 +9,7 @@
 			</view>
 
 			<view class="form-wrapper" v-if="!isSubmit">
-				<form  class="agent-form">
+				<form class="agent-form">
 					<view class="form-card">
 						<view class="section-header">
 							<view class="section-icon">
@@ -45,23 +45,38 @@
 						</view>
 						<view class="form-group">
 							<view class="form-label required">代理区域</view>
-							<picker mode="multiSelector" :range="regionRange" :value="regionIndex"
-								@change="onRegionChange" @columnchange="onRegionColumnChange" class="form-picker">
-								<view class="picker-view">
-									{{ regionIndex[0] !== null ? `${regionRange[0][regionIndex[0]]} - ${regionRange[1][regionIndex[1]]}` : '选择区域' }}
-								</view>
-							</picker>
-							<view class="error-tip" v-if="errorTips.region">{{ errorTips.region }}</view>
+
+
+							<view class="form-picker">
+								<picker mode="multiSelector" :range="multiArray" :value="multiIndex"
+									@change="bindMultiPickerChange" @columnchange="bindMultiPickerColumnChange">
+									<view class="compact-picker">
+										<view>
+											<text class="province">{{ multiArray[0][multiIndex[0]] || '省' }}</text>
+											<text class="separator">-</text>
+											<text class="city">{{ multiArray[1][multiIndex[1]] || '市' }}</text>
+											<text class="separator">-</text>
+											<text class="district">{{ multiArray[2][multiIndex[2]] || '区' }}</text>
+										</view>
+									</view>
+								</picker>
+
+							</view>
+							<!-- <view class="error-tip" v-if="errorTips.region">{{ errorTips.region }}</view> -->
 						</view>
 						<view class="form-group">
 							<view class="form-label required">代理级别</view>
-							<picker mode="multiSelector" class="form-picker" :range="agentTypeList"
-								@change="onAgentTypeChange">
-								<view class="picker-view">
-									{{ agentTypeIndex[0] !== null ? `${agentTypeList[0][agentTypeIndex[0]]}` : '选择代理级别' }}
-								</view>
-							</picker>
-							<view class="error-tip" v-if="errorTips.region">{{ errorTips.region }}</view>
+
+
+							<view class="form-picker">
+								<picker mode="multiSelector" :range="agentTypeList" @change="onAgentTypeChange">
+									<view class="picker-view">
+										{{ agentTypeIndex[0] !== null ? `${agentTypeList[0][agentTypeIndex[0]]}` : '选择代理级别' }}
+									</view>
+								</picker>
+							</view>
+
+							<!-- <view class="error-tip" v-if="errorTips.region">{{ errorTips.region }}</view> -->
 						</view>
 
 						<view class="form-group">
@@ -115,9 +130,11 @@
 	import {
 		api
 	} from '@/api/index.js'
-	import {myMixin}from '@/utils/public.js'
+	import {
+		myMixin
+	} from '@/utils/public.js'
 	export default {
-		mixins:[myMixin],
+		mixins: [myMixin],
 		data() {
 			return {
 				// 表单数据
@@ -128,19 +145,19 @@
 					province: '', // 用户代理的省份id
 					city: '', //  用户代理市县id
 					remark: '',
-					type:null,
-					status:1
+					type: null,
+					status: 1
 				},
 				// 实时错误提示
 				errorTips: {},
-				// 地区选择
-				regionRange: [
+
+				multiArray: [
+					[],
 					[],
 					[]
 				],
-				provinceMapData: [],
-				cityMapData: [],
-				regionIndex: [0, 0],
+				provinceList: [],
+				multiIndex: [0, 0, 0],
 				agentTypeList: [
 					[
 						'省级',
@@ -160,63 +177,122 @@
 		},
 		async onLoad() {
 			let data = await api.getqrcode()
-			if (data.code == 200){
+			if (data.code == 200) {
 				this.formData.userid = data.data.userid
 			}
+			this.initializePicker();
 			// this.formData.id = data.id
-			this.initRegion()
 		},
 		methods: {
-			// 获取城市数据
-			async getCityData(pid) {
-				// 校验pid有效性，避免无效请求
-				if (!pid) {
-					console.warn('缺少省份ID，无法获取城市数据');
-					return;
-				}
+			onAgentTypeChange({
+				detail
+			}) {
+				this.agentTypeIndex[0] = detail.value[0]
+				// console.log(this.agentTypeIndex[0]+1)
+				this.$nextTick(() => {
+					this.$forceUpdate();
+				});
+			},
 
-				this.regionIndex[1] = 0
-				this.cityMapData = [];
-				this.regionRange.splice(1, 1, []);
+			async fetchProvinces() {
 				try {
-					const data = await api.citytree(pid);
-					if (data.code === 200 && Array.isArray(data.data)) {
-						// 批量处理数据，减少响应式更新次数
-						const cityIds = [];
-						const cityNames = [];
-						data.data.forEach(item => {
-							cityIds.push(item.id);
-							cityNames.push(item.name);
-						});
-						// 一次性赋值，提升性能并确保响应式
-						this.cityMapData = cityIds;
-						this.regionRange[1] = cityNames;
+					const response = await api.citylist({
+						level: 1,
+						limit: 100
+					});
+					if (response.code === 200) {
+						this.provinceList = response.data.listdata;
+						return this.provinceList;
+					}
+					throw new Error('Failed to fetch provinces');
+				} catch (error) {
+					console.error('Failed to fetch provinces:', error);
+					throw error;
+				}
+			},
+			async fetchCities(provinceId) {
+				// console.log('Fetching cities for provinceId:', provinceId);
+				try {
+					const response = await api.citytree(provinceId);
+					// console.log('Cities API response:', response);
+					if (response.code === 200 && Array.isArray(response.data)) {
+						return response.data; // Assuming response.data is the array of cities
 					} else {
-						console.warn('城市数据返回格式异常', data);
+						console.error('No cities data found');
+						return [];
 					}
 				} catch (error) {
-					console.error('获取城市数据失败', error);
-				} finally {
-					this.$nextTick(() => {
-						this.$forceUpdate();
-					});
+					console.error('Failed to fetch cities:', error);
+					return [];
 				}
 			},
-			// 初始化地区
-			async initRegion() {
-				let data = await api.citylist({
-					"level": 1,
-					"limit": 100
-				})
-				if (data.code == 200) {
-					data.data.listdata.forEach(item => {
-						this.provinceMapData.push(item.id)
-						this.regionRange[0].push(item.name)
-					})
+			async fetchAreas(cityId) {
+				// console.log('Fetching areas for cityId:', cityId);
+				try {
+					const response = await api.citytree(cityId);
+					// console.log('Areas API response:', response);
+					if (response.code === 200 && Array.isArray(response.data)) {
+						return response.data; // Assuming response.data is the array of areas
+					} else {
+						console.error('No areas data found');
+						return [];
+					}
+				} catch (error) {
+					console.error('Failed to fetch areas:', error);
+					return [];
 				}
-				this.getCityData(this.provinceMapData[0])
 			},
-			// 导航返回
+			bindMultiPickerChange(e) {
+				this.multiIndex = e.detail.value;
+				const selectedProvince = this.multiArray[0][this.multiIndex[0]];
+				const selectedProvinceId = this.provinceList[this.multiIndex[0]].id
+				const selectedCity = this.multiArray[1][this.multiIndex[1]];
+				const selectedArea = this.multiArray[2][this.multiIndex[2]];
+				const selectedAreaId = this.districtList[this.multiIndex[2]].id;
+				console.log('选择的省市区:', selectedProvince, selectedCity, selectedArea);
+				// console.log(selectedProvinceId)
+				this.area_id = selectedAreaId;
+				this.formData.city = selectedAreaId
+				this.formData.province = selectedProvinceId
+				// this.fetchMarkets(selectedAreaId);   取消获取菜市场
+			},
+			async bindMultiPickerColumnChange(e) {
+				const column = e.detail.column;
+				const value = e.detail.value;
+				this.multiIndex[column] = value;
+
+				if (column === 0) {
+					const provinceId = this.provinceList[value].id;
+					const cities = await this.fetchCities(provinceId);
+					this.cityList = cities;
+					this.multiArray[1] = cities.map(item => item.name);
+					this.multiArray[2] = cities ? cities[0].Children.map(item => item.name) : [];
+					this.multiIndex[1] = 0;
+					this.multiIndex[2] = 0;
+				} else if (column === 1) {
+					const cityId = this.cityList[value].id;
+					const areas = await this.fetchAreas(cityId);
+					this.districtList = areas;
+					this.multiArray[2] = areas.map(item => item.name);
+					this.multiIndex[2] = 0;
+				}
+
+				this.multiIndex = [...this.multiIndex];
+			},
+
+			async initializePicker() {
+				try {
+					const provinces = await this.fetchProvinces();
+					this.multiArray[0] = provinces.map(item => item.name);
+					const cities = await this.fetchCities(provinces[0].id);
+					this.multiArray[1] = cities.map(item => item.name);
+					const areas = await this.fetchAreas(cities[0].id);
+					this.multiArray[2] = areas.map(item => item.name);
+					this.multiIndex = [0, 0, 0];
+				} catch (error) {
+					console.error('Failed to initialize picker:', error);
+				}
+			},
 			navigateBack() {
 				uni.navigateBack({
 					delta: 1
@@ -230,37 +306,7 @@
 				this.formData.phone = e.detail.value.replace(/\D/g, '').slice(0, 11);
 			},
 
-			// 地区选择列变化
-			onRegionColumnChange({
-				detail
-			}) {
-				console.log(detail)
-				if (detail.column == 0) {
-					this.regionIndex[0] = detail.value
-					this.getCityData(this.provinceMapData[detail.value])
-				}
-				// const {
-				// 	column,
-				// 	value
-				// } = e.detail;
-				// this.regionIndex[column] = value;
-			},
-			onAgentTypeChange({
-				detail
-			}) {
-				this.agentTypeIndex[0] = detail.value[0]
-				// console.log(this.agentTypeIndex[0]+1)
-				this.$nextTick(() => {
-					this.$forceUpdate();
-				});
-			},
 
-			// 地区选择确认
-			onRegionChange({
-				detail
-			}) {
-				this.regionIndex = detail.value
-			},
 
 			// 单个字段验证
 			validateField(field) {
@@ -312,12 +358,12 @@
 				return isPass;
 			},
 
-			// 提交表单（新增等待遮罩逻辑）
+			// 提交表单
 			async submitForm() {
-				
+
 				// if (!this.validateForm()) return
-				
-				switch (this.agentTypeList[0][this.agentTypeIndex[0]]){
+
+				switch (this.agentTypeList[0][this.agentTypeIndex[0]]) {
 					case '省级':
 						this.formData.type = 1
 						break
@@ -325,9 +371,7 @@
 						this.formData.type = 2
 						break
 				}
-				// console.log(this.formData)
-				this.formData.province = this.provinceMapData[this.regionIndex[0]]
-				this.formData.city = this.cityMapData[this.regionIndex[1]]
+
 				this.formData.agentType = Number(this.agentTypeIndex[0]) + 1
 
 				let data = await api.agentApply(this.formData)
@@ -366,8 +410,6 @@
 </script>
 
 <style scoped>
-	/* 原有样式不变，新增以下样式 */
-	/* 表单包裹层：用于定位加载遮罩 */
 	.form-wrapper {
 		position: relative;
 	}

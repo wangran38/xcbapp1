@@ -7,23 +7,25 @@ export const UPLOAD_URL = 'https://image.xcbdsc.com'
 
 const WEBSOCKET_URL = "192.168.0.111:8088"
 
-export const  locationsKey = '9d721b642fb8ef1921e8986da474f65e'
+export const locationsKey = '9d721b642fb8ef1921e8986da474f65e'
 /**
  * 
  * @@param {url,parmas} 连接的路由地址，连接参数
  * @description websocket封装，调用之后返回实例，继而在实例上绑定事件
-*/
-const getSocket  = (url,parmas)=>{
-	let socketTask =  uni.connectSocket({
-		url:`ws://${WEBSOCKET_URL}${url}?${parmas}`,
-		 success(data) {
-			console.log("websocket连接成功"+url);
+ */
+const getSocket = (url, parmas) => {
+	let socketTask = uni.connectSocket({
+		url: `ws://${WEBSOCKET_URL}${url}?${parmas}`,
+		success(data) {
+			console.log("websocket连接成功" + url);
 		},
 	})
 	return socketTask
-} 
+}
 
-export {getSocket}
+export {
+	getSocket
+}
 
 // 创建白名单，默认所有接口都需要传token，白名单中的接口不需要传token
 const whiteList = [
@@ -64,11 +66,11 @@ const checkToken = (url) => {
 // 通用的请求函数
 const fetch = (url, method, data = {}, headers = {}) => {
 	return new Promise((resolve, reject) => {
-		
+
 		// 校验白名单以外的接口 token是否存在，
 		// if (!whiteList.includes(url)){
 		// 	const token = uni.getStorageSync('token');
-			
+
 		// 	if (!token){
 		// 		uni.showModal({
 		// 			title: '提示',
@@ -86,7 +88,7 @@ const fetch = (url, method, data = {}, headers = {}) => {
 		// 		})
 		// 		reject("检测不到token",url)
 		// 	}
-			
+
 		// }
 		uni.request({
 			url: `${BASE_URL}${url}`,
@@ -159,7 +161,7 @@ export const api = {
 		})
 	},
 	// 用户注册接口
-	register(phone, psw, psw1,fromid) {
+	register(phone, psw, psw1, fromid) {
 		return fetch('/api/user/rs', 'POST', {
 			phone,
 			psw,
@@ -358,238 +360,248 @@ export const api = {
 	bindingOpenid(data) {
 		return fetch('/api/wx/getopenid', 'GET', data);
 	},
-	
+
 	// 打卡数据
 	signTotal(data) {
 		return fetch('/api/sign/total', 'POST', data);
 	},
-	
+
 	// 创建户主
 	addfarmers(data) {
 		return fetch('/api/farmers/addfarmers', 'POST', data);
 	},
 	// 户主补充资料
-	upFarmers(data){
+	upFarmers(data) {
 		return fetch('/api/farmers/upFarmers', 'POST', data);
 	},
 	// 户主资料
-	myInfo(data){
+	myInfo(data) {
 		return fetch('/api/farmers/info', 'POST', data);
 	},
-	
+
 	// 积分支付
-	payscore(data){
+	payscore(data) {
 		return fetch('/api/user/payscore', 'POST', data);
 	},
 	// 微信支付
-	wechatpay(data){
+	wechatpay(data) {
 		return fetch('/api/pay/orderpay', 'POST', data);
 	},
 	// 轮询查询微信支付状态
-	getorderinfo(data){
+	getorderinfo(data) {
 		return fetch('/api/user/getorderinfo', 'POST', data);
 	},
-	
+
 
 	// 查看溯源信息
-	lookTraceability(data){
+	lookTraceability(data) {
 		return fetch('/api/goods/getinfo', 'POST', data);
 	},
 	// 扫码收货
-	receiving(data){
+	receiving(data) {
 		return fetch('/api/shop/receiving', 'POST', data);
 	},
-	
+
 	// 发送短信
-	sendText(data){
+	sendText(data) {
 		return fetch('/api/sendsms', 'POST', data);
 	},
 	// 修改密码
-	editPwd(data){
+	editPwd(data) {
 		return fetch('/api/user/editpsw', 'POST', data);
 	},
 	// 我的钱包
-	mymoney(data){
+	mymoney(data) {
 		return fetch('/api/shop/mymoney', 'POST', data);
 	},
-	
+
 	// 提现至银行卡
-	amount(data){
+	amount(data) {
 		return fetch('/api/shop/amount', 'POST', data);
 	},
 	// 添加预卖菜品
-	addPreSale(data){
+	addPreSale(data) {
 		return fetch('/api/farmers/addgoods', 'POST', data);
 	},
-	
+
 	// 卖家端预卖菜品列表
-	goodslist(data){
+	goodslist(data) {
 		return fetch('/api/farmers/goodslist', 'POST', data);
 	},
 	// 菜品朋友圈上传
-	addinfos(data){
+	addinfos(data) {
 		return fetch('/api/farmers/goods/addinfos', 'POST', data);
 	},
 	// 菜品朋友圈数据
-	goodsinfoList(data){
+	goodsinfoList(data) {
 		return fetch('/api/farmers/goodsinfo/list', 'POST', data);
 	},
 	// 买家端和买家端预卖菜品列表
-	presaleList(data){
+	presaleList(data) {
 		return fetch('/api/farmers/market/goodslist', 'POST', data);
 	},
-	
+
 	// 删除预卖菜品
-	delDishes(data){
+	delDishes(data) {
 		return fetch('/api/farmers/delgoods', 'POST', data);
 	},
 	// 删除朋友圈
-	delMoments(data){
+	delMoments(data) {
 		return fetch('/api/farmers/goodsinfo/del', 'POST', data);
 	},
 	// 删除列表
-	farmersList(data){
+	farmersList(data) {
 		return fetch('/api/farmers/list', 'POST', data);
 	},
 	//  朋友圈数据
-	dynamicsDataList(data){
+	dynamicsDataList(data) {
 		return fetch('/api/farmers/goodsinfo/showlist', 'POST', data);
 	},
 	// 发布求购信息
-	buyinfoAdd(data){
+	buyinfoAdd(data) {
 		return fetch('/api/user/buyinfo/add', 'POST', data);
 	},
-	buyinfoList(data){
+	buyinfoList(data) {
 		return fetch('/api/buyinfo/list', 'POST', data);
 	},
 	// 修改预卖菜品信息
-	updateDish(data){
+	updateDish(data) {
 		return fetch('/api/farmers/upgoods', 'POST', data);
 	},
 	// 用户提交投诉
-	submitComplaint(data){
+	submitComplaint(data) {
 		return fetch('/api/user/complaint/add', 'POST', data);
 	},
 	// 我的投诉
-	mylist(data){
+	mylist(data) {
 		return fetch('/api/user/complaint/mylist', 'POST', data);
 	},
 	// 资讯信息列表
-	informationData(data){
+	informationData(data) {
 		return fetch('/api/news/list', 'POST', data);
 	},
 	// 资讯信息分类
-	classification(data){
+	classification(data) {
 		return fetch('/api/news/category/list', 'POST', data);
 	},
-	
+
 	// 菜品上市
-	foodOnSale(data){
+	foodOnSale(data) {
 		return fetch('/api/farmers/market/addgoods', 'POST', data);
 	},
-	
+
 	// 菜品下市
-	XiaShiCity(data){
+	XiaShiCity(data) {
 		return fetch('/api/farmers/market/editgoods', 'POST', data);
 	},
-	
+
 	// 发布批发
-	publishWholesale(data){
+	publishWholesale(data) {
 		return fetch('/api/user/sellinfo/add', 'POST', data);
 	},
 	// 批发列表
-	wholesaleList(data){
+	wholesaleList(data) {
 		return fetch('/api/sellinfo/list', 'POST', data);
 	},
 	// 我的求购列表
-	myProcurementData(data){
+	myProcurementData(data) {
 		return fetch('/api/user/buyinfo/mylist', 'POST', data);
 	},
 	// 我的供应列表
-	mySupplyData(data){
+	mySupplyData(data) {
 		return fetch('/api/user/sellinfo/mylist', 'POST', data);
 	},
 	// 我的地址列表
-	myaddressData(data){
+	myaddressData(data) {
 		return fetch('/api/user/myaddress', 'POST', data);
 	},
 	// 添加我的地址
-	addMyAddress(data){
+	addMyAddress(data) {
 		return fetch('/api/user/addaddress', 'POST', data);
 	},
 	// 编辑我的地址
-	editMyAddress(data){
+	editMyAddress(data) {
 		return fetch('/api/user/editaddress', 'POST', data);
 	},
-	delMyAddress(data){
+	delMyAddress(data) {
 		return fetch('/api/user/deladdress', 'POST', data);
 	},
 	// 现金账单记录
-	shopmoneylist(data){
+	shopmoneylist(data) {
 		return fetch('/api/shop/shopmoneylist', 'POST', data);
 	},
 	// 根据地址获取经纬度
-	searchResolution(data){
+	searchResolution(data) {
 		return fetch('/api/get/lnglat', 'POST', data);
 	},
 	// 预买菜品下单
-	prePurchaseOrder(data){
+	prePurchaseOrder(data) {
 		return fetch('/api/user/addorderfarmer', 'POST', data);
 	},
-	
-	manyImages(data){
+
+	manyImages(data) {
 		return fetch('/api/shop/add/img', 'POST', data);
 	},
-	getManyImages(data){
+	getManyImages(data) {
 		return fetch('/api/shop/get/img/list', 'POST', data);
 	},
-	
-	delManyImages(data){
+
+	delManyImages(data) {
 		return fetch('/api/shop/del/img', 'POST', data);
 	},
 	// 添加溯源信息
-	addTraceability(data){
+	addTraceability(data) {
 		return fetch('/api/goods/addinfo', 'POST', data);
 	},
 	// 获取溯源信息
-	traceabilityInfo(data){
+	traceabilityInfo(data) {
 		return fetch('/api/goods/get/info', 'POST', data);
 	},
-	getqrcode(data){
+	getqrcode(data) {
 		return fetch('/wx/getqrcode', 'POST', data);
 	},
-	fromuserlist(data){
+	fromuserlist(data) {
 		return fetch('/api/user/fromuserlist', 'POST', data);
 	},
 	// 代理入驻申请
-	agentApply(data){
+	agentApply(data) {
 		return fetch('/api/agentuser/add', 'POST', data);
 	},
 	// 查看代理商信息
-	viewAgentInfo(data){
+	viewAgentInfo(data) {
 		return fetch('/api/agentuser/info', 'POST', data);
 	},
-	
+
 	// 用户推广收益
-	userRevenue(data){
+	userRevenue(data) {
 		return fetch('/api/my/getusermoneylist', 'POST', data);
 	},
 	// 商家推广收益
-	merchantRevenue(data){
+	merchantRevenue(data) {
 		return fetch('/api/my/getshopusermoneylist', 'POST', data);
 	},
-	
+
 	// 市县代理商推广收益
-	cityAgentRevenue(data){
+	cityAgentRevenue(data) {
 		return fetch('/api/my/getcitymoneylist', 'POST', data);
 	},
-	appWeiXin(data){
+	/**
+	 * 暂时不使用
+	 */
+	appWeiXin(data) {
 		return fetch('/api/app/pay', 'POST', data);
+	},
+	/**
+	 *省级代理商收益接口
+	 */
+	getpromoneylist(data) {
+		return fetch('/api/my/getpromoneylist', 'POST', data);
 	}
-	
-	
-	
-	
+
+
+
+
+
 }
 export default {
 	fetch,

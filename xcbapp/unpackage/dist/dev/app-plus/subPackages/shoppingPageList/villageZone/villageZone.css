@@ -1250,6 +1250,309 @@
 /**
  * 请在全局下引入该文件，@import '/static/wxParse.css';
  */
+.wxParse[data-v-e3b8d142] {
+  -webkit-user-select: none;
+          user-select: none;
+  width: 100%;
+  font-family: Helvetica, "PingFangSC", "Microsoft Yahei", "微软雅黑", Arial, sans-serif;
+  color: #333;
+  line-height: 1.5;
+  font-size: 1em;
+  text-align: justify;
+  /* //左右两端对齐 */
+}
+.wxParse uni-view[data-v-e3b8d142], .wxParse uni-view[data-v-e3b8d142] {
+  word-break: break-word;
+}
+.wxParse .p[data-v-e3b8d142] {
+  padding-bottom: 0.5em;
+  clear: both;
+  /* letter-spacing: 0;//字间距 */
+}
+.wxParse .inline[data-v-e3b8d142] {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+.wxParse .div[data-v-e3b8d142] {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+.wxParse .h1[data-v-e3b8d142] {
+  font-size: 2em;
+  line-height: 1.2em;
+  margin: 0.67em 0;
+}
+.wxParse .h2[data-v-e3b8d142] {
+  font-size: 1.5em;
+  margin: 0.83em 0;
+}
+.wxParse .h3[data-v-e3b8d142] {
+  font-size: 1.17em;
+  margin: 1em 0;
+}
+.wxParse .h4[data-v-e3b8d142] {
+  margin: 1.33em 0;
+}
+.wxParse .h5[data-v-e3b8d142] {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+.wxParse .h6[data-v-e3b8d142] {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+.wxParse .h1[data-v-e3b8d142],
+.wxParse .h2[data-v-e3b8d142],
+.wxParse .h3[data-v-e3b8d142],
+.wxParse .h4[data-v-e3b8d142],
+.wxParse .h5[data-v-e3b8d142],
+.wxParse .h6[data-v-e3b8d142],
+.wxParse .b[data-v-e3b8d142],
+.wxParse .strong[data-v-e3b8d142] {
+  font-weight: bolder;
+}
+.wxParse .i[data-v-e3b8d142],
+.wxParse .cite[data-v-e3b8d142],
+.wxParse .em[data-v-e3b8d142],
+.wxParse .var[data-v-e3b8d142],
+.wxParse .address[data-v-e3b8d142] {
+  font-style: italic;
+}
+.wxParse .spaceshow[data-v-e3b8d142] {
+  white-space: pre;
+}
+.wxParse .pre[data-v-e3b8d142],
+.wxParse .tt[data-v-e3b8d142],
+.wxParse .code[data-v-e3b8d142],
+.wxParse .kbd[data-v-e3b8d142],
+.wxParse .samp[data-v-e3b8d142] {
+  font-family: monospace;
+}
+.wxParse .pre[data-v-e3b8d142] {
+  overflow: auto;
+  background: #f5f5f5;
+  padding: 0.5rem;
+  white-space: pre;
+  margin: 1em 0;
+  font-size: 0.75rem;
+}
+.wxParse .code[data-v-e3b8d142] {
+  overflow: auto;
+  padding: 0.5rem;
+  white-space: pre;
+  margin: 1em 0;
+  background: #f5f5f5;
+  font-size: 0.75rem;
+}
+.wxParse .big[data-v-e3b8d142] {
+  font-size: 1.17em;
+}
+.wxParse .small[data-v-e3b8d142],
+.wxParse .sub[data-v-e3b8d142],
+.wxParse .sup[data-v-e3b8d142] {
+  font-size: 0.83em;
+}
+.wxParse .sub[data-v-e3b8d142] {
+  vertical-align: sub;
+}
+.wxParse .sup[data-v-e3b8d142] {
+  vertical-align: super;
+}
+.wxParse .s[data-v-e3b8d142],
+.wxParse .strike[data-v-e3b8d142],
+.wxParse .del[data-v-e3b8d142] {
+  text-decoration: line-through;
+}
+.wxParse .strong[data-v-e3b8d142],
+.wxParse .text[data-v-e3b8d142],
+.wxParse .span[data-v-e3b8d142],
+.wxParse .s[data-v-e3b8d142] {
+  display: inline;
+}
+.wxParse .a[data-v-e3b8d142] {
+  color: deepskyblue;
+}
+.wxParse .video[data-v-e3b8d142] {
+  text-align: center;
+  margin: 0.6875rem 0;
+}
+.wxParse .video-video[data-v-e3b8d142] {
+  width: 100%;
+}
+.wxParse .uni-image[data-v-e3b8d142] {
+  height: 100px !important;
+  width: 100px !important;
+}
+.wxParse .img[data-v-e3b8d142] {
+  height: 18.75rem !important;
+  display: block;
+  height: 3.125rem;
+  margin-bottom: 0em;
+  /* //与p标签底部padding同时修改 */
+  overflow: hidden;
+}
+.wxParse .blockquote[data-v-e3b8d142] {
+  margin: 0.3125rem 0;
+  padding: 0.6875rem 0 0.6875rem 0.6875rem;
+  font-family: Courier, Calibri, "宋体";
+  background: #f5f5f5;
+  border-left: 0.1875rem solid #dbdbdb;
+}
+.wxParse .blockquote .p[data-v-e3b8d142] {
+  margin: 0;
+}
+.wxParse .ul[data-v-e3b8d142], .wxParse .ol[data-v-e3b8d142] {
+  display: block;
+  margin: 1em 0;
+  padding-left: 2em;
+}
+.wxParse .ol[data-v-e3b8d142] {
+  list-style-type: disc;
+}
+.wxParse .ol[data-v-e3b8d142] {
+  list-style-type: decimal;
+}
+.wxParse .ol > weixin-parse-template[data-v-e3b8d142], .wxParse .ul > weixin-parse-template[data-v-e3b8d142] {
+  display: list-item;
+  align-items: baseline;
+  text-align: match-parent;
+}
+.wxParse .ol > .li[data-v-e3b8d142], .wxParse .ul > .li[data-v-e3b8d142] {
+  display: list-item;
+  align-items: baseline;
+  text-align: match-parent;
+}
+.wxParse .ul .ul[data-v-e3b8d142], .wxParse .ol .ul[data-v-e3b8d142] {
+  list-style-type: circle;
+}
+.wxParse .ol .ol .ul[data-v-e3b8d142], .wxParse .ol .ul .ul[data-v-e3b8d142], .wxParse .ul .ol .ul[data-v-e3b8d142], .wxParse .ul .ul .ul[data-v-e3b8d142] {
+  list-style-type: square;
+}
+.wxParse .u[data-v-e3b8d142] {
+  text-decoration: underline;
+}
+.wxParse .hide[data-v-e3b8d142] {
+  display: none;
+}
+.wxParse .del[data-v-e3b8d142] {
+  display: inline;
+}
+.wxParse .figure[data-v-e3b8d142] {
+  overflow: hidden;
+}
+.wxParse .tablebox[data-v-e3b8d142] {
+  overflow: auto;
+  background-color: #f5f5f5;
+  background: #f5f5f5;
+  font-size: 13px;
+  padding: 8px;
+}
+.wxParse .table .table[data-v-e3b8d142], .wxParse .table[data-v-e3b8d142] {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  /* 内边框 */
+  /* width: 100%; */
+  overflow: auto;
+  white-space: pre;
+}
+.wxParse .tbody[data-v-e3b8d142] {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  /* 内边框 */
+  border: 1px solid #dadada;
+}
+.wxParse .table .thead[data-v-e3b8d142], .wxParse .table .tfoot[data-v-e3b8d142], .wxParse .table .th[data-v-e3b8d142] {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  background: #ececec;
+  font-weight: 40;
+}
+.wxParse .table .tr[data-v-e3b8d142] {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  /* border: 2px solid #F0AD4E; */
+  overflow: auto;
+}
+.wxParse .table .th[data-v-e3b8d142],
+.wxParse .table .td[data-v-e3b8d142] {
+  border-collapse: collapse;
+  box-sizing: border-box;
+  border: 0.0625rem solid #dadada;
+  overflow: auto;
+}
+.wxParse .audio[data-v-e3b8d142], .wxParse .uni-audio-default[data-v-e3b8d142] {
+  display: block;
+}
+.search-container .search-bar[data-v-e3b8d142] {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 1.5rem;
+  padding: 0.3125rem 0.3125rem 0.3125rem 0.75rem;
+  height: 2.5rem;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.06);
+}
+.search-container .search-bar .search-input[data-v-e3b8d142] {
+  flex: 1;
+  font-size: 0.875rem;
+  padding: 0 0.625rem;
+  color: #333;
+}
+.search-container .search-bar .search-btn[data-v-e3b8d142] {
+  font-size: 0.875rem;
+  color: #fff;
+  background: #4a90e2;
+  border-radius: 1.125rem;
+  padding: 0 1.125rem;
+  height: 2rem;
+  line-height: 2rem;
+}
+.search-container .search-bar .search-btn[data-v-e3b8d142]::after {
+  border: none;
+}
+/* 水平间距 */
+/* 水平间距 */
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+/**
+ * author: Di (微信小程序开发工程师)
+ * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
+ *         垂直微信小程序开发交流社区
+ *
+ * github地址: https://github.com/icindy/wxParse
+ *
+ * for: 微信小程序富文本解析
+ * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
+ */
+/**
+ * 请在全局下引入该文件，@import '/static/wxParse.css';
+ */
 .wxParse[data-v-8ec1e1a2] {
   -webkit-user-select: none;
           user-select: none;

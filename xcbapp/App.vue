@@ -148,19 +148,19 @@
 			},
 
 			/** 提示用户开启通知 */
-			noticMsgTool() {
-				uni.showModal({
-					title: '通知权限提醒',
-					content: '您还没有开启通知权限，无法接收消息，请前往设置！',
-					showCancel: false,
-					confirmText: '去设置',
-					success: res => {
-						if (res.confirm) {
-							this.openNotificationSettings();
-						}
-					},
-				});
-			},
+			// noticMsgTool() {
+			// 	uni.showModal({
+			// 		title: '通知权限提醒',
+			// 		content: '您还没有开启通知权限，无法接收消息，请前往设置！',
+			// 		showCancel: false,
+			// 		confirmText: '去设置',
+			// 		success: res => {
+			// 			if (res.confirm) {
+			// 				this.openNotificationSettings();
+			// 			}
+			// 		},
+			// 	});
+			// },
 
 			/** 打开系统通知设置 */
 			openNotificationSettings() {

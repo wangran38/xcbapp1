@@ -168,12 +168,12 @@
 	import {
 		api
 	} from '@/api/index.js'
-	import {
-		mapState,
-		mapMutations,
-		mapGetters
-	} from 'vuex';
+	import { useCartStore } from '@/store/cart';
+	
 	export default {
+		created() {
+			this.cartStore = useCartStore();
+		},
 		async onLoad({
 			query
 		}) {
@@ -246,14 +246,13 @@
 		
 		methods: {
 			initCount(){
-				let oldCount =  this.getTempCount()(this.product.id)
+				let oldCount =  this.cartStore.getTempCount(this.product.id)
 				if (oldCount>1){
 					this.count = oldCount
 				}
 			},
-			...mapGetters('cart',['getTempCount']),
-			...mapMutations('cart', ['addItem','anyNumber','subItem']),
-			// 分享
+			
+			
 			onShare() {
 			},
 			
@@ -270,7 +269,7 @@
 			// 确定加入购物车
 			confirmAddToCart(){
 				this.product.count = this.count
-				this.anyNumber(this.product)
+				this.cartStore.anyNumber(this.product)
 				uni.showToast({
 					icon:'success',
 					title:'已加入'
@@ -781,7 +780,7 @@
 		height: 100%;
 		border-radius: 0;
 		border: none;
-		font-size: 25rpx;
+		font-size: 20rpx;
 		color: #ffffff;
 		display: flex;
 		justify-content: center;

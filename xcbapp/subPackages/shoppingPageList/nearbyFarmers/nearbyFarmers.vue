@@ -2,7 +2,9 @@
 	<view class="container">
 		<!-- 搜索栏 -->
 		<view class="search-bar">
-			<view style="display: flex;">
+			
+			<mButtonVue  @btn1="startSearch"  @btn2="stopSearch"    :isShowbutton2="true" :placeholder="'搜索农户姓名或地址'"></mButtonVue>
+			<!-- <view style="display: flex;">
 				<view
 					style="display: flex;  background-color: rgb(245, 245, 245); align-items: center; border-radius: 20rpx;">
 					<view style="padding: 20rpx;"><uni-icons color="#999999" size="20" type="search" /></view>
@@ -16,7 +18,7 @@
 					style="background-color: red; color: white;width: 120rpx; height: 80rpx; line-height: 80rpx; text-align: center; border-radius: 10rpx; margin: 10rpx;"
 					@click="stopSearch">
 					清空</view>
-			</view>
+			</view> -->
 			<view class="filter-group">
 
 				<picker @change="categoryChange" :range="categories" range-key="label">
@@ -117,8 +119,12 @@
 	import {
 		myMixin
 	} from '@/utils/public.js'
+	import mButtonVue from '@/components/public/mButton/mButton.vue'
 
 	export default {
+		components: {
+			mButtonVue
+		},
 		mixins: [myMixin],
 		data() {
 			return {
@@ -182,7 +188,8 @@
 				}
 			},
 			// 开始搜索
-			startSearch() {
+			startSearch(value) {
+				this.formdata.farmersname = value
 				this.farmers = [] // 清空原来的数据
 				this.getData()
 			},
