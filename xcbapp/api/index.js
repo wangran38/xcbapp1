@@ -596,6 +596,12 @@ export const api = {
 	 */
 	getpromoneylist(data) {
 		return fetch('/api/my/getpromoneylist', 'POST', data);
+	},
+	/**
+	 * 获取省级代理商的下辖市县统计
+	 */
+	getprogetsumall() {
+		return fetch('/api/my/progetsumall', 'POST');
 	}
 
 

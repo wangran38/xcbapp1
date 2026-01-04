@@ -27,9 +27,7 @@
 							收益
 						</view>
 					</view>
-					
 				</view>
-
 			</view>
 
 			<!-- 			<view class="orders">

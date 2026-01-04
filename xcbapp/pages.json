@@ -37,6 +37,25 @@
 				"style": {
 					"navigationBarTitleText": ""
 				}
+			},
+			
+			{
+				"path": "cityDetail/cityDetail",
+				"style": {
+					"navigationBarTitleText": ""
+				}
+			},
+			{
+				"path": "districtDetail/districtDetail",
+				"style": {
+					"navigationBarTitleText": ""
+				}
+			},
+			{
+				"path": "marketDetail/marketDetail",
+				"style": {
+					"navigationBarTitleText": ""
+				}
 			}
 			]
 		},

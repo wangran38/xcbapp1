@@ -79,11 +79,15 @@
 			},
 
 			/**
-			 * 获取收益数据（概览 + 列表）
+			 * 获取收益数据
 			 */
 			async fetchProfitData() {
 				this.loading = true;
 				this.loadStatus = 'loading';
+				
+				// 判断用户类别
+				
+				
 				try {
 					const response = await api.cityAgentRevenue(this.query);
 

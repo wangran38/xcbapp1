@@ -782,104 +782,75 @@
   text-align: center;
 }
 
-.agent-index-page[data-v-7170c164] {
+.city-detail-page[data-v-f8530dd0] {
 		background-color: #f8f9fa;
 		min-height: 100vh;
 		font-size: 14px;
 		padding-bottom: 40px;
 }
-.page-header[data-v-7170c164] {
-		padding: 20px 16px;
+.page-header[data-v-f8530dd0] {
+		padding: 15px 16px;
 		background-color: #fff;
+		display: flex;
+		align-items: center;
 		border-bottom: 1px solid #f5f5f5;
 }
-.header-title[data-v-7170c164] {
-		font-size: 20px;
-		font-weight: 600;
+.back-btn[data-v-f8530dd0] {
+		font-size: 14px;
+		color: #4285F4;
+		margin-right: 15px;
+}
+.header-title[data-v-f8530dd0] {
+		font-size: 16px;
+		font-weight: 500;
 		color: #2d3748;
-		margin-bottom: 10px;
 }
-.level-switch[data-v-7170c164] {
-		position: absolute;
-		top: 20px;
-		right: 20px;
-		font-size: 12px;
-		color: #4285F4;
-		padding: 4px 8px;
-		border: 1px solid #4285F4;
-		border-radius: 4px;
-		cursor: pointer;
-}
-.role-tag[data-v-7170c164] {
-		display: inline-block;
-		padding: 4px 16px;
-		border-radius: 20px;
-		font-size: 12px;
-		margin-bottom: 15px;
-}
-.provincial[data-v-7170c164] {
-		background-color: #e8f4fd;
-		color: #4285F4;
-}
-.municipal[data-v-7170c164] {
-		background-color: #e6f4ea;
-		color: #34A853;
-}
-.summary-card[data-v-7170c164] {
+.summary-card[data-v-f8530dd0] {
+		background-color: #fff;
+		border-radius: 12px;
+		padding: 15px;
+		margin: 15px auto;
+		width: 92%;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 		display: flex;
 		justify-content: space-around;
-		flex-wrap: wrap;
-		gap: 10px;
-		background-color: #f8f9fa;
-		border-radius: 8px;
-		padding: 10px;
-		margin-bottom: 15px;
 }
-.summary-item[data-v-7170c164] {
+.summary-item[data-v-f8530dd0] {
 		text-align: center;
-		min-width: 80px;
 }
-.summary-label[data-v-7170c164] {
-		font-size: 11px;
+.summary-label[data-v-f8530dd0] {
+		font-size: 12px;
 		color: #718096;
-		margin-bottom: 4px;
+		margin-bottom: 5px;
 }
-.summary-value[data-v-7170c164] {
+.summary-value[data-v-f8530dd0] {
 		font-size: 16px;
 		font-weight: 600;
 		color: #2d3748;
 }
-.content-container[data-v-7170c164] {
+.content-container[data-v-f8530dd0] {
 		width: 92%;
 		margin: 0 auto;
-		padding-top: 15px;
 }
-.empty-tip[data-v-7170c164] {
+.empty-tip[data-v-f8530dd0] {
 		text-align: center;
 		padding: 60px 0;
 		color: #999;
-		font-size: 14px;
 }
-.card-list[data-v-7170c164] {
+.card-list[data-v-f8530dd0] {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 		gap: 12px;
 		margin-bottom: 15px;
 }
-.city-card[data-v-7170c164],
-	.district-card[data-v-7170c164] {
+.district-card[data-v-f8530dd0] {
 		background-color: #fff;
 		border-radius: 12px;
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 		padding: 15px;
 		cursor: pointer;
-		transition: transform 0.2s;
 }
-.city-card[data-v-7170c164]:active,
-	.district-card[data-v-7170c164]:active {
-		transform: scale(0.98);
-}
-.card-header[data-v-7170c164] {
+.card-header[data-v-f8530dd0] {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -887,30 +858,30 @@
 		padding-bottom: 6px;
 		border-bottom: 1px solid #f5f5f5;
 }
-.card-title[data-v-7170c164] {
+.card-title[data-v-f8530dd0] {
 		font-size: 15px;
 		font-weight: 500;
 		color: #2d3748;
 }
-.card-body[data-v-7170c164] {
+.card-body[data-v-f8530dd0] {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: 1fr 1fr;
 		gap: 8px;
 }
-.card-item[data-v-7170c164] {
+.card-item[data-v-f8530dd0] {
 		text-align: center;
 }
-.item-label[data-v-7170c164] {
+.item-label[data-v-f8530dd0] {
 		font-size: 11px;
 		color: #718096;
 		margin-bottom: 4px;
 }
-.item-value[data-v-7170c164] {
+.item-value[data-v-f8530dd0] {
 		font-size: 14px;
 		font-weight: 500;
 		color: #2d3748;
 }
-.load-more[data-v-7170c164] {
+.load-more[data-v-f8530dd0] {
 		text-align: center;
 		padding: 15px 0;
 		font-size: 13px;
@@ -920,13 +891,11 @@
 
 	/* 响应式适配 */
 @media (max-width: 767px) {
-.summary-card[data-v-7170c164] {
+.summary-card[data-v-f8530dd0] {
 			flex-direction: column;
+			gap: 10px;
 }
-.card-body[data-v-7170c164] {
-			grid-template-columns: 1fr 1fr;
-}
-.card-list[data-v-7170c164] {
+.card-list[data-v-f8530dd0] {
 			grid-template-columns: 1fr;
 }
 }
