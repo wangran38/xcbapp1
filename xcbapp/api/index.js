@@ -568,8 +568,8 @@ export const api = {
 		return fetch('/api/agentuser/add', 'POST', data);
 	},
 	// 查看代理商信息
-	viewAgentInfo(data) {
-		return fetch('/api/agentuser/info', 'POST', data);
+	viewAgentInfo() {
+		return fetch('/api/agentuser/info', 'POST');
 	},
 
 	// 用户推广收益

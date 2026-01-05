@@ -85,7 +85,7 @@
 		},
 		async onLoad() {
 			this.showStatus = await this.checkApplyStatus()
-			console.log(this.showStatus,'申请状态')
+			// console.log(this.showStatus,'申请状态')
 			if (this.showStatus == 1){
 				uni.showModal({
 				  showCancel: false,

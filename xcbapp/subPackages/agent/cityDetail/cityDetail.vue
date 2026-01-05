@@ -48,9 +48,9 @@
 				</view>
 			</view>
 
-			<view class="load-more" @click="loadMore" v-if="hasMore">
+			<!-- <view class="load-more" @click="loadMore" v-if="hasMore">
 				加载更多 <uni-icons type="down" size="14" />
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -73,9 +73,16 @@
 		onLoad(options) {
 			// this.cityId = options.cityId
 			// this.cityName = options.cityName
-			
-			console.log(options)
-			this.loadDistrictData()
+			// console.log()
+			this.districtList = JSON.parse(options.children).map(item=>{
+				return {
+					id: item.pid,
+					name: item.name,
+					marketCount: 12,
+					totalConsume: 896002.80
+				}
+			})
+			// this.loadDistrictData()
 		},
 		methods: {
 			// 返回上一页

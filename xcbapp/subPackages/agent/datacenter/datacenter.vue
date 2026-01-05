@@ -4,9 +4,9 @@
 		<view class="page-header">
 			<view class="header-title">代理商消费数据中心</view>
 			<!-- 代理级别切换（测试用） -->
-			<view class="level-switch" @click="switchAgentLevel">
+		<!-- 	<view class="level-switch" @click="switchAgentLevel">
 				{{ agentLevel === 'PROVINCIAL' ? '切换为市级' : '切换为省级' }}
-			</view>
+			</view> -->
 			<view class="role-tag" :class="agentLevel === 'PROVINCIAL' ? 'provincial' : 'municipal'">
 				{{ agentLevel === 'PROVINCIAL' ? '省级代理' : '市级代理' }}
 			</view>
@@ -31,7 +31,8 @@
 			<view class="empty-tip" v-if="!dataList.length">暂无数据可展示</view>
 
 			<view class="card-list" v-else-if="agentLevel === 'PROVINCIAL'">
-				<view class="city-card" v-for="(city, index) in dataList" :key="city.id" @click="toCityDetail(city.children)">
+				<view class="city-card" v-for="(city, index) in dataList" :key="city.id"
+					@click="toCityDetail(city.children)">
 					<view class="card-header">
 						<view class="card-title">{{ city.name }}</view>
 						<uni-icons type="arrowright" size="16" color="#999" />
@@ -79,9 +80,9 @@
 			</view>
 
 			<!-- 加载更多 -->
-			<view class="load-more" @click="loadMore" v-if="hasMore">
+			<!-- 	<view class="load-more" @click="loadMore" v-if="hasMore">
 				加载更多 <uni-icons type="down" size="14" />
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -100,14 +101,28 @@
 				totalMarketCount: 0,
 				pageNum: 1,
 				pageSize: 5,
-				hasMore: true
+				hasMore: true,
+				city:null,
 			}
 		},
 		async onLoad() {
-
+			this.checkUserInfo()
 			this.loadData()
 		},
 		methods: {
+			async checkUserInfo() {
+				let data = await api.viewAgentInfo()
+				// console.log(66666666,data.data.listdata)
+				if (data.code == 200) {
+					if (data.data.listdata[0].type == 1) {
+						this.agentLevel = 'PROVINCIAL'
+					} else {
+						this.agentLevel = 'MUNICIPAL'
+					}
+				}
+				console.log('用户代理类型', this.agentLevel)
+			},
+
 			// 切换代理级别
 			switchAgentLevel() {
 				this.agentLevel = this.agentLevel === 'PROVINCIAL' ? 'MUNICIPAL' : 'PROVINCIAL'
@@ -118,16 +133,13 @@
 
 			// 加载数据
 			async loadData() {
-
+				let data = await api.getprogetsumall()
 				try {
 					uni.showLoading({
 						title: '加载数据...',
 						mask: true
 					})
 					if (this.agentLevel === 'PROVINCIAL') {
-						let data = await api.getprogetsumall()
-						console.log(data, 111111)
-
 						let cityList = data['data']['city_list'].map((item, index) => {
 							return {
 								id: `city_${index}`,
@@ -135,11 +147,10 @@
 								districtCount: 11,
 								marketCount: 89,
 								totalConsume: 3285008.80,
-								children:item.children
+								children: item.children
 							}
 						})
-						console.log(cityList)
-						this.dataList = [...this.dataList,...cityList]
+						this.dataList = cityList
 
 						// console.log(cityList)
 
@@ -173,53 +184,12 @@
 						// 	},
 						// ]
 					} else {
-						// 加载市级代理数据
-
-						const districtList = [{
-								id: "district_0101",
-								name: "秀英区",
-								marketCount: 12,
-								totalConsume: 896002.80,
-								totalOrderCount: 8960
-							},
-							{
-								id: "district_0102",
-								name: "龙华区",
-								marketCount: 9,
-								totalConsume: 752005.50,
-								totalOrderCount: 7520
-							},
-							{
-								id: "district_0103",
-								name: "琼山区",
-								marketCount: 10,
-								totalConsume: 689001.10,
-								totalOrderCount: 6890
-							},
-							{
-								id: "district_0104",
-								name: "美兰区",
-								marketCount: 8,
-								totalConsume: 587003.30,
-								totalOrderCount: 5870
-							}
-						]
-						const paginatedData = districtList.slice((this.pageNum - 1) * this.pageSize, this.pageNum *
-							this
-							.pageSize)
-						mockData = {
-							list: paginatedData,
-							totalConsume: districtList.reduce((sum, item) => sum + item.totalConsume, 0),
-							totalDistrictCount: districtList.length,
-							totalMarketCount: districtList.reduce((sum, item) => sum + item.marketCount, 0),
-							hasMore: this.pageNum * this.pageSize < districtList.length
-						}
+						data['data']['city_list'].filter(item=>{
+							console.log("市级代理",item)
+						})
+						// const districtList = 
+						this.dataList = districtList
 					}
-
-					// this.totalConsume = mockData.totalConsume
-					// this.totalDistrictCount = mockData.totalDistrictCount
-					// this.totalMarketCount = mockData.totalMarketCount
-					// this.hasMore = mockData.hasMore
 
 					uni.hideLoading()
 				} catch (error) {
@@ -238,9 +208,9 @@
 			},
 
 			// 跳转到市详情页（省级代理）
-			toCityDetail(children) {
-				// let children = JSON.stringify(children)
-				console.log(children)
+			toCityDetail(city) {
+				let children = JSON.stringify(city)
+				// console.log(11111,JSON.stringify(children))
 				uni.navigateTo({
 					url: `/subPackages/agent/cityDetail/cityDetail?children=${children}`
 				})

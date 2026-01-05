@@ -527,8 +527,8 @@ if (uni.restoreGlobal) {
       return fetch("/api/agentuser/add", "POST", data);
     },
     // 查看代理商信息
-    viewAgentInfo(data) {
-      return fetch("/api/agentuser/info", "POST", data);
+    viewAgentInfo() {
+      return fetch("/api/agentuser/info", "POST");
     },
     // 用户推广收益
     userRevenue(data) {
@@ -31005,9 +31005,6 @@ ${o3}
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
-      vue.createElementVNode("view", { class: "header-bar" }, [
-        vue.createElementVNode("text", { class: "platform-name" }, "批发")
-      ]),
       vue.createElementVNode("view", { class: "main-content" }, [
         vue.createElementVNode(
           "view",
@@ -35802,7 +35799,6 @@ ${o3}
     },
     async onLoad() {
       this.showStatus = await this.checkApplyStatus();
-      formatAppLog("log", "at pages/agent/agent.vue:88", this.showStatus, "申请状态");
       if (this.showStatus == 1) {
         uni.showModal({
           showCancel: false,
@@ -36485,49 +36481,55 @@ ${o3}
           //  用户代理市县id
           remark: "",
           type: null,
-          status: 1
+          status: 1,
+          userid: ""
+          // 补充userid默认值
         },
         // 实时错误提示
         errorTips: {},
         multiArray: [
           [],
+          // 省
           [],
+          // 市
           []
+          // 区
         ],
         provinceList: [],
+        // 省份原始数据（含id）
+        cityList: [],
+        // 城市原始数据（含id）
+        districtList: [],
+        // 区县原始数据（含id）
         multiIndex: [0, 0, 0],
+        // 三级选择器默认索引
         agentTypeList: [
-          [
-            "省级",
-            "市级"
-          ]
+          ["省级", "市级"]
         ],
-        agentTypeIndex: [
-          [0]
-        ],
-        // 提交状态（原有）
+        agentTypeIndex: [0],
+        // 代理级别默认选中第一个
+        // 提交状态
         isSubmitting: false,
-        // 提交等待遮罩显示状态（新增）
         isShowLoading: false,
         isSubmit: false,
         key: false
       };
     },
     async onLoad() {
-      let data = await api.getqrcode();
-      if (data.code == 200) {
-        this.formData.userid = data.data.userid;
+      try {
+        let data = await api.getqrcode();
+        if (data.code == 200) {
+          this.formData.userid = data.data.userid;
+        }
+        await this.initializePicker();
+      } catch (error2) {
+        formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:172", "页面初始化失败:", error2);
       }
-      this.initializePicker();
     },
     methods: {
-      onAgentTypeChange({
-        detail
-      }) {
-        this.agentTypeIndex[0] = detail.value[0];
-        this.$nextTick(() => {
-          this.$forceUpdate();
-        });
+      onAgentTypeChange({ detail }) {
+        this.agentTypeIndex[0] = detail.value;
+        this.$forceUpdate();
       },
       async fetchProvinces() {
         try {
@@ -36539,10 +36541,10 @@ ${o3}
             this.provinceList = response.data.listdata;
             return this.provinceList;
           }
-          throw new Error("Failed to fetch provinces");
+          throw new Error("获取省份数据失败");
         } catch (error2) {
-          formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:209", "Failed to fetch provinces:", error2);
-          throw error2;
+          formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:193", "获取省份失败:", error2);
+          return [];
         }
       },
       async fetchCities(provinceId) {
@@ -36551,11 +36553,11 @@ ${o3}
           if (response.code === 200 && Array.isArray(response.data)) {
             return response.data;
           } else {
-            formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:221", "No cities data found");
+            formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:203", "获取城市数据为空");
             return [];
           }
         } catch (error2) {
-          formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:225", "Failed to fetch cities:", error2);
+          formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:207", "获取城市失败:", error2);
           return [];
         }
       },
@@ -36565,40 +36567,62 @@ ${o3}
           if (response.code === 200 && Array.isArray(response.data)) {
             return response.data;
           } else {
-            formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:237", "No areas data found");
+            formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:217", "获取区县数据为空");
             return [];
           }
         } catch (error2) {
-          formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:241", "Failed to fetch areas:", error2);
+          formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:221", "获取区县失败:", error2);
           return [];
         }
       },
       bindMultiPickerChange(e2) {
         this.multiIndex = e2.detail.value;
-        const selectedProvince = this.multiArray[0][this.multiIndex[0]];
+        if (!this.provinceList[this.multiIndex[0]])
+          return;
+        if (!this.cityList[this.multiIndex[1]])
+          return;
+        if (!this.districtList[this.multiIndex[2]])
+          return;
         const selectedProvinceId = this.provinceList[this.multiIndex[0]].id;
-        const selectedCity = this.multiArray[1][this.multiIndex[1]];
-        const selectedArea = this.multiArray[2][this.multiIndex[2]];
         const selectedAreaId = this.districtList[this.multiIndex[2]].id;
-        formatAppLog("log", "at subPackages/agent/cooperation/cooperation.vue:252", "选择的省市区:", selectedProvince, selectedCity, selectedArea);
-        this.area_id = selectedAreaId;
-        this.formData.city = selectedAreaId;
+        formatAppLog(
+          "log",
+          "at subPackages/agent/cooperation/cooperation.vue:236",
+          "选择的省市区:",
+          this.multiArray[0][this.multiIndex[0]],
+          this.multiArray[1][this.multiIndex[1]],
+          this.multiArray[2][this.multiIndex[2]]
+        );
         this.formData.province = selectedProvinceId;
+        this.formData.city = selectedAreaId;
       },
       async bindMultiPickerColumnChange(e2) {
+        var _a, _b, _c;
         const column = e2.detail.column;
         const value = e2.detail.value;
         this.multiIndex[column] = value;
         if (column === 0) {
-          const provinceId = this.provinceList[value].id;
+          const provinceId = (_a = this.provinceList[value]) == null ? void 0 : _a.id;
+          if (!provinceId)
+            return;
           const cities = await this.fetchCities(provinceId);
           this.cityList = cities;
           this.multiArray[1] = cities.map((item) => item.name);
-          this.multiArray[2] = cities ? cities[0].Children.map((item) => item.name) : [];
+          const firstCityId = (_b = cities[0]) == null ? void 0 : _b.id;
+          if (firstCityId) {
+            const areas = await this.fetchAreas(firstCityId);
+            this.districtList = areas;
+            this.multiArray[2] = areas.map((item) => item.name);
+          } else {
+            this.districtList = [];
+            this.multiArray[2] = [];
+          }
           this.multiIndex[1] = 0;
           this.multiIndex[2] = 0;
         } else if (column === 1) {
-          const cityId = this.cityList[value].id;
+          const cityId = (_c = this.cityList[value]) == null ? void 0 : _c.id;
+          if (!cityId)
+            return;
           const areas = await this.fetchAreas(cityId);
           this.districtList = areas;
           this.multiArray[2] = areas.map((item) => item.name);
@@ -36607,30 +36631,47 @@ ${o3}
         this.multiIndex = [...this.multiIndex];
       },
       async initializePicker() {
+        var _a, _b;
         try {
           const provinces = await this.fetchProvinces();
+          if (provinces.length === 0)
+            return;
           this.multiArray[0] = provinces.map((item) => item.name);
-          const cities = await this.fetchCities(provinces[0].id);
+          const firstProvinceId = provinces[0].id;
+          const cities = await this.fetchCities(firstProvinceId);
+          this.cityList = cities;
           this.multiArray[1] = cities.map((item) => item.name);
-          const areas = await this.fetchAreas(cities[0].id);
-          this.multiArray[2] = areas.map((item) => item.name);
+          const firstCityId = (_a = cities[0]) == null ? void 0 : _a.id;
+          if (firstCityId) {
+            const areas = await this.fetchAreas(firstCityId);
+            this.districtList = areas;
+            this.multiArray[2] = areas.map((item) => item.name);
+          }
           this.multiIndex = [0, 0, 0];
+          this.formData.province = firstProvinceId;
+          this.formData.city = ((_b = this.districtList[0]) == null ? void 0 : _b.id) || "";
+          formatAppLog(
+            "log",
+            "at subPackages/agent/cooperation/cooperation.vue:321",
+            "选择器初始化完成，默认选中:",
+            this.multiArray[0][0],
+            this.multiArray[1][0],
+            this.multiArray[2][0]
+          );
         } catch (error2) {
-          formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:293", "Failed to initialize picker:", error2);
+          formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:327", "选择器初始化失败:", error2);
         }
       },
-      navigateBack() {
-        uni.navigateBack({
-          delta: 1
-        });
+      customizeBack() {
+        uni.navigateBack({ delta: 1 });
       },
       // 手机号输入处理
       handlePhoneInput(e2) {
         this.formData.phone = e2.detail.value.replace(/\D/g, "").slice(0, 11);
       },
-      // 单个字段验证
+      // 单个字段验证（修复字段名错误：name → nickname）
       validateField(field) {
-        const val = field === "region" ? this.regionIndex[0] : this.formData[field];
+        const val = this.formData[field];
         const tips = {};
         switch (field) {
           case "nickname":
@@ -36650,41 +36691,34 @@ ${o3}
             else if (!reg.test(val))
               tips.email = "请输入有效的邮箱格式（例：xxx@xx.com）";
             break;
-          case "company":
-            if (!val)
-              tips.company = "请输入公司名称";
-            break;
-          case "address":
-            if (!val)
-              tips.address = "请输入公司详细地址";
-            break;
-          case "region":
-            if (val === null)
-              tips.region = "请选择意向代理区域";
-            break;
-          case "intention":
-            if (!val)
-              tips.intention = "请描述您的合作意向";
-            else if (val.length > 200)
-              tips.intention = "合作意向描述不能超过200字";
-            break;
         }
         this.$set(this.errorTips, field, tips[field] || "");
         return !tips[field];
       },
-      // 整体表单验证
+      // 整体表单验证（修复字段名和验证逻辑）
       validateForm() {
-        const fields = ["name", "phone", "email", "company", "address", "region", "intention"];
+        const fields = ["nickname", "phone", "email"];
         let isPass = true;
         fields.forEach((field) => {
           const pass = this.validateField(field);
           if (!pass)
             isPass = false;
         });
+        if (!this.formData.province || !this.formData.city) {
+          uni.showToast({ title: "请选择完整的代理区域", icon: "none" });
+          isPass = false;
+        }
+        if (this.agentTypeIndex[0] === null) {
+          uni.showToast({ title: "请选择代理级别", icon: "none" });
+          isPass = false;
+        }
         return isPass;
       },
       // 提交表单
       async submitForm() {
+        if (!this.validateForm())
+          return;
+        formatAppLog("log", "at subPackages/agent/cooperation/cooperation.vue:391", this.formData, "提交数据");
         switch (this.agentTypeList[0][this.agentTypeIndex[0]]) {
           case "省级":
             this.formData.type = 1;
@@ -36694,26 +36728,43 @@ ${o3}
             break;
         }
         this.formData.agentType = Number(this.agentTypeIndex[0]) + 1;
-        await api.agentApply(this.formData);
-        this.isSubmit = true;
         this.isSubmitting = true;
         this.isShowLoading = true;
-        setTimeout(() => {
+        try {
+          const res = await api.agentApply(this.formData);
+          if (res.code === 200) {
+            this.isShowLoading = false;
+            this.isSubmitting = false;
+            this.isSubmit = true;
+          } else {
+            uni.showToast({ title: res.msg || "提交失败", icon: "none" });
+            this.isShowLoading = false;
+            this.isSubmitting = false;
+          }
+        } catch (error2) {
+          formatAppLog("error", "at subPackages/agent/cooperation/cooperation.vue:422", "提交申请失败:", error2);
+          uni.showToast({ title: "网络错误，提交失败", icon: "none" });
           this.isShowLoading = false;
           this.isSubmitting = false;
-          this.resetForm();
-        }, 2500);
+        }
       },
       // 重置表单
       resetForm() {
         this.formData = {
-          name: "",
+          nickname: "",
           phone: "",
           email: "",
-          intention: ""
+          province: "",
+          city: "",
+          remark: "",
+          type: null,
+          status: 1,
+          userid: this.formData.userid
+          // 保留userid不重置
         };
-        this.regionIndex = [null, null];
+        this.agentTypeIndex = [0];
         this.errorTips = {};
+        this.initializePicker();
       }
     }
   };
@@ -36850,7 +36901,7 @@ ${o3}
                         vue.createElementVNode(
                           "text",
                           { class: "province" },
-                          vue.toDisplayString($data.multiArray[0][$data.multiIndex[0]] || "省"),
+                          vue.toDisplayString($data.multiArray[0][$data.multiIndex[0]] || "请选择省"),
                           1
                           /* TEXT */
                         ),
@@ -36858,7 +36909,7 @@ ${o3}
                         vue.createElementVNode(
                           "text",
                           { class: "city" },
-                          vue.toDisplayString($data.multiArray[1][$data.multiIndex[1]] || "市"),
+                          vue.toDisplayString($data.multiArray[1][$data.multiIndex[1]] || "请选择市"),
                           1
                           /* TEXT */
                         ),
@@ -36866,7 +36917,7 @@ ${o3}
                         vue.createElementVNode(
                           "text",
                           { class: "district" },
-                          vue.toDisplayString($data.multiArray[2][$data.multiIndex[2]] || "区"),
+                          vue.toDisplayString($data.multiArray[2][$data.multiIndex[2]] || "请选择区"),
                           1
                           /* TEXT */
                         )
@@ -36879,18 +36930,19 @@ ${o3}
                 vue.createElementVNode("view", { class: "form-label required" }, "代理级别"),
                 vue.createElementVNode("view", { class: "form-picker" }, [
                   vue.createElementVNode("picker", {
-                    mode: "multiSelector",
-                    range: $data.agentTypeList,
+                    mode: "selector",
+                    range: $data.agentTypeList[0],
+                    value: $data.agentTypeIndex[0],
                     onChange: _cache[6] || (_cache[6] = (...args) => $options.onAgentTypeChange && $options.onAgentTypeChange(...args))
                   }, [
                     vue.createElementVNode(
                       "view",
                       { class: "picker-view" },
-                      vue.toDisplayString($data.agentTypeIndex[0] !== null ? `${$data.agentTypeList[0][$data.agentTypeIndex[0]]}` : "选择代理级别"),
+                      vue.toDisplayString($data.agentTypeIndex[0] !== null ? $data.agentTypeList[0][$data.agentTypeIndex[0]] : "选择代理级别"),
                       1
                       /* TEXT */
                     )
-                  ], 40, ["range"])
+                  ], 40, ["range", "value"])
                 ])
               ]),
               vue.createElementVNode("view", { class: "form-group" }, [
@@ -36935,7 +36987,21 @@ ${o3}
               }))
             ], 8, ["loading", "disabled"])
           ]),
-          vue.createCommentVNode("v-if", true)
+          $data.isShowLoading ? (vue.openBlock(), vue.createElementBlock("view", {
+            key: 0,
+            class: "submit-loading-mask"
+          }, [
+            vue.createElementVNode("view", { class: "loading-container" }, [
+              vue.createVNode(_component_uni_icons, {
+                type: "spinner",
+                size: "40",
+                color: "#4285F4",
+                class: "loading-icon"
+              }),
+              vue.createElementVNode("view", { class: "loading-text" }, "提交中，请稍候..."),
+              vue.createElementVNode("view", { class: "loading-desc" }, "此过程约2-3秒，请勿关闭页面")
+            ])
+          ])) : vue.createCommentVNode("v-if", true)
         ])) : vue.createCommentVNode("v-if", true),
         $data.isSubmit ? (vue.openBlock(), vue.createElementBlock("view", {
           key: 1,
@@ -36959,7 +37025,7 @@ ${o3}
             ]),
             vue.createElementVNode("button", {
               class: "popup-btn",
-              onClick: _cache[9] || (_cache[9] = (...args) => _ctx.customizeBack && _ctx.customizeBack(...args)),
+              onClick: _cache[9] || (_cache[9] = (...args) => $options.customizeBack && $options.customizeBack(...args)),
               "hover-class": "popup-btn-hover"
             }, " 好的 ")
           ])
@@ -36979,13 +37045,26 @@ ${o3}
         totalMarketCount: 0,
         pageNum: 1,
         pageSize: 5,
-        hasMore: true
+        hasMore: true,
+        city: null
       };
     },
     async onLoad() {
+      this.checkUserInfo();
       this.loadData();
     },
     methods: {
+      async checkUserInfo() {
+        let data = await api.viewAgentInfo();
+        if (data.code == 200) {
+          if (data.data.listdata[0].type == 1) {
+            this.agentLevel = "PROVINCIAL";
+          } else {
+            this.agentLevel = "MUNICIPAL";
+          }
+        }
+        formatAppLog("log", "at subPackages/agent/datacenter/datacenter.vue:123", "用户代理类型", this.agentLevel);
+      },
       // 切换代理级别
       switchAgentLevel() {
         this.agentLevel = this.agentLevel === "PROVINCIAL" ? "MUNICIPAL" : "PROVINCIAL";
@@ -36995,14 +37074,13 @@ ${o3}
       },
       // 加载数据
       async loadData() {
+        let data = await api.getprogetsumall();
         try {
           uni.showLoading({
             title: "加载数据...",
             mask: true
           });
           if (this.agentLevel === "PROVINCIAL") {
-            let data = await api.getprogetsumall();
-            formatAppLog("log", "at subPackages/agent/datacenter/datacenter.vue:129", data, 111111);
             let cityList = data["data"]["city_list"].map((item, index2) => {
               return {
                 id: `city_${index2}`,
@@ -37013,51 +37091,16 @@ ${o3}
                 children: item.children
               };
             });
-            formatAppLog("log", "at subPackages/agent/datacenter/datacenter.vue:141", cityList);
-            this.dataList = [...this.dataList, ...cityList];
+            this.dataList = cityList;
           } else {
-            const districtList = [
-              {
-                id: "district_0101",
-                name: "秀英区",
-                marketCount: 12,
-                totalConsume: 896002.8,
-                totalOrderCount: 8960
-              },
-              {
-                id: "district_0102",
-                name: "龙华区",
-                marketCount: 9,
-                totalConsume: 752005.5,
-                totalOrderCount: 7520
-              },
-              {
-                id: "district_0103",
-                name: "琼山区",
-                marketCount: 10,
-                totalConsume: 689001.1,
-                totalOrderCount: 6890
-              },
-              {
-                id: "district_0104",
-                name: "美兰区",
-                marketCount: 8,
-                totalConsume: 587003.3,
-                totalOrderCount: 5870
-              }
-            ];
-            const paginatedData = districtList.slice((this.pageNum - 1) * this.pageSize, this.pageNum * this.pageSize);
-            mockData = {
-              list: paginatedData,
-              totalConsume: districtList.reduce((sum2, item) => sum2 + item.totalConsume, 0),
-              totalDistrictCount: districtList.length,
-              totalMarketCount: districtList.reduce((sum2, item) => sum2 + item.marketCount, 0),
-              hasMore: this.pageNum * this.pageSize < districtList.length
-            };
+            data["data"]["city_list"].filter((item) => {
+              formatAppLog("log", "at subPackages/agent/datacenter/datacenter.vue:188", "市级代理", item);
+            });
+            this.dataList = districtList;
           }
           uni.hideLoading();
         } catch (error2) {
-          formatAppLog("error", "at subPackages/agent/datacenter/datacenter.vue:226", "加载数据失败：", error2);
+          formatAppLog("error", "at subPackages/agent/datacenter/datacenter.vue:196", "加载数据失败：", error2);
           uni.showToast({
             title: "数据加载失败",
             icon: "none"
@@ -37070,8 +37113,8 @@ ${o3}
         this.loadData();
       },
       // 跳转到市详情页（省级代理）
-      toCityDetail(children) {
-        formatAppLog("log", "at subPackages/agent/datacenter/datacenter.vue:243", children);
+      toCityDetail(city) {
+        let children = JSON.stringify(city);
         uni.navigateTo({
           url: `/subPackages/agent/cityDetail/cityDetail?children=${children}`
         });
@@ -37089,16 +37132,6 @@ ${o3}
     return vue.openBlock(), vue.createElementBlock("view", { class: "agent-index-page" }, [
       vue.createElementVNode("view", { class: "page-header" }, [
         vue.createElementVNode("view", { class: "header-title" }, "代理商消费数据中心"),
-        vue.createElementVNode(
-          "view",
-          {
-            class: "level-switch",
-            onClick: _cache[0] || (_cache[0] = (...args) => $options.switchAgentLevel && $options.switchAgentLevel(...args))
-          },
-          vue.toDisplayString($data.agentLevel === "PROVINCIAL" ? "切换为市级" : "切换为省级"),
-          1
-          /* TEXT */
-        ),
         vue.createElementVNode(
           "view",
           {
@@ -37273,18 +37306,7 @@ ${o3}
             128
             /* KEYED_FRAGMENT */
           ))
-        ])),
-        $data.hasMore ? (vue.openBlock(), vue.createElementBlock("view", {
-          key: 3,
-          class: "load-more",
-          onClick: _cache[1] || (_cache[1] = (...args) => $options.loadMore && $options.loadMore(...args))
-        }, [
-          vue.createTextVNode(" 加载更多 "),
-          vue.createVNode(_component_uni_icons, {
-            type: "down",
-            size: "14"
-          })
-        ])) : vue.createCommentVNode("v-if", true)
+        ]))
       ])
     ]);
   }
@@ -37476,8 +37498,14 @@ ${o3}
       };
     },
     onLoad(options) {
-      formatAppLog("log", "at subPackages/agent/cityDetail/cityDetail.vue:77", options);
-      this.loadDistrictData();
+      this.districtList = JSON.parse(options.children).map((item) => {
+        return {
+          id: item.pid,
+          name: item.name,
+          marketCount: 12,
+          totalConsume: 896002.8
+        };
+      });
     },
     methods: {
       // 返回上一页
@@ -37670,7 +37698,7 @@ ${o3}
           this.hasMore = this.pageNum * this.pageSize < allDistricts.length;
           uni.hideLoading();
         } catch (error2) {
-          formatAppLog("error", "at subPackages/agent/cityDetail/cityDetail.vue:273", "加载区县数据失败：", error2);
+          formatAppLog("error", "at subPackages/agent/cityDetail/cityDetail.vue:280", "加载区县数据失败：", error2);
           uni.showToast({
             title: "数据加载失败",
             icon: "none"
@@ -37783,18 +37811,7 @@ ${o3}
             128
             /* KEYED_FRAGMENT */
           ))
-        ])),
-        $data.hasMore ? (vue.openBlock(), vue.createElementBlock("view", {
-          key: 2,
-          class: "load-more",
-          onClick: _cache[0] || (_cache[0] = (...args) => $options.loadMore && $options.loadMore(...args))
-        }, [
-          vue.createTextVNode(" 加载更多 "),
-          vue.createVNode(_component_uni_icons, {
-            type: "down",
-            size: "14"
-          })
-        ])) : vue.createCommentVNode("v-if", true)
+        ]))
       ])
     ]);
   }
