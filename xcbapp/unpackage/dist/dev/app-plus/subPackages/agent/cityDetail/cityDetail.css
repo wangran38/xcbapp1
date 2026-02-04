@@ -805,28 +805,83 @@
 		font-weight: 500;
 		color: #2d3748;
 }
+
+	/* 核心卡片容器 - 渐变背景+强立体感 */
 .summary-card[data-v-f8530dd0] {
-		background-color: #fff;
-		border-radius: 12px;
-		padding: 15px;
-		margin: 15px auto;
-		width: 92%;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-		display: flex;
-		justify-content: space-around;
+	  display: flex;
+	  flex-direction: column;
+	  /* 橙色调渐变背景，瞬间抓住注意力 */
+	  background: linear-gradient(135deg, #FFF8F0 0%, #FFFAF5 100%);
+	  /* 圆角优化，更圆润有质感 */
+	  border-radius: 0.375rem;
+	  /* 增强阴影，提升立体感 */
+	  box-shadow: 0 0.125rem 0.625rem rgba(255, 125, 0, 0.12);
+	  /* 适度增加上下内边距，提升呼吸感 */
+	  padding: 0.78125rem 0;
+	  margin: 0 auto;
+	  margin-bottom: 0.3125rem;
+	  width: 90%;
+	  box-sizing: border-box;
+	  /* 边框点缀，强化卡片轮廓 */
+	  border: 0.03125rem solid #FFE8D0;
 }
+	
+	/* 单个数据项 - 优化间距和分隔 */
 .summary-item[data-v-f8530dd0] {
-		text-align: center;
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	  /* 增加项内左右内边距，避免内容拥挤 */
+	  padding: 0.625rem 0.78125rem;
+	  position: relative;
 }
+	
+	/* 分隔线 - 渐变细线条，更精致 */
+.summary-item[data-v-f8530dd0]:not(:last-child)::after {
+	  content: '';
+	  position: absolute;
+	  left: 0.78125rem;
+	  bottom: 0;
+	  width: calc(100% - 1.5625rem);
+	  height: 0.03125rem;
+	  background: linear-gradient(90deg, transparent 0%, #FFE0C0 50%, transparent 100%);
+}
+	
+	/* 数据标签 - 强化视觉，加小图标点缀 */
 .summary-label[data-v-f8530dd0] {
-		font-size: 12px;
-		color: #718096;
-		margin-bottom: 5px;
+	  display: flex;
+	  align-items: center;
+	  font-size: 0.9375rem;
+	  color: #555555;
+	  font-weight: 600;
+	  /* 标签文字间距，提升可读性 */
+	  letter-spacing: 0.025rem;
 }
+	
+	/* 标签前的小图标（可选，增强辨识度） */
+.summary-label .iconfont[data-v-f8530dd0] {
+	  color: #FF7D00;
+	  font-size: 0.875rem;
+	  margin-right: 0.375rem;
+}
+	
+	/* 数据数值 - 极致醒目，视觉焦点 */
 .summary-value[data-v-f8530dd0] {
-		font-size: 16px;
-		font-weight: 600;
-		color: #2d3748;
+	  font-size: 1.3125rem; /* 大幅放大数值 */
+	  font-weight: 800; /* 超粗体，强化冲击感 */
+	  color: #FF7D00; /* 主色加深，更醒目 */
+	  text-align: right;
+	  white-space: nowrap;
+	  /* 数值轻微发光效果，提升焦点 */
+	  text-shadow: 0 0 0.25rem rgba(255, 125, 0, 0.15);
+	  /* 数值位置微调，更贴合视觉中心 */
+	  transform: translateY(0.03125rem);
+}
+	
+	/* 可选：消费总额数值加特殊样式，突出核心数据 */
+.summary-item:last-child .summary-value[data-v-f8530dd0] {
+	  color: #E86800; /* 更深的橙色，突出核心数据 */
+	  font-size: 1.375rem;
 }
 .content-container[data-v-f8530dd0] {
 		width: 92%;

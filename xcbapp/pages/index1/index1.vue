@@ -32,7 +32,7 @@
 			<!-- <button @click="gotodemo">测试</button> -->
 		</view>
 		
-		<button style="margin: 50rpx;" @click="goToJackpot">免费买菜</button>
+		<!-- <button style="margin: 50rpx;" @click="goToJackpot">免费买菜</button> -->
 		<!-- 		<view style="color: white; margin: 20rpx; font-size: 25rpx; background-color: black; border: 5rpx solid lightslategray; padding: 20rpx;">
 			小程序使用体验上出现问题,请打热线电话联系我们我们将虚心接受您的意见并进行整改.
 			
@@ -119,23 +119,7 @@
 			},
 			...mapMutations('location', ['setStatus']),
 
-			goTorules(item) {
-				console.log(item)
-				switch (item) {
-					case '赠送积分说明':
-						uni.navigateTo({
-							url: '/pages/rules/rules'
-						});
-						break;
-					case '关于春节放假通知':
-						uni.navigateTo({
-							url: '/pages/arrangeNotification/arrangeNotification'
-						});
-
-						break;
-				}
-			},
-			// 默认选中海南省定安县塔岭市场
+		
 			async initializePicker() {
 				try {
 					if (this.selectedCountry === 'china') {

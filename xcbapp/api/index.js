@@ -449,7 +449,7 @@ export const api = {
 	delMoments(data) {
 		return fetch('/api/farmers/goodsinfo/del', 'POST', data);
 	},
-	// 删除列表
+	// 农户列表
 	farmersList(data) {
 		return fetch('/api/farmers/list', 'POST', data);
 	},
@@ -602,11 +602,19 @@ export const api = {
 	 */
 	getprogetsumall() {
 		return fetch('/api/my/progetsumall', 'POST');
+	},
+	/**
+	 * 获取收益订单详细接口
+	 */
+	getMoneyalllist(data) {
+		return fetch('/api/get/moneyalllist', 'POST', data);
+	},
+	/**
+	 * 求购批发统计
+	 */
+	buysellTotal(data) {
+		return fetch('/api/buysell/total', 'POST', data);
 	}
-
-
-
-
 
 }
 export default {

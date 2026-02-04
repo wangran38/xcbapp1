@@ -54,6 +54,18 @@
 			{
 				"path": "marketDetail/marketDetail",
 				"style": {
+					"navigationBarTitleText": "菜市场"
+				}
+			},
+			{
+				"path": "farmerList/farmerList",
+				"style": {
+					"navigationBarTitleText": ""
+				}
+			},
+			{
+				"path": "supplyInfo/supplyInfo",
+				"style": {
 					"navigationBarTitleText": ""
 				}
 			}
@@ -703,6 +715,12 @@
 		},
 		{
 			"path": "components/public/mButton1/mButton1",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/videoPreview/videoPreview",
 			"style": {
 				"navigationBarTitleText": ""
 			}

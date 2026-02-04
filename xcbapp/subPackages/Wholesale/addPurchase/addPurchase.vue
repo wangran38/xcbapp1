@@ -6,9 +6,9 @@
 				<uni-forms-item label="商品名称" required name="infotitle">
 					<uni-easyinput v-model="formData.infotitle" placeholder="请输入商品名称" @focus="showGoodsPicker = true" />
 
-					<uni-popup ref="goodsPopup" type="dialog">
+<!-- 					<uni-popup ref="goodsPopup" type="dialog">
 						<goods-picker @select="handleGoodsSelect" />
-					</uni-popup>
+					</uni-popup> -->
 				</uni-forms-item>
 
 				<uni-forms-item label="采购量" required name="quantity">

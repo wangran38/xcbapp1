@@ -1,6 +1,6 @@
 <template>
 	<view class="container">
-<!-- 		<view class="header-bar">
+		<!-- 		<view class="header-bar">
 			<text class="platform-name">批发</text>
 		</view> -->
 
@@ -26,28 +26,32 @@
 
 			<view class="stats-panel">
 				<view class="stats-item">
-					<text class="stats-value">1,502</text>
-					<text class="stats-label">今日供应量</text>
+					<text class="stats-value">{{selltotalnum}}</text>
+					<text class="stats-label">供应量</text>
 				</view>
 				<view class="stats-item">
-					<text class="stats-value">893</text>
-					<text class="stats-label">今日采购量</text>
+					<text class="stats-value">{{buytotalnum}}</text>
+					<text class="stats-label">采购量</text>
 				</view>
 			</view>
-			
+
 			<view style="margin: 30rpx 0 0 0; display: flex; justify-content: center;" @click="toggle('bottom')">
-				<uni-icons type="plusempty" size="40" style="background-color: limegreen; padding: 20rpx; border-radius: 10rpx; color: white;"></uni-icons>
+				<uni-icons type="plusempty" size="40"
+					style="background-color: limegreen; padding: 20rpx; border-radius: 10rpx; color: white;"></uni-icons>
 			</view>
-			
+
 			<uni-popup ref="popup" style="padding-bottom: 0;">
-				<view style="height: 30vh; border-radius:30rpx 30rpx 0rpx 0rpx; background-color: white; display: flex; justify-content: center; align-items: center;">
-					<view style="text-align: center; margin: 0 50rpx 0 0;" >
-						<uni-icons type="plusempty" size="40" style="border-radius: 50%;" @click="goToAddPurchase"></uni-icons>
+				<view
+					style="height: 30vh; border-radius:30rpx 30rpx 0rpx 0rpx; background-color: white; display: flex; justify-content: center; align-items: center;">
+					<view style="text-align: center; margin: 0 50rpx 0 0;">
+						<uni-icons type="plusempty" size="40" style="border-radius: 50%;"
+							@click="goToAddPurchase"></uni-icons>
 						<view style="font-size: 30rpx; font-weight: bold;">发采购</view>
 						<view class="label">让百万供应商为你报价</view>
 					</view>
 					<view style="text-align: center;">
-						<uni-icons type="plusempty" size="40" style="border-radius: 50%;" @click="goToAddSupply"></uni-icons>
+						<uni-icons type="plusempty" size="40" style="border-radius: 50%;"
+							@click="goToAddSupply"></uni-icons>
 						<view style="font-size: 30rpx; font-weight: bold;">发商品</view>
 						<view class="label">千万采购商找到你</view>
 					</view>
@@ -58,24 +62,37 @@
 </template>
 
 <script>
+	import {
+		api
+	} from '@/api/index.js'
 	export default {
 		data() {
 			return {
-				cardHeight: '380rpx' // 默认卡片高度
+				cardHeight: '380rpx',
+				selltotalnum:0, //供应信息数量
+				buytotalnum:0  // 求购信息数量
 			};
 		},
 		onLoad() {
 			this.calculateLayout();
+			this.getData()
 		},
 		methods: {
-			goToAddPurchase(){
+			async getData(){
+				let data = await api.buysellTotal()
+				if (data.code == 200){
+					this.selltotalnum = data.data.selltotalnum
+					this.buytotalnum = data.data.buytotalnum
+				}
+			},
+			goToAddPurchase() {
 				uni.navigateTo({
-					url:'/subPackages/Wholesale/addPurchase/addPurchase'
+					url: '/subPackages/Wholesale/addPurchase/addPurchase'
 				})
 			},
-			goToAddSupply(){
+			goToAddSupply() {
 				uni.navigateTo({
-					url:'/subPackages/Wholesale/addSupply/addSupply'
+					url: '/subPackages/Wholesale/addSupply/addSupply'
 				})
 			},
 			toggle(type) {
@@ -114,12 +131,14 @@
 </script>
 
 <style lang="scss" scoped>
-	.vue-ref{
+	.vue-ref {
 		padding-bottom: 0px;
 	}
-	.label{
-		color:gray;
+
+	.label {
+		color: gray;
 	}
+
 	$primary-blue: #2d8cf0;
 	$primary-orange: #ff6a00;
 

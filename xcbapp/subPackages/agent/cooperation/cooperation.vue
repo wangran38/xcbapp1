@@ -2,47 +2,44 @@
 	<view class="agent-apply-page">
 		<!-- 表单容器 -->
 		<view class="form-container">
-			<!-- 标题区域 -->
 			<view class="form-header">
 				<view class="form-title">代理申请表</view>
 				<view class="form-subtitle">请如实填写信息，我们将尽快与您对接</view>
 			</view>
+			<view class="step-indicator">
+				<view class="step-item" :class="{active: currentStep === 1}">
+					<view class="step-num">1</view>
+					<view class="step-text">代理信息</view>
+				</view>
+				<view class="step-line" :class="{active: currentStep >= 2}"></view>
+				<view class="step-item" :class="{active: currentStep === 2}">
+					<view class="step-num">2</view>
+					<view class="step-text">个人信息</view>
+				</view>
+			</view>
 
 			<view class="form-wrapper" v-if="!isSubmit">
-				<form class="agent-form">
-					<view class="form-card">
+				<!-- 第一步：选择代理类型 + 代理区域 -->
+				<view class="step-content" v-if="currentStep === 1">
+					<view class="form-card step1-card">
 						<view class="section-header">
-							<view class="section-icon">
-								<uni-icons type="contact" size="20" color="#4285F4" />
-							</view>
-							<view class="section-name">个人信息</view>
-						</view>
-						<view class="form-group">
-							<view class="form-label required">姓名</view>
-							<input type="text" v-model="formData.nickname" placeholder="请输入您的真实姓名" class="form-input" />
-							<view class="error-tip" v-if="errorTips.name">{{ errorTips.name }}</view>
-						</view>
-						<view class="form-group">
-							<view class="form-label required">联系电话</view>
-							<input type="number" v-model="formData.phone" placeholder="请输入11位手机号码" class="form-input"
-								@input="handlePhoneInput" />
-							<view class="error-tip" v-if="errorTips.phone">{{ errorTips.phone }}</view>
-						</view>
-						<view class="form-group">
-							<view class="form-label required">电子邮箱</view>
-							<input type="email" v-model="formData.email" placeholder="请输入常用邮箱（例：xxx@xx.com）"
-								class="form-input" />
-							<view class="error-tip" v-if="errorTips.email">{{ errorTips.email }}</view>
-						</view>
-
-					</view>
-					<view class="form-card">
-						<view class="section-header">
-							<view class="section-icon">
-								<uni-icons type="map-pin" size="20" color="#FBBC05" />
-							</view>
 							<view class="section-name">代理信息</view>
 						</view>
+						
+						<!-- 代理类型选择 -->
+						<view class="form-group">
+							<view class="form-label required">代理级别</view>
+							<view class="form-picker">
+								<picker mode="selector" :range="agentTypeList[0]" :value="agentTypeIndex[0]"
+									@change="onAgentTypeChange">
+									<view class="picker-view">
+										{{ agentTypeIndex[0] !== null ? agentTypeList[0][agentTypeIndex[0]] : '选择代理级别' }}
+									</view>
+								</picker>
+							</view>
+						</view>
+
+						<!-- 代理区域选择（完整三级联动） -->
 						<view class="form-group">
 							<view class="form-label required">代理区域</view>
 							<view class="form-picker">
@@ -60,46 +57,92 @@
 								</picker>
 							</view>
 						</view>
-						<view class="form-group">
-							<view class="form-label required">代理级别</view>
-							<view class="form-picker">
-								<picker mode="selector" :range="agentTypeList[0]" :value="agentTypeIndex[0]"
-									@change="onAgentTypeChange">
-									<view class="picker-view">
-										{{ agentTypeIndex[0] !== null ? agentTypeList[0][agentTypeIndex[0]] : '选择代理级别' }}
-									</view>
-								</picker>
+
+						<!-- 下一步按钮 -->
+						<button class="next-btn" @click="toStep2" hover-class="next-btn-hover">
+							下一步
+						</button>
+					</view>
+				</view>
+
+				<!-- 第二步：填写个人信息 + 补充说明（展示已选代理信息） -->
+				<view class="step-content" v-if="currentStep === 2">
+					<form class="agent-form">
+						<!-- 已选代理信息展示（不可修改） -->
+						<view class="form-card">
+							<view class="section-header">
+								<view class="section-name">已确认代理信息</view>
+							</view>
+							<view class="form-group">
+								<view class="form-label">代理级别</view>
+								<view class="selected-info">
+									{{ agentTypeList[0][agentTypeIndex[0]] || '未选择' }}
+								</view>
+							</view>
+							<view class="form-group">
+								<view class="form-label">代理区域</view>
+								<view class="selected-info">
+									{{ `${multiArray[0][multiIndex[0]] || '无'} - ${multiArray[1][multiIndex[1]] || '无'} - ${multiArray[2][multiIndex[2]] || '无'}` }}
+								</view>
 							</view>
 						</view>
 
-						<view class="form-group">
-							<view class="form-label">补充说明</view>
-							<textarea v-model="formData.remark" placeholder="其他需要说明的信息" class="form-textarea"
-								rows="3"></textarea>
-							<view class="word-count">{{ formData.remark.length }}/150</view>
+						<view class="form-card">
+							<view class="section-header">
+								<view class="section-name">个人信息</view>
+							</view>
+							<view class="form-group">
+								<view class="form-label required">姓名</view>
+								<input type="text" v-model="formData.nickname" placeholder="请输入您的真实姓名" class="form-input" />
+								<view class="error-tip" v-if="errorTips.name">{{ errorTips.name }}</view>
+							</view>
+							<view class="form-group">
+								<view class="form-label required">联系电话</view>
+								<input type="number" v-model="formData.phone" placeholder="请输入11位手机号码" class="form-input"
+									@input="handlePhoneInput" />
+								<view class="error-tip" v-if="errorTips.phone">{{ errorTips.phone }}</view>
+							</view>
+							<view class="form-group">
+								<view class="form-label required">电子邮箱</view>
+								<input type="email" v-model="formData.email" placeholder="请输入常用邮箱（例：xxx@xx.com）"
+									class="form-input" />
+								<view class="error-tip" v-if="errorTips.email">{{ errorTips.email }}</view>
+							</view>
 						</view>
-					</view>
 
-					<!-- 提交按钮 -->
-					<button form-type="submit" class="submit-btn" @click="submitForm" :loading="isSubmitting"
-						:disabled="isSubmitting" hover-class="submit-btn-hover">
-						<span v-if="!isSubmitting">提交申请</span>
-						<uni-icons type="spinner" size="18" color="#fff" class="submit-loading" v-else></uni-icons>
-					</button>
-				</form>
+						<view class="form-card">
+							<view class="section-header">
+								<view class="section-name">补充说明</view>
+							</view>
+							<view class="form-group">
+								<textarea v-model="formData.remark" placeholder="其他需要说明的信息" class="form-textarea"
+									rows="3"></textarea>
+								<view class="word-count">{{ formData.remark.length }}/150</view>
+							</view>
+						</view>
 
-				<view class="submit-loading-mask" v-if="isShowLoading">
-					<view class="loading-container">
-						<!-- 旋转加载图标 -->
-						<uni-icons type="spinner" size="40" color="#4285F4" class="loading-icon" />
-						<!-- 等待提示文字 -->
-						<view class="loading-text">提交中，请稍候...</view>
-						<!-- 辅助说明（降低用户焦虑） -->
-						<view class="loading-desc">此过程约2-3秒，请勿关闭页面</view>
+
+						<view class="btn-group">
+							<button class="back-step-btn" @click="toStep1" >
+								返回上一步
+							</button>
+							<button form-type="submit" class="submit-btn" @click="submitForm" :loading="isSubmitting">
+								<span v-if="!isSubmitting">提交申请</span>
+							</button>
+						</view>
+					</form>
+
+					<view class="submit-loading-mask" v-if="isShowLoading">
+						<view class="loading-container">
+							<uni-icons type="spinner" size="40" color="#4285F4" class="loading-icon" />
+							<view class="loading-text">提交中，请稍候...</view>
+							<view class="loading-desc">此过程约2-3秒，请勿关闭页面</view>
+						</view>
 					</view>
 				</view>
 			</view>
 
+			<!-- 提交成功弹窗 -->
 			<view v-if="isSubmit" style="display: flex; justify-content: center;" :animation="true"
 				animation-duration="300">
 				<view class="popup-content">
@@ -126,17 +169,18 @@
 		mixins: [myMixin],
 		data() {
 			return {
+				currentStep: 1, // 1=选择代理信息（类型+区域），2=填写个人信息
 				// 表单数据
 				formData: {
 					nickname: '',
 					phone: '',
 					email: '',
-					province: '', // 用户代理的省份id
-					city: '', //  用户代理市县id
+					province: '', // 代理省份id
+					city: '', // 代理市县id
 					remark: '',
 					type: null,
 					status: 1,
-					userid: '' // 补充userid默认值
+					userid: ''
 				},
 				// 实时错误提示
 				errorTips: {},
@@ -151,7 +195,7 @@
 				districtList: [], // 区县原始数据（含id）
 				multiIndex: [0, 0, 0], // 三级选择器默认索引
 				agentTypeList: [
-					['省级', '市级']
+					['省级', '市县区级']
 				],
 				agentTypeIndex: [0], // 代理级别默认选中第一个
 				// 提交状态
@@ -167,23 +211,21 @@
 				if (data.code == 200) {
 					this.formData.userid = data.data.userid
 				}
-				await this.initializePicker(); // 等待初始化完成
+				await this.initializePicker(); // 初始化省市区选择器
 			} catch (error) {
 				console.error('页面初始化失败:', error);
 			}
 		},
 		methods: {
 			onAgentTypeChange({ detail }) {
-				this.agentTypeIndex[0] = detail.value; // 简化赋值逻辑
+				this.agentTypeIndex[0] = detail.value;
 				this.$forceUpdate();
 			},
 
+			// 省市区选择器相关方法（不变）
 			async fetchProvinces() {
 				try {
-					const response = await api.citylist({
-						level: 1,
-						limit: 100
-					});
+					const response = await api.citylist({ level: 1, limit: 100 });
 					if (response.code === 200) {
 						this.provinceList = response.data.listdata;
 						return this.provinceList;
@@ -191,18 +233,15 @@
 					throw new Error('获取省份数据失败');
 				} catch (error) {
 					console.error('获取省份失败:', error);
-					return []; // 返回空数组避免后续报错
+					return [];
 				}
 			},
 			async fetchCities(provinceId) {
 				try {
 					const response = await api.citytree(provinceId);
-					if (response.code === 200 && Array.isArray(response.data)) {
-						return response.data;
-					} else {
-						console.error('获取城市数据为空');
-						return [];
-					}
+					if (response.code === 200 && Array.isArray(response.data)) return response.data;
+					console.error('获取城市数据为空');
+					return [];
 				} catch (error) {
 					console.error('获取城市失败:', error);
 					return [];
@@ -211,12 +250,9 @@
 			async fetchAreas(cityId) {
 				try {
 					const response = await api.citytree(cityId);
-					if (response.code === 200 && Array.isArray(response.data)) {
-						return response.data;
-					} else {
-						console.error('获取区县数据为空');
-						return [];
-					}
+					if (response.code === 200 && Array.isArray(response.data)) return response.data;
+					console.error('获取区县数据为空');
+					return [];
 				} catch (error) {
 					console.error('获取区县失败:', error);
 					return [];
@@ -225,22 +261,11 @@
 			bindMultiPickerChange(e) {
 				this.multiIndex = e.detail.value;
 				// 校验数据存在性，避免报错
-				if (!this.provinceList[this.multiIndex[0]]) return;
-				if (!this.cityList[this.multiIndex[1]]) return;
-				if (!this.districtList[this.multiIndex[2]]) return;
+				if (!this.provinceList[this.multiIndex[0]] || !this.cityList[this.multiIndex[1]] || !this.districtList[this.multiIndex[2]]) return;
 
-				// 获取选中的省市区ID
-				const selectedProvinceId = this.provinceList[this.multiIndex[0]].id;
-				const selectedAreaId = this.districtList[this.multiIndex[2]].id;
-				
-				console.log('选择的省市区:', 
-					this.multiArray[0][this.multiIndex[0]],
-					this.multiArray[1][this.multiIndex[1]],
-					this.multiArray[2][this.multiIndex[2]]
-				);
-				
-				this.formData.province = selectedProvinceId;
-				this.formData.city = selectedAreaId;
+				// 保存选中的省市区ID
+				this.formData.province = this.provinceList[this.multiIndex[0]].id;
+				this.formData.city = this.districtList[this.multiIndex[2]].id;
 			},
 			async bindMultiPickerColumnChange(e) {
 				const column = e.detail.column;
@@ -250,14 +275,11 @@
 				// 切换省份（第一列）
 				if (column === 0) {
 					const provinceId = this.provinceList[value]?.id;
-					if (!provinceId) return; // 无省份ID则终止
-
-					// 获取该省份下的城市列表
+					if (!provinceId) return;
 					const cities = await this.fetchCities(provinceId);
 					this.cityList = cities;
 					this.multiArray[1] = cities.map(item => item.name);
 					
-					// 默认选中第一个城市，再获取该城市的区县
 					const firstCityId = cities[0]?.id;
 					if (firstCityId) {
 						const areas = await this.fetchAreas(firstCityId);
@@ -267,8 +289,6 @@
 						this.districtList = [];
 						this.multiArray[2] = [];
 					}
-					
-					// 重置市、区索引为第一个
 					this.multiIndex[1] = 0;
 					this.multiIndex[2] = 0;
 				} 
@@ -276,34 +296,28 @@
 				else if (column === 1) {
 					const cityId = this.cityList[value]?.id;
 					if (!cityId) return;
-
-					// 获取该城市下的区县列表
 					const areas = await this.fetchAreas(cityId);
 					this.districtList = areas;
 					this.multiArray[2] = areas.map(item => item.name);
-					
-					// 重置区县索引为第一个
 					this.multiIndex[2] = 0;
 				}
 
-				// 强制更新视图（关键：解决索引更新后视图不刷新问题）
-				this.multiIndex = [...this.multiIndex];
+				this.multiIndex = [...this.multiIndex]; // 强制更新视图
 			},
-
 			async initializePicker() {
 				try {
-					// 1. 获取省份列表并初始化第一列
+					// 初始化省份
 					const provinces = await this.fetchProvinces();
 					if (provinces.length === 0) return;
 					this.multiArray[0] = provinces.map(item => item.name);
 					
-					// 2. 获取第一个省份的城市列表并初始化第二列
+					// 初始化第一个省份的城市
 					const firstProvinceId = provinces[0].id;
 					const cities = await this.fetchCities(firstProvinceId);
 					this.cityList = cities;
 					this.multiArray[1] = cities.map(item => item.name);
 					
-					// 3. 获取第一个城市的区县列表并初始化第三列
+					// 初始化第一个城市的区县
 					const firstCityId = cities[0]?.id;
 					if (firstCityId) {
 						const areas = await this.fetchAreas(firstCityId);
@@ -311,31 +325,21 @@
 						this.multiArray[2] = areas.map(item => item.name);
 					}
 					
-					// 4. 初始化默认索引（确保默认选中第一个省市区）
-					this.multiIndex = [0, 0, 0];
-					
-					// 5. 初始化表单中的省市区ID（默认选中第一个）
+					// 初始化默认选中的省市区ID
 					this.formData.province = firstProvinceId;
 					this.formData.city = this.districtList[0]?.id || '';
-					
-					console.log('选择器初始化完成，默认选中:', 
-						this.multiArray[0][0], 
-						this.multiArray[1][0], 
-						this.multiArray[2][0]
-					);
 				} catch (error) {
 					console.error('选择器初始化失败:', error);
 				}
 			},
-			customizeBack() { // 补充缺失的返回方法
+
+			// 其他原有方法（不变）
+			customizeBack() {
 				uni.navigateBack({ delta: 1 });
 			},
-			// 手机号输入处理
 			handlePhoneInput(e) {
 				this.formData.phone = e.detail.value.replace(/\D/g, '').slice(0, 11);
 			},
-
-			// 单个字段验证（修复字段名错误：name → nickname）
 			validateField(field) {
 				const val = this.formData[field];
 				const tips = {};
@@ -358,8 +362,6 @@
 				this.$set(this.errorTips, field, tips[field] || '');
 				return !tips[field];
 			},
-
-			// 整体表单验证（修复字段名和验证逻辑）
 			validateForm() {
 				const fields = ['nickname', 'phone', 'email'];
 				let isPass = true;
@@ -369,47 +371,24 @@
 					if (!pass) isPass = false;
 				});
 
-				// 验证地区选择
-				if (!this.formData.province || !this.formData.city) {
-					uni.showToast({ title: '请选择完整的代理区域', icon: 'none' });
-					isPass = false;
-				}
-
-				// 验证代理级别
-				if (this.agentTypeIndex[0] === null) {
-					uni.showToast({ title: '请选择代理级别', icon: 'none' });
-					isPass = false;
-				}
-
 				return isPass;
 			},
-
-			// 提交表单
 			async submitForm() {
-				// 先验证表单
 				if (!this.validateForm()) return;
-				console.log(this.formData,"提交数据")
 
 				// 设置代理类型
 				switch (this.agentTypeList[0][this.agentTypeIndex[0]]) {
-					case '省级':
-						this.formData.type = 1
-						break
-					case '市级':
-						this.formData.type = 2
-						break
+					case '省级': this.formData.type = 1; break;
+					case '市县区级': this.formData.type = 2; break;
 				}
-				this.formData.agentType = Number(this.agentTypeIndex[0]) + 1
+				this.formData.agentType = Number(this.agentTypeIndex[0]) + 1;
 
-				// 开启加载状态
+				// 提交逻辑
 				this.isSubmitting = true;
 				this.isShowLoading = true;
-
 				try {
-					// 提交接口请求
 					const res = await api.agentApply(this.formData);
 					if (res.code === 200) {
-						// 提交成功
 						this.isShowLoading = false;
 						this.isSubmitting = false;
 						this.isSubmit = true;
@@ -425,8 +404,6 @@
 					this.isSubmitting = false;
 				}
 			},
-
-			// 重置表单
 			resetForm() {
 				this.formData = {
 					nickname: '',
@@ -437,24 +414,74 @@
 					remark: '',
 					type: null,
 					status: 1,
-					userid: this.formData.userid // 保留userid不重置
+					userid: this.formData.userid
 				};
 				this.agentTypeIndex = [0];
 				this.errorTips = {};
-				this.initializePicker(); // 重置后重新初始化选择器
+				this.initializePicker();
+			},
+
+			// 第一步 → 第二步（核心验证：代理类型+完整区域）
+			toStep2() {
+				// 验证代理类型是否选择
+				if (this.agentTypeIndex[0] === null) {
+					uni.showToast({ title: '请选择代理级别', icon: 'none' });
+					return;
+				}
+				// 验证区域是否完整选择（省+市+区都有值）
+				if (!this.multiArray[0][this.multiIndex[0]] || !this.multiArray[1][this.multiIndex[1]] || !this.multiArray[2][this.multiIndex[2]]) {
+					uni.showToast({ title: '请选择完整的代理区域', icon: 'none' });
+					return;
+				}
+				// 验证区域ID是否存在（避免选择器初始化异常）
+				if (!this.formData.province || !this.formData.city) {
+					uni.showToast({ title: '区域数据异常，请重新选择', icon: 'none' });
+					return;
+				}
+
+				// 验证通过，进入第二步
+				this.currentStep = 2;
+				// 滚动到顶部
+				uni.pageScrollTo({ scrollTop: 0, duration: 300 });
+			},
+
+			// 第二步 → 第一步（返回修改）
+			toStep1() {
+				this.currentStep = 1;
+				uni.pageScrollTo({ scrollTop: 0, duration: 300 });
 			}
 		}
 	};
 </script>
 
-
-
 <style scoped>
+	/* 原有样式不变，仅新增/调整以下样式 */
+	/* 第一步卡片样式：适配代理类型+区域两个选择器 */
+	.step1-card {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+	/* 已选信息展示样式 */
+	.selected-info {
+		width: 100%;
+		padding: 14px 16px;
+		border: 1px solid #e2e8f0;
+		border-radius: 8px;
+		font-size: 14px;
+		color: #2d3748;
+		box-sizing: border-box;
+		background-color: #f8f9fa;
+	}
+	/* 步骤指示器文字调整（适配新步骤名称） */
+	.step-text {
+		font-size: 13px;
+	}
+	/* 其他原有样式保持不变... */
+
 	.form-wrapper {
 		position: relative;
 	}
-
-	/* 提交等待遮罩：覆盖整个表单区域，防止用户操作 */
 	.submit-loading-mask {
 		position: absolute;
 		top: 0;
@@ -462,15 +489,11 @@
 		right: 0;
 		bottom: 0;
 		background-color: rgba(255, 255, 255, 0.85);
-		/* 半透明白色遮罩，不遮挡页面色调 */
 		z-index: 10;
-		/* 高于表单，低于成功弹窗 */
 		display: flex;
 		align-items: center;
 		justify-content: center;
 	}
-
-	/* 加载内容容器：居中显示 */
 	.loading-container {
 		text-align: center;
 		padding: 30px 20px;
@@ -478,46 +501,30 @@
 		background-color: #fff;
 		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 	}
-
-	/* 加载图标：旋转动画 */
 	.loading-icon {
 		animation: spin 1.2s linear infinite;
 		margin-bottom: 15px;
 	}
-
-	/* 加载提示文字 */
 	.loading-text {
 		font-size: 16px;
 		color: #333;
 		font-weight: 500;
 		margin-bottom: 8px;
 	}
-
-	/* 加载辅助说明：浅色调降低焦虑 */
 	.loading-desc {
 		font-size: 12px;
 		color: #999;
 	}
-
-	/* 旋转动画关键帧（复用按钮加载动画，保持统一） */
 	@keyframes spin {
-		from {
-			transform: rotate(0deg);
-		}
-
-		to {
-			transform: rotate(360deg);
-		}
+		from { transform: rotate(0deg); }
+		to { transform: rotate(360deg); }
 	}
-
-	/* 原有其他样式... */
 	.agent-apply-page {
 		background-color: #f8f9fa;
 		min-height: 100vh;
 		font-size: 14px;
 		padding-bottom: 30px;
 	}
-
 	.navbar {
 		display: flex;
 		justify-content: space-between;
@@ -530,48 +537,126 @@
 		top: 0;
 		z-index: 99;
 	}
-
 	.nav-back-icon {
 		cursor: pointer;
 		transition: transform 0.2s;
 	}
-
 	.nav-back-icon:active {
 		transform: scale(0.9);
 	}
-
 	.nav-title {
 		font-size: 18px;
 		font-weight: 500;
 		color: #333;
 	}
-
 	.nav-empty {
 		width: 22px;
 	}
-
 	.form-container {
 		width: 92%;
 		margin: 18px auto 0;
 	}
-
 	.form-header {
 		text-align: center;
 		margin-bottom: 22px;
 	}
-
 	.form-title {
 		font-size: 22px;
 		font-weight: 600;
 		color: #2d3748;
 		margin-bottom: 8px;
 	}
-
 	.form-subtitle {
 		font-size: 13px;
 		color: #718096;
 	}
+	.step-indicator {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 24px;
+		gap: 20px;
+	}
+	.step-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 8px;
+	}
+	.step-num {
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		background-color: #e2e8f0;
+		color: #a0aec0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 16px;
+		font-weight: 500;
+		transition: all 0.3s;
+	}
+	.step-item.active .step-num {
+		background-color: #4285F4;
+		color: #fff;
+	}
+	.step-item.active .step-text {
+		color: #4285F4;
+		font-weight: 500;
+	}
+	.step-line {
+		width: 40px;
+		height: 2px;
+		background-color: #e2e8f0;
+		transition: all 0.3s;
+	}
+	.step-line.active {
+		background-color: #4285F4;
+	}
+	.next-btn {
+		width: 100%;
+		height: 52px;
+		line-height: 52px;
+		background: linear-gradient(90deg, #4285F4 0%, #4285F4 100%);
+		color: #fff;
+		font-size: 16px;
+		font-weight: 500;
+		border-radius: 12px;
+		border: none;
+		margin-top: 10px;
+		transition: all 0.3s;
+	}
+	.next-btn-hover {
+		opacity: 0.9;
+		transform: translateY(-2px);
+		box-shadow: 0 8px 16px rgba(66, 133, 244, 0.2);
+	}
+	.btn-group {
+		display: flex;
+		gap: 12px;
+		margin-top: 12px;
+	}
+	.back-step-btn {
+		width: 40%;
+		height: 52px;
+		line-height: 52px;
+		background-color: #aa0000;
+		color: #fff;
+		font-size: 16px;
+		font-weight: 500;
+		border-radius: 12px;
+		transition: all 0.3s;
+	}
 
+	.submit-btn {
+		color:#fff;
+		background-color: #4285F4;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 60%;
+		margin-top: 0;
+	}
 	.form-card {
 		background-color: #fff;
 		border-radius: 12px;
@@ -580,17 +665,14 @@
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 		transition: box-shadow 0.3s;
 	}
-
 	.form-card:active {
 		box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
 	}
-
 	.section-header {
 		display: flex;
 		align-items: center;
 		margin-bottom: 18px;
 	}
-
 	.section-icon {
 		width: 28px;
 		height: 28px;
@@ -601,26 +683,21 @@
 		justify-content: center;
 		margin-right: 10px;
 	}
-
 	.form-card:nth-child(2) .section-icon {
 		background-color: rgba(52, 168, 83, 0.1);
 	}
-
 	.form-card:nth-child(3) .section-icon {
 		background-color: rgba(251, 188, 5, 0.1);
 	}
-
 	.section-name {
 		font-size: 16px;
 		font-weight: 500;
 		color: #2d3748;
 	}
-
 	.form-group {
 		margin-bottom: 22px;
 		position: relative;
 	}
-
 	.form-label {
 		font-size: 14px;
 		color: #2d3748;
@@ -628,14 +705,12 @@
 		display: flex;
 		align-items: center;
 	}
-
 	.required::before {
 		content: '*';
 		color: #e53e3e;
 		margin-right: 4px;
 		font-size: 16px;
 	}
-
 	.form-input {
 		width: 91%;
 		padding: 14px 16px;
@@ -643,21 +718,17 @@
 		border-radius: 8px;
 		font-size: 25rpx;
 		color: #2d3748;
-		/* box-sizing: border-box; */
 		transition: all 0.2s;
 	}
-
 	.form-input::placeholder {
 		color: #a0aec0;
 		font-size: 13px;
 	}
-
 	.input-focus {
 		border-color: #4285F4;
 		box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
 		transform: translateY(-1px);
 	}
-
 	.form-picker {
 		width: 100%;
 		padding: 14px 16px;
@@ -670,16 +741,13 @@
 		cursor: pointer;
 		transition: all 0.2s;
 	}
-
 	.form-picker:active {
 		border-color: #4285F4;
 		box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
 	}
-
 	.picker-view {
 		color: #2d3748;
 	}
-
 	.form-picker::after {
 		content: '';
 		position: absolute;
@@ -692,11 +760,9 @@
 		border-right: 2px solid #a0aec0;
 		transition: all 0.2s;
 	}
-
 	.form-picker:active::after {
 		border-color: #4285F4;
 	}
-
 	.form-textarea {
 		width: 100%;
 		padding: 14px 16px;
@@ -709,24 +775,20 @@
 		resize: none;
 		transition: all 0.2s;
 	}
-
 	.form-textarea::placeholder {
 		color: #a0aec0;
 		font-size: 13px;
 	}
-
 	.form-textarea.input-focus {
 		border-color: #4285F4;
 		box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
 	}
-
 	.word-count {
 		font-size: 12px;
 		color: #a0aec0;
 		text-align: right;
 		margin-top: 6px;
 	}
-
 	.error-tip {
 		font-size: 12px;
 		color: #e53e3e;
@@ -734,7 +796,6 @@
 		display: flex;
 		align-items: center;
 	}
-
 	.error-tip::before {
 		content: '';
 		width: 12px;
@@ -743,35 +804,10 @@
 		background-size: 100%;
 		margin-right: 4px;
 	}
-
-	.submit-btn {
-		width: 100%;
-		height: 52px;
-		line-height: 52px;
-		background: linear-gradient(90deg, #4285F4 0%, #4285F4 100%);
-		color: #fff;
-		font-size: 16px;
-		font-weight: 500;
-		border-radius: 12px;
-		border: none;
-		margin-top: 12px;
-		transition: all 0.3s;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.submit-btn-hover {
-		opacity: 0.9;
-		transform: translateY(-2px);
-		box-shadow: 0 8px 16px rgba(66, 133, 244, 0.2);
-	}
-
 	.submit-loading {
 		animation: spin 1s linear infinite;
 		margin-right: 8px;
 	}
-
 	.popup-content {
 		width: 85%;
 		max-width: 320px;
@@ -782,52 +818,31 @@
 		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 		animation: popupIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
-
 	@keyframes popupIn {
-		from {
-			transform: scale(0.8);
-			opacity: 0;
-		}
-
-		to {
-			transform: scale(1);
-			opacity: 1;
-		}
+		from { transform: scale(0.8); opacity: 0; }
+		to { transform: scale(1); opacity: 1; }
 	}
-
 	.popup-icon {
 		margin-bottom: 20px;
 		animation: iconBounce 0.5s ease;
 	}
-
 	@keyframes iconBounce {
-		0% {
-			transform: scale(0);
-		}
-
-		70% {
-			transform: scale(1.2);
-		}
-
-		100% {
-			transform: scale(1);
-		}
+		0% { transform: scale(0); }
+		70% { transform: scale(1.2); }
+		100% { transform: scale(1); }
 	}
-
 	.popup-title {
 		font-size: 20px;
 		font-weight: 600;
 		color: #2d3748;
 		margin-bottom: 12px;
 	}
-
 	.popup-desc {
 		font-size: 14px;
 		color: #718096;
 		line-height: 1.6;
 		margin-bottom: 28px;
 	}
-
 	.popup-btn {
 		width: 140px;
 		height: 46px;
@@ -839,12 +854,10 @@
 		border: none;
 		transition: all 0.2s;
 	}
-
 	.popup-btn-hover {
 		background-color: #2d9749;
 		transform: scale(1.05);
 	}
-
 	@media (min-width: 768px) {
 		.form-container {
 			width: 60%;

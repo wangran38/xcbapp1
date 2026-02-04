@@ -1,28 +1,32 @@
 <template>
 	<view class="city-detail-page">
-		<!-- 页面头部 -->
-		<!--  <view class="page-header">
-      <view class="back-btn" @click="goBack">
-        <uni-icons type="left" size="18" /> 返回
-      </view>
-      <view class="header-title">{{ cityName }} - 区县列表</view>
-    </view> -->
 
-		<!-- 汇总数据 -->
+		
 		<view class="summary-card">
-			<view class="summary-item">
-				<view class="summary-label">区县总数</view>
-				<view class="summary-value">{{ totalDistrictCount }} 个</view>
-			</view>
-			<view class="summary-item">
-				<view class="summary-label">菜市场总数</view>
-				<view class="summary-value">{{ totalMarketCount }} 个</view>
-			</view>
-			<view class="summary-item">
-				<view class="summary-label">消费总额</view>
-				<view class="summary-value">¥{{ totalConsume.toLocaleString() }}</view>
-			</view>
+		  <view class="summary-item">
+		    <view class="summary-label">
+		      <text class="iconfont icon-district"></text>
+		      订单总数
+		    </view>
+		    <view class="summary-value">{{0 }} 个</view>
+		  </view>
+		  <view class="summary-item">
+		    <view class="summary-label">
+		      <text class="iconfont icon-market"></text>
+		      菜市场总数
+		    </view>
+		    <view class="summary-value">{{ totalMarketCount }} 个</view>
+		  </view>
+		  <view class="summary-item">
+		    <view class="summary-label">
+		      <text class="iconfont icon-money"></text>
+		      收益总额
+		    </view>
+		    <view class="summary-value">¥{{ totalConsume.toFixed(1) }}</view>
+		  </view>
 		</view>
+
+
 
 		<!-- 区县列表 -->
 		<view class="content-container">
@@ -41,7 +45,7 @@
 							<view class="item-value">{{ district.marketCount }} 个</view>
 						</view>
 						<view class="card-item">
-							<view class="item-label">消费总额</view>
+							<view class="item-label">收益总额</view>
 							<view class="item-value">¥{{ district.totalConsume.toLocaleString() }}</view>
 						</view>
 					</view>
@@ -78,8 +82,8 @@
 				return {
 					id: item.pid,
 					name: item.name,
-					marketCount: 12,
-					totalConsume: 896002.80
+					marketCount: 0,
+					totalConsume: 0
 				}
 			})
 			// this.loadDistrictData()
@@ -329,31 +333,82 @@
 		color: #2d3748;
 	}
 
+	/* 核心卡片容器 - 渐变背景+强立体感 */
 	.summary-card {
-		background-color: #fff;
-		border-radius: 12px;
-		padding: 15px;
-		margin: 15px auto;
-		width: 92%;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-		display: flex;
-		justify-content: space-around;
+	  display: flex;
+	  flex-direction: column;
+	  /* 橙色调渐变背景，瞬间抓住注意力 */
+	  background: linear-gradient(135deg, #FFF8F0 0%, #FFFAF5 100%);
+	  /* 圆角优化，更圆润有质感 */
+	  border-radius: 12rpx;
+	  /* 增强阴影，提升立体感 */
+	  box-shadow: 0 4rpx 20rpx rgba(255, 125, 0, 0.12);
+	  /* 适度增加上下内边距，提升呼吸感 */
+	  padding: 25rpx 0;
+	  margin: 0 auto;
+	  margin-bottom: 10rpx;
+	  width: 90%;
+	  box-sizing: border-box;
+	  /* 边框点缀，强化卡片轮廓 */
+	  border: 1rpx solid #FFE8D0;
 	}
-
+	
+	/* 单个数据项 - 优化间距和分隔 */
 	.summary-item {
-		text-align: center;
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	  /* 增加项内左右内边距，避免内容拥挤 */
+	  padding: 20rpx 25rpx;
+	  position: relative;
 	}
-
+	
+	/* 分隔线 - 渐变细线条，更精致 */
+	.summary-item:not(:last-child)::after {
+	  content: '';
+	  position: absolute;
+	  left: 25rpx;
+	  bottom: 0;
+	  width: calc(100% - 50rpx);
+	  height: 1rpx;
+	  background: linear-gradient(90deg, transparent 0%, #FFE0C0 50%, transparent 100%);
+	}
+	
+	/* 数据标签 - 强化视觉，加小图标点缀 */
 	.summary-label {
-		font-size: 12px;
-		color: #718096;
-		margin-bottom: 5px;
+	  display: flex;
+	  align-items: center;
+	  font-size: 30rpx;
+	  color: #555555;
+	  font-weight: 600;
+	  /* 标签文字间距，提升可读性 */
+	  letter-spacing: 0.8rpx;
 	}
-
+	
+	/* 标签前的小图标（可选，增强辨识度） */
+	.summary-label .iconfont {
+	  color: #FF7D00;
+	  font-size: 28rpx;
+	  margin-right: 12rpx;
+	}
+	
+	/* 数据数值 - 极致醒目，视觉焦点 */
 	.summary-value {
-		font-size: 16px;
-		font-weight: 600;
-		color: #2d3748;
+	  font-size: 42rpx; /* 大幅放大数值 */
+	  font-weight: 800; /* 超粗体，强化冲击感 */
+	  color: #FF7D00; /* 主色加深，更醒目 */
+	  text-align: right;
+	  white-space: nowrap;
+	  /* 数值轻微发光效果，提升焦点 */
+	  text-shadow: 0 0 8rpx rgba(255, 125, 0, 0.15);
+	  /* 数值位置微调，更贴合视觉中心 */
+	  transform: translateY(1rpx);
+	}
+	
+	/* 可选：消费总额数值加特殊样式，突出核心数据 */
+	.summary-item:last-child .summary-value {
+	  color: #E86800; /* 更深的橙色，突出核心数据 */
+	  font-size: 44rpx;
 	}
 
 	.content-container {

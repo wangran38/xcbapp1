@@ -1,118 +1,110 @@
 <template>
-  <view class="me-container">
-    <!-- 用户信息区域 -->
-    <view class="user">
-      <view class="user-info">
-        <!-- 用户头像 -->
-        <view class="user-img">
-          <image :src="userAvatar || 'http://h5.xcbdsc.com/static/morentouxiang.jpg'" mode="aspectFill" />
-        </view>
-        
-        <!-- 用户名称 -->
-        <view class="user-name">
-          <button v-if="!isLoggedIn" @click="login" class="login-button">点击登录</button>
-          <view v-if="isLoggedIn" class="nickname-container">
-            <view class="nickname-input">{{ userName || '请到我的信息中填写昵称' }}</view>
-          </view>
-        </view>
-        
-        <!-- 设置图标 -->
-        <uni-icons 
-          custom-prefix="iconfont" 
-          type="icon-shezhi" 
-          size="20" 
-          class="settings-icon"
-          @click="GoTOsettings"
-        />
-      </view>
-    </view>
+	<view class="me-container">
+		<view class="user">
+			<view class="user-info">
+				<view class="user-img">
+					<image :src="userAvatar || 'http://h5.xcbdsc.com/static/morentouxiang.jpg'" mode="aspectFill" />
+				</view>
 
-    <!-- 积分统计 -->
-    <view class="integral-grid">
-      <view class="integral-item">
-        <text class="label">现金消费累计</text>
-        <text class="value">0元</text>
-      </view>
-      <view class="integral-item highlight">
-        <text class="label">可用积分</text>
-        <text class="value">{{score}}分</text>
-      </view>
-      <view class="integral-item">
-        <text class="label">冻结积分</text>
-        <text class="value">0分</text>
-      </view>
-    </view>
+				<view class="user-name">
+					<button v-if="!isLoggedIn" @click="login" class="login-button">点击登录</button>
+					<view v-if="isLoggedIn" class="nickname-container">
+						<view class="nickname-input">{{ userName || '请到我的信息中填写昵称' }}</view>
+					</view>
+				</view>
 
-    <!-- 功能入口 -->
-    <view class="function-list">
-      <!-- 打卡 -->
-      <view class="function-item" @click="lottery">
+				<!-- 设置图标 -->
+				<uni-icons custom-prefix="iconfont" type="icon-shezhi" size="20" class="settings-icon"
+					@click="GoTOsettings" />
+			</view>
+		</view>
+
+		<!-- 积分统计 -->
+		<view class="integral-grid">
+			<view class="integral-item">
+				<text class="label">现金消费累计</text>
+				<text class="value">0元</text>
+			</view>
+			<view class="integral-item highlight">
+				<text class="label">可用积分</text>
+				<text class="value">{{score}}分</text>
+			</view>
+			<view class="integral-item">
+				<text class="label">冻结积分</text>
+				<text class="value">0分</text>
+			</view>
+		</view>
+
+		<!-- 功能入口 -->
+		<view class="function-list">
+			<!-- 打卡 -->
+			<!-- <view class="function-item" @click="lottery">
         <view class="item-left">
           <uni-icons type="auth" size="30" color="#00C853" />
           <text class="title">我的打卡</text>
           <text class="subtitle">累计打卡{{totalnum}}次</text>
         </view>
         <uni-icons type="right" size="18" color="#999" />
-      </view>
+      </view> -->
 
-      <!-- 我的积分 -->
-      <view class="function-item" @click="mypoints">
-        <view class="item-left">
-          <uni-icons type="vip" size="30" color="#FFD600" />
-          <text class="title">我的积分</text>
-        </view>
-        <uni-icons type="right" size="18" color="#999" />
-      </view>
+			<!-- 我的积分 -->
+			<view class="function-item" @click="mypoints">
+				<view class="item-left">
+					<uni-icons type="vip" size="30" color="#FFD600" />
+					<text class="title">我的积分</text>
+				</view>
+				<uni-icons type="right" size="18" color="#999" />
+			</view>
 
-      <!-- 我的预购 -->
-      <view class="function-item" @click="goToprePurchaseOrder">
-        <view class="item-left">
-          <uni-icons type="shop-filled" size="30" color="#2979FF" />
-          <text class="title">我的预购</text>
-        </view>
-        <uni-icons type="right" size="18" color="#999" />
-      </view>
-	  
-	  <view class="function-item" @click="toorders">
-	    <view class="item-left">
-	      <uni-icons type="cart" size="30" color="#2979FF" />
-	      <text class="title">我的订单</text>
-	    </view>
-	    <uni-icons type="right" size="18" color="#999" />
-	  </view>
-	  <view class="function-item" @click="GotowholesaleNavigation">
-	    <view class="item-left">
-	      <uni-icons type="list" size="30" color="#2979FF" />
-	      <text class="title">我的批发</text>
-	    </view>
-	    <uni-icons type="right" size="18" color="#999" />
-	  </view>
-	  <view class="function-item" @click="GoTOsettings">
-	    <view class="item-left">
-	      <uni-icons type="gear" size="30" color="#2979FF" />
-	      <text class="title">我的设置</text>
-	    </view>
-	    <uni-icons type="right" size="18" color="#999" />
-	  </view>
-	  <view class="function-item" @click="routerPush('/pages/invitation/invitation')">
-	    <view class="item-left">
-	      <uni-icons type="medal-filled" size="30" color="#2979FF" />
-	      <text class="title">我的推广</text>
-	    </view>
-	    <uni-icons type="right" size="18" color="#999" />
-	  </view>
-	  
-	  <view class="function-item" @click="routerPush('/pages/earningsRecord/earningsRecord')">
-	    <view class="item-left">
-	      <uni-icons type="medal-filled" size="30" color="#2979FF" />
-	      <text class="title">我的收益</text>
-	    </view>
-	    <uni-icons type="right" size="18" color="#999" />
-	  </view>
-	  
-    </view>
-	<button type="warn" @click="logout" style="margin: 20rpx;">退出登录</button>
-  </view>
+			<!-- 我的预购 -->
+			<view class="function-item" @click="goToprePurchaseOrder">
+				<view class="item-left">
+					<uni-icons type="shop-filled" size="30" color="#2979FF" />
+					<text class="title">我的预购</text>
+				</view>
+				<uni-icons type="right" size="18" color="#999" />
+			</view>
+
+			<view class="function-item" @click="toorders">
+				<view class="item-left">
+					<uni-icons type="cart" size="30" color="#2979FF" />
+					<text class="title">我的订单</text>
+				</view>
+				<uni-icons type="right" size="18" color="#999" />
+			</view>
+			<view class="function-item" @click="GotowholesaleNavigation">
+				<view class="item-left">
+					<uni-icons type="list" size="30" color="#2979FF" />
+					<text class="title">我的批发</text>
+				</view>
+				<uni-icons type="right" size="18" color="#999" />
+			</view>
+			<view class="function-item" @click="GoTOsettings">
+				<view class="item-left">
+					<uni-icons type="gear" size="30" color="#2979FF" />
+					<text class="title">我的设置</text>
+				</view>
+				<uni-icons type="right" size="18" color="#999" />
+			</view>
+			<view class="function-item" @click="routerPush('/pages/invitation/invitation')">
+				<view class="item-left">
+					<uni-icons type="medal-filled" size="30" color="#2979FF" />
+					<text class="title">我的推广</text>
+				</view>
+				<uni-icons type="right" size="18" color="#999" />
+			</view>
+
+			<view class="function-item" @click="routerPush('/pages/earningsRecord/earningsRecord')">
+				<view class="item-left">
+					<uni-icons type="medal-filled" size="30" color="#2979FF" />
+					<text class="title">我的收益</text>
+				</view>
+				<uni-icons type="right" size="18" color="#999" />
+			</view>
+
+		</view>
+		<button type="warn" @click="logout" style="margin: 20rpx;">退出登录</button>
+	</view>
 </template>
 
 <script>
@@ -132,10 +124,10 @@
 				// 添加你需要的数据属性
 				totalnum: 0,
 				signTotal: {},
-				phone:null // 用户手机号
+				phone: null // 用户手机号
 			};
 		},
-		async onShow() {			
+		async onShow() {
 			// 检查是否登录
 			this.checkLoginStatus();
 			if (this.isLoggedIn) {
@@ -145,36 +137,36 @@
 			this.signlist()
 		},
 		methods: {
-			routerPush(path){
-				try{
+			routerPush(path) {
+				try {
 					uni.navigateTo({
-						url:path
+						url: path
 					})
-				}catch{
-					
+				} catch {
+
 				}
 			},
-			GotowholesaleNavigation(){
+			GotowholesaleNavigation() {
 				uni.navigateTo({
-					 url: '/subPackages/Wholesale/wholesaleNavigation/wholesaleNavigation'
+					url: '/subPackages/Wholesale/wholesaleNavigation/wholesaleNavigation'
 				})
 			},
-			GoTOsettings(){
+			GoTOsettings() {
 				uni.navigateTo({
-					 url: '/pages/settings/settings'
+					url: '/pages/settings/settings'
 				})
 			},
-			GoToComplaint(){
+			GoToComplaint() {
 				uni.navigateTo({
-					 url: '/pages/myComplaint/myComplaint'
+					url: '/pages/myComplaint/myComplaint'
 				})
 			},
-			goToprePurchaseOrder(){
+			goToprePurchaseOrder() {
 				uni.navigateTo({
-					 url: `/subPackages/shoppingPageList/prePurchaseOrder/prePurchaseOrder`
+					url: `/subPackages/shoppingPageList/prePurchaseOrder/prePurchaseOrder`
 				})
 			},
-			goToUpdatePwd(){
+			goToUpdatePwd() {
 				uni.navigateTo({
 					url: `/pages/updatePwd/updatePwd?phone=${this.phone}`,
 				})
@@ -296,15 +288,15 @@
 								code: res.code
 							})
 							let msg = data.message
-							if (data.code == 200){
+							if (data.code == 200) {
 								uni.showToast({
-									title:msg,
-									icon:'success'
+									title: msg,
+									icon: 'success'
 								})
-							}else{
+							} else {
 								uni.showToast({
-									title:msg,
-									icon:'error'
+									title: msg,
+									icon: 'error'
 								})
 							}
 						},
@@ -325,147 +317,154 @@
 
 
 <style lang="scss">
-.me-container {
-  padding: 32rpx;
-  background: #f8f9fa;
-  min-height: 100vh;
-}
+	.me-container {
+		padding: 32rpx;
+		background: #f8f9fa;
+		min-height: 100vh;
+	}
 
-/* 用户信息 */
-.user {
-  margin-bottom: 48rpx;
-  .user-info {
-    display: flex;
-    align-items: center;
-    gap: 24rpx;
-    
-    .user-img {
-      width: 120rpx;
-      height: 120rpx;
-      border-radius: 50%;
-      overflow: hidden;
-      image {
-        width: 100%;
-        height: 100%;
-      }
-    }
+	/* 用户信息 */
+	.user {
+		margin-bottom: 48rpx;
 
-    .user-name {
-      flex: 1;
-      .login-button {
-        background: #2979FF;
-        color: white;
-        border-radius: 48rpx;
-        font-size: 28rpx;
-        padding: 16rpx 32rpx;
-        &::after { border: none; }
-      }
-      
-      .nickname-input {
-        font-size: 32rpx;
-        color: #333;
-      }
-    }
+		.user-info {
+			display: flex;
+			align-items: center;
+			gap: 24rpx;
 
-    .settings-icon {
-      padding: 16rpx;
-    }
-  }
-}
+			.user-img {
+				width: 120rpx;
+				height: 120rpx;
+				border-radius: 50%;
+				overflow: hidden;
 
-/* 积分统计 */
-.integral-grid {
-  display: flex;
-  justify-content: space-around;
-  background: #fff;
-  border-radius: 24rpx;
-  overflow: hidden;
-  box-shadow: 0 4rpx 24rpx rgba(0,0,0,0.05);
+				image {
+					width: 100%;
+					height: 100%;
+				}
+			}
 
-  .integral-item {
-    padding: 32rpx;
-    background: #fff;
-    text-align: center;
-    
-    .label {
-      display: block;
-      font-size: 26rpx;
-      color: #666;
-      margin-bottom: 8rpx;
-    }
-    
-    .value {
-      font-size: 32rpx;
-      color: #333;
-      font-weight: 500;
-    }
+			.user-name {
+				flex: 1;
 
-    &.highlight .value {
-      color: #2979FF;
-    }
-  }
-}
+				.login-button {
+					background: #2979FF;
+					color: white;
+					border-radius: 48rpx;
+					font-size: 28rpx;
+					padding: 16rpx 32rpx;
 
-/* 功能列表 */
-.function-list {
-  margin-top: 48rpx;
-  background: #fff;
-  border-radius: 24rpx;
-  overflow: hidden;
-  box-shadow: 0 4rpx 24rpx rgba(0,0,0,0.05);
+					&::after {
+						border: none;
+					}
+				}
 
-  .function-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 32rpx;
-    border-bottom: 1rpx solid #eee;
-    
-    &:last-child {
-      border: none;
-    }
+				.nickname-input {
+					font-size: 32rpx;
+					color: #333;
+				}
+			}
 
-    .item-left {
-      display: flex;
-      align-items: center;
-      gap: 24rpx;
-      
-      .title {
-        font-size: 30rpx;
-        color: #333;
-      }
-      
-      .subtitle {
-        font-size: 24rpx;
-        color: #999;
-        margin-left: 24rpx;
-      }
-    }
-  }
-}
+			.settings-icon {
+				padding: 16rpx;
+			}
+		}
+	}
 
-/* 移动端适配 */
-@media (max-width: 480px) {
-  .me-container {
-    padding: 24rpx;
-  }
-  
-  .user-info {
-    .user-img {
-      width: 96rpx !important;
-      height: 96rpx !important;
-    }
-    
-    .nickname-input {
-      font-size: 28rpx !important;
-    }
-  }
+	/* 积分统计 */
+	.integral-grid {
+		display: flex;
+		justify-content: space-around;
+		background: #fff;
+		border-radius: 24rpx;
+		overflow: hidden;
+		box-shadow: 0 4rpx 24rpx rgba(0, 0, 0, 0.05);
 
-  .integral-grid {
-    grid-template-columns: 1fr;
-    .integral-item {
-      padding: 24rpx;
-    }
-  }
-}
+		.integral-item {
+			padding: 32rpx;
+			background: #fff;
+			text-align: center;
+
+			.label {
+				display: block;
+				font-size: 26rpx;
+				color: #666;
+				margin-bottom: 8rpx;
+			}
+
+			.value {
+				font-size: 32rpx;
+				color: #333;
+				font-weight: 500;
+			}
+
+			&.highlight .value {
+				color: #2979FF;
+			}
+		}
+	}
+
+	/* 功能列表 */
+	.function-list {
+		margin-top: 48rpx;
+		background: #fff;
+		border-radius: 24rpx;
+		overflow: hidden;
+		box-shadow: 0 4rpx 24rpx rgba(0, 0, 0, 0.05);
+
+		.function-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 32rpx;
+			border-bottom: 1rpx solid #eee;
+
+			&:last-child {
+				border: none;
+			}
+
+			.item-left {
+				display: flex;
+				align-items: center;
+				gap: 24rpx;
+
+				.title {
+					font-size: 30rpx;
+					color: #333;
+				}
+
+				.subtitle {
+					font-size: 24rpx;
+					color: #999;
+					margin-left: 24rpx;
+				}
+			}
+		}
+	}
+
+	/* 移动端适配 */
+	@media (max-width: 480px) {
+		.me-container {
+			padding: 24rpx;
+		}
+
+		.user-info {
+			.user-img {
+				width: 96rpx !important;
+				height: 96rpx !important;
+			}
+
+			.nickname-input {
+				font-size: 28rpx !important;
+			}
+		}
+
+		.integral-grid {
+			grid-template-columns: 1fr;
+
+			.integral-item {
+				padding: 24rpx;
+			}
+		}
+	}
 </style>

@@ -783,132 +783,216 @@
 }
 
 .district-detail-page[data-v-f7f3bbbe] {
-  background-color: #f8f9fa;
-  min-height: 100vh;
-  font-size: 14px;
-  padding-bottom: 40px;
+		background-color: #f8f9fa;
+		min-height: 100vh;
+		font-size: 14px;
+		padding-bottom: 40px;
 }
 .page-header[data-v-f7f3bbbe] {
-  padding: 15px 16px;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #f5f5f5;
+		padding: 15px 16px;
+		background-color: #fff;
+		display: flex;
+		align-items: center;
+		border-bottom: 1px solid #f5f5f5;
 }
 .back-btn[data-v-f7f3bbbe] {
-  font-size: 14px;
-  color: #4285F4;
-  margin-right: 15px;
+		font-size: 14px;
+		color: #4285F4;
+		margin-right: 15px;
 }
 .header-title[data-v-f7f3bbbe] {
-  font-size: 16px;
-  font-weight: 500;
-  color: #2d3748;
-}
-.summary-card[data-v-f7f3bbbe] {
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 15px;
-  margin: 15px auto;
-  width: 92%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  display: flex;
-  justify-content: space-around;
-}
-.summary-item[data-v-f7f3bbbe] {
-  text-align: center;
-}
-.summary-label[data-v-f7f3bbbe] {
-  font-size: 12px;
-  color: #718096;
-  margin-bottom: 5px;
-}
-.summary-value[data-v-f7f3bbbe] {
-  font-size: 16px;
-  font-weight: 600;
-  color: #2d3748;
-}
-.filter-bar[data-v-f7f3bbbe] {
-  width: 92%;
-  margin: 0 auto 15px;
-}
-.filter-text[data-v-f7f3bbbe] {
-  background-color: #fff;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 12px;
-  color: #4285F4;
-  display: inline-block;
-  cursor: pointer;
-}
-.content-container[data-v-f7f3bbbe] {
-  width: 92%;
-  margin: 0 auto;
-}
-.empty-tip[data-v-f7f3bbbe] {
-  text-align: center;
-  padding: 60px 0;
-  color: #999;
-}
-.card-list[data-v-f7f3bbbe] {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 12px;
-  margin-bottom: 15px;
-}
-.market-card[data-v-f7f3bbbe] {
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  padding: 15px;
-  cursor: pointer;
-}
-.card-header[data-v-f7f3bbbe] {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid #f5f5f5;
-}
-.card-title[data-v-f7f3bbbe] {
-  font-size: 15px;
-  font-weight: 500;
-  color: #2d3748;
-}
-.card-body[data-v-f7f3bbbe] {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-.card-item[data-v-f7f3bbbe] {
-  text-align: center;
-}
-.item-label[data-v-f7f3bbbe] {
-  font-size: 11px;
-  color: #718096;
-  margin-bottom: 4px;
-}
-.item-value[data-v-f7f3bbbe] {
-  font-size: 14px;
-  font-weight: 500;
-  color: #2d3748;
-}
-.load-more[data-v-f7f3bbbe] {
-  text-align: center;
-  padding: 15px 0;
-  font-size: 13px;
-  color: #4285F4;
-  cursor: pointer;
+		font-size: 16px;
+		font-weight: 500;
+		color: #2d3748;
 }
 
-/* 响应式适配 */
-@media (max-width: 767px) {
+	/* 核心卡片容器 */
 .summary-card[data-v-f7f3bbbe] {
-    flex-direction: column;
-    gap: 10px;
+		background-color: #ffffff;
+		border-radius: 0.375rem;
+		box-shadow: 0 0.125rem 0.625rem rgba(255, 125, 0, 0.08);
+		padding: 0.9375rem 0.625rem;
+		margin: 0.625rem 0;
+		width: 100%;
+		box-sizing: border-box;
+		border: 0.03125rem solid #FFE8D0;
+		margin-bottom: 0.625rem;
+}
+
+	/* 收益总额单独突出区 - 视觉核心 */
+.summary-highlight[data-v-f7f3bbbe] {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 0.78125rem 0;
+		margin-bottom: 0.78125rem;
+		/* 渐变背景突出收益 */
+		background: linear-gradient(135deg, #FFF8F0 0%, #FFFAF5 100%);
+		border-radius: 0.3125rem;
+		position: relative;
+}
+
+	/* 收益标签 */
+.highlight-label[data-v-f7f3bbbe] {
+		font-size: 0.875rem;
+		color: #666;
+		margin-bottom: 0.3125rem;
+		display: flex;
+		align-items: center;
+}
+.highlight-label .iconfont[data-v-f7f3bbbe] {
+		color: #FF7D00;
+		font-size: 0.8125rem;
+		margin-right: 0.3125rem;
+}
+
+	/* 收益数值 - 极致醒目 */
+.highlight-value[data-v-f7f3bbbe] {
+		font-size: 1.5rem;
+		font-weight: 800;
+		color: #E86800;
+		text-shadow: 0 0 0.3125rem rgba(255, 125, 0, 0.2);
+		letter-spacing: 0.03125rem;
+}
+
+	/* 5个小数据网格布局 - 规整排列 */
+.summary-grid[data-v-f7f3bbbe] {
+		display: flex;
+		flex-wrap: wrap;
+		/* 自动换行，保证排列规则 */
+		justify-content: space-between;
+		gap: 0.46875rem 0;
+		/* 项之间的上下间距 */
+}
+
+	/* 小数据项 - 统一样式，2列/3列自适应 */
+.summary-item[data-v-f7f3bbbe] {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		/* 每2个占一行，自动均分宽度（5个则2+2+1，视觉更规整） */
+		flex: 0 0 48%;
+		padding: 0.46875rem 0;
+		border-bottom: 0.03125rem solid #f8f8f8;
+}
+
+	/* 最后一行的项去掉下边框 */
+.summary-item[data-v-f7f3bbbe]:nth-last-child(1),
+	.summary-item[data-v-f7f3bbbe]:nth-last-child(2) {
+		border-bottom: none;
+}
+
+	/* 小数据标签 */
+.summary-label[data-v-f7f3bbbe] {
+		font-size: 0.75rem;
+		color: #555;
+		margin-bottom: 0.25rem;
+		display: flex;
+		align-items: center;
+}
+.summary-label .iconfont[data-v-f7f3bbbe] {
+		color: #FF9500;
+		font-size: 0.6875rem;
+		margin-right: 0.25rem;
+}
+
+	/* 小数据数值 */
+.summary-value[data-v-f7f3bbbe] {
+		font-size: 0.875rem;
+		font-weight: 700;
+		color: #FF7D00;
+}
+
+	/* 新增：极简跳转入口样式 - 仅按钮，无多余装饰 */
+.jump-entrance[data-v-f7f3bbbe] {
+		width: 92%;
+		margin: 0 auto 0.625rem;
+		display: flex;
+		gap: 0.46875rem;
+}
+.jump-btn[data-v-f7f3bbbe] {
+		flex: 1;
+		height: 2.5rem;
+		line-height: 2.5rem;
+		background-color: #FFF8F0;
+		color: #FF7D00;
+		border: 0.03125rem solid #FFE8D0;
+		border-radius: 0.25rem;
+		font-size: 0.875rem;
+		padding: 0;
+}
+.jump-btn[data-v-f7f3bbbe]::after {
+		border: none;
+		/* 去掉uni-app按钮默认边框 */
+}
+.content-container[data-v-f7f3bbbe] {
+		width: 92%;
+		margin: 0 auto;
+}
+.empty-tip[data-v-f7f3bbbe] {
+		text-align: center;
+		padding: 60px 0;
+		color: #999;
 }
 .card-list[data-v-f7f3bbbe] {
-    grid-template-columns: 1fr;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: 12px;
+		margin-bottom: 15px;
+}
+.market-card[data-v-f7f3bbbe] {
+		background-color: #fff;
+		border-radius: 12px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+		padding: 15px;
+}
+.card-header[data-v-f7f3bbbe] {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 10px;
+		padding-bottom: 6px;
+		border-bottom: 1px solid #f5f5f5;
+}
+.card-title[data-v-f7f3bbbe] {
+		font-size: 15px;
+		font-weight: 500;
+		color: #2d3748;
+}
+.card-body[data-v-f7f3bbbe] {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 8px;
+}
+.card-item[data-v-f7f3bbbe] {
+		text-align: center;
+}
+.item-label[data-v-f7f3bbbe] {
+		font-size: 11px;
+		color: #718096;
+		margin-bottom: 4px;
+}
+.item-value[data-v-f7f3bbbe] {
+		font-size: 14px;
+		font-weight: 500;
+		color: #2d3748;
+}
+.load-more[data-v-f7f3bbbe] {
+		text-align: center;
+		padding: 15px 0;
+		font-size: 13px;
+		color: #4285F4;
+}
+
+	/* 响应式适配 */
+@media (max-width: 767px) {
+.summary-card[data-v-f7f3bbbe] {
+			flex-direction: column;
+			gap: 10px;
+}
+.card-list[data-v-f7f3bbbe] {
+			grid-template-columns: 1fr;
 }
 }

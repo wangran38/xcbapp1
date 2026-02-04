@@ -206,8 +206,7 @@
 					let data = await api.buyinfoList(this.query)
 					
 					
-					console.log(this.query,"这是请求参数")
-					console.log(data.data.listdata,"这是响应数据")
+
 
 					this.purchaseList = [...this.purchaseList, ...data.data.listdata]
 					this.page++
