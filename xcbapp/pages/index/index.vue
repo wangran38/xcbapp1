@@ -18,8 +18,8 @@
 				</button>
 			</view>
 		</view>
-
-
+		
+		
 		<!-- 定位模块 -->
 		<view class="location-header">
 			<view class="location-info" @click="toindex1">

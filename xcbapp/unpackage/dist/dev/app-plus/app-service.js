@@ -34026,6 +34026,7 @@ ${o3}
       },
       async getData() {
         let data = await api.dynamicsDataList(this.queryData);
+        formatAppLog("log", "at pages/dynamics/dynamics.vue:104", "种养朋友圈数据", data);
         if (data.code == 200) {
           let newList = data.data.listdata.map((item) => {
             if (!item["imgs"])
@@ -38768,103 +38769,199 @@ ${o3}
     data() {
       return {
         userinfo: {
-          reallyname: "",
+          farmersname: "",
           cardnumber: "",
           avatar: "",
           address: ""
         },
-        oldDataInfo: null
+        oldDataInfo: null,
+        // 存储原始用户数据，用于取ID和判断模式
+        isEditMode: false,
+        // 核心模式标识：true=编辑模式，false=补充模式
+        loading: false
+        // 全局加载状态：头像上传+提交共用
       };
     },
+    /**
+     * 页面加载核心：获取用户资料 → 判断模式 → 数据回显
+     */
     async onLoad() {
-      let res = await api.myInfo({});
-      this.oldDataInfo = res.data;
+      try {
+        const res = await api.myInfo({});
+        formatAppLog("log", "at subPackages/aHouseholder/additionalInformation/additionalInformation.vue:200", "个人信息回显", res.data);
+        if (res.code === 200 && res.data) {
+          this.oldDataInfo = res.data;
+          const hasUserInfo = res.data.farmersname || res.data.cardnumber || res.data.address;
+          this.isEditMode = hasUserInfo;
+          if (this.isEditMode) {
+            this.userinfo = {
+              farmersname: res.data.farmersname || "",
+              cardnumber: res.data.cardnumber || "",
+              avatar: res.data.avatar || "",
+              address: res.data.address || ""
+            };
+          }
+        }
+      } catch (err) {
+        formatAppLog("error", "at subPackages/aHouseholder/additionalInformation/additionalInformation.vue:217", "获取用户资料异常：", err);
+        this.isEditMode = false;
+      }
     },
     methods: {
-      commitAvater() {
+      /**
+       * 头像上传：补充/编辑模式共用，上传后自动更新表单
+       */
+      async commitAvater() {
+        if (this.loading)
+          return;
         uni.chooseImage({
           count: 1,
-          sizeType: ["compressed", "original"],
+          sizeType: ["compressed"],
           sourceType: ["album", "camera"],
-          success: (res) => {
-            const tempFilePaths = res.tempFilePaths;
-            if (tempFilePaths.length > 0) {
-              const {
-                upload,
-                request: request2
-              } = useUpload({
+          success: async (res) => {
+            var _a;
+            const tempFilePath = res.tempFilePaths[0];
+            if (!tempFilePath)
+              return;
+            this.loading = true;
+            try {
+              const { upload } = useUpload({
                 uploadPath: "/group1/upload",
-                tempFilePaths: tempFilePaths[0],
+                tempFilePaths: tempFilePath,
                 file: res.tempFiles[0]
               });
-              upload().then((res2) => {
-                var obj = JSON.parse(res2);
+              const uploadRes = await upload();
+              const obj = JSON.parse(uploadRes);
+              if ((_a = obj == null ? void 0 : obj.data) == null ? void 0 : _a.url) {
                 this.userinfo.avatar = obj.data.url;
+                uni.showToast({
+                  icon: "success",
+                  title: this.isEditMode ? "头像更新成功" : "头像上传成功"
+                });
+              } else {
+                throw new Error("上传结果无效");
+              }
+            } catch (err) {
+              formatAppLog("error", "at subPackages/aHouseholder/additionalInformation/additionalInformation.vue:256", "头像操作失败：", err);
+              uni.showToast({
+                icon: "none",
+                title: this.isEditMode ? "头像更新失败" : "头像上传失败"
               });
+            } finally {
+              this.loading = false;
+            }
+          },
+          fail: (err) => {
+            if (err.errMsg !== "chooseImage:cancel") {
+              uni.showToast({ icon: "none", title: "选择图片失败" });
             }
           }
         });
       },
-      // 返回上一页
-      async customizeBack() {
-        let canNavBack = await getCurrentPages();
-        formatAppLog("log", "at subPackages/aHouseholder/additionalInformation/additionalInformation.vue:216", canNavBack);
-        if (canNavBack && canNavBack.length > 1) {
-          uni.navigateBack();
-        } else {
-          history.back();
+      /**
+       * 表单校验：补充/编辑模式共用，规则一致
+       */
+      validateForm() {
+        const { farmersname, cardnumber, avatar, address } = this.userinfo;
+        if (!farmersname.trim()) {
+          uni.showToast({ icon: "none", title: "请输入真实姓名" });
+          return false;
         }
+        const cardReg = /^\d{17}[\dXx]$/;
+        if (!cardnumber.trim() || !cardReg.test(cardnumber.trim())) {
+          uni.showToast({ icon: "none", title: "请输入有效18位身份证" });
+          return false;
+        }
+        if (!avatar) {
+          uni.showToast({ icon: "none", title: "请上传头像" });
+          return false;
+        }
+        if (!address.trim()) {
+          uni.showToast({ icon: "none", title: "请输入详细地址" });
+          return false;
+        }
+        return true;
       },
       async submitForm() {
-        let res = await api.upFarmers({
-          id: this.oldDataInfo.id,
-          ...this.userinfo
-        });
-        if (res.code == 200) {
+        var _a;
+        if (!this.validateForm())
+          return;
+        if (this.loading)
+          return;
+        this.loading = true;
+        try {
+          let submitData = { ...this.userinfo };
+          if (this.isEditMode && ((_a = this.oldDataInfo) == null ? void 0 : _a.id)) {
+            submitData.id = this.oldDataInfo.id;
+          }
+          formatAppLog("log", "at subPackages/aHouseholder/additionalInformation/additionalInformation.vue:318", "个人数据提交", submitData);
+          const res = await api.upFarmers(submitData);
+          if (res.code === 200) {
+            uni.showToast({
+              icon: "success",
+              title: this.isEditMode ? "资料修改成功" : "资料补充成功"
+            });
+            setTimeout(() => {
+              uni.navigateBack({ delta: 1 });
+            }, 1200);
+          } else {
+            uni.showToast({
+              icon: "none",
+              title: res.msg || (this.isEditMode ? "资料修改失败" : "资料补充失败")
+            });
+          }
+        } catch (err) {
+          formatAppLog("error", "at subPackages/aHouseholder/additionalInformation/additionalInformation.vue:339", "提交失败：", err);
           uni.showToast({
-            icon: "success",
-            title: res.msg
+            icon: "none",
+            title: "网络异常，请稍后重试"
           });
-          this.customizeBack();
+        } finally {
+          this.loading = false;
         }
-        uni.showToast({
-          icon: "error",
-          title: res.msg
-        });
       }
     }
   };
   function _sfc_render$J(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
+    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "profile-page" }, [
-      vue.createElementVNode("text", { class: "page-title" }, "户主资料补充"),
+      vue.createElementVNode(
+        "text",
+        { class: "page-title" },
+        vue.toDisplayString($data.isEditMode ? "户主资料编辑" : "户主资料补充"),
+        1
+        /* TEXT */
+      ),
       vue.createElementVNode("view", { class: "form-container" }, [
         vue.createElementVNode("view", { class: "form-item" }, [
-          vue.createElementVNode("label", { class: "form-label" }, "真实姓名："),
+          vue.createElementVNode("label", { class: "form-label" }, "真实姓名"),
           vue.withDirectives(vue.createElementVNode(
             "input",
             {
               type: "text",
-              "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.userinfo.reallyname = $event),
+              "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.userinfo.farmersname = $event),
               placeholder: "请输入真实姓名",
-              class: "form-input"
+              class: "form-input",
+              maxlength: "20"
             },
             null,
             512
             /* NEED_PATCH */
           ), [
-            [vue.vModelText, $data.userinfo.reallyname]
+            [vue.vModelText, $data.userinfo.farmersname]
           ])
         ]),
         vue.createElementVNode("view", { class: "form-item" }, [
-          vue.createElementVNode("label", { class: "form-label" }, "身份证："),
+          vue.createElementVNode("label", { class: "form-label" }, "身份证号"),
           vue.withDirectives(vue.createElementVNode(
             "input",
             {
               type: "text",
               "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => $data.userinfo.cardnumber = $event),
-              placeholder: "请输入身份证号码",
-              class: "form-input"
+              placeholder: "请输入18位身份证号码",
+              class: "form-input",
+              maxlength: "18"
             },
             null,
             512
@@ -38874,35 +38971,51 @@ ${o3}
           ])
         ]),
         vue.createElementVNode("view", { class: "form-item avatar-item" }, [
-          vue.createElementVNode("label", { class: "form-label" }, "头像："),
-          vue.createElementVNode("view", { class: "avatar-wrapper" }, [
+          vue.createElementVNode(
+            "label",
+            { class: "form-label" },
+            vue.toDisplayString($data.isEditMode ? "当前头像" : "上传头像"),
+            1
+            /* TEXT */
+          ),
+          vue.createElementVNode("view", {
+            class: "avatar-wrapper",
+            onClick: _cache[2] || (_cache[2] = (...args) => $options.commitAvater && $options.commitAvater(...args))
+          }, [
             vue.withDirectives(vue.createElementVNode("image", {
               src: $data.userinfo.avatar,
-              mode: "aspectFit",
-              class: "avatar-image",
-              onClick: _cache[2] || (_cache[2] = (...args) => $options.commitAvater && $options.commitAvater(...args))
+              mode: "aspectFill",
+              class: "avatar-image"
             }, null, 8, ["src"]), [
               [vue.vShow, $data.userinfo.avatar]
             ]),
-            vue.withDirectives(vue.createVNode(_component_uni_icons, {
-              type: "plusempty",
-              size: "50",
-              class: "avatar-placeholder",
-              onClick: $options.commitAvater
-            }, null, 8, ["onClick"]), [
+            vue.withDirectives(vue.createElementVNode(
+              "view",
+              { class: "avatar-placeholder" },
+              [
+                vue.createVNode(_component_uni_icons, {
+                  type: "camera",
+                  size: "40",
+                  color: "#86909c"
+                })
+              ],
+              512
+              /* NEED_PATCH */
+            ), [
               [vue.vShow, !$data.userinfo.avatar]
             ])
           ])
         ]),
         vue.createElementVNode("view", { class: "form-item" }, [
-          vue.createElementVNode("label", { class: "form-label" }, "详细地址："),
+          vue.createElementVNode("label", { class: "form-label" }, "详细地址"),
           vue.withDirectives(vue.createElementVNode(
             "input",
             {
               type: "text",
               "onUpdate:modelValue": _cache[3] || (_cache[3] = ($event) => $data.userinfo.address = $event),
-              placeholder: "请输入详细地址",
-              class: "form-input"
+              placeholder: "请输入详细居住地址",
+              class: "form-input",
+              maxlength: "100"
             },
             null,
             512
@@ -38915,8 +39028,32 @@ ${o3}
       vue.createElementVNode("view", { class: "button-container" }, [
         vue.createElementVNode("button", {
           onClick: _cache[4] || (_cache[4] = (...args) => $options.submitForm && $options.submitForm(...args)),
-          class: "submit-btn"
-        }, "提交信息")
+          class: "submit-btn",
+          disabled: $data.loading
+        }, [
+          vue.withDirectives(vue.createVNode(
+            _component_uni_load_more,
+            {
+              type: "loading",
+              size: "mini",
+              class: "btn-loading"
+            },
+            null,
+            512
+            /* NEED_PATCH */
+          ), [
+            [vue.vShow, $data.loading]
+          ]),
+          vue.withDirectives(vue.createElementVNode(
+            "text",
+            null,
+            vue.toDisplayString($data.isEditMode ? "保存修改" : "提交资料"),
+            513
+            /* TEXT, NEED_PATCH */
+          ), [
+            [vue.vShow, !$data.loading]
+          ])
+        ], 8, ["disabled"])
       ])
     ]);
   }
