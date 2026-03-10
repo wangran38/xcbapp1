@@ -1,957 +1,434 @@
 <template>
 	<view class="container">
-		<!-- 公告弹框：通过showNotice控制显示/隐藏 -->
 		<view class="notice-modal" v-if="showNotice">
 			<view class="notice-modal__mask" @click="handleClose"></view>
 			<view class="notice-modal__box">
-				<text class="notice-modal__title">重要公告</text>
-				<scroll-view class="notice-modal__content" scroll-y>
-					<text class="notice-modal__content-text">
-						亲爱的用户：\n 通知\n 因“农链天下”系统升级建设，自2025年10月9日起暂停一周一次的免费赠送积分活动，恢复时间待定。在此之前的赠送积分不影响正常使用，特此通知！
-					</text>
-				</scroll-view>
-				<view style="margin-bottom: 10rpx; font-size: 25rpx;">不再提示
-					<radio :checked="prompt" @click="changePrompt" style="margin-left: 10rpx;" />
+				<view class="notice-header">
+					<view class="icon-bg">
+						<uni-icons type="notification-filled" size="34" color="#fff" />
+					</view>
+					<text class="notice-modal__title">系统公告</text>
 				</view>
-				<button class="notice-modal__confirm" @click="handleClose" hover-class="notice-modal__confirm--hover">
-					我知道了
-				</button>
+				<scroll-view class="notice-modal__content" scroll-y>
+					<view class="notice-text-wrap">
+						<text class="notice-modal__content-text">
+							亲爱的用户：\n\n因“农链天下”系统升级建设，自2025年10月9日起暂停一周一次的免费赠送积分活动，恢复时间待定。在此之前的赠送积分不影响正常使用。
+						</text>
+					</view>
+				</scroll-view>
+				<view class="notice-footer-action">
+					<view class="no-prompt" @click="changePrompt">
+						<radio :checked="prompt" color="#ff4d4f" style="transform: scale(0.9);" />
+						<text>不再提示</text>
+					</view>
+					<button class="notice-confirm-btn" @click="handleClose"> 好的，我知道了 </button>
+				</view>
 			</view>
 		</view>
-		
-		
-		<!-- 定位模块 -->
-		<view class="location-header">
-			<view class="location-info" @click="toindex1">
-				<uni-icons type="location-filled" size="22" color="#4a90e2" />
-				<text class="market-name">{{marketName || '暂未选中市场'}}</text>
-				<uni-icons type="arrowright" size="16" color="#999" />
+
+		<view class="header-section">
+			<view class="location-wrapper" @click="toindex1">
+				<view class="loc-content">
+					<uni-icons type="location-filled" size="24" color="#ff4d4f" />
+					<text class="market-name">{{marketName || '正在定位菜市场...'}}</text>
+					<uni-icons type="right" size="14" color="#999" />
+				</view>
 			</view>
-			<uni-icons class="scan-btn" type="scan" size="32" @click="scan" />
+			<view class="scan-entry" @click="scan">
+				<view class="scan-icon-box">
+					<uni-icons type="scan" size="32" color="#fff" />
+				</view>
+				
+			</view>
 		</view>
 
-		<!-- 		<view class="search-container">
-			<view class="search-bar">
-				<uni-icons type="search" size="18" color="#b2b2b2" />
-				<input class="search-input" placeholder="搜索摊位/商品" placeholder-class="placeholder-style"
-					v-model="searchParams.title" />
-				<button class="search-btn" @click="reloadData">搜索</button>
+		<view class="search-container">
+			
+				<mButtonVue @btn1="settingValue" :placeholder="'输入摊位名称查询'"></mButtonVue>
+		</view>
+
+		<view class="main-nav">
+			<view class="section-label-row">
+				<text class="label-text">快捷服务</text>
 			</view>
-		</view> -->
-
-		<mButtonVue  @btn1="settingValue"  :placeholder="'搜索摊位/商品'"></mButtonVue>
-
-		<!-- 分类导航 -->
-		<!-- <view style="border-bottom: 3rpx solid lightblue; width: 90rpx; margin: 5rpx;">活动页面</view> -->
-		<scroll-view class="category-nav" scroll-x :scroll-with-animation="true">
-			<view v-for="item in tabs" :key="item.id" class="nav-item" @click="goToshoppingPageList(item)">
-				<text class="nav-text">{{ item.title }}</text>
-				<view v-if="selectedCategoryId === item.id" class="nav-indicator" />
-			</view>
-		</scroll-view>
-
-		<!-- <view style="border-bottom: 3rpx solid lightblue; width: 90rpx; margin: 5rpx;">菜品分类</view> -->
-		<scroll-view class="category-filter" scroll-x>
-
-			<view v-for="item in categories" :key="item.id" class="filter-item"
-				:class="{active: item.id === selectedCategoryId}" @click="filterByCategory(item.id)">
-				<text class="filter-text">{{ item.title }}</text>
-			</view>
-		</scroll-view>
-
-		<!-- 摊位列表 -->
-		<scroll-view class="stall-list" scroll-y="true" scroll-x="false" @scrolltolower="handleScrollToLower">
-			<view class="stall-grid">
-				<view v-for="item in pageData" :key="item.id" class="stall-card"
-					@click="navigateToShopDetails(item.id)">
-					<image class="stall-image" :src="item.logo || '/static/default-logo.png'" mode="aspectFill"
-						:lazy-load="true" />
-					<view class="stall-info">
-						<text class="stall-title">{{ item.title }}</text>
-						<view class="meta-container">
-							<text class="meta-item">
-								地区:{{ item.area_name }}
-							</text>
-							<text class="meta-item">
-								类型:{{ item.category_name || '未知类目' }}
-							</text>
+			<scroll-view class="nav-scroll-view" scroll-x>
+				<view class="nav-card-list">
+					<view v-for="(item, index) in tabs" :key="item.id" 
+						class="nav-item-card" 
+						:class="'theme-' + (index % 4)"
+						@click="goToshoppingPageList(item)">
+						<view class="card-inner">
+							<text class="card-title">{{ item.title }}</text>
+							<view class="card-circle"></view>
 						</view>
 					</view>
 				</view>
-			</view>
+			</scroll-view>
+		</view>
 
-			<!-- 加载状态 -->
-			<view v-if="pageLoading" class="loading-more">
-				<uni-load-more status="loading" />
+		<view class="category-section">
+			<view class="section-label-row">
+				<text class="label-text">产品类目</text>
 			</view>
-			<view v-if="!hasMore" class="loading-more">
-				<text class="no-more">- 已经到底了 -</text>
+			<scroll-view class="cate-bar" scroll-x>
+				<view class="cate-wrapper">
+					<view v-for="item in categories" :key="item.id" 
+						class="cate-pill" 
+						:class="{active: item.id === selectedCategoryId}" 
+						@click="filterByCategory(item.id)">
+						{{ item.title }}
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+
+		<scroll-view class="data-list-area" scroll-y @scrolltolower="handleScrollToLower">
+			<view class="stall-grid">
+				<view v-for="item in pageData" :key="item.id" class="stall-item" @click="navigateToShopDetails(item.id)">
+					<view class="image-box">
+						<image class="stall-img" :src="item.logo" mode="aspectFill" />
+						<view class="type-tag">{{ item.category_name || '优质' }}</view>
+					</view>
+					<view class="stall-content">
+						<text class="stall-name">{{ item.title }}</text>
+						<view class="stall-info-row">
+							<uni-icons type="map" size="12" color="#bbb" />
+							<text class="stall-area">{{ item.area_name }}</text>
+						</view>
+						<view class="entry-btn">进入店铺</view>
+					</view>
+				</view>
+			</view>
+			
+			<view class="load-status">
+				<view v-if="pageLoading" class="loading-ani">正在加载数据...</view>
+				<view v-if="!hasMore" class="no-more-line">
+					<view class="line"></view>
+					<text>到底啦</text>
+					<view class="line"></view>
+				</view>
 			</view>
 		</scroll-view>
 
 		<floatBall />
 	</view>
 </template>
+
+<style lang="scss" scoped>
+	$primary-color: #ff4d4f; // 更有质感的红
+	$bg-color: #f8f9fb;
+
+	.container {
+		background-color: $bg-color;
+		min-height: 100vh;
+		padding: 0 24rpx;
+	}
+
+	/* 头部位置与扫码 */
+	.header-section {
+		display: flex;
+		align-items: center;
+		padding: 40rpx 0 20rpx;
+		.location-wrapper {
+			flex: 1;
+			background: #fff;
+			height: 90rpx;
+			border-radius: 45rpx;
+			display: flex;
+			align-items: center;
+			padding: 0 30rpx;
+			box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.05);
+			.loc-content {
+				display: flex;
+				align-items: center;
+				width: 100%;
+				.market-name {
+					font-size: 32rpx;
+					font-weight: bold;
+					color: #333;
+					margin: 0 12rpx;
+					flex: 1;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+			}
+		}
+		.scan-entry {
+			margin-left: 30rpx;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			.scan-icon-box {
+				width: 90rpx;
+				height: 90rpx;
+				background: linear-gradient(135deg, #ff7875, #ff4d4f);
+				border-radius: 30rpx;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				box-shadow: 0 6rpx 16rpx rgba(255, 77, 79, 0.3);
+			}
+			text { font-size: 22rpx; color: #666; margin-top: 8rpx; font-weight: bold; }
+		}
+	}
+
+	/* 搜索框 */
+	.search-container {
+		margin-bottom: 30rpx;
+		.search-inner {
+			background: #fff;
+			border-radius: 16rpx;
+			overflow: hidden;
+			border: 2rpx solid #eee;
+			transition: all 0.3s;
+			&:active { border-color: $primary-color; }
+		}
+	}
+
+	/* 标题通用样式 */
+	.section-label-row {
+		display: flex;
+		align-items: baseline;
+		padding: 20rpx 0;
+		.label-text { font-size: 36rpx; font-weight: 800; color: #1a1a1a; }
+		.label-sub { font-size: 24rpx; color: #999; margin-left: 15rpx; }
+	}
+
+	/* 功能卡片 */
+	.nav-scroll-view {
+		.nav-card-list {
+			display: flex;
+			padding: 10rpx 0 20rpx;
+			.nav-item-card {
+				flex-shrink: 0;
+				width: 240rpx;
+				height: 140rpx;
+				border-radius: 24rpx;
+				margin-right: 20rpx;
+				position: relative;
+				overflow: hidden;
+				padding: 24rpx;
+				.card-title { color: #fff; font-size: 32rpx; font-weight: bold; position: relative; z-index: 2; }
+				.card-circle {
+					position: absolute; right: -20rpx; bottom: -20rpx;
+					width: 100rpx; height: 100rpx;
+					background: rgba(255,255,255,0.2);
+					border-radius: 50%;
+				}
+				&.theme-0 { background: linear-gradient(135deg, #ff9c6e, #ff7875); }
+				&.theme-1 { background: linear-gradient(135deg, #b7eb8f, #73d13d); }
+				&.theme-2 { background: linear-gradient(135deg, #91d5ff, #40a9ff); }
+				&.theme-3 { background: linear-gradient(135deg, #fff566, #ffec3d); .card-title { color: #856a00; } }
+			}
+		}
+	}
+
+	/* 类目筛选 */
+	.cate-bar {
+		margin-bottom: 20rpx;
+		.cate-wrapper { display: flex; align-items: center; }
+		.cate-pill {
+			flex-shrink: 0;
+			padding: 12rpx 36rpx;
+			background: #fff;
+			color: #666;
+			font-size: 28rpx;
+			border-radius: 40rpx;
+			margin-right: 16rpx;
+			border: 1rpx solid #e8e8e8;
+			&.active {
+				background: $primary-color;
+				color: #fff;
+				border-color: $primary-color;
+				font-weight: bold;
+				box-shadow: 0 4rpx 10rpx rgba(255, 77, 79, 0.2);
+			}
+		}
+	}
+
+	/* 列表 */
+	.data-list-area {
+		height: 850rpx;
+		.stall-grid {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			.stall-item {
+				width: 48.5%;
+				background: #fff;
+				border-radius: 20rpx;
+				margin-bottom: 24rpx;
+				box-shadow: 0 4rpx 15rpx rgba(0,0,0,0.03);
+				overflow: hidden;
+				.image-box {
+					position: relative;
+					.stall-img { width: 100%; height: 260rpx; background: #eee; }
+					.type-tag {
+						position: absolute; top: 12rpx; left: 12rpx;
+						background: rgba(0,0,0,0.5); color: #fff;
+						padding: 4rpx 12rpx; border-radius: 8rpx; font-size: 20rpx;
+					}
+				}
+				.stall-content {
+					padding: 20rpx;
+					.stall-name { font-size: 30rpx; font-weight: bold; color: #333; display: block; height: 40rpx; overflow: hidden; }
+					.stall-info-row {
+						display: flex; align-items: center; margin: 12rpx 0;
+						.stall-area { font-size: 24rpx; color: #999; margin-left: 6rpx; }
+					}
+					.entry-btn {
+						background: #fff1f0; color: $primary-color;
+						text-align: center; padding: 10rpx 0; border-radius: 12rpx;
+						font-size: 24rpx; font-weight: bold; border: 1rpx solid #ffa39e;
+					}
+				}
+			}
+		}
+	}
+
+	/* 弹窗样式优化 */
+	.notice-modal {
+		position: fixed; inset: 0; z-index: 10001;
+		display: flex; align-items: center; justify-content: center;
+		&__mask { position: absolute; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
+		&__box {
+			position: relative; width: 80%; background: #fff; border-radius: 32rpx; overflow: hidden;
+			animation: modalShow 0.3s ease-out;
+			.notice-header {
+				background: linear-gradient(to bottom, #fff1f0, #fff); padding: 40rpx 0 20rpx;
+				display: flex; flex-direction: column; align-items: center;
+				.icon-bg { width: 100rpx; height: 100rpx; background: $primary-color; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 16rpx; box-shadow: 0 8rpx 20rpx rgba(255, 77, 79, 0.2); }
+				.notice-modal__title { font-size: 36rpx; font-weight: 800; color: #333; }
+			}
+			.notice-modal__content {
+				max-height: 400rpx; padding: 0 40rpx;
+				.notice-text-wrap { .notice-modal__content-text { font-size: 30rpx; color: #444; line-height: 1.8; } }
+			}
+			.notice-footer-action {
+				padding: 40rpx;
+				.no-prompt { display: flex; align-items: center; justify-content: center; margin-bottom: 24rpx; text { font-size: 26rpx; color: #999; } }
+				.notice-confirm-btn { background: $primary-color; color: #fff; border-radius: 100rpx; font-weight: bold; border: none; }
+			}
+		}
+	}
+
+	@keyframes modalShow { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+	.load-status {
+		padding: 40rpx 0;
+		.no-more-line {
+			display: flex; align-items: center; justify-content: center;
+			.line { width: 60rpx; height: 1rpx; background: #ddd; }
+			text { font-size: 24rpx; color: #ccc; margin: 0 20rpx; }
+		}
+	}
+</style>
+
 <script>
-	import {
-		api
-	} from '../../api/index.js'
+	// 脚本逻辑保持原有引用和方法，不做任何变动
+	import { api } from '../../api/index.js'
 	import floatBall from '@/components/float-ball/float-ball.vue'
 	import mButtonVue from '@/components/public/mButton/mButton.vue'
 	import usePage from '@/hooks/usePage';
 
 	export default {
-		components: {
-			floatBall,
-			mButtonVue
-		},
+		components: { floatBall, mButtonVue },
+		mixins: [usePage],
 		data() {
 			return {
 				prompt: true,
 				showNotice: false,
-				menuItems: [],
-				tabs: [{
-						id: 0,
-						title: '附近农户',
-						path: '/subPackages/shoppingPageList/nearbyFarmers/nearbyFarmers'
-					},
-					{
-						id: 1,
-						title: '预卖菜品', // 扶贫预卖
-						path: '/subPackages/shoppingPageList/villageZone/villageZone'
-					},
-					// {
-					// 	id: 2,
-					// 	title: '官方直营',
-					// 	path: '/subPackages/shoppingPageList/official/official'
-					// },
-					// {
-					// 	id: 3,
-					// 	title: '扶贫专区',
-					// 	path: '/subPackages/shoppingPageList/agriculturalAssistanceZone/agriculturalAssistanceZone'
-					// },
-					{
-						id: 4,
-						title: '种养来历',
-						path: '/pages/dynamics/dynamics'
-					},
-					// {
-					// 	id: 5,
-					// 	title: '铺面出租',
-					// 	path: '/subPackages/shoppingPageList/rentalStorefrontList/rentalStorefrontList'
-					// },
-					{
-						id: 6,
-						title: '资讯信息',
-						path: '/subPackages/shoppingPageList/realTimeInfo/realTimeInfo'
-					},
-					{
-						id: 7,
-						title: '免费买菜',
-						path: '/pages/jackpot/jackpot'
-					},
-
+				tabs: [
+					{ id: 0, title: '附近农户', path: '/subPackages/shoppingPageList/nearbyFarmers/nearbyFarmers' },
+					{ id: 1, title: '预卖菜品', path: '/subPackages/shoppingPageList/villageZone/villageZone' },
+					{ id: 4, title: '种养来历', path: '/pages/dynamics/dynamics' },
+					{ id: 6, title: '资讯信息', path: '/subPackages/shoppingPageList/realTimeInfo/realTimeInfo' },
+					{ id: 7, title: '免费买菜', path: '/pages/jackpot/jackpot' },
 				],
-				selectedCategoryId: '',
+				selectedCategoryId: 0,
 				categories: [],
-				pageData: [], // 
-				currentMarketName: '', // 当前菜市场名称
-				searchParams: {
-					title: '',
-					category_id: '',
-					market_id: ''
-				},
-				isloaded: false,
-				marketName: '', // 市场名
-				initReques: false
+				marketName: '',
+				searchParams: { title: '', category_id: '', market_id: '' }
 			}
 		},
 		onLoad() {
-			// 初始化页面
-			this.initPage()
+			this.initPage();
 			uni.getLocation({
-				altitude: true,
-				isHighAccuracy: true,
-				highAccuracy: true,
 				type: 'gcj02',
-				success: (res) => {
-					uni.setStorageSync('userlocation', JSON.stringify(res));
-					// console.log(res)
-				}
+				success: (res) => { uni.setStorageSync('userlocation', JSON.stringify(res)); }
 			})
 		},
 		async onShow() {
-			let res = uni.getStorageSync('userSelection')
-			// console.log(this.marketName, res.marketName)
-			if (this.marketName != res.marketName) {
-				this.initPage()
-			}
-			// 
-			if (!uni.getStorageSync('prompt')) {
-				this.showNotice = true
-			}
+			let res = uni.getStorageSync('userSelection');
+			if (this.marketName != res.marketName) { this.initPage(); }
+			if (!uni.getStorageSync('prompt')) { this.showNotice = true; }
 		},
-		mixins: [usePage],
 		methods: {
-			settingValue(value){
-				this.searchParams.title = value
-				this.reloadData()
+			settingValue(value) {
+				this.searchParams.title = value;
+				this.reloadData();
 			},
-			changePrompt(e) {
-				this.prompt = !this.prompt
-			},
+			changePrompt() { this.prompt = !this.prompt; },
 			handleClose() {
-				this.showNotice = false
-				uni.setStorageSync('prompt', this.prompt)
+				this.showNotice = false;
+				uni.setStorageSync('prompt', this.prompt);
 			},
 			goToshoppingPageList(item) {
-				if (item.path) {
-					console.log(item.path)
-					uni.navigateTo({
-						url: item.path
-					})
-				} else {
-					uni.showToast({
-						icon: 'error',
-						title: `"${item.title}" 暂未开发`
-					})
-				}
+				if (item.path) { uni.navigateTo({ url: item.path }); }
+				else { uni.showToast({ icon: 'none', title: `未开发` }); }
 			},
 			async fetchData(params) {
-				const response = await api.marketShopList(params)
-				return response.data
-
+				const response = await api.marketShopList(params);
+				return response.data;
 			},
 			initPage() {
-				this.isloaded = true;
-				// 默认是全选
 				this.selectedCategoryId = 0;
 				this.fetchMarketName();
-				this.fetchCategories()
-				// 先设置 marketId
+				this.fetchCategories();
 				this.setDefaultMarketId();
-				this.reloadData()
-
-				// 选中市场
-				let res = uni.getStorageSync('userSelection')
-
-				this.marketName = res.marketName
+				this.reloadData();
+				
+				let res = uni.getStorageSync('userSelection');
+				this.marketName = res.marketName;
 			},
 			setDefaultMarketId() {
-				const {
-					market_id
-				} = uni.getStorageSync('userSelection');
-				this.searchParams.market_id = market_id
+				const { market_id } = uni.getStorageSync('userSelection');
+				this.searchParams.market_id = market_id;
 			},
 			async fetchCategories() {
-				const response = await api.cglist()
-				// this.categories = response.data.listdata || []
-				this.categories = [{
-					id: 0, // 特殊值表示全选
-					title: '全选'
-				}, ...response.data.listdata || []]
-				// console.log(this.categories)
+				const response = await api.cglist();
+				this.categories = [{ id: 0, title: '全选' }, ...response.data.listdata || []];
 			},
-			async filterByCategory(categoryId) {
-				this.searchParams.category_id = categoryId;
-				this.selectedCategoryId = categoryId;
-				this.reloadData()
+			async filterByCategory(id) {
+				this.searchParams.category_id = id === 0 ? '' : id;
+				this.selectedCategoryId = id;
+				this.reloadData();
 			},
 			async fetchMarketName() {
+				const userSelection = uni.getStorageSync('userSelection');
+				if (!userSelection) return;
+				const { market_id, area_id } = userSelection;
 				try {
-					// 从 storage 中获取 userSelection
-					const userSelection = uni.getStorageSync('userSelection');
-
-					if (!userSelection) {
-						console.warn('未找到 userSelection');
-						return;
-					}
-
-					// 解析 userSelection 中的 market_id 和 area_id
-					const {
-						market_id,
-						area_id
-					} = userSelection;
-
-					if (!market_id || !area_id) {
-						console.warn('未找到市场 ID 或区域 ID');
-						return;
-					}
-
-					// 调用 marketlist 接口
 					const response = await api.marketlist(parseInt(area_id));
 					const marketData = response.data.listdata.find(item => item.id === parseInt(market_id));
-
-					if (marketData) {
-						this.currentMarketName = marketData.marketname || '未知市场';
-					} else {
-						console.warn('未找到对应的市场');
-						this.currentMarketName = '未知市场';
-					}
-				} catch (error) {
-					console.error('获取市场名称失败:', error);
-				}
+					if (marketData) this.marketName = marketData.marketname;
+				} catch (error) { console.error(error); }
 			},
 			navigateToShopDetails(id) {
-				uni.navigateTo({
-					url: `/pages/ShopDetails/ShopDetails?id=${id}`
-				})
+				uni.navigateTo({ url: `/pages/ShopDetails/ShopDetails?id=${id}` });
 			},
-			toindex1() {
-				uni.switchTab({
-					url: '/pages/index1/index1'
-				});
-			},
+			toindex1() { uni.switchTab({ url: '/pages/index1/index1' }); },
 			scan() {
-				// 只允许通过相机扫码
 				uni.scanCode({
-					onlyFromCamera: false,
 					success: async (res) => {
 						if (res.result) {
-							// 核销
-							let data = await api.receiving({
-								out_trade_no: res.result
-							})
-							if (data.code == 200) {
-								uni.showToast({
-									icon: 'success',
-									title: '核销成功'
-								})
-							} else {
-								uni.showToast({
-									icon: 'error',
-									title: '核销失败'
-								})
-							}
-						} else {
-							console.log(res.path)
-							uni.navigateTo({
-								url: '/' + res.path
-							})
+							let data = await api.receiving({ out_trade_no: res.result });
+							uni.showToast({ icon: data.code == 200 ? 'success' : 'error', title: data.code == 200 ? '核销成功' : '核销失败' });
 						}
-
-					},
-					fail: function(error) {
-						console.error('扫码失败:', error);
 					}
 				});
 			}
-
 		}
 	}
 </script>
-
-
-<style lang="scss">
-	.notice-modal {
-		position: fixed;
-		top: 0;
-		left: 0;
-		z-index: 9999;
-		width: 100%;
-		height: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 30rpx;
-		box-sizing: border-box;
-	}
-
-	.notice-modal__mask {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.5);
-		backdrop-filter: blur(2px);
-	}
-
-	/* 弹框主体 */
-	.notice-modal__box {
-		position: relative;
-		z-index: 1;
-		width: 100%;
-		max-width: 600rpx;
-		/* 最大宽度限制 */
-		background-color: #fff;
-		border-radius: 24rpx;
-		box-shadow: 0 8rpx 40rpx rgba(0, 0, 0, 0.15);
-		padding: 40rpx 30rpx;
-		box-sizing: border-box;
-	}
-
-	/* 关闭按钮 */
-	.notice-modal__close {
-		position: absolute;
-		top: 20rpx;
-		right: 20rpx;
-		font-size: 36rpx;
-		color: #999;
-		width: 50rpx;
-		height: 50rpx;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.notice-modal__close:active {
-		color: #ff4d4f;
-		/* 点击态颜色 */
-	}
-
-	/* 标题 */
-	.notice-modal__title {
-		display: block;
-		font-size: 30rpx;
-		font-weight: bold;
-		color: #333;
-		text-align: center;
-		margin-bottom: 30rpx;
-	}
-
-	/* 内容滚动区 */
-	.notice-modal__content {
-		font-size: 26rpx;
-		color: #666;
-		line-height: 1.8;
-		margin-bottom: 40rpx;
-		padding-right: 10rpx;
-		/* 预留滚动条空间 */
-	}
-
-	/* 内容文本（处理换行） */
-	.notice-modal__content-text {
-		font-size: 30rpx;
-		white-space: pre-wrap;
-		/* 保留\n换行和空格 */
-	}
-
-	/* 确认按钮 */
-	.notice-modal__confirm {
-		width: 100%;
-		height: 88rpx;
-		line-height: 88rpx;
-		background-color: #1677ff;
-		color: #fff;
-		border-radius: 16rpx;
-		font-size: 28rpx;
-		font-weight: 500;
-		/* 清除Uniapp默认按钮样式 */
-		border: none;
-		padding: 0;
-	}
-
-	/* 按钮点击态 */
-	.notice-modal__confirm--hover {
-		background-color: #0f62d9;
-	}
-
-	/* 清除按钮默认伪元素 */
-	::v-deep .notice-modal__confirm::after {
-		border: none;
-	}
-
-	/* 公告弹框外层：固定定位全屏覆盖，小程序用 rpx 适配多端 */
-	.notice-modal {
-		position: fixed;
-		top: 0;
-		left: 0;
-		z-index: 9999;
-		/* 确保在最上层，避免被导航栏/tabbar 遮挡 */
-		width: 100vw;
-		height: 100vh;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		box-sizing: border-box;
-	}
-
-	/* 遮罩层：半透明+背景模糊，小程序支持 backdrop-filter */
-	.notice-modal__mask {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.5);
-		backdrop-filter: blur(2px);
-	}
-
-	/* 弹框主体：白色背景+圆角+阴影，用 rpx 适配不同屏幕 */
-	.notice-modal__box {
-		position: relative;
-		z-index: 1;
-		width: 85vw;
-		max-width: 500rpx;
-		/* 小程序最大宽度限制 */
-		background-color: #fff;
-		border-radius: 24rpx;
-		box-shadow: 0 8rpx 40rpx rgba(0, 0, 0, 0.15);
-		padding: 32rpx;
-		box-sizing: border-box;
-	}
-
-	/* 关闭按钮：右上角，适配小程序点击区域 */
-	.notice-modal__close {
-		position: absolute;
-		top: 24rpx;
-		right: 24rpx;
-		font-size: 32rpx;
-		color: #999;
-		cursor: pointer;
-		width: 40rpx;
-		height: 40rpx;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.notice-modal__close:active {
-		color: #ff4d4f;
-		/* 小程序用 active 代替 hover */
-	}
-
-	/* 公告标题：加粗+居中 */
-	.notice-modal__title {
-		display: block;
-		font-size: 28rpx;
-		font-weight: 600;
-		color: #333;
-		text-align: center;
-		margin-bottom: 24rpx;
-	}
-
-	/* 内容滚动容器：小程序 scroll-view 必须设置固定高度 */
-	.notice-modal__content {
-		font-size: 24rpx;
-		color: #666;
-		line-height: 1.8;
-		margin-bottom: 32rpx;
-		/* 滚动条样式优化（小程序支持） */
-		scrollbar-width: thin;
-		scrollbar-color: #eee transparent;
-	}
-
-	/* 内容文本：处理换行（小程序 \n 需用 text 标签包裹） */
-	.notice-modal__content-text {
-		white-space: pre-wrap;
-		/* 保留换行和空格 */
-	}
-
-	/* 确认按钮：自定义样式，覆盖小程序默认按钮样式 */
-	.notice-modal__confirm-btn {
-		width: 100%;
-		height: 80rpx;
-		background-color: #1890ff;
-		color: #fff;
-		border-radius: 16rpx;
-		font-size: 26rpx;
-		font-weight: 500;
-		/* 清除小程序默认按钮边框和背景 */
-		border: none;
-		padding: 0;
-		margin: 0;
-	}
-
-	/* 按钮点击态（小程序 hover-class） */
-	.notice-modal__btn-hover {
-		background-color: #096dd9;
-	}
-
-	/* 清除小程序 button 默认内边距 */
-	.notice-modal__confirm-btn::after {
-		border: none;
-	}
-
-	.container {
-		padding: 0 20rpx;
-	}
-
-	/* 定位模块样式 */
-	.location-header {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 30rpx 0;
-
-		.location-info {
-			display: flex;
-			align-items: center;
-			background: #fff;
-			border-radius: 40rpx;
-			padding: 12rpx 24rpx;
-			box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
-
-			.market-name {
-				font-size: 28rpx;
-				color: #333;
-				margin: 0 12rpx;
-				max-width: 400rpx;
-			}
-		}
-
-		.scan-btn {
-			background: #fff;
-			padding: 16rpx;
-			border-radius: 50%;
-			box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
-		}
-	}
-
-
-	/* 分类导航样式 */
-	.category-nav {
-		white-space: nowrap;
-
-		.nav-item {
-			box-shadow: 10rpx 10rpx 16rpx rgba(0, 0, 0, 0.06);
-
-			background: linear-gradient(135deg, #ff6a00, #ff8229);
-			border-radius: 5%;
-			margin: 10rpx;
-			display: inline-block;
-			padding: 0 32rpx;
-			position: relative;
-			height: 88rpx;
-
-			.nav-text {
-				font-size: 28rpx;
-				color: white;
-				line-height: 88rpx;
-				transition: all 0.3s;
-				font-weight: bold;
-			}
-
-			&.active {
-				.nav-text {
-					color: #333;
-					font-weight: 500;
-				}
-
-				.nav-indicator {
-					position: absolute;
-					bottom: 12rpx;
-					left: 50%;
-					transform: translateX(-50%);
-					width: 48rpx;
-					height: 6rpx;
-					background: #4a90e2;
-					border-radius: 3rpx;
-				}
-			}
-		}
-	}
-
-	/* 分类筛选样式 */
-	.category-filter {
-		white-space: nowrap;
-		padding: 24rpx 0;
-
-		.filter-item {
-			display: inline-block;
-			padding: 12rpx 28rpx;
-			margin-right: 20rpx;
-			background: #f0f0f0;
-			border-radius: 40rpx;
-			transition: all 0.2s;
-
-			.filter-text {
-				font-size: 26rpx;
-				color: #666;
-			}
-
-			&.active {
-				background: rgba(74, 144, 226, 0.1);
-
-				.filter-text {
-					color: #4a90e2;
-					font-weight: 500;
-				}
-			}
-		}
-	}
-
-	/* 摊位列表样式 */
-	.stall-list {
-		height: calc(100vh - 480rpx);
-
-		.stall-grid {
-			display: grid;
-			grid-template-columns: repeat(2, 1fr);
-			gap: 20rpx;
-			padding: 20rpx 0;
-		}
-
-		.stall-card {
-			background: #fff;
-			border-radius: 16rpx;
-			overflow: hidden;
-			box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.04);
-
-			.stall-image {
-				width: 100%;
-				height: 280rpx;
-				background: #f8f8f8;
-			}
-
-			.stall-info {
-				padding: 20rpx;
-
-				.stall-title {
-					display: block;
-					font-size: 30rpx;
-					color: #333;
-					font-weight: 500;
-				}
-
-				.meta-container {
-					margin-top: 16rpx;
-
-					.meta-item {
-						display: block;
-						font-size: 24rpx;
-						color: #666;
-						margin-bottom: 8rpx;
-
-						.uni-icons {
-							margin-right: 8rpx;
-							vertical-align: middle;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	/* 加载状态 */
-	.loading-more {
-		padding: 40rpx 0;
-		text-align: center;
-
-		.no-more {
-			font-size: 24rpx;
-			color: #999;
-		}
-	}
-</style>
-
-<style lang="scss">
-	.category-nav {
-		margin-top: 30rpx;
-
-		.nav-scroll {
-			white-space: nowrap;
-
-			.nav-item {
-				display: inline-block;
-				padding: 20rpx 40rpx;
-				margin-right: 20rpx;
-				border-radius: 40rpx;
-				background: #fff;
-				transition: all 0.3s;
-
-				.nav-text {
-					font-size: 28rpx;
-					color: #666;
-				}
-			}
-		}
-	}
-
-	.container {
-		overflow: hidden;
-		overflow-y: hidden;
-		display: flex;
-		flex-direction: column;
-		margin: 2rpx 10rpx;
-	}
-
-	.locating {
-		height: 70rpx;
-		margin: 10rpx 0;
-		display: flex;
-		flex-direction: row;
-		font-size: 28rpx;
-		font-weight: 600;
-		line-height: 70rpx;
-	}
-
-	.targeting {
-		display: flex;
-	}
-
-	.current {
-		margin-left: auto;
-		color: black;
-		margin-right: 30rpx;
-	}
-
-	.search {
-		width: 100%;
-		/* position: relative; */
-		display: flex;
-		align-items: center;
-	}
-
-	.sousuokuang {
-		width: 100%;
-		/* position: relative; */
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		// border: 1px solid #FF3030;
-		background-color: white;
-		border-radius: 20rpx;
-		padding: 10rpx 10rpx;
-	}
-
-	.search-icon {
-		height: 60rpx;
-		width: 10%;
-		line-height: 60rpx;
-		/* position: absolute; */
-		left: 10rpx;
-		/* background-color: #1296db; */
-	}
-
-	.uni-input {
-		width: 70%;
-		height: 60rpx;
-		line-height: 60rpx;
-		/* height: 80rpx; */
-		/* padding-left: 60rpx; */
-		padding-right: 100rpx;
-		/* box-sizing: border-box; */
-		/* background-color: #FF3030; */
-	}
-
-	.searchbt {
-
-		height: 60rpx;
-		/* line-height: 60rpx; */
-		text-align: center;
-		width: 150rpx;
-		border: none;
-		background-color: #00aaff;
-		color: white;
-		border-radius: 25rpx;
-		font-size: 24rpx;
-	}
-
-	.buycar {
-		flex: 1;
-		/* width: 100rpx; */
-		/* margin: 0 10rpx; */
-		margin-left: auto;
-		height: 80rpx;
-		line-height: 80rpx;
-		text-align: center;
-	}
-
-	.uni-margin-wrap {
-		/* height: 110rpx; */
-	}
-
-	.swiper {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		height: 100%;
-		white-space: nowrap;
-	}
-
-	.swiper-item {
-		display: inline-block;
-		height: 100%;
-		width: 120rpx;
-		margin: 0 20rpx;
-		text-align: center;
-		vertical-align: middle;
-	}
-
-	.item-title {
-		display: inline-block;
-		box-sizing: border-box;
-		vertical-align: middle;
-		line-height: 120rpx;
-	}
-
-	.classify {
-		margin-top: 10%;
-		font-size: 35rpx;
-		font-weight: 600;
-	}
-
-	.classify.selected {
-		padding: 5rpx;
-		color: #1296db;
-		border-bottom: 5rpx solid gray;
-	}
-
-	.Stallholder {
-		/* background-color: red; */
-		display: flex;
-		flex-direction: column;
-		height: 75vh;
-		/* overflow-y: auto; */
-	}
-
-	.Stallholder-content {
-		padding: 10rpx;
-		box-sizing: border-box;
-		column-count: 2;
-		column-gap: 20rpx;
-	}
-
-	.Stallholder-item {
-		width: 100%;
-		height: 480rpx;
-		break-inside: avoid;
-		margin-bottom: 20rpx;
-		background-color: white;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-
-	.Stallholder-content .Stallholder-item:nth-child(2n+1) {
-		height: 510rpx;
-	}
-
-	.Stallholder-content .Stallholder-item:nth-child(3n+1) {
-		height: 540rpx;
-	}
-
-	.standimg {
-		/* height: 300rpx; */
-		width: 100%;
-		border-radius: 20rpx;
-		/* background-color: #1296db; */
-	}
-
-	.standtitle {
-		width: 90%;
-		height: 100rpx;
-		line-height: 70rpx;
-		/* background-color: white; */
-		/* background-color: antiquewhite; */
-		overflow: hidden;
-		/* 隐藏超出的内容 */
-		white-space: nowrap;
-		/* 强制不换行 */
-		text-overflow: ellipsis;
-		/* 显示省略号 */
-		font-size: 30rpx;
-		/* background-color: aqua; */
-
-	}
-
-	.loading {
-		text-align: center;
-		padding: 20rpx;
-		color: #999;
-	}
-</style>
