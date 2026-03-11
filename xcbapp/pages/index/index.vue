@@ -1,30 +1,5 @@
 <template>
 	<view class="container">
-		<view class="notice-modal" v-if="showNotice">
-			<view class="notice-modal__mask" @click="handleClose"></view>
-			<view class="notice-modal__box">
-				<view class="notice-header">
-					<view class="icon-bg">
-						<uni-icons type="notification-filled" size="34" color="#fff" />
-					</view>
-					<text class="notice-modal__title">系统公告</text>
-				</view>
-				<scroll-view class="notice-modal__content" scroll-y>
-					<view class="notice-text-wrap">
-						<text class="notice-modal__content-text">
-							亲爱的用户：\n\n因“农链天下”系统升级建设，自2025年10月9日起暂停一周一次的免费赠送积分活动，恢复时间待定。在此之前的赠送积分不影响正常使用。
-						</text>
-					</view>
-				</scroll-view>
-				<view class="notice-footer-action">
-					<view class="no-prompt" @click="changePrompt">
-						<radio :checked="prompt" color="#ff4d4f" style="transform: scale(0.9);" />
-						<text>不再提示</text>
-					</view>
-					<button class="notice-confirm-btn" @click="handleClose"> 好的，我知道了 </button>
-				</view>
-			</view>
-		</view>
 
 		<view class="header-section">
 			<view class="location-wrapper" @click="toindex1">
@@ -129,8 +104,8 @@
 		display: flex;
 		align-items: center;
 		padding: 40rpx 0 20rpx;
+		justify-content: space-between;
 		.location-wrapper {
-			flex: 1;
 			background: #fff;
 			height: 90rpx;
 			border-radius: 45rpx;
@@ -203,13 +178,13 @@
 			.nav-item-card {
 				flex-shrink: 0;
 				width: 240rpx;
-				height: 140rpx;
+				height: 100rpx;
 				border-radius: 24rpx;
 				margin-right: 20rpx;
 				position: relative;
 				overflow: hidden;
 				padding: 24rpx;
-				.card-title { color: #fff; font-size: 32rpx; font-weight: bold; position: relative; z-index: 2; }
+				.card-title { color: #fff; font-size: 35rpx; font-weight: bold; position: relative; z-index: 2; }
 				.card-circle {
 					position: absolute; right: -20rpx; bottom: -20rpx;
 					width: 100rpx; height: 100rpx;
@@ -280,7 +255,7 @@
 					.entry-btn {
 						background: #fff1f0; color: $primary-color;
 						text-align: center; padding: 10rpx 0; border-radius: 12rpx;
-						font-size: 24rpx; font-weight: bold; border: 1rpx solid #ffa39e;
+						font-size: 32rpx; font-weight: bold; border: 1rpx solid #ffa39e;
 					}
 				}
 			}
@@ -338,7 +313,6 @@
 		data() {
 			return {
 				prompt: true,
-				showNotice: false,
 				tabs: [
 					{ id: 0, title: '附近农户', path: '/subPackages/shoppingPageList/nearbyFarmers/nearbyFarmers' },
 					{ id: 1, title: '预卖菜品', path: '/subPackages/shoppingPageList/villageZone/villageZone' },

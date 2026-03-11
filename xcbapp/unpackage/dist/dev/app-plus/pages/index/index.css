@@ -1681,9 +1681,9 @@
   display: flex;
   align-items: center;
   padding: 1.25rem 0 0.625rem;
+  justify-content: space-between;
 }
 .header-section .location-wrapper[data-v-1cf27b2a] {
-  flex: 1;
   background: #fff;
   height: 2.8125rem;
   border-radius: 1.40625rem;
@@ -1770,7 +1770,7 @@
 .nav-scroll-view .nav-card-list .nav-item-card[data-v-1cf27b2a] {
   flex-shrink: 0;
   width: 7.5rem;
-  height: 4.375rem;
+  height: 3.125rem;
   border-radius: 0.75rem;
   margin-right: 0.625rem;
   position: relative;
@@ -1779,7 +1779,7 @@
 }
 .nav-scroll-view .nav-card-list .nav-item-card .card-title[data-v-1cf27b2a] {
   color: #fff;
-  font-size: 1rem;
+  font-size: 1.09375rem;
   font-weight: bold;
   position: relative;
   z-index: 2;
@@ -1897,7 +1897,7 @@
   text-align: center;
   padding: 0.3125rem 0;
   border-radius: 0.375rem;
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: bold;
   border: 0.03125rem solid #ffa39e;
 }

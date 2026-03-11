@@ -1,47 +1,252 @@
 <template>
 	<view class="me-container">
-		<view class="top">
-			农链天下
+		<view class="brand-header">
+			<view class="brand-title">农链天下</view>
+			<view class="brand-subtitle">连接城乡 · 悦享农鲜</view>
 		</view>
-		<view class="region">
-			<view class="nation">
-				<view class="china" :class="{ active: selectedCountry === 'china' }" @click="selectCountry('china')">中国
-				</view>
-				<view class="overseas" :class="{ active: selectedCountry === 'overseas' }"
-					@click="selectCountry('overseas')">海外</view>
-			</view>
-			<view class="area">
-				<text>所在的地区</text>
-				<picker class="picker" mode="multiSelector" :range="multiArray" :value="multiIndex"
-					@change="bindMultiPickerChange" @columnchange="bindMultiPickerColumnChange">
-					<view class="picker-text">
-						{{ multiArray[0][multiIndex[0]] }} -
-						{{ multiArray[1][multiIndex[1]] ? multiArray[1][multiIndex[1]]: '暂无数据' }}
-						-{{ selectedCountry === 'overseas' ? '' : multiArray[2][multiIndex[2]] }}
-					</view>
-				</picker>
-			</view>
-			<view class="Address">
-				<text>选择菜市场</text>
-				<picker class="picker" mode="selector" :range="displayMarketList" :value="selectedMarketIndex"
-					@change="bindMarketChange">
-					<view class="picker-text">{{ displayMarketList[selectedMarketIndex] }}</view>
-				</picker>
-			</view>
-			<button class="save" @click="saveData">立即逛</button>
-			<!-- <button @click="gotodemo">测试</button> -->
-		</view>
-		
-		<!-- <button style="margin: 50rpx;" @click="goToJackpot">免费买菜</button> -->
-		<!-- 		<view style="color: white; margin: 20rpx; font-size: 25rpx; background-color: black; border: 5rpx solid lightslategray; padding: 20rpx;">
-			小程序使用体验上出现问题,请打热线电话联系我们我们将虚心接受您的意见并进行整改.
-			
-		</view>
-		<view style="color: white; margin: 10rpx; font-size: 25rpx; background-color: black; border: 5rpx solid lightslategray; padding: 20rpx;">官方热线电话:63836278</view>
-		 -->
 
+		<view class="region-card">
+			<view class="nation-tabs">
+				<view class="tab-item" :class="{ active: selectedCountry === 'china' }" @click="selectCountry('china')">
+					<text>中国</text>
+					<view class="active-line"></view>
+				</view>
+				<view class="tab-item" :class="{ active: selectedCountry === 'overseas' }"
+					@click="selectCountry('overseas')">
+					<text>海外</text>
+					<view class="active-line"></view>
+				</view>
+			</view>
+
+			<view class="picker-group">
+				<view class="input-row">
+					<view class="label">
+						<uni-icons type="location-filled" size="18" color="#ff4d4f" />
+						<text>所在地区</text>
+					</view>
+					<picker class="main-picker" mode="multiSelector" :range="multiArray" :value="multiIndex"
+						@change="bindMultiPickerChange" @columnchange="bindMultiPickerColumnChange">
+						<view class="picker-content">
+							<text class="value-text">
+								{{ multiArray[0][multiIndex[0]] || '请选择' }}
+								<block v-if="multiArray[1][multiIndex[1]]"> / {{ multiArray[1][multiIndex[1]] }}</block>
+								<block v-if="selectedCountry !== 'overseas' && multiArray[2][multiIndex[2]]"> /
+									{{ multiArray[2][multiIndex[2]] }}</block>
+							</text>
+							<uni-icons type="right" size="14" color="#ccc" />
+						</view>
+					</picker>
+				</view>
+
+				<view class="input-row">
+					<view class="label">
+						<uni-icons type="shop-filled" size="18" color="#ff4d4f" />
+						<text>目标市场</text>
+					</view>
+					<picker class="main-picker" mode="selector" :range="displayMarketList" :value="selectedMarketIndex"
+						@change="bindMarketChange">
+						<view class="picker-content">
+							<text class="value-text">{{ displayMarketList[selectedMarketIndex] || '请选择菜市场' }}</text>
+							<uni-icons type="right" size="14" color="#ccc" />
+						</view>
+					</picker>
+				</view>
+			</view>
+
+			<view class="action-bar">
+				<button class="save-btn" @click="saveData">
+					<text>立即逛</text>
+				</button>
+			</view>
+		</view>
+
+		<view class="footer-tips">
+			<view class="tip-item">
+				<uni-icons type="checkmark-circle" size="14" color="#52c41a" />
+				<text>溯源品质保障</text>
+			</view>
+		</view>
 	</view>
 </template>
+
+<style lang="scss" scoped>
+	.me-container {
+		min-height: 100vh;
+		background-color: #fcfcfc;
+		background-image:
+			radial-gradient(at 0% 0%, rgba(255, 77, 79, 0.05) 0px, transparent 50%),
+			radial-gradient(at 100% 0%, rgba(24, 144, 255, 0.05) 0px, transparent 50%);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 0 40rpx;
+	}
+
+	/* 顶部品牌感 */
+	.brand-header {
+		margin-top: 120rpx;
+		text-align: center;
+
+		.brand-title {
+			font-size: 88rpx;
+			font-weight: 900;
+			background: linear-gradient(135deg, #333 0%, #666 100%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			letter-spacing: 4rpx;
+		}
+
+		.brand-subtitle {
+			font-size: 26rpx;
+			color: #999;
+			letter-spacing: 10rpx;
+			margin-top: 10rpx;
+			text-transform: uppercase;
+		}
+	}
+
+	/* 核心卡片布局 */
+	.region-card {
+		width: 100%;
+		margin-top: 80rpx;
+		background: #ffffff;
+		border-radius: 40rpx;
+		box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.06);
+		padding: 40rpx;
+		box-sizing: border-box;
+	}
+
+	/* 选项卡切换 */
+	.nation-tabs {
+		display: flex;
+		margin-bottom: 40rpx;
+		border-bottom: 1rpx solid #f0f0f0;
+
+		.tab-item {
+			flex: 1;
+			padding: 20rpx 0;
+			text-align: center;
+			position: relative;
+
+			text {
+				font-size: 32rpx;
+				color: #999;
+				transition: all 0.3s;
+			}
+
+			.active-line {
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 0;
+				height: 6rpx;
+				background: #ff4d4f;
+				border-radius: 4rpx;
+				transition: all 0.3s;
+			}
+
+			&.active {
+				text {
+					color: #333;
+					font-weight: bold;
+					font-size: 34rpx;
+				}
+
+				.active-line {
+					width: 60rpx;
+				}
+			}
+		}
+	}
+
+	/* 输入行样式 */
+	.picker-group {
+		.input-row {
+			margin-bottom: 40rpx;
+
+			.label {
+				display: flex;
+				align-items: center;
+				margin-bottom: 16rpx;
+
+				text {
+					font-size: 28rpx;
+					color: #666;
+					margin-left: 10rpx;
+					font-weight: 500;
+				}
+			}
+
+			.main-picker {
+				background: #f7f8fa;
+				border-radius: 20rpx;
+				height: 100rpx;
+
+				.picker-content {
+					height: 100rpx;
+					padding: 0 30rpx;
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+
+					.value-text {
+						font-size: 30rpx;
+						color: #333;
+						font-weight: 500;
+						flex: 1;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+					}
+				}
+			}
+		}
+	}
+
+	/* 按钮样式 */
+	.action-bar {
+		margin-top: 60rpx;
+
+		.save-btn {
+			background: linear-gradient(135deg, #ff7875 0%, #ff4d4f 100%);
+			color: #fff;
+			height: 110rpx;
+			line-height: 110rpx;
+			border-radius: 55rpx;
+			font-size: 34rpx;
+			font-weight: bold;
+			border: none;
+			box-shadow: 0 10rpx 30rpx rgba(255, 77, 79, 0.3);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			&:active {
+				transform: scale(0.98);
+				opacity: 0.9;
+			}
+		}
+	}
+
+	/* 底部小字 */
+	.footer-tips {
+		margin-top: 60rpx;
+		display: flex;
+		gap: 40rpx;
+
+		.tip-item {
+			display: flex;
+			align-items: center;
+
+			text {
+				font-size: 24rpx;
+				color: #bbb;
+				margin-left: 8rpx;
+			}
+		}
+	}
+</style>
 
 <script>
 	import {
@@ -106,7 +311,7 @@
 
 		},
 		methods: {
-			
+
 			gotodemo() {
 				uni.navigateTo({
 					url: "/pages/demo/demo"
@@ -119,7 +324,23 @@
 			},
 			...mapMutations('location', ['setStatus']),
 
-		
+			goTorules(item) {
+				console.log(item)
+				switch (item) {
+					case '赠送积分说明':
+						uni.navigateTo({
+							url: '/pages/rules/rules'
+						});
+						break;
+					case '关于春节放假通知':
+						uni.navigateTo({
+							url: '/pages/arrangeNotification/arrangeNotification'
+						});
+
+						break;
+				}
+			},
+			// 默认选中海南省定安县塔岭市场
 			async initializePicker() {
 				try {
 					if (this.selectedCountry === 'china') {
@@ -358,29 +579,35 @@
 				const selectedMarket = this.marketList[this.selectedMarketIndex];
 				this.market_id = this.marketIdMap[selectedMarket] || null;
 			},
+
+
 			saveData() {
+				// console.log(this.selectedCountry,this.market_id,"这是校验数据")
+				// if (this.selectedCountry === 'china' && !this.market_id) {
+				// 	return uni.showToast({
+				// 		title: '请先选择所在地区和市场',
+				// 		icon: 'none'
+				// 	});
+				// }
+
 				const savedData = {
-					multiIndex: this.multiIndex,
 					area_id: this.area_id,
-					market_id: this.marketIdMap[this.displayMarketList[this.selectedMarketIndex]],
-					selectedMarketIndex: this.selectedMarketIndex,
-					marketName: this.displayMarketList[this.selectedMarketIndex]
+					market_id: this.market_id,
+					marketName: this.displayMarketList[this.selectedMarketIndex],
+					country: this.selectedCountry
 				};
 
-
-				// this.setStatus()   注释无用代码
-				
-				// console.log(this.displayMarketList[this.selectedMarketIndex])
-				// console.log('Saving data:', savedData); // 这行可以帮助你调试
 				uni.setStorageSync('userSelection', savedData);
 				uni.showToast({
-					title: '正在加载',
-					icon: 'success'
-				});
-				uni.switchTab({
-					url: '/pages/index/index',
+					title: '加载中',
+					icon: 'loading'
 				});
 
+				setTimeout(() => {
+					uni.switchTab({
+						url: '/pages/index/index'
+					});
+				}, 500);
 			},
 
 			loadSavedData() {
@@ -408,285 +635,3 @@
 		}
 	};
 </script>
-
-
-
-
-
-
-<style>
-	.bigBox {
-		position: relative;
-		width: 500rpx;
-		height: 200rpx;
-		background-color: white;
-		padding: 30rpx;
-	}
-
-	.bigBox .title {
-		font-weight: bold;
-		position: absolute;
-		top: 10rpx;
-		left: 10rpx;
-		color: black;
-		text-align: left;
-
-	}
-
-	.bigBox .description {
-		margin: 20rpx;
-		color: black;
-		text-align: left;
-	}
-
-	.Notice {
-		margin: 50rpx;
-		text-align: center;
-		color: black;
-	}
-
-	.notice {
-		margin-top: 20rpx;
-		width: 100%;
-		height: 80rpx;
-		line-height: 80rpx;
-		background-color: white;
-		margin: 20rpx auto;
-		border-radius: 80rpx;
-		display: flex;
-		align-items: center;
-		box-sizing: border-box;
-		padding: 0 20rpx;
-	}
-
-	.nlef {
-		width: 140rpx;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.ntext {
-		color: #007aff;
-		font-weight: 600;
-		font-size: 28rpx;
-	}
-
-	.nrig {
-		width: 50rpx;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.ncen {
-		height: 100%;
-		flex: 1;
-	}
-
-	.swiper {
-		height: 100%;
-		/* background-color: #007aff; */
-	}
-
-	.swiitem {
-		height: 100%;
-		text-align: center;
-		font-size: 30rpx;
-		color: #666;
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-	}
-
-	.dishes {
-		display: flex;
-		flex-direction: column;
-		margin-bottom: 180rpx;
-	}
-
-	.dishes>text {
-		color: black;
-		font-size: 30rpx;
-		font-weight: 600;
-	}
-
-	.me-container {
-		overflow-x: hidden;
-		height: 100vh;
-		width: 100%;
-		box-sizing: border-box;
-		padding: 0rpx 40rpx 0 40rpx;
-		color: white;
-		z-index: 1;
-		background-color: #f8f8f8;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		position: relative;
-	}
-
-	.me-container::after {
-		content: "";
-		width: 140%;
-		height: 200px;
-		position: absolute;
-		left: -20%;
-		top: 0;
-		z-index: -1;
-		border-radius: 0 0 50% 50%;
-		background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-	}
-
-	.top {
-		margin: 10% auto;
-		position: absolute;
-		font-size: 100rpx;
-		font-weight: bold;
-		text-align: center;
-		/*字体粗细*/
-		/* -webkit-text-stroke: 1px #aa55ff; */
-		-webkit-text-stroke: 1px white;
-		/*描边*/
-		-webkit-text-fill-color: transparent;
-		margin-top: 150rpx;
-	}
-
-	.region {
-		width: 650rpx;
-		height: 520rpx;
-		/* margin: auto auto; */
-		margin-top: 300rpx;
-		padding: 20rpx;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		/* align-items: center;	 */
-		background: rgba(255, 255, 255, 1);
-		/* background-color: white; */
-		box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-		backdrop-filter: blur(13.5px);
-		-webkit-backdrop-filter: blur(13.5px);
-		border-radius: 10px;
-		border: 1px solid rgba(255, 255, 255, 0.18);
-	}
-
-	.nation {
-		height: 100rpx;
-		width: 100%;
-		text-align: center;
-		line-height: 100rpx;
-		display: flex;
-		flex-direction: row;
-		/* background-color: darkred; */
-		border-bottom: 1px solid #ccc;
-		color: black;
-	}
-
-	.china {
-		flex: 1;
-		border-right: 1px solid #ccc;
-		cursor: pointer;
-		transition: all 0.3s;
-	}
-
-	.overseas {
-		flex: 1;
-		cursor: pointer;
-		transition: all 0.3s;
-	}
-
-	.active {
-		font-weight: bold;
-		border-bottom: 2px solid #007aff;
-	}
-
-	.area {
-		height: 150rpx;
-		display: flex;
-		flex-direction: row;
-		/* justify-content: space-between; */
-		align-items: center;
-		/* margin: 0 20rpx; */
-		/* padding: 0 20rpx; */
-		/* margin-top: 30rpx; */
-		border-bottom: 1px solid #ccc;
-		/* background-color: white; */
-	}
-
-	.area>text {
-		height: 150rpx;
-		width: 200rpx;
-		line-height: 150rpx;
-		text-align: left;
-		color: black;
-		font-size: 28rpx;
-		box-sizing: border-box;
-		border-right: 1px solid #ccc;
-		/* background-color: antiquewhite; */
-	}
-
-	.picker {
-		height: 150rpx;
-		width: 100%;
-		color: black;
-		line-height: 150rpx;
-		text-align: center;
-		box-sizing: border-box;
-		font-size: 30rpx;
-		padding: 0 10rpx;
-		overflow: hidden;
-		/* 隐藏超出部分 */
-	}
-
-	.picker-text {
-		white-space: nowrap;
-		/* 禁止换行 */
-		overflow: hidden;
-		/* 隐藏超出部分 */
-		text-overflow: ellipsis;
-		/* 超出部分显示省略号 */
-		line-height: 150rpx;
-		text-align: center;
-		box-sizing: border-box;
-		font-size: 30rpx;
-		padding: 0 10rpx;
-	}
-
-	.Address {
-		height: 150rpx;
-		display: flex;
-		flex-direction: row;
-		/* justify-content: space-between; */
-		align-items: center;
-		/* margin: 0 20rpx; */
-		/* padding: 0 20rpx; */
-		border-bottom: 1px solid #ccc;
-		/* background-color: red; */
-	}
-
-	.Address>text {
-		height: 150rpx;
-		width: 200rpx;
-		line-height: 150rpx;
-		text-align: left;
-		color: black;
-		font-size: 28rpx;
-		box-sizing: border-box;
-		border-right: 1px solid #ccc;
-		/* background-color: yellow; */
-	}
-
-	.save {
-		background: transparent;
-		border: none;
-		color: white;
-		font-size: 34rpx;
-		height: 80rpx;
-		line-height: 80rpx;
-		text-align: center;
-		border-radius: 20 rpx;
-		background-color: #007aff;
-		margin: auto 10rpx;
-	}
-</style>

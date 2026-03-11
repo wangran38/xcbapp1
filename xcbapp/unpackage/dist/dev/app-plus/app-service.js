@@ -44,6 +44,733 @@ if (uni.restoreGlobal) {
   function resolveEasycom(component, easycom) {
     return typeof component === "string" ? easycom : component;
   }
+  const fontData = [
+    {
+      "font_class": "arrow-down",
+      "unicode": ""
+    },
+    {
+      "font_class": "arrow-left",
+      "unicode": ""
+    },
+    {
+      "font_class": "arrow-right",
+      "unicode": ""
+    },
+    {
+      "font_class": "arrow-up",
+      "unicode": ""
+    },
+    {
+      "font_class": "auth",
+      "unicode": ""
+    },
+    {
+      "font_class": "auth-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "back",
+      "unicode": ""
+    },
+    {
+      "font_class": "bars",
+      "unicode": ""
+    },
+    {
+      "font_class": "calendar",
+      "unicode": ""
+    },
+    {
+      "font_class": "calendar-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "camera",
+      "unicode": ""
+    },
+    {
+      "font_class": "camera-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "cart",
+      "unicode": ""
+    },
+    {
+      "font_class": "cart-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "chat",
+      "unicode": ""
+    },
+    {
+      "font_class": "chat-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "chatboxes",
+      "unicode": ""
+    },
+    {
+      "font_class": "chatboxes-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "chatbubble",
+      "unicode": ""
+    },
+    {
+      "font_class": "chatbubble-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "checkbox",
+      "unicode": ""
+    },
+    {
+      "font_class": "checkbox-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "checkmarkempty",
+      "unicode": ""
+    },
+    {
+      "font_class": "circle",
+      "unicode": ""
+    },
+    {
+      "font_class": "circle-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "clear",
+      "unicode": ""
+    },
+    {
+      "font_class": "close",
+      "unicode": ""
+    },
+    {
+      "font_class": "closeempty",
+      "unicode": ""
+    },
+    {
+      "font_class": "cloud-download",
+      "unicode": ""
+    },
+    {
+      "font_class": "cloud-download-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "cloud-upload",
+      "unicode": ""
+    },
+    {
+      "font_class": "cloud-upload-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "color",
+      "unicode": ""
+    },
+    {
+      "font_class": "color-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "compose",
+      "unicode": ""
+    },
+    {
+      "font_class": "contact",
+      "unicode": ""
+    },
+    {
+      "font_class": "contact-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "down",
+      "unicode": ""
+    },
+    {
+      "font_class": "bottom",
+      "unicode": ""
+    },
+    {
+      "font_class": "download",
+      "unicode": ""
+    },
+    {
+      "font_class": "download-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "email",
+      "unicode": ""
+    },
+    {
+      "font_class": "email-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "eye",
+      "unicode": ""
+    },
+    {
+      "font_class": "eye-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "eye-slash",
+      "unicode": ""
+    },
+    {
+      "font_class": "eye-slash-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "fire",
+      "unicode": ""
+    },
+    {
+      "font_class": "fire-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "flag",
+      "unicode": ""
+    },
+    {
+      "font_class": "flag-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "folder-add",
+      "unicode": ""
+    },
+    {
+      "font_class": "folder-add-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "font",
+      "unicode": ""
+    },
+    {
+      "font_class": "forward",
+      "unicode": ""
+    },
+    {
+      "font_class": "gear",
+      "unicode": ""
+    },
+    {
+      "font_class": "gear-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "gift",
+      "unicode": ""
+    },
+    {
+      "font_class": "gift-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "hand-down",
+      "unicode": ""
+    },
+    {
+      "font_class": "hand-down-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "hand-up",
+      "unicode": ""
+    },
+    {
+      "font_class": "hand-up-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "headphones",
+      "unicode": ""
+    },
+    {
+      "font_class": "heart",
+      "unicode": ""
+    },
+    {
+      "font_class": "heart-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "help",
+      "unicode": ""
+    },
+    {
+      "font_class": "help-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "home",
+      "unicode": ""
+    },
+    {
+      "font_class": "home-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "image",
+      "unicode": ""
+    },
+    {
+      "font_class": "image-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "images",
+      "unicode": ""
+    },
+    {
+      "font_class": "images-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "info",
+      "unicode": ""
+    },
+    {
+      "font_class": "info-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "left",
+      "unicode": ""
+    },
+    {
+      "font_class": "link",
+      "unicode": ""
+    },
+    {
+      "font_class": "list",
+      "unicode": ""
+    },
+    {
+      "font_class": "location",
+      "unicode": ""
+    },
+    {
+      "font_class": "location-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "locked",
+      "unicode": ""
+    },
+    {
+      "font_class": "locked-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "loop",
+      "unicode": ""
+    },
+    {
+      "font_class": "mail-open",
+      "unicode": ""
+    },
+    {
+      "font_class": "mail-open-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "map",
+      "unicode": ""
+    },
+    {
+      "font_class": "map-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "map-pin",
+      "unicode": ""
+    },
+    {
+      "font_class": "map-pin-ellipse",
+      "unicode": ""
+    },
+    {
+      "font_class": "medal",
+      "unicode": ""
+    },
+    {
+      "font_class": "medal-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "mic",
+      "unicode": ""
+    },
+    {
+      "font_class": "mic-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "micoff",
+      "unicode": ""
+    },
+    {
+      "font_class": "micoff-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "minus",
+      "unicode": ""
+    },
+    {
+      "font_class": "minus-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "more",
+      "unicode": ""
+    },
+    {
+      "font_class": "more-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "navigate",
+      "unicode": ""
+    },
+    {
+      "font_class": "navigate-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "notification",
+      "unicode": ""
+    },
+    {
+      "font_class": "notification-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "paperclip",
+      "unicode": ""
+    },
+    {
+      "font_class": "paperplane",
+      "unicode": ""
+    },
+    {
+      "font_class": "paperplane-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "person",
+      "unicode": ""
+    },
+    {
+      "font_class": "person-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "personadd",
+      "unicode": ""
+    },
+    {
+      "font_class": "personadd-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "personadd-filled-copy",
+      "unicode": ""
+    },
+    {
+      "font_class": "phone",
+      "unicode": ""
+    },
+    {
+      "font_class": "phone-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "plus",
+      "unicode": ""
+    },
+    {
+      "font_class": "plus-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "plusempty",
+      "unicode": ""
+    },
+    {
+      "font_class": "pulldown",
+      "unicode": ""
+    },
+    {
+      "font_class": "pyq",
+      "unicode": ""
+    },
+    {
+      "font_class": "qq",
+      "unicode": ""
+    },
+    {
+      "font_class": "redo",
+      "unicode": ""
+    },
+    {
+      "font_class": "redo-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "refresh",
+      "unicode": ""
+    },
+    {
+      "font_class": "refresh-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "refreshempty",
+      "unicode": ""
+    },
+    {
+      "font_class": "reload",
+      "unicode": ""
+    },
+    {
+      "font_class": "right",
+      "unicode": ""
+    },
+    {
+      "font_class": "scan",
+      "unicode": ""
+    },
+    {
+      "font_class": "search",
+      "unicode": ""
+    },
+    {
+      "font_class": "settings",
+      "unicode": ""
+    },
+    {
+      "font_class": "settings-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "shop",
+      "unicode": ""
+    },
+    {
+      "font_class": "shop-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "smallcircle",
+      "unicode": ""
+    },
+    {
+      "font_class": "smallcircle-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "sound",
+      "unicode": ""
+    },
+    {
+      "font_class": "sound-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "spinner-cycle",
+      "unicode": ""
+    },
+    {
+      "font_class": "staff",
+      "unicode": ""
+    },
+    {
+      "font_class": "staff-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "star",
+      "unicode": ""
+    },
+    {
+      "font_class": "star-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "starhalf",
+      "unicode": ""
+    },
+    {
+      "font_class": "trash",
+      "unicode": ""
+    },
+    {
+      "font_class": "trash-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "tune",
+      "unicode": ""
+    },
+    {
+      "font_class": "tune-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "undo",
+      "unicode": ""
+    },
+    {
+      "font_class": "undo-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "up",
+      "unicode": ""
+    },
+    {
+      "font_class": "top",
+      "unicode": ""
+    },
+    {
+      "font_class": "upload",
+      "unicode": ""
+    },
+    {
+      "font_class": "upload-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "videocam",
+      "unicode": ""
+    },
+    {
+      "font_class": "videocam-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "vip",
+      "unicode": ""
+    },
+    {
+      "font_class": "vip-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "wallet",
+      "unicode": ""
+    },
+    {
+      "font_class": "wallet-filled",
+      "unicode": ""
+    },
+    {
+      "font_class": "weibo",
+      "unicode": ""
+    },
+    {
+      "font_class": "weixin",
+      "unicode": ""
+    }
+  ];
+  const _export_sfc = (sfc, props2) => {
+    const target = sfc.__vccOpts || sfc;
+    for (const [key, val] of props2) {
+      target[key] = val;
+    }
+    return target;
+  };
+  const getVal = (val) => {
+    const reg = /^[0-9]*$/g;
+    return typeof val === "number" || reg.test(val) ? val + "px" : val;
+  };
+  const _sfc_main$2i = {
+    name: "UniIcons",
+    emits: ["click"],
+    props: {
+      type: {
+        type: String,
+        default: ""
+      },
+      color: {
+        type: String,
+        default: "#333333"
+      },
+      size: {
+        type: [Number, String],
+        default: 16
+      },
+      customPrefix: {
+        type: String,
+        default: ""
+      },
+      fontFamily: {
+        type: String,
+        default: ""
+      }
+    },
+    data() {
+      return {
+        icons: fontData
+      };
+    },
+    computed: {
+      unicode() {
+        let code2 = this.icons.find((v2) => v2.font_class === this.type);
+        if (code2) {
+          return code2.unicode;
+        }
+        return "";
+      },
+      iconSize() {
+        return getVal(this.size);
+      },
+      styleObj() {
+        if (this.fontFamily !== "") {
+          return `color: ${this.color}; font-size: ${this.iconSize}; font-family: ${this.fontFamily};`;
+        }
+        return `color: ${this.color}; font-size: ${this.iconSize};`;
+      }
+    },
+    methods: {
+      _onClick() {
+        this.$emit("click");
+      }
+    }
+  };
+  function _sfc_render$2h(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock(
+      "text",
+      {
+        style: vue.normalizeStyle($options.styleObj),
+        class: vue.normalizeClass(["uni-icons", ["uniui-" + $props.type, $props.customPrefix, $props.customPrefix ? $props.type : ""]]),
+        onClick: _cache[0] || (_cache[0] = (...args) => $options._onClick && $options._onClick(...args))
+      },
+      [
+        vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+      ],
+      6
+      /* CLASS, STYLE */
+    );
+  }
+  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$2i, [["render", _sfc_render$2h], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
   const BASE_URL = "https://api.xcbdsc.com";
   const UPLOAD_URL = "https://image.xcbdsc.com";
   const whiteList = [
@@ -1683,14 +2410,7 @@ if (uni.restoreGlobal) {
     }
     return module;
   }
-  const _export_sfc = (sfc, props2) => {
-    const target = sfc.__vccOpts || sfc;
-    for (const [key, val] of props2) {
-      target[key] = val;
-    }
-    return target;
-  };
-  const _sfc_main$2i = {
+  const _sfc_main$2h = {
     data() {
       return {
         NoticeList: ["赠送积分说明"],
@@ -1755,6 +2475,22 @@ if (uni.restoreGlobal) {
         });
       },
       ...mapMutations("location", ["setStatus"]),
+      goTorules(item) {
+        formatAppLog("log", "at pages/index1/index1.vue:328", item);
+        switch (item) {
+          case "赠送积分说明":
+            uni.navigateTo({
+              url: "/pages/rules/rules"
+            });
+            break;
+          case "关于春节放假通知":
+            uni.navigateTo({
+              url: "/pages/arrangeNotification/arrangeNotification"
+            });
+            break;
+        }
+      },
+      // 默认选中海南省定安县塔岭市场
       async initializePicker() {
         try {
           if (this.selectedCountry === "china") {
@@ -1777,7 +2513,7 @@ if (uni.restoreGlobal) {
             this.multiIndex = [0, 0, 0];
           }
         } catch (error2) {
-          formatAppLog("error", "at pages/index1/index1.vue:155", "Failed to initialize picker:", error2);
+          formatAppLog("error", "at pages/index1/index1.vue:376", "Failed to initialize picker:", error2);
         }
         this.fetchMarkets(2313);
         this.selectedMarketIndex = 1;
@@ -1794,7 +2530,7 @@ if (uni.restoreGlobal) {
           }
           throw new Error("Failed to fetch provinces");
         } catch (error2) {
-          formatAppLog("error", "at pages/index1/index1.vue:179", "Failed to fetch provinces:", error2);
+          formatAppLog("error", "at pages/index1/index1.vue:400", "Failed to fetch provinces:", error2);
           throw error2;
         }
       },
@@ -1805,11 +2541,11 @@ if (uni.restoreGlobal) {
             this.cityList = response.data;
             return response.data;
           } else {
-            formatAppLog("error", "at pages/index1/index1.vue:190", "No cities data found");
+            formatAppLog("error", "at pages/index1/index1.vue:411", "No cities data found");
             return [];
           }
         } catch (error2) {
-          formatAppLog("error", "at pages/index1/index1.vue:194", "Failed to fetch cities:", error2);
+          formatAppLog("error", "at pages/index1/index1.vue:415", "Failed to fetch cities:", error2);
           return [];
         }
       },
@@ -1820,11 +2556,11 @@ if (uni.restoreGlobal) {
             this.districtList = response.data;
             return response.data;
           } else {
-            formatAppLog("error", "at pages/index1/index1.vue:205", "No areas data found");
+            formatAppLog("error", "at pages/index1/index1.vue:426", "No areas data found");
             return [];
           }
         } catch (error2) {
-          formatAppLog("error", "at pages/index1/index1.vue:209", "Failed to fetch areas:", error2);
+          formatAppLog("error", "at pages/index1/index1.vue:430", "Failed to fetch areas:", error2);
           return [];
         }
       },
@@ -1842,7 +2578,7 @@ if (uni.restoreGlobal) {
             throw new Error("Failed to fetch overseas continents");
           }
         } catch (error2) {
-          formatAppLog("error", "at pages/index1/index1.vue:227", "Failed to fetch overseas continents:", error2);
+          formatAppLog("error", "at pages/index1/index1.vue:448", "Failed to fetch overseas continents:", error2);
           throw error2;
         }
       },
@@ -1860,7 +2596,7 @@ if (uni.restoreGlobal) {
             throw new Error("Failed to fetch overseas countries");
           }
         } catch (error2) {
-          formatAppLog("error", "at pages/index1/index1.vue:245", "Failed to fetch overseas countries:", error2);
+          formatAppLog("error", "at pages/index1/index1.vue:466", "Failed to fetch overseas countries:", error2);
           throw error2;
         }
       },
@@ -1958,12 +2694,12 @@ if (uni.restoreGlobal) {
               return map;
             }, {});
           } else {
-            formatAppLog("error", "at pages/index1/index1.vue:346", "No market data found");
+            formatAppLog("error", "at pages/index1/index1.vue:567", "No market data found");
             this.marketList = [];
             this.marketIdMap = {};
           }
         } catch (error2) {
-          formatAppLog("error", "at pages/index1/index1.vue:351", "Failed to fetch markets:", error2);
+          formatAppLog("error", "at pages/index1/index1.vue:572", "Failed to fetch markets:", error2);
           this.marketList = [];
           this.marketIdMap = {};
         }
@@ -1975,20 +2711,21 @@ if (uni.restoreGlobal) {
       },
       saveData() {
         const savedData = {
-          multiIndex: this.multiIndex,
           area_id: this.area_id,
-          market_id: this.marketIdMap[this.displayMarketList[this.selectedMarketIndex]],
-          selectedMarketIndex: this.selectedMarketIndex,
-          marketName: this.displayMarketList[this.selectedMarketIndex]
+          market_id: this.market_id,
+          marketName: this.displayMarketList[this.selectedMarketIndex],
+          country: this.selectedCountry
         };
         uni.setStorageSync("userSelection", savedData);
         uni.showToast({
-          title: "正在加载",
-          icon: "success"
+          title: "加载中",
+          icon: "loading"
         });
-        uni.switchTab({
-          url: "/pages/index/index"
-        });
+        setTimeout(() => {
+          uni.switchTab({
+            url: "/pages/index/index"
+          });
+        }, 500);
       },
       loadSavedData() {
         const savedData = uni.getStorageSync("userSelection");
@@ -2008,797 +2745,157 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$2h(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2g(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
-      vue.createElementVNode("view", { class: "top" }, " 农链天下 "),
-      vue.createElementVNode("view", { class: "region" }, [
-        vue.createElementVNode("view", { class: "nation" }, [
+      vue.createElementVNode("view", { class: "brand-header" }, [
+        vue.createElementVNode("view", { class: "brand-title" }, "农链天下"),
+        vue.createElementVNode("view", { class: "brand-subtitle" }, "连接城乡 · 悦享农鲜")
+      ]),
+      vue.createElementVNode("view", { class: "region-card" }, [
+        vue.createElementVNode("view", { class: "nation-tabs" }, [
           vue.createElementVNode(
             "view",
             {
-              class: vue.normalizeClass(["china", { active: $data.selectedCountry === "china" }]),
+              class: vue.normalizeClass(["tab-item", { active: $data.selectedCountry === "china" }]),
               onClick: _cache[0] || (_cache[0] = ($event) => $options.selectCountry("china"))
             },
-            "中国 ",
+            [
+              vue.createElementVNode("text", null, "中国"),
+              vue.createElementVNode("view", { class: "active-line" })
+            ],
             2
             /* CLASS */
           ),
           vue.createElementVNode(
             "view",
             {
-              class: vue.normalizeClass(["overseas", { active: $data.selectedCountry === "overseas" }]),
+              class: vue.normalizeClass(["tab-item", { active: $data.selectedCountry === "overseas" }]),
               onClick: _cache[1] || (_cache[1] = ($event) => $options.selectCountry("overseas"))
             },
-            "海外",
+            [
+              vue.createElementVNode("text", null, "海外"),
+              vue.createElementVNode("view", { class: "active-line" })
+            ],
             2
             /* CLASS */
           )
         ]),
-        vue.createElementVNode("view", { class: "area" }, [
-          vue.createElementVNode("text", null, "所在的地区"),
-          vue.createElementVNode("picker", {
-            class: "picker",
-            mode: "multiSelector",
-            range: $data.multiArray,
-            value: $data.multiIndex,
-            onChange: _cache[2] || (_cache[2] = (...args) => $options.bindMultiPickerChange && $options.bindMultiPickerChange(...args)),
-            onColumnchange: _cache[3] || (_cache[3] = (...args) => $options.bindMultiPickerColumnChange && $options.bindMultiPickerColumnChange(...args))
-          }, [
-            vue.createElementVNode(
-              "view",
-              { class: "picker-text" },
-              vue.toDisplayString($data.multiArray[0][$data.multiIndex[0]]) + " - " + vue.toDisplayString($data.multiArray[1][$data.multiIndex[1]] ? $data.multiArray[1][$data.multiIndex[1]] : "暂无数据") + " -" + vue.toDisplayString($data.selectedCountry === "overseas" ? "" : $data.multiArray[2][$data.multiIndex[2]]),
-              1
-              /* TEXT */
-            )
-          ], 40, ["range", "value"])
+        vue.createElementVNode("view", { class: "picker-group" }, [
+          vue.createElementVNode("view", { class: "input-row" }, [
+            vue.createElementVNode("view", { class: "label" }, [
+              vue.createVNode(_component_uni_icons, {
+                type: "location-filled",
+                size: "18",
+                color: "#ff4d4f"
+              }),
+              vue.createElementVNode("text", null, "所在地区")
+            ]),
+            vue.createElementVNode("picker", {
+              class: "main-picker",
+              mode: "multiSelector",
+              range: $data.multiArray,
+              value: $data.multiIndex,
+              onChange: _cache[2] || (_cache[2] = (...args) => $options.bindMultiPickerChange && $options.bindMultiPickerChange(...args)),
+              onColumnchange: _cache[3] || (_cache[3] = (...args) => $options.bindMultiPickerColumnChange && $options.bindMultiPickerColumnChange(...args))
+            }, [
+              vue.createElementVNode("view", { class: "picker-content" }, [
+                vue.createElementVNode("text", { class: "value-text" }, [
+                  vue.createTextVNode(
+                    vue.toDisplayString($data.multiArray[0][$data.multiIndex[0]] || "请选择") + " ",
+                    1
+                    /* TEXT */
+                  ),
+                  $data.multiArray[1][$data.multiIndex[1]] ? (vue.openBlock(), vue.createElementBlock(
+                    vue.Fragment,
+                    { key: 0 },
+                    [
+                      vue.createTextVNode(
+                        " / " + vue.toDisplayString($data.multiArray[1][$data.multiIndex[1]]),
+                        1
+                        /* TEXT */
+                      )
+                    ],
+                    64
+                    /* STABLE_FRAGMENT */
+                  )) : vue.createCommentVNode("v-if", true),
+                  $data.selectedCountry !== "overseas" && $data.multiArray[2][$data.multiIndex[2]] ? (vue.openBlock(), vue.createElementBlock(
+                    vue.Fragment,
+                    { key: 1 },
+                    [
+                      vue.createTextVNode(
+                        " / " + vue.toDisplayString($data.multiArray[2][$data.multiIndex[2]]),
+                        1
+                        /* TEXT */
+                      )
+                    ],
+                    64
+                    /* STABLE_FRAGMENT */
+                  )) : vue.createCommentVNode("v-if", true)
+                ]),
+                vue.createVNode(_component_uni_icons, {
+                  type: "right",
+                  size: "14",
+                  color: "#ccc"
+                })
+              ])
+            ], 40, ["range", "value"])
+          ]),
+          vue.createElementVNode("view", { class: "input-row" }, [
+            vue.createElementVNode("view", { class: "label" }, [
+              vue.createVNode(_component_uni_icons, {
+                type: "shop-filled",
+                size: "18",
+                color: "#ff4d4f"
+              }),
+              vue.createElementVNode("text", null, "目标市场")
+            ]),
+            vue.createElementVNode("picker", {
+              class: "main-picker",
+              mode: "selector",
+              range: $options.displayMarketList,
+              value: $data.selectedMarketIndex,
+              onChange: _cache[4] || (_cache[4] = (...args) => $options.bindMarketChange && $options.bindMarketChange(...args))
+            }, [
+              vue.createElementVNode("view", { class: "picker-content" }, [
+                vue.createElementVNode(
+                  "text",
+                  { class: "value-text" },
+                  vue.toDisplayString($options.displayMarketList[$data.selectedMarketIndex] || "请选择菜市场"),
+                  1
+                  /* TEXT */
+                ),
+                vue.createVNode(_component_uni_icons, {
+                  type: "right",
+                  size: "14",
+                  color: "#ccc"
+                })
+              ])
+            ], 40, ["range", "value"])
+          ])
         ]),
-        vue.createElementVNode("view", { class: "Address" }, [
-          vue.createElementVNode("text", null, "选择菜市场"),
-          vue.createElementVNode("picker", {
-            class: "picker",
-            mode: "selector",
-            range: $options.displayMarketList,
-            value: $data.selectedMarketIndex,
-            onChange: _cache[4] || (_cache[4] = (...args) => $options.bindMarketChange && $options.bindMarketChange(...args))
+        vue.createElementVNode("view", { class: "action-bar" }, [
+          vue.createElementVNode("button", {
+            class: "save-btn",
+            onClick: _cache[5] || (_cache[5] = (...args) => $options.saveData && $options.saveData(...args))
           }, [
-            vue.createElementVNode(
-              "view",
-              { class: "picker-text" },
-              vue.toDisplayString($options.displayMarketList[$data.selectedMarketIndex]),
-              1
-              /* TEXT */
-            )
-          ], 40, ["range", "value"])
-        ]),
-        vue.createElementVNode("button", {
-          class: "save",
-          onClick: _cache[5] || (_cache[5] = (...args) => $options.saveData && $options.saveData(...args))
-        }, "立即逛")
+            vue.createElementVNode("text", null, "立即逛")
+          ])
+        ])
+      ]),
+      vue.createElementVNode("view", { class: "footer-tips" }, [
+        vue.createElementVNode("view", { class: "tip-item" }, [
+          vue.createVNode(_component_uni_icons, {
+            type: "checkmark-circle",
+            size: "14",
+            color: "#52c41a"
+          }),
+          vue.createElementVNode("text", null, "溯源品质保障")
+        ])
       ])
     ]);
   }
-  const PagesIndex1Index1 = /* @__PURE__ */ _export_sfc(_sfc_main$2i, [["render", _sfc_render$2h], ["__file", "E:/小程序转app/xcbapp/pages/index1/index1.vue"]]);
-  const fontData = [
-    {
-      "font_class": "arrow-down",
-      "unicode": ""
-    },
-    {
-      "font_class": "arrow-left",
-      "unicode": ""
-    },
-    {
-      "font_class": "arrow-right",
-      "unicode": ""
-    },
-    {
-      "font_class": "arrow-up",
-      "unicode": ""
-    },
-    {
-      "font_class": "auth",
-      "unicode": ""
-    },
-    {
-      "font_class": "auth-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "back",
-      "unicode": ""
-    },
-    {
-      "font_class": "bars",
-      "unicode": ""
-    },
-    {
-      "font_class": "calendar",
-      "unicode": ""
-    },
-    {
-      "font_class": "calendar-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "camera",
-      "unicode": ""
-    },
-    {
-      "font_class": "camera-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "cart",
-      "unicode": ""
-    },
-    {
-      "font_class": "cart-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "chat",
-      "unicode": ""
-    },
-    {
-      "font_class": "chat-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "chatboxes",
-      "unicode": ""
-    },
-    {
-      "font_class": "chatboxes-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "chatbubble",
-      "unicode": ""
-    },
-    {
-      "font_class": "chatbubble-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "checkbox",
-      "unicode": ""
-    },
-    {
-      "font_class": "checkbox-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "checkmarkempty",
-      "unicode": ""
-    },
-    {
-      "font_class": "circle",
-      "unicode": ""
-    },
-    {
-      "font_class": "circle-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "clear",
-      "unicode": ""
-    },
-    {
-      "font_class": "close",
-      "unicode": ""
-    },
-    {
-      "font_class": "closeempty",
-      "unicode": ""
-    },
-    {
-      "font_class": "cloud-download",
-      "unicode": ""
-    },
-    {
-      "font_class": "cloud-download-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "cloud-upload",
-      "unicode": ""
-    },
-    {
-      "font_class": "cloud-upload-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "color",
-      "unicode": ""
-    },
-    {
-      "font_class": "color-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "compose",
-      "unicode": ""
-    },
-    {
-      "font_class": "contact",
-      "unicode": ""
-    },
-    {
-      "font_class": "contact-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "down",
-      "unicode": ""
-    },
-    {
-      "font_class": "bottom",
-      "unicode": ""
-    },
-    {
-      "font_class": "download",
-      "unicode": ""
-    },
-    {
-      "font_class": "download-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "email",
-      "unicode": ""
-    },
-    {
-      "font_class": "email-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "eye",
-      "unicode": ""
-    },
-    {
-      "font_class": "eye-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "eye-slash",
-      "unicode": ""
-    },
-    {
-      "font_class": "eye-slash-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "fire",
-      "unicode": ""
-    },
-    {
-      "font_class": "fire-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "flag",
-      "unicode": ""
-    },
-    {
-      "font_class": "flag-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "folder-add",
-      "unicode": ""
-    },
-    {
-      "font_class": "folder-add-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "font",
-      "unicode": ""
-    },
-    {
-      "font_class": "forward",
-      "unicode": ""
-    },
-    {
-      "font_class": "gear",
-      "unicode": ""
-    },
-    {
-      "font_class": "gear-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "gift",
-      "unicode": ""
-    },
-    {
-      "font_class": "gift-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "hand-down",
-      "unicode": ""
-    },
-    {
-      "font_class": "hand-down-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "hand-up",
-      "unicode": ""
-    },
-    {
-      "font_class": "hand-up-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "headphones",
-      "unicode": ""
-    },
-    {
-      "font_class": "heart",
-      "unicode": ""
-    },
-    {
-      "font_class": "heart-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "help",
-      "unicode": ""
-    },
-    {
-      "font_class": "help-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "home",
-      "unicode": ""
-    },
-    {
-      "font_class": "home-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "image",
-      "unicode": ""
-    },
-    {
-      "font_class": "image-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "images",
-      "unicode": ""
-    },
-    {
-      "font_class": "images-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "info",
-      "unicode": ""
-    },
-    {
-      "font_class": "info-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "left",
-      "unicode": ""
-    },
-    {
-      "font_class": "link",
-      "unicode": ""
-    },
-    {
-      "font_class": "list",
-      "unicode": ""
-    },
-    {
-      "font_class": "location",
-      "unicode": ""
-    },
-    {
-      "font_class": "location-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "locked",
-      "unicode": ""
-    },
-    {
-      "font_class": "locked-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "loop",
-      "unicode": ""
-    },
-    {
-      "font_class": "mail-open",
-      "unicode": ""
-    },
-    {
-      "font_class": "mail-open-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "map",
-      "unicode": ""
-    },
-    {
-      "font_class": "map-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "map-pin",
-      "unicode": ""
-    },
-    {
-      "font_class": "map-pin-ellipse",
-      "unicode": ""
-    },
-    {
-      "font_class": "medal",
-      "unicode": ""
-    },
-    {
-      "font_class": "medal-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "mic",
-      "unicode": ""
-    },
-    {
-      "font_class": "mic-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "micoff",
-      "unicode": ""
-    },
-    {
-      "font_class": "micoff-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "minus",
-      "unicode": ""
-    },
-    {
-      "font_class": "minus-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "more",
-      "unicode": ""
-    },
-    {
-      "font_class": "more-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "navigate",
-      "unicode": ""
-    },
-    {
-      "font_class": "navigate-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "notification",
-      "unicode": ""
-    },
-    {
-      "font_class": "notification-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "paperclip",
-      "unicode": ""
-    },
-    {
-      "font_class": "paperplane",
-      "unicode": ""
-    },
-    {
-      "font_class": "paperplane-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "person",
-      "unicode": ""
-    },
-    {
-      "font_class": "person-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "personadd",
-      "unicode": ""
-    },
-    {
-      "font_class": "personadd-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "personadd-filled-copy",
-      "unicode": ""
-    },
-    {
-      "font_class": "phone",
-      "unicode": ""
-    },
-    {
-      "font_class": "phone-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "plus",
-      "unicode": ""
-    },
-    {
-      "font_class": "plus-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "plusempty",
-      "unicode": ""
-    },
-    {
-      "font_class": "pulldown",
-      "unicode": ""
-    },
-    {
-      "font_class": "pyq",
-      "unicode": ""
-    },
-    {
-      "font_class": "qq",
-      "unicode": ""
-    },
-    {
-      "font_class": "redo",
-      "unicode": ""
-    },
-    {
-      "font_class": "redo-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "refresh",
-      "unicode": ""
-    },
-    {
-      "font_class": "refresh-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "refreshempty",
-      "unicode": ""
-    },
-    {
-      "font_class": "reload",
-      "unicode": ""
-    },
-    {
-      "font_class": "right",
-      "unicode": ""
-    },
-    {
-      "font_class": "scan",
-      "unicode": ""
-    },
-    {
-      "font_class": "search",
-      "unicode": ""
-    },
-    {
-      "font_class": "settings",
-      "unicode": ""
-    },
-    {
-      "font_class": "settings-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "shop",
-      "unicode": ""
-    },
-    {
-      "font_class": "shop-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "smallcircle",
-      "unicode": ""
-    },
-    {
-      "font_class": "smallcircle-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "sound",
-      "unicode": ""
-    },
-    {
-      "font_class": "sound-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "spinner-cycle",
-      "unicode": ""
-    },
-    {
-      "font_class": "staff",
-      "unicode": ""
-    },
-    {
-      "font_class": "staff-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "star",
-      "unicode": ""
-    },
-    {
-      "font_class": "star-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "starhalf",
-      "unicode": ""
-    },
-    {
-      "font_class": "trash",
-      "unicode": ""
-    },
-    {
-      "font_class": "trash-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "tune",
-      "unicode": ""
-    },
-    {
-      "font_class": "tune-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "undo",
-      "unicode": ""
-    },
-    {
-      "font_class": "undo-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "up",
-      "unicode": ""
-    },
-    {
-      "font_class": "top",
-      "unicode": ""
-    },
-    {
-      "font_class": "upload",
-      "unicode": ""
-    },
-    {
-      "font_class": "upload-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "videocam",
-      "unicode": ""
-    },
-    {
-      "font_class": "videocam-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "vip",
-      "unicode": ""
-    },
-    {
-      "font_class": "vip-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "wallet",
-      "unicode": ""
-    },
-    {
-      "font_class": "wallet-filled",
-      "unicode": ""
-    },
-    {
-      "font_class": "weibo",
-      "unicode": ""
-    },
-    {
-      "font_class": "weixin",
-      "unicode": ""
-    }
-  ];
-  const getVal = (val) => {
-    const reg = /^[0-9]*$/g;
-    return typeof val === "number" || reg.test(val) ? val + "px" : val;
-  };
-  const _sfc_main$2h = {
-    name: "UniIcons",
-    emits: ["click"],
-    props: {
-      type: {
-        type: String,
-        default: ""
-      },
-      color: {
-        type: String,
-        default: "#333333"
-      },
-      size: {
-        type: [Number, String],
-        default: 16
-      },
-      customPrefix: {
-        type: String,
-        default: ""
-      },
-      fontFamily: {
-        type: String,
-        default: ""
-      }
-    },
-    data() {
-      return {
-        icons: fontData
-      };
-    },
-    computed: {
-      unicode() {
-        let code2 = this.icons.find((v2) => v2.font_class === this.type);
-        if (code2) {
-          return code2.unicode;
-        }
-        return "";
-      },
-      iconSize() {
-        return getVal(this.size);
-      },
-      styleObj() {
-        if (this.fontFamily !== "") {
-          return `color: ${this.color}; font-size: ${this.iconSize}; font-family: ${this.fontFamily};`;
-        }
-        return `color: ${this.color}; font-size: ${this.iconSize};`;
-      }
-    },
-    methods: {
-      _onClick() {
-        this.$emit("click");
-      }
-    }
-  };
-  function _sfc_render$2g(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock(
-      "text",
-      {
-        style: vue.normalizeStyle($options.styleObj),
-        class: vue.normalizeClass(["uni-icons", ["uniui-" + $props.type, $props.customPrefix, $props.customPrefix ? $props.type : ""]]),
-        onClick: _cache[0] || (_cache[0] = (...args) => $options._onClick && $options._onClick(...args))
-      },
-      [
-        vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
-      ],
-      6
-      /* CLASS, STYLE */
-    );
-  }
-  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$2h, [["render", _sfc_render$2g], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const PagesIndex1Index1 = /* @__PURE__ */ _export_sfc(_sfc_main$2h, [["render", _sfc_render$2g], ["__scopeId", "data-v-3b59972f"], ["__file", "E:/小程序转app/xcbapp/pages/index1/index1.vue"]]);
   const _sfc_main$2g = {
     props: {
       menuList: {
@@ -3148,7 +3245,6 @@ if (uni.restoreGlobal) {
     data() {
       return {
         prompt: true,
-        showNotice: false,
         tabs: [
           { id: 0, title: "附近农户", path: "/subPackages/shoppingPageList/nearbyFarmers/nearbyFarmers" },
           { id: 1, title: "预卖菜品", path: "/subPackages/shoppingPageList/villageZone/villageZone" },
@@ -3236,7 +3332,7 @@ if (uni.restoreGlobal) {
           if (marketData)
             this.marketName = marketData.marketname;
         } catch (error2) {
-          formatAppLog("error", "at pages/index/index.vue:416", error2);
+          formatAppLog("error", "at pages/index/index.vue:390", error2);
         }
       },
       navigateToShopDetails(id) {
@@ -3262,56 +3358,10 @@ if (uni.restoreGlobal) {
     const _component_mButtonVue = vue.resolveComponent("mButtonVue");
     const _component_floatBall = vue.resolveComponent("floatBall");
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
-      $data.showNotice ? (vue.openBlock(), vue.createElementBlock("view", {
-        key: 0,
-        class: "notice-modal"
-      }, [
-        vue.createElementVNode("view", {
-          class: "notice-modal__mask",
-          onClick: _cache[0] || (_cache[0] = (...args) => $options.handleClose && $options.handleClose(...args))
-        }),
-        vue.createElementVNode("view", { class: "notice-modal__box" }, [
-          vue.createElementVNode("view", { class: "notice-header" }, [
-            vue.createElementVNode("view", { class: "icon-bg" }, [
-              vue.createVNode(_component_uni_icons, {
-                type: "notification-filled",
-                size: "34",
-                color: "#fff"
-              })
-            ]),
-            vue.createElementVNode("text", { class: "notice-modal__title" }, "系统公告")
-          ]),
-          vue.createElementVNode("scroll-view", {
-            class: "notice-modal__content",
-            "scroll-y": ""
-          }, [
-            vue.createElementVNode("view", { class: "notice-text-wrap" }, [
-              vue.createElementVNode("text", { class: "notice-modal__content-text" }, " 亲爱的用户：\\n\\n因“农链天下”系统升级建设，自2025年10月9日起暂停一周一次的免费赠送积分活动，恢复时间待定。在此之前的赠送积分不影响正常使用。 ")
-            ])
-          ]),
-          vue.createElementVNode("view", { class: "notice-footer-action" }, [
-            vue.createElementVNode("view", {
-              class: "no-prompt",
-              onClick: _cache[1] || (_cache[1] = (...args) => $options.changePrompt && $options.changePrompt(...args))
-            }, [
-              vue.createElementVNode("radio", {
-                checked: $data.prompt,
-                color: "#ff4d4f",
-                style: { "transform": "scale(0.9)" }
-              }, null, 8, ["checked"]),
-              vue.createElementVNode("text", null, "不再提示")
-            ]),
-            vue.createElementVNode("button", {
-              class: "notice-confirm-btn",
-              onClick: _cache[2] || (_cache[2] = (...args) => $options.handleClose && $options.handleClose(...args))
-            }, " 好的，我知道了 ")
-          ])
-        ])
-      ])) : vue.createCommentVNode("v-if", true),
       vue.createElementVNode("view", { class: "header-section" }, [
         vue.createElementVNode("view", {
           class: "location-wrapper",
-          onClick: _cache[3] || (_cache[3] = (...args) => $options.toindex1 && $options.toindex1(...args))
+          onClick: _cache[0] || (_cache[0] = (...args) => $options.toindex1 && $options.toindex1(...args))
         }, [
           vue.createElementVNode("view", { class: "loc-content" }, [
             vue.createVNode(_component_uni_icons, {
@@ -3335,7 +3385,7 @@ if (uni.restoreGlobal) {
         ]),
         vue.createElementVNode("view", {
           class: "scan-entry",
-          onClick: _cache[4] || (_cache[4] = (...args) => $options.scan && $options.scan(...args))
+          onClick: _cache[1] || (_cache[1] = (...args) => $options.scan && $options.scan(...args))
         }, [
           vue.createElementVNode("view", { class: "scan-icon-box" }, [
             vue.createVNode(_component_uni_icons, {
@@ -3418,7 +3468,7 @@ if (uni.restoreGlobal) {
         {
           class: "data-list-area",
           "scroll-y": "",
-          onScrolltolower: _cache[5] || (_cache[5] = (...args) => _ctx.handleScrollToLower && _ctx.handleScrollToLower(...args))
+          onScrolltolower: _cache[2] || (_cache[2] = (...args) => _ctx.handleScrollToLower && _ctx.handleScrollToLower(...args))
         },
         [
           vue.createElementVNode("view", { class: "stall-grid" }, [
