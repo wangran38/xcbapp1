@@ -21,7 +21,7 @@
 			<view class="picker-group">
 				<view class="input-row">
 					<view class="label">
-						<uni-icons type="location-filled" size="18" color="#ff4d4f" />
+						<uni-icons type="location-filled" size="18" color="#4a90e2;" />
 						<text>所在地区</text>
 					</view>
 					<picker class="main-picker" mode="multiSelector" :range="multiArray" :value="multiIndex"
@@ -40,7 +40,7 @@
 
 				<view class="input-row">
 					<view class="label">
-						<uni-icons type="shop-filled" size="18" color="#ff4d4f" />
+						<uni-icons type="shop-filled" size="18" color="#4a90e2;" />
 						<text>目标市场</text>
 					</view>
 					<picker class="main-picker" mode="selector" :range="displayMarketList" :value="selectedMarketIndex"
@@ -141,7 +141,7 @@
 				transform: translateX(-50%);
 				width: 0;
 				height: 6rpx;
-				background: #ff4d4f;
+				background: #4a90e2;
 				border-radius: 4rpx;
 				transition: all 0.3s;
 			}
@@ -209,7 +209,7 @@
 		margin-top: 60rpx;
 
 		.save-btn {
-			background: linear-gradient(135deg, #ff7875 0%, #ff4d4f 100%);
+			background: #4a90e2;
 			color: #fff;
 			height: 110rpx;
 			line-height: 110rpx;
@@ -217,7 +217,6 @@
 			font-size: 34rpx;
 			font-weight: bold;
 			border: none;
-			box-shadow: 0 10rpx 30rpx rgba(255, 77, 79, 0.3);
 			display: flex;
 			align-items: center;
 			justify-content: center;

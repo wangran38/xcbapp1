@@ -1,27 +1,59 @@
 <template>
-  <view class="all">
-    <view class="tip">
-      <view class="heading">请选择您的身份</view>
-      <view class="items">
-        <view class="mencheng booth-owner" @click="goToBoothOwner" data-bg-color="#90EE90">
-          <uni-icons type="staff-filled" size="60rpx"></uni-icons>
-          <view>我是摊主</view>
-        </view>
-        <view class="mencheng householder" @click="goToAhouseholder" data-bg-color="#ADD8E6">
-          <uni-icons type="person-filled" size="60rpx"></uni-icons>
-          <view>我是户主</view>
-        </view>
-		<view class="mencheng householder" @click="goToAgent" data-bg-color="#ADD8E6">
-		  <uni-icons type="auth" size="60rpx"></uni-icons>
-		  <view>我是代理</view>
-		</view>
+  <view class="container">
+    <!-- 主内容区（居中、留白充足，干净不混乱） -->
+    <view class="content">
+      <!-- 优雅标题（与农链天下品牌标题同风格，渐变文字） -->
+      <view class="heading">
+        <text>请选择您的身份</text>
       </view>
-    </view>
-    <view class="description">
-      <text>在这里，无论是摊主还是户主，都能享受到便捷的服务哦。摊主可以轻松管理自己的摊位商品，进行售卖等操作；</text>
+
+      <!-- 选项容器（白色大圆角卡片，内部列表式排列，绝不混乱） -->
+      <view class="selection-card">
+        <!-- 摊主 -->
+        <view class="option-item" @click="goToBoothOwner">
+          <view class="icon-box booth">
+            <uni-icons type="staff-filled" size="58" color="#fff" />
+          </view>
+          <view class="option-text">
+            <text class="title">我是摊主</text>
+            <!-- <text class="desc">管理摊位 · 轻松售卖</text> -->
+          </view>
+          <uni-icons type="right" size="24" color="#ccc" />
+        </view>
+
+        <!-- 户主 -->
+        <view class="option-item" @click="goToAhouseholder">
+          <view class="icon-box householder">
+            <uni-icons type="person-filled" size="58" color="#fff" />
+          </view>
+          <view class="option-text">
+            <text class="title">我是户主</text>
+            <!-- <text class="desc">发布货源 · 灵活交易</text> -->
+          </view>
+          <uni-icons type="right" size="24" color="#ccc" />
+        </view>
+
+        <!-- 代理 -->
+        <view class="option-item" @click="goToAgent">
+          <view class="icon-box agent">
+            <uni-icons type="auth" size="58" color="#fff" />
+          </view>
+          <view class="option-text">
+            <text class="title">我是代理</text>
+            <!-- <text class="desc">连接供需 · 赚取佣金</text> -->
+          </view>
+          <uni-icons type="right" size="24" color="#ccc" />
+        </view>
+      </view>
+
+      <!-- 底部说明（轻盈、专业） -->
+      <view class="description">
+        <text>在这里，无论是摊主、户主还是代理，都能享受到专业便捷的服务。摊主轻松管理商品，户主灵活发布需求，代理轻松连接供需。</text>
+      </view>
     </view>
   </view>
 </template>
+
 <script>
   export default {
     data() {
@@ -45,23 +77,23 @@
           })
         }
       },
-	  // 跳转至我的代理商
-	  goToAgent() {
-	    if (this.checkToken()) {
-	      uni.showModal({
-	        showCancel: false,
-	        content: '暂未登录,请前往登录',
-	      }).then(() => {
-	        uni.navigateTo({
-	          url: '/pages/login/login'
-	        })
-	      })
-	    } else {
-	      uni.navigateTo({
-	        url: '/pages/agent/agent'
-	      })
-	    }
-	  },
+      // 跳转至我的代理商
+      goToAgent() {
+        if (this.checkToken()) {
+          uni.showModal({
+            showCancel: false,
+            content: '暂未登录,请前往登录',
+          }).then(() => {
+            uni.navigateTo({
+              url: '/pages/login/login'
+            })
+          })
+        } else {
+          uni.navigateTo({
+            url: '/pages/agent/agent'
+          })
+        }
+      },
       // 跳转至我的户主
       goToAhouseholder() {
         if (this.checkToken()) {
@@ -91,122 +123,108 @@
   }
 </script>
 
-<style>
-/* 整体页面背景设置 */
-page {
-  background-color: #f8f8f8;
-}
+<style lang="scss" scoped>
+  $green: #4caf50;
+  $blue: #2d8cf0;
+  $purple: #9c27b0;
 
-/* 整个页面内容容器样式 */
-.all {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  padding: 0 20rpx; /* 左右添加一点内边距，避免内容太靠边 */
-}
+  .container {
+    min-height: 100vh;
+    background: #f8f9fb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 40rpx;
+  }
 
-/* 提示区域样式 */
-.tip {
-  width: 100%;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.1); /* 添加淡淡的阴影，增加层次感 */
-  border-radius: 10rpx; /* 给容器添加圆角 */
-  padding: 30rpx 0; /* 上下添加内边距，让内部元素更舒展 */
-}
+  .content {
+    width: 100%;
+    max-width: 680rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-/* 标题样式 */
-.heading {
-  font-size: 40rpx;
-  font-weight: bold;
-  color: #333;
-  text-align: center;
-  margin-bottom: 30rpx;
-}
+  /* 标题（优雅渐变，与农链天下同风格） */
+  .heading {
+    margin-bottom: 70rpx;
+    text {
+      font-size: 54rpx;
+      font-weight: 800;
+      background: linear-gradient(135deg, #2d3436 0%, #555 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 6rpx;
+    }
+  }
 
-/* 按钮通用样式 */
-.mencheng {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 20rpx 40rpx;
-  border-radius: 10rpx;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-bottom: 30rpx;
-  font-size: 32rpx;
-}
+  /* 选项卡片容器（白色大圆角 + 立体阴影，内部列表清晰不混乱） */
+  .selection-card {
+    width: 100%;
+    background: #fff;
+    border-radius: 40rpx;
+    box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+    margin-bottom: 70rpx;
+  }
 
-/* 摊主按钮样式 */
-.booth-owner {
-  background: linear-gradient(to bottom, #b3f0b3, #55aa55); /* 调淡了绿色系的渐变颜色 */
-  color: white;
-  box-shadow: 0 3rpx 6rpx rgba(0, 0, 0, 0.08); /* 调淡阴影效果 */
-}
+  .option-item {
+    display: flex;
+    align-items: center;
+    padding: 36rpx 40rpx;
+    transition: all 0.25s ease;
+    border-bottom: 1rpx solid #f5f5f5;
 
-/* 摊主按钮悬停效果 */
-.booth-owner:hover {
-  transform: scale(1.05);
-  opacity: 0.85;
-  background-color: rgba(255, 255, 255, 0.15);
-}
+    &:last-child {
+      border-bottom: none;
+    }
 
-/* 摊主按钮点击效果 */
-.booth-owner:active {
-  transform: scale(0.98);
-  background-color: #c8ffc8; /* 点击时变亮一点的示例颜色，调淡了一些，更柔和 */
-  transition: all 0.1s ease;
-}
+    &:active {
+      background: #f8f9fb;
+      transform: scale(0.98);
+    }
 
-/* 户主按钮样式 */
-.householder {
-  background: linear-gradient(to bottom, #c0e0f0, #6699cc); /* 调淡了蓝色系的渐变颜色 */
-  color: white;
-  box-shadow: 0 3rpx 6rpx rgba(0, 0, 0, 0.08); /* 调淡阴影效果 */
-}
+    .icon-box {
+      width: 92rpx;
+      height: 92rpx;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 36rpx;
+      flex-shrink: 0;
+    }
 
-/* 户主按钮悬停效果 */
-.householder:hover {
-  transform: scale(1.05);
-  opacity: 0.85;
-  background-color: rgba(255, 255, 255, 0.15);
-}
+    .option-text {
+      flex: 1;
 
-/* 户主按钮点击效果 */
-.householder:active {
-  transform: scale(0.98);
-  background-color: #d9e9ff; /* 点击时变亮一点的示例颜色，调淡了一些，更柔和 */
-  transition: all 0.1s ease;
-}
+      .title {
+        font-size: 38rpx;
+        font-weight: 700;
+        color: #2d3436;
+        display: block;
+        margin-bottom: 4rpx;
+      }
 
-/* 按钮内图标样式 */
-.mencheng uni-icons {
-  size: 60rpx;
-  margin-right: 15rpx;
-}
+      .desc {
+        font-size: 26rpx;
+        color: #8a8f99;
+        line-height: 1.4;
+      }
+    }
+  }
 
-/* 按钮组样式 */
-.items {
-  margin-top: 50rpx;
-  margin-bottom: 50rpx;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  /* 各身份专属颜色 */
+  .booth { background: linear-gradient(135deg, $green, #66bb6a); }
+  .householder { background: linear-gradient(135deg, $blue, #5aa8ff); }
+  .agent { background: linear-gradient(135deg, $purple, #ba68c8); }
 
-/* 新增的描述文字样式 */
-.description {
-  text-align: center;
-  margin: 30rpx 0;
-  color: #666;
-  font-size: 28rpx;
-  line-height: 1.5;
-}
-
+  /* 说明文字（轻盈易读） */
+  .description {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 28rpx;
+    line-height: 1.65;
+    padding: 0 30rpx;
+  }
 </style>

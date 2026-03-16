@@ -2476,7 +2476,7 @@ if (uni.restoreGlobal) {
       },
       ...mapMutations("location", ["setStatus"]),
       goTorules(item) {
-        formatAppLog("log", "at pages/index1/index1.vue:328", item);
+        formatAppLog("log", "at pages/index1/index1.vue:327", item);
         switch (item) {
           case "赠送积分说明":
             uni.navigateTo({
@@ -2513,7 +2513,7 @@ if (uni.restoreGlobal) {
             this.multiIndex = [0, 0, 0];
           }
         } catch (error2) {
-          formatAppLog("error", "at pages/index1/index1.vue:376", "Failed to initialize picker:", error2);
+          formatAppLog("error", "at pages/index1/index1.vue:375", "Failed to initialize picker:", error2);
         }
         this.fetchMarkets(2313);
         this.selectedMarketIndex = 1;
@@ -2530,7 +2530,7 @@ if (uni.restoreGlobal) {
           }
           throw new Error("Failed to fetch provinces");
         } catch (error2) {
-          formatAppLog("error", "at pages/index1/index1.vue:400", "Failed to fetch provinces:", error2);
+          formatAppLog("error", "at pages/index1/index1.vue:399", "Failed to fetch provinces:", error2);
           throw error2;
         }
       },
@@ -2541,11 +2541,11 @@ if (uni.restoreGlobal) {
             this.cityList = response.data;
             return response.data;
           } else {
-            formatAppLog("error", "at pages/index1/index1.vue:411", "No cities data found");
+            formatAppLog("error", "at pages/index1/index1.vue:410", "No cities data found");
             return [];
           }
         } catch (error2) {
-          formatAppLog("error", "at pages/index1/index1.vue:415", "Failed to fetch cities:", error2);
+          formatAppLog("error", "at pages/index1/index1.vue:414", "Failed to fetch cities:", error2);
           return [];
         }
       },
@@ -2556,11 +2556,11 @@ if (uni.restoreGlobal) {
             this.districtList = response.data;
             return response.data;
           } else {
-            formatAppLog("error", "at pages/index1/index1.vue:426", "No areas data found");
+            formatAppLog("error", "at pages/index1/index1.vue:425", "No areas data found");
             return [];
           }
         } catch (error2) {
-          formatAppLog("error", "at pages/index1/index1.vue:430", "Failed to fetch areas:", error2);
+          formatAppLog("error", "at pages/index1/index1.vue:429", "Failed to fetch areas:", error2);
           return [];
         }
       },
@@ -2578,7 +2578,7 @@ if (uni.restoreGlobal) {
             throw new Error("Failed to fetch overseas continents");
           }
         } catch (error2) {
-          formatAppLog("error", "at pages/index1/index1.vue:448", "Failed to fetch overseas continents:", error2);
+          formatAppLog("error", "at pages/index1/index1.vue:447", "Failed to fetch overseas continents:", error2);
           throw error2;
         }
       },
@@ -2596,7 +2596,7 @@ if (uni.restoreGlobal) {
             throw new Error("Failed to fetch overseas countries");
           }
         } catch (error2) {
-          formatAppLog("error", "at pages/index1/index1.vue:466", "Failed to fetch overseas countries:", error2);
+          formatAppLog("error", "at pages/index1/index1.vue:465", "Failed to fetch overseas countries:", error2);
           throw error2;
         }
       },
@@ -2694,12 +2694,12 @@ if (uni.restoreGlobal) {
               return map;
             }, {});
           } else {
-            formatAppLog("error", "at pages/index1/index1.vue:567", "No market data found");
+            formatAppLog("error", "at pages/index1/index1.vue:566", "No market data found");
             this.marketList = [];
             this.marketIdMap = {};
           }
         } catch (error2) {
-          formatAppLog("error", "at pages/index1/index1.vue:572", "Failed to fetch markets:", error2);
+          formatAppLog("error", "at pages/index1/index1.vue:571", "Failed to fetch markets:", error2);
           this.marketList = [];
           this.marketIdMap = {};
         }
@@ -2787,7 +2787,7 @@ if (uni.restoreGlobal) {
               vue.createVNode(_component_uni_icons, {
                 type: "location-filled",
                 size: "18",
-                color: "#ff4d4f"
+                color: "#4a90e2;"
               }),
               vue.createElementVNode("text", null, "所在地区")
             ]),
@@ -2846,7 +2846,7 @@ if (uni.restoreGlobal) {
               vue.createVNode(_component_uni_icons, {
                 type: "shop-filled",
                 size: "18",
-                color: "#ff4d4f"
+                color: "#4a90e2;"
               }),
               vue.createElementVNode("text", null, "目标市场")
             ]),
@@ -3332,7 +3332,7 @@ if (uni.restoreGlobal) {
           if (marketData)
             this.marketName = marketData.marketname;
         } catch (error2) {
-          formatAppLog("error", "at pages/index/index.vue:390", error2);
+          formatAppLog("error", "at pages/index/index.vue:365", error2);
         }
       },
       navigateToShopDetails(id) {
@@ -4150,51 +4150,80 @@ if (uni.restoreGlobal) {
   };
   function _sfc_render$29(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    return vue.openBlock(), vue.createElementBlock("view", { class: "all" }, [
-      vue.createElementVNode("view", { class: "tip" }, [
-        vue.createElementVNode("view", { class: "heading" }, "请选择您的身份"),
-        vue.createElementVNode("view", { class: "items" }, [
+    return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
+      vue.createElementVNode("view", { class: "content" }, [
+        vue.createElementVNode("view", { class: "heading" }, [
+          vue.createElementVNode("text", null, "请选择您的身份")
+        ]),
+        vue.createElementVNode("view", { class: "selection-card" }, [
           vue.createElementVNode("view", {
-            class: "mencheng booth-owner",
-            onClick: _cache[0] || (_cache[0] = (...args) => $options.goToBoothOwner && $options.goToBoothOwner(...args)),
-            "data-bg-color": "#90EE90"
+            class: "option-item",
+            onClick: _cache[0] || (_cache[0] = (...args) => $options.goToBoothOwner && $options.goToBoothOwner(...args))
           }, [
+            vue.createElementVNode("view", { class: "icon-box booth" }, [
+              vue.createVNode(_component_uni_icons, {
+                type: "staff-filled",
+                size: "58",
+                color: "#fff"
+              })
+            ]),
+            vue.createElementVNode("view", { class: "option-text" }, [
+              vue.createElementVNode("text", { class: "title" }, "我是摊主")
+            ]),
             vue.createVNode(_component_uni_icons, {
-              type: "staff-filled",
-              size: "60rpx"
-            }),
-            vue.createElementVNode("view", null, "我是摊主")
+              type: "right",
+              size: "24",
+              color: "#ccc"
+            })
           ]),
           vue.createElementVNode("view", {
-            class: "mencheng householder",
-            onClick: _cache[1] || (_cache[1] = (...args) => $options.goToAhouseholder && $options.goToAhouseholder(...args)),
-            "data-bg-color": "#ADD8E6"
+            class: "option-item",
+            onClick: _cache[1] || (_cache[1] = (...args) => $options.goToAhouseholder && $options.goToAhouseholder(...args))
           }, [
+            vue.createElementVNode("view", { class: "icon-box householder" }, [
+              vue.createVNode(_component_uni_icons, {
+                type: "person-filled",
+                size: "58",
+                color: "#fff"
+              })
+            ]),
+            vue.createElementVNode("view", { class: "option-text" }, [
+              vue.createElementVNode("text", { class: "title" }, "我是户主")
+            ]),
             vue.createVNode(_component_uni_icons, {
-              type: "person-filled",
-              size: "60rpx"
-            }),
-            vue.createElementVNode("view", null, "我是户主")
+              type: "right",
+              size: "24",
+              color: "#ccc"
+            })
           ]),
           vue.createElementVNode("view", {
-            class: "mencheng householder",
-            onClick: _cache[2] || (_cache[2] = (...args) => $options.goToAgent && $options.goToAgent(...args)),
-            "data-bg-color": "#ADD8E6"
+            class: "option-item",
+            onClick: _cache[2] || (_cache[2] = (...args) => $options.goToAgent && $options.goToAgent(...args))
           }, [
+            vue.createElementVNode("view", { class: "icon-box agent" }, [
+              vue.createVNode(_component_uni_icons, {
+                type: "auth",
+                size: "58",
+                color: "#fff"
+              })
+            ]),
+            vue.createElementVNode("view", { class: "option-text" }, [
+              vue.createElementVNode("text", { class: "title" }, "我是代理")
+            ]),
             vue.createVNode(_component_uni_icons, {
-              type: "auth",
-              size: "60rpx"
-            }),
-            vue.createElementVNode("view", null, "我是代理")
+              type: "right",
+              size: "24",
+              color: "#ccc"
+            })
           ])
+        ]),
+        vue.createElementVNode("view", { class: "description" }, [
+          vue.createElementVNode("text", null, "在这里，无论是摊主、户主还是代理，都能享受到专业便捷的服务。摊主轻松管理商品，户主灵活发布需求，代理轻松连接供需。")
         ])
-      ]),
-      vue.createElementVNode("view", { class: "description" }, [
-        vue.createElementVNode("text", null, "在这里，无论是摊主还是户主，都能享受到便捷的服务哦。摊主可以轻松管理自己的摊位商品，进行售卖等操作；")
       ])
     ]);
   }
-  const PagesSVegetablesSVegetables = /* @__PURE__ */ _export_sfc(_sfc_main$2a, [["render", _sfc_render$29], ["__file", "E:/小程序转app/xcbapp/pages/sVegetables/sVegetables.vue"]]);
+  const PagesSVegetablesSVegetables = /* @__PURE__ */ _export_sfc(_sfc_main$2a, [["render", _sfc_render$29], ["__scopeId", "data-v-9c8f2f2f"], ["__file", "E:/小程序转app/xcbapp/pages/sVegetables/sVegetables.vue"]]);
   /*!
    * Compressor.js v1.2.1
    * https://fengyuanchen.github.io/compressorjs
@@ -5230,12 +5259,10 @@ if (uni.restoreGlobal) {
         isLoggedIn: false,
         userName: "",
         userAvatar: "",
-        score: "",
-        // 添加你需要的数据属性
+        score: 0,
         totalnum: 0,
         signTotal: {},
         phone: null
-        // 用户手机号
       };
     },
     async onShow() {
@@ -5279,9 +5306,6 @@ if (uni.restoreGlobal) {
           url: `/pages/updatePwd/updatePwd?phone=${this.phone}`
         });
       },
-      /**
-       * 检查登录状态
-       */
       checkLoginStatus() {
         const token = uni.getStorageSync("token");
         if (token) {
@@ -5290,9 +5314,6 @@ if (uni.restoreGlobal) {
           this.isLoggedIn = false;
         }
       },
-      /**
-       * 获取用户个人信息
-       */
       async fetchUserProfile() {
         try {
           const response = await api.getUserProfile();
@@ -5314,7 +5335,7 @@ if (uni.restoreGlobal) {
             });
           }
         } catch (error2) {
-          formatAppLog("error", "at pages/user/user.vue:225", "Error fetching user profile:", error2);
+          formatAppLog("error", "at pages/user/user.vue:206", "Error fetching user profile:", error2);
           uni.showToast({
             title: "获取用户信息失败",
             icon: "none"
@@ -5350,9 +5371,8 @@ if (uni.restoreGlobal) {
         try {
           uni.removeStorageSync("token");
           uni.removeStorageSync("nickname");
-          formatAppLog("log", "at pages/user/user.vue:265", "Token and nickname removed from storage");
         } catch (e2) {
-          formatAppLog("error", "at pages/user/user.vue:267", "Failed to remove token or nickname from storage", e2);
+          formatAppLog("error", "at pages/user/user.vue:243", "Failed to remove token or nickname from storage", e2);
         }
         this.isLoggedIn = false;
         this.nickname = "";
@@ -5361,14 +5381,13 @@ if (uni.restoreGlobal) {
           url: "/pages/login/login"
         });
       },
-      // 绑定微信
       async bindingWechat() {
         let systemInfo = await uni.getSystemInfo();
         if (systemInfo[1].host && systemInfo[1].host.env == "WeChat") {
           uni.login({
             provider: "true",
             success: async (res) => {
-              formatAppLog("log", "at pages/user/user.vue:286", res.code, "这是用户唯一标识");
+              formatAppLog("log", "at pages/user/user.vue:258", res.code, "这是用户唯一标识");
               let data = await api.bindingOpenid({
                 code: res.code
               });
@@ -5384,10 +5403,6 @@ if (uni.restoreGlobal) {
                   icon: "error"
                 });
               }
-            },
-            fail: () => {
-            },
-            complete: () => {
             }
           });
         } else {
@@ -5403,7 +5418,7 @@ if (uni.restoreGlobal) {
   function _sfc_render$28(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
-      vue.createElementVNode("view", { class: "user" }, [
+      vue.createElementVNode("view", { class: "user-card" }, [
         vue.createElementVNode("view", { class: "user-info" }, [
           vue.createElementVNode("view", { class: "user-img" }, [
             vue.createElementVNode("image", {
@@ -5422,8 +5437,8 @@ if (uni.restoreGlobal) {
               class: "nickname-container"
             }, [
               vue.createElementVNode(
-                "view",
-                { class: "nickname-input" },
+                "text",
+                { class: "nickname" },
                 vue.toDisplayString($data.userName || "请到我的信息中填写昵称"),
                 1
                 /* TEXT */
@@ -5433,21 +5448,21 @@ if (uni.restoreGlobal) {
           vue.createVNode(_component_uni_icons, {
             "custom-prefix": "iconfont",
             type: "icon-shezhi",
-            size: "20",
+            size: "28",
             class: "settings-icon",
             onClick: $options.GoTOsettings
           }, null, 8, ["onClick"])
         ])
       ]),
-      vue.createElementVNode("view", { class: "integral-grid" }, [
+      vue.createElementVNode("view", { class: "integral-card" }, [
         vue.createElementVNode("view", { class: "integral-item" }, [
-          vue.createElementVNode("text", { class: "label" }, "现金消费累计"),
-          vue.createElementVNode("text", { class: "value" }, "0元")
+          vue.createElementVNode("view", { class: "label" }, "现金消费累计"),
+          vue.createElementVNode("view", { class: "value" }, "0元")
         ]),
         vue.createElementVNode("view", { class: "integral-item highlight" }, [
-          vue.createElementVNode("text", { class: "label" }, "可用积分"),
+          vue.createElementVNode("view", { class: "label" }, "可用积分"),
           vue.createElementVNode(
-            "text",
+            "view",
             { class: "value" },
             vue.toDisplayString($data.score) + "分",
             1
@@ -5455,27 +5470,29 @@ if (uni.restoreGlobal) {
           )
         ]),
         vue.createElementVNode("view", { class: "integral-item" }, [
-          vue.createElementVNode("text", { class: "label" }, "冻结积分"),
-          vue.createElementVNode("text", { class: "value" }, "0分")
+          vue.createElementVNode("view", { class: "label" }, "冻结积分"),
+          vue.createElementVNode("view", { class: "value" }, "0分")
         ])
       ]),
-      vue.createElementVNode("view", { class: "function-list" }, [
+      vue.createElementVNode("view", { class: "function-card" }, [
         vue.createElementVNode("view", {
           class: "function-item",
           onClick: _cache[1] || (_cache[1] = (...args) => $options.mypoints && $options.mypoints(...args))
         }, [
           vue.createElementVNode("view", { class: "item-left" }, [
-            vue.createVNode(_component_uni_icons, {
-              type: "vip",
-              size: "30",
-              color: "#FFD600"
-            }),
+            vue.createElementVNode("view", { class: "icon-circle yellow" }, [
+              vue.createVNode(_component_uni_icons, {
+                type: "vip",
+                size: "30",
+                color: "#fff"
+              })
+            ]),
             vue.createElementVNode("text", { class: "title" }, "我的积分")
           ]),
           vue.createVNode(_component_uni_icons, {
             type: "right",
-            size: "18",
-            color: "#999"
+            size: "20",
+            color: "#ccc"
           })
         ]),
         vue.createElementVNode("view", {
@@ -5483,17 +5500,19 @@ if (uni.restoreGlobal) {
           onClick: _cache[2] || (_cache[2] = (...args) => $options.goToprePurchaseOrder && $options.goToprePurchaseOrder(...args))
         }, [
           vue.createElementVNode("view", { class: "item-left" }, [
-            vue.createVNode(_component_uni_icons, {
-              type: "shop-filled",
-              size: "30",
-              color: "#2979FF"
-            }),
+            vue.createElementVNode("view", { class: "icon-circle blue" }, [
+              vue.createVNode(_component_uni_icons, {
+                type: "shop-filled",
+                size: "30",
+                color: "#fff"
+              })
+            ]),
             vue.createElementVNode("text", { class: "title" }, "我的预购")
           ]),
           vue.createVNode(_component_uni_icons, {
             type: "right",
-            size: "18",
-            color: "#999"
+            size: "20",
+            color: "#ccc"
           })
         ]),
         vue.createElementVNode("view", {
@@ -5501,17 +5520,19 @@ if (uni.restoreGlobal) {
           onClick: _cache[3] || (_cache[3] = (...args) => $options.toorders && $options.toorders(...args))
         }, [
           vue.createElementVNode("view", { class: "item-left" }, [
-            vue.createVNode(_component_uni_icons, {
-              type: "cart",
-              size: "30",
-              color: "#2979FF"
-            }),
+            vue.createElementVNode("view", { class: "icon-circle blue" }, [
+              vue.createVNode(_component_uni_icons, {
+                type: "cart",
+                size: "30",
+                color: "#fff"
+              })
+            ]),
             vue.createElementVNode("text", { class: "title" }, "我的订单")
           ]),
           vue.createVNode(_component_uni_icons, {
             type: "right",
-            size: "18",
-            color: "#999"
+            size: "20",
+            color: "#ccc"
           })
         ]),
         vue.createElementVNode("view", {
@@ -5519,17 +5540,19 @@ if (uni.restoreGlobal) {
           onClick: _cache[4] || (_cache[4] = (...args) => $options.GotowholesaleNavigation && $options.GotowholesaleNavigation(...args))
         }, [
           vue.createElementVNode("view", { class: "item-left" }, [
-            vue.createVNode(_component_uni_icons, {
-              type: "list",
-              size: "30",
-              color: "#2979FF"
-            }),
+            vue.createElementVNode("view", { class: "icon-circle blue" }, [
+              vue.createVNode(_component_uni_icons, {
+                type: "list",
+                size: "30",
+                color: "#fff"
+              })
+            ]),
             vue.createElementVNode("text", { class: "title" }, "我的批发")
           ]),
           vue.createVNode(_component_uni_icons, {
             type: "right",
-            size: "18",
-            color: "#999"
+            size: "20",
+            color: "#ccc"
           })
         ]),
         vue.createElementVNode("view", {
@@ -5537,17 +5560,19 @@ if (uni.restoreGlobal) {
           onClick: _cache[5] || (_cache[5] = (...args) => $options.GoTOsettings && $options.GoTOsettings(...args))
         }, [
           vue.createElementVNode("view", { class: "item-left" }, [
-            vue.createVNode(_component_uni_icons, {
-              type: "gear",
-              size: "30",
-              color: "#2979FF"
-            }),
+            vue.createElementVNode("view", { class: "icon-circle blue" }, [
+              vue.createVNode(_component_uni_icons, {
+                type: "gear",
+                size: "30",
+                color: "#fff"
+              })
+            ]),
             vue.createElementVNode("text", { class: "title" }, "我的设置")
           ]),
           vue.createVNode(_component_uni_icons, {
             type: "right",
-            size: "18",
-            color: "#999"
+            size: "20",
+            color: "#ccc"
           })
         ]),
         vue.createElementVNode("view", {
@@ -5555,17 +5580,19 @@ if (uni.restoreGlobal) {
           onClick: _cache[6] || (_cache[6] = ($event) => $options.routerPush("/pages/invitation/invitation"))
         }, [
           vue.createElementVNode("view", { class: "item-left" }, [
-            vue.createVNode(_component_uni_icons, {
-              type: "medal-filled",
-              size: "30",
-              color: "#2979FF"
-            }),
+            vue.createElementVNode("view", { class: "icon-circle purple" }, [
+              vue.createVNode(_component_uni_icons, {
+                type: "medal-filled",
+                size: "30",
+                color: "#fff"
+              })
+            ]),
             vue.createElementVNode("text", { class: "title" }, "我的推广")
           ]),
           vue.createVNode(_component_uni_icons, {
             type: "right",
-            size: "18",
-            color: "#999"
+            size: "20",
+            color: "#ccc"
           })
         ]),
         vue.createElementVNode("view", {
@@ -5573,28 +5600,30 @@ if (uni.restoreGlobal) {
           onClick: _cache[7] || (_cache[7] = ($event) => $options.routerPush("/pages/earningsRecord/earningsRecord"))
         }, [
           vue.createElementVNode("view", { class: "item-left" }, [
-            vue.createVNode(_component_uni_icons, {
-              type: "medal-filled",
-              size: "30",
-              color: "#2979FF"
-            }),
+            vue.createElementVNode("view", { class: "icon-circle purple" }, [
+              vue.createVNode(_component_uni_icons, {
+                type: "medal-filled",
+                size: "30",
+                color: "#fff"
+              })
+            ]),
             vue.createElementVNode("text", { class: "title" }, "我的收益")
           ]),
           vue.createVNode(_component_uni_icons, {
             type: "right",
-            size: "18",
-            color: "#999"
+            size: "20",
+            color: "#ccc"
           })
         ])
       ]),
       vue.createElementVNode("button", {
         type: "warn",
         onClick: _cache[8] || (_cache[8] = (...args) => $options.logout && $options.logout(...args)),
-        style: { "margin": "20rpx" }
+        class: "logout-btn"
       }, "退出登录")
     ]);
   }
-  const PagesUserUser = /* @__PURE__ */ _export_sfc(_sfc_main$29, [["render", _sfc_render$28], ["__file", "E:/小程序转app/xcbapp/pages/user/user.vue"]]);
+  const PagesUserUser = /* @__PURE__ */ _export_sfc(_sfc_main$29, [["render", _sfc_render$28], ["__scopeId", "data-v-0f7520f0"], ["__file", "E:/小程序转app/xcbapp/pages/user/user.vue"]]);
   const _sfc_main$28 = {
     name: "UniBadge",
     emits: ["click"],
@@ -30920,9 +30949,7 @@ ${o3}
       return {
         cardHeight: "380rpx",
         selltotalnum: 0,
-        //供应信息数量
         buytotalnum: 0
-        // 求购信息数量
       };
     },
     onLoad() {
@@ -30961,28 +30988,17 @@ ${o3}
           url: "/subPackages/Wholesale/supply/supply"
         });
       },
-      // 计算布局尺寸
       calculateLayout() {
         const systemInfo = uni.getSystemInfoSync();
-        this.cardHeight = `${systemInfo.windowHeight * 0.3}px`;
-      },
-      // 页面跳转
-      navigateTo(type) {
-        const routes = {
-          supply: "/pages/supply/supply",
-          purchase: "/pages/purchase/purchase"
-        };
-        uni.navigateTo({
-          url: routes[type]
-        });
+        this.cardHeight = `${systemInfo.windowHeight * 0.28}px`;
       }
     }
   };
   function _sfc_render$1c(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
-    return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
-      vue.createElementVNode("view", { class: "main-content" }, [
+    return vue.openBlock(), vue.createElementBlock("view", { class: "wholesale-container" }, [
+      vue.createElementVNode("view", { class: "region-card" }, [
         vue.createElementVNode(
           "view",
           {
@@ -30994,7 +31010,7 @@ ${o3}
             vue.createElementVNode("view", { class: "card-inner" }, [
               vue.createVNode(_component_uni_icons, {
                 type: "shop-filled",
-                size: "48",
+                size: "64",
                 color: "#fff"
               }),
               vue.createElementVNode("text", { class: "card-title" }, "供应大厅"),
@@ -31015,7 +31031,7 @@ ${o3}
             vue.createElementVNode("view", { class: "card-inner" }, [
               vue.createVNode(_component_uni_icons, {
                 type: "cart-filled",
-                size: "48",
+                size: "64",
                 color: "#fff"
               }),
               vue.createElementVNode("text", { class: "card-title" }, "采购大厅"),
@@ -31027,6 +31043,11 @@ ${o3}
         ),
         vue.createElementVNode("view", { class: "stats-panel" }, [
           vue.createElementVNode("view", { class: "stats-item" }, [
+            vue.createVNode(_component_uni_icons, {
+              type: "shop-filled",
+              size: "36",
+              color: "#2d8cf0"
+            }),
             vue.createElementVNode(
               "text",
               { class: "stats-value" },
@@ -31037,6 +31058,11 @@ ${o3}
             vue.createElementVNode("text", { class: "stats-label" }, "供应量")
           ]),
           vue.createElementVNode("view", { class: "stats-item" }, [
+            vue.createVNode(_component_uni_icons, {
+              type: "cart-filled",
+              size: "36",
+              color: "#ff6a00"
+            }),
             vue.createElementVNode(
               "text",
               { class: "stats-value" },
@@ -31048,53 +31074,62 @@ ${o3}
           ])
         ]),
         vue.createElementVNode("view", {
-          style: { "margin": "30rpx 0 0 0", "display": "flex", "justify-content": "center" },
+          class: "action-bar",
           onClick: _cache[2] || (_cache[2] = ($event) => $options.toggle("bottom"))
         }, [
-          vue.createVNode(_component_uni_icons, {
-            type: "plusempty",
-            size: "40",
-            style: { "background-color": "limegreen", "padding": "20rpx", "border-radius": "10rpx", "color": "white" }
-          })
-        ]),
-        vue.createVNode(
-          _component_uni_popup,
-          {
-            ref: "popup",
-            style: { "padding-bottom": "0" }
-          },
-          {
-            default: vue.withCtx(() => [
-              vue.createElementVNode("view", { style: { "height": "30vh", "border-radius": "30rpx 30rpx 0rpx 0rpx", "background-color": "white", "display": "flex", "justify-content": "center", "align-items": "center" } }, [
-                vue.createElementVNode("view", { style: { "text-align": "center", "margin": "0 50rpx 0 0" } }, [
-                  vue.createVNode(_component_uni_icons, {
-                    type: "plusempty",
-                    size: "40",
-                    style: { "border-radius": "50%" },
-                    onClick: $options.goToAddPurchase
-                  }, null, 8, ["onClick"]),
-                  vue.createElementVNode("view", { style: { "font-size": "30rpx", "font-weight": "bold" } }, "发采购"),
-                  vue.createElementVNode("view", { class: "label" }, "让百万供应商为你报价")
-                ]),
-                vue.createElementVNode("view", { style: { "text-align": "center" } }, [
-                  vue.createVNode(_component_uni_icons, {
-                    type: "plusempty",
-                    size: "40",
-                    style: { "border-radius": "50%" },
-                    onClick: $options.goToAddSupply
-                  }, null, 8, ["onClick"]),
-                  vue.createElementVNode("view", { style: { "font-size": "30rpx", "font-weight": "bold" } }, "发商品"),
-                  vue.createElementVNode("view", { class: "label" }, "千万采购商找到你")
-                ])
+          vue.createElementVNode("button", { class: "save-btn" }, [
+            vue.createVNode(_component_uni_icons, {
+              type: "plusempty",
+              size: "42",
+              color: "#fff",
+              style: { "margin-right": "12rpx" }
+            }),
+            vue.createElementVNode("text", null, "我要发布")
+          ])
+        ])
+      ]),
+      vue.createVNode(
+        _component_uni_popup,
+        {
+          ref: "popup",
+          style: { "padding-bottom": "0" }
+        },
+        {
+          default: vue.withCtx(() => [
+            vue.createElementVNode("view", { class: "popup-sheet" }, [
+              vue.createElementVNode("view", {
+                class: "popup-option purchase-option",
+                onClick: _cache[3] || (_cache[3] = (...args) => $options.goToAddPurchase && $options.goToAddPurchase(...args))
+              }, [
+                vue.createVNode(_component_uni_icons, {
+                  type: "cart-filled",
+                  size: "56",
+                  color: "#ff4d4f"
+                }),
+                vue.createElementVNode("view", { class: "option-title" }, "发采购"),
+                vue.createElementVNode("view", { class: "label" }, "让百万供应商为你报价")
+              ]),
+              vue.createElementVNode("view", { class: "vertical-divider" }),
+              vue.createElementVNode("view", {
+                class: "popup-option supply-option",
+                onClick: _cache[4] || (_cache[4] = (...args) => $options.goToAddSupply && $options.goToAddSupply(...args))
+              }, [
+                vue.createVNode(_component_uni_icons, {
+                  type: "shop-filled",
+                  size: "56",
+                  color: "#2d8cf0"
+                }),
+                vue.createElementVNode("view", { class: "option-title" }, "发商品"),
+                vue.createElementVNode("view", { class: "label" }, "千万采购商找到你")
               ])
-            ]),
-            _: 1
-            /* STABLE */
-          },
-          512
-          /* NEED_PATCH */
-        )
-      ])
+            ])
+          ]),
+          _: 1
+          /* STABLE */
+        },
+        512
+        /* NEED_PATCH */
+      )
     ]);
   }
   const PagesWholesaleWholesale = /* @__PURE__ */ _export_sfc(_sfc_main$1d, [["render", _sfc_render$1c], ["__scopeId", "data-v-e0b2961b"], ["__file", "E:/小程序转app/xcbapp/pages/wholesale/wholesale.vue"]]);

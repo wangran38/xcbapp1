@@ -287,7 +287,7 @@
 		margin-top: 60rpx;
 		height: 96rpx;
 		line-height: 96rpx;
-		background: #2ecc71;
+		background: #4a90e2;
 		color: #fff;
 		font-size: 32rpx;
 		border-radius: 48rpx;

@@ -1122,7 +1122,7 @@
   transform: translateX(-50%);
   width: 0;
   height: 0.1875rem;
-  background: #ff4d4f;
+  background: #4a90e2;
   border-radius: 0.125rem;
   transition: all 0.3s;
 }
@@ -1177,7 +1177,7 @@
   margin-top: 1.875rem;
 }
 .action-bar .save-btn[data-v-3b59972f] {
-  background: linear-gradient(135deg, #ff7875 0%, #ff4d4f 100%);
+  background: #4a90e2;
   color: #fff;
   height: 3.4375rem;
   line-height: 3.4375rem;
@@ -1185,7 +1185,6 @@
   font-size: 1.0625rem;
   font-weight: bold;
   border: none;
-  box-shadow: 0 0.3125rem 0.9375rem rgba(255, 77, 79, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;

@@ -194,7 +194,8 @@
 				&.theme-0 { background: linear-gradient(135deg, #ff9c6e, #ff7875); }
 				&.theme-1 { background: linear-gradient(135deg, #b7eb8f, #73d13d); }
 				&.theme-2 { background: linear-gradient(135deg, #91d5ff, #40a9ff); }
-				&.theme-3 { background: linear-gradient(135deg, #fff566, #ffec3d); .card-title { color: #856a00; } }
+				&.theme-3 { background: linear-gradient(135deg, #fff566, #ffec3d); 
+				.card-title { color: #856a00; } }
 			}
 		}
 	}
@@ -213,11 +214,10 @@
 			margin-right: 16rpx;
 			border: 1rpx solid #e8e8e8;
 			&.active {
-				background: $primary-color;
+				background: #4a90e2;
 				color: #fff;
-				border-color: $primary-color;
+				border-color: #4a90e2;
 				font-weight: bold;
-				box-shadow: 0 4rpx 10rpx rgba(255, 77, 79, 0.2);
 			}
 		}
 	}
@@ -253,40 +253,15 @@
 						.stall-area { font-size: 24rpx; color: #999; margin-left: 6rpx; }
 					}
 					.entry-btn {
-						background: #fff1f0; color: $primary-color;
+						background: #4a90e2; color: #fff;
 						text-align: center; padding: 10rpx 0; border-radius: 12rpx;
-						font-size: 32rpx; font-weight: bold; border: 1rpx solid #ffa39e;
+						font-size: 32rpx; font-weight: bold; border: 1rpx solid #4a90e2;
 					}
 				}
 			}
 		}
 	}
 
-	/* 弹窗样式优化 */
-	.notice-modal {
-		position: fixed; inset: 0; z-index: 10001;
-		display: flex; align-items: center; justify-content: center;
-		&__mask { position: absolute; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
-		&__box {
-			position: relative; width: 80%; background: #fff; border-radius: 32rpx; overflow: hidden;
-			animation: modalShow 0.3s ease-out;
-			.notice-header {
-				background: linear-gradient(to bottom, #fff1f0, #fff); padding: 40rpx 0 20rpx;
-				display: flex; flex-direction: column; align-items: center;
-				.icon-bg { width: 100rpx; height: 100rpx; background: $primary-color; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 16rpx; box-shadow: 0 8rpx 20rpx rgba(255, 77, 79, 0.2); }
-				.notice-modal__title { font-size: 36rpx; font-weight: 800; color: #333; }
-			}
-			.notice-modal__content {
-				max-height: 400rpx; padding: 0 40rpx;
-				.notice-text-wrap { .notice-modal__content-text { font-size: 30rpx; color: #444; line-height: 1.8; } }
-			}
-			.notice-footer-action {
-				padding: 40rpx;
-				.no-prompt { display: flex; align-items: center; justify-content: center; margin-bottom: 24rpx; text { font-size: 26rpx; color: #999; } }
-				.notice-confirm-btn { background: $primary-color; color: #fff; border-radius: 100rpx; font-weight: bold; border: none; }
-			}
-		}
-	}
 
 	@keyframes modalShow { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
