@@ -781,1715 +781,6 @@
   text-decoration: none;
   text-align: center;
 }
-/* 水平间距 */
-/* 水平间距 */
-/**
- * 这里是uni-app内置的常用样式变量
- *
- * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
- * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
- *
- */
-/**
- * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
- *
- * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
- */
-/* 颜色变量 */
-/* 行为相关颜色 */
-/* 文字基本颜色 */
-/* 背景颜色 */
-/* 边框颜色 */
-/* 尺寸变量 */
-/* 文字尺寸 */
-/* 图片尺寸 */
-/* Border Radius */
-/* 水平间距 */
-/* 垂直间距 */
-/* 透明度 */
-/* 文章场景相关 */
-/**
- * author: Di (微信小程序开发工程师)
- * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
- *         垂直微信小程序开发交流社区
- *
- * github地址: https://github.com/icindy/wxParse
- *
- * for: 微信小程序富文本解析
- * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
- */
-/**
- * 请在全局下引入该文件，@import '/static/wxParse.css';
- */
-.wxParse[data-v-c97cb896] {
-  -webkit-user-select: none;
-          user-select: none;
-  width: 100%;
-  font-family: Helvetica, "PingFangSC", "Microsoft Yahei", "微软雅黑", Arial, sans-serif;
-  color: #333;
-  line-height: 1.5;
-  font-size: 1em;
-  text-align: justify;
-  /* //左右两端对齐 */
-}
-.wxParse uni-view[data-v-c97cb896], .wxParse uni-view[data-v-c97cb896] {
-  word-break: break-word;
-}
-.wxParse .p[data-v-c97cb896] {
-  padding-bottom: 0.5em;
-  clear: both;
-  /* letter-spacing: 0;//字间距 */
-}
-.wxParse .inline[data-v-c97cb896] {
-  display: inline;
-  margin: 0;
-  padding: 0;
-}
-.wxParse .div[data-v-c97cb896] {
-  margin: 0;
-  padding: 0;
-  display: block;
-}
-.wxParse .h1[data-v-c97cb896] {
-  font-size: 2em;
-  line-height: 1.2em;
-  margin: 0.67em 0;
-}
-.wxParse .h2[data-v-c97cb896] {
-  font-size: 1.5em;
-  margin: 0.83em 0;
-}
-.wxParse .h3[data-v-c97cb896] {
-  font-size: 1.17em;
-  margin: 1em 0;
-}
-.wxParse .h4[data-v-c97cb896] {
-  margin: 1.33em 0;
-}
-.wxParse .h5[data-v-c97cb896] {
-  font-size: 0.83em;
-  margin: 1.67em 0;
-}
-.wxParse .h6[data-v-c97cb896] {
-  font-size: 0.83em;
-  margin: 1.67em 0;
-}
-.wxParse .h1[data-v-c97cb896],
-.wxParse .h2[data-v-c97cb896],
-.wxParse .h3[data-v-c97cb896],
-.wxParse .h4[data-v-c97cb896],
-.wxParse .h5[data-v-c97cb896],
-.wxParse .h6[data-v-c97cb896],
-.wxParse .b[data-v-c97cb896],
-.wxParse .strong[data-v-c97cb896] {
-  font-weight: bolder;
-}
-.wxParse .i[data-v-c97cb896],
-.wxParse .cite[data-v-c97cb896],
-.wxParse .em[data-v-c97cb896],
-.wxParse .var[data-v-c97cb896],
-.wxParse .address[data-v-c97cb896] {
-  font-style: italic;
-}
-.wxParse .spaceshow[data-v-c97cb896] {
-  white-space: pre;
-}
-.wxParse .pre[data-v-c97cb896],
-.wxParse .tt[data-v-c97cb896],
-.wxParse .code[data-v-c97cb896],
-.wxParse .kbd[data-v-c97cb896],
-.wxParse .samp[data-v-c97cb896] {
-  font-family: monospace;
-}
-.wxParse .pre[data-v-c97cb896] {
-  overflow: auto;
-  background: #f5f5f5;
-  padding: 0.5rem;
-  white-space: pre;
-  margin: 1em 0;
-  font-size: 0.75rem;
-}
-.wxParse .code[data-v-c97cb896] {
-  overflow: auto;
-  padding: 0.5rem;
-  white-space: pre;
-  margin: 1em 0;
-  background: #f5f5f5;
-  font-size: 0.75rem;
-}
-.wxParse .big[data-v-c97cb896] {
-  font-size: 1.17em;
-}
-.wxParse .small[data-v-c97cb896],
-.wxParse .sub[data-v-c97cb896],
-.wxParse .sup[data-v-c97cb896] {
-  font-size: 0.83em;
-}
-.wxParse .sub[data-v-c97cb896] {
-  vertical-align: sub;
-}
-.wxParse .sup[data-v-c97cb896] {
-  vertical-align: super;
-}
-.wxParse .s[data-v-c97cb896],
-.wxParse .strike[data-v-c97cb896],
-.wxParse .del[data-v-c97cb896] {
-  text-decoration: line-through;
-}
-.wxParse .strong[data-v-c97cb896],
-.wxParse .text[data-v-c97cb896],
-.wxParse .span[data-v-c97cb896],
-.wxParse .s[data-v-c97cb896] {
-  display: inline;
-}
-.wxParse .a[data-v-c97cb896] {
-  color: deepskyblue;
-}
-.wxParse .video[data-v-c97cb896] {
-  text-align: center;
-  margin: 0.6875rem 0;
-}
-.wxParse .video-video[data-v-c97cb896] {
-  width: 100%;
-}
-.wxParse .uni-image[data-v-c97cb896] {
-  height: 100px !important;
-  width: 100px !important;
-}
-.wxParse .img[data-v-c97cb896] {
-  height: 18.75rem !important;
-  display: block;
-  height: 3.125rem;
-  margin-bottom: 0em;
-  /* //与p标签底部padding同时修改 */
-  overflow: hidden;
-}
-.wxParse .blockquote[data-v-c97cb896] {
-  margin: 0.3125rem 0;
-  padding: 0.6875rem 0 0.6875rem 0.6875rem;
-  font-family: Courier, Calibri, "宋体";
-  background: #f5f5f5;
-  border-left: 0.1875rem solid #dbdbdb;
-}
-.wxParse .blockquote .p[data-v-c97cb896] {
-  margin: 0;
-}
-.wxParse .ul[data-v-c97cb896], .wxParse .ol[data-v-c97cb896] {
-  display: block;
-  margin: 1em 0;
-  padding-left: 2em;
-}
-.wxParse .ol[data-v-c97cb896] {
-  list-style-type: disc;
-}
-.wxParse .ol[data-v-c97cb896] {
-  list-style-type: decimal;
-}
-.wxParse .ol > weixin-parse-template[data-v-c97cb896], .wxParse .ul > weixin-parse-template[data-v-c97cb896] {
-  display: list-item;
-  align-items: baseline;
-  text-align: match-parent;
-}
-.wxParse .ol > .li[data-v-c97cb896], .wxParse .ul > .li[data-v-c97cb896] {
-  display: list-item;
-  align-items: baseline;
-  text-align: match-parent;
-}
-.wxParse .ul .ul[data-v-c97cb896], .wxParse .ol .ul[data-v-c97cb896] {
-  list-style-type: circle;
-}
-.wxParse .ol .ol .ul[data-v-c97cb896], .wxParse .ol .ul .ul[data-v-c97cb896], .wxParse .ul .ol .ul[data-v-c97cb896], .wxParse .ul .ul .ul[data-v-c97cb896] {
-  list-style-type: square;
-}
-.wxParse .u[data-v-c97cb896] {
-  text-decoration: underline;
-}
-.wxParse .hide[data-v-c97cb896] {
-  display: none;
-}
-.wxParse .del[data-v-c97cb896] {
-  display: inline;
-}
-.wxParse .figure[data-v-c97cb896] {
-  overflow: hidden;
-}
-.wxParse .tablebox[data-v-c97cb896] {
-  overflow: auto;
-  background-color: #f5f5f5;
-  background: #f5f5f5;
-  font-size: 13px;
-  padding: 8px;
-}
-.wxParse .table .table[data-v-c97cb896], .wxParse .table[data-v-c97cb896] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  /* 内边框 */
-  /* width: 100%; */
-  overflow: auto;
-  white-space: pre;
-}
-.wxParse .tbody[data-v-c97cb896] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  /* 内边框 */
-  border: 1px solid #dadada;
-}
-.wxParse .table .thead[data-v-c97cb896], .wxParse .table .tfoot[data-v-c97cb896], .wxParse .table .th[data-v-c97cb896] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  background: #ececec;
-  font-weight: 40;
-}
-.wxParse .table .tr[data-v-c97cb896] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  /* border: 2px solid #F0AD4E; */
-  overflow: auto;
-}
-.wxParse .table .th[data-v-c97cb896],
-.wxParse .table .td[data-v-c97cb896] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  border: 0.0625rem solid #dadada;
-  overflow: auto;
-}
-.wxParse .audio[data-v-c97cb896], .wxParse .uni-audio-default[data-v-c97cb896] {
-  display: block;
-}
-.uni-badge--x[data-v-c97cb896] {
-  display: inline-block;
-  position: relative;
-}
-.uni-badge--absolute[data-v-c97cb896] {
-  position: absolute;
-}
-.uni-badge--small[data-v-c97cb896] {
-  transform: scale(0.8);
-  transform-origin: center center;
-}
-.uni-badge[data-v-c97cb896] {
-  display: flex;
-  overflow: hidden;
-  box-sizing: border-box;
-  font-feature-settings: "tnum";
-  min-width: 20px;
-  justify-content: center;
-  flex-direction: row;
-  height: 20px;
-  padding: 0 4px;
-  line-height: 18px;
-  color: #fff;
-  border-radius: 100px;
-  background-color: #8f939c;
-  background-color: transparent;
-  border: 1px solid #fff;
-  text-align: center;
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 12px;
-}
-.uni-badge--info[data-v-c97cb896] {
-  color: #fff;
-  background-color: #8f939c;
-}
-.uni-badge--primary[data-v-c97cb896] {
-  background-color: #2979ff;
-}
-.uni-badge--success[data-v-c97cb896] {
-  background-color: #18bc37;
-}
-.uni-badge--warning[data-v-c97cb896] {
-  background-color: #f3a73f;
-}
-.uni-badge--error[data-v-c97cb896] {
-  background-color: #e43d33;
-}
-.uni-badge--inverted[data-v-c97cb896] {
-  padding: 0 5px 0 0;
-  color: #8f939c;
-}
-.uni-badge--info-inverted[data-v-c97cb896] {
-  color: #8f939c;
-  background-color: transparent;
-}
-.uni-badge--primary-inverted[data-v-c97cb896] {
-  color: #2979ff;
-  background-color: transparent;
-}
-.uni-badge--success-inverted[data-v-c97cb896] {
-  color: #18bc37;
-  background-color: transparent;
-}
-.uni-badge--warning-inverted[data-v-c97cb896] {
-  color: #f3a73f;
-  background-color: transparent;
-}
-.uni-badge--error-inverted[data-v-c97cb896] {
-  color: #e43d33;
-  background-color: transparent;
-}
-/* 水平间距 */
-/* 水平间距 */
-/**
- * 这里是uni-app内置的常用样式变量
- *
- * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
- * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
- *
- */
-/**
- * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
- *
- * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
- */
-/* 颜色变量 */
-/* 行为相关颜色 */
-/* 文字基本颜色 */
-/* 背景颜色 */
-/* 边框颜色 */
-/* 尺寸变量 */
-/* 文字尺寸 */
-/* 图片尺寸 */
-/* Border Radius */
-/* 水平间距 */
-/* 垂直间距 */
-/* 透明度 */
-/* 文章场景相关 */
-/**
- * author: Di (微信小程序开发工程师)
- * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
- *         垂直微信小程序开发交流社区
- *
- * github地址: https://github.com/icindy/wxParse
- *
- * for: 微信小程序富文本解析
- * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
- */
-/**
- * 请在全局下引入该文件，@import '/static/wxParse.css';
- */
-.wxParse[data-v-c7524739] {
-  -webkit-user-select: none;
-          user-select: none;
-  width: 100%;
-  font-family: Helvetica, "PingFangSC", "Microsoft Yahei", "微软雅黑", Arial, sans-serif;
-  color: #333;
-  line-height: 1.5;
-  font-size: 1em;
-  text-align: justify;
-  /* //左右两端对齐 */
-}
-.wxParse uni-view[data-v-c7524739], .wxParse uni-view[data-v-c7524739] {
-  word-break: break-word;
-}
-.wxParse .p[data-v-c7524739] {
-  padding-bottom: 0.5em;
-  clear: both;
-  /* letter-spacing: 0;//字间距 */
-}
-.wxParse .inline[data-v-c7524739] {
-  display: inline;
-  margin: 0;
-  padding: 0;
-}
-.wxParse .div[data-v-c7524739] {
-  margin: 0;
-  padding: 0;
-  display: block;
-}
-.wxParse .h1[data-v-c7524739] {
-  font-size: 2em;
-  line-height: 1.2em;
-  margin: 0.67em 0;
-}
-.wxParse .h2[data-v-c7524739] {
-  font-size: 1.5em;
-  margin: 0.83em 0;
-}
-.wxParse .h3[data-v-c7524739] {
-  font-size: 1.17em;
-  margin: 1em 0;
-}
-.wxParse .h4[data-v-c7524739] {
-  margin: 1.33em 0;
-}
-.wxParse .h5[data-v-c7524739] {
-  font-size: 0.83em;
-  margin: 1.67em 0;
-}
-.wxParse .h6[data-v-c7524739] {
-  font-size: 0.83em;
-  margin: 1.67em 0;
-}
-.wxParse .h1[data-v-c7524739],
-.wxParse .h2[data-v-c7524739],
-.wxParse .h3[data-v-c7524739],
-.wxParse .h4[data-v-c7524739],
-.wxParse .h5[data-v-c7524739],
-.wxParse .h6[data-v-c7524739],
-.wxParse .b[data-v-c7524739],
-.wxParse .strong[data-v-c7524739] {
-  font-weight: bolder;
-}
-.wxParse .i[data-v-c7524739],
-.wxParse .cite[data-v-c7524739],
-.wxParse .em[data-v-c7524739],
-.wxParse .var[data-v-c7524739],
-.wxParse .address[data-v-c7524739] {
-  font-style: italic;
-}
-.wxParse .spaceshow[data-v-c7524739] {
-  white-space: pre;
-}
-.wxParse .pre[data-v-c7524739],
-.wxParse .tt[data-v-c7524739],
-.wxParse .code[data-v-c7524739],
-.wxParse .kbd[data-v-c7524739],
-.wxParse .samp[data-v-c7524739] {
-  font-family: monospace;
-}
-.wxParse .pre[data-v-c7524739] {
-  overflow: auto;
-  background: #f5f5f5;
-  padding: 0.5rem;
-  white-space: pre;
-  margin: 1em 0;
-  font-size: 0.75rem;
-}
-.wxParse .code[data-v-c7524739] {
-  overflow: auto;
-  padding: 0.5rem;
-  white-space: pre;
-  margin: 1em 0;
-  background: #f5f5f5;
-  font-size: 0.75rem;
-}
-.wxParse .big[data-v-c7524739] {
-  font-size: 1.17em;
-}
-.wxParse .small[data-v-c7524739],
-.wxParse .sub[data-v-c7524739],
-.wxParse .sup[data-v-c7524739] {
-  font-size: 0.83em;
-}
-.wxParse .sub[data-v-c7524739] {
-  vertical-align: sub;
-}
-.wxParse .sup[data-v-c7524739] {
-  vertical-align: super;
-}
-.wxParse .s[data-v-c7524739],
-.wxParse .strike[data-v-c7524739],
-.wxParse .del[data-v-c7524739] {
-  text-decoration: line-through;
-}
-.wxParse .strong[data-v-c7524739],
-.wxParse .text[data-v-c7524739],
-.wxParse .span[data-v-c7524739],
-.wxParse .s[data-v-c7524739] {
-  display: inline;
-}
-.wxParse .a[data-v-c7524739] {
-  color: deepskyblue;
-}
-.wxParse .video[data-v-c7524739] {
-  text-align: center;
-  margin: 0.6875rem 0;
-}
-.wxParse .video-video[data-v-c7524739] {
-  width: 100%;
-}
-.wxParse .uni-image[data-v-c7524739] {
-  height: 100px !important;
-  width: 100px !important;
-}
-.wxParse .img[data-v-c7524739] {
-  height: 18.75rem !important;
-  display: block;
-  height: 3.125rem;
-  margin-bottom: 0em;
-  /* //与p标签底部padding同时修改 */
-  overflow: hidden;
-}
-.wxParse .blockquote[data-v-c7524739] {
-  margin: 0.3125rem 0;
-  padding: 0.6875rem 0 0.6875rem 0.6875rem;
-  font-family: Courier, Calibri, "宋体";
-  background: #f5f5f5;
-  border-left: 0.1875rem solid #dbdbdb;
-}
-.wxParse .blockquote .p[data-v-c7524739] {
-  margin: 0;
-}
-.wxParse .ul[data-v-c7524739], .wxParse .ol[data-v-c7524739] {
-  display: block;
-  margin: 1em 0;
-  padding-left: 2em;
-}
-.wxParse .ol[data-v-c7524739] {
-  list-style-type: disc;
-}
-.wxParse .ol[data-v-c7524739] {
-  list-style-type: decimal;
-}
-.wxParse .ol > weixin-parse-template[data-v-c7524739], .wxParse .ul > weixin-parse-template[data-v-c7524739] {
-  display: list-item;
-  align-items: baseline;
-  text-align: match-parent;
-}
-.wxParse .ol > .li[data-v-c7524739], .wxParse .ul > .li[data-v-c7524739] {
-  display: list-item;
-  align-items: baseline;
-  text-align: match-parent;
-}
-.wxParse .ul .ul[data-v-c7524739], .wxParse .ol .ul[data-v-c7524739] {
-  list-style-type: circle;
-}
-.wxParse .ol .ol .ul[data-v-c7524739], .wxParse .ol .ul .ul[data-v-c7524739], .wxParse .ul .ol .ul[data-v-c7524739], .wxParse .ul .ul .ul[data-v-c7524739] {
-  list-style-type: square;
-}
-.wxParse .u[data-v-c7524739] {
-  text-decoration: underline;
-}
-.wxParse .hide[data-v-c7524739] {
-  display: none;
-}
-.wxParse .del[data-v-c7524739] {
-  display: inline;
-}
-.wxParse .figure[data-v-c7524739] {
-  overflow: hidden;
-}
-.wxParse .tablebox[data-v-c7524739] {
-  overflow: auto;
-  background-color: #f5f5f5;
-  background: #f5f5f5;
-  font-size: 13px;
-  padding: 8px;
-}
-.wxParse .table .table[data-v-c7524739], .wxParse .table[data-v-c7524739] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  /* 内边框 */
-  /* width: 100%; */
-  overflow: auto;
-  white-space: pre;
-}
-.wxParse .tbody[data-v-c7524739] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  /* 内边框 */
-  border: 1px solid #dadada;
-}
-.wxParse .table .thead[data-v-c7524739], .wxParse .table .tfoot[data-v-c7524739], .wxParse .table .th[data-v-c7524739] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  background: #ececec;
-  font-weight: 40;
-}
-.wxParse .table .tr[data-v-c7524739] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  /* border: 2px solid #F0AD4E; */
-  overflow: auto;
-}
-.wxParse .table .th[data-v-c7524739],
-.wxParse .table .td[data-v-c7524739] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  border: 0.0625rem solid #dadada;
-  overflow: auto;
-}
-.wxParse .audio[data-v-c7524739], .wxParse .uni-audio-default[data-v-c7524739] {
-  display: block;
-}
-.uni-list-item[data-v-c7524739] {
-  display: flex;
-  font-size: 16px;
-  position: relative;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #fff;
-  flex-direction: row;
-}
-.uni-list-item--disabled[data-v-c7524739] {
-  opacity: 0.3;
-}
-.uni-list-item--hover[data-v-c7524739] {
-  background-color: #f1f1f1;
-}
-.uni-list-item__container[data-v-c7524739] {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  padding: 12px 15px;
-  padding-left: 15px;
-  flex: 1;
-  overflow: hidden;
-}
-.container--right[data-v-c7524739] {
-  padding-right: 0;
-}
-.uni-list--border[data-v-c7524739] {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-}
-.uni-list--border[data-v-c7524739]:after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 1px;
-  content: "";
-  transform: scaleY(0.5);
-  background-color: #e5e5e5;
-}
-.uni-list-item__content[data-v-c7524739] {
-  display: flex;
-  padding-right: 8px;
-  flex: 1;
-  color: #3b4144;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-}
-.uni-list-item__content--center[data-v-c7524739] {
-  justify-content: center;
-}
-.uni-list-item__content-title[data-v-c7524739] {
-  font-size: 14px;
-  color: #3b4144;
-  overflow: hidden;
-}
-.uni-list-item__content-note[data-v-c7524739] {
-  margin-top: 0.1875rem;
-  color: #999;
-  font-size: 12px;
-  overflow: hidden;
-}
-.uni-list-item__extra[data-v-c7524739] {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-}
-.uni-list-item__header[data-v-c7524739] {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.uni-list-item__icon[data-v-c7524739] {
-  margin-right: 0.5625rem;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-.uni-list-item__icon-img[data-v-c7524739] {
-  display: block;
-  height: 26px;
-  width: 26px;
-  margin-right: 10px;
-}
-.uni-icon-wrapper[data-v-c7524739] {
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-}
-.flex--direction[data-v-c7524739] {
-  flex-direction: column;
-  align-items: initial;
-}
-.flex--justify[data-v-c7524739] {
-  justify-content: initial;
-}
-.uni-list--lg[data-v-c7524739] {
-  height: 40px;
-  width: 40px;
-}
-.uni-list--base[data-v-c7524739] {
-  height: 26px;
-  width: 26px;
-}
-.uni-list--sm[data-v-c7524739] {
-  height: 20px;
-  width: 20px;
-}
-.uni-list-item__extra-text[data-v-c7524739] {
-  color: #999;
-  font-size: 12px;
-}
-.uni-ellipsis-1[data-v-c7524739] {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.uni-ellipsis-2[data-v-c7524739] {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-/* 水平间距 */
-/* 水平间距 */
-/**
- * 这里是uni-app内置的常用样式变量
- *
- * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
- * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
- *
- */
-/**
- * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
- *
- * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
- */
-/* 颜色变量 */
-/* 行为相关颜色 */
-/* 文字基本颜色 */
-/* 背景颜色 */
-/* 边框颜色 */
-/* 尺寸变量 */
-/* 文字尺寸 */
-/* 图片尺寸 */
-/* Border Radius */
-/* 水平间距 */
-/* 垂直间距 */
-/* 透明度 */
-/* 文章场景相关 */
-/**
- * author: Di (微信小程序开发工程师)
- * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
- *         垂直微信小程序开发交流社区
- *
- * github地址: https://github.com/icindy/wxParse
- *
- * for: 微信小程序富文本解析
- * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
- */
-/**
- * 请在全局下引入该文件，@import '/static/wxParse.css';
- */
-.wxParse[data-v-c2f1266a] {
-  -webkit-user-select: none;
-          user-select: none;
-  width: 100%;
-  font-family: Helvetica, "PingFangSC", "Microsoft Yahei", "微软雅黑", Arial, sans-serif;
-  color: #333;
-  line-height: 1.5;
-  font-size: 1em;
-  text-align: justify;
-  /* //左右两端对齐 */
-}
-.wxParse uni-view[data-v-c2f1266a], .wxParse uni-view[data-v-c2f1266a] {
-  word-break: break-word;
-}
-.wxParse .p[data-v-c2f1266a] {
-  padding-bottom: 0.5em;
-  clear: both;
-  /* letter-spacing: 0;//字间距 */
-}
-.wxParse .inline[data-v-c2f1266a] {
-  display: inline;
-  margin: 0;
-  padding: 0;
-}
-.wxParse .div[data-v-c2f1266a] {
-  margin: 0;
-  padding: 0;
-  display: block;
-}
-.wxParse .h1[data-v-c2f1266a] {
-  font-size: 2em;
-  line-height: 1.2em;
-  margin: 0.67em 0;
-}
-.wxParse .h2[data-v-c2f1266a] {
-  font-size: 1.5em;
-  margin: 0.83em 0;
-}
-.wxParse .h3[data-v-c2f1266a] {
-  font-size: 1.17em;
-  margin: 1em 0;
-}
-.wxParse .h4[data-v-c2f1266a] {
-  margin: 1.33em 0;
-}
-.wxParse .h5[data-v-c2f1266a] {
-  font-size: 0.83em;
-  margin: 1.67em 0;
-}
-.wxParse .h6[data-v-c2f1266a] {
-  font-size: 0.83em;
-  margin: 1.67em 0;
-}
-.wxParse .h1[data-v-c2f1266a],
-.wxParse .h2[data-v-c2f1266a],
-.wxParse .h3[data-v-c2f1266a],
-.wxParse .h4[data-v-c2f1266a],
-.wxParse .h5[data-v-c2f1266a],
-.wxParse .h6[data-v-c2f1266a],
-.wxParse .b[data-v-c2f1266a],
-.wxParse .strong[data-v-c2f1266a] {
-  font-weight: bolder;
-}
-.wxParse .i[data-v-c2f1266a],
-.wxParse .cite[data-v-c2f1266a],
-.wxParse .em[data-v-c2f1266a],
-.wxParse .var[data-v-c2f1266a],
-.wxParse .address[data-v-c2f1266a] {
-  font-style: italic;
-}
-.wxParse .spaceshow[data-v-c2f1266a] {
-  white-space: pre;
-}
-.wxParse .pre[data-v-c2f1266a],
-.wxParse .tt[data-v-c2f1266a],
-.wxParse .code[data-v-c2f1266a],
-.wxParse .kbd[data-v-c2f1266a],
-.wxParse .samp[data-v-c2f1266a] {
-  font-family: monospace;
-}
-.wxParse .pre[data-v-c2f1266a] {
-  overflow: auto;
-  background: #f5f5f5;
-  padding: 0.5rem;
-  white-space: pre;
-  margin: 1em 0;
-  font-size: 0.75rem;
-}
-.wxParse .code[data-v-c2f1266a] {
-  overflow: auto;
-  padding: 0.5rem;
-  white-space: pre;
-  margin: 1em 0;
-  background: #f5f5f5;
-  font-size: 0.75rem;
-}
-.wxParse .big[data-v-c2f1266a] {
-  font-size: 1.17em;
-}
-.wxParse .small[data-v-c2f1266a],
-.wxParse .sub[data-v-c2f1266a],
-.wxParse .sup[data-v-c2f1266a] {
-  font-size: 0.83em;
-}
-.wxParse .sub[data-v-c2f1266a] {
-  vertical-align: sub;
-}
-.wxParse .sup[data-v-c2f1266a] {
-  vertical-align: super;
-}
-.wxParse .s[data-v-c2f1266a],
-.wxParse .strike[data-v-c2f1266a],
-.wxParse .del[data-v-c2f1266a] {
-  text-decoration: line-through;
-}
-.wxParse .strong[data-v-c2f1266a],
-.wxParse .text[data-v-c2f1266a],
-.wxParse .span[data-v-c2f1266a],
-.wxParse .s[data-v-c2f1266a] {
-  display: inline;
-}
-.wxParse .a[data-v-c2f1266a] {
-  color: deepskyblue;
-}
-.wxParse .video[data-v-c2f1266a] {
-  text-align: center;
-  margin: 0.6875rem 0;
-}
-.wxParse .video-video[data-v-c2f1266a] {
-  width: 100%;
-}
-.wxParse .uni-image[data-v-c2f1266a] {
-  height: 100px !important;
-  width: 100px !important;
-}
-.wxParse .img[data-v-c2f1266a] {
-  height: 18.75rem !important;
-  display: block;
-  height: 3.125rem;
-  margin-bottom: 0em;
-  /* //与p标签底部padding同时修改 */
-  overflow: hidden;
-}
-.wxParse .blockquote[data-v-c2f1266a] {
-  margin: 0.3125rem 0;
-  padding: 0.6875rem 0 0.6875rem 0.6875rem;
-  font-family: Courier, Calibri, "宋体";
-  background: #f5f5f5;
-  border-left: 0.1875rem solid #dbdbdb;
-}
-.wxParse .blockquote .p[data-v-c2f1266a] {
-  margin: 0;
-}
-.wxParse .ul[data-v-c2f1266a], .wxParse .ol[data-v-c2f1266a] {
-  display: block;
-  margin: 1em 0;
-  padding-left: 2em;
-}
-.wxParse .ol[data-v-c2f1266a] {
-  list-style-type: disc;
-}
-.wxParse .ol[data-v-c2f1266a] {
-  list-style-type: decimal;
-}
-.wxParse .ol > weixin-parse-template[data-v-c2f1266a], .wxParse .ul > weixin-parse-template[data-v-c2f1266a] {
-  display: list-item;
-  align-items: baseline;
-  text-align: match-parent;
-}
-.wxParse .ol > .li[data-v-c2f1266a], .wxParse .ul > .li[data-v-c2f1266a] {
-  display: list-item;
-  align-items: baseline;
-  text-align: match-parent;
-}
-.wxParse .ul .ul[data-v-c2f1266a], .wxParse .ol .ul[data-v-c2f1266a] {
-  list-style-type: circle;
-}
-.wxParse .ol .ol .ul[data-v-c2f1266a], .wxParse .ol .ul .ul[data-v-c2f1266a], .wxParse .ul .ol .ul[data-v-c2f1266a], .wxParse .ul .ul .ul[data-v-c2f1266a] {
-  list-style-type: square;
-}
-.wxParse .u[data-v-c2f1266a] {
-  text-decoration: underline;
-}
-.wxParse .hide[data-v-c2f1266a] {
-  display: none;
-}
-.wxParse .del[data-v-c2f1266a] {
-  display: inline;
-}
-.wxParse .figure[data-v-c2f1266a] {
-  overflow: hidden;
-}
-.wxParse .tablebox[data-v-c2f1266a] {
-  overflow: auto;
-  background-color: #f5f5f5;
-  background: #f5f5f5;
-  font-size: 13px;
-  padding: 8px;
-}
-.wxParse .table .table[data-v-c2f1266a], .wxParse .table[data-v-c2f1266a] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  /* 内边框 */
-  /* width: 100%; */
-  overflow: auto;
-  white-space: pre;
-}
-.wxParse .tbody[data-v-c2f1266a] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  /* 内边框 */
-  border: 1px solid #dadada;
-}
-.wxParse .table .thead[data-v-c2f1266a], .wxParse .table .tfoot[data-v-c2f1266a], .wxParse .table .th[data-v-c2f1266a] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  background: #ececec;
-  font-weight: 40;
-}
-.wxParse .table .tr[data-v-c2f1266a] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  /* border: 2px solid #F0AD4E; */
-  overflow: auto;
-}
-.wxParse .table .th[data-v-c2f1266a],
-.wxParse .table .td[data-v-c2f1266a] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  border: 0.0625rem solid #dadada;
-  overflow: auto;
-}
-.wxParse .audio[data-v-c2f1266a], .wxParse .uni-audio-default[data-v-c2f1266a] {
-  display: block;
-}
-.uni-list[data-v-c2f1266a] {
-  display: flex;
-  background-color: #ffffff;
-  position: relative;
-  flex-direction: column;
-}
-.uni-list--border[data-v-c2f1266a] {
-  position: relative;
-  z-index: -1;
-}
-.uni-list--border-top[data-v-c2f1266a] {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 1px;
-  transform: scaleY(0.5);
-  background-color: #e5e5e5;
-  z-index: 1;
-}
-.uni-list--border-bottom[data-v-c2f1266a] {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  height: 1px;
-  transform: scaleY(0.5);
-  background-color: #e5e5e5;
-}
-/* 水平间距 */
-/* 水平间距 */
-/**
- * 这里是uni-app内置的常用样式变量
- *
- * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
- * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
- *
- */
-/**
- * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
- *
- * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
- */
-/* 颜色变量 */
-/* 行为相关颜色 */
-/* 文字基本颜色 */
-/* 背景颜色 */
-/* 边框颜色 */
-/* 尺寸变量 */
-/* 文字尺寸 */
-/* 图片尺寸 */
-/* Border Radius */
-/* 水平间距 */
-/* 垂直间距 */
-/* 透明度 */
-/* 文章场景相关 */
-/**
- * author: Di (微信小程序开发工程师)
- * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
- *         垂直微信小程序开发交流社区
- *
- * github地址: https://github.com/icindy/wxParse
- *
- * for: 微信小程序富文本解析
- * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
- */
-/**
- * 请在全局下引入该文件，@import '/static/wxParse.css';
- */
-.wxParse[data-v-3d2dde9f] {
-  -webkit-user-select: none;
-          user-select: none;
-  width: 100%;
-  font-family: Helvetica, "PingFangSC", "Microsoft Yahei", "微软雅黑", Arial, sans-serif;
-  color: #333;
-  line-height: 1.5;
-  font-size: 1em;
-  text-align: justify;
-  /* //左右两端对齐 */
-}
-.wxParse uni-view[data-v-3d2dde9f], .wxParse uni-view[data-v-3d2dde9f] {
-  word-break: break-word;
-}
-.wxParse .p[data-v-3d2dde9f] {
-  padding-bottom: 0.5em;
-  clear: both;
-  /* letter-spacing: 0;//字间距 */
-}
-.wxParse .inline[data-v-3d2dde9f] {
-  display: inline;
-  margin: 0;
-  padding: 0;
-}
-.wxParse .div[data-v-3d2dde9f] {
-  margin: 0;
-  padding: 0;
-  display: block;
-}
-.wxParse .h1[data-v-3d2dde9f] {
-  font-size: 2em;
-  line-height: 1.2em;
-  margin: 0.67em 0;
-}
-.wxParse .h2[data-v-3d2dde9f] {
-  font-size: 1.5em;
-  margin: 0.83em 0;
-}
-.wxParse .h3[data-v-3d2dde9f] {
-  font-size: 1.17em;
-  margin: 1em 0;
-}
-.wxParse .h4[data-v-3d2dde9f] {
-  margin: 1.33em 0;
-}
-.wxParse .h5[data-v-3d2dde9f] {
-  font-size: 0.83em;
-  margin: 1.67em 0;
-}
-.wxParse .h6[data-v-3d2dde9f] {
-  font-size: 0.83em;
-  margin: 1.67em 0;
-}
-.wxParse .h1[data-v-3d2dde9f],
-.wxParse .h2[data-v-3d2dde9f],
-.wxParse .h3[data-v-3d2dde9f],
-.wxParse .h4[data-v-3d2dde9f],
-.wxParse .h5[data-v-3d2dde9f],
-.wxParse .h6[data-v-3d2dde9f],
-.wxParse .b[data-v-3d2dde9f],
-.wxParse .strong[data-v-3d2dde9f] {
-  font-weight: bolder;
-}
-.wxParse .i[data-v-3d2dde9f],
-.wxParse .cite[data-v-3d2dde9f],
-.wxParse .em[data-v-3d2dde9f],
-.wxParse .var[data-v-3d2dde9f],
-.wxParse .address[data-v-3d2dde9f] {
-  font-style: italic;
-}
-.wxParse .spaceshow[data-v-3d2dde9f] {
-  white-space: pre;
-}
-.wxParse .pre[data-v-3d2dde9f],
-.wxParse .tt[data-v-3d2dde9f],
-.wxParse .code[data-v-3d2dde9f],
-.wxParse .kbd[data-v-3d2dde9f],
-.wxParse .samp[data-v-3d2dde9f] {
-  font-family: monospace;
-}
-.wxParse .pre[data-v-3d2dde9f] {
-  overflow: auto;
-  background: #f5f5f5;
-  padding: 0.5rem;
-  white-space: pre;
-  margin: 1em 0;
-  font-size: 0.75rem;
-}
-.wxParse .code[data-v-3d2dde9f] {
-  overflow: auto;
-  padding: 0.5rem;
-  white-space: pre;
-  margin: 1em 0;
-  background: #f5f5f5;
-  font-size: 0.75rem;
-}
-.wxParse .big[data-v-3d2dde9f] {
-  font-size: 1.17em;
-}
-.wxParse .small[data-v-3d2dde9f],
-.wxParse .sub[data-v-3d2dde9f],
-.wxParse .sup[data-v-3d2dde9f] {
-  font-size: 0.83em;
-}
-.wxParse .sub[data-v-3d2dde9f] {
-  vertical-align: sub;
-}
-.wxParse .sup[data-v-3d2dde9f] {
-  vertical-align: super;
-}
-.wxParse .s[data-v-3d2dde9f],
-.wxParse .strike[data-v-3d2dde9f],
-.wxParse .del[data-v-3d2dde9f] {
-  text-decoration: line-through;
-}
-.wxParse .strong[data-v-3d2dde9f],
-.wxParse .text[data-v-3d2dde9f],
-.wxParse .span[data-v-3d2dde9f],
-.wxParse .s[data-v-3d2dde9f] {
-  display: inline;
-}
-.wxParse .a[data-v-3d2dde9f] {
-  color: deepskyblue;
-}
-.wxParse .video[data-v-3d2dde9f] {
-  text-align: center;
-  margin: 0.6875rem 0;
-}
-.wxParse .video-video[data-v-3d2dde9f] {
-  width: 100%;
-}
-.wxParse .uni-image[data-v-3d2dde9f] {
-  height: 100px !important;
-  width: 100px !important;
-}
-.wxParse .img[data-v-3d2dde9f] {
-  height: 18.75rem !important;
-  display: block;
-  height: 3.125rem;
-  margin-bottom: 0em;
-  /* //与p标签底部padding同时修改 */
-  overflow: hidden;
-}
-.wxParse .blockquote[data-v-3d2dde9f] {
-  margin: 0.3125rem 0;
-  padding: 0.6875rem 0 0.6875rem 0.6875rem;
-  font-family: Courier, Calibri, "宋体";
-  background: #f5f5f5;
-  border-left: 0.1875rem solid #dbdbdb;
-}
-.wxParse .blockquote .p[data-v-3d2dde9f] {
-  margin: 0;
-}
-.wxParse .ul[data-v-3d2dde9f], .wxParse .ol[data-v-3d2dde9f] {
-  display: block;
-  margin: 1em 0;
-  padding-left: 2em;
-}
-.wxParse .ol[data-v-3d2dde9f] {
-  list-style-type: disc;
-}
-.wxParse .ol[data-v-3d2dde9f] {
-  list-style-type: decimal;
-}
-.wxParse .ol > weixin-parse-template[data-v-3d2dde9f], .wxParse .ul > weixin-parse-template[data-v-3d2dde9f] {
-  display: list-item;
-  align-items: baseline;
-  text-align: match-parent;
-}
-.wxParse .ol > .li[data-v-3d2dde9f], .wxParse .ul > .li[data-v-3d2dde9f] {
-  display: list-item;
-  align-items: baseline;
-  text-align: match-parent;
-}
-.wxParse .ul .ul[data-v-3d2dde9f], .wxParse .ol .ul[data-v-3d2dde9f] {
-  list-style-type: circle;
-}
-.wxParse .ol .ol .ul[data-v-3d2dde9f], .wxParse .ol .ul .ul[data-v-3d2dde9f], .wxParse .ul .ol .ul[data-v-3d2dde9f], .wxParse .ul .ul .ul[data-v-3d2dde9f] {
-  list-style-type: square;
-}
-.wxParse .u[data-v-3d2dde9f] {
-  text-decoration: underline;
-}
-.wxParse .hide[data-v-3d2dde9f] {
-  display: none;
-}
-.wxParse .del[data-v-3d2dde9f] {
-  display: inline;
-}
-.wxParse .figure[data-v-3d2dde9f] {
-  overflow: hidden;
-}
-.wxParse .tablebox[data-v-3d2dde9f] {
-  overflow: auto;
-  background-color: #f5f5f5;
-  background: #f5f5f5;
-  font-size: 13px;
-  padding: 8px;
-}
-.wxParse .table .table[data-v-3d2dde9f], .wxParse .table[data-v-3d2dde9f] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  /* 内边框 */
-  /* width: 100%; */
-  overflow: auto;
-  white-space: pre;
-}
-.wxParse .tbody[data-v-3d2dde9f] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  /* 内边框 */
-  border: 1px solid #dadada;
-}
-.wxParse .table .thead[data-v-3d2dde9f], .wxParse .table .tfoot[data-v-3d2dde9f], .wxParse .table .th[data-v-3d2dde9f] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  background: #ececec;
-  font-weight: 40;
-}
-.wxParse .table .tr[data-v-3d2dde9f] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  /* border: 2px solid #F0AD4E; */
-  overflow: auto;
-}
-.wxParse .table .th[data-v-3d2dde9f],
-.wxParse .table .td[data-v-3d2dde9f] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  border: 0.0625rem solid #dadada;
-  overflow: auto;
-}
-.wxParse .audio[data-v-3d2dde9f], .wxParse .uni-audio-default[data-v-3d2dde9f] {
-  display: block;
-}
-.uni-collapse-item[data-v-3d2dde9f] {
-  box-sizing: border-box;
-}
-.uni-collapse-item__title[data-v-3d2dde9f] {
-  display: flex;
-  width: 100%;
-  box-sizing: border-box;
-  flex-direction: row;
-  align-items: center;
-  transition: border-bottom-color 0.3s;
-}
-.uni-collapse-item__title-wrap[data-v-3d2dde9f] {
-  width: 100%;
-  flex: 1;
-}
-.uni-collapse-item__title-box[data-v-3d2dde9f] {
-  padding: 0 15px;
-  display: flex;
-  width: 100%;
-  box-sizing: border-box;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 48px;
-  line-height: 48px;
-  background-color: #fff;
-  color: #303133;
-  font-size: 13px;
-  font-weight: 500;
-}
-.uni-collapse-item__title-box.is-disabled .uni-collapse-item__title-text[data-v-3d2dde9f] {
-  color: #999;
-}
-.uni-collapse-item__title.uni-collapse-item-border[data-v-3d2dde9f] {
-  border-bottom: 1px solid #ebeef5;
-}
-.uni-collapse-item__title.is-open[data-v-3d2dde9f] {
-  border-bottom-color: transparent;
-}
-.uni-collapse-item__title-img[data-v-3d2dde9f] {
-  height: 22px;
-  width: 22px;
-  margin-right: 10px;
-}
-.uni-collapse-item__title-text[data-v-3d2dde9f] {
-  flex: 1;
-  font-size: 14px;
-  white-space: nowrap;
-  color: inherit;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.uni-collapse-item__title-arrow[data-v-3d2dde9f] {
-  display: flex;
-  box-sizing: border-box;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-  transform: rotate(0deg);
-}
-.uni-collapse-item__title-arrow-active[data-v-3d2dde9f] {
-  transform: rotate(-180deg);
-}
-.uni-collapse-item__wrap[data-v-3d2dde9f] {
-  will-change: height;
-  box-sizing: border-box;
-  background-color: #fff;
-  overflow: hidden;
-  position: relative;
-  height: 0;
-}
-.uni-collapse-item__wrap.is--transition[data-v-3d2dde9f] {
-  transition-property: height, border-bottom-width;
-  transition-duration: 0.3s;
-  will-change: height;
-}
-.uni-collapse-item__wrap-content[data-v-3d2dde9f] {
-  position: absolute;
-  font-size: 13px;
-  color: #303133;
-  border-bottom-color: transparent;
-  border-bottom-style: solid;
-  border-bottom-width: 0;
-}
-.uni-collapse-item__wrap-content.uni-collapse-item--border[data-v-3d2dde9f] {
-  border-bottom-width: 1px;
-  border-bottom-color: red;
-  border-bottom-color: #ebeef5;
-}
-.uni-collapse-item__wrap-content.open[data-v-3d2dde9f] {
-  position: relative;
-}
-.uni-collapse-item--animation[data-v-3d2dde9f] {
-  transition-property: transform;
-  transition-duration: 0.3s;
-  transition-timing-function: ease;
-}
-/* 水平间距 */
-/* 水平间距 */
-/**
- * 这里是uni-app内置的常用样式变量
- *
- * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
- * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
- *
- */
-/**
- * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
- *
- * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
- */
-/* 颜色变量 */
-/* 行为相关颜色 */
-/* 文字基本颜色 */
-/* 背景颜色 */
-/* 边框颜色 */
-/* 尺寸变量 */
-/* 文字尺寸 */
-/* 图片尺寸 */
-/* Border Radius */
-/* 水平间距 */
-/* 垂直间距 */
-/* 透明度 */
-/* 文章场景相关 */
-/**
- * author: Di (微信小程序开发工程师)
- * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
- *         垂直微信小程序开发交流社区
- *
- * github地址: https://github.com/icindy/wxParse
- *
- * for: 微信小程序富文本解析
- * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
- */
-/**
- * 请在全局下引入该文件，@import '/static/wxParse.css';
- */
-.wxParse[data-v-3f050360] {
-  -webkit-user-select: none;
-          user-select: none;
-  width: 100%;
-  font-family: Helvetica, "PingFangSC", "Microsoft Yahei", "微软雅黑", Arial, sans-serif;
-  color: #333;
-  line-height: 1.5;
-  font-size: 1em;
-  text-align: justify;
-  /* //左右两端对齐 */
-}
-.wxParse uni-view[data-v-3f050360], .wxParse uni-view[data-v-3f050360] {
-  word-break: break-word;
-}
-.wxParse .p[data-v-3f050360] {
-  padding-bottom: 0.5em;
-  clear: both;
-  /* letter-spacing: 0;//字间距 */
-}
-.wxParse .inline[data-v-3f050360] {
-  display: inline;
-  margin: 0;
-  padding: 0;
-}
-.wxParse .div[data-v-3f050360] {
-  margin: 0;
-  padding: 0;
-  display: block;
-}
-.wxParse .h1[data-v-3f050360] {
-  font-size: 2em;
-  line-height: 1.2em;
-  margin: 0.67em 0;
-}
-.wxParse .h2[data-v-3f050360] {
-  font-size: 1.5em;
-  margin: 0.83em 0;
-}
-.wxParse .h3[data-v-3f050360] {
-  font-size: 1.17em;
-  margin: 1em 0;
-}
-.wxParse .h4[data-v-3f050360] {
-  margin: 1.33em 0;
-}
-.wxParse .h5[data-v-3f050360] {
-  font-size: 0.83em;
-  margin: 1.67em 0;
-}
-.wxParse .h6[data-v-3f050360] {
-  font-size: 0.83em;
-  margin: 1.67em 0;
-}
-.wxParse .h1[data-v-3f050360],
-.wxParse .h2[data-v-3f050360],
-.wxParse .h3[data-v-3f050360],
-.wxParse .h4[data-v-3f050360],
-.wxParse .h5[data-v-3f050360],
-.wxParse .h6[data-v-3f050360],
-.wxParse .b[data-v-3f050360],
-.wxParse .strong[data-v-3f050360] {
-  font-weight: bolder;
-}
-.wxParse .i[data-v-3f050360],
-.wxParse .cite[data-v-3f050360],
-.wxParse .em[data-v-3f050360],
-.wxParse .var[data-v-3f050360],
-.wxParse .address[data-v-3f050360] {
-  font-style: italic;
-}
-.wxParse .spaceshow[data-v-3f050360] {
-  white-space: pre;
-}
-.wxParse .pre[data-v-3f050360],
-.wxParse .tt[data-v-3f050360],
-.wxParse .code[data-v-3f050360],
-.wxParse .kbd[data-v-3f050360],
-.wxParse .samp[data-v-3f050360] {
-  font-family: monospace;
-}
-.wxParse .pre[data-v-3f050360] {
-  overflow: auto;
-  background: #f5f5f5;
-  padding: 0.5rem;
-  white-space: pre;
-  margin: 1em 0;
-  font-size: 0.75rem;
-}
-.wxParse .code[data-v-3f050360] {
-  overflow: auto;
-  padding: 0.5rem;
-  white-space: pre;
-  margin: 1em 0;
-  background: #f5f5f5;
-  font-size: 0.75rem;
-}
-.wxParse .big[data-v-3f050360] {
-  font-size: 1.17em;
-}
-.wxParse .small[data-v-3f050360],
-.wxParse .sub[data-v-3f050360],
-.wxParse .sup[data-v-3f050360] {
-  font-size: 0.83em;
-}
-.wxParse .sub[data-v-3f050360] {
-  vertical-align: sub;
-}
-.wxParse .sup[data-v-3f050360] {
-  vertical-align: super;
-}
-.wxParse .s[data-v-3f050360],
-.wxParse .strike[data-v-3f050360],
-.wxParse .del[data-v-3f050360] {
-  text-decoration: line-through;
-}
-.wxParse .strong[data-v-3f050360],
-.wxParse .text[data-v-3f050360],
-.wxParse .span[data-v-3f050360],
-.wxParse .s[data-v-3f050360] {
-  display: inline;
-}
-.wxParse .a[data-v-3f050360] {
-  color: deepskyblue;
-}
-.wxParse .video[data-v-3f050360] {
-  text-align: center;
-  margin: 0.6875rem 0;
-}
-.wxParse .video-video[data-v-3f050360] {
-  width: 100%;
-}
-.wxParse .uni-image[data-v-3f050360] {
-  height: 100px !important;
-  width: 100px !important;
-}
-.wxParse .img[data-v-3f050360] {
-  height: 18.75rem !important;
-  display: block;
-  height: 3.125rem;
-  margin-bottom: 0em;
-  /* //与p标签底部padding同时修改 */
-  overflow: hidden;
-}
-.wxParse .blockquote[data-v-3f050360] {
-  margin: 0.3125rem 0;
-  padding: 0.6875rem 0 0.6875rem 0.6875rem;
-  font-family: Courier, Calibri, "宋体";
-  background: #f5f5f5;
-  border-left: 0.1875rem solid #dbdbdb;
-}
-.wxParse .blockquote .p[data-v-3f050360] {
-  margin: 0;
-}
-.wxParse .ul[data-v-3f050360], .wxParse .ol[data-v-3f050360] {
-  display: block;
-  margin: 1em 0;
-  padding-left: 2em;
-}
-.wxParse .ol[data-v-3f050360] {
-  list-style-type: disc;
-}
-.wxParse .ol[data-v-3f050360] {
-  list-style-type: decimal;
-}
-.wxParse .ol > weixin-parse-template[data-v-3f050360], .wxParse .ul > weixin-parse-template[data-v-3f050360] {
-  display: list-item;
-  align-items: baseline;
-  text-align: match-parent;
-}
-.wxParse .ol > .li[data-v-3f050360], .wxParse .ul > .li[data-v-3f050360] {
-  display: list-item;
-  align-items: baseline;
-  text-align: match-parent;
-}
-.wxParse .ul .ul[data-v-3f050360], .wxParse .ol .ul[data-v-3f050360] {
-  list-style-type: circle;
-}
-.wxParse .ol .ol .ul[data-v-3f050360], .wxParse .ol .ul .ul[data-v-3f050360], .wxParse .ul .ol .ul[data-v-3f050360], .wxParse .ul .ul .ul[data-v-3f050360] {
-  list-style-type: square;
-}
-.wxParse .u[data-v-3f050360] {
-  text-decoration: underline;
-}
-.wxParse .hide[data-v-3f050360] {
-  display: none;
-}
-.wxParse .del[data-v-3f050360] {
-  display: inline;
-}
-.wxParse .figure[data-v-3f050360] {
-  overflow: hidden;
-}
-.wxParse .tablebox[data-v-3f050360] {
-  overflow: auto;
-  background-color: #f5f5f5;
-  background: #f5f5f5;
-  font-size: 13px;
-  padding: 8px;
-}
-.wxParse .table .table[data-v-3f050360], .wxParse .table[data-v-3f050360] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  /* 内边框 */
-  /* width: 100%; */
-  overflow: auto;
-  white-space: pre;
-}
-.wxParse .tbody[data-v-3f050360] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  /* 内边框 */
-  border: 1px solid #dadada;
-}
-.wxParse .table .thead[data-v-3f050360], .wxParse .table .tfoot[data-v-3f050360], .wxParse .table .th[data-v-3f050360] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  background: #ececec;
-  font-weight: 40;
-}
-.wxParse .table .tr[data-v-3f050360] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  /* border: 2px solid #F0AD4E; */
-  overflow: auto;
-}
-.wxParse .table .th[data-v-3f050360],
-.wxParse .table .td[data-v-3f050360] {
-  border-collapse: collapse;
-  box-sizing: border-box;
-  border: 0.0625rem solid #dadada;
-  overflow: auto;
-}
-.wxParse .audio[data-v-3f050360], .wxParse .uni-audio-default[data-v-3f050360] {
-  display: block;
-}
-.uni-collapse[data-v-3f050360] {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-}
 
 .delete1[data-v-a8327be0] {
 		font-size: 1.03125rem;
@@ -3505,7 +1796,7 @@ uni-image[data-v-757745aa] {
 /**
  * 请在全局下引入该文件，@import '/static/wxParse.css';
  */
-.wxParse {
+.wxParse[data-v-a7f2603d] {
   -webkit-user-select: none;
           user-select: none;
   width: 100%;
@@ -3516,76 +1807,76 @@ uni-image[data-v-757745aa] {
   text-align: justify;
   /* //左右两端对齐 */
 }
-.wxParse uni-view, .wxParse uni-view {
+.wxParse uni-view[data-v-a7f2603d], .wxParse uni-view[data-v-a7f2603d] {
   word-break: break-word;
 }
-.wxParse .p {
+.wxParse .p[data-v-a7f2603d] {
   padding-bottom: 0.5em;
   clear: both;
   /* letter-spacing: 0;//字间距 */
 }
-.wxParse .inline {
+.wxParse .inline[data-v-a7f2603d] {
   display: inline;
   margin: 0;
   padding: 0;
 }
-.wxParse .div {
+.wxParse .div[data-v-a7f2603d] {
   margin: 0;
   padding: 0;
   display: block;
 }
-.wxParse .h1 {
+.wxParse .h1[data-v-a7f2603d] {
   font-size: 2em;
   line-height: 1.2em;
   margin: 0.67em 0;
 }
-.wxParse .h2 {
+.wxParse .h2[data-v-a7f2603d] {
   font-size: 1.5em;
   margin: 0.83em 0;
 }
-.wxParse .h3 {
+.wxParse .h3[data-v-a7f2603d] {
   font-size: 1.17em;
   margin: 1em 0;
 }
-.wxParse .h4 {
+.wxParse .h4[data-v-a7f2603d] {
   margin: 1.33em 0;
 }
-.wxParse .h5 {
+.wxParse .h5[data-v-a7f2603d] {
   font-size: 0.83em;
   margin: 1.67em 0;
 }
-.wxParse .h6 {
+.wxParse .h6[data-v-a7f2603d] {
   font-size: 0.83em;
   margin: 1.67em 0;
 }
-.wxParse .h1,
-.wxParse .h2,
-.wxParse .h3,
-.wxParse .h4,
-.wxParse .h5,
-.wxParse .h6,
-.wxParse .b,
-.wxParse .strong {
+.wxParse .h1[data-v-a7f2603d],
+.wxParse .h2[data-v-a7f2603d],
+.wxParse .h3[data-v-a7f2603d],
+.wxParse .h4[data-v-a7f2603d],
+.wxParse .h5[data-v-a7f2603d],
+.wxParse .h6[data-v-a7f2603d],
+.wxParse .b[data-v-a7f2603d],
+.wxParse .strong[data-v-a7f2603d] {
   font-weight: bolder;
 }
-.wxParse .i,
-.wxParse .cite,
-.wxParse .em,
-.wxParse .var,
-.wxParse .address {
+.wxParse .i[data-v-a7f2603d],
+.wxParse .cite[data-v-a7f2603d],
+.wxParse .em[data-v-a7f2603d],
+.wxParse .var[data-v-a7f2603d],
+.wxParse .address[data-v-a7f2603d] {
   font-style: italic;
 }
-.wxParse .spaceshow {
+.wxParse .spaceshow[data-v-a7f2603d] {
   white-space: pre;
 }
-.wxParse .pre,
-.wxParse .tt,
-.wxParse .code,
-.wxParse .kbd,
-.wxParse .samp {
+.wxParse .pre[data-v-a7f2603d],
+.wxParse .tt[data-v-a7f2603d],
+.wxParse .code[data-v-a7f2603d],
+.wxParse .kbd[data-v-a7f2603d],
+.wxParse .samp[data-v-a7f2603d] {
   font-family: monospace;
 }
-.wxParse .pre {
+.wxParse .pre[data-v-a7f2603d] {
   overflow: auto;
   background: #f5f5f5;
   padding: 0.5rem;
@@ -3593,7 +1884,7 @@ uni-image[data-v-757745aa] {
   margin: 1em 0;
   font-size: 0.75rem;
 }
-.wxParse .code {
+.wxParse .code[data-v-a7f2603d] {
   overflow: auto;
   padding: 0.5rem;
   white-space: pre;
@@ -3601,46 +1892,46 @@ uni-image[data-v-757745aa] {
   background: #f5f5f5;
   font-size: 0.75rem;
 }
-.wxParse .big {
+.wxParse .big[data-v-a7f2603d] {
   font-size: 1.17em;
 }
-.wxParse .small,
-.wxParse .sub,
-.wxParse .sup {
+.wxParse .small[data-v-a7f2603d],
+.wxParse .sub[data-v-a7f2603d],
+.wxParse .sup[data-v-a7f2603d] {
   font-size: 0.83em;
 }
-.wxParse .sub {
+.wxParse .sub[data-v-a7f2603d] {
   vertical-align: sub;
 }
-.wxParse .sup {
+.wxParse .sup[data-v-a7f2603d] {
   vertical-align: super;
 }
-.wxParse .s,
-.wxParse .strike,
-.wxParse .del {
+.wxParse .s[data-v-a7f2603d],
+.wxParse .strike[data-v-a7f2603d],
+.wxParse .del[data-v-a7f2603d] {
   text-decoration: line-through;
 }
-.wxParse .strong,
-.wxParse .text,
-.wxParse .span,
-.wxParse .s {
+.wxParse .strong[data-v-a7f2603d],
+.wxParse .text[data-v-a7f2603d],
+.wxParse .span[data-v-a7f2603d],
+.wxParse .s[data-v-a7f2603d] {
   display: inline;
 }
-.wxParse .a {
+.wxParse .a[data-v-a7f2603d] {
   color: deepskyblue;
 }
-.wxParse .video {
+.wxParse .video[data-v-a7f2603d] {
   text-align: center;
   margin: 0.6875rem 0;
 }
-.wxParse .video-video {
+.wxParse .video-video[data-v-a7f2603d] {
   width: 100%;
 }
-.wxParse .uni-image {
+.wxParse .uni-image[data-v-a7f2603d] {
   height: 100px !important;
   width: 100px !important;
 }
-.wxParse .img {
+.wxParse .img[data-v-a7f2603d] {
   height: 18.75rem !important;
   display: block;
   height: 3.125rem;
@@ -3648,63 +1939,63 @@ uni-image[data-v-757745aa] {
   /* //与p标签底部padding同时修改 */
   overflow: hidden;
 }
-.wxParse .blockquote {
+.wxParse .blockquote[data-v-a7f2603d] {
   margin: 0.3125rem 0;
   padding: 0.6875rem 0 0.6875rem 0.6875rem;
   font-family: Courier, Calibri, "宋体";
   background: #f5f5f5;
   border-left: 0.1875rem solid #dbdbdb;
 }
-.wxParse .blockquote .p {
+.wxParse .blockquote .p[data-v-a7f2603d] {
   margin: 0;
 }
-.wxParse .ul, .wxParse .ol {
+.wxParse .ul[data-v-a7f2603d], .wxParse .ol[data-v-a7f2603d] {
   display: block;
   margin: 1em 0;
   padding-left: 2em;
 }
-.wxParse .ol {
+.wxParse .ol[data-v-a7f2603d] {
   list-style-type: disc;
 }
-.wxParse .ol {
+.wxParse .ol[data-v-a7f2603d] {
   list-style-type: decimal;
 }
-.wxParse .ol > weixin-parse-template, .wxParse .ul > weixin-parse-template {
+.wxParse .ol > weixin-parse-template[data-v-a7f2603d], .wxParse .ul > weixin-parse-template[data-v-a7f2603d] {
   display: list-item;
   align-items: baseline;
   text-align: match-parent;
 }
-.wxParse .ol > .li, .wxParse .ul > .li {
+.wxParse .ol > .li[data-v-a7f2603d], .wxParse .ul > .li[data-v-a7f2603d] {
   display: list-item;
   align-items: baseline;
   text-align: match-parent;
 }
-.wxParse .ul .ul, .wxParse .ol .ul {
+.wxParse .ul .ul[data-v-a7f2603d], .wxParse .ol .ul[data-v-a7f2603d] {
   list-style-type: circle;
 }
-.wxParse .ol .ol .ul, .wxParse .ol .ul .ul, .wxParse .ul .ol .ul, .wxParse .ul .ul .ul {
+.wxParse .ol .ol .ul[data-v-a7f2603d], .wxParse .ol .ul .ul[data-v-a7f2603d], .wxParse .ul .ol .ul[data-v-a7f2603d], .wxParse .ul .ul .ul[data-v-a7f2603d] {
   list-style-type: square;
 }
-.wxParse .u {
+.wxParse .u[data-v-a7f2603d] {
   text-decoration: underline;
 }
-.wxParse .hide {
+.wxParse .hide[data-v-a7f2603d] {
   display: none;
 }
-.wxParse .del {
+.wxParse .del[data-v-a7f2603d] {
   display: inline;
 }
-.wxParse .figure {
+.wxParse .figure[data-v-a7f2603d] {
   overflow: hidden;
 }
-.wxParse .tablebox {
+.wxParse .tablebox[data-v-a7f2603d] {
   overflow: auto;
   background-color: #f5f5f5;
   background: #f5f5f5;
   font-size: 13px;
   padding: 8px;
 }
-.wxParse .table .table, .wxParse .table {
+.wxParse .table .table[data-v-a7f2603d], .wxParse .table[data-v-a7f2603d] {
   border-collapse: collapse;
   box-sizing: border-box;
   /* 内边框 */
@@ -3712,476 +2003,186 @@ uni-image[data-v-757745aa] {
   overflow: auto;
   white-space: pre;
 }
-.wxParse .tbody {
+.wxParse .tbody[data-v-a7f2603d] {
   border-collapse: collapse;
   box-sizing: border-box;
   /* 内边框 */
   border: 1px solid #dadada;
 }
-.wxParse .table .thead, .wxParse .table .tfoot, .wxParse .table .th {
+.wxParse .table .thead[data-v-a7f2603d], .wxParse .table .tfoot[data-v-a7f2603d], .wxParse .table .th[data-v-a7f2603d] {
   border-collapse: collapse;
   box-sizing: border-box;
   background: #ececec;
   font-weight: 40;
 }
-.wxParse .table .tr {
+.wxParse .table .tr[data-v-a7f2603d] {
   border-collapse: collapse;
   box-sizing: border-box;
   /* border: 2px solid #F0AD4E; */
   overflow: auto;
 }
-.wxParse .table .th,
-.wxParse .table .td {
+.wxParse .table .th[data-v-a7f2603d],
+.wxParse .table .td[data-v-a7f2603d] {
   border-collapse: collapse;
   box-sizing: border-box;
   border: 0.0625rem solid #dadada;
   overflow: auto;
 }
-.wxParse .audio, .wxParse .uni-audio-default {
+.wxParse .audio[data-v-a7f2603d], .wxParse .uni-audio-default[data-v-a7f2603d] {
   display: block;
 }
-.detail-collapse {
-  background-color: white;
-  margin-bottom: 0.9375rem;
-  border-radius: 0.625rem;
-  overflow: hidden;
+.container[data-v-a7f2603d] {
+  min-height: 100vh;
+  padding-bottom: 5.625rem;
 }
-.dishes {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 5.625rem;
-}
-.search-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0.3125rem 0;
-  background-color: white;
-  padding: 0.3125rem;
-  border-radius: 0.625rem;
-}
-.search-input {
-  flex: 0.9;
-  height: 2.34375rem !important;
-  border-radius: 0.625rem !important;
-  padding-left: 0.625rem !important;
-  font-size: 0.75rem !important;
-}
-.search-btn-group {
-  display: flex;
-  gap: 0.3125rem;
-}
-.save {
-  font-weight: bold;
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 1.0625rem;
-  height: 2.34375rem;
-  line-height: 2.5rem;
-  text-align: center;
-  border-radius: 0.625rem;
-  background-color: #007aff;
-  margin: 0.15625rem;
-}
-.save::after {
-  border: none;
-}
-.reset-btn {
-  background-color: #ff7675;
-}
-.dish-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
-}
-.Detail {
-  overflow: hidden;
-  height: 0px;
-  transition: height 0.5s eace;
-}
-.complaint-btn {
-  position: absolute;
-  left: 0.3125rem;
-  bottom: 0.3125rem;
-  display: flex;
-  align-items: center;
-  background: #ff7675;
-  border-radius: 1.25rem;
-  padding: 0.25rem 0.75rem;
-  color: #fff;
-  font-size: 0.75rem;
-}
-.complaint-btn uni-text {
-  margin-left: 0.25rem;
-}
-.container {
-  display: flex;
-  flex-direction: column;
-  margin: 0.03125rem auto;
-  padding: 0.46875rem;
-}
-.StoreName {
-  height: 5.625rem;
-  padding: 0.3125rem;
-  /* line-height: 60rpx; */
-  margin-bottom: 0.9375rem;
-  font-size: 1.3125rem;
-  font-weight: 600;
-  background-color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.logo {
-  height: 4.6875rem;
-  width: 4.6875rem;
-  border-radius: 0.625rem;
-}
-.time {
-  /* margin-top: 20rpx; */
-  height: 1.875rem;
-  line-height: 1.875rem;
-  padding: 0.3125rem;
-  background-color: white;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #ccc;
-}
-.business-hours {
-  color: black;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  display: flex;
-  /* background-color: #007aff; */
-}
-.hour {
-  margin-left: 0.625rem;
-}
-.phone {
-  height: 100%;
-  display: flex;
-  margin-right: 0.3125rem;
-  box-sizing: border-box;
-}
-.phone > uni-text {
-  margin-top: 0;
-}
-.address {
-  height: 1.875rem;
-  line-height: 1.875rem;
-  padding: 0.3125rem;
-  background-color: white;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #ccc;
-}
-.address > uni-text {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  color: black;
-  font-size: 0.9375rem;
-  font-weight: 600;
-}
-.notice {
-  width: 100%;
-  height: 2.5rem;
-  line-height: 2.5rem;
-  background-color: white;
-  margin: 0.625rem auto;
-  border-radius: 2.5rem;
-  display: flex;
-  /* justify-content: center; */
-  align-items: center;
-  box-sizing: border-box;
-  padding: 0 0.625rem;
-}
-.nlef {
-  width: 4.375rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.ntext {
-  color: #007aff;
-  font-weight: 600;
-  font-size: 0.875rem;
-}
-.nrig {
-  width: 1.5625rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.ncen {
-  height: 100%;
-  flex: 1;
-}
-.swiper {
-  height: 100%;
-  /* background-color: #007aff; */
-}
-.swiitem {
-  height: 100%;
-  text-align: center;
-  font-size: 0.9375rem;
-  color: #666;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.dishes {
-  display: flex;
-  flex-direction: column;
-  /* margin-top: 20rpx; */
-  margin-bottom: 5.625rem;
-}
-.dishes > .type {
-  margin-top: 0.625rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  height: 7.5rem;
-  width: 100%;
-  border-radius: 0.78125rem;
-  box-sizing: border-box;
-  background-color: white;
-}
-.regard {
-  height: 100%;
-  width: 71%;
-  display: flex;
-  flex-direction: column;
-}
-.typetitle {
-  height: 3.125rem;
-  width: 100%;
-  line-height: 3.125rem;
-  color: black;
-  font-size: 1.25rem;
-  font-weight: 600;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  box-sizing: border-box;
-}
-.ellipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 10%;
-}
-.label {
-  width: 100%;
-  height: 0.9375rem;
-  line-height: 0.9375rem;
-  font-size: 0.625rem;
-  color: #007aff;
-  /* background-color: #007aff; */
-  display: flex;
-}
-.one {
-  width: 15%;
-  height: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* background-color: #007aff; */
-  border: 0.01563rem solid #007aff;
-  margin-right: 0.3125rem;
-}
-.price {
-  height: 50%;
-  /* width: 100%; */
-  padding: 0 0.3125rem;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: space-between;
-}
-.price > uni-text {
-  height: 1.5625rem;
-  width: 50%;
-  line-height: 1.5625rem;
-  color: red;
-  font-size: 1.09375rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-}
-.quantity {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.3125rem;
-}
-.btn1,
-.btn2 {
-  width: 1.5625rem;
-  height: 1.5625rem;
-  background-color: #007aff;
-  color: white;
-  text-align: center;
-  line-height: 1.5625rem;
-  border-radius: 50%;
-  margin: 0 0.3125rem;
-}
-.count {
-  width: 100%;
-}
-.fixed {
-  height: 3.125rem;
-  width: 90%;
-  background-color: black;
-  border-radius: 3.125rem;
-  position: fixed;
-  /* box-sizing: border-box; */
-  bottom: 0.9375rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: row;
-  z-index: 1000;
-}
-.car {
-  /* width: 280rpx; */
-  flex: 1;
-  height: 100%;
-  color: white;
-  /* background-color: aqua; */
-  border-radius: 3.125rem 0 0 3.125rem;
-  /* padding-left: 30rpx; */
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  font-size: 1.25rem;
-  margin-left: 0.9375rem;
-}
-.pri {
-  margin-left: 0.9375rem;
-}
-.cart-icon-wrapper {
+
+/* 超大英雄头部 */
+.hero-header[data-v-a7f2603d] {
   position: relative;
-  display: inline-block;
+  height: 11.875rem;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  border-radius: 0 0 1.25rem 1.25rem;
 }
-.badge {
+.hero-bg[data-v-a7f2603d] {
+  width: 100%;
+  height: 100%;
+  filter: brightness(0.88);
+}
+.header-overlay[data-v-a7f2603d] {
   position: absolute;
-  top: -0.3125rem;
-  /* Adjust to position the badge vertically */
-  right: -0.3125rem;
-  /* Adjust to position the badge horizontally */
-  background-color: red;
-  color: white;
-  border-radius: 50%;
-  font-size: 0.625rem;
-  /* Adjust font size */
-  width: 1.25rem;
-  /* Width of the badge */
-  height: 1.25rem;
-  /* Height of the badge */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.sett {
-  width: 6.25rem;
-  height: 100%;
-  margin-left: auto;
-  background-color: #007aff;
-  border-radius: 0 3.125rem 3.125rem 0;
-  color: white;
-  font-size: 0.9375rem;
-  text-align: center;
-  line-height: 3.125rem;
-}
-.overlay {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  transition: opacity 0.3s ease;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 999;
+  bottom: 0;
   left: 0;
-}
-.overlay-active {
-  opacity: 1;
-  pointer-events: auto;
-  /* 激活状态下可点击 */
-}
-.cart-layer {
-  background-color: white;
-  /* padding: 20rpx; */
-  padding-top: 0;
-  border-radius: 1.5625rem 1.5625rem 0 0;
-  width: 100%;
-  /* max-width: 600rpx; */
-  transition: transform 0.3s ease;
-  /* 平滑的从底部弹出效果 */
-  transform: translateY(100%);
-  /* Add any additional styling here */
-}
-.cart-layer-active {
-  transform: translateY(0);
-  /* 激活状态下弹出层回到视口内 */
-}
-.Topmost {
-  height: 1.5625rem;
-  width: 100%;
-  line-height: 1.5625rem;
-  border-radius: 1.5625rem 1.5625rem 0 0;
-  background-color: #007aff;
-  color: white;
-  text-align: center;
-}
-.shopcontent {
-  width: 100%;
-  padding: 0.625rem;
-  box-sizing: border-box;
-  margin-bottom: 4.0625rem;
-}
-.top {
-  width: 100%;
-  height: 3.125rem;
-  line-height: 3.125rem;
+  right: 0;
+  padding: 1.25rem 0.9375rem 0.9375rem;
   display: flex;
-  margin: 0 auto;
-  border-bottom: 0.03125rem solid #ccc;
+  align-items: flex-end;
+  gap: 0.9375rem;
 }
-.delete {
-  width: 30%;
-  height: 70%;
-  display: flex;
-  margin: auto 0;
-  margin-left: auto;
-  justify-content: center;
-  align-items: center;
+.logo-wrapper[data-v-a7f2603d] {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 0.9375rem;
+  overflow: hidden;
+  border: 0.25rem solid #fff;
+  box-shadow: 0 0.46875rem 0.9375rem rgba(0, 0, 0, 0.28);
 }
-.shopimg {
+.logo[data-v-a7f2603d] {
   width: 100%;
   height: 100%;
-  border-radius: 0.625rem;
 }
-.shoptitle {
-  font-size: 1.09375rem;
+.shop-title[data-v-a7f2603d] {
+  font-size: 1.625rem;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.45);
+  line-height: 1.2;
+  flex: 1;
+}
+
+/* 投诉按钮 */
+.complaint-btn[data-v-a7f2603d] {
+  position: absolute;
+  top: 1.25rem;
+  right: 0.9375rem;
+  background: linear-gradient(90deg, #FF5722, #FF8A65);
+  padding: 0.4375rem 1rem;
+  border-radius: 1.5625rem;
+  color: #fff;
+  font-size: 0.8125rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
+  box-shadow: 0 0.3125rem 0.78125rem rgba(255, 87, 34, 0.35);
+}
+
+/* 信息卡片（纯白大圆角，与截图卡片风格一致） */
+.info-card[data-v-a7f2603d] {
+  background: #fff;
+  margin: 0 0.75rem 1.25rem;
+  border-radius: 1rem;
+  padding: 1.25rem 0.9375rem;
+  box-shadow: 0 0.46875rem 1.25rem rgba(0, 0, 0, 0.07);
+}
+.info-title[data-v-a7f2603d] {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 0.9375rem;
+  padding-left: 0.3125rem;
+  border-left: 0.1875rem solid #4a90e2;
+}
+.info-list[data-v-a7f2603d] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+.info-item[data-v-a7f2603d] {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.3125rem 0;
+}
+.info-label[data-v-a7f2603d] {
+  font-size: 0.875rem;
+  color: #666;
+  width: 3.75rem;
+}
+.info-value[data-v-a7f2603d] {
+  font-size: 0.875rem;
+  color: #333;
+  flex: 1;
+}
+.link[data-v-a7f2603d] {
+  color: #4a90e2;
   font-weight: 600;
 }
-.shopprice {
-  color: red;
-  font-size: 1.09375rem;
+
+/* 菜品区 */
+.dishes[data-v-a7f2603d] {
+  padding: 0 0.75rem;
+}
+.section-header[data-v-a7f2603d] {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.625rem;
+}
+.section-title[data-v-a7f2603d] {
+  font-size: 1.1875rem;
+  font-weight: 700;
+  color: #222;
+}
+.section-subtitle[data-v-a7f2603d] {
+  font-size: 0.8125rem;
+  color: #999;
+}
+.dish-grid[data-v-a7f2603d] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9375rem;
+  margin-top: 0.625rem;
+}
+.dish-card[data-v-a7f2603d] {
+  background: #fff;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0.46875rem 1.25rem rgba(0, 0, 0, 0.09);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 空状态 */
+.empty-state[data-v-a7f2603d] {
+  text-align: center;
+  padding: 3.75rem 0 2.5rem;
+}
+.empty-text[data-v-a7f2603d] {
+  font-size: 1.0625rem;
+  margin-top: 0.625rem;
   font-weight: 600;
 }
-.biaoti {
-  height: 3.125rem;
-  width: 3.125rem;
-  background-color: #007aff;
+.empty-sub[data-v-a7f2603d] {
+  font-size: 0.8125rem;
+  color: #999;
+  margin-top: 0.3125rem;
 }

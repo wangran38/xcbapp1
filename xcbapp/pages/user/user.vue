@@ -1,6 +1,5 @@
 <template>
     <view class="me-container">
-        <!-- 用户信息卡片（大圆角 + 立体阴影，与批发/身份页统一） -->
         <view class="user-card">
             <view class="user-info">
                 <view class="user-img">

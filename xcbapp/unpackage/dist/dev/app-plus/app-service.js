@@ -5335,7 +5335,7 @@ if (uni.restoreGlobal) {
             });
           }
         } catch (error2) {
-          formatAppLog("error", "at pages/user/user.vue:206", "Error fetching user profile:", error2);
+          formatAppLog("error", "at pages/user/user.vue:205", "Error fetching user profile:", error2);
           uni.showToast({
             title: "获取用户信息失败",
             icon: "none"
@@ -5372,7 +5372,7 @@ if (uni.restoreGlobal) {
           uni.removeStorageSync("token");
           uni.removeStorageSync("nickname");
         } catch (e2) {
-          formatAppLog("error", "at pages/user/user.vue:243", "Failed to remove token or nickname from storage", e2);
+          formatAppLog("error", "at pages/user/user.vue:242", "Failed to remove token or nickname from storage", e2);
         }
         this.isLoggedIn = false;
         this.nickname = "";
@@ -5387,7 +5387,7 @@ if (uni.restoreGlobal) {
           uni.login({
             provider: "true",
             success: async (res) => {
-              formatAppLog("log", "at pages/user/user.vue:258", res.code, "这是用户唯一标识");
+              formatAppLog("log", "at pages/user/user.vue:257", res.code, "这是用户唯一标识");
               let data = await api.bindingOpenid({
                 code: res.code
               });
@@ -5624,938 +5624,6 @@ if (uni.restoreGlobal) {
     ]);
   }
   const PagesUserUser = /* @__PURE__ */ _export_sfc(_sfc_main$29, [["render", _sfc_render$28], ["__scopeId", "data-v-0f7520f0"], ["__file", "E:/小程序转app/xcbapp/pages/user/user.vue"]]);
-  const _sfc_main$28 = {
-    name: "UniBadge",
-    emits: ["click"],
-    props: {
-      type: {
-        type: String,
-        default: "error"
-      },
-      inverted: {
-        type: Boolean,
-        default: false
-      },
-      isDot: {
-        type: Boolean,
-        default: false
-      },
-      maxNum: {
-        type: Number,
-        default: 99
-      },
-      absolute: {
-        type: String,
-        default: ""
-      },
-      offset: {
-        type: Array,
-        default() {
-          return [0, 0];
-        }
-      },
-      text: {
-        type: [String, Number],
-        default: ""
-      },
-      size: {
-        type: String,
-        default: "small"
-      },
-      customStyle: {
-        type: Object,
-        default() {
-          return {};
-        }
-      }
-    },
-    data() {
-      return {};
-    },
-    computed: {
-      width() {
-        return String(this.text).length * 8 + 12;
-      },
-      classNames() {
-        const {
-          inverted,
-          type,
-          size,
-          absolute
-        } = this;
-        return [
-          inverted ? "uni-badge--" + type + "-inverted" : "",
-          "uni-badge--" + type,
-          "uni-badge--" + size,
-          absolute ? "uni-badge--absolute" : ""
-        ].join(" ");
-      },
-      positionStyle() {
-        if (!this.absolute)
-          return {};
-        let w2 = this.width / 2, h2 = 10;
-        if (this.isDot) {
-          w2 = 5;
-          h2 = 5;
-        }
-        const x = `${-w2 + this.offset[0]}px`;
-        const y2 = `${-h2 + this.offset[1]}px`;
-        const whiteList2 = {
-          rightTop: {
-            right: x,
-            top: y2
-          },
-          rightBottom: {
-            right: x,
-            bottom: y2
-          },
-          leftBottom: {
-            left: x,
-            bottom: y2
-          },
-          leftTop: {
-            left: x,
-            top: y2
-          }
-        };
-        const match = whiteList2[this.absolute];
-        return match ? match : whiteList2["rightTop"];
-      },
-      dotStyle() {
-        if (!this.isDot)
-          return {};
-        return {
-          width: "10px",
-          minWidth: "0",
-          height: "10px",
-          padding: "0",
-          borderRadius: "10px"
-        };
-      },
-      displayValue() {
-        const {
-          isDot,
-          text,
-          maxNum
-        } = this;
-        return isDot ? "" : Number(text) > maxNum ? `${maxNum}+` : text;
-      }
-    },
-    methods: {
-      onClick() {
-        this.$emit("click");
-      }
-    }
-  };
-  function _sfc_render$27(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-badge--x" }, [
-      vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
-      $props.text ? (vue.openBlock(), vue.createElementBlock(
-        "text",
-        {
-          key: 0,
-          class: vue.normalizeClass([$options.classNames, "uni-badge"]),
-          style: vue.normalizeStyle([$options.positionStyle, $props.customStyle, $options.dotStyle]),
-          onClick: _cache[0] || (_cache[0] = ($event) => $options.onClick())
-        },
-        vue.toDisplayString($options.displayValue),
-        7
-        /* TEXT, CLASS, STYLE */
-      )) : vue.createCommentVNode("v-if", true)
-    ]);
-  }
-  const __easycom_1$7 = /* @__PURE__ */ _export_sfc(_sfc_main$28, [["render", _sfc_render$27], ["__scopeId", "data-v-c97cb896"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-badge/components/uni-badge/uni-badge.vue"]]);
-  const _sfc_main$27 = {
-    name: "UniListItem",
-    emits: ["click", "switchChange"],
-    props: {
-      direction: {
-        type: String,
-        default: "row"
-      },
-      title: {
-        type: String,
-        default: ""
-      },
-      note: {
-        type: String,
-        default: ""
-      },
-      ellipsis: {
-        type: [Number, String],
-        default: 0
-      },
-      disabled: {
-        type: [Boolean, String],
-        default: false
-      },
-      clickable: {
-        type: Boolean,
-        default: false
-      },
-      showArrow: {
-        type: [Boolean, String],
-        default: false
-      },
-      link: {
-        type: [Boolean, String],
-        default: false
-      },
-      to: {
-        type: String,
-        default: ""
-      },
-      showBadge: {
-        type: [Boolean, String],
-        default: false
-      },
-      showSwitch: {
-        type: [Boolean, String],
-        default: false
-      },
-      switchChecked: {
-        type: [Boolean, String],
-        default: false
-      },
-      badgeText: {
-        type: String,
-        default: ""
-      },
-      badgeType: {
-        type: String,
-        default: "success"
-      },
-      badgeStyle: {
-        type: Object,
-        default() {
-          return {};
-        }
-      },
-      rightText: {
-        type: String,
-        default: ""
-      },
-      thumb: {
-        type: String,
-        default: ""
-      },
-      thumbSize: {
-        type: String,
-        default: "base"
-      },
-      showExtraIcon: {
-        type: [Boolean, String],
-        default: false
-      },
-      extraIcon: {
-        type: Object,
-        default() {
-          return {
-            type: "",
-            color: "#000000",
-            size: 20,
-            customPrefix: ""
-          };
-        }
-      },
-      border: {
-        type: Boolean,
-        default: true
-      },
-      customStyle: {
-        type: Object,
-        default() {
-          return {
-            padding: "",
-            backgroundColor: "#FFFFFF"
-          };
-        }
-      },
-      keepScrollPosition: {
-        type: Boolean,
-        default: false
-      }
-    },
-    watch: {
-      "customStyle.padding": {
-        handler(padding) {
-          if (typeof padding == "number") {
-            padding += "";
-          }
-          let paddingArr = padding.split(" ");
-          if (paddingArr.length === 1) {
-            const allPadding = paddingArr[0];
-            this.padding = {
-              "top": allPadding,
-              "right": allPadding,
-              "bottom": allPadding,
-              "left": allPadding
-            };
-          } else if (paddingArr.length === 2) {
-            const [verticalPadding, horizontalPadding] = paddingArr;
-            this.padding = {
-              "top": verticalPadding,
-              "right": horizontalPadding,
-              "bottom": verticalPadding,
-              "left": horizontalPadding
-            };
-          } else if (paddingArr.length === 4) {
-            const [topPadding, rightPadding, bottomPadding, leftPadding] = paddingArr;
-            this.padding = {
-              "top": topPadding,
-              "right": rightPadding,
-              "bottom": bottomPadding,
-              "left": leftPadding
-            };
-          }
-        },
-        immediate: true
-      }
-    },
-    // inject: ['list'],
-    data() {
-      return {
-        isFirstChild: false,
-        padding: {
-          top: "",
-          right: "",
-          bottom: "",
-          left: ""
-        }
-      };
-    },
-    mounted() {
-      this.list = this.getForm();
-      if (this.list) {
-        if (!this.list.firstChildAppend) {
-          this.list.firstChildAppend = true;
-          this.isFirstChild = true;
-        }
-      }
-    },
-    methods: {
-      /**
-       * 获取父元素实例
-       */
-      getForm(name = "uniList") {
-        let parent = this.$parent;
-        let parentName = parent.$options.name;
-        while (parentName !== name) {
-          parent = parent.$parent;
-          if (!parent)
-            return false;
-          parentName = parent.$options.name;
-        }
-        return parent;
-      },
-      onClick() {
-        if (this.to !== "") {
-          this.openPage();
-          return;
-        }
-        if (this.clickable || this.link) {
-          this.$emit("click", {
-            data: {}
-          });
-        }
-      },
-      onSwitchChange(e2) {
-        this.$emit("switchChange", e2.detail);
-      },
-      openPage() {
-        if (["navigateTo", "redirectTo", "reLaunch", "switchTab"].indexOf(this.link) !== -1) {
-          this.pageApi(this.link);
-        } else {
-          this.pageApi("navigateTo");
-        }
-      },
-      pageApi(api2) {
-        let callback = {
-          url: this.to,
-          success: (res) => {
-            this.$emit("click", {
-              data: res
-            });
-          },
-          fail: (err) => {
-            this.$emit("click", {
-              data: err
-            });
-          }
-        };
-        switch (api2) {
-          case "navigateTo":
-            uni.navigateTo(callback);
-            break;
-          case "redirectTo":
-            uni.redirectTo(callback);
-            break;
-          case "reLaunch":
-            uni.reLaunch(callback);
-            break;
-          case "switchTab":
-            uni.switchTab(callback);
-            break;
-          default:
-            uni.navigateTo(callback);
-        }
-      }
-    }
-  };
-  function _sfc_render$26(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    const _component_uni_badge = resolveEasycom(vue.resolveDynamicComponent("uni-badge"), __easycom_1$7);
-    return vue.openBlock(), vue.createElementBlock("view", {
-      class: vue.normalizeClass([{ "uni-list-item--disabled": $props.disabled }, "uni-list-item"]),
-      style: vue.normalizeStyle({ "background-color": $props.customStyle.backgroundColor }),
-      "hover-class": !$props.clickable && !$props.link || $props.disabled || $props.showSwitch ? "" : "uni-list-item--hover",
-      onClick: _cache[1] || (_cache[1] = (...args) => $options.onClick && $options.onClick(...args))
-    }, [
-      !$data.isFirstChild ? (vue.openBlock(), vue.createElementBlock(
-        "view",
-        {
-          key: 0,
-          class: vue.normalizeClass(["border--left", { "uni-list--border": $props.border }])
-        },
-        null,
-        2
-        /* CLASS */
-      )) : vue.createCommentVNode("v-if", true),
-      vue.createElementVNode(
-        "view",
-        {
-          class: vue.normalizeClass(["uni-list-item__container", { "container--right": $props.showArrow || $props.link, "flex--direction": $props.direction === "column" }]),
-          style: vue.normalizeStyle({ paddingTop: $data.padding.top, paddingLeft: $data.padding.left, paddingRight: $data.padding.right, paddingBottom: $data.padding.bottom })
-        },
-        [
-          vue.renderSlot(_ctx.$slots, "header", {}, () => [
-            vue.createElementVNode("view", { class: "uni-list-item__header" }, [
-              $props.thumb ? (vue.openBlock(), vue.createElementBlock("view", {
-                key: 0,
-                class: "uni-list-item__icon"
-              }, [
-                vue.createElementVNode("image", {
-                  src: $props.thumb,
-                  class: vue.normalizeClass(["uni-list-item__icon-img", ["uni-list--" + $props.thumbSize]])
-                }, null, 10, ["src"])
-              ])) : $props.showExtraIcon ? (vue.openBlock(), vue.createElementBlock("view", {
-                key: 1,
-                class: "uni-list-item__icon"
-              }, [
-                vue.createVNode(_component_uni_icons, {
-                  customPrefix: $props.extraIcon.customPrefix,
-                  color: $props.extraIcon.color,
-                  size: $props.extraIcon.size,
-                  type: $props.extraIcon.type
-                }, null, 8, ["customPrefix", "color", "size", "type"])
-              ])) : vue.createCommentVNode("v-if", true)
-            ])
-          ], true),
-          vue.renderSlot(_ctx.$slots, "body", {}, () => [
-            vue.createElementVNode(
-              "view",
-              {
-                class: vue.normalizeClass(["uni-list-item__content", { "uni-list-item__content--center": $props.thumb || $props.showExtraIcon || $props.showBadge || $props.showSwitch }])
-              },
-              [
-                $props.title ? (vue.openBlock(), vue.createElementBlock(
-                  "text",
-                  {
-                    key: 0,
-                    class: vue.normalizeClass(["uni-list-item__content-title", [$props.ellipsis !== 0 && $props.ellipsis <= 2 ? "uni-ellipsis-" + $props.ellipsis : ""]])
-                  },
-                  vue.toDisplayString($props.title),
-                  3
-                  /* TEXT, CLASS */
-                )) : vue.createCommentVNode("v-if", true),
-                $props.note ? (vue.openBlock(), vue.createElementBlock(
-                  "text",
-                  {
-                    key: 1,
-                    class: "uni-list-item__content-note"
-                  },
-                  vue.toDisplayString($props.note),
-                  1
-                  /* TEXT */
-                )) : vue.createCommentVNode("v-if", true)
-              ],
-              2
-              /* CLASS */
-            )
-          ], true),
-          vue.renderSlot(_ctx.$slots, "footer", {}, () => [
-            $props.rightText || $props.showBadge || $props.showSwitch ? (vue.openBlock(), vue.createElementBlock(
-              "view",
-              {
-                key: 0,
-                class: vue.normalizeClass(["uni-list-item__extra", { "flex--justify": $props.direction === "column" }])
-              },
-              [
-                $props.rightText ? (vue.openBlock(), vue.createElementBlock(
-                  "text",
-                  {
-                    key: 0,
-                    class: "uni-list-item__extra-text"
-                  },
-                  vue.toDisplayString($props.rightText),
-                  1
-                  /* TEXT */
-                )) : vue.createCommentVNode("v-if", true),
-                $props.showBadge ? (vue.openBlock(), vue.createBlock(_component_uni_badge, {
-                  key: 1,
-                  type: $props.badgeType,
-                  text: $props.badgeText,
-                  "custom-style": $props.badgeStyle
-                }, null, 8, ["type", "text", "custom-style"])) : vue.createCommentVNode("v-if", true),
-                $props.showSwitch ? (vue.openBlock(), vue.createElementBlock("switch", {
-                  key: 2,
-                  disabled: $props.disabled,
-                  checked: $props.switchChecked,
-                  onChange: _cache[0] || (_cache[0] = (...args) => $options.onSwitchChange && $options.onSwitchChange(...args))
-                }, null, 40, ["disabled", "checked"])) : vue.createCommentVNode("v-if", true)
-              ],
-              2
-              /* CLASS */
-            )) : vue.createCommentVNode("v-if", true)
-          ], true)
-        ],
-        6
-        /* CLASS, STYLE */
-      ),
-      $props.showArrow || $props.link ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
-        key: 1,
-        size: 16,
-        class: "uni-icon-wrapper",
-        color: "#bbb",
-        type: "arrowright"
-      })) : vue.createCommentVNode("v-if", true)
-    ], 14, ["hover-class"]);
-  }
-  const __easycom_1$6 = /* @__PURE__ */ _export_sfc(_sfc_main$27, [["render", _sfc_render$26], ["__scopeId", "data-v-c7524739"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue"]]);
-  const _sfc_main$26 = {
-    name: "uniList",
-    "mp-weixin": {
-      options: {
-        multipleSlots: false
-      }
-    },
-    props: {
-      stackFromEnd: {
-        type: Boolean,
-        default: false
-      },
-      enableBackToTop: {
-        type: [Boolean, String],
-        default: false
-      },
-      scrollY: {
-        type: [Boolean, String],
-        default: false
-      },
-      border: {
-        type: Boolean,
-        default: true
-      },
-      renderReverse: {
-        type: Boolean,
-        default: false
-      }
-    },
-    // provide() {
-    // 	return {
-    // 		list: this
-    // 	};
-    // },
-    created() {
-      this.firstChildAppend = false;
-    },
-    methods: {
-      loadMore(e2) {
-        this.$emit("scrolltolower");
-      },
-      scroll(e2) {
-        this.$emit("scroll", e2);
-      }
-    }
-  };
-  function _sfc_render$25(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-list uni-border-top-bottom" }, [
-      $props.border ? (vue.openBlock(), vue.createElementBlock("view", {
-        key: 0,
-        class: "uni-list--border-top"
-      })) : vue.createCommentVNode("v-if", true),
-      vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
-      $props.border ? (vue.openBlock(), vue.createElementBlock("view", {
-        key: 1,
-        class: "uni-list--border-bottom"
-      })) : vue.createCommentVNode("v-if", true)
-    ]);
-  }
-  const __easycom_2$2 = /* @__PURE__ */ _export_sfc(_sfc_main$26, [["render", _sfc_render$25], ["__scopeId", "data-v-c2f1266a"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-list/components/uni-list/uni-list.vue"]]);
-  const _sfc_main$25 = {
-    name: "uniCollapseItem",
-    props: {
-      // 列表标题
-      title: {
-        type: String,
-        default: ""
-      },
-      name: {
-        type: [Number, String],
-        default: ""
-      },
-      // 是否禁用
-      disabled: {
-        type: Boolean,
-        default: false
-      },
-      // 是否显示动画,app 端默认不开启动画，卡顿严重
-      showAnimation: {
-        type: Boolean,
-        default: false
-      },
-      // 是否展开
-      open: {
-        type: Boolean,
-        default: false
-      },
-      // 缩略图
-      thumb: {
-        type: String,
-        default: ""
-      },
-      // 标题分隔线显示类型
-      titleBorder: {
-        type: String,
-        default: "auto"
-      },
-      border: {
-        type: Boolean,
-        default: true
-      },
-      showArrow: {
-        type: Boolean,
-        default: true
-      }
-    },
-    data() {
-      const elId = `Uni_${Math.ceil(Math.random() * 1e6).toString(36)}`;
-      return {
-        isOpen: false,
-        isheight: null,
-        height: 0,
-        elId,
-        nameSync: 0
-      };
-    },
-    watch: {
-      open(val) {
-        this.isOpen = val;
-        this.onClick(val, "init");
-      }
-    },
-    updated(e2) {
-      this.$nextTick(() => {
-        this.init(true);
-      });
-    },
-    created() {
-      this.collapse = this.getCollapse();
-      this.oldHeight = 0;
-      this.onClick(this.open, "init");
-    },
-    // TODO vue3
-    unmounted() {
-      this.__isUnmounted = true;
-      this.uninstall();
-    },
-    mounted() {
-      if (!this.collapse)
-        return;
-      if (this.name !== "") {
-        this.nameSync = this.name;
-      } else {
-        this.nameSync = this.collapse.childrens.length + "";
-      }
-      if (this.collapse.names.indexOf(this.nameSync) === -1) {
-        this.collapse.names.push(this.nameSync);
-      } else {
-        formatAppLog("warn", "at uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue:154", `name 值 ${this.nameSync} 重复`);
-      }
-      if (this.collapse.childrens.indexOf(this) === -1) {
-        this.collapse.childrens.push(this);
-      }
-      this.init();
-    },
-    methods: {
-      init(type) {
-        this.getCollapseHeight(type);
-      },
-      uninstall() {
-        if (this.collapse) {
-          this.collapse.childrens.forEach((item, index2) => {
-            if (item === this) {
-              this.collapse.childrens.splice(index2, 1);
-            }
-          });
-          this.collapse.names.forEach((item, index2) => {
-            if (item === this.nameSync) {
-              this.collapse.names.splice(index2, 1);
-            }
-          });
-        }
-      },
-      onClick(isOpen, type) {
-        if (this.disabled)
-          return;
-        this.isOpen = isOpen;
-        if (this.isOpen && this.collapse) {
-          this.collapse.setAccordion(this);
-        }
-        if (type !== "init") {
-          this.collapse.onChange(isOpen, this);
-        }
-      },
-      getCollapseHeight(type, index2 = 0) {
-        const views = uni.createSelectorQuery().in(this);
-        views.select(`#${this.elId}`).fields({
-          size: true
-        }, (data) => {
-          if (index2 >= 10)
-            return;
-          if (!data) {
-            index2++;
-            this.getCollapseHeight(false, index2);
-            return;
-          }
-          this.height = data.height;
-          this.isheight = true;
-          if (type)
-            return;
-          this.onClick(this.isOpen, "init");
-        }).exec();
-      },
-      getNvueHwight(type) {
-        dom.getComponentRect(this.$refs["collapse--hook"], (option) => {
-          if (option && option.result && option.size) {
-            this.height = option.size.height;
-            this.isheight = true;
-            if (type)
-              return;
-            this.onClick(this.open, "init");
-          }
-        });
-      },
-      /**
-       * 获取父元素实例
-       */
-      getCollapse(name = "uniCollapse") {
-        let parent = this.$parent;
-        let parentName = parent.$options.name;
-        while (parentName !== name) {
-          parent = parent.$parent;
-          if (!parent)
-            return false;
-          parentName = parent.$options.name;
-        }
-        return parent;
-      }
-    }
-  };
-  function _sfc_render$24(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-collapse-item" }, [
-      vue.createElementVNode(
-        "view",
-        {
-          onClick: _cache[0] || (_cache[0] = ($event) => $options.onClick(!$data.isOpen)),
-          class: vue.normalizeClass(["uni-collapse-item__title", { "is-open": $data.isOpen && $props.titleBorder === "auto", "uni-collapse-item-border": $props.titleBorder !== "none" }])
-        },
-        [
-          vue.createElementVNode("view", { class: "uni-collapse-item__title-wrap" }, [
-            vue.renderSlot(_ctx.$slots, "title", {}, () => [
-              vue.createElementVNode(
-                "view",
-                {
-                  class: vue.normalizeClass(["uni-collapse-item__title-box", { "is-disabled": $props.disabled }])
-                },
-                [
-                  $props.thumb ? (vue.openBlock(), vue.createElementBlock("image", {
-                    key: 0,
-                    src: $props.thumb,
-                    class: "uni-collapse-item__title-img"
-                  }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true),
-                  vue.createElementVNode(
-                    "text",
-                    { class: "uni-collapse-item__title-text" },
-                    vue.toDisplayString($props.title),
-                    1
-                    /* TEXT */
-                  )
-                ],
-                2
-                /* CLASS */
-              )
-            ], true)
-          ]),
-          $props.showArrow ? (vue.openBlock(), vue.createElementBlock(
-            "view",
-            {
-              key: 0,
-              class: vue.normalizeClass([{ "uni-collapse-item__title-arrow-active": $data.isOpen, "uni-collapse-item--animation": $props.showAnimation === true }, "uni-collapse-item__title-arrow"])
-            },
-            [
-              vue.createVNode(_component_uni_icons, {
-                color: $props.disabled ? "#ddd" : "#bbb",
-                size: "14",
-                type: "bottom"
-              }, null, 8, ["color"])
-            ],
-            2
-            /* CLASS */
-          )) : vue.createCommentVNode("v-if", true)
-        ],
-        2
-        /* CLASS */
-      ),
-      vue.createElementVNode(
-        "view",
-        {
-          class: vue.normalizeClass(["uni-collapse-item__wrap", { "is--transition": $props.showAnimation }]),
-          style: vue.normalizeStyle({ height: ($data.isOpen ? $data.height : 0) + "px" })
-        },
-        [
-          vue.createElementVNode("view", {
-            id: $data.elId,
-            ref: "collapse--hook",
-            class: vue.normalizeClass(["uni-collapse-item__wrap-content", { open: $data.isheight, "uni-collapse-item--border": $props.border && $data.isOpen }])
-          }, [
-            vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
-          ], 10, ["id"])
-        ],
-        6
-        /* CLASS, STYLE */
-      )
-    ]);
-  }
-  const __easycom_1$5 = /* @__PURE__ */ _export_sfc(_sfc_main$25, [["render", _sfc_render$24], ["__scopeId", "data-v-3d2dde9f"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue"]]);
-  const _sfc_main$24 = {
-    name: "uniCollapse",
-    emits: ["change", "activeItem", "input", "update:modelValue"],
-    props: {
-      value: {
-        type: [String, Array],
-        default: ""
-      },
-      modelValue: {
-        type: [String, Array],
-        default: ""
-      },
-      accordion: {
-        // 是否开启手风琴效果
-        type: [Boolean, String],
-        default: false
-      }
-    },
-    data() {
-      return {};
-    },
-    computed: {
-      // TODO 兼容 vue2 和 vue3
-      dataValue() {
-        let value = typeof this.value === "string" && this.value === "" || Array.isArray(this.value) && this.value.length === 0;
-        let modelValue = typeof this.modelValue === "string" && this.modelValue === "" || Array.isArray(this.modelValue) && this.modelValue.length === 0;
-        if (value) {
-          return this.modelValue;
-        }
-        if (modelValue) {
-          return this.value;
-        }
-        return this.value;
-      }
-    },
-    watch: {
-      dataValue(val) {
-        this.setOpen(val);
-      }
-    },
-    created() {
-      this.childrens = [];
-      this.names = [];
-    },
-    mounted() {
-      this.$nextTick(() => {
-        this.setOpen(this.dataValue);
-      });
-    },
-    methods: {
-      setOpen(val) {
-        let str = typeof val === "string";
-        let arr = Array.isArray(val);
-        this.childrens.forEach((vm, index2) => {
-          if (str) {
-            if (val === vm.nameSync) {
-              if (!this.accordion) {
-                formatAppLog("warn", "at uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue:75", "accordion 属性为 false ,v-model 类型应该为 array");
-                return;
-              }
-              vm.isOpen = true;
-            }
-          }
-          if (arr) {
-            val.forEach((v2) => {
-              if (v2 === vm.nameSync) {
-                if (this.accordion) {
-                  formatAppLog("warn", "at uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue:85", "accordion 属性为 true ,v-model 类型应该为 string");
-                  return;
-                }
-                vm.isOpen = true;
-              }
-            });
-          }
-        });
-        this.emit(val);
-      },
-      setAccordion(self2) {
-        if (!this.accordion)
-          return;
-        this.childrens.forEach((vm, index2) => {
-          if (self2 !== vm) {
-            vm.isOpen = false;
-          }
-        });
-      },
-      resize() {
-        this.childrens.forEach((vm, index2) => {
-          vm.getCollapseHeight();
-        });
-      },
-      onChange(isOpen, self2) {
-        let activeItem = [];
-        if (this.accordion) {
-          activeItem = isOpen ? self2.nameSync : "";
-        } else {
-          this.childrens.forEach((vm, index2) => {
-            if (vm.isOpen) {
-              activeItem.push(vm.nameSync);
-            }
-          });
-        }
-        this.$emit("change", activeItem);
-        this.emit(activeItem);
-      },
-      emit(val) {
-        this.$emit("input", val);
-        this.$emit("update:modelValue", val);
-      }
-    }
-  };
-  function _sfc_render$23(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-collapse" }, [
-      vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
-    ]);
-  }
-  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$24, [["render", _sfc_render$23], ["__scopeId", "data-v-3f050360"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue"]]);
   var isVue2 = false;
   function set(target, key, val) {
     if (Array.isArray(target)) {
@@ -10578,7 +9646,7 @@ This will fail in production.`);
       }
     }
   });
-  const _sfc_main$23 = {
+  const _sfc_main$28 = {
     name: "shop-item",
     props: {
       shop_id: {
@@ -10647,7 +9715,7 @@ This will fail in production.`);
       }
     }
   };
-  function _sfc_render$22(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$27(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "shoplist" }, [
       $data.showCartLayer1 ? (vue.openBlock(), vue.createElementBlock("view", {
@@ -10795,8 +9863,8 @@ This will fail in production.`);
       ])
     ]);
   }
-  const shopItem = /* @__PURE__ */ _export_sfc(_sfc_main$23, [["render", _sfc_render$22], ["__scopeId", "data-v-a8327be0"], ["__file", "E:/小程序转app/xcbapp/components/shop-item/shop-item.vue"]]);
-  const _sfc_main$22 = {
+  const shopItem = /* @__PURE__ */ _export_sfc(_sfc_main$28, [["render", _sfc_render$27], ["__scopeId", "data-v-a8327be0"], ["__file", "E:/小程序转app/xcbapp/components/shop-item/shop-item.vue"]]);
+  const _sfc_main$27 = {
     name: "menuBarVue",
     props: ["item"],
     // 保留原有 props
@@ -10881,7 +9949,7 @@ This will fail in production.`);
       // 5. 移除原 Vuex 的 mapMutations 扩展（已替换为 Pinia 直接调用）
     }
   };
-  function _sfc_render$21(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$26(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "box",
@@ -10984,8 +10052,8 @@ This will fail in production.`);
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const menuBarVue = /* @__PURE__ */ _export_sfc(_sfc_main$22, [["render", _sfc_render$21], ["__scopeId", "data-v-757745aa"], ["__file", "E:/小程序转app/xcbapp/components/menuBar.vue"]]);
-  const _sfc_main$21 = {
+  const menuBarVue = /* @__PURE__ */ _export_sfc(_sfc_main$27, [["render", _sfc_render$26], ["__scopeId", "data-v-757745aa"], ["__file", "E:/小程序转app/xcbapp/components/menuBar.vue"]]);
+  const _sfc_main$26 = {
     name: "inputBox",
     data() {
       return {
@@ -11137,7 +10205,7 @@ This will fail in production.`);
       }
     }
   };
-  function _sfc_render$20(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$25(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.withDirectives((vue.openBlock(), vue.createElementBlock("view", {
       class: "number-keyboard-mask",
       onClick: _cache[4] || (_cache[4] = (...args) => $options.close && $options.close(...args)),
@@ -11245,7 +10313,7 @@ This will fail in production.`);
       [vue.vShow, $data.show]
     ]);
   }
-  const inputBoxVue = /* @__PURE__ */ _export_sfc(_sfc_main$21, [["render", _sfc_render$20], ["__scopeId", "data-v-c235284e"], ["__file", "E:/小程序转app/xcbapp/components/inputBox.vue"]]);
+  const inputBoxVue = /* @__PURE__ */ _export_sfc(_sfc_main$26, [["render", _sfc_render$25], ["__scopeId", "data-v-c235284e"], ["__file", "E:/小程序转app/xcbapp/components/inputBox.vue"]]);
   const myMixin = {
     methods: {
       /**
@@ -11364,216 +10432,97 @@ This will fail in production.`);
       }
     }
   };
-  const _sfc_main$20 = {
+  const _sfc_main$25 = {
     data() {
       return {
-        // 修改点 2: 移除 Vuex 映射的状态，直接从 Store 访问
-        // cart: [], // 不再需要
-        // totalPrice: 0, // 如果需要，可从 Pinia Getter 获取
-        showCartLayer: false,
-        // cartItems: [], // 不再需要，直接使用 cartStore.carts
-        pageData: [],
         shopDetails: {},
         shop_id: "",
         urls1: [],
-        // 摊主照片
         urls2: [],
-        // 营业执照图片
-        cart: false,
-        // 购物车初始化弹窗,锁
-        show: false,
+        pageData: [],
         isLogin: true,
-        showSearch: false,
-        commodity_name: "",
-        // 模糊查询菜品名称
-        showDetail: false,
-        detailHeidht: 0,
-        animationData: {}
+        commodity_name: ""
       };
     },
     mixins: [usePage, myMixin],
-    components: {
-      shopItem,
-      menuBarVue,
-      inputBoxVue,
-      mButtonVue
-    },
-    // 修改点 3: 使用 setup() 函数获取 Pinia Store 实例
+    components: { shopItem, menuBarVue, inputBoxVue, mButtonVue },
     setup() {
       const cartStore = useCartStore();
-      return {
-        cartStore
-      };
-    },
-    // 修改点 4: 移除 Vuex 的 computed 映射
-    // computed: {
-    // 	...mapState('cart', ['carts']),
-    // 	...mapGetters('cart', ['getTempCount']),
-    // },
-    onShow() {
-      const token = uni.getStorageSync("token");
-      if (!token) {
-        this.isLogin = false;
-      }
-      this.loadPageData();
+      return { cartStore };
     },
     onLoad(query) {
       this.shop_id = Number(query.id);
     },
+    onShow() {
+      this.isLogin = !!uni.getStorageSync("token");
+      this.loadPageData();
+    },
     methods: {
-      // 展开详情
-      expandDetails() {
-        this.showDetail = !this.showDetail;
-        if (this.showDetail) {
-          var animation = uni.createAnimation({
-            duration: 2e3,
-            transformOrigin: "50% 50%",
-            timingFunction: "ease"
-          });
-          this.animation = animation;
-          animation.height(230).step();
-          this.animationData = animation.export();
-        } else {
-          var animation = uni.createAnimation({
-            duration: 2e3,
-            transformOrigin: "50% 50%",
-            timingFunction: "ease"
-          });
-          this.animation = animation;
-          animation.height(0).step();
-          this.animationData = animation.export();
-        }
-      },
-      // 取消搜索
-      async cancelSearch() {
-        this.commodity_name = null;
-        this.pageData = [];
-        this.showSearch = false;
-        const res = await this.fetchData({
-          page: 1,
-          limit: 10,
-          isshow: 1
-        });
-        this.pageData = res.listdata;
-        this.hasMore = true;
-      },
-      // 搜索菜品
-      async searchCommodity(value) {
-        this.commodity_name = value;
-        this.pageData = [];
-        let res = await this.fetchData({
-          commodity_name: this.commodity_name,
-          page: 1,
-          limit: 100
-        });
-        this.pageData = res.listdata;
-        this.hasMore = false;
-      },
       complaint() {
         uni.navigateTo({
           url: `/pages/merchantComplaints/merchantComplaints?id=${this.shopDetails.id}&title=${this.shopDetails.title}`
         });
       },
-      // 需要调起数字键盘
-      Keyboard(value) {
-        formatAppLog("log", "at pages/ShopDetails/ShopDetails.vue:209", "调用自定义键盘");
+      Keyboard(item) {
         this.$refs.inputBoxVueRef.show = true;
-        this.$refs.inputBoxVueRef.cartItem = value;
+        this.$refs.inputBoxVueRef.cartItem = item;
       },
-      // 收起购物车
       closeTan() {
-        if (this.$refs.shopitem.showCartLayer1) {
+        var _a;
+        if ((_a = this.$refs.shopitem) == null ? void 0 : _a.showCartLayer1)
           this.$refs.shopitem.showCartLayer1 = false;
-        }
       },
-      // 查看摊主照片
       openAvater1() {
-        if (this.urls1[0] && this.urls1[0].length > 1) {
-          uni.previewImage({
-            count: 1,
-            urls: this.urls1,
-            sizeType: ["original", "compressed"],
-            success: (res) => {
-            }
-          });
+        if (this.urls1.length) {
+          uni.previewImage({ urls: this.urls1 });
         } else {
-          uni.showToast({
-            title: "暂无图片",
-            icon: "error"
-          });
+          uni.showToast({ title: "暂无摊主照片", icon: "none" });
         }
       },
-      // 查看营业执照
       openAvater2() {
-        if (this.urls2[0] && this.urls2[0].length > 1) {
-          uni.previewImage({
-            count: 1,
-            urls: this.urls2,
-            sizeType: ["original", "compressed"],
-            success: (res) => {
-            }
-          });
+        if (this.urls2.length) {
+          uni.previewImage({ urls: this.urls2 });
         } else {
-          uni.showToast({
-            title: "暂无图片",
-            icon: "error"
-          });
+          uni.showToast({ title: "暂无营业执照", icon: "none" });
         }
       },
-      // 修改点 6: 移除 Vuex 的 mutations 映射
-      // ...mapMutations('cart', ['addItem', 'subItem']),
-      // 首次加载，初始化
       async loadShopDetails() {
         try {
-          const response = await api.shopDetail(this.shop_id);
-          this.shopDetails = response.data.listdata[0];
-          if (this.shopDetails.facelogo)
-            this.urls1.push(this.shopDetails.facelogo);
-          if (this.shopDetails.businesslogo)
-            this.urls2.push(this.shopDetails.businesslogo);
-          return response;
-        } catch (error2) {
-          formatAppLog("error", "at pages/ShopDetails/ShopDetails.vue:268", "获取摊主详情失败", error2);
-          uni.showToast({
-            title: "获取摊主详情失败",
-            icon: "none"
-          });
-          return { data: { listdata: [{}] } };
+          const res = await api.shopDetail(this.shop_id);
+          this.shopDetails = res.data.listdata[0] || {};
+          this.urls1 = this.shopDetails.facelogo ? [this.shopDetails.facelogo] : [];
+          this.urls2 = this.shopDetails.businesslogo ? [this.shopDetails.businesslogo] : [];
+        } catch (e2) {
+          uni.showToast({ title: "店铺信息加载失败", icon: "none" });
         }
       },
       async fetchData(params) {
-        const res = await this.loadShopDetails();
-        const { title } = res.data.listdata[0] || {};
-        params = {
-          ...params,
-          shop_id: this.shop_id || null
-        };
-        const response = await api.getmarketCommdityList({
-          ...params
-          // isshow: 1,
-        });
-        response.data.listdata = response.data.listdata.map((e2) => {
-          return {
-            ...e2,
-            shopTitle: title
-          };
-        });
-        return response.data;
+        if (!this.shopDetails.title)
+          await this.loadShopDetails();
+        const res = await api.getmarketCommdityList({ ...params, shop_id: this.shop_id });
+        const title = this.shopDetails.title || "";
+        res.data.listdata = res.data.listdata.map((item) => ({ ...item, shopTitle: title }));
+        return res.data;
       },
-      goTorules() {
-        uni.navigateTo({
-          url: "/pages/rules/rules"
-        });
+      async searchCommodity(value) {
+        this.commodity_name = value;
+        this.pageData = [];
+        const res = await this.fetchData({ commodity_name: value, page: 1, limit: 100 });
+        this.pageData = res.listdata;
+        this.hasMore = false;
+      },
+      async cancelSearch() {
+        this.commodity_name = "";
+        this.pageData = [];
+        this.hasMore = true;
+        const res = await this.fetchData({ page: 1, limit: 10 });
+        this.pageData = res.listdata;
       }
     }
   };
-  function _sfc_render$1$(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$24(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_inputBoxVue = vue.resolveComponent("inputBoxVue");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_1$6);
-    const _component_uni_list = resolveEasycom(vue.resolveDynamicComponent("uni-list"), __easycom_2$2);
-    const _component_uni_collapse_item = resolveEasycom(vue.resolveDynamicComponent("uni-collapse-item"), __easycom_1$5);
-    const _component_uni_collapse = resolveEasycom(vue.resolveDynamicComponent("uni-collapse"), __easycom_2$1);
     const _component_mButtonVue = vue.resolveComponent("mButtonVue");
     const _component_menuBarVue = vue.resolveComponent("menuBarVue");
     const _component_shopItem = vue.resolveComponent("shopItem");
@@ -11582,9 +10531,9 @@ This will fail in production.`);
       {
         class: "Stallholder",
         "scroll-y": "true",
-        onScrolltolower: _cache[1] || (_cache[1] = (...args) => _ctx.handleScrollToLower && _ctx.handleScrollToLower(...args)),
+        onScrolltolower: _cache[3] || (_cache[3] = (...args) => _ctx.handleScrollToLower && _ctx.handleScrollToLower(...args)),
         style: { height: "100vh" },
-        onClick: _cache[2] || (_cache[2] = (...args) => $options.closeTan && $options.closeTan(...args))
+        onClick: _cache[4] || (_cache[4] = (...args) => $options.closeTan && $options.closeTan(...args))
       },
       [
         vue.createVNode(
@@ -11595,132 +10544,164 @@ This will fail in production.`);
           /* NEED_PATCH */
         ),
         vue.createElementVNode("view", { class: "container" }, [
-          vue.createElementVNode("view", {
-            class: "StoreName",
-            style: { "position": "relative" }
-          }, [
-            vue.createElementVNode(
-              "text",
-              null,
-              vue.toDisplayString($data.shopDetails.title),
-              1
-              /* TEXT */
-            ),
+          vue.createElementVNode("view", { class: "hero-header" }, [
             vue.createElementVNode("image", {
-              class: "logo",
-              src: $data.shopDetails.logo,
+              class: "hero-bg",
+              src: $data.shopDetails.logo || "https://picsum.photos/800/400?random=farm",
               mode: "aspectFill"
             }, null, 8, ["src"]),
+            vue.createElementVNode("view", { class: "header-overlay" }, [
+              vue.createElementVNode("view", { class: "logo-wrapper" }, [
+                vue.createElementVNode("image", {
+                  class: "logo",
+                  src: $data.shopDetails.logo,
+                  mode: "aspectFill"
+                }, null, 8, ["src"])
+              ]),
+              vue.createElementVNode(
+                "text",
+                { class: "shop-title" },
+                vue.toDisplayString($data.shopDetails.title || "摊位名称"),
+                1
+                /* TEXT */
+              )
+            ]),
             vue.createElementVNode("view", {
               class: "complaint-btn",
               onClick: _cache[0] || (_cache[0] = (...args) => $options.complaint && $options.complaint(...args))
             }, [
               vue.createVNode(_component_uni_icons, {
                 type: "compose",
-                size: "18",
+                size: "20",
                 color: "#fff"
               }),
               vue.createElementVNode("text", null, "投诉建议")
             ])
           ]),
-          vue.createVNode(_component_uni_collapse, {
-            class: "detail-collapse",
-            border: "true"
-          }, {
-            default: vue.withCtx(() => [
-              vue.createVNode(_component_uni_collapse_item, {
-                title: "基本信息",
-                "title-style": { fontSize: "26rpx", color: "#333", fontWeight: 600, padding: "10rpx 0" }
-              }, {
-                default: vue.withCtx(() => [
-                  vue.createVNode(_component_uni_list, null, {
-                    default: vue.withCtx(() => [
-                      vue.createVNode(_component_uni_list_item, {
-                        title: "摊主名称",
-                        "show-extra-icon": true,
-                        "extra-icon": { color: "#007aff", size: "24", type: "person-filled" },
-                        style: { height: "70rpx", fontSize: "22rpx" },
-                        "right-text": $data.shopDetails.contactpeople
-                      }, null, 8, ["right-text"]),
-                      vue.createVNode(_component_uni_list_item, {
-                        title: "电话",
-                        "show-extra-icon": true,
-                        "extra-icon": { color: "#007aff", size: "24", type: "phone-filled" },
-                        style: { height: "70rpx", fontSize: "22rpx" },
-                        "right-text": $data.isLogin ? $data.shopDetails.contactphone : _ctx.hidePhone($data.shopDetails.contactphone)
-                      }, null, 8, ["right-text"]),
-                      vue.createVNode(_component_uni_list_item, {
-                        title: "营业时间",
-                        "show-extra-icon": true,
-                        "extra-icon": { color: "#007aff", size: "24", type: "calendar-filled" },
-                        style: { height: "70rpx", fontSize: "22rpx" },
-                        "right-text": "6:00-21:00"
-                      }),
-                      vue.createVNode(_component_uni_list_item, {
-                        title: "营业执照",
-                        "show-extra-icon": true,
-                        "extra-icon": { color: "#007aff", size: "24", type: "map-filled" },
-                        style: { height: "70rpx", fontSize: "22rpx" },
-                        onClick: $options.openAvater2,
-                        "right-text": "点击查看摊位营业执照"
-                      }, null, 8, ["onClick"]),
-                      vue.createVNode(_component_uni_list_item, {
-                        title: "地址",
-                        "show-extra-icon": true,
-                        "extra-icon": { color: "#007aff", size: "24", type: "location-filled" },
-                        style: { height: "70rpx", fontSize: "22rpx" },
-                        "right-text": $data.shopDetails.market_address ? $data.shopDetails.market_address : ""
-                      }, null, 8, ["right-text"])
-                    ]),
-                    _: 1
-                    /* STABLE */
-                  })
-                ]),
-                _: 1
-                /* STABLE */
-              })
-            ]),
-            _: 1
-            /* STABLE */
-          }),
+          vue.createElementVNode("view", { class: "info-card" }, [
+            vue.createElementVNode("view", { class: "info-title" }, "摊主信息"),
+            vue.createElementVNode("view", { class: "info-list" }, [
+              vue.createElementVNode("view", { class: "info-item" }, [
+                vue.createVNode(_component_uni_icons, {
+                  type: "person-filled",
+                  size: "24",
+                  color: "#4a90e2"
+                }),
+                vue.createElementVNode("text", { class: "info-label" }, "摊主"),
+                vue.createElementVNode(
+                  "text",
+                  { class: "info-value" },
+                  vue.toDisplayString($data.shopDetails.contactpeople),
+                  1
+                  /* TEXT */
+                )
+              ]),
+              vue.createElementVNode("view", { class: "info-item" }, [
+                vue.createVNode(_component_uni_icons, {
+                  type: "phone-filled",
+                  size: "24",
+                  color: "#4a90e2"
+                }),
+                vue.createElementVNode("text", { class: "info-label" }, "电话"),
+                vue.createElementVNode(
+                  "text",
+                  { class: "info-value" },
+                  vue.toDisplayString($data.isLogin ? $data.shopDetails.contactphone : _ctx.hidePhone($data.shopDetails.contactphone)),
+                  1
+                  /* TEXT */
+                )
+              ]),
+              vue.createElementVNode("view", { class: "info-item" }, [
+                vue.createVNode(_component_uni_icons, {
+                  type: "calendar-filled",
+                  size: "24",
+                  color: "#4a90e2"
+                }),
+                vue.createElementVNode("text", { class: "info-label" }, "营业时间"),
+                vue.createElementVNode("text", { class: "info-value" }, "06:00 - 21:00")
+              ]),
+              vue.createElementVNode("view", {
+                class: "info-item",
+                onClick: _cache[1] || (_cache[1] = (...args) => $options.openAvater2 && $options.openAvater2(...args))
+              }, [
+                vue.createVNode(_component_uni_icons, {
+                  type: "map-filled",
+                  size: "24",
+                  color: "#4a90e2"
+                }),
+                vue.createElementVNode("text", { class: "info-label" }, "营业执照"),
+                vue.createElementVNode("text", { class: "info-value link" }, "点击查看")
+              ]),
+              vue.createElementVNode("view", {
+                class: "info-item",
+                onClick: _cache[2] || (_cache[2] = (...args) => $options.openAvater1 && $options.openAvater1(...args))
+              }, [
+                vue.createVNode(_component_uni_icons, {
+                  type: "camera-filled",
+                  size: "24",
+                  color: "#4a90e2"
+                }),
+                vue.createElementVNode("text", { class: "info-label" }, "摊主照片"),
+                vue.createElementVNode("text", { class: "info-value link" }, "点击查看")
+              ]),
+              vue.createElementVNode("view", { class: "info-item" }, [
+                vue.createVNode(_component_uni_icons, {
+                  type: "location-filled",
+                  size: "24",
+                  color: "#4a90e2"
+                }),
+                vue.createElementVNode("text", { class: "info-label" }, "地址"),
+                vue.createElementVNode(
+                  "text",
+                  { class: "info-value" },
+                  vue.toDisplayString($data.shopDetails.market_address || "菜市场内"),
+                  1
+                  /* TEXT */
+                )
+              ])
+            ])
+          ]),
           vue.createElementVNode("view", { class: "dishes" }, [
+            vue.createElementVNode("view", { class: "section-header" }, [
+              vue.createElementVNode("text", { class: "section-title" }, "今日精选菜品")
+            ]),
             vue.createVNode(_component_mButtonVue, {
               isShowbutton2: true,
               onBtn1: $options.searchCommodity,
               onBtn2: $options.cancelSearch,
-              placeholder: "请输入菜品名称"
+              placeholder: "搜索菜品名称"
             }, null, 8, ["onBtn1", "onBtn2"]),
-            vue.createElementVNode("view", { class: "dish-list" }, [
+            vue.createElementVNode("view", { class: "dish-grid" }, [
               (vue.openBlock(true), vue.createElementBlock(
                 vue.Fragment,
                 null,
                 vue.renderList($data.pageData, (item) => {
                   return vue.openBlock(), vue.createElementBlock("view", {
-                    class: "dish-card",
-                    key: item.id
+                    key: item.id,
+                    class: "dish-card"
                   }, [
                     vue.createVNode(_component_menuBarVue, {
                       item,
-                      class: "count",
                       onShowKeyboard: $options.Keyboard
                     }, null, 8, ["item", "onShowKeyboard"])
                   ]);
                 }),
                 128
                 /* KEYED_FRAGMENT */
-              )),
-              $data.pageData.length === 0 ? (vue.openBlock(), vue.createElementBlock("view", {
-                key: 0,
-                class: "empty-state"
-              }, [
-                vue.createVNode(_component_uni_icons, {
-                  type: "empty",
-                  size: "40",
-                  color: "#999"
-                }),
-                vue.createElementVNode("text", null, "暂无菜品")
-              ])) : vue.createCommentVNode("v-if", true)
-            ])
+              ))
+            ]),
+            $data.pageData.length === 0 ? (vue.openBlock(), vue.createElementBlock("view", {
+              key: 0,
+              class: "empty-state"
+            }, [
+              vue.createVNode(_component_uni_icons, {
+                type: "empty",
+                size: "80",
+                color: "#FF9800"
+              }),
+              vue.createElementVNode("text", { class: "empty-text" }, "暂无菜品"),
+              vue.createElementVNode("text", { class: "empty-sub" }, "换个关键词试试看～")
+            ])) : vue.createCommentVNode("v-if", true)
           ]),
           vue.createVNode(_component_shopItem, {
             shop_id: $data.shop_id,
@@ -11732,8 +10713,8 @@ This will fail in production.`);
       /* NEED_HYDRATION */
     );
   }
-  const PagesShopDetailsShopDetails = /* @__PURE__ */ _export_sfc(_sfc_main$20, [["render", _sfc_render$1$], ["__file", "E:/小程序转app/xcbapp/pages/ShopDetails/ShopDetails.vue"]]);
-  const _sfc_main$1$ = {
+  const PagesShopDetailsShopDetails = /* @__PURE__ */ _export_sfc(_sfc_main$25, [["render", _sfc_render$24], ["__scopeId", "data-v-a7f2603d"], ["__file", "E:/小程序转app/xcbapp/pages/ShopDetails/ShopDetails.vue"]]);
+  const _sfc_main$24 = {
     data() {
       return {
         multiArray: [
@@ -12012,7 +10993,7 @@ This will fail in production.`);
       }
     }
   };
-  function _sfc_render$1_(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$23(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "form-card" }, [
@@ -12301,7 +11282,7 @@ This will fail in production.`);
       ])
     ]);
   }
-  const PagesApplyApply = /* @__PURE__ */ _export_sfc(_sfc_main$1$, [["render", _sfc_render$1_], ["__scopeId", "data-v-cdb56d2d"], ["__file", "E:/小程序转app/xcbapp/pages/Apply/Apply.vue"]]);
+  const PagesApplyApply = /* @__PURE__ */ _export_sfc(_sfc_main$24, [["render", _sfc_render$23], ["__scopeId", "data-v-cdb56d2d"], ["__file", "E:/小程序转app/xcbapp/pages/Apply/Apply.vue"]]);
   const isObject = (val) => val !== null && typeof val === "object";
   const defaultDelimiters = ["{", "}"];
   class BaseFormatter {
@@ -12615,7 +11596,7 @@ This will fail in production.`);
   const {
     t: t$5
   } = initVueI18n(messages$1);
-  const _sfc_main$1_ = {
+  const _sfc_main$23 = {
     name: "UniLoadMore",
     emits: ["clickLoadMore"],
     props: {
@@ -12697,7 +11678,7 @@ This will fail in production.`);
       }
     }
   };
-  function _sfc_render$1Z(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$22(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "uni-load-more",
       onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args))
@@ -12772,7 +11753,7 @@ This will fail in production.`);
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1$4 = /* @__PURE__ */ _export_sfc(_sfc_main$1_, [["render", _sfc_render$1Z], ["__scopeId", "data-v-9245e42c"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue"]]);
+  const __easycom_1$7 = /* @__PURE__ */ _export_sfc(_sfc_main$23, [["render", _sfc_render$22], ["__scopeId", "data-v-9245e42c"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue"]]);
   const subPackages = [
     {
       root: "subPackages/PaymentModule",
@@ -16923,7 +15904,7 @@ ${o3}
       }
     }
   };
-  const _sfc_main$1Z = {
+  const _sfc_main$22 = {
     name: "UniDataPickerView",
     emits: ["nodeclick", "change", "datachange", "update:modelValue"],
     mixins: [dataPicker],
@@ -17027,8 +16008,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1Y(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$4);
+  function _sfc_render$21(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-data-pickerview" }, [
       !_ctx.isCloudDataList ? (vue.openBlock(), vue.createElementBlock("scroll-view", {
         key: 0,
@@ -17117,8 +16098,8 @@ ${o3}
       ])
     ]);
   }
-  const DataPickerView = /* @__PURE__ */ _export_sfc(_sfc_main$1Z, [["render", _sfc_render$1Y], ["__scopeId", "data-v-91ec6a82"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-data-picker/components/uni-data-pickerview/uni-data-pickerview.vue"]]);
-  const _sfc_main$1Y = {
+  const DataPickerView = /* @__PURE__ */ _export_sfc(_sfc_main$22, [["render", _sfc_render$21], ["__scopeId", "data-v-91ec6a82"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-data-picker/components/uni-data-pickerview/uni-data-pickerview.vue"]]);
+  const _sfc_main$21 = {
     name: "UniDataPicker",
     emits: ["popupopened", "popupclosed", "nodeclick", "input", "change", "update:modelValue", "inputclick"],
     mixins: [dataPicker],
@@ -17322,8 +16303,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1X(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$4);
+  function _sfc_render$20(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$7);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_data_picker_view = vue.resolveComponent("data-picker-view");
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-data-tree" }, [
@@ -17488,7 +16469,7 @@ ${o3}
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$1Y, [["render", _sfc_render$1X], ["__scopeId", "data-v-2653531e"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-data-picker/components/uni-data-picker/uni-data-picker.vue"]]);
+  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$21, [["render", _sfc_render$20], ["__scopeId", "data-v-2653531e"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-data-picker/components/uni-data-picker/uni-data-picker.vue"]]);
   let Calendar$1 = class Calendar {
     constructor({
       selected,
@@ -17844,7 +16825,7 @@ ${o3}
     }
     return value;
   }
-  const _sfc_main$1X = {
+  const _sfc_main$20 = {
     props: {
       weeks: {
         type: Object,
@@ -17878,7 +16859,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1W(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1$(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -17934,7 +16915,7 @@ ${o3}
       /* CLASS, NEED_HYDRATION */
     );
   }
-  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$1X, [["render", _sfc_render$1W], ["__scopeId", "data-v-3c762a01"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
+  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$20, [["render", _sfc_render$1$], ["__scopeId", "data-v-3c762a01"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
   const en$1 = {
     "uni-datetime-picker.selectDate": "select date",
     "uni-datetime-picker.selectTime": "select time",
@@ -18009,7 +16990,7 @@ ${o3}
   const {
     t: t$3
   } = initVueI18n(i18nMessages);
-  const _sfc_main$1W = {
+  const _sfc_main$1$ = {
     name: "UniDatetimePicker",
     data() {
       return {
@@ -18613,7 +17594,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1V(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1_(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-datetime-picker" }, [
       vue.createElementVNode("view", {
         onClick: _cache[0] || (_cache[0] = (...args) => $options.initTimePicker && $options.initTimePicker(...args))
@@ -18888,11 +17869,11 @@ ${o3}
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$1W, [["render", _sfc_render$1V], ["__scopeId", "data-v-1d532b70"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
+  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$1$, [["render", _sfc_render$1_], ["__scopeId", "data-v-1d532b70"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
   const {
     t: t$2
   } = initVueI18n(i18nMessages);
-  const _sfc_main$1V = {
+  const _sfc_main$1_ = {
     components: {
       calendarItem,
       timePicker: TimePicker
@@ -19373,7 +18354,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1U(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1Z(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_calendar_item = vue.resolveComponent("calendar-item");
     const _component_time_picker = vue.resolveComponent("time-picker");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
@@ -19666,8 +18647,8 @@ ${o3}
       /* NEED_HYDRATION */
     );
   }
-  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$1V, [["render", _sfc_render$1U], ["__scopeId", "data-v-1d379219"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
-  const _sfc_main$1U = {
+  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$1_, [["render", _sfc_render$1Z], ["__scopeId", "data-v-1d379219"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
+  const _sfc_main$1Z = {
     name: "UniDatetimePicker",
     options: {
       virtualHost: true
@@ -20323,7 +19304,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1T(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1Y(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_time_picker = vue.resolveComponent("time-picker");
     const _component_Calendar = vue.resolveComponent("Calendar");
@@ -20667,8 +19648,8 @@ ${o3}
       }, null, 8, ["date", "defTime", "start-date", "end-date", "selectableTimes", "startPlaceholder", "endPlaceholder", "default-value", "pleStatus", "range", "hasTime", "hideSecond", "onConfirm", "onMaskClose", "onChange"])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1U, [["render", _sfc_render$1T], ["__scopeId", "data-v-9802168a"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
-  const _sfc_main$1T = {
+  const __easycom_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1Z, [["render", _sfc_render$1Y], ["__scopeId", "data-v-9802168a"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
+  const _sfc_main$1Y = {
     data() {
       return {
         methodItems: [{
@@ -20938,7 +19919,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1S(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1X(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_data_picker = resolveEasycom(vue.resolveDynamicComponent("uni-data-picker"), __easycom_0$3);
     const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
@@ -21067,8 +20048,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesBuyBuy = /* @__PURE__ */ _export_sfc(_sfc_main$1T, [["render", _sfc_render$1S], ["__scopeId", "data-v-4ca90ae6"], ["__file", "E:/小程序转app/xcbapp/pages/Buy/Buy.vue"]]);
-  const _sfc_main$1S = {
+  const PagesBuyBuy = /* @__PURE__ */ _export_sfc(_sfc_main$1Y, [["render", _sfc_render$1X], ["__scopeId", "data-v-4ca90ae6"], ["__file", "E:/小程序转app/xcbapp/pages/Buy/Buy.vue"]]);
+  const _sfc_main$1X = {
     data() {
       return {
         pageData: [],
@@ -21347,7 +20328,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1R(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1W(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode(
@@ -21642,8 +20623,8 @@ ${o3}
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const PagesPublishPublish = /* @__PURE__ */ _export_sfc(_sfc_main$1S, [["render", _sfc_render$1R], ["__file", "E:/小程序转app/xcbapp/pages/publish/publish.vue"]]);
-  const _sfc_main$1R = {
+  const PagesPublishPublish = /* @__PURE__ */ _export_sfc(_sfc_main$1X, [["render", _sfc_render$1W], ["__file", "E:/小程序转app/xcbapp/pages/publish/publish.vue"]]);
+  const _sfc_main$1W = {
     data() {
       return {
         Image: "",
@@ -21794,7 +20775,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1Q(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1V(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "content" }, [
@@ -21881,8 +20862,8 @@ ${o3}
       vue.createElementVNode("text", { style: { "color": "red", "margin-top": "30rpx", "font-size": "30rpx" } }, "注意：添加菜品后要在菜品列表里面选择上架")
     ]);
   }
-  const PagesReleaseRelease = /* @__PURE__ */ _export_sfc(_sfc_main$1R, [["render", _sfc_render$1Q], ["__file", "E:/小程序转app/xcbapp/pages/release/release.vue"]]);
-  const _sfc_main$1Q = {
+  const PagesReleaseRelease = /* @__PURE__ */ _export_sfc(_sfc_main$1W, [["render", _sfc_render$1V], ["__file", "E:/小程序转app/xcbapp/pages/release/release.vue"]]);
+  const _sfc_main$1V = {
     data() {
       return {
         pageData: [],
@@ -22020,7 +21001,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1P(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1U(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode(
         "scroll-view",
@@ -22162,8 +21143,8 @@ ${o3}
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const PagesStalllistStalllist = /* @__PURE__ */ _export_sfc(_sfc_main$1Q, [["render", _sfc_render$1P], ["__file", "E:/小程序转app/xcbapp/pages/stalllist/stalllist.vue"]]);
-  const _sfc_main$1P = {
+  const PagesStalllistStalllist = /* @__PURE__ */ _export_sfc(_sfc_main$1V, [["render", _sfc_render$1U], ["__file", "E:/小程序转app/xcbapp/pages/stalllist/stalllist.vue"]]);
+  const _sfc_main$1U = {
     data() {
       return {
         pageData: []
@@ -22187,7 +21168,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1O(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1T(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "content" }, [
         vue.createElementVNode(
@@ -22247,8 +21228,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesCouponsCoupons = /* @__PURE__ */ _export_sfc(_sfc_main$1P, [["render", _sfc_render$1O], ["__file", "E:/小程序转app/xcbapp/pages/coupons/coupons.vue"]]);
-  const _sfc_main$1O = {
+  const PagesCouponsCoupons = /* @__PURE__ */ _export_sfc(_sfc_main$1U, [["render", _sfc_render$1T], ["__file", "E:/小程序转app/xcbapp/pages/coupons/coupons.vue"]]);
+  const _sfc_main$1T = {
     data() {
       return {};
     },
@@ -22266,7 +21247,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1N(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1S(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "first" }, [
         vue.createElementVNode("image", {
@@ -22339,8 +21320,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesLotteryLottery = /* @__PURE__ */ _export_sfc(_sfc_main$1O, [["render", _sfc_render$1N], ["__file", "E:/小程序转app/xcbapp/pages/lottery/lottery.vue"]]);
-  const _sfc_main$1N = {
+  const PagesLotteryLottery = /* @__PURE__ */ _export_sfc(_sfc_main$1T, [["render", _sfc_render$1S], ["__file", "E:/小程序转app/xcbapp/pages/lottery/lottery.vue"]]);
+  const _sfc_main$1S = {
     data() {
       return {};
     },
@@ -22379,7 +21360,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1M(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1R(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "title" }, " 喜讯 "),
       vue.createElementVNode("view", { class: "content" }, [
@@ -22405,8 +21386,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesRulesRules = /* @__PURE__ */ _export_sfc(_sfc_main$1N, [["render", _sfc_render$1M], ["__file", "E:/小程序转app/xcbapp/pages/rules/rules.vue"]]);
-  const _sfc_main$1M = {
+  const PagesRulesRules = /* @__PURE__ */ _export_sfc(_sfc_main$1S, [["render", _sfc_render$1R], ["__file", "E:/小程序转app/xcbapp/pages/rules/rules.vue"]]);
+  const _sfc_main$1R = {
     data() {
       return {
         pagedData: [],
@@ -22463,7 +21444,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1L(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1Q(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "item" }, [
         vue.createElementVNode("view", { class: "top" }, [
@@ -22551,7 +21532,7 @@ ${o3}
       }, "参与活动说明")
     ]);
   }
-  const PagesJackpotJackpot = /* @__PURE__ */ _export_sfc(_sfc_main$1M, [["render", _sfc_render$1L], ["__file", "E:/小程序转app/xcbapp/pages/jackpot/jackpot.vue"]]);
+  const PagesJackpotJackpot = /* @__PURE__ */ _export_sfc(_sfc_main$1R, [["render", _sfc_render$1Q], ["__file", "E:/小程序转app/xcbapp/pages/jackpot/jackpot.vue"]]);
   function obj2strClass(obj) {
     let classess = "";
     for (let key in obj) {
@@ -22570,7 +21551,7 @@ ${o3}
     }
     return style;
   }
-  const _sfc_main$1L = {
+  const _sfc_main$1Q = {
     name: "uni-easyinput",
     emits: [
       "click",
@@ -22919,7 +21900,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1K(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1P(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock(
       "view",
@@ -23043,8 +22024,8 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$1L, [["render", _sfc_render$1K], ["__scopeId", "data-v-09fd5285"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
-  const _sfc_main$1K = {
+  const __easycom_2$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1Q, [["render", _sfc_render$1P], ["__scopeId", "data-v-09fd5285"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
+  const _sfc_main$1P = {
     name: "UniSection",
     emits: ["click"],
     props: {
@@ -23103,7 +22084,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1J(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1O(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-section" }, [
       vue.createElementVNode("view", {
         class: "uni-section-header",
@@ -23160,7 +22141,7 @@ ${o3}
       )
     ]);
   }
-  const __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$1K, [["render", _sfc_render$1J], ["__scopeId", "data-v-637fd36b"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-section/components/uni-section/uni-section.vue"]]);
+  const __easycom_1$6 = /* @__PURE__ */ _export_sfc(_sfc_main$1P, [["render", _sfc_render$1O], ["__scopeId", "data-v-637fd36b"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-section/components/uni-section/uni-section.vue"]]);
   const props = {
     props: {
       //二维码内容
@@ -24939,7 +23920,7 @@ ${o3}
   const queueLoadImage = new Queue();
   const cacheImageList = [];
   let instance = null;
-  const _sfc_main$1J = {
+  const _sfc_main$1O = {
     name: "uv-qrcode",
     mixins: [mpMixin, mixin, props],
     emits: ["click", "change", "complete"],
@@ -25535,7 +24516,7 @@ ${o3}
     }
     return obj;
   }
-  function _sfc_render$1I(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1N(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -25596,7 +24577,7 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_3$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1J, [["render", _sfc_render$1I], ["__scopeId", "data-v-ff61d38d"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uv-qrcode/components/uv-qrcode/uv-qrcode.vue"]]);
+  const __easycom_3$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1O, [["render", _sfc_render$1N], ["__scopeId", "data-v-ff61d38d"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uv-qrcode/components/uv-qrcode/uv-qrcode.vue"]]);
   class MPAnimation {
     constructor(options, _this) {
       this.options = options;
@@ -25709,7 +24690,7 @@ ${o3}
     clearTimeout(_this.timer);
     return new MPAnimation(option, _this);
   }
-  const _sfc_main$1I = {
+  const _sfc_main$1N = {
     name: "uniTransition",
     emits: ["click", "change"],
     props: {
@@ -25960,7 +24941,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1H(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1M(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.withDirectives((vue.openBlock(), vue.createElementBlock("view", {
       ref: "ani",
       animation: $data.animationData,
@@ -25973,8 +24954,8 @@ ${o3}
       [vue.vShow, $data.isShow]
     ]);
   }
-  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1I, [["render", _sfc_render$1H], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
-  const _sfc_main$1H = {
+  const __easycom_1$5 = /* @__PURE__ */ _export_sfc(_sfc_main$1N, [["render", _sfc_render$1M], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  const _sfc_main$1M = {
     name: "uniPopup",
     components: {},
     emits: ["change", "maskClick"],
@@ -26325,8 +25306,8 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1G(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_1$2);
+  function _sfc_render$1L(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_1$5);
     return $data.showPopup ? (vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -26385,8 +25366,8 @@ ${o3}
       /* CLASS */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1H, [["render", _sfc_render$1G], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
-  const _sfc_main$1G = {
+  const __easycom_1$4 = /* @__PURE__ */ _export_sfc(_sfc_main$1M, [["render", _sfc_render$1L], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const _sfc_main$1L = {
     data() {
       return {
         tabs1: ["全部", "待支付", "待收货", "已完成"],
@@ -26516,12 +25497,12 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1F(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2);
-    const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_1$3);
+  function _sfc_render$1K(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2$2);
+    const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_1$6);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uv_qrcode = resolveEasycom(vue.resolveDynamicComponent("uv-qrcode"), __easycom_3$2);
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "b-tabs" }, [
         vue.createElementVNode("scroll-view", { "scroll-x": "" }, [
@@ -26822,8 +25803,8 @@ ${o3}
       )
     ]);
   }
-  const PagesOrdersOrders = /* @__PURE__ */ _export_sfc(_sfc_main$1G, [["render", _sfc_render$1F], ["__file", "E:/小程序转app/xcbapp/pages/orders/orders.vue"]]);
-  const _sfc_main$1F = {
+  const PagesOrdersOrders = /* @__PURE__ */ _export_sfc(_sfc_main$1L, [["render", _sfc_render$1K], ["__file", "E:/小程序转app/xcbapp/pages/orders/orders.vue"]]);
+  const _sfc_main$1K = {
     data() {
       return {
         pageData: [],
@@ -26875,7 +25856,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1E(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1J(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode(
         "scroll-view",
@@ -26942,8 +25923,8 @@ ${o3}
       )
     ]);
   }
-  const PagesStallsDishesStallsDishes = /* @__PURE__ */ _export_sfc(_sfc_main$1F, [["render", _sfc_render$1E], ["__file", "E:/小程序转app/xcbapp/pages/Stalls-dishes/Stalls-dishes.vue"]]);
-  const _sfc_main$1E = {
+  const PagesStallsDishesStallsDishes = /* @__PURE__ */ _export_sfc(_sfc_main$1K, [["render", _sfc_render$1J], ["__file", "E:/小程序转app/xcbapp/pages/Stalls-dishes/Stalls-dishes.vue"]]);
+  const _sfc_main$1J = {
     data() {
       return {
         pageData: [],
@@ -27006,7 +25987,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1D(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1I(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode(
         "scroll-view",
@@ -27074,8 +26055,8 @@ ${o3}
       )
     ]);
   }
-  const PagesListedDishesListedDishes = /* @__PURE__ */ _export_sfc(_sfc_main$1E, [["render", _sfc_render$1D], ["__file", "E:/小程序转app/xcbapp/pages/Listed-Dishes/Listed-Dishes.vue"]]);
-  const _sfc_main$1D = {
+  const PagesListedDishesListedDishes = /* @__PURE__ */ _export_sfc(_sfc_main$1J, [["render", _sfc_render$1I], ["__file", "E:/小程序转app/xcbapp/pages/Listed-Dishes/Listed-Dishes.vue"]]);
+  const _sfc_main$1I = {
     data() {
       return {
         pageData: [],
@@ -27115,7 +26096,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1C(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1H(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "content" }, [
         vue.createElementVNode(
@@ -27183,8 +26164,8 @@ ${o3}
       }, " 确认 ")
     ]);
   }
-  const PagesUsecouponsUsecoupons = /* @__PURE__ */ _export_sfc(_sfc_main$1D, [["render", _sfc_render$1C], ["__file", "E:/小程序转app/xcbapp/pages/usecoupons/usecoupons.vue"]]);
-  const _sfc_main$1C = {
+  const PagesUsecouponsUsecoupons = /* @__PURE__ */ _export_sfc(_sfc_main$1I, [["render", _sfc_render$1H], ["__file", "E:/小程序转app/xcbapp/pages/usecoupons/usecoupons.vue"]]);
+  const _sfc_main$1H = {
     data() {
       return {
         isSignedIn: false,
@@ -27205,7 +26186,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1B(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1G(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "content" }, [
         vue.createElementVNode(
@@ -27218,8 +26199,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesClockClock = /* @__PURE__ */ _export_sfc(_sfc_main$1C, [["render", _sfc_render$1B], ["__file", "E:/小程序转app/xcbapp/pages/Clock/Clock.vue"]]);
-  const _sfc_main$1B = {
+  const PagesClockClock = /* @__PURE__ */ _export_sfc(_sfc_main$1H, [["render", _sfc_render$1G], ["__file", "E:/小程序转app/xcbapp/pages/Clock/Clock.vue"]]);
+  const _sfc_main$1G = {
     data() {
       return {
         pageData: []
@@ -27249,7 +26230,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1A(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1F(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "title" }, " 打卡记录 "),
       vue.createElementVNode("view", { class: "records" }, [
@@ -27302,8 +26283,8 @@ ${o3}
       }, " 免费抽奖 ")
     ]);
   }
-  const PagesClockRecordsClockRecords = /* @__PURE__ */ _export_sfc(_sfc_main$1B, [["render", _sfc_render$1A], ["__file", "E:/小程序转app/xcbapp/pages/clock-records/clock-records.vue"]]);
-  const _sfc_main$1A = {
+  const PagesClockRecordsClockRecords = /* @__PURE__ */ _export_sfc(_sfc_main$1G, [["render", _sfc_render$1F], ["__file", "E:/小程序转app/xcbapp/pages/clock-records/clock-records.vue"]]);
+  const _sfc_main$1F = {
     data() {
       return {
         pageData: []
@@ -27346,7 +26327,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1z(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1E(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "title" }, " 积分记录 "),
       vue.createElementVNode("view", { class: "records" }, [
@@ -27425,8 +26406,8 @@ ${o3}
       }, " 免费抽奖 ")
     ]);
   }
-  const PagesMyPointsRecordsMyPointsRecords = /* @__PURE__ */ _export_sfc(_sfc_main$1A, [["render", _sfc_render$1z], ["__file", "E:/小程序转app/xcbapp/pages/MyPoints-records/MyPoints-records.vue"]]);
-  const _sfc_main$1z = {
+  const PagesMyPointsRecordsMyPointsRecords = /* @__PURE__ */ _export_sfc(_sfc_main$1F, [["render", _sfc_render$1E], ["__file", "E:/小程序转app/xcbapp/pages/MyPoints-records/MyPoints-records.vue"]]);
+  const _sfc_main$1E = {
     data() {
       return {
         // tabs1: ["全部", "待支付", "待收货", "待结算", "已结算"],
@@ -27499,7 +26480,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1y(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1D(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "b-tabs" }, [
@@ -27648,8 +26629,8 @@ ${o3}
       )
     ]);
   }
-  const PagesOwnerordersOwnerorders = /* @__PURE__ */ _export_sfc(_sfc_main$1z, [["render", _sfc_render$1y], ["__file", "E:/小程序转app/xcbapp/pages/Ownerorders/Ownerorders.vue"]]);
-  const _sfc_main$1y = {
+  const PagesOwnerordersOwnerorders = /* @__PURE__ */ _export_sfc(_sfc_main$1E, [["render", _sfc_render$1D], ["__file", "E:/小程序转app/xcbapp/pages/Ownerorders/Ownerorders.vue"]]);
+  const _sfc_main$1D = {
     data() {
       return {
         shopmoney: null,
@@ -27675,7 +26656,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1x(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1C(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "asset" }, [
@@ -27734,8 +26715,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesWalletWallet = /* @__PURE__ */ _export_sfc(_sfc_main$1y, [["render", _sfc_render$1x], ["__file", "E:/小程序转app/xcbapp/pages/wallet/wallet.vue"]]);
-  const _sfc_main$1x = {
+  const PagesWalletWallet = /* @__PURE__ */ _export_sfc(_sfc_main$1D, [["render", _sfc_render$1C], ["__file", "E:/小程序转app/xcbapp/pages/wallet/wallet.vue"]]);
+  const _sfc_main$1C = {
     data() {
       return {
         pagedata: {
@@ -27769,7 +26750,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1w(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1B(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "asset" }, [
@@ -27840,8 +26821,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesPointsPoints = /* @__PURE__ */ _export_sfc(_sfc_main$1x, [["render", _sfc_render$1w], ["__file", "E:/小程序转app/xcbapp/pages/Points/Points.vue"]]);
-  const _sfc_main$1w = {
+  const PagesPointsPoints = /* @__PURE__ */ _export_sfc(_sfc_main$1C, [["render", _sfc_render$1B], ["__file", "E:/小程序转app/xcbapp/pages/Points/Points.vue"]]);
+  const _sfc_main$1B = {
     data() {
       return {
         pagedata: {
@@ -27919,7 +26900,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1v(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1A(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "input-section" }, [
@@ -27973,9 +26954,9 @@ ${o3}
       ])
     ]);
   }
-  const PagesPointspayoutsPointspayouts = /* @__PURE__ */ _export_sfc(_sfc_main$1w, [["render", _sfc_render$1v], ["__file", "E:/小程序转app/xcbapp/pages/pointspayouts/pointspayouts.vue"]]);
+  const PagesPointspayoutsPointspayouts = /* @__PURE__ */ _export_sfc(_sfc_main$1B, [["render", _sfc_render$1A], ["__file", "E:/小程序转app/xcbapp/pages/pointspayouts/pointspayouts.vue"]]);
   const _imports_0$4 = "/static/empty.png";
-  const _sfc_main$1v = {
+  const _sfc_main$1A = {
     data() {
       return {
         pageData: [],
@@ -28006,7 +26987,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1u(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1z(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "page-title" }, "积分结算记录"),
       vue.createElementVNode("view", { class: "table-container" }, [
@@ -28106,8 +27087,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesSettrecordsSettrecords = /* @__PURE__ */ _export_sfc(_sfc_main$1v, [["render", _sfc_render$1u], ["__file", "E:/小程序转app/xcbapp/pages/Settrecords/Settrecords.vue"]]);
-  const _sfc_main$1u = {
+  const PagesSettrecordsSettrecords = /* @__PURE__ */ _export_sfc(_sfc_main$1A, [["render", _sfc_render$1z], ["__file", "E:/小程序转app/xcbapp/pages/Settrecords/Settrecords.vue"]]);
+  const _sfc_main$1z = {
     data() {
       return {
         marketList: [],
@@ -28271,7 +27252,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1t(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1y(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "store" }, [
         vue.createElementVNode("text", { style: { "margin": "10rpx 20rpx" } }, "补充摊铺信息"),
@@ -28328,8 +27309,8 @@ ${o3}
       }, "提交", 8, ["disabled"])
     ]);
   }
-  const PagesEditshopEditshop = /* @__PURE__ */ _export_sfc(_sfc_main$1u, [["render", _sfc_render$1t], ["__file", "E:/小程序转app/xcbapp/pages/editshop/editshop.vue"]]);
-  const _sfc_main$1t = {
+  const PagesEditshopEditshop = /* @__PURE__ */ _export_sfc(_sfc_main$1z, [["render", _sfc_render$1y], ["__file", "E:/小程序转app/xcbapp/pages/editshop/editshop.vue"]]);
+  const _sfc_main$1y = {
     name: "UniTag",
     emits: ["click"],
     props: {
@@ -28409,7 +27390,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1s(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1x(_ctx, _cache, $props, $setup, $data, $options) {
     return $props.text ? (vue.openBlock(), vue.createElementBlock(
       "text",
       {
@@ -28423,8 +27404,8 @@ ${o3}
       /* TEXT, CLASS, STYLE */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1t, [["render", _sfc_render$1s], ["__scopeId", "data-v-1f94d070"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-tag/components/uni-tag/uni-tag.vue"]]);
-  const _sfc_main$1s = {
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1y, [["render", _sfc_render$1x], ["__scopeId", "data-v-1f94d070"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-tag/components/uni-tag/uni-tag.vue"]]);
+  const _sfc_main$1x = {
     name: "bCard",
     data() {
       return {
@@ -28461,7 +27442,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1r(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1w(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_tag = resolveEasycom(vue.resolveDynamicComponent("uni-tag"), __easycom_0$2);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", null, [
@@ -28527,8 +27508,8 @@ ${o3}
       ])
     ]);
   }
-  const bCard = /* @__PURE__ */ _export_sfc(_sfc_main$1s, [["render", _sfc_render$1r], ["__scopeId", "data-v-ea57fc88"], ["__file", "E:/小程序转app/xcbapp/components/bCard.vue"]]);
-  const _sfc_main$1r = {
+  const bCard = /* @__PURE__ */ _export_sfc(_sfc_main$1x, [["render", _sfc_render$1w], ["__scopeId", "data-v-ea57fc88"], ["__file", "E:/小程序转app/xcbapp/components/bCard.vue"]]);
+  const _sfc_main$1w = {
     data() {
       return {
         cardList: []
@@ -28570,7 +27551,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1q(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1v(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_bCard = vue.resolveComponent("bCard");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "bank-card-container" }, [
@@ -28615,8 +27596,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesBankCardBankCard = /* @__PURE__ */ _export_sfc(_sfc_main$1r, [["render", _sfc_render$1q], ["__file", "E:/小程序转app/xcbapp/pages/bankCard/bankCard.vue"]]);
-  const _sfc_main$1q = {
+  const PagesBankCardBankCard = /* @__PURE__ */ _export_sfc(_sfc_main$1w, [["render", _sfc_render$1v], ["__file", "E:/小程序转app/xcbapp/pages/bankCard/bankCard.vue"]]);
+  const _sfc_main$1v = {
     data() {
       return {
         // 银行卡信息
@@ -28703,7 +27684,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1p(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1u(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "bigBox" }, [
       vue.createElementVNode("view", { class: "title" }, " 添加银行卡 "),
       vue.createElementVNode("view", { class: "card" }, [
@@ -28798,8 +27779,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesAddCardAddCard = /* @__PURE__ */ _export_sfc(_sfc_main$1q, [["render", _sfc_render$1p], ["__file", "E:/小程序转app/xcbapp/pages/addCard/addCard.vue"]]);
-  const _sfc_main$1p = {
+  const PagesAddCardAddCard = /* @__PURE__ */ _export_sfc(_sfc_main$1v, [["render", _sfc_render$1u], ["__file", "E:/小程序转app/xcbapp/pages/addCard/addCard.vue"]]);
+  const _sfc_main$1u = {
     name: "UniSteps",
     props: {
       direction: {
@@ -28849,7 +27830,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1o(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1t(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-steps" }, [
       vue.createElementVNode(
@@ -28989,8 +27970,8 @@ ${o3}
       )
     ]);
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1p, [["render", _sfc_render$1o], ["__scopeId", "data-v-c0a11c53"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-steps/components/uni-steps/uni-steps.vue"]]);
-  const _sfc_main$1o = {
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1u, [["render", _sfc_render$1t], ["__scopeId", "data-v-c0a11c53"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-steps/components/uni-steps/uni-steps.vue"]]);
+  const _sfc_main$1t = {
     name: "UniCard",
     emits: ["click"],
     props: {
@@ -29051,7 +28032,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1n(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1s(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -29149,8 +28130,8 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$1o, [["render", _sfc_render$1n], ["__scopeId", "data-v-ae4bee67"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-card/components/uni-card/uni-card.vue"]]);
-  const _sfc_main$1n = {
+  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$1t, [["render", _sfc_render$1s], ["__scopeId", "data-v-ae4bee67"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-card/components/uni-card/uni-card.vue"]]);
+  const _sfc_main$1s = {
     name: "pop",
     data() {
       return {
@@ -29184,9 +28165,9 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1m(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1r(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_1$2);
+    const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_1$5);
     return vue.withDirectives((vue.openBlock(), vue.createElementBlock(
       "view",
       { class: "pop" },
@@ -29232,8 +28213,8 @@ ${o3}
       [vue.vShow, $data.show]
     ]);
   }
-  const popVue = /* @__PURE__ */ _export_sfc(_sfc_main$1n, [["render", _sfc_render$1m], ["__scopeId", "data-v-26f7d2a1"], ["__file", "E:/小程序转app/xcbapp/pages/onlineBooth/components/pop.vue"]]);
-  const _sfc_main$1m = {
+  const popVue = /* @__PURE__ */ _export_sfc(_sfc_main$1s, [["render", _sfc_render$1r], ["__scopeId", "data-v-26f7d2a1"], ["__file", "E:/小程序转app/xcbapp/pages/onlineBooth/components/pop.vue"]]);
+  const _sfc_main$1r = {
     data() {
       return {
         // options: [{
@@ -29646,7 +28627,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1l(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1q(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_popVue = vue.resolveComponent("popVue");
     const _component_uni_steps = resolveEasycom(vue.resolveDynamicComponent("uni-steps"), __easycom_0$1);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
@@ -29818,8 +28799,8 @@ ${o3}
       )
     ]);
   }
-  const PagesOnlineBoothOnlineBooth = /* @__PURE__ */ _export_sfc(_sfc_main$1m, [["render", _sfc_render$1l], ["__scopeId", "data-v-2ffa6e15"], ["__file", "E:/小程序转app/xcbapp/pages/onlineBooth/onlineBooth.vue"]]);
-  const _sfc_main$1l = {
+  const PagesOnlineBoothOnlineBooth = /* @__PURE__ */ _export_sfc(_sfc_main$1r, [["render", _sfc_render$1q], ["__scopeId", "data-v-2ffa6e15"], ["__file", "E:/小程序转app/xcbapp/pages/onlineBooth/onlineBooth.vue"]]);
+  const _sfc_main$1q = {
     data() {
       return {};
     },
@@ -29847,7 +28828,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1k(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1p(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "all" }, [
       vue.createElementVNode("view", { class: "me-container" }, [
@@ -30149,8 +29130,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesBoothOwnerBoothOwner = /* @__PURE__ */ _export_sfc(_sfc_main$1l, [["render", _sfc_render$1k], ["__file", "E:/小程序转app/xcbapp/pages/boothOwner/boothOwner.vue"]]);
-  const _sfc_main$1k = {
+  const PagesBoothOwnerBoothOwner = /* @__PURE__ */ _export_sfc(_sfc_main$1q, [["render", _sfc_render$1p], ["__file", "E:/小程序转app/xcbapp/pages/boothOwner/boothOwner.vue"]]);
+  const _sfc_main$1p = {
     data() {
       return {};
     },
@@ -30178,7 +29159,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1j(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1o(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "all" }, [
       vue.createElementVNode("view", { class: "me-container" }, [
@@ -30412,11 +29393,11 @@ ${o3}
       ])
     ]);
   }
-  const PagesAHouseholderAHouseholder = /* @__PURE__ */ _export_sfc(_sfc_main$1k, [["render", _sfc_render$1j], ["__file", "E:/小程序转app/xcbapp/pages/aHouseholder/aHouseholder.vue"]]);
-  const _sfc_main$1j = {
+  const PagesAHouseholderAHouseholder = /* @__PURE__ */ _export_sfc(_sfc_main$1p, [["render", _sfc_render$1o], ["__file", "E:/小程序转app/xcbapp/pages/aHouseholder/aHouseholder.vue"]]);
+  const _sfc_main$1o = {
     name: "AgreementPage"
   };
-  function _sfc_render$1i(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1n(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "agreement-page" }, [
       vue.createElementVNode("view", { class: "agreement-title" }, "【农链天下】服务协议"),
       vue.createElementVNode("scroll-view", {
@@ -30427,29 +29408,131 @@ ${o3}
       ])
     ]);
   }
-  const PagesUserServiceAgreementUserServiceAgreement = /* @__PURE__ */ _export_sfc(_sfc_main$1j, [["render", _sfc_render$1i], ["__scopeId", "data-v-d92cc4a9"], ["__file", "E:/小程序转app/xcbapp/pages/userServiceAgreement/userServiceAgreement.vue"]]);
-  const _sfc_main$1i = {
-    name: "PrivacyAgreementPage"
+  const PagesUserServiceAgreementUserServiceAgreement = /* @__PURE__ */ _export_sfc(_sfc_main$1o, [["render", _sfc_render$1n], ["__scopeId", "data-v-d92cc4a9"], ["__file", "E:/小程序转app/xcbapp/pages/userServiceAgreement/userServiceAgreement.vue"]]);
+  const _sfc_main$1n = {
+    name: "Privacy",
+    head() {
+      return {
+        title: "农链天下 - 隐私政策"
+      };
+    }
   };
-  function _sfc_render$1h(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", { class: "privacy-agreement-page" }, [
-      vue.createElementVNode("view", { class: "privacy-agreement-title" }, "【农链天下】隐私协议"),
-      vue.createElementVNode("scroll-view", {
-        class: "privacy-agreement-content",
-        "scroll-y": ""
-      }, [
-        vue.createElementVNode("text", { class: "privacy-agreement-text" }, " 本隐私协议（以下简称“协议”）由海南积分宝电子商务有限公司（以下简称“本公司”）与使用【农链天下】的摊主（以下简称“摊主”）及用户（以下简称“用户”）共同缔结。本公司致力于保护用户和摊主的隐私，在使用本小程序的过程中，本公司将依据国家相关法律法规及本协议规定，以合法、正当、必要的原则处理您的个人信息。 一、信息收集 1. 本公司会收集用户和摊主在使用【农链天下】时提供的各类个人信息，具体包括但不限于： - 基本身份信息：姓名、身份证号、联系方式（如手机号码、电子邮箱）等，这些信息对于用户和摊主的账户注册、身份验证以及服务使用至关重要。 - 店铺信息（仅针对摊主）：店铺名称、店铺地址、经营范围、营业执照编号等，以便为摊主提供店铺管理和运营服务。 - 交易信息：包括订单信息（如订单编号、商品信息、交易金额、交易时间等），这是为了完成订单处理、结算及售后服务所需。 - 支付信息：在用户进行支付操作时，会涉及支付账户信息，但本公司将确保支付信息的处理符合金融监管机构的要求，仅在完成支付流程中使用，且会通过安全加密机制保护其安全性。 - 设备信息：在您使用本小程序时，会自动收集您的设备相关信息，例如设备型号、操作系统版本、唯一设备标识符（如 IMEI 号、MAC 地址等），主要用于确保服务的兼容性、维护服务的安全性以及优化用户体验。这些信息将以匿名化和去标识化的方式进行处理，不会直接关联到您的个人身份，除非法律另有规定。 二、信息使用 1. 本公司将使用收集到的个人信息为您提供和优化服务，具体如下： - 提供服务：使用您的信息来创建和管理您的账户，处理订单，为摊主管理店铺、提供商品展示和销售服务，为用户提供商品选购、订单追踪及客户服务等。 - 业务运营：进行数据分析，包括但不限于统计分析用户和摊主的行为模式、偏好，以改进我们的服务，如调整菜品推荐算法、优化服务流程和功能，提升服务质量。 - 沟通与服务：使用您的信息向您发送与服务相关的通知，如订单状态更新、发货通知、服务维护通知等，以确保您能及时了解服务进展。同时，我们可能会根据您的偏好和历史行为向您推送个性化的推荐信息，如您可能感兴趣的菜品、促销活动或优惠信息。若您不希望接收营销信息，可以通过【农链天下】内的设置功能随时选择退订，我们将尊重您的选择。 - 安全与防欺诈：利用收集到的信息来维护服务的安全性，预防和检测可能的欺诈、安全漏洞及滥用行为，保障用户和摊主的权益。 三、信息共享 1. 未经您的明确同意，本公司不会将您的个人信息向第三方共享，以下情况除外： - 服务提供商：为了向您提供更优质的服务，我们可能会与部分服务提供商合作，如支付机构、物流配送公司、技术支持服务商等。在共享信息前，我们会与这些服务提供商签订严格的保密协议，确保其仅在为您提供服务的必要范围内使用您的信息，并采取适当的安全和保密措施。例如，支付机构仅会在处理支付事务时使用您的支付信息，且仅能访问其所需的最少信息；物流配送公司仅能获取发货所需的收货地址等信息。 - 法律要求：当法律、法规、司法或行政命令要求我们披露信息时，我们将依法配合，同时会在合理范围内保障您的权益。 - 合并与收购：在公司合并、收购、重组或出售部分业务时，您的信息可能会被转移至新的实体，但我们会确保新的实体继续履行本协议所规定的隐私保护义务。 四、信息存储 1. 本公司将根据国家法律法规的要求，以安全的方式存储您的个人信息，确保信息的保密性和完整性。存储时间将根据信息的使用目的和相关法律规定而定，对于不再需要的信息，我们将及时进行删除或匿名化处理。 2. 我们采用多种安全措施来保护信息存储的安全，包括但不限于： - 采用加密技术对存储的信息进行加密，防止未经授权的访问。 - 实施访问控制措施，仅允许授权人员在必要时访问信息。 - 定期进行数据备份和恢复测试，以防止数据丢失或损坏。 五、信息访问与修改 1. 您有权随时访问、更新和修改您在【农链天下】中的个人信息。您可以通过【农链天下】内的用户中心或摊主管理界面进行操作，或者联系我们的客户服务团队。我们将及时响应您的请求，并确保信息的更新准确反映您的最新情况。 2. 若您发现您的信息有误或不完整，您有权要求我们进行更正或补充。在某些情况下，您还可以请求删除您的部分或全部个人信息，但需注意，在删除信息可能影响服务提供或违反法律规定的情况下，我们可能会在合理范围内保留必要信息，并向您说明原因。 六、信息保护 1. 本公司高度重视信息保护，采取多维度的安全措施来防止未经授权的访问、使用、披露、修改或破坏您的个人信息，这些措施包括但不限于： - 技术防护：运用先进的安全技术和工具，如防火墙、加密技术、安全套接字层（SSL）协议等，确保信息在传输和存储过程中的安全。 - 人员管理：对员工进行信息安全培训，确保员工遵守严格的信息处理和保护规定，只有经授权的员工在必要时才能接触和处理用户信息。 - 安全审计：定期进行安全审计和风险评估，及时发现并解决潜在的安全风险。 2. 若发生信息安全事件，我们将按照法律法规的要求，在不影响调查和处理的前提下，尽快通知受影响的用户和摊主，并采取相应的补救措施，包括但不限于提供风险提示、协助您采取防范措施等。 七、第三方链接和服务 1. 【农链天下】可能包含指向第三方网站或服务的链接，这些第三方网站或服务有其独立的隐私政策和信息处理方式，本公司对其隐私政策和信息处理行为不承担责任。 2. 在使用第三方服务时，请您务必仔细阅读并理解其隐私政策，谨慎操作。当您点击这些链接时，即表示您将离开本公司的服务环境，本公司无法控制第三方对您信息的收集和处理，您需自行判断风险。 八、儿童隐私 1. 本小程序不针对儿童（不满 14 周岁）提供服务。我们致力于遵守相关儿童隐私保护法律法规，若发现我们收集了儿童的信息，将采取合理措施尽快删除相关信息。若您是儿童的家长或监护人，请及时联系我们，我们将协助您进行信息删除和保护操作。 九、隐私协议的变更 1. 本公司会根据业务发展、法律法规的更新或监管要求，适时更新本隐私协议。我们将通过【农链天下】内的公告系统、电子邮件或短信等合理的通讯方式向您通知协议的变更内容。 2. 您在收到隐私协议更新通知后继续使用【农链天下】，将视为您同意更新后的隐私协议；若您不同意更新内容，您有权停止使用本小程序。 十、法律适用和争议解决 1. 本隐私协议的解释、效力及争议解决均适用中华人民共和国法律。 2. 在协议履行过程中，若双方因本隐私协议的内容或履行事宜发生争议，应首先尝试通过友好协商解决；若协商不成，任何一方可向本公司所在地人民法院提起诉讼。 若您对本隐私协议有任何疑问或需要帮助，请随时联系我们的客户服务热线：68552337 或发送邮件至 13707589182@163.com。 ")
+  function _sfc_render$1m(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("div", { class: "privacy-container" }, [
+      vue.createElementVNode("div", { class: "title" }, "【农链天下】隐私协议"),
+      vue.createElementVNode("div", { class: "content" }, [
+        vue.createElementVNode("p", null, " 本隐私协议（以下简称“协议”）由海南积分宝电子商务有限公司（以下简称“本公司”）与使用【农链天下】的摊主（以下简称“摊主”）及用户（以下简称“用户”）共同缔结。本公司致力于保护用户和摊主的隐私，在使用本小程序的过程中，本公司将依据国家相关法律法规及本协议规定，以合法、正当、必要的原则处理您的个人信息。 "),
+        vue.createElementVNode("h2", null, "一、信息收集"),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 1. 本公司会收集用户和摊主在使用【农链天下】时提供的各类个人信息，具体包括但不限于："),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 基本身份信息：姓名、身份证号、联系方式（如手机号码、电子邮箱）等，这些信息对于用户和摊主的账户注册、身份验证以及服务使用至关重要。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 店铺信息（仅针对摊主）：店铺名称、店铺地址、经营范围、营业执照编号等，以便为摊主提供店铺管理和运营服务。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 交易信息：包括订单信息（如订单编号、商品信息、交易金额、交易时间等），这是为了完成订单处理、结算及售后服务所需。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 支付信息：在用户进行支付操作时，会涉及支付账户信息，但本公司将确保支付信息的处理符合金融监管机构的要求，仅在完成支付流程中使用，且会通过安全加密机制保护其安全性。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 设备信息：在您使用本小程序时，会自动收集您的设备相关信息，例如设备型号、操作系统版本、唯一设备标识符（如 IMEI 号、MAC 地址等），主要用于确保服务的兼容性、维护服务的安全性以及优化用户体验。这些信息将以匿名化和去标识化的方式进行处理，不会直接关联到您的个人身份，除非法律另有规定。 ")
+        ]),
+        vue.createElementVNode("h2", null, "二、信息使用"),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 1. 本公司将使用收集到的个人信息为您提供和优化服务，具体如下："),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 提供服务：使用您的信息来创建和管理您的账户，处理订单，为摊主管理店铺、提供商品展示和销售服务，为用户提供商品选购、订单追踪及客户服务等。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 业务运营：进行数据分析，包括但不限于统计分析用户和摊主的行为模式、偏好，以改进我们的服务，如调整菜品推荐算法、优化服务流程和功能，提升服务质量。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 沟通与服务：使用您的信息向您发送与服务相关的通知，如订单状态更新、发货通知、服务维护通知等，以确保您能及时了解服务进展。同时，我们可能会根据您的偏好和历史行为向您推送个性化的推荐信息，如您可能感兴趣的菜品、促销活动或优惠信息。若您不希望接收营销信息，可以通过【农链天下】内的设置功能随时选择退订，我们将尊重您的选择。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 安全与防欺诈：利用收集到的信息来维护服务的安全性，预防和检测可能的欺诈、安全漏洞及滥用行为，保障用户和摊主的权益。 ")
+        ]),
+        vue.createElementVNode("h2", null, "三、第三方SDK收集信息说明（应用商店合规必备）"),
+        vue.createElementVNode("p", null, "1. 极光推送SDK"),
+        vue.createElementVNode("p", null, "收集信息：AndroidID、OAID、应用安装列表、设备信息"),
+        vue.createElementVNode("p", null, "使用目的：消息推送、推送到达率保障、反作弊"),
+        vue.createElementVNode("p", null, "隐私政策：https://www.jiguang.cn/privacy"),
+        vue.createElementVNode("p", null, "2. 高德地图SDK"),
+        vue.createElementVNode("p", null, "收集信息：位置信息、传感器数据"),
+        vue.createElementVNode("p", null, "使用目的：地图展示、定位、导航"),
+        vue.createElementVNode("p", null, "隐私政策：https://lbs.amap.com/home/privacy"),
+        vue.createElementVNode("p", null, "3. DCloud 开发通用工具库"),
+        vue.createElementVNode("p", null, "收集信息：OAID、摄像头信息"),
+        vue.createElementVNode("p", null, "使用目的：扫码、基础功能支持、设备兼容"),
+        vue.createElementVNode("p", null, "隐私政策：https://ask.dcloud.net.cn/article/36"),
+        vue.createElementVNode("h2", null, "四、信息共享"),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 1. 未经您的明确同意，本公司不会将您的个人信息向第三方共享，以下情况除外："),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 服务提供商：为了向您提供更优质的服务，我们可能会与部分服务提供商合作，如支付机构、物流配送公司、技术支持服务商等。在共享信息前，我们会与这些服务提供商签订严格的保密协议，确保其仅在为您提供服务的必要范围内使用您的信息，并采取适当的安全和保密措施。例如，支付机构仅会在处理支付事务时使用您的支付信息，且仅能访问其所需的最少信息；物流配送公司仅能获取发货所需的收货地址等信息。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 法律要求：当法律、法规、司法或行政命令要求我们披露信息时，我们将依法配合，同时会在合理范围内保障您的权益。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 合并与收购：在公司合并、收购、重组或出售部分业务时，您的信息可能会被转移至新的实体，但我们会确保新的实体继续履行本协议所规定的隐私保护义务。 ")
+        ]),
+        vue.createElementVNode("h2", null, "五、信息存储"),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 1. 本公司将根据国家法律法规的要求，以安全的方式存储您的个人信息，确保信息的保密性和完整性。存储时间将根据信息的使用目的和相关法律规定而定，对于不再需要的信息，我们将及时进行删除或匿名化处理。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 2. 我们采用多种安全措施来保护信息存储的安全，包括但不限于："),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 采用加密技术对存储的信息进行加密，防止未经授权的访问。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 实施访问控制措施，仅允许授权人员在必要时访问信息。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 定期进行数据备份和恢复测试，以防止数据丢失或损坏。 ")
+        ]),
+        vue.createElementVNode("h2", null, "六、信息访问与修改"),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 1. 您有权随时访问、更新和修改您在【农链天下】中的个人信息。您可以通过【农链天下】内的用户中心或摊主管理界面进行操作，或者联系我们的客户服务团队。我们将及时响应您的请求，并确保信息的更新准确反映您的最新情况。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 2. 若您发现您的信息有误或不完整，您有权要求我们进行更正或补充。在某些情况下，您还可以请求删除您的部分或全部个人信息，但需注意，在删除信息可能影响服务提供或违反法律规定的情况下，我们可能会在合理范围内保留必要信息，并向您说明原因。 ")
+        ]),
+        vue.createElementVNode("h2", null, "七、信息保护"),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 1. 本公司高度重视信息保护，采取多维度的安全措施来防止未经授权的访问、使用、披露、修改或破坏您的个人信息，这些措施包括但不限于："),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 技术防护：运用先进的安全技术和工具，如防火墙、加密技术、安全套接字层（SSL）协议等，确保信息在传输和存储过程中的安全。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 人员管理：对员工进行信息安全培训，确保员工遵守严格的信息处理和保护规定，只有经授权的员工在必要时才能接触和处理用户信息。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 安全审计：定期进行安全审计和风险评估，及时发现并解决潜在的安全风险。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 2. 若发生信息安全事件，我们将按照法律法规的要求，在不影响调查和处理的前提下，尽快通知受影响的用户和摊主，并采取相应的补救措施，包括但不限于提供风险提示、协助您采取防范措施等。 ")
+        ]),
+        vue.createElementVNode("h2", null, "八、第三方链接和服务"),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 1. 【农链天下】可能包含指向第三方网站或服务的链接，这些第三方网站或服务有其独立的隐私政策和信息处理方式，本公司对其隐私政策和信息处理行为不承担责任。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 2. 在使用第三方服务时，请您务必仔细阅读并理解其隐私政策，谨慎操作。当您点击这些链接时，即表示您将离开本公司的服务环境，本公司无法控制第三方对您信息的收集和处理，您需自行判断风险。 ")
+        ]),
+        vue.createElementVNode("h2", null, "九、儿童隐私"),
+        vue.createElementVNode("p", null, " 1. 本小程序不针对儿童（不满 14 周岁）提供服务。我们致力于遵守相关儿童隐私保护法律法规，若发现我们收集了儿童的信息，将采取合理措施尽快删除相关信息。若您是儿童的家长或监护人，请及时联系我们，我们将协助您进行信息删除和保护操作。 "),
+        vue.createElementVNode("h2", null, "十、隐私协议的变更"),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 1. 本公司会根据业务发展、法律法规的更新或监管要求，适时更新本隐私协议。我们将通过【农链天下】内的公告系统、电子邮件或短信等合理的通讯方式向您通知协议的变更内容。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 2. 您在收到隐私协议更新通知后继续使用【农链天下】，将视为您同意更新后的隐私协议；若您不同意更新内容，您有权停止使用本小程序。 ")
+        ]),
+        vue.createElementVNode("h2", null, "十一、法律适用和争议解决"),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 1. 本隐私协议的解释、效力及争议解决均适用中华人民共和国法律。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 2. 在协议履行过程中，若双方因本隐私协议的内容或履行事宜发生争议，应首先尝试通过友好协商解决；若协商不成，任何一方可向本公司所在地人民法院提起诉讼。 ")
+        ]),
+        vue.createElementVNode("p", null, "若您对本隐私协议有任何疑问或需要帮助，请随时联系我们的客户服务热线：68552337 或发送邮件至 13707589182@163.com。")
       ])
     ]);
   }
-  const PagesPrivacyAgreementPrivacyAgreement = /* @__PURE__ */ _export_sfc(_sfc_main$1i, [["render", _sfc_render$1h], ["__scopeId", "data-v-28d9e677"], ["__file", "E:/小程序转app/xcbapp/pages/privacyAgreement/privacyAgreement.vue"]]);
-  const _sfc_main$1h = {
+  const PagesPrivacyAgreementPrivacyAgreement = /* @__PURE__ */ _export_sfc(_sfc_main$1n, [["render", _sfc_render$1m], ["__scopeId", "data-v-28d9e677"], ["__file", "E:/小程序转app/xcbapp/pages/privacyAgreement/privacyAgreement.vue"]]);
+  const _sfc_main$1m = {
     data() {
       return {};
     },
     methods: {}
   };
-  function _sfc_render$1g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1l(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { style: { "margin-top": "100rpx" } }, [
       vue.createElementVNode("button", {
         type: "primary",
@@ -30457,13 +29540,13 @@ ${o3}
       }, "开通微信分账")
     ]);
   }
-  const PagesOpenAccountSharingOpenAccountSharing = /* @__PURE__ */ _export_sfc(_sfc_main$1h, [["render", _sfc_render$1g], ["__file", "E:/小程序转app/xcbapp/pages/OpenAccountSharing/OpenAccountSharing.vue"]]);
-  const _sfc_main$1g = {
+  const PagesOpenAccountSharingOpenAccountSharing = /* @__PURE__ */ _export_sfc(_sfc_main$1m, [["render", _sfc_render$1l], ["__file", "E:/小程序转app/xcbapp/pages/OpenAccountSharing/OpenAccountSharing.vue"]]);
+  const _sfc_main$1l = {
     data() {
       return {};
     }
   };
-  function _sfc_render$1f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1k(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "title" }, " 通知 "),
       vue.createElementVNode("view", { class: "content" }, [
@@ -30475,8 +29558,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesArrangeNotificationArrangeNotification = /* @__PURE__ */ _export_sfc(_sfc_main$1g, [["render", _sfc_render$1f], ["__file", "E:/小程序转app/xcbapp/pages/arrangeNotification/arrangeNotification.vue"]]);
-  const _sfc_main$1f = {
+  const PagesArrangeNotificationArrangeNotification = /* @__PURE__ */ _export_sfc(_sfc_main$1l, [["render", _sfc_render$1k], ["__file", "E:/小程序转app/xcbapp/pages/arrangeNotification/arrangeNotification.vue"]]);
+  const _sfc_main$1k = {
     data() {
       return {
         amount: null,
@@ -30559,7 +29642,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1e(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1j(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "balance-box" }, [
@@ -30675,8 +29758,576 @@ ${o3}
       ])
     ]);
   }
-  const PagesWeChatCashwWithdrawalWeChatCashwWithdrawal = /* @__PURE__ */ _export_sfc(_sfc_main$1f, [["render", _sfc_render$1e], ["__scopeId", "data-v-4c2d0ccf"], ["__file", "E:/小程序转app/xcbapp/pages/weChatCashwWithdrawal/weChatCashwWithdrawal.vue"]]);
-  const _sfc_main$1e = {
+  const PagesWeChatCashwWithdrawalWeChatCashwWithdrawal = /* @__PURE__ */ _export_sfc(_sfc_main$1k, [["render", _sfc_render$1j], ["__scopeId", "data-v-4c2d0ccf"], ["__file", "E:/小程序转app/xcbapp/pages/weChatCashwWithdrawal/weChatCashwWithdrawal.vue"]]);
+  const _sfc_main$1j = {
+    name: "UniBadge",
+    emits: ["click"],
+    props: {
+      type: {
+        type: String,
+        default: "error"
+      },
+      inverted: {
+        type: Boolean,
+        default: false
+      },
+      isDot: {
+        type: Boolean,
+        default: false
+      },
+      maxNum: {
+        type: Number,
+        default: 99
+      },
+      absolute: {
+        type: String,
+        default: ""
+      },
+      offset: {
+        type: Array,
+        default() {
+          return [0, 0];
+        }
+      },
+      text: {
+        type: [String, Number],
+        default: ""
+      },
+      size: {
+        type: String,
+        default: "small"
+      },
+      customStyle: {
+        type: Object,
+        default() {
+          return {};
+        }
+      }
+    },
+    data() {
+      return {};
+    },
+    computed: {
+      width() {
+        return String(this.text).length * 8 + 12;
+      },
+      classNames() {
+        const {
+          inverted,
+          type,
+          size,
+          absolute
+        } = this;
+        return [
+          inverted ? "uni-badge--" + type + "-inverted" : "",
+          "uni-badge--" + type,
+          "uni-badge--" + size,
+          absolute ? "uni-badge--absolute" : ""
+        ].join(" ");
+      },
+      positionStyle() {
+        if (!this.absolute)
+          return {};
+        let w2 = this.width / 2, h2 = 10;
+        if (this.isDot) {
+          w2 = 5;
+          h2 = 5;
+        }
+        const x = `${-w2 + this.offset[0]}px`;
+        const y2 = `${-h2 + this.offset[1]}px`;
+        const whiteList2 = {
+          rightTop: {
+            right: x,
+            top: y2
+          },
+          rightBottom: {
+            right: x,
+            bottom: y2
+          },
+          leftBottom: {
+            left: x,
+            bottom: y2
+          },
+          leftTop: {
+            left: x,
+            top: y2
+          }
+        };
+        const match = whiteList2[this.absolute];
+        return match ? match : whiteList2["rightTop"];
+      },
+      dotStyle() {
+        if (!this.isDot)
+          return {};
+        return {
+          width: "10px",
+          minWidth: "0",
+          height: "10px",
+          padding: "0",
+          borderRadius: "10px"
+        };
+      },
+      displayValue() {
+        const {
+          isDot,
+          text,
+          maxNum
+        } = this;
+        return isDot ? "" : Number(text) > maxNum ? `${maxNum}+` : text;
+      }
+    },
+    methods: {
+      onClick() {
+        this.$emit("click");
+      }
+    }
+  };
+  function _sfc_render$1i(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-badge--x" }, [
+      vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
+      $props.text ? (vue.openBlock(), vue.createElementBlock(
+        "text",
+        {
+          key: 0,
+          class: vue.normalizeClass([$options.classNames, "uni-badge"]),
+          style: vue.normalizeStyle([$options.positionStyle, $props.customStyle, $options.dotStyle]),
+          onClick: _cache[0] || (_cache[0] = ($event) => $options.onClick())
+        },
+        vue.toDisplayString($options.displayValue),
+        7
+        /* TEXT, CLASS, STYLE */
+      )) : vue.createCommentVNode("v-if", true)
+    ]);
+  }
+  const __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$1j, [["render", _sfc_render$1i], ["__scopeId", "data-v-c97cb896"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-badge/components/uni-badge/uni-badge.vue"]]);
+  const _sfc_main$1i = {
+    name: "UniListItem",
+    emits: ["click", "switchChange"],
+    props: {
+      direction: {
+        type: String,
+        default: "row"
+      },
+      title: {
+        type: String,
+        default: ""
+      },
+      note: {
+        type: String,
+        default: ""
+      },
+      ellipsis: {
+        type: [Number, String],
+        default: 0
+      },
+      disabled: {
+        type: [Boolean, String],
+        default: false
+      },
+      clickable: {
+        type: Boolean,
+        default: false
+      },
+      showArrow: {
+        type: [Boolean, String],
+        default: false
+      },
+      link: {
+        type: [Boolean, String],
+        default: false
+      },
+      to: {
+        type: String,
+        default: ""
+      },
+      showBadge: {
+        type: [Boolean, String],
+        default: false
+      },
+      showSwitch: {
+        type: [Boolean, String],
+        default: false
+      },
+      switchChecked: {
+        type: [Boolean, String],
+        default: false
+      },
+      badgeText: {
+        type: String,
+        default: ""
+      },
+      badgeType: {
+        type: String,
+        default: "success"
+      },
+      badgeStyle: {
+        type: Object,
+        default() {
+          return {};
+        }
+      },
+      rightText: {
+        type: String,
+        default: ""
+      },
+      thumb: {
+        type: String,
+        default: ""
+      },
+      thumbSize: {
+        type: String,
+        default: "base"
+      },
+      showExtraIcon: {
+        type: [Boolean, String],
+        default: false
+      },
+      extraIcon: {
+        type: Object,
+        default() {
+          return {
+            type: "",
+            color: "#000000",
+            size: 20,
+            customPrefix: ""
+          };
+        }
+      },
+      border: {
+        type: Boolean,
+        default: true
+      },
+      customStyle: {
+        type: Object,
+        default() {
+          return {
+            padding: "",
+            backgroundColor: "#FFFFFF"
+          };
+        }
+      },
+      keepScrollPosition: {
+        type: Boolean,
+        default: false
+      }
+    },
+    watch: {
+      "customStyle.padding": {
+        handler(padding) {
+          if (typeof padding == "number") {
+            padding += "";
+          }
+          let paddingArr = padding.split(" ");
+          if (paddingArr.length === 1) {
+            const allPadding = paddingArr[0];
+            this.padding = {
+              "top": allPadding,
+              "right": allPadding,
+              "bottom": allPadding,
+              "left": allPadding
+            };
+          } else if (paddingArr.length === 2) {
+            const [verticalPadding, horizontalPadding] = paddingArr;
+            this.padding = {
+              "top": verticalPadding,
+              "right": horizontalPadding,
+              "bottom": verticalPadding,
+              "left": horizontalPadding
+            };
+          } else if (paddingArr.length === 4) {
+            const [topPadding, rightPadding, bottomPadding, leftPadding] = paddingArr;
+            this.padding = {
+              "top": topPadding,
+              "right": rightPadding,
+              "bottom": bottomPadding,
+              "left": leftPadding
+            };
+          }
+        },
+        immediate: true
+      }
+    },
+    // inject: ['list'],
+    data() {
+      return {
+        isFirstChild: false,
+        padding: {
+          top: "",
+          right: "",
+          bottom: "",
+          left: ""
+        }
+      };
+    },
+    mounted() {
+      this.list = this.getForm();
+      if (this.list) {
+        if (!this.list.firstChildAppend) {
+          this.list.firstChildAppend = true;
+          this.isFirstChild = true;
+        }
+      }
+    },
+    methods: {
+      /**
+       * 获取父元素实例
+       */
+      getForm(name = "uniList") {
+        let parent = this.$parent;
+        let parentName = parent.$options.name;
+        while (parentName !== name) {
+          parent = parent.$parent;
+          if (!parent)
+            return false;
+          parentName = parent.$options.name;
+        }
+        return parent;
+      },
+      onClick() {
+        if (this.to !== "") {
+          this.openPage();
+          return;
+        }
+        if (this.clickable || this.link) {
+          this.$emit("click", {
+            data: {}
+          });
+        }
+      },
+      onSwitchChange(e2) {
+        this.$emit("switchChange", e2.detail);
+      },
+      openPage() {
+        if (["navigateTo", "redirectTo", "reLaunch", "switchTab"].indexOf(this.link) !== -1) {
+          this.pageApi(this.link);
+        } else {
+          this.pageApi("navigateTo");
+        }
+      },
+      pageApi(api2) {
+        let callback = {
+          url: this.to,
+          success: (res) => {
+            this.$emit("click", {
+              data: res
+            });
+          },
+          fail: (err) => {
+            this.$emit("click", {
+              data: err
+            });
+          }
+        };
+        switch (api2) {
+          case "navigateTo":
+            uni.navigateTo(callback);
+            break;
+          case "redirectTo":
+            uni.redirectTo(callback);
+            break;
+          case "reLaunch":
+            uni.reLaunch(callback);
+            break;
+          case "switchTab":
+            uni.switchTab(callback);
+            break;
+          default:
+            uni.navigateTo(callback);
+        }
+      }
+    }
+  };
+  function _sfc_render$1h(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
+    const _component_uni_badge = resolveEasycom(vue.resolveDynamicComponent("uni-badge"), __easycom_1$3);
+    return vue.openBlock(), vue.createElementBlock("view", {
+      class: vue.normalizeClass([{ "uni-list-item--disabled": $props.disabled }, "uni-list-item"]),
+      style: vue.normalizeStyle({ "background-color": $props.customStyle.backgroundColor }),
+      "hover-class": !$props.clickable && !$props.link || $props.disabled || $props.showSwitch ? "" : "uni-list-item--hover",
+      onClick: _cache[1] || (_cache[1] = (...args) => $options.onClick && $options.onClick(...args))
+    }, [
+      !$data.isFirstChild ? (vue.openBlock(), vue.createElementBlock(
+        "view",
+        {
+          key: 0,
+          class: vue.normalizeClass(["border--left", { "uni-list--border": $props.border }])
+        },
+        null,
+        2
+        /* CLASS */
+      )) : vue.createCommentVNode("v-if", true),
+      vue.createElementVNode(
+        "view",
+        {
+          class: vue.normalizeClass(["uni-list-item__container", { "container--right": $props.showArrow || $props.link, "flex--direction": $props.direction === "column" }]),
+          style: vue.normalizeStyle({ paddingTop: $data.padding.top, paddingLeft: $data.padding.left, paddingRight: $data.padding.right, paddingBottom: $data.padding.bottom })
+        },
+        [
+          vue.renderSlot(_ctx.$slots, "header", {}, () => [
+            vue.createElementVNode("view", { class: "uni-list-item__header" }, [
+              $props.thumb ? (vue.openBlock(), vue.createElementBlock("view", {
+                key: 0,
+                class: "uni-list-item__icon"
+              }, [
+                vue.createElementVNode("image", {
+                  src: $props.thumb,
+                  class: vue.normalizeClass(["uni-list-item__icon-img", ["uni-list--" + $props.thumbSize]])
+                }, null, 10, ["src"])
+              ])) : $props.showExtraIcon ? (vue.openBlock(), vue.createElementBlock("view", {
+                key: 1,
+                class: "uni-list-item__icon"
+              }, [
+                vue.createVNode(_component_uni_icons, {
+                  customPrefix: $props.extraIcon.customPrefix,
+                  color: $props.extraIcon.color,
+                  size: $props.extraIcon.size,
+                  type: $props.extraIcon.type
+                }, null, 8, ["customPrefix", "color", "size", "type"])
+              ])) : vue.createCommentVNode("v-if", true)
+            ])
+          ], true),
+          vue.renderSlot(_ctx.$slots, "body", {}, () => [
+            vue.createElementVNode(
+              "view",
+              {
+                class: vue.normalizeClass(["uni-list-item__content", { "uni-list-item__content--center": $props.thumb || $props.showExtraIcon || $props.showBadge || $props.showSwitch }])
+              },
+              [
+                $props.title ? (vue.openBlock(), vue.createElementBlock(
+                  "text",
+                  {
+                    key: 0,
+                    class: vue.normalizeClass(["uni-list-item__content-title", [$props.ellipsis !== 0 && $props.ellipsis <= 2 ? "uni-ellipsis-" + $props.ellipsis : ""]])
+                  },
+                  vue.toDisplayString($props.title),
+                  3
+                  /* TEXT, CLASS */
+                )) : vue.createCommentVNode("v-if", true),
+                $props.note ? (vue.openBlock(), vue.createElementBlock(
+                  "text",
+                  {
+                    key: 1,
+                    class: "uni-list-item__content-note"
+                  },
+                  vue.toDisplayString($props.note),
+                  1
+                  /* TEXT */
+                )) : vue.createCommentVNode("v-if", true)
+              ],
+              2
+              /* CLASS */
+            )
+          ], true),
+          vue.renderSlot(_ctx.$slots, "footer", {}, () => [
+            $props.rightText || $props.showBadge || $props.showSwitch ? (vue.openBlock(), vue.createElementBlock(
+              "view",
+              {
+                key: 0,
+                class: vue.normalizeClass(["uni-list-item__extra", { "flex--justify": $props.direction === "column" }])
+              },
+              [
+                $props.rightText ? (vue.openBlock(), vue.createElementBlock(
+                  "text",
+                  {
+                    key: 0,
+                    class: "uni-list-item__extra-text"
+                  },
+                  vue.toDisplayString($props.rightText),
+                  1
+                  /* TEXT */
+                )) : vue.createCommentVNode("v-if", true),
+                $props.showBadge ? (vue.openBlock(), vue.createBlock(_component_uni_badge, {
+                  key: 1,
+                  type: $props.badgeType,
+                  text: $props.badgeText,
+                  "custom-style": $props.badgeStyle
+                }, null, 8, ["type", "text", "custom-style"])) : vue.createCommentVNode("v-if", true),
+                $props.showSwitch ? (vue.openBlock(), vue.createElementBlock("switch", {
+                  key: 2,
+                  disabled: $props.disabled,
+                  checked: $props.switchChecked,
+                  onChange: _cache[0] || (_cache[0] = (...args) => $options.onSwitchChange && $options.onSwitchChange(...args))
+                }, null, 40, ["disabled", "checked"])) : vue.createCommentVNode("v-if", true)
+              ],
+              2
+              /* CLASS */
+            )) : vue.createCommentVNode("v-if", true)
+          ], true)
+        ],
+        6
+        /* CLASS, STYLE */
+      ),
+      $props.showArrow || $props.link ? (vue.openBlock(), vue.createBlock(_component_uni_icons, {
+        key: 1,
+        size: 16,
+        class: "uni-icon-wrapper",
+        color: "#bbb",
+        type: "arrowright"
+      })) : vue.createCommentVNode("v-if", true)
+    ], 14, ["hover-class"]);
+  }
+  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1i, [["render", _sfc_render$1h], ["__scopeId", "data-v-c7524739"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue"]]);
+  const _sfc_main$1h = {
+    name: "uniList",
+    "mp-weixin": {
+      options: {
+        multipleSlots: false
+      }
+    },
+    props: {
+      stackFromEnd: {
+        type: Boolean,
+        default: false
+      },
+      enableBackToTop: {
+        type: [Boolean, String],
+        default: false
+      },
+      scrollY: {
+        type: [Boolean, String],
+        default: false
+      },
+      border: {
+        type: Boolean,
+        default: true
+      },
+      renderReverse: {
+        type: Boolean,
+        default: false
+      }
+    },
+    // provide() {
+    // 	return {
+    // 		list: this
+    // 	};
+    // },
+    created() {
+      this.firstChildAppend = false;
+    },
+    methods: {
+      loadMore(e2) {
+        this.$emit("scrolltolower");
+      },
+      scroll(e2) {
+        this.$emit("scroll", e2);
+      }
+    }
+  };
+  function _sfc_render$1g(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-list uni-border-top-bottom" }, [
+      $props.border ? (vue.openBlock(), vue.createElementBlock("view", {
+        key: 0,
+        class: "uni-list--border-top"
+      })) : vue.createCommentVNode("v-if", true),
+      vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
+      $props.border ? (vue.openBlock(), vue.createElementBlock("view", {
+        key: 1,
+        class: "uni-list--border-bottom"
+      })) : vue.createCommentVNode("v-if", true)
+    ]);
+  }
+  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1h, [["render", _sfc_render$1g], ["__scopeId", "data-v-c2f1266a"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-list/components/uni-list/uni-list.vue"]]);
+  const _sfc_main$1g = {
     data() {
       return {
         statusBarHeight: 20,
@@ -30792,10 +30443,10 @@ ${o3}
       this.loadMore();
     }
   };
-  function _sfc_render$1d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1f(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_1$6);
-    const _component_uni_list = resolveEasycom(vue.resolveDynamicComponent("uni-list"), __easycom_2$2);
+    const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_1$2);
+    const _component_uni_list = resolveEasycom(vue.resolveDynamicComponent("uni-list"), __easycom_2$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode(
         "view",
@@ -30943,8 +30594,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesBillRecordBillRecord = /* @__PURE__ */ _export_sfc(_sfc_main$1e, [["render", _sfc_render$1d], ["__file", "E:/小程序转app/xcbapp/pages/billRecord/billRecord.vue"]]);
-  const _sfc_main$1d = {
+  const PagesBillRecordBillRecord = /* @__PURE__ */ _export_sfc(_sfc_main$1g, [["render", _sfc_render$1f], ["__file", "E:/小程序转app/xcbapp/pages/billRecord/billRecord.vue"]]);
+  const _sfc_main$1f = {
     data() {
       return {
         cardHeight: "380rpx",
@@ -30994,9 +30645,9 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1e(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "wholesale-container" }, [
       vue.createElementVNode("view", { class: "region-card" }, [
         vue.createElementVNode(
@@ -31132,16 +30783,16 @@ ${o3}
       )
     ]);
   }
-  const PagesWholesaleWholesale = /* @__PURE__ */ _export_sfc(_sfc_main$1d, [["render", _sfc_render$1c], ["__scopeId", "data-v-e0b2961b"], ["__file", "E:/小程序转app/xcbapp/pages/wholesale/wholesale.vue"]]);
-  const _sfc_main$1c = {
+  const PagesWholesaleWholesale = /* @__PURE__ */ _export_sfc(_sfc_main$1f, [["render", _sfc_render$1e], ["__scopeId", "data-v-e0b2961b"], ["__file", "E:/小程序转app/xcbapp/pages/wholesale/wholesale.vue"]]);
+  const _sfc_main$1e = {
     data() {
       return {};
     }
   };
-  function _sfc_render$1b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1d(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" });
   }
-  const PagesPrizeDrawPrizeDraw = /* @__PURE__ */ _export_sfc(_sfc_main$1c, [["render", _sfc_render$1b], ["__file", "E:/小程序转app/xcbapp/pages/prizeDraw/prizeDraw.vue"]]);
+  const PagesPrizeDrawPrizeDraw = /* @__PURE__ */ _export_sfc(_sfc_main$1e, [["render", _sfc_render$1d], ["__file", "E:/小程序转app/xcbapp/pages/prizeDraw/prizeDraw.vue"]]);
   var pattern = {
     email: /^\S+?@\S+?\.\S+?$/,
     idcard: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
@@ -31705,7 +31356,7 @@ ${o3}
       return false;
     }
   };
-  const _sfc_main$1b = {
+  const _sfc_main$1d = {
     name: "uniForms",
     emits: ["validate", "submit"],
     options: {
@@ -32002,15 +31653,15 @@ ${o3}
       _isEqual: isEqual
     }
   };
-  function _sfc_render$1a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1c(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-forms" }, [
       vue.createElementVNode("form", null, [
         vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
       ])
     ]);
   }
-  const __easycom_5 = /* @__PURE__ */ _export_sfc(_sfc_main$1b, [["render", _sfc_render$1a], ["__scopeId", "data-v-9a1e3c32"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
-  const _sfc_main$1a = {
+  const __easycom_5 = /* @__PURE__ */ _export_sfc(_sfc_main$1d, [["render", _sfc_render$1c], ["__scopeId", "data-v-9a1e3c32"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
+  const _sfc_main$1c = {
     mixins: [myMixin],
     data() {
       return {
@@ -32148,9 +31799,9 @@ ${o3}
       }
     }
   };
-  function _sfc_render$19(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1b(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2);
+    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2$2);
     const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_5);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "progress-steps" }, [
@@ -32312,8 +31963,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesPreSalePreSale = /* @__PURE__ */ _export_sfc(_sfc_main$1a, [["render", _sfc_render$19], ["__file", "E:/小程序转app/xcbapp/pages/preSale/preSale.vue"]]);
-  const _sfc_main$19 = {
+  const PagesPreSalePreSale = /* @__PURE__ */ _export_sfc(_sfc_main$1c, [["render", _sfc_render$1b], ["__file", "E:/小程序转app/xcbapp/pages/preSale/preSale.vue"]]);
+  const _sfc_main$1b = {
     name: "uni-data-select",
     mixins: [tr.mixinDatacom || {}],
     props: {
@@ -32565,7 +32216,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$18(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1a(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-stat__select" }, [
       $props.label ? (vue.openBlock(), vue.createElementBlock(
@@ -32705,8 +32356,8 @@ ${o3}
       )
     ]);
   }
-  const __easycom_3$1 = /* @__PURE__ */ _export_sfc(_sfc_main$19, [["render", _sfc_render$18], ["__scopeId", "data-v-ddf9e0a2"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue"]]);
-  const _sfc_main$18 = {
+  const __easycom_3$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1b, [["render", _sfc_render$1a], ["__scopeId", "data-v-ddf9e0a2"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue"]]);
+  const _sfc_main$1a = {
     name: "uniFormsItem",
     options: {
       virtualHost: true
@@ -33038,7 +32689,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$17(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$19(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -33094,7 +32745,7 @@ ${o3}
       /* CLASS */
     );
   }
-  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$18, [["render", _sfc_render$17], ["__scopeId", "data-v-462874dd"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
+  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$1a, [["render", _sfc_render$19], ["__scopeId", "data-v-462874dd"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
   var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
   function getDefaultExportFromCjs(x) {
     return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
@@ -33391,7 +33042,7 @@ ${o3}
   })(dayjs_min);
   var dayjs_minExports = dayjs_min.exports;
   const dayjs = /* @__PURE__ */ getDefaultExportFromCjs(dayjs_minExports);
-  const _sfc_main$17 = {
+  const _sfc_main$19 = {
     data() {
       return {
         selectedProduct: null,
@@ -33690,11 +33341,11 @@ ${o3}
       }
     }
   };
-  function _sfc_render$16(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$18(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_data_select = resolveEasycom(vue.resolveDynamicComponent("uni-data-select"), __easycom_3$1);
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_3);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "background-wave" }),
       vue.createElementVNode("view", { class: "product-selector" }, [
@@ -33995,18 +33646,18 @@ ${o3}
       ])
     ]);
   }
-  const PagesAdditionalinformationAdditionalinformation = /* @__PURE__ */ _export_sfc(_sfc_main$17, [["render", _sfc_render$16], ["__scopeId", "data-v-7e7c2362"], ["__file", "E:/小程序转app/xcbapp/pages/additionalinformation/additionalinformation.vue"]]);
-  const _sfc_main$16 = {
+  const PagesAdditionalinformationAdditionalinformation = /* @__PURE__ */ _export_sfc(_sfc_main$19, [["render", _sfc_render$18], ["__scopeId", "data-v-7e7c2362"], ["__file", "E:/小程序转app/xcbapp/pages/additionalinformation/additionalinformation.vue"]]);
+  const _sfc_main$18 = {
     data() {
       return {};
     },
     methods: {}
   };
-  function _sfc_render$15(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$17(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view");
   }
-  const PagesPresalemenulistPresalemenulist = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["render", _sfc_render$15], ["__file", "E:/小程序转app/xcbapp/pages/Presalemenulist/Presalemenulist.vue"]]);
-  const _sfc_main$15 = {
+  const PagesPresalemenulistPresalemenulist = /* @__PURE__ */ _export_sfc(_sfc_main$18, [["render", _sfc_render$17], ["__file", "E:/小程序转app/xcbapp/pages/Presalemenulist/Presalemenulist.vue"]]);
+  const _sfc_main$17 = {
     mixins: [myMixin],
     data() {
       return {
@@ -34091,7 +33742,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$14(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$16(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "dynamic-header" }, [
@@ -34248,8 +33899,8 @@ ${o3}
       )
     ]);
   }
-  const PagesDynamicsDynamics = /* @__PURE__ */ _export_sfc(_sfc_main$15, [["render", _sfc_render$14], ["__scopeId", "data-v-e92d2579"], ["__file", "E:/小程序转app/xcbapp/pages/dynamics/dynamics.vue"]]);
-  const _sfc_main$14 = {
+  const PagesDynamicsDynamics = /* @__PURE__ */ _export_sfc(_sfc_main$17, [["render", _sfc_render$16], ["__scopeId", "data-v-e92d2579"], ["__file", "E:/小程序转app/xcbapp/pages/dynamics/dynamics.vue"]]);
+  const _sfc_main$16 = {
     mixins: [],
     components: {},
     data() {
@@ -34325,14 +33976,14 @@ ${o3}
       }
     }
   };
-  function _sfc_render$13(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$15(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("canvas", {
       "canvas-id": "pureCanvas",
       style: { "width": "700rpx", "height": "600rpx" }
     });
   }
-  const PagesDemoDemo = /* @__PURE__ */ _export_sfc(_sfc_main$14, [["render", _sfc_render$13], ["__file", "E:/小程序转app/xcbapp/pages/demo/demo.vue"]]);
-  const _sfc_main$13 = {
+  const PagesDemoDemo = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["render", _sfc_render$15], ["__file", "E:/小程序转app/xcbapp/pages/demo/demo.vue"]]);
+  const _sfc_main$15 = {
     mixins: [myMixin],
     data() {
       return {
@@ -34424,7 +34075,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$12(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$14(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "complaint-container" }, [
       vue.createElementVNode("view", { class: "complaint-header" }, [
@@ -34567,9 +34218,9 @@ ${o3}
       ])
     ]);
   }
-  const PagesMerchantComplaintsMerchantComplaints = /* @__PURE__ */ _export_sfc(_sfc_main$13, [["render", _sfc_render$12], ["__scopeId", "data-v-241a3734"], ["__file", "E:/小程序转app/xcbapp/pages/merchantComplaints/merchantComplaints.vue"]]);
+  const PagesMerchantComplaintsMerchantComplaints = /* @__PURE__ */ _export_sfc(_sfc_main$15, [["render", _sfc_render$14], ["__scopeId", "data-v-241a3734"], ["__file", "E:/小程序转app/xcbapp/pages/merchantComplaints/merchantComplaints.vue"]]);
   const _imports_0$3 = "/static/empty-state.svg";
-  const _sfc_main$12 = {
+  const _sfc_main$14 = {
     mixins: [myMixin],
     data() {
       return {
@@ -34625,7 +34276,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$11(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$13(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "data-panel" }, [
@@ -34726,8 +34377,8 @@ ${o3}
       )
     ]);
   }
-  const PagesMyComplaintMyComplaint = /* @__PURE__ */ _export_sfc(_sfc_main$12, [["render", _sfc_render$11], ["__scopeId", "data-v-c28db3eb"], ["__file", "E:/小程序转app/xcbapp/pages/myComplaint/myComplaint.vue"]]);
-  const _sfc_main$11 = {
+  const PagesMyComplaintMyComplaint = /* @__PURE__ */ _export_sfc(_sfc_main$14, [["render", _sfc_render$13], ["__scopeId", "data-v-c28db3eb"], ["__file", "E:/小程序转app/xcbapp/pages/myComplaint/myComplaint.vue"]]);
+  const _sfc_main$13 = {
     mixins: [myMixin],
     data() {
       return {
@@ -34792,7 +34443,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$10(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$12(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "detail-container" }, [
       vue.createElementVNode("scroll-view", {
         "scroll-y": "",
@@ -34874,8 +34525,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesComplaintDetailsComplaintDetails = /* @__PURE__ */ _export_sfc(_sfc_main$11, [["render", _sfc_render$10], ["__scopeId", "data-v-af642d83"], ["__file", "E:/小程序转app/xcbapp/pages/complaintDetails/complaintDetails.vue"]]);
-  const _sfc_main$10 = {
+  const PagesComplaintDetailsComplaintDetails = /* @__PURE__ */ _export_sfc(_sfc_main$13, [["render", _sfc_render$12], ["__scopeId", "data-v-af642d83"], ["__file", "E:/小程序转app/xcbapp/pages/complaintDetails/complaintDetails.vue"]]);
+  const _sfc_main$12 = {
     methods: {
       navTo(url2) {
         uni.navigateTo({
@@ -34936,7 +34587,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$$(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$11(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "settings-container" }, [
       vue.createElementVNode("view", { class: "header" }, [
@@ -35028,8 +34679,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesSettingsSettings = /* @__PURE__ */ _export_sfc(_sfc_main$10, [["render", _sfc_render$$], ["__file", "E:/小程序转app/xcbapp/pages/settings/settings.vue"]]);
-  const _sfc_main$$ = {
+  const PagesSettingsSettings = /* @__PURE__ */ _export_sfc(_sfc_main$12, [["render", _sfc_render$11], ["__file", "E:/小程序转app/xcbapp/pages/settings/settings.vue"]]);
+  const _sfc_main$11 = {
     created() {
       this.cartStore = useCartStore();
     },
@@ -35155,7 +34806,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$_(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$10(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "product-detail-page" }, [
       vue.createElementVNode("view", { class: "product-images" }, [
         (vue.openBlock(), vue.createElementBlock("swiper", {
@@ -35290,7 +34941,371 @@ ${o3}
       ])
     ]);
   }
-  const PagesCommodityDetailCommodityDetail = /* @__PURE__ */ _export_sfc(_sfc_main$$, [["render", _sfc_render$_], ["__scopeId", "data-v-7f9cd24e"], ["__file", "E:/小程序转app/xcbapp/pages/commodityDetail/commodityDetail.vue"]]);
+  const PagesCommodityDetailCommodityDetail = /* @__PURE__ */ _export_sfc(_sfc_main$11, [["render", _sfc_render$10], ["__scopeId", "data-v-7f9cd24e"], ["__file", "E:/小程序转app/xcbapp/pages/commodityDetail/commodityDetail.vue"]]);
+  const _sfc_main$10 = {
+    name: "uniCollapseItem",
+    props: {
+      // 列表标题
+      title: {
+        type: String,
+        default: ""
+      },
+      name: {
+        type: [Number, String],
+        default: ""
+      },
+      // 是否禁用
+      disabled: {
+        type: Boolean,
+        default: false
+      },
+      // 是否显示动画,app 端默认不开启动画，卡顿严重
+      showAnimation: {
+        type: Boolean,
+        default: false
+      },
+      // 是否展开
+      open: {
+        type: Boolean,
+        default: false
+      },
+      // 缩略图
+      thumb: {
+        type: String,
+        default: ""
+      },
+      // 标题分隔线显示类型
+      titleBorder: {
+        type: String,
+        default: "auto"
+      },
+      border: {
+        type: Boolean,
+        default: true
+      },
+      showArrow: {
+        type: Boolean,
+        default: true
+      }
+    },
+    data() {
+      const elId = `Uni_${Math.ceil(Math.random() * 1e6).toString(36)}`;
+      return {
+        isOpen: false,
+        isheight: null,
+        height: 0,
+        elId,
+        nameSync: 0
+      };
+    },
+    watch: {
+      open(val) {
+        this.isOpen = val;
+        this.onClick(val, "init");
+      }
+    },
+    updated(e2) {
+      this.$nextTick(() => {
+        this.init(true);
+      });
+    },
+    created() {
+      this.collapse = this.getCollapse();
+      this.oldHeight = 0;
+      this.onClick(this.open, "init");
+    },
+    // TODO vue3
+    unmounted() {
+      this.__isUnmounted = true;
+      this.uninstall();
+    },
+    mounted() {
+      if (!this.collapse)
+        return;
+      if (this.name !== "") {
+        this.nameSync = this.name;
+      } else {
+        this.nameSync = this.collapse.childrens.length + "";
+      }
+      if (this.collapse.names.indexOf(this.nameSync) === -1) {
+        this.collapse.names.push(this.nameSync);
+      } else {
+        formatAppLog("warn", "at uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue:154", `name 值 ${this.nameSync} 重复`);
+      }
+      if (this.collapse.childrens.indexOf(this) === -1) {
+        this.collapse.childrens.push(this);
+      }
+      this.init();
+    },
+    methods: {
+      init(type) {
+        this.getCollapseHeight(type);
+      },
+      uninstall() {
+        if (this.collapse) {
+          this.collapse.childrens.forEach((item, index2) => {
+            if (item === this) {
+              this.collapse.childrens.splice(index2, 1);
+            }
+          });
+          this.collapse.names.forEach((item, index2) => {
+            if (item === this.nameSync) {
+              this.collapse.names.splice(index2, 1);
+            }
+          });
+        }
+      },
+      onClick(isOpen, type) {
+        if (this.disabled)
+          return;
+        this.isOpen = isOpen;
+        if (this.isOpen && this.collapse) {
+          this.collapse.setAccordion(this);
+        }
+        if (type !== "init") {
+          this.collapse.onChange(isOpen, this);
+        }
+      },
+      getCollapseHeight(type, index2 = 0) {
+        const views = uni.createSelectorQuery().in(this);
+        views.select(`#${this.elId}`).fields({
+          size: true
+        }, (data) => {
+          if (index2 >= 10)
+            return;
+          if (!data) {
+            index2++;
+            this.getCollapseHeight(false, index2);
+            return;
+          }
+          this.height = data.height;
+          this.isheight = true;
+          if (type)
+            return;
+          this.onClick(this.isOpen, "init");
+        }).exec();
+      },
+      getNvueHwight(type) {
+        dom.getComponentRect(this.$refs["collapse--hook"], (option) => {
+          if (option && option.result && option.size) {
+            this.height = option.size.height;
+            this.isheight = true;
+            if (type)
+              return;
+            this.onClick(this.open, "init");
+          }
+        });
+      },
+      /**
+       * 获取父元素实例
+       */
+      getCollapse(name = "uniCollapse") {
+        let parent = this.$parent;
+        let parentName = parent.$options.name;
+        while (parentName !== name) {
+          parent = parent.$parent;
+          if (!parent)
+            return false;
+          parentName = parent.$options.name;
+        }
+        return parent;
+      }
+    }
+  };
+  function _sfc_render$$(_ctx, _cache, $props, $setup, $data, $options) {
+    const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-collapse-item" }, [
+      vue.createElementVNode(
+        "view",
+        {
+          onClick: _cache[0] || (_cache[0] = ($event) => $options.onClick(!$data.isOpen)),
+          class: vue.normalizeClass(["uni-collapse-item__title", { "is-open": $data.isOpen && $props.titleBorder === "auto", "uni-collapse-item-border": $props.titleBorder !== "none" }])
+        },
+        [
+          vue.createElementVNode("view", { class: "uni-collapse-item__title-wrap" }, [
+            vue.renderSlot(_ctx.$slots, "title", {}, () => [
+              vue.createElementVNode(
+                "view",
+                {
+                  class: vue.normalizeClass(["uni-collapse-item__title-box", { "is-disabled": $props.disabled }])
+                },
+                [
+                  $props.thumb ? (vue.openBlock(), vue.createElementBlock("image", {
+                    key: 0,
+                    src: $props.thumb,
+                    class: "uni-collapse-item__title-img"
+                  }, null, 8, ["src"])) : vue.createCommentVNode("v-if", true),
+                  vue.createElementVNode(
+                    "text",
+                    { class: "uni-collapse-item__title-text" },
+                    vue.toDisplayString($props.title),
+                    1
+                    /* TEXT */
+                  )
+                ],
+                2
+                /* CLASS */
+              )
+            ], true)
+          ]),
+          $props.showArrow ? (vue.openBlock(), vue.createElementBlock(
+            "view",
+            {
+              key: 0,
+              class: vue.normalizeClass([{ "uni-collapse-item__title-arrow-active": $data.isOpen, "uni-collapse-item--animation": $props.showAnimation === true }, "uni-collapse-item__title-arrow"])
+            },
+            [
+              vue.createVNode(_component_uni_icons, {
+                color: $props.disabled ? "#ddd" : "#bbb",
+                size: "14",
+                type: "bottom"
+              }, null, 8, ["color"])
+            ],
+            2
+            /* CLASS */
+          )) : vue.createCommentVNode("v-if", true)
+        ],
+        2
+        /* CLASS */
+      ),
+      vue.createElementVNode(
+        "view",
+        {
+          class: vue.normalizeClass(["uni-collapse-item__wrap", { "is--transition": $props.showAnimation }]),
+          style: vue.normalizeStyle({ height: ($data.isOpen ? $data.height : 0) + "px" })
+        },
+        [
+          vue.createElementVNode("view", {
+            id: $data.elId,
+            ref: "collapse--hook",
+            class: vue.normalizeClass(["uni-collapse-item__wrap-content", { open: $data.isheight, "uni-collapse-item--border": $props.border && $data.isOpen }])
+          }, [
+            vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+          ], 10, ["id"])
+        ],
+        6
+        /* CLASS, STYLE */
+      )
+    ]);
+  }
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$10, [["render", _sfc_render$$], ["__scopeId", "data-v-3d2dde9f"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue"]]);
+  const _sfc_main$$ = {
+    name: "uniCollapse",
+    emits: ["change", "activeItem", "input", "update:modelValue"],
+    props: {
+      value: {
+        type: [String, Array],
+        default: ""
+      },
+      modelValue: {
+        type: [String, Array],
+        default: ""
+      },
+      accordion: {
+        // 是否开启手风琴效果
+        type: [Boolean, String],
+        default: false
+      }
+    },
+    data() {
+      return {};
+    },
+    computed: {
+      // TODO 兼容 vue2 和 vue3
+      dataValue() {
+        let value = typeof this.value === "string" && this.value === "" || Array.isArray(this.value) && this.value.length === 0;
+        let modelValue = typeof this.modelValue === "string" && this.modelValue === "" || Array.isArray(this.modelValue) && this.modelValue.length === 0;
+        if (value) {
+          return this.modelValue;
+        }
+        if (modelValue) {
+          return this.value;
+        }
+        return this.value;
+      }
+    },
+    watch: {
+      dataValue(val) {
+        this.setOpen(val);
+      }
+    },
+    created() {
+      this.childrens = [];
+      this.names = [];
+    },
+    mounted() {
+      this.$nextTick(() => {
+        this.setOpen(this.dataValue);
+      });
+    },
+    methods: {
+      setOpen(val) {
+        let str = typeof val === "string";
+        let arr = Array.isArray(val);
+        this.childrens.forEach((vm, index2) => {
+          if (str) {
+            if (val === vm.nameSync) {
+              if (!this.accordion) {
+                formatAppLog("warn", "at uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue:75", "accordion 属性为 false ,v-model 类型应该为 array");
+                return;
+              }
+              vm.isOpen = true;
+            }
+          }
+          if (arr) {
+            val.forEach((v2) => {
+              if (v2 === vm.nameSync) {
+                if (this.accordion) {
+                  formatAppLog("warn", "at uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue:85", "accordion 属性为 true ,v-model 类型应该为 string");
+                  return;
+                }
+                vm.isOpen = true;
+              }
+            });
+          }
+        });
+        this.emit(val);
+      },
+      setAccordion(self2) {
+        if (!this.accordion)
+          return;
+        this.childrens.forEach((vm, index2) => {
+          if (self2 !== vm) {
+            vm.isOpen = false;
+          }
+        });
+      },
+      resize() {
+        this.childrens.forEach((vm, index2) => {
+          vm.getCollapseHeight();
+        });
+      },
+      onChange(isOpen, self2) {
+        let activeItem = [];
+        if (this.accordion) {
+          activeItem = isOpen ? self2.nameSync : "";
+        } else {
+          this.childrens.forEach((vm, index2) => {
+            if (vm.isOpen) {
+              activeItem.push(vm.nameSync);
+            }
+          });
+        }
+        this.$emit("change", activeItem);
+        this.emit(activeItem);
+      },
+      emit(val) {
+        this.$emit("input", val);
+        this.$emit("update:modelValue", val);
+      }
+    }
+  };
+  function _sfc_render$_(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "uni-collapse" }, [
+      vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
+    ]);
+  }
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$$, [["render", _sfc_render$_], ["__scopeId", "data-v-3f050360"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue"]]);
   const _sfc_main$_ = {
     data() {
       return {
@@ -35540,10 +35555,10 @@ ${o3}
   };
   function _sfc_render$Y(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    const _component_uni_collapse_item = resolveEasycom(vue.resolveDynamicComponent("uni-collapse-item"), __easycom_1$5);
-    const _component_uni_collapse = resolveEasycom(vue.resolveDynamicComponent("uni-collapse"), __easycom_2$1);
+    const _component_uni_collapse_item = resolveEasycom(vue.resolveDynamicComponent("uni-collapse-item"), __easycom_1$1);
+    const _component_uni_collapse = resolveEasycom(vue.resolveDynamicComponent("uni-collapse"), __easycom_2);
     const _component_posterVue = vue.resolveComponent("posterVue");
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "invite-page" }, [
       vue.createElementVNode("view", { class: "invite-header" }, [
         vue.createElementVNode("text", { class: "header-title" }, "邀请好友，共赢福利"),
@@ -37553,7 +37568,7 @@ ${o3}
     }
   };
   function _sfc_render$P(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$4);
+    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "agent-profit-page" }, [
       vue.createElementVNode("view", { class: "overview-container" }, [
         vue.createElementVNode("view", { class: "overview-card" }, [
@@ -38940,7 +38955,7 @@ ${o3}
   };
   function _sfc_render$J(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$4);
+    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "profile-page" }, [
       vue.createElementVNode(
         "text",
@@ -40057,7 +40072,7 @@ ${o3}
   function _sfc_render$E(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_popup_dialog = resolveEasycom(vue.resolveDynamicComponent("uni-popup-dialog"), __easycom_1);
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("scroll-view", {
         class: "list-container",
@@ -43151,7 +43166,7 @@ ${o3}
     }
   };
   function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2);
+    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2$2);
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_3);
     const _component_uni_data_select = resolveEasycom(vue.resolveDynamicComponent("uni-data-select"), __easycom_3$1);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
@@ -43569,8 +43584,8 @@ ${o3}
     }
   };
   function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
-    const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_1$3);
-    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2);
+    const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_1$6);
+    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2$2);
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_3);
     const _component_uni_data_select = resolveEasycom(vue.resolveDynamicComponent("uni-data-select"), __easycom_3$1);
     const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$1);
@@ -44279,7 +44294,7 @@ ${o3}
   function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_mButtonVue = vue.resolveComponent("mButtonVue");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$4);
+    const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createVNode(_component_mButtonVue, {
         onBtn1: $options.startSearch,
@@ -45469,8 +45484,8 @@ ${o3}
   };
   function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_1$3);
-    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2);
+    const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_1$6);
+    const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2$2);
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_3);
     const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$1);
     const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_5);
@@ -46491,7 +46506,7 @@ ${o3}
   };
   function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
-    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$1);
+    const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "carousel-container" }, [
         vue.createElementVNode(
@@ -50967,46 +50982,131 @@ ${o3}
       return {
         jpushModule: null,
         registrationID: "",
-        connectStatus: "未连接"
+        connectStatus: "未连接",
+        isPrivacyAgreed: false
       };
     },
+    onLaunch() {
+      this.isPrivacyAgreed = uni.getStorageSync("isPrivacyAgreed") || false;
+      uni.$globalMethods = {
+        getRegistrationID: () => this.getRegistrationID()
+      };
+      try {
+        const main = plus.android.runtimeMainActivity();
+        const context = main;
+        plus.android.importClass(context);
+        const resources = context.getResources();
+        plus.android.importClass(resources);
+        const packageName = context.getPackageName();
+        const resId = plus.android.invoke(resources, "getIdentifier", "custom_ringtone", "raw", packageName);
+        saveLog("铃声资源 ID = " + resId);
+      } catch (e2) {
+        saveLog("❌ 错误：" + e2);
+      }
+      if (!this.isPrivacyAgreed) {
+        this.showPrivacyDialog();
+      } else {
+        this.initJPush();
+        this.createCustomRingtoneChannel();
+      }
+    },
     methods: {
-      /** 初始化极光推送 */
+      // ====================
+      // 真正正确的隐私弹窗
+      // ====================
+      showPrivacyDialog() {
+        uni.showModal({
+          title: "隐私政策提示",
+          content: "欢迎使用农链天下！我们将严格保护您的个人信息，未经允许不会收集AndroidID、OAID、设备信息、位置等数据。请阅读并同意隐私政策后使用。",
+          confirmText: "去阅读",
+          cancelText: "拒绝退出",
+          maskClick: false,
+          success: (res) => {
+            if (res.confirm) {
+              uni.navigateTo({
+                url: "/pages/privacyAgreement/privacyAgreement"
+              });
+              this.waitForBack();
+            } else {
+              plus.runtime.quit();
+            }
+          }
+        });
+      },
+      // 监听返回动作
+      waitForBack() {
+        formatAppLog("log", "at App.vue:72", "执行了");
+        const oldLen = getCurrentPages().length;
+        const timer = setInterval(() => {
+          const nowLen = getCurrentPages().length;
+          if (nowLen < oldLen) {
+            clearInterval(timer);
+            this.askAgree();
+          }
+        }, 300);
+      },
+      // 返回后弹出
+      askAgree() {
+        uni.showModal({
+          title: "确认同意",
+          content: "您已阅读完毕，是否同意《隐私政策》",
+          confirmText: "同意",
+          cancelText: "拒绝退出",
+          maskClick: false,
+          success: (res) => {
+            if (res.confirm) {
+              this.userAgreePrivacy();
+            } else {
+              plus.runtime.quit();
+            }
+          }
+        });
+      },
+      // 同意后初始化
+      userAgreePrivacy() {
+        this.isPrivacyAgreed = true;
+        uni.setStorageSync("isPrivacyAgreed", true);
+        this.initJPush();
+        this.createCustomRingtoneChannel();
+      },
+      // ====================
+      // 以下全部不变
+      // ====================
       initJPush() {
         try {
+          if (!this.isPrivacyAgreed)
+            return;
           saveLog("开始初始化 JPush...");
           this.jpushModule = requireNativePlugin("JG-JPush");
           if (!this.jpushModule) {
-            saveLog("[错误] JPush 初始化失败：无法获取插件实例。");
+            saveLog("[错误] JPush 初始化失败");
             return;
           }
+          if (this.jpushModule.setPrivacyAuthorization) {
+            this.jpushModule.setPrivacyAuthorization(true);
+          }
           this.jpushModule.initJPushService();
-          saveLog("✅ JPush 服务已初始化。");
+          saveLog("✅ JPush 服务已初始化");
           this.jpushModule.addConnectEventListener((result) => {
             this.connectStatus = result.connectEnable ? "已连接" : "未连接";
-            saveLog(`📡 JPush 连接状态: ${this.connectStatus}`);
             if (this.connectStatus === "已连接") {
               this.getRegistrationID();
             }
           });
           this.jpushModule.addNotificationListener((result) => {
-            saveLog("📥 收到 JPush 通知:", result);
+            saveLog("📥 收到通知");
           });
           this.checkNotificationPermission();
         } catch (e2) {
           saveLog(`[错误] JPush 初始化异常: ${e2.message}`);
         }
       },
-      /** 创建自定义铃声渠道 */
       createCustomRingtoneChannel() {
         try {
-          saveLog("🚀 [铃声渠道] 函数已执行");
           const main = plus.android.runtimeMainActivity();
           const AndroidVersion = plus.android.importClass("android.os.Build");
-          if (AndroidVersion.SDK_INT < 26) {
-            saveLog("⚠️ [铃声渠道] Android < 8.0，不创建渠道");
+          if (AndroidVersion.SDK_INT < 26)
             return;
-          }
           const NotificationManager = plus.android.importClass("android.app.NotificationManager");
           const NotificationChannel = plus.android.importClass("android.app.NotificationChannel");
           const Uri = plus.android.importClass("android.net.Uri");
@@ -51016,84 +51116,36 @@ ${o3}
           const packageName = main.getPackageName();
           const res = main.getResources();
           const channelId = "custom_ringtone";
-          const channelName = "订单语音通知";
-          const channelDesc = "播放自定义通知铃声";
           const ringtoneResId = res.getIdentifier("custom_ringtone", "raw", packageName);
-          saveLog("🎵 [铃声渠道] 铃声资源 ID = " + ringtoneResId);
-          if (ringtoneResId === 0) {
-            saveLog("❌ [铃声渠道] 找不到自定义铃声，请检查路径：nativeResources/android/res/raw/custom_ringtone.mp3");
-            return;
-          }
           const ringtoneUri = Uri.parse(`android.resource://${packageName}/${ringtoneResId}`);
-          saveLog("🔗 [铃声渠道] 铃声 URI = " + ringtoneUri.toString());
-          try {
-            const ringtone = RingtoneManager.getRingtone(main, ringtoneUri);
-            saveLog("🎧 [铃声渠道] 系统解析铃声成功: " + ringtone.getTitle(main));
-          } catch (e2) {
-            saveLog("⚠️ [铃声渠道] 系统解析铃声失败: " + e2.message);
-          }
           let channel = manager.getNotificationChannel(channelId);
           if (!channel) {
-            saveLog("📢 [铃声渠道] 渠道不存在 → 开始创建");
             const audioAttr = new AudioAttributes.Builder().setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION).setUsage(AudioAttributes.USAGE_NOTIFICATION).build();
-            channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
-            channel.setDescription(channelDesc);
+            channel = new NotificationChannel(channelId, "订单语音通知", NotificationManager.IMPORTANCE_HIGH);
+            channel.setDescription("播放自定义通知铃声");
             channel.enableLights(true);
             channel.enableVibration(true);
             channel.setSound(ringtoneUri, audioAttr);
             manager.createNotificationChannel(channel);
-            saveLog("✅ [铃声渠道] 渠道创建完成");
-          } else {
-            saveLog("⚠️ [铃声渠道] 渠道已存在（不会更新铃声）。如需更新：卸载重装 App");
           }
-          const created = manager.getNotificationChannel(channelId);
-          saveLog("🔍 [铃声渠道] 最终渠道铃声 = " + created.getSound());
-          saveLog("🔍 [铃声渠道] 重要性 = " + created.getImportance());
         } catch (e2) {
-          saveLog("❌ [铃声渠道] 异常：" + e2.message);
         }
       },
-      /** 获取 RegistrationID */
       getRegistrationID() {
-        if (!this.jpushModule)
+        if (!this.jpushModule || !this.isPrivacyAgreed)
           return;
         this.jpushModule.getRegistrationID((result) => {
           if (result.registerID) {
             this.registrationID = result.registerID;
             uni.setStorageSync("registerID", this.registrationID);
-            saveLog(`✅ 获取 RegistrationID 成功: ${this.registrationID}`);
-          } else {
-            saveLog(`[错误] 获取 RegistrationID 失败: ${result.errMsg}`);
           }
         });
       },
-      /** 检查通知权限 */
       checkNotificationPermission() {
         const main = plus.android.runtimeMainActivity();
         plus.android.importClass("android.app.NotificationManager");
-        const nm = main.getSystemService(main.NOTIFICATION_SERVICE);
-        if (plus.android.invoke(nm, "areNotificationsEnabled")) {
-          saveLog("🔔 通知权限已开启");
-        } else {
-          saveLog("⚠️ 通知权限未开启");
-          this.noticMsgTool();
-        }
+        main.getSystemService(main.NOTIFICATION_SERVICE);
       },
-      /** 提示用户开启通知 */
-      // noticMsgTool() {
-      // 	uni.showModal({
-      // 		title: '通知权限提醒',
-      // 		content: '您还没有开启通知权限，无法接收消息，请前往设置！',
-      // 		showCancel: false,
-      // 		confirmText: '去设置',
-      // 		success: res => {
-      // 			if (res.confirm) {
-      // 				this.openNotificationSettings();
-      // 			}
-      // 		},
-      // 	});
-      // },
-      /** 打开系统通知设置 */
       openNotificationSettings() {
         const main = plus.android.runtimeMainActivity();
         const Intent = plus.android.importClass("android.content.Intent");
@@ -51115,47 +51167,13 @@ ${o3}
           }
           main.startActivity(intent);
         } catch (e2) {
-          saveLog(`[错误] 打开通知设置失败: ${e2.message}`);
           const intent = new Intent(Settings.ACTION_SETTINGS);
           main.startActivity(intent);
         }
       }
     },
-    onLaunch() {
-      uni.$globalMethods = {
-        getRegistrationID: () => this.getRegistrationID()
-      };
-      try {
-        const main = plus.android.runtimeMainActivity();
-        const context = main;
-        plus.android.importClass(context);
-        const resources = context.getResources();
-        plus.android.importClass(resources);
-        const packageName = context.getPackageName();
-        const resId = plus.android.invoke(
-          resources,
-          "getIdentifier",
-          "custom_ringtone",
-          "raw",
-          packageName
-        );
-        saveLog("铃声资源 ID = " + resId);
-        if (!resId) {
-          saveLog("❌ 资源不存在，请检查是否正确放入 raw 目录");
-        }
-      } catch (e2) {
-        saveLog("❌ 错误：" + e2);
-      }
-      this.initJPush();
-      this.createCustomRingtoneChannel();
-    },
-    onShow() {
-      if (this.jpushModule && !this.registrationID) {
-        this.getRegistrationID();
-      }
-    },
-    onHide: function() {
-      formatAppLog("log", "at App.vue:356", "App Hide");
+    onHide() {
+      formatAppLog("log", "at App.vue:230", "App Hide");
     }
   };
   const App = /* @__PURE__ */ _export_sfc(_sfc_main, [["__file", "E:/小程序转app/xcbapp/App.vue"]]);

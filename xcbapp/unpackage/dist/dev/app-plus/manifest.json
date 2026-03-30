@@ -45,6 +45,9 @@
       "id": "1",
       "kernel": "WKWebview"
     },
+    "compatible": {
+      "ignoreVersion": true
+    },
     "sslVerify": false,
     "usingComponents": true,
     "nvueStyleCompiler": "uni-app",
