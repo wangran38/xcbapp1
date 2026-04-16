@@ -2,7 +2,7 @@
 	<view class="settings-container">
 		<!-- 头部 -->
 		<view class="header">
-			<text class="title">系统设置</text>
+			<text class="title">我的设置</text>
 		</view>
 
 		<!-- 设置项列表 -->
@@ -31,6 +31,10 @@
 				</view>
 				<view class="item" @click="navTo('/subPackages/settings/updatePwd/updatePwd')">
 					<text>修改密码</text>
+					<uni-icons type="right" size="18" color="#999" />
+				</view>
+				<view class="item" @click="navTo('/subPackages/settings/loGout/loGout')">
+					<text>账户注销</text>
 					<uni-icons type="right" size="18" color="#999" />
 				</view>
 			</view>

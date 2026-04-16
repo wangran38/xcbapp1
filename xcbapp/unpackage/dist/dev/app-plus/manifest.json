@@ -7,8 +7,8 @@
   "id": "__UNI__600C35E",
   "name": "农链天下(商家版)",
   "version": {
-    "name": "2.3.3",
-    "code": 386
+    "name": "2.3.4",
+    "code": 387
   },
   "description": "一个让农民先富起来的平台",
   "developer": {
@@ -45,6 +45,7 @@
       "id": "1",
       "kernel": "WKWebview"
     },
+    "privacyRegisterMode": "manual",
     "compatible": {
       "ignoreVersion": true
     },
@@ -91,6 +92,7 @@
         }
       },
       "google": {
+        "enableOAID": false,
         "resource": [
           {
             "type": "raw",
@@ -130,7 +132,7 @@
             "__platform__": [
               "android"
             ],
-            "appid": "wx6823c63b646d3ca3",
+            "appid": "wxdbcb5c79798721e6",
             "UniversalLinks": ""
           }
         },
@@ -143,10 +145,11 @@
         },
         "share": {
           "weixin": {
-            "appid": "wx6823c63b646d3ca3",
+            "appid": "wxdbcb5c79798721e6",
             "UniversalLinks": ""
           }
         },
+        "oauth": {},
         "audio": {
           "mp3": {
             "description": "Android平台录音支持MP3格式文件"

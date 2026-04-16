@@ -701,7 +701,7 @@ if (uni.restoreGlobal) {
     const reg = /^[0-9]*$/g;
     return typeof val === "number" || reg.test(val) ? val + "px" : val;
   };
-  const _sfc_main$2i = {
+  const _sfc_main$2k = {
     name: "UniIcons",
     emits: ["click"],
     props: {
@@ -755,7 +755,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$2h(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2j(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "text",
       {
@@ -770,7 +770,7 @@ if (uni.restoreGlobal) {
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$2i, [["render", _sfc_render$2h], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
+  const __easycom_0$4 = /* @__PURE__ */ _export_sfc(_sfc_main$2k, [["render", _sfc_render$2j], ["__scopeId", "data-v-d31e1c47"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-icons/components/uni-icons/uni-icons.vue"]]);
   const BASE_URL = "https://api.xcbdsc.com";
   const UPLOAD_URL = "https://image.xcbdsc.com";
   const whiteList = [
@@ -2410,7 +2410,7 @@ if (uni.restoreGlobal) {
     }
     return module;
   }
-  const _sfc_main$2h = {
+  const _sfc_main$2j = {
     data() {
       return {
         NoticeList: ["赠送积分说明"],
@@ -2745,7 +2745,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$2g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2i(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "brand-header" }, [
@@ -2895,8 +2895,8 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesIndex1Index1 = /* @__PURE__ */ _export_sfc(_sfc_main$2h, [["render", _sfc_render$2g], ["__scopeId", "data-v-3b59972f"], ["__file", "E:/小程序转app/xcbapp/pages/index1/index1.vue"]]);
-  const _sfc_main$2g = {
+  const PagesIndex1Index1 = /* @__PURE__ */ _export_sfc(_sfc_main$2j, [["render", _sfc_render$2i], ["__scopeId", "data-v-3b59972f"], ["__file", "E:/小程序转app/xcbapp/pages/index1/index1.vue"]]);
+  const _sfc_main$2i = {
     props: {
       menuList: {
         type: Array,
@@ -3030,7 +3030,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$2f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2h(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "movable-area",
       {
@@ -3081,8 +3081,8 @@ if (uni.restoreGlobal) {
       /* STYLE */
     );
   }
-  const floatBall = /* @__PURE__ */ _export_sfc(_sfc_main$2g, [["render", _sfc_render$2f], ["__scopeId", "data-v-cb34b40c"], ["__file", "E:/小程序转app/xcbapp/components/float-ball/float-ball.vue"]]);
-  const _sfc_main$2f = {
+  const floatBall = /* @__PURE__ */ _export_sfc(_sfc_main$2i, [["render", _sfc_render$2h], ["__scopeId", "data-v-cb34b40c"], ["__file", "E:/小程序转app/xcbapp/components/float-ball/float-ball.vue"]]);
+  const _sfc_main$2h = {
     name: "mButton",
     data() {
       return {
@@ -3121,7 +3121,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$2e(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2g(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "search-container" }, [
       vue.createElementVNode("view", { class: "search-bar" }, [
@@ -3163,7 +3163,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const mButtonVue = /* @__PURE__ */ _export_sfc(_sfc_main$2f, [["render", _sfc_render$2e], ["__scopeId", "data-v-e3b8d142"], ["__file", "E:/小程序转app/xcbapp/components/public/mButton/mButton.vue"]]);
+  const mButtonVue = /* @__PURE__ */ _export_sfc(_sfc_main$2h, [["render", _sfc_render$2g], ["__scopeId", "data-v-e3b8d142"], ["__file", "E:/小程序转app/xcbapp/components/public/mButton/mButton.vue"]]);
   const usePage = {
     data() {
       return {
@@ -3239,7 +3239,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  const _sfc_main$2e = {
+  const _sfc_main$2g = {
     components: { floatBall, mButtonVue },
     mixins: [usePage],
     data() {
@@ -3353,7 +3353,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$2d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2f(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_mButtonVue = vue.resolveComponent("mButtonVue");
     const _component_floatBall = vue.resolveComponent("floatBall");
@@ -3546,10 +3546,14 @@ if (uni.restoreGlobal) {
       vue.createVNode(_component_floatBall)
     ]);
   }
-  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$2e, [["render", _sfc_render$2d], ["__scopeId", "data-v-1cf27b2a"], ["__file", "E:/小程序转app/xcbapp/pages/index/index.vue"]]);
-  const _sfc_main$2d = {
+  const PagesIndexIndex = /* @__PURE__ */ _export_sfc(_sfc_main$2g, [["render", _sfc_render$2f], ["__scopeId", "data-v-1cf27b2a"], ["__file", "E:/小程序转app/xcbapp/pages/index/index.vue"]]);
+  const _sfc_main$2f = {
     data() {
       return {
+        agreements: {
+          service: false,
+          privacy: false
+        },
         form: {
           username: "",
           password: ""
@@ -3560,10 +3564,20 @@ if (uni.restoreGlobal) {
     },
     computed: {
       formValid() {
-        return /^1[3-9]\d{9}$/.test(this.form.username) && this.form.password.length >= 6;
+        return /^1[3-9]\d{9}$/.test(this.form.username) && this.form.password.length >= 6 && agreements.service && agreements.privacy;
       }
     },
     methods: {
+      goTouserServiceAgreement() {
+        uni.navigateTo({
+          url: "/pages/userServiceAgreement/userServiceAgreement"
+        });
+      },
+      goToprivacyAgreement() {
+        uni.navigateTo({
+          url: "/pages/privacyAgreement/privacyAgreement"
+        });
+      },
       togglePassword() {
         this.showPassword = !this.showPassword;
       },
@@ -3576,7 +3590,7 @@ if (uni.restoreGlobal) {
             let registerID = uni.getStorageSync("registerID");
             if (registerID) {
               let res = await api.editUserProfile({ "registration_id": registerID });
-              formatAppLog("log", "at pages/login/login.vue:75", "已覆盖设备id", res);
+              formatAppLog("log", "at pages/login/login.vue:108", "已覆盖设备id", res);
             }
             let promise2 = new Promise((res, rej) => {
               if (this.form.password == "123456") {
@@ -3624,7 +3638,7 @@ if (uni.restoreGlobal) {
             });
           }
         } catch (error2) {
-          formatAppLog("log", "at pages/login/login.vue:128", error2);
+          formatAppLog("log", "at pages/login/login.vue:161", error2);
           uni.showToast({
             title: `登录失败`,
             icon: "error"
@@ -3643,7 +3657,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$2c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2e(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "login-container" }, [
       vue.createElementVNode("view", { class: "decorative-circle circle-1" }),
@@ -3709,11 +3723,39 @@ if (uni.restoreGlobal) {
               onClick: _cache[3] || (_cache[3] = ($event) => $data.showPassword = !$data.showPassword)
             }, null, 8, ["type"])
           ]),
+          vue.createElementVNode("view", { class: "agreement-group" }, [
+            vue.createElementVNode("view", { class: "checkbox-item" }, [
+              vue.createVNode(_component_uni_icons, {
+                type: $data.agreements.service ? "checkbox-filled" : "circle",
+                size: "24",
+                color: $data.agreements.service ? "#409EFF" : "#999",
+                onClick: _cache[4] || (_cache[4] = ($event) => $data.agreements.service = !$data.agreements.service)
+              }, null, 8, ["type", "color"]),
+              vue.createElementVNode("text", { class: "agreement-text" }, "我已阅读并同意"),
+              vue.createElementVNode("text", {
+                class: "link",
+                onClick: _cache[5] || (_cache[5] = (...args) => $options.goTouserServiceAgreement && $options.goTouserServiceAgreement(...args))
+              }, "《服务协议》")
+            ]),
+            vue.createElementVNode("view", { class: "checkbox-item" }, [
+              vue.createVNode(_component_uni_icons, {
+                type: $data.agreements.privacy ? "checkbox-filled" : "circle",
+                size: "24",
+                color: $data.agreements.privacy ? "#409EFF" : "#999",
+                onClick: _cache[6] || (_cache[6] = ($event) => $data.agreements.privacy = !$data.agreements.privacy)
+              }, null, 8, ["type", "color"]),
+              vue.createElementVNode("text", { class: "agreement-text" }, "我已阅读并同意"),
+              vue.createElementVNode("text", {
+                class: "link",
+                onClick: _cache[7] || (_cache[7] = (...args) => $options.goToprivacyAgreement && $options.goToprivacyAgreement(...args))
+              }, "《隐私政策》")
+            ])
+          ]),
           vue.createElementVNode(
             "button",
             {
               class: vue.normalizeClass(["login-btn", { "active": $options.formValid }]),
-              onClick: _cache[4] || (_cache[4] = (...args) => $options.login && $options.login(...args))
+              onClick: _cache[8] || (_cache[8] = (...args) => $options.login && $options.login(...args))
             },
             [
               !$data.loading ? (vue.openBlock(), vue.createElementBlock("text", { key: 0 }, "登 录")) : (vue.openBlock(), vue.createBlock(_component_uni_icons, {
@@ -3730,19 +3772,19 @@ if (uni.restoreGlobal) {
           vue.createElementVNode("view", { class: "assist-links" }, [
             vue.createElementVNode("text", {
               class: "link-text",
-              onClick: _cache[5] || (_cache[5] = (...args) => $options.gotoRegster && $options.gotoRegster(...args))
+              onClick: _cache[9] || (_cache[9] = (...args) => $options.gotoRegster && $options.gotoRegster(...args))
             }, "注册账号"),
             vue.createElementVNode("text", {
               class: "link-text",
-              onClick: _cache[6] || (_cache[6] = (...args) => $options.gotoUptdatePwd && $options.gotoUptdatePwd(...args))
+              onClick: _cache[10] || (_cache[10] = (...args) => $options.gotoUptdatePwd && $options.gotoUptdatePwd(...args))
             }, "忘记密码")
           ])
         ])
       ])
     ]);
   }
-  const PagesLoginLogin = /* @__PURE__ */ _export_sfc(_sfc_main$2d, [["render", _sfc_render$2c], ["__file", "E:/小程序转app/xcbapp/pages/login/login.vue"]]);
-  const _sfc_main$2c = {
+  const PagesLoginLogin = /* @__PURE__ */ _export_sfc(_sfc_main$2f, [["render", _sfc_render$2e], ["__file", "E:/小程序转app/xcbapp/pages/login/login.vue"]]);
+  const _sfc_main$2e = {
     data() {
       return {
         form: {
@@ -3881,7 +3923,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$2b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2d(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "register-container" }, [
       vue.createElementVNode("view", { class: "decorative-circle circle-1" }),
@@ -4052,8 +4094,8 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesRegisterRegister = /* @__PURE__ */ _export_sfc(_sfc_main$2c, [["render", _sfc_render$2b], ["__file", "E:/小程序转app/xcbapp/pages/register/register.vue"]]);
-  const _sfc_main$2b = {
+  const PagesRegisterRegister = /* @__PURE__ */ _export_sfc(_sfc_main$2e, [["render", _sfc_render$2d], ["__file", "E:/小程序转app/xcbapp/pages/register/register.vue"]]);
+  const _sfc_main$2d = {
     data() {
       return {};
     },
@@ -4065,7 +4107,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$2a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2c(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "select" }, [
       vue.createElementVNode("view", { class: "vip" }, [
         vue.createElementVNode("button", {
@@ -4081,8 +4123,8 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesSelectSelect = /* @__PURE__ */ _export_sfc(_sfc_main$2b, [["render", _sfc_render$2a], ["__file", "E:/小程序转app/xcbapp/pages/select/select.vue"]]);
-  const _sfc_main$2a = {
+  const PagesSelectSelect = /* @__PURE__ */ _export_sfc(_sfc_main$2d, [["render", _sfc_render$2c], ["__file", "E:/小程序转app/xcbapp/pages/select/select.vue"]]);
+  const _sfc_main$2c = {
     data() {
       return {};
     },
@@ -4148,7 +4190,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$29(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2b(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "content" }, [
@@ -4223,7 +4265,7 @@ if (uni.restoreGlobal) {
       ])
     ]);
   }
-  const PagesSVegetablesSVegetables = /* @__PURE__ */ _export_sfc(_sfc_main$2a, [["render", _sfc_render$29], ["__scopeId", "data-v-9c8f2f2f"], ["__file", "E:/小程序转app/xcbapp/pages/sVegetables/sVegetables.vue"]]);
+  const PagesSVegetablesSVegetables = /* @__PURE__ */ _export_sfc(_sfc_main$2c, [["render", _sfc_render$2b], ["__scopeId", "data-v-9c8f2f2f"], ["__file", "E:/小程序转app/xcbapp/pages/sVegetables/sVegetables.vue"]]);
   /*!
    * Compressor.js v1.2.1
    * https://fengyuanchen.github.io/compressorjs
@@ -5253,7 +5295,7 @@ if (uni.restoreGlobal) {
       upload
     };
   };
-  const _sfc_main$29 = {
+  const _sfc_main$2b = {
     data() {
       return {
         isLoggedIn: false,
@@ -5415,7 +5457,7 @@ if (uni.restoreGlobal) {
       }
     }
   };
-  function _sfc_render$28(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2a(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "user-card" }, [
@@ -5623,7 +5665,7 @@ if (uni.restoreGlobal) {
       }, "退出登录")
     ]);
   }
-  const PagesUserUser = /* @__PURE__ */ _export_sfc(_sfc_main$29, [["render", _sfc_render$28], ["__scopeId", "data-v-0f7520f0"], ["__file", "E:/小程序转app/xcbapp/pages/user/user.vue"]]);
+  const PagesUserUser = /* @__PURE__ */ _export_sfc(_sfc_main$2b, [["render", _sfc_render$2a], ["__scopeId", "data-v-0f7520f0"], ["__file", "E:/小程序转app/xcbapp/pages/user/user.vue"]]);
   var isVue2 = false;
   function set(target, key, val) {
     if (Array.isArray(target)) {
@@ -9646,7 +9688,7 @@ This will fail in production.`);
       }
     }
   });
-  const _sfc_main$28 = {
+  const _sfc_main$2a = {
     name: "shop-item",
     props: {
       shop_id: {
@@ -9715,7 +9757,7 @@ This will fail in production.`);
       }
     }
   };
-  function _sfc_render$27(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$29(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "shoplist" }, [
       $data.showCartLayer1 ? (vue.openBlock(), vue.createElementBlock("view", {
@@ -9863,8 +9905,8 @@ This will fail in production.`);
       ])
     ]);
   }
-  const shopItem = /* @__PURE__ */ _export_sfc(_sfc_main$28, [["render", _sfc_render$27], ["__scopeId", "data-v-a8327be0"], ["__file", "E:/小程序转app/xcbapp/components/shop-item/shop-item.vue"]]);
-  const _sfc_main$27 = {
+  const shopItem = /* @__PURE__ */ _export_sfc(_sfc_main$2a, [["render", _sfc_render$29], ["__scopeId", "data-v-a8327be0"], ["__file", "E:/小程序转app/xcbapp/components/shop-item/shop-item.vue"]]);
+  const _sfc_main$29 = {
     name: "menuBarVue",
     props: ["item"],
     // 保留原有 props
@@ -9949,7 +9991,7 @@ This will fail in production.`);
       // 5. 移除原 Vuex 的 mapMutations 扩展（已替换为 Pinia 直接调用）
     }
   };
-  function _sfc_render$26(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$28(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "box",
@@ -10052,8 +10094,8 @@ This will fail in production.`);
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const menuBarVue = /* @__PURE__ */ _export_sfc(_sfc_main$27, [["render", _sfc_render$26], ["__scopeId", "data-v-757745aa"], ["__file", "E:/小程序转app/xcbapp/components/menuBar.vue"]]);
-  const _sfc_main$26 = {
+  const menuBarVue = /* @__PURE__ */ _export_sfc(_sfc_main$29, [["render", _sfc_render$28], ["__scopeId", "data-v-757745aa"], ["__file", "E:/小程序转app/xcbapp/components/menuBar.vue"]]);
+  const _sfc_main$28 = {
     name: "inputBox",
     data() {
       return {
@@ -10205,7 +10247,7 @@ This will fail in production.`);
       }
     }
   };
-  function _sfc_render$25(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$27(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.withDirectives((vue.openBlock(), vue.createElementBlock("view", {
       class: "number-keyboard-mask",
       onClick: _cache[4] || (_cache[4] = (...args) => $options.close && $options.close(...args)),
@@ -10313,7 +10355,7 @@ This will fail in production.`);
       [vue.vShow, $data.show]
     ]);
   }
-  const inputBoxVue = /* @__PURE__ */ _export_sfc(_sfc_main$26, [["render", _sfc_render$25], ["__scopeId", "data-v-c235284e"], ["__file", "E:/小程序转app/xcbapp/components/inputBox.vue"]]);
+  const inputBoxVue = /* @__PURE__ */ _export_sfc(_sfc_main$28, [["render", _sfc_render$27], ["__scopeId", "data-v-c235284e"], ["__file", "E:/小程序转app/xcbapp/components/inputBox.vue"]]);
   const myMixin = {
     methods: {
       /**
@@ -10432,7 +10474,7 @@ This will fail in production.`);
       }
     }
   };
-  const _sfc_main$25 = {
+  const _sfc_main$27 = {
     data() {
       return {
         shopDetails: {},
@@ -10520,7 +10562,7 @@ This will fail in production.`);
       }
     }
   };
-  function _sfc_render$24(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$26(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_inputBoxVue = vue.resolveComponent("inputBoxVue");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_mButtonVue = vue.resolveComponent("mButtonVue");
@@ -10713,8 +10755,8 @@ This will fail in production.`);
       /* NEED_HYDRATION */
     );
   }
-  const PagesShopDetailsShopDetails = /* @__PURE__ */ _export_sfc(_sfc_main$25, [["render", _sfc_render$24], ["__scopeId", "data-v-a7f2603d"], ["__file", "E:/小程序转app/xcbapp/pages/ShopDetails/ShopDetails.vue"]]);
-  const _sfc_main$24 = {
+  const PagesShopDetailsShopDetails = /* @__PURE__ */ _export_sfc(_sfc_main$27, [["render", _sfc_render$26], ["__scopeId", "data-v-a7f2603d"], ["__file", "E:/小程序转app/xcbapp/pages/ShopDetails/ShopDetails.vue"]]);
+  const _sfc_main$26 = {
     data() {
       return {
         multiArray: [
@@ -10993,7 +11035,7 @@ This will fail in production.`);
       }
     }
   };
-  function _sfc_render$23(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$25(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "form-card" }, [
@@ -11282,7 +11324,7 @@ This will fail in production.`);
       ])
     ]);
   }
-  const PagesApplyApply = /* @__PURE__ */ _export_sfc(_sfc_main$24, [["render", _sfc_render$23], ["__scopeId", "data-v-cdb56d2d"], ["__file", "E:/小程序转app/xcbapp/pages/Apply/Apply.vue"]]);
+  const PagesApplyApply = /* @__PURE__ */ _export_sfc(_sfc_main$26, [["render", _sfc_render$25], ["__scopeId", "data-v-cdb56d2d"], ["__file", "E:/小程序转app/xcbapp/pages/Apply/Apply.vue"]]);
   const isObject = (val) => val !== null && typeof val === "object";
   const defaultDelimiters = ["{", "}"];
   class BaseFormatter {
@@ -11596,7 +11638,7 @@ This will fail in production.`);
   const {
     t: t$5
   } = initVueI18n(messages$1);
-  const _sfc_main$23 = {
+  const _sfc_main$25 = {
     name: "UniLoadMore",
     emits: ["clickLoadMore"],
     props: {
@@ -11678,7 +11720,7 @@ This will fail in production.`);
       }
     }
   };
-  function _sfc_render$22(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$24(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", {
       class: "uni-load-more",
       onClick: _cache[0] || (_cache[0] = (...args) => $options.onClick && $options.onClick(...args))
@@ -11753,7 +11795,7 @@ This will fail in production.`);
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1$7 = /* @__PURE__ */ _export_sfc(_sfc_main$23, [["render", _sfc_render$22], ["__scopeId", "data-v-9245e42c"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue"]]);
+  const __easycom_1$7 = /* @__PURE__ */ _export_sfc(_sfc_main$25, [["render", _sfc_render$24], ["__scopeId", "data-v-9245e42c"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue"]]);
   const subPackages = [
     {
       root: "subPackages/PaymentModule",
@@ -12076,6 +12118,12 @@ This will fail in production.`);
           path: "addAddress/addAddress",
           style: {
             navigationBarTitleText: "地址"
+          }
+        },
+        {
+          path: "loGout/loGout",
+          style: {
+            navigationBarTitleText: "用户注销"
           }
         }
       ]
@@ -12447,6 +12495,12 @@ This will fail in production.`);
       path: "pages/videoPreview/videoPreview",
       style: {
         navigationBarTitleText: ""
+      }
+    },
+    {
+      path: "pages/logoutAgreement/logoutAgreement",
+      style: {
+        navigationBarTitleText: "注销协议"
       }
     }
   ];
@@ -15904,7 +15958,7 @@ ${o3}
       }
     }
   };
-  const _sfc_main$22 = {
+  const _sfc_main$24 = {
     name: "UniDataPickerView",
     emits: ["nodeclick", "change", "datachange", "update:modelValue"],
     mixins: [dataPicker],
@@ -16008,7 +16062,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$21(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$23(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-data-pickerview" }, [
       !_ctx.isCloudDataList ? (vue.openBlock(), vue.createElementBlock("scroll-view", {
@@ -16098,8 +16152,8 @@ ${o3}
       ])
     ]);
   }
-  const DataPickerView = /* @__PURE__ */ _export_sfc(_sfc_main$22, [["render", _sfc_render$21], ["__scopeId", "data-v-91ec6a82"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-data-picker/components/uni-data-pickerview/uni-data-pickerview.vue"]]);
-  const _sfc_main$21 = {
+  const DataPickerView = /* @__PURE__ */ _export_sfc(_sfc_main$24, [["render", _sfc_render$23], ["__scopeId", "data-v-91ec6a82"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-data-picker/components/uni-data-pickerview/uni-data-pickerview.vue"]]);
+  const _sfc_main$23 = {
     name: "UniDataPicker",
     emits: ["popupopened", "popupclosed", "nodeclick", "input", "change", "update:modelValue", "inputclick"],
     mixins: [dataPicker],
@@ -16303,7 +16357,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$20(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$22(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$7);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_data_picker_view = vue.resolveComponent("data-picker-view");
@@ -16469,7 +16523,7 @@ ${o3}
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$21, [["render", _sfc_render$20], ["__scopeId", "data-v-2653531e"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-data-picker/components/uni-data-picker/uni-data-picker.vue"]]);
+  const __easycom_0$3 = /* @__PURE__ */ _export_sfc(_sfc_main$23, [["render", _sfc_render$22], ["__scopeId", "data-v-2653531e"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-data-picker/components/uni-data-picker/uni-data-picker.vue"]]);
   let Calendar$1 = class Calendar {
     constructor({
       selected,
@@ -16825,7 +16879,7 @@ ${o3}
     }
     return value;
   }
-  const _sfc_main$20 = {
+  const _sfc_main$22 = {
     props: {
       weeks: {
         type: Object,
@@ -16859,7 +16913,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1$(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$21(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -16915,7 +16969,7 @@ ${o3}
       /* CLASS, NEED_HYDRATION */
     );
   }
-  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$20, [["render", _sfc_render$1$], ["__scopeId", "data-v-3c762a01"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
+  const calendarItem = /* @__PURE__ */ _export_sfc(_sfc_main$22, [["render", _sfc_render$21], ["__scopeId", "data-v-3c762a01"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar-item.vue"]]);
   const en$1 = {
     "uni-datetime-picker.selectDate": "select date",
     "uni-datetime-picker.selectTime": "select time",
@@ -16990,7 +17044,7 @@ ${o3}
   const {
     t: t$3
   } = initVueI18n(i18nMessages);
-  const _sfc_main$1$ = {
+  const _sfc_main$21 = {
     name: "UniDatetimePicker",
     data() {
       return {
@@ -17594,7 +17648,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1_(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$20(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-datetime-picker" }, [
       vue.createElementVNode("view", {
         onClick: _cache[0] || (_cache[0] = (...args) => $options.initTimePicker && $options.initTimePicker(...args))
@@ -17869,11 +17923,11 @@ ${o3}
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$1$, [["render", _sfc_render$1_], ["__scopeId", "data-v-1d532b70"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
+  const TimePicker = /* @__PURE__ */ _export_sfc(_sfc_main$21, [["render", _sfc_render$20], ["__scopeId", "data-v-1d532b70"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/time-picker.vue"]]);
   const {
     t: t$2
   } = initVueI18n(i18nMessages);
-  const _sfc_main$1_ = {
+  const _sfc_main$20 = {
     components: {
       calendarItem,
       timePicker: TimePicker
@@ -18354,7 +18408,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1Z(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1$(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_calendar_item = vue.resolveComponent("calendar-item");
     const _component_time_picker = vue.resolveComponent("time-picker");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
@@ -18647,8 +18701,8 @@ ${o3}
       /* NEED_HYDRATION */
     );
   }
-  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$1_, [["render", _sfc_render$1Z], ["__scopeId", "data-v-1d379219"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
-  const _sfc_main$1Z = {
+  const Calendar = /* @__PURE__ */ _export_sfc(_sfc_main$20, [["render", _sfc_render$1$], ["__scopeId", "data-v-1d379219"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/calendar.vue"]]);
+  const _sfc_main$1$ = {
     name: "UniDatetimePicker",
     options: {
       virtualHost: true
@@ -19304,7 +19358,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1Y(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1_(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_time_picker = vue.resolveComponent("time-picker");
     const _component_Calendar = vue.resolveComponent("Calendar");
@@ -19648,8 +19702,8 @@ ${o3}
       }, null, 8, ["date", "defTime", "start-date", "end-date", "selectableTimes", "startPlaceholder", "endPlaceholder", "default-value", "pleStatus", "range", "hasTime", "hideSecond", "onConfirm", "onMaskClose", "onChange"])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1Z, [["render", _sfc_render$1Y], ["__scopeId", "data-v-9802168a"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
-  const _sfc_main$1Y = {
+  const __easycom_4$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1$, [["render", _sfc_render$1_], ["__scopeId", "data-v-9802168a"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.vue"]]);
+  const _sfc_main$1_ = {
     data() {
       return {
         methodItems: [{
@@ -19919,7 +19973,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1X(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1Z(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_data_picker = resolveEasycom(vue.resolveDynamicComponent("uni-data-picker"), __easycom_0$3);
     const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
@@ -20048,8 +20102,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesBuyBuy = /* @__PURE__ */ _export_sfc(_sfc_main$1Y, [["render", _sfc_render$1X], ["__scopeId", "data-v-4ca90ae6"], ["__file", "E:/小程序转app/xcbapp/pages/Buy/Buy.vue"]]);
-  const _sfc_main$1X = {
+  const PagesBuyBuy = /* @__PURE__ */ _export_sfc(_sfc_main$1_, [["render", _sfc_render$1Z], ["__scopeId", "data-v-4ca90ae6"], ["__file", "E:/小程序转app/xcbapp/pages/Buy/Buy.vue"]]);
+  const _sfc_main$1Z = {
     data() {
       return {
         pageData: [],
@@ -20328,7 +20382,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1W(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1Y(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode(
@@ -20623,8 +20677,8 @@ ${o3}
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const PagesPublishPublish = /* @__PURE__ */ _export_sfc(_sfc_main$1X, [["render", _sfc_render$1W], ["__file", "E:/小程序转app/xcbapp/pages/publish/publish.vue"]]);
-  const _sfc_main$1W = {
+  const PagesPublishPublish = /* @__PURE__ */ _export_sfc(_sfc_main$1Z, [["render", _sfc_render$1Y], ["__file", "E:/小程序转app/xcbapp/pages/publish/publish.vue"]]);
+  const _sfc_main$1Y = {
     data() {
       return {
         Image: "",
@@ -20775,7 +20829,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1V(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1X(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "content" }, [
@@ -20862,8 +20916,8 @@ ${o3}
       vue.createElementVNode("text", { style: { "color": "red", "margin-top": "30rpx", "font-size": "30rpx" } }, "注意：添加菜品后要在菜品列表里面选择上架")
     ]);
   }
-  const PagesReleaseRelease = /* @__PURE__ */ _export_sfc(_sfc_main$1W, [["render", _sfc_render$1V], ["__file", "E:/小程序转app/xcbapp/pages/release/release.vue"]]);
-  const _sfc_main$1V = {
+  const PagesReleaseRelease = /* @__PURE__ */ _export_sfc(_sfc_main$1Y, [["render", _sfc_render$1X], ["__file", "E:/小程序转app/xcbapp/pages/release/release.vue"]]);
+  const _sfc_main$1X = {
     data() {
       return {
         pageData: [],
@@ -21001,7 +21055,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1U(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1W(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode(
         "scroll-view",
@@ -21143,8 +21197,8 @@ ${o3}
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const PagesStalllistStalllist = /* @__PURE__ */ _export_sfc(_sfc_main$1V, [["render", _sfc_render$1U], ["__file", "E:/小程序转app/xcbapp/pages/stalllist/stalllist.vue"]]);
-  const _sfc_main$1U = {
+  const PagesStalllistStalllist = /* @__PURE__ */ _export_sfc(_sfc_main$1X, [["render", _sfc_render$1W], ["__file", "E:/小程序转app/xcbapp/pages/stalllist/stalllist.vue"]]);
+  const _sfc_main$1W = {
     data() {
       return {
         pageData: []
@@ -21168,7 +21222,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1T(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1V(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "content" }, [
         vue.createElementVNode(
@@ -21228,8 +21282,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesCouponsCoupons = /* @__PURE__ */ _export_sfc(_sfc_main$1U, [["render", _sfc_render$1T], ["__file", "E:/小程序转app/xcbapp/pages/coupons/coupons.vue"]]);
-  const _sfc_main$1T = {
+  const PagesCouponsCoupons = /* @__PURE__ */ _export_sfc(_sfc_main$1W, [["render", _sfc_render$1V], ["__file", "E:/小程序转app/xcbapp/pages/coupons/coupons.vue"]]);
+  const _sfc_main$1V = {
     data() {
       return {};
     },
@@ -21247,7 +21301,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1S(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1U(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "first" }, [
         vue.createElementVNode("image", {
@@ -21320,8 +21374,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesLotteryLottery = /* @__PURE__ */ _export_sfc(_sfc_main$1T, [["render", _sfc_render$1S], ["__file", "E:/小程序转app/xcbapp/pages/lottery/lottery.vue"]]);
-  const _sfc_main$1S = {
+  const PagesLotteryLottery = /* @__PURE__ */ _export_sfc(_sfc_main$1V, [["render", _sfc_render$1U], ["__file", "E:/小程序转app/xcbapp/pages/lottery/lottery.vue"]]);
+  const _sfc_main$1U = {
     data() {
       return {};
     },
@@ -21360,7 +21414,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1R(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1T(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "title" }, " 喜讯 "),
       vue.createElementVNode("view", { class: "content" }, [
@@ -21386,8 +21440,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesRulesRules = /* @__PURE__ */ _export_sfc(_sfc_main$1S, [["render", _sfc_render$1R], ["__file", "E:/小程序转app/xcbapp/pages/rules/rules.vue"]]);
-  const _sfc_main$1R = {
+  const PagesRulesRules = /* @__PURE__ */ _export_sfc(_sfc_main$1U, [["render", _sfc_render$1T], ["__file", "E:/小程序转app/xcbapp/pages/rules/rules.vue"]]);
+  const _sfc_main$1T = {
     data() {
       return {
         pagedData: [],
@@ -21444,7 +21498,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1Q(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1S(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "item" }, [
         vue.createElementVNode("view", { class: "top" }, [
@@ -21532,7 +21586,7 @@ ${o3}
       }, "参与活动说明")
     ]);
   }
-  const PagesJackpotJackpot = /* @__PURE__ */ _export_sfc(_sfc_main$1R, [["render", _sfc_render$1Q], ["__file", "E:/小程序转app/xcbapp/pages/jackpot/jackpot.vue"]]);
+  const PagesJackpotJackpot = /* @__PURE__ */ _export_sfc(_sfc_main$1T, [["render", _sfc_render$1S], ["__file", "E:/小程序转app/xcbapp/pages/jackpot/jackpot.vue"]]);
   function obj2strClass(obj) {
     let classess = "";
     for (let key in obj) {
@@ -21551,7 +21605,7 @@ ${o3}
     }
     return style;
   }
-  const _sfc_main$1Q = {
+  const _sfc_main$1S = {
     name: "uni-easyinput",
     emits: [
       "click",
@@ -21900,7 +21954,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1P(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1R(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock(
       "view",
@@ -22024,8 +22078,8 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_2$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1Q, [["render", _sfc_render$1P], ["__scopeId", "data-v-09fd5285"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
-  const _sfc_main$1P = {
+  const __easycom_2$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1S, [["render", _sfc_render$1R], ["__scopeId", "data-v-09fd5285"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue"]]);
+  const _sfc_main$1R = {
     name: "UniSection",
     emits: ["click"],
     props: {
@@ -22084,7 +22138,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1O(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1Q(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-section" }, [
       vue.createElementVNode("view", {
         class: "uni-section-header",
@@ -22141,7 +22195,7 @@ ${o3}
       )
     ]);
   }
-  const __easycom_1$6 = /* @__PURE__ */ _export_sfc(_sfc_main$1P, [["render", _sfc_render$1O], ["__scopeId", "data-v-637fd36b"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-section/components/uni-section/uni-section.vue"]]);
+  const __easycom_1$6 = /* @__PURE__ */ _export_sfc(_sfc_main$1R, [["render", _sfc_render$1Q], ["__scopeId", "data-v-637fd36b"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-section/components/uni-section/uni-section.vue"]]);
   const props = {
     props: {
       //二维码内容
@@ -23920,7 +23974,7 @@ ${o3}
   const queueLoadImage = new Queue();
   const cacheImageList = [];
   let instance = null;
-  const _sfc_main$1O = {
+  const _sfc_main$1Q = {
     name: "uv-qrcode",
     mixins: [mpMixin, mixin, props],
     emits: ["click", "change", "complete"],
@@ -24516,7 +24570,7 @@ ${o3}
     }
     return obj;
   }
-  function _sfc_render$1N(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1P(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -24577,7 +24631,7 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_3$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1O, [["render", _sfc_render$1N], ["__scopeId", "data-v-ff61d38d"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uv-qrcode/components/uv-qrcode/uv-qrcode.vue"]]);
+  const __easycom_3$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1Q, [["render", _sfc_render$1P], ["__scopeId", "data-v-ff61d38d"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uv-qrcode/components/uv-qrcode/uv-qrcode.vue"]]);
   class MPAnimation {
     constructor(options, _this) {
       this.options = options;
@@ -24690,7 +24744,7 @@ ${o3}
     clearTimeout(_this.timer);
     return new MPAnimation(option, _this);
   }
-  const _sfc_main$1N = {
+  const _sfc_main$1P = {
     name: "uniTransition",
     emits: ["click", "change"],
     props: {
@@ -24941,7 +24995,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1M(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1O(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.withDirectives((vue.openBlock(), vue.createElementBlock("view", {
       ref: "ani",
       animation: $data.animationData,
@@ -24954,8 +25008,8 @@ ${o3}
       [vue.vShow, $data.isShow]
     ]);
   }
-  const __easycom_1$5 = /* @__PURE__ */ _export_sfc(_sfc_main$1N, [["render", _sfc_render$1M], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
-  const _sfc_main$1M = {
+  const __easycom_1$5 = /* @__PURE__ */ _export_sfc(_sfc_main$1P, [["render", _sfc_render$1O], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-transition/components/uni-transition/uni-transition.vue"]]);
+  const _sfc_main$1O = {
     name: "uniPopup",
     components: {},
     emits: ["change", "maskClick"],
@@ -25306,7 +25360,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1L(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1N(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_1$5);
     return $data.showPopup ? (vue.openBlock(), vue.createElementBlock(
       "view",
@@ -25366,8 +25420,8 @@ ${o3}
       /* CLASS */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_1$4 = /* @__PURE__ */ _export_sfc(_sfc_main$1M, [["render", _sfc_render$1L], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
-  const _sfc_main$1L = {
+  const __easycom_1$4 = /* @__PURE__ */ _export_sfc(_sfc_main$1O, [["render", _sfc_render$1N], ["__scopeId", "data-v-4dd3c44b"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-popup/components/uni-popup/uni-popup.vue"]]);
+  const _sfc_main$1N = {
     data() {
       return {
         tabs1: ["全部", "待支付", "待收货", "已完成"],
@@ -25497,7 +25551,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1K(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1M(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2$2);
     const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_1$6);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
@@ -25803,8 +25857,8 @@ ${o3}
       )
     ]);
   }
-  const PagesOrdersOrders = /* @__PURE__ */ _export_sfc(_sfc_main$1L, [["render", _sfc_render$1K], ["__file", "E:/小程序转app/xcbapp/pages/orders/orders.vue"]]);
-  const _sfc_main$1K = {
+  const PagesOrdersOrders = /* @__PURE__ */ _export_sfc(_sfc_main$1N, [["render", _sfc_render$1M], ["__file", "E:/小程序转app/xcbapp/pages/orders/orders.vue"]]);
+  const _sfc_main$1M = {
     data() {
       return {
         pageData: [],
@@ -25856,7 +25910,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1J(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1L(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode(
         "scroll-view",
@@ -25923,8 +25977,8 @@ ${o3}
       )
     ]);
   }
-  const PagesStallsDishesStallsDishes = /* @__PURE__ */ _export_sfc(_sfc_main$1K, [["render", _sfc_render$1J], ["__file", "E:/小程序转app/xcbapp/pages/Stalls-dishes/Stalls-dishes.vue"]]);
-  const _sfc_main$1J = {
+  const PagesStallsDishesStallsDishes = /* @__PURE__ */ _export_sfc(_sfc_main$1M, [["render", _sfc_render$1L], ["__file", "E:/小程序转app/xcbapp/pages/Stalls-dishes/Stalls-dishes.vue"]]);
+  const _sfc_main$1L = {
     data() {
       return {
         pageData: [],
@@ -25987,7 +26041,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1I(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1K(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode(
         "scroll-view",
@@ -26055,8 +26109,8 @@ ${o3}
       )
     ]);
   }
-  const PagesListedDishesListedDishes = /* @__PURE__ */ _export_sfc(_sfc_main$1J, [["render", _sfc_render$1I], ["__file", "E:/小程序转app/xcbapp/pages/Listed-Dishes/Listed-Dishes.vue"]]);
-  const _sfc_main$1I = {
+  const PagesListedDishesListedDishes = /* @__PURE__ */ _export_sfc(_sfc_main$1L, [["render", _sfc_render$1K], ["__file", "E:/小程序转app/xcbapp/pages/Listed-Dishes/Listed-Dishes.vue"]]);
+  const _sfc_main$1K = {
     data() {
       return {
         pageData: [],
@@ -26096,7 +26150,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1H(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1J(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "content" }, [
         vue.createElementVNode(
@@ -26164,8 +26218,8 @@ ${o3}
       }, " 确认 ")
     ]);
   }
-  const PagesUsecouponsUsecoupons = /* @__PURE__ */ _export_sfc(_sfc_main$1I, [["render", _sfc_render$1H], ["__file", "E:/小程序转app/xcbapp/pages/usecoupons/usecoupons.vue"]]);
-  const _sfc_main$1H = {
+  const PagesUsecouponsUsecoupons = /* @__PURE__ */ _export_sfc(_sfc_main$1K, [["render", _sfc_render$1J], ["__file", "E:/小程序转app/xcbapp/pages/usecoupons/usecoupons.vue"]]);
+  const _sfc_main$1J = {
     data() {
       return {
         isSignedIn: false,
@@ -26186,7 +26240,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1G(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1I(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "content" }, [
         vue.createElementVNode(
@@ -26199,8 +26253,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesClockClock = /* @__PURE__ */ _export_sfc(_sfc_main$1H, [["render", _sfc_render$1G], ["__file", "E:/小程序转app/xcbapp/pages/Clock/Clock.vue"]]);
-  const _sfc_main$1G = {
+  const PagesClockClock = /* @__PURE__ */ _export_sfc(_sfc_main$1J, [["render", _sfc_render$1I], ["__file", "E:/小程序转app/xcbapp/pages/Clock/Clock.vue"]]);
+  const _sfc_main$1I = {
     data() {
       return {
         pageData: []
@@ -26230,7 +26284,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1F(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1H(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "title" }, " 打卡记录 "),
       vue.createElementVNode("view", { class: "records" }, [
@@ -26283,8 +26337,8 @@ ${o3}
       }, " 免费抽奖 ")
     ]);
   }
-  const PagesClockRecordsClockRecords = /* @__PURE__ */ _export_sfc(_sfc_main$1G, [["render", _sfc_render$1F], ["__file", "E:/小程序转app/xcbapp/pages/clock-records/clock-records.vue"]]);
-  const _sfc_main$1F = {
+  const PagesClockRecordsClockRecords = /* @__PURE__ */ _export_sfc(_sfc_main$1I, [["render", _sfc_render$1H], ["__file", "E:/小程序转app/xcbapp/pages/clock-records/clock-records.vue"]]);
+  const _sfc_main$1H = {
     data() {
       return {
         pageData: []
@@ -26327,7 +26381,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1E(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1G(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "title" }, " 积分记录 "),
       vue.createElementVNode("view", { class: "records" }, [
@@ -26406,8 +26460,8 @@ ${o3}
       }, " 免费抽奖 ")
     ]);
   }
-  const PagesMyPointsRecordsMyPointsRecords = /* @__PURE__ */ _export_sfc(_sfc_main$1F, [["render", _sfc_render$1E], ["__file", "E:/小程序转app/xcbapp/pages/MyPoints-records/MyPoints-records.vue"]]);
-  const _sfc_main$1E = {
+  const PagesMyPointsRecordsMyPointsRecords = /* @__PURE__ */ _export_sfc(_sfc_main$1H, [["render", _sfc_render$1G], ["__file", "E:/小程序转app/xcbapp/pages/MyPoints-records/MyPoints-records.vue"]]);
+  const _sfc_main$1G = {
     data() {
       return {
         // tabs1: ["全部", "待支付", "待收货", "待结算", "已结算"],
@@ -26480,7 +26534,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1D(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1F(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "b-tabs" }, [
@@ -26629,8 +26683,8 @@ ${o3}
       )
     ]);
   }
-  const PagesOwnerordersOwnerorders = /* @__PURE__ */ _export_sfc(_sfc_main$1E, [["render", _sfc_render$1D], ["__file", "E:/小程序转app/xcbapp/pages/Ownerorders/Ownerorders.vue"]]);
-  const _sfc_main$1D = {
+  const PagesOwnerordersOwnerorders = /* @__PURE__ */ _export_sfc(_sfc_main$1G, [["render", _sfc_render$1F], ["__file", "E:/小程序转app/xcbapp/pages/Ownerorders/Ownerorders.vue"]]);
+  const _sfc_main$1F = {
     data() {
       return {
         shopmoney: null,
@@ -26656,7 +26710,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1C(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1E(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "asset" }, [
@@ -26715,8 +26769,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesWalletWallet = /* @__PURE__ */ _export_sfc(_sfc_main$1D, [["render", _sfc_render$1C], ["__file", "E:/小程序转app/xcbapp/pages/wallet/wallet.vue"]]);
-  const _sfc_main$1C = {
+  const PagesWalletWallet = /* @__PURE__ */ _export_sfc(_sfc_main$1F, [["render", _sfc_render$1E], ["__file", "E:/小程序转app/xcbapp/pages/wallet/wallet.vue"]]);
+  const _sfc_main$1E = {
     data() {
       return {
         pagedata: {
@@ -26750,7 +26804,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1B(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1D(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "asset" }, [
@@ -26821,8 +26875,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesPointsPoints = /* @__PURE__ */ _export_sfc(_sfc_main$1C, [["render", _sfc_render$1B], ["__file", "E:/小程序转app/xcbapp/pages/Points/Points.vue"]]);
-  const _sfc_main$1B = {
+  const PagesPointsPoints = /* @__PURE__ */ _export_sfc(_sfc_main$1E, [["render", _sfc_render$1D], ["__file", "E:/小程序转app/xcbapp/pages/Points/Points.vue"]]);
+  const _sfc_main$1D = {
     data() {
       return {
         pagedata: {
@@ -26900,7 +26954,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1A(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1C(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "input-section" }, [
@@ -26954,9 +27008,9 @@ ${o3}
       ])
     ]);
   }
-  const PagesPointspayoutsPointspayouts = /* @__PURE__ */ _export_sfc(_sfc_main$1B, [["render", _sfc_render$1A], ["__file", "E:/小程序转app/xcbapp/pages/pointspayouts/pointspayouts.vue"]]);
-  const _imports_0$4 = "/static/empty.png";
-  const _sfc_main$1A = {
+  const PagesPointspayoutsPointspayouts = /* @__PURE__ */ _export_sfc(_sfc_main$1D, [["render", _sfc_render$1C], ["__file", "E:/小程序转app/xcbapp/pages/pointspayouts/pointspayouts.vue"]]);
+  const _imports_0$5 = "/static/empty.png";
+  const _sfc_main$1C = {
     data() {
       return {
         pageData: [],
@@ -26987,7 +27041,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1z(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1B(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "page-title" }, "积分结算记录"),
       vue.createElementVNode("view", { class: "table-container" }, [
@@ -27017,7 +27071,7 @@ ${o3}
               class: "empty-state"
             }, [
               vue.createElementVNode("image", {
-                src: _imports_0$4,
+                src: _imports_0$5,
                 mode: "widthFix",
                 class: "empty-img"
               }),
@@ -27087,8 +27141,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesSettrecordsSettrecords = /* @__PURE__ */ _export_sfc(_sfc_main$1A, [["render", _sfc_render$1z], ["__file", "E:/小程序转app/xcbapp/pages/Settrecords/Settrecords.vue"]]);
-  const _sfc_main$1z = {
+  const PagesSettrecordsSettrecords = /* @__PURE__ */ _export_sfc(_sfc_main$1C, [["render", _sfc_render$1B], ["__file", "E:/小程序转app/xcbapp/pages/Settrecords/Settrecords.vue"]]);
+  const _sfc_main$1B = {
     data() {
       return {
         marketList: [],
@@ -27252,7 +27306,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1y(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1A(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "store" }, [
         vue.createElementVNode("text", { style: { "margin": "10rpx 20rpx" } }, "补充摊铺信息"),
@@ -27309,8 +27363,8 @@ ${o3}
       }, "提交", 8, ["disabled"])
     ]);
   }
-  const PagesEditshopEditshop = /* @__PURE__ */ _export_sfc(_sfc_main$1z, [["render", _sfc_render$1y], ["__file", "E:/小程序转app/xcbapp/pages/editshop/editshop.vue"]]);
-  const _sfc_main$1y = {
+  const PagesEditshopEditshop = /* @__PURE__ */ _export_sfc(_sfc_main$1B, [["render", _sfc_render$1A], ["__file", "E:/小程序转app/xcbapp/pages/editshop/editshop.vue"]]);
+  const _sfc_main$1A = {
     name: "UniTag",
     emits: ["click"],
     props: {
@@ -27390,7 +27444,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1x(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1z(_ctx, _cache, $props, $setup, $data, $options) {
     return $props.text ? (vue.openBlock(), vue.createElementBlock(
       "text",
       {
@@ -27404,8 +27458,8 @@ ${o3}
       /* TEXT, CLASS, STYLE */
     )) : vue.createCommentVNode("v-if", true);
   }
-  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1y, [["render", _sfc_render$1x], ["__scopeId", "data-v-1f94d070"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-tag/components/uni-tag/uni-tag.vue"]]);
-  const _sfc_main$1x = {
+  const __easycom_0$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1A, [["render", _sfc_render$1z], ["__scopeId", "data-v-1f94d070"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-tag/components/uni-tag/uni-tag.vue"]]);
+  const _sfc_main$1z = {
     name: "bCard",
     data() {
       return {
@@ -27442,7 +27496,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1w(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1y(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_tag = resolveEasycom(vue.resolveDynamicComponent("uni-tag"), __easycom_0$2);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", null, [
@@ -27508,8 +27562,8 @@ ${o3}
       ])
     ]);
   }
-  const bCard = /* @__PURE__ */ _export_sfc(_sfc_main$1x, [["render", _sfc_render$1w], ["__scopeId", "data-v-ea57fc88"], ["__file", "E:/小程序转app/xcbapp/components/bCard.vue"]]);
-  const _sfc_main$1w = {
+  const bCard = /* @__PURE__ */ _export_sfc(_sfc_main$1z, [["render", _sfc_render$1y], ["__scopeId", "data-v-ea57fc88"], ["__file", "E:/小程序转app/xcbapp/components/bCard.vue"]]);
+  const _sfc_main$1y = {
     data() {
       return {
         cardList: []
@@ -27551,7 +27605,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1v(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1x(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_bCard = vue.resolveComponent("bCard");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "bank-card-container" }, [
@@ -27596,8 +27650,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesBankCardBankCard = /* @__PURE__ */ _export_sfc(_sfc_main$1w, [["render", _sfc_render$1v], ["__file", "E:/小程序转app/xcbapp/pages/bankCard/bankCard.vue"]]);
-  const _sfc_main$1v = {
+  const PagesBankCardBankCard = /* @__PURE__ */ _export_sfc(_sfc_main$1y, [["render", _sfc_render$1x], ["__file", "E:/小程序转app/xcbapp/pages/bankCard/bankCard.vue"]]);
+  const _sfc_main$1x = {
     data() {
       return {
         // 银行卡信息
@@ -27684,7 +27738,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1u(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1w(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "bigBox" }, [
       vue.createElementVNode("view", { class: "title" }, " 添加银行卡 "),
       vue.createElementVNode("view", { class: "card" }, [
@@ -27779,8 +27833,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesAddCardAddCard = /* @__PURE__ */ _export_sfc(_sfc_main$1v, [["render", _sfc_render$1u], ["__file", "E:/小程序转app/xcbapp/pages/addCard/addCard.vue"]]);
-  const _sfc_main$1u = {
+  const PagesAddCardAddCard = /* @__PURE__ */ _export_sfc(_sfc_main$1x, [["render", _sfc_render$1w], ["__file", "E:/小程序转app/xcbapp/pages/addCard/addCard.vue"]]);
+  const _sfc_main$1w = {
     name: "UniSteps",
     props: {
       direction: {
@@ -27830,7 +27884,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1t(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1v(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-steps" }, [
       vue.createElementVNode(
@@ -27970,8 +28024,8 @@ ${o3}
       )
     ]);
   }
-  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1u, [["render", _sfc_render$1t], ["__scopeId", "data-v-c0a11c53"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-steps/components/uni-steps/uni-steps.vue"]]);
-  const _sfc_main$1t = {
+  const __easycom_0$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1w, [["render", _sfc_render$1v], ["__scopeId", "data-v-c0a11c53"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-steps/components/uni-steps/uni-steps.vue"]]);
+  const _sfc_main$1v = {
     name: "UniCard",
     emits: ["click"],
     props: {
@@ -28032,7 +28086,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1s(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1u(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -28130,8 +28184,8 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$1t, [["render", _sfc_render$1s], ["__scopeId", "data-v-ae4bee67"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-card/components/uni-card/uni-card.vue"]]);
-  const _sfc_main$1s = {
+  const __easycom_4 = /* @__PURE__ */ _export_sfc(_sfc_main$1v, [["render", _sfc_render$1u], ["__scopeId", "data-v-ae4bee67"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-card/components/uni-card/uni-card.vue"]]);
+  const _sfc_main$1u = {
     name: "pop",
     data() {
       return {
@@ -28165,7 +28219,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1r(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1t(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_transition = resolveEasycom(vue.resolveDynamicComponent("uni-transition"), __easycom_1$5);
     return vue.withDirectives((vue.openBlock(), vue.createElementBlock(
@@ -28213,8 +28267,8 @@ ${o3}
       [vue.vShow, $data.show]
     ]);
   }
-  const popVue = /* @__PURE__ */ _export_sfc(_sfc_main$1s, [["render", _sfc_render$1r], ["__scopeId", "data-v-26f7d2a1"], ["__file", "E:/小程序转app/xcbapp/pages/onlineBooth/components/pop.vue"]]);
-  const _sfc_main$1r = {
+  const popVue = /* @__PURE__ */ _export_sfc(_sfc_main$1u, [["render", _sfc_render$1t], ["__scopeId", "data-v-26f7d2a1"], ["__file", "E:/小程序转app/xcbapp/pages/onlineBooth/components/pop.vue"]]);
+  const _sfc_main$1t = {
     data() {
       return {
         // options: [{
@@ -28627,7 +28681,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1q(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1s(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_popVue = vue.resolveComponent("popVue");
     const _component_uni_steps = resolveEasycom(vue.resolveDynamicComponent("uni-steps"), __easycom_0$1);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
@@ -28799,8 +28853,8 @@ ${o3}
       )
     ]);
   }
-  const PagesOnlineBoothOnlineBooth = /* @__PURE__ */ _export_sfc(_sfc_main$1r, [["render", _sfc_render$1q], ["__scopeId", "data-v-2ffa6e15"], ["__file", "E:/小程序转app/xcbapp/pages/onlineBooth/onlineBooth.vue"]]);
-  const _sfc_main$1q = {
+  const PagesOnlineBoothOnlineBooth = /* @__PURE__ */ _export_sfc(_sfc_main$1t, [["render", _sfc_render$1s], ["__scopeId", "data-v-2ffa6e15"], ["__file", "E:/小程序转app/xcbapp/pages/onlineBooth/onlineBooth.vue"]]);
+  const _sfc_main$1s = {
     data() {
       return {};
     },
@@ -28828,7 +28882,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1p(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1r(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "all" }, [
       vue.createElementVNode("view", { class: "me-container" }, [
@@ -29130,8 +29184,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesBoothOwnerBoothOwner = /* @__PURE__ */ _export_sfc(_sfc_main$1q, [["render", _sfc_render$1p], ["__file", "E:/小程序转app/xcbapp/pages/boothOwner/boothOwner.vue"]]);
-  const _sfc_main$1p = {
+  const PagesBoothOwnerBoothOwner = /* @__PURE__ */ _export_sfc(_sfc_main$1s, [["render", _sfc_render$1r], ["__file", "E:/小程序转app/xcbapp/pages/boothOwner/boothOwner.vue"]]);
+  const _sfc_main$1r = {
     data() {
       return {};
     },
@@ -29159,7 +29213,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1o(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1q(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "all" }, [
       vue.createElementVNode("view", { class: "me-container" }, [
@@ -29393,23 +29447,59 @@ ${o3}
       ])
     ]);
   }
-  const PagesAHouseholderAHouseholder = /* @__PURE__ */ _export_sfc(_sfc_main$1p, [["render", _sfc_render$1o], ["__file", "E:/小程序转app/xcbapp/pages/aHouseholder/aHouseholder.vue"]]);
-  const _sfc_main$1o = {
-    name: "AgreementPage"
+  const PagesAHouseholderAHouseholder = /* @__PURE__ */ _export_sfc(_sfc_main$1r, [["render", _sfc_render$1q], ["__file", "E:/小程序转app/xcbapp/pages/aHouseholder/aHouseholder.vue"]]);
+  const _sfc_main$1q = {
+    name: "Agreement",
+    head() {
+      return {
+        title: "农链天下 - 服务协议"
+      };
+    }
   };
-  function _sfc_render$1n(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", { class: "agreement-page" }, [
-      vue.createElementVNode("view", { class: "agreement-title" }, "【农链天下】服务协议"),
-      vue.createElementVNode("scroll-view", {
-        class: "agreement-content",
-        "scroll-y": ""
-      }, [
-        vue.createElementVNode("text", { class: "agreement-text" }, " 本服务协议（以下简称“协议”）由海南积分宝电子商务有限公司（以下简称“本公司”）与使用【农链天下】的摊主（以下简称“摊主”）及用户（以下简称“用户”）共同缔结。本公司系依据中华人民共和国法律合法设立，统一社会信用代码/注册号为 91460000567989358W，注册地址位于海南省海口市秀英区海盛路35号旭源大厦2楼B211房。 为保障各方的合法权益，明确各方在使用【农链天下】过程中的权利和义务，特制定本协议。用户和摊主在使用本小程序时，应仔细阅读本协议的全部条款。一经使用，即视为已充分理解并同意接受本协议的约束。 一、服务范围 （一）摊主服务： 1. 摊主有权在【农链天下】内创建并管理自己的店铺，可上传包括但不限于菜品名称、价格、图片、详细描述等信息，以便用户浏览和选购。 2. 摊主需对店铺内产生的订单进行妥善管理，包括但不限于接收订单、处理用户的退款请求以及提供相应的售后服务。 3. 摊主必须确保所提供的菜品信息真实、准确、完整，且符合国家相关法律法规及食品安全标准，严禁提供虚假信息或违规产品信息。 （二）用户服务： 1. 用户可在【农链天下】内方便地浏览各摊主提供的菜品信息，并根据自身需求进行选购操作。 2. 用户可通过小程序内置的安全支付功能完成订单的支付流程，本公司将确保支付过程的安全性和稳定性。 3. 用户可随时查看订单的详细状态，如待支付、待发货、待收货、已完成等，同时可追溯历史订单记录并查看物流跟踪信息，以便掌握订单的最新进展。 二、用户注册与信息安全 1. 摊主和用户均须进行实名认证，提供真实、有效、准确且完整的个人信息，包括但不限于姓名、联系方式、身份证号等。 2. 各方有义务妥善保管登录密码和支付密码，因自身原因导致的账户被盗用、密码泄露或其他安全问题所造成的一切后果和损失，由其自行承担相应责任。 3. 本公司将严格遵守国家相关法律法规，对用户和摊主提供的个人信息进行收集、存储、使用、保护和管理，确保信息安全。在未获得用户和摊主的明确授权下，不会将信息泄露给第三方，但法律法规另有规定的除外。 三、商品交易 1. 摊主在【农链天下】上架菜品时，应确保菜品信息的真实性、准确性和合理性，遵循国家法律法规及食品安全标准。所提供的菜品价格应符合市场规律及合理定价原则。 2. 用户在本小程序内选购并完成支付操作后，摊主应在规定时间内依据订单要求及时发货，确保商品的质量和数量符合订单约定。 3. 摊主和用户均可在【农链天下】内方便地查看订单状态，并对订单进行相应操作和管理。 四、退款与售后服务 1. 对于符合退货条件的商品，用户可在【农链天下】内申请退货，退货流程及具体条件将在小程序内进行详细公示。用户应确保退货商品的完好性和可售性，在申请退货时需遵守相应的退货规则。 2. 若摊主和用户因商品交易产生纠纷，双方应首先秉持友好协商的原则解决问题。若协商无法达成一致，任何一方可联系本公司的客服人员介入处理，本公司将根据实际情况进行调解。 五、知识产权 1. 【农链天下】内的所有内容，包括但不限于文字、图片、音频、视频、软件代码及界面设计等，其版权及相关知识产权均归本公司或其他相关权利人所有。 2. 未经本公司或相关权利人的书面授权，摊主和用户不得以任何形式对上述内容进行复制、传播、修改、改编、分发或用于商业目的等，否则将承担相应的法律责任。 六、免责条款 1. 在服务过程中，如因不可抗力因素，包括但不限于自然灾害、网络故障、政府行为、战争、罢工等，导致服务中断、数据丢失或其他损失，本公司不承担任何责任。 2. 本公司对摊主或用户因使用【农链天下】服务而产生的任何直接、间接、特殊、偶然、必然或惩罚性的损失不承担赔偿责任，但法律法规另有规定的除外。 七、争议解决 1. 本协议的解释、效力及争议解决均适用中华人民共和国法律。 2. 在协议履行过程中，若双方因本协议的内容或履行事宜发生争议，应首先尝试通过友好协商解决。若协商不成，任何一方可向本公司所在地人民法院提起诉讼，通过法律途径解决争议。 八、其他 1. 本协议自摊主和用户注册、登录或开始使用【农链天下】之日起生效，对各方均具有法律约束力。 2. 本公司有权根据市场环境的变化、法律法规的调整及业务发展需要，适时调整服务内容、推出新的服务项目或暂停、终止部分服务。本公司将通过【农链天下】内的公告系统或其他合理的通讯方式提前通知用户和摊主，以便其知悉相关变更信息。 如有任何疑问或需要帮助，请随时联系我们的客户服务热线：68552337 或发送邮件至 13707589182@163.com。 ")
+  function _sfc_render$1p(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("div", { class: "privacy-container" }, [
+      vue.createElementVNode("div", { class: "title" }, "【农链天下】服务协议"),
+      vue.createElementVNode("div", { class: "content" }, [
+        vue.createElementVNode("p", null, " 本服务协议（以下简称“协议”）由海南积分宝电子商务有限公司（以下简称“本公司”）与使用【农链天下】的摊主（以下简称“摊主”）及用户（以下简称“用户”）共同缔结。本公司系依据中华人民共和国法律合法设立，统一社会信用代码/注册号为 91460000567989358W，注册地址位于海南省海口市秀英区海盛路35号旭源大厦2楼B211房。 "),
+        vue.createElementVNode("p", null, " 为保障各方的合法权益，明确各方在使用【农链天下】过程中的权利和义务，特制定本协议。用户和摊主在使用本小程序时，应仔细阅读本协议的全部条款。一经使用，即视为已充分理解并同意接受本协议的约束。 "),
+        vue.createElementVNode("h2", null, "一、服务范围"),
+        vue.createElementVNode("p", null, "（一）摊主服务："),
+        vue.createElementVNode("p", null, "1. 摊主有权在【农链天下】内创建并管理自己的店铺，可上传包括但不限于菜品名称、价格、图片、详细描述等信息，以便用户浏览和选购。"),
+        vue.createElementVNode("p", null, "2. 摊主需对店铺内产生的订单进行妥善管理，包括但不限于接收订单、处理用户的退款请求以及提供相应的售后服务。"),
+        vue.createElementVNode("p", null, "3. 摊主必须确保所提供的菜品信息真实、准确、完整，且符合国家相关法律法规及食品安全标准，严禁提供虚假信息或违规产品信息。"),
+        vue.createElementVNode("p", null, "（二）用户服务："),
+        vue.createElementVNode("p", null, "1. 用户可在【农链天下】内方便地浏览各摊主提供的菜品信息，并根据自身需求进行选购操作。"),
+        vue.createElementVNode("p", null, "2. 用户可通过小程序内置的安全支付功能完成订单的支付流程，本公司将确保支付过程的安全性和稳定性。"),
+        vue.createElementVNode("p", null, "3. 用户可随时查看订单的详细状态，如待支付、待发货、待收货、已完成等，同时可追溯历史订单记录并查看物流跟踪信息，以便掌握订单的最新进展。"),
+        vue.createElementVNode("h2", null, "二、用户注册与信息安全"),
+        vue.createElementVNode("p", null, "1. 摊主和用户均须进行实名认证，提供真实、有效、准确且完整的个人信息，包括但不限于姓名、联系方式、身份证号等。"),
+        vue.createElementVNode("p", null, "2. 各方有义务妥善保管登录密码和支付密码，因自身原因导致的账户被盗用、密码泄露或其他安全问题所造成的一切后果和损失，由其自行承担相应责任。"),
+        vue.createElementVNode("p", null, "3. 本公司将严格遵守国家相关法律法规，对用户和摊主提供的个人信息进行收集、存储、使用、保护和管理，确保信息安全。在未获得用户和摊主的明确授权下，不会将信息泄露给第三方，但法律法规另有规定的除外。"),
+        vue.createElementVNode("h2", null, "三、商品交易"),
+        vue.createElementVNode("p", null, "1. 摊主在【农链天下】上架菜品时，应确保菜品信息的真实性、准确性和合理性，遵循国家法律法规及食品安全标准。所提供的菜品价格应符合市场规律及合理定价原则。"),
+        vue.createElementVNode("p", null, "2. 用户在本小程序内选购并完成支付操作后，摊主应在规定时间内依据订单要求及时发货，确保商品的质量和数量符合订单约定。"),
+        vue.createElementVNode("p", null, "3. 摊主和用户均可在【农链天下】内方便地查看订单状态，并对订单进行相应操作和管理。"),
+        vue.createElementVNode("h2", null, "四、退款与售后服务"),
+        vue.createElementVNode("p", null, "1. 对于符合退货条件的商品，用户可在【农链天下】内申请退货，退货流程及具体条件将在小程序内进行详细公示。用户应确保退货商品的完好性和可售性，在申请退货时需遵守相应的退货规则。"),
+        vue.createElementVNode("p", null, "2. 若摊主和用户因商品交易产生纠纷，双方应首先秉持友好协商的原则解决问题。若协商无法达成一致，任何一方可联系本公司的客服人员介入处理，本公司将根据实际情况进行调解。"),
+        vue.createElementVNode("h2", null, "五、知识产权"),
+        vue.createElementVNode("p", null, "1. 【农链天下】内的所有内容，包括但不限于文字、图片、音频、视频、软件代码及界面设计等，其版权及相关知识产权均归本公司或其他相关权利人所有。"),
+        vue.createElementVNode("p", null, "2. 未经本公司或相关权利人的书面授权，摊主和用户不得以任何形式对上述内容进行复制、传播、修改、改编、分发或用于商业目的等，否则将承担相应的法律责任。"),
+        vue.createElementVNode("h2", null, "六、免责条款"),
+        vue.createElementVNode("p", null, "1. 在服务过程中，如因不可抗力因素，包括但不限于自然灾害、网络故障、政府行为、战争、罢工等，导致服务中断、数据丢失或其他损失，本公司不承担任何责任。"),
+        vue.createElementVNode("p", null, "2. 本公司对摊主或用户因使用【农链天下】服务而产生的任何直接、间接、特殊、偶然、必然或惩罚性的损失不承担赔偿责任，但法律法规另有规定的除外。"),
+        vue.createElementVNode("h2", null, "七、争议解决"),
+        vue.createElementVNode("p", null, "1. 本协议的解释、效力及争议解决均适用中华人民共和国法律。"),
+        vue.createElementVNode("p", null, "2. 在协议履行过程中，若双方因本协议的内容或履行事宜发生争议，应首先尝试通过友好协商解决。若协商不成，任何一方可向本公司所在地人民法院提起诉讼，通过法律途径解决争议。"),
+        vue.createElementVNode("h2", null, "八、其他"),
+        vue.createElementVNode("p", null, "1. 本协议自摊主和用户注册、登录或开始使用【农链天下】之日起生效，对各方均具有法律约束力。"),
+        vue.createElementVNode("p", null, "2. 本公司有权根据市场环境的变化、法律法规的调整及业务发展需要，适时调整服务内容、推出新的服务项目或暂停、终止部分服务。本公司将通过【农链天下】内的公告系统或其他合理的通讯方式提前通知用户和摊主，以便其知悉相关变更信息。"),
+        vue.createElementVNode("p", null, "如有任何疑问或需要帮助，请随时联系我们的客户服务热线：68552337 或发送邮件至 13707589182@163.com。")
       ])
     ]);
   }
-  const PagesUserServiceAgreementUserServiceAgreement = /* @__PURE__ */ _export_sfc(_sfc_main$1o, [["render", _sfc_render$1n], ["__scopeId", "data-v-d92cc4a9"], ["__file", "E:/小程序转app/xcbapp/pages/userServiceAgreement/userServiceAgreement.vue"]]);
-  const _sfc_main$1n = {
+  const PagesUserServiceAgreementUserServiceAgreement = /* @__PURE__ */ _export_sfc(_sfc_main$1q, [["render", _sfc_render$1p], ["__scopeId", "data-v-d92cc4a9"], ["__file", "E:/小程序转app/xcbapp/pages/userServiceAgreement/userServiceAgreement.vue"]]);
+  const _sfc_main$1p = {
     name: "Privacy",
     head() {
       return {
@@ -29417,7 +29507,7 @@ ${o3}
       };
     }
   };
-  function _sfc_render$1m(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1o(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("div", { class: "privacy-container" }, [
       vue.createElementVNode("div", { class: "title" }, "【农链天下】隐私协议"),
       vue.createElementVNode("div", { class: "content" }, [
@@ -29442,9 +29532,9 @@ ${o3}
           vue.createElementVNode("br"),
           vue.createTextVNode(" - 提供服务：使用您的信息来创建和管理您的账户，处理订单，为摊主管理店铺、提供商品展示和销售服务，为用户提供商品选购、订单追踪及客户服务等。"),
           vue.createElementVNode("br"),
-          vue.createTextVNode(" - 业务运营：进行数据分析，包括但不限于统计分析用户和摊主的行为模式、偏好，以改进我们的服务，如调整菜品推荐算法、优化服务流程和功能，提升服务质量。"),
+          vue.createTextVNode(" - 业务运营：进行数据分析，包括但不限于统计分析用户和摊主的行为模式、偏好，以改进我们的服务，优化服务流程和功能，提升服务质量。"),
           vue.createElementVNode("br"),
-          vue.createTextVNode(" - 沟通与服务：使用您的信息向您发送与服务相关的通知，如订单状态更新、发货通知、服务维护通知等，以确保您能及时了解服务进展。同时，我们可能会根据您的偏好和历史行为向您推送个性化的推荐信息，如您可能感兴趣的菜品、促销活动或优惠信息。若您不希望接收营销信息，可以通过【农链天下】内的设置功能随时选择退订，我们将尊重您的选择。"),
+          vue.createTextVNode(" - 沟通与服务：使用您的信息向您发送与服务相关的通知，如订单状态更新、发货通知、服务维护通知等，以确保您能及时了解服务进展。"),
           vue.createElementVNode("br"),
           vue.createTextVNode(" - 安全与防欺诈：利用收集到的信息来维护服务的安全性，预防和检测可能的欺诈、安全漏洞及滥用行为，保障用户和摊主的权益。 ")
         ]),
@@ -29489,7 +29579,17 @@ ${o3}
           vue.createElementVNode("br"),
           vue.createTextVNode(" 2. 若您发现您的信息有误或不完整，您有权要求我们进行更正或补充。在某些情况下，您还可以请求删除您的部分或全部个人信息，但需注意，在删除信息可能影响服务提供或违反法律规定的情况下，我们可能会在合理范围内保留必要信息，并向您说明原因。 ")
         ]),
-        vue.createElementVNode("h2", null, "七、信息保护"),
+        vue.createElementVNode("h2", null, "七、账号注销流程"),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 1. 用户如需注销账号，可通过APP内自助申请或联系客服申请注销："),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - APP内自助注销：我的 → 我的设置 → 账号注销（按页面指引完成操作）"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" - 客服电话注销：拨打客服热线 68552337 申请注销"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 2. 我们将在收到您的注销申请后15个工作日内完成审核与处理，账号注销后，您的个人信息将按照法律法规要求进行删除或匿名化处理，且无法恢复。 ")
+        ]),
+        vue.createElementVNode("h2", null, "八、信息保护"),
         vue.createElementVNode("p", null, [
           vue.createTextVNode(" 1. 本公司高度重视信息保护，采取多维度的安全措施来防止未经授权的访问、使用、披露、修改或破坏您的个人信息，这些措施包括但不限于："),
           vue.createElementVNode("br"),
@@ -29501,21 +29601,21 @@ ${o3}
           vue.createElementVNode("br"),
           vue.createTextVNode(" 2. 若发生信息安全事件，我们将按照法律法规的要求，在不影响调查和处理的前提下，尽快通知受影响的用户和摊主，并采取相应的补救措施，包括但不限于提供风险提示、协助您采取防范措施等。 ")
         ]),
-        vue.createElementVNode("h2", null, "八、第三方链接和服务"),
+        vue.createElementVNode("h2", null, "九、第三方链接和服务"),
         vue.createElementVNode("p", null, [
           vue.createTextVNode(" 1. 【农链天下】可能包含指向第三方网站或服务的链接，这些第三方网站或服务有其独立的隐私政策和信息处理方式，本公司对其隐私政策和信息处理行为不承担责任。"),
           vue.createElementVNode("br"),
           vue.createTextVNode(" 2. 在使用第三方服务时，请您务必仔细阅读并理解其隐私政策，谨慎操作。当您点击这些链接时，即表示您将离开本公司的服务环境，本公司无法控制第三方对您信息的收集和处理，您需自行判断风险。 ")
         ]),
-        vue.createElementVNode("h2", null, "九、儿童隐私"),
+        vue.createElementVNode("h2", null, "十、儿童隐私"),
         vue.createElementVNode("p", null, " 1. 本小程序不针对儿童（不满 14 周岁）提供服务。我们致力于遵守相关儿童隐私保护法律法规，若发现我们收集了儿童的信息，将采取合理措施尽快删除相关信息。若您是儿童的家长或监护人，请及时联系我们，我们将协助您进行信息删除和保护操作。 "),
-        vue.createElementVNode("h2", null, "十、隐私协议的变更"),
+        vue.createElementVNode("h2", null, "十一、隐私协议的变更"),
         vue.createElementVNode("p", null, [
           vue.createTextVNode(" 1. 本公司会根据业务发展、法律法规的更新或监管要求，适时更新本隐私协议。我们将通过【农链天下】内的公告系统、电子邮件或短信等合理的通讯方式向您通知协议的变更内容。"),
           vue.createElementVNode("br"),
           vue.createTextVNode(" 2. 您在收到隐私协议更新通知后继续使用【农链天下】，将视为您同意更新后的隐私协议；若您不同意更新内容，您有权停止使用本小程序。 ")
         ]),
-        vue.createElementVNode("h2", null, "十一、法律适用和争议解决"),
+        vue.createElementVNode("h2", null, "十二、法律适用和争议解决"),
         vue.createElementVNode("p", null, [
           vue.createTextVNode(" 1. 本隐私协议的解释、效力及争议解决均适用中华人民共和国法律。"),
           vue.createElementVNode("br"),
@@ -29525,14 +29625,14 @@ ${o3}
       ])
     ]);
   }
-  const PagesPrivacyAgreementPrivacyAgreement = /* @__PURE__ */ _export_sfc(_sfc_main$1n, [["render", _sfc_render$1m], ["__scopeId", "data-v-28d9e677"], ["__file", "E:/小程序转app/xcbapp/pages/privacyAgreement/privacyAgreement.vue"]]);
-  const _sfc_main$1m = {
+  const PagesPrivacyAgreementPrivacyAgreement = /* @__PURE__ */ _export_sfc(_sfc_main$1p, [["render", _sfc_render$1o], ["__scopeId", "data-v-28d9e677"], ["__file", "E:/小程序转app/xcbapp/pages/privacyAgreement/privacyAgreement.vue"]]);
+  const _sfc_main$1o = {
     data() {
       return {};
     },
     methods: {}
   };
-  function _sfc_render$1l(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1n(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { style: { "margin-top": "100rpx" } }, [
       vue.createElementVNode("button", {
         type: "primary",
@@ -29540,13 +29640,13 @@ ${o3}
       }, "开通微信分账")
     ]);
   }
-  const PagesOpenAccountSharingOpenAccountSharing = /* @__PURE__ */ _export_sfc(_sfc_main$1m, [["render", _sfc_render$1l], ["__file", "E:/小程序转app/xcbapp/pages/OpenAccountSharing/OpenAccountSharing.vue"]]);
-  const _sfc_main$1l = {
+  const PagesOpenAccountSharingOpenAccountSharing = /* @__PURE__ */ _export_sfc(_sfc_main$1o, [["render", _sfc_render$1n], ["__file", "E:/小程序转app/xcbapp/pages/OpenAccountSharing/OpenAccountSharing.vue"]]);
+  const _sfc_main$1n = {
     data() {
       return {};
     }
   };
-  function _sfc_render$1k(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1m(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "title" }, " 通知 "),
       vue.createElementVNode("view", { class: "content" }, [
@@ -29558,8 +29658,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesArrangeNotificationArrangeNotification = /* @__PURE__ */ _export_sfc(_sfc_main$1l, [["render", _sfc_render$1k], ["__file", "E:/小程序转app/xcbapp/pages/arrangeNotification/arrangeNotification.vue"]]);
-  const _sfc_main$1k = {
+  const PagesArrangeNotificationArrangeNotification = /* @__PURE__ */ _export_sfc(_sfc_main$1n, [["render", _sfc_render$1m], ["__file", "E:/小程序转app/xcbapp/pages/arrangeNotification/arrangeNotification.vue"]]);
+  const _sfc_main$1m = {
     data() {
       return {
         amount: null,
@@ -29642,7 +29742,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1j(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1l(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "balance-box" }, [
@@ -29758,8 +29858,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesWeChatCashwWithdrawalWeChatCashwWithdrawal = /* @__PURE__ */ _export_sfc(_sfc_main$1k, [["render", _sfc_render$1j], ["__scopeId", "data-v-4c2d0ccf"], ["__file", "E:/小程序转app/xcbapp/pages/weChatCashwWithdrawal/weChatCashwWithdrawal.vue"]]);
-  const _sfc_main$1j = {
+  const PagesWeChatCashwWithdrawalWeChatCashwWithdrawal = /* @__PURE__ */ _export_sfc(_sfc_main$1m, [["render", _sfc_render$1l], ["__scopeId", "data-v-4c2d0ccf"], ["__file", "E:/小程序转app/xcbapp/pages/weChatCashwWithdrawal/weChatCashwWithdrawal.vue"]]);
+  const _sfc_main$1l = {
     name: "UniBadge",
     emits: ["click"],
     props: {
@@ -29882,7 +29982,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1i(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1k(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-badge--x" }, [
       vue.renderSlot(_ctx.$slots, "default", {}, void 0, true),
       $props.text ? (vue.openBlock(), vue.createElementBlock(
@@ -29899,8 +29999,8 @@ ${o3}
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$1j, [["render", _sfc_render$1i], ["__scopeId", "data-v-c97cb896"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-badge/components/uni-badge/uni-badge.vue"]]);
-  const _sfc_main$1i = {
+  const __easycom_1$3 = /* @__PURE__ */ _export_sfc(_sfc_main$1l, [["render", _sfc_render$1k], ["__scopeId", "data-v-c97cb896"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-badge/components/uni-badge/uni-badge.vue"]]);
+  const _sfc_main$1k = {
     name: "UniListItem",
     emits: ["click", "switchChange"],
     props: {
@@ -30137,7 +30237,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1h(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1j(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_badge = resolveEasycom(vue.resolveDynamicComponent("uni-badge"), __easycom_1$3);
     return vue.openBlock(), vue.createElementBlock("view", {
@@ -30266,8 +30366,8 @@ ${o3}
       })) : vue.createCommentVNode("v-if", true)
     ], 14, ["hover-class"]);
   }
-  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1i, [["render", _sfc_render$1h], ["__scopeId", "data-v-c7524739"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue"]]);
-  const _sfc_main$1h = {
+  const __easycom_1$2 = /* @__PURE__ */ _export_sfc(_sfc_main$1k, [["render", _sfc_render$1j], ["__scopeId", "data-v-c7524739"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-list/components/uni-list-item/uni-list-item.vue"]]);
+  const _sfc_main$1j = {
     name: "uniList",
     "mp-weixin": {
       options: {
@@ -30313,7 +30413,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1i(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-list uni-border-top-bottom" }, [
       $props.border ? (vue.openBlock(), vue.createElementBlock("view", {
         key: 0,
@@ -30326,8 +30426,8 @@ ${o3}
       })) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1h, [["render", _sfc_render$1g], ["__scopeId", "data-v-c2f1266a"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-list/components/uni-list/uni-list.vue"]]);
-  const _sfc_main$1g = {
+  const __easycom_2$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1j, [["render", _sfc_render$1i], ["__scopeId", "data-v-c2f1266a"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-list/components/uni-list/uni-list.vue"]]);
+  const _sfc_main$1i = {
     data() {
       return {
         statusBarHeight: 20,
@@ -30443,7 +30543,7 @@ ${o3}
       this.loadMore();
     }
   };
-  function _sfc_render$1f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1h(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_list_item = resolveEasycom(vue.resolveDynamicComponent("uni-list-item"), __easycom_1$2);
     const _component_uni_list = resolveEasycom(vue.resolveDynamicComponent("uni-list"), __easycom_2$1);
@@ -30594,8 +30694,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesBillRecordBillRecord = /* @__PURE__ */ _export_sfc(_sfc_main$1g, [["render", _sfc_render$1f], ["__file", "E:/小程序转app/xcbapp/pages/billRecord/billRecord.vue"]]);
-  const _sfc_main$1f = {
+  const PagesBillRecordBillRecord = /* @__PURE__ */ _export_sfc(_sfc_main$1i, [["render", _sfc_render$1h], ["__file", "E:/小程序转app/xcbapp/pages/billRecord/billRecord.vue"]]);
+  const _sfc_main$1h = {
     data() {
       return {
         cardHeight: "380rpx",
@@ -30645,7 +30745,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1e(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1g(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "wholesale-container" }, [
@@ -30783,16 +30883,16 @@ ${o3}
       )
     ]);
   }
-  const PagesWholesaleWholesale = /* @__PURE__ */ _export_sfc(_sfc_main$1f, [["render", _sfc_render$1e], ["__scopeId", "data-v-e0b2961b"], ["__file", "E:/小程序转app/xcbapp/pages/wholesale/wholesale.vue"]]);
-  const _sfc_main$1e = {
+  const PagesWholesaleWholesale = /* @__PURE__ */ _export_sfc(_sfc_main$1h, [["render", _sfc_render$1g], ["__scopeId", "data-v-e0b2961b"], ["__file", "E:/小程序转app/xcbapp/pages/wholesale/wholesale.vue"]]);
+  const _sfc_main$1g = {
     data() {
       return {};
     }
   };
-  function _sfc_render$1d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1f(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" });
   }
-  const PagesPrizeDrawPrizeDraw = /* @__PURE__ */ _export_sfc(_sfc_main$1e, [["render", _sfc_render$1d], ["__file", "E:/小程序转app/xcbapp/pages/prizeDraw/prizeDraw.vue"]]);
+  const PagesPrizeDrawPrizeDraw = /* @__PURE__ */ _export_sfc(_sfc_main$1g, [["render", _sfc_render$1f], ["__file", "E:/小程序转app/xcbapp/pages/prizeDraw/prizeDraw.vue"]]);
   var pattern = {
     email: /^\S+?@\S+?\.\S+?$/,
     idcard: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
@@ -31356,7 +31456,7 @@ ${o3}
       return false;
     }
   };
-  const _sfc_main$1d = {
+  const _sfc_main$1f = {
     name: "uniForms",
     emits: ["validate", "submit"],
     options: {
@@ -31653,15 +31753,15 @@ ${o3}
       _isEqual: isEqual
     }
   };
-  function _sfc_render$1c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1e(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-forms" }, [
       vue.createElementVNode("form", null, [
         vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
       ])
     ]);
   }
-  const __easycom_5 = /* @__PURE__ */ _export_sfc(_sfc_main$1d, [["render", _sfc_render$1c], ["__scopeId", "data-v-9a1e3c32"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
-  const _sfc_main$1c = {
+  const __easycom_5 = /* @__PURE__ */ _export_sfc(_sfc_main$1f, [["render", _sfc_render$1e], ["__scopeId", "data-v-9a1e3c32"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-forms/components/uni-forms/uni-forms.vue"]]);
+  const _sfc_main$1e = {
     mixins: [myMixin],
     data() {
       return {
@@ -31799,7 +31899,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1d(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2$2);
     const _component_uni_forms = resolveEasycom(vue.resolveDynamicComponent("uni-forms"), __easycom_5);
@@ -31963,8 +32063,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesPreSalePreSale = /* @__PURE__ */ _export_sfc(_sfc_main$1c, [["render", _sfc_render$1b], ["__file", "E:/小程序转app/xcbapp/pages/preSale/preSale.vue"]]);
-  const _sfc_main$1b = {
+  const PagesPreSalePreSale = /* @__PURE__ */ _export_sfc(_sfc_main$1e, [["render", _sfc_render$1d], ["__file", "E:/小程序转app/xcbapp/pages/preSale/preSale.vue"]]);
+  const _sfc_main$1d = {
     name: "uni-data-select",
     mixins: [tr.mixinDatacom || {}],
     props: {
@@ -32216,7 +32316,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1c(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-stat__select" }, [
       $props.label ? (vue.openBlock(), vue.createElementBlock(
@@ -32356,8 +32456,8 @@ ${o3}
       )
     ]);
   }
-  const __easycom_3$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1b, [["render", _sfc_render$1a], ["__scopeId", "data-v-ddf9e0a2"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue"]]);
-  const _sfc_main$1a = {
+  const __easycom_3$1 = /* @__PURE__ */ _export_sfc(_sfc_main$1d, [["render", _sfc_render$1c], ["__scopeId", "data-v-ddf9e0a2"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-data-select/components/uni-data-select/uni-data-select.vue"]]);
+  const _sfc_main$1c = {
     name: "uniFormsItem",
     options: {
       virtualHost: true
@@ -32689,7 +32789,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$19(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1b(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock(
       "view",
       {
@@ -32745,7 +32845,7 @@ ${o3}
       /* CLASS */
     );
   }
-  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$1a, [["render", _sfc_render$19], ["__scopeId", "data-v-462874dd"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
+  const __easycom_3 = /* @__PURE__ */ _export_sfc(_sfc_main$1c, [["render", _sfc_render$1b], ["__scopeId", "data-v-462874dd"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.vue"]]);
   var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
   function getDefaultExportFromCjs(x) {
     return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
@@ -33042,7 +33142,7 @@ ${o3}
   })(dayjs_min);
   var dayjs_minExports = dayjs_min.exports;
   const dayjs = /* @__PURE__ */ getDefaultExportFromCjs(dayjs_minExports);
-  const _sfc_main$19 = {
+  const _sfc_main$1b = {
     data() {
       return {
         selectedProduct: null,
@@ -33341,7 +33441,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$18(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1a(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_data_select = resolveEasycom(vue.resolveDynamicComponent("uni-data-select"), __easycom_3$1);
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_3);
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
@@ -33646,18 +33746,18 @@ ${o3}
       ])
     ]);
   }
-  const PagesAdditionalinformationAdditionalinformation = /* @__PURE__ */ _export_sfc(_sfc_main$19, [["render", _sfc_render$18], ["__scopeId", "data-v-7e7c2362"], ["__file", "E:/小程序转app/xcbapp/pages/additionalinformation/additionalinformation.vue"]]);
-  const _sfc_main$18 = {
+  const PagesAdditionalinformationAdditionalinformation = /* @__PURE__ */ _export_sfc(_sfc_main$1b, [["render", _sfc_render$1a], ["__scopeId", "data-v-7e7c2362"], ["__file", "E:/小程序转app/xcbapp/pages/additionalinformation/additionalinformation.vue"]]);
+  const _sfc_main$1a = {
     data() {
       return {};
     },
     methods: {}
   };
-  function _sfc_render$17(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$19(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view");
   }
-  const PagesPresalemenulistPresalemenulist = /* @__PURE__ */ _export_sfc(_sfc_main$18, [["render", _sfc_render$17], ["__file", "E:/小程序转app/xcbapp/pages/Presalemenulist/Presalemenulist.vue"]]);
-  const _sfc_main$17 = {
+  const PagesPresalemenulistPresalemenulist = /* @__PURE__ */ _export_sfc(_sfc_main$1a, [["render", _sfc_render$19], ["__file", "E:/小程序转app/xcbapp/pages/Presalemenulist/Presalemenulist.vue"]]);
+  const _sfc_main$19 = {
     mixins: [myMixin],
     data() {
       return {
@@ -33742,7 +33842,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$16(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$18(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "dynamic-header" }, [
@@ -33899,8 +33999,8 @@ ${o3}
       )
     ]);
   }
-  const PagesDynamicsDynamics = /* @__PURE__ */ _export_sfc(_sfc_main$17, [["render", _sfc_render$16], ["__scopeId", "data-v-e92d2579"], ["__file", "E:/小程序转app/xcbapp/pages/dynamics/dynamics.vue"]]);
-  const _sfc_main$16 = {
+  const PagesDynamicsDynamics = /* @__PURE__ */ _export_sfc(_sfc_main$19, [["render", _sfc_render$18], ["__scopeId", "data-v-e92d2579"], ["__file", "E:/小程序转app/xcbapp/pages/dynamics/dynamics.vue"]]);
+  const _sfc_main$18 = {
     mixins: [],
     components: {},
     data() {
@@ -33976,14 +34076,14 @@ ${o3}
       }
     }
   };
-  function _sfc_render$15(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$17(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("canvas", {
       "canvas-id": "pureCanvas",
       style: { "width": "700rpx", "height": "600rpx" }
     });
   }
-  const PagesDemoDemo = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["render", _sfc_render$15], ["__file", "E:/小程序转app/xcbapp/pages/demo/demo.vue"]]);
-  const _sfc_main$15 = {
+  const PagesDemoDemo = /* @__PURE__ */ _export_sfc(_sfc_main$18, [["render", _sfc_render$17], ["__file", "E:/小程序转app/xcbapp/pages/demo/demo.vue"]]);
+  const _sfc_main$17 = {
     mixins: [myMixin],
     data() {
       return {
@@ -34075,7 +34175,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$14(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$16(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "complaint-container" }, [
       vue.createElementVNode("view", { class: "complaint-header" }, [
@@ -34218,9 +34318,9 @@ ${o3}
       ])
     ]);
   }
-  const PagesMerchantComplaintsMerchantComplaints = /* @__PURE__ */ _export_sfc(_sfc_main$15, [["render", _sfc_render$14], ["__scopeId", "data-v-241a3734"], ["__file", "E:/小程序转app/xcbapp/pages/merchantComplaints/merchantComplaints.vue"]]);
-  const _imports_0$3 = "/static/empty-state.svg";
-  const _sfc_main$14 = {
+  const PagesMerchantComplaintsMerchantComplaints = /* @__PURE__ */ _export_sfc(_sfc_main$17, [["render", _sfc_render$16], ["__scopeId", "data-v-241a3734"], ["__file", "E:/小程序转app/xcbapp/pages/merchantComplaints/merchantComplaints.vue"]]);
+  const _imports_0$4 = "/static/empty-state.svg";
+  const _sfc_main$16 = {
     mixins: [myMixin],
     data() {
       return {
@@ -34276,7 +34376,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$13(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$15(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "data-panel" }, [
@@ -34366,7 +34466,7 @@ ${o3}
             class: "empty-state"
           }, [
             vue.createElementVNode("image", {
-              src: _imports_0$3,
+              src: _imports_0$4,
               class: "empty-image"
             }),
             vue.createElementVNode("text", { class: "empty-text" }, "暂无投诉记录")
@@ -34377,8 +34477,8 @@ ${o3}
       )
     ]);
   }
-  const PagesMyComplaintMyComplaint = /* @__PURE__ */ _export_sfc(_sfc_main$14, [["render", _sfc_render$13], ["__scopeId", "data-v-c28db3eb"], ["__file", "E:/小程序转app/xcbapp/pages/myComplaint/myComplaint.vue"]]);
-  const _sfc_main$13 = {
+  const PagesMyComplaintMyComplaint = /* @__PURE__ */ _export_sfc(_sfc_main$16, [["render", _sfc_render$15], ["__scopeId", "data-v-c28db3eb"], ["__file", "E:/小程序转app/xcbapp/pages/myComplaint/myComplaint.vue"]]);
+  const _sfc_main$15 = {
     mixins: [myMixin],
     data() {
       return {
@@ -34443,7 +34543,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$12(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$14(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "detail-container" }, [
       vue.createElementVNode("scroll-view", {
         "scroll-y": "",
@@ -34525,8 +34625,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesComplaintDetailsComplaintDetails = /* @__PURE__ */ _export_sfc(_sfc_main$13, [["render", _sfc_render$12], ["__scopeId", "data-v-af642d83"], ["__file", "E:/小程序转app/xcbapp/pages/complaintDetails/complaintDetails.vue"]]);
-  const _sfc_main$12 = {
+  const PagesComplaintDetailsComplaintDetails = /* @__PURE__ */ _export_sfc(_sfc_main$15, [["render", _sfc_render$14], ["__scopeId", "data-v-af642d83"], ["__file", "E:/小程序转app/xcbapp/pages/complaintDetails/complaintDetails.vue"]]);
+  const _sfc_main$14 = {
     methods: {
       navTo(url2) {
         uni.navigateTo({
@@ -34537,9 +34637,9 @@ ${o3}
         try {
           uni.removeStorageSync("token");
           uni.removeStorageSync("nickname");
-          formatAppLog("log", "at pages/settings/settings.vue:72", "Token and nickname removed from storage");
+          formatAppLog("log", "at pages/settings/settings.vue:76", "Token and nickname removed from storage");
         } catch (e2) {
-          formatAppLog("error", "at pages/settings/settings.vue:74", "Failed to remove token or nickname from storage", e2);
+          formatAppLog("error", "at pages/settings/settings.vue:78", "Failed to remove token or nickname from storage", e2);
         }
         this.isLoggedIn = false;
         this.nickname = "";
@@ -34555,7 +34655,7 @@ ${o3}
           uni.login({
             provider: "true",
             success: async (res) => {
-              formatAppLog("log", "at pages/settings/settings.vue:93", res.code, "这是用户唯一标识");
+              formatAppLog("log", "at pages/settings/settings.vue:97", res.code, "这是用户唯一标识");
               let data = await api.bindingOpenid({
                 code: res.code
               });
@@ -34587,11 +34687,11 @@ ${o3}
       }
     }
   };
-  function _sfc_render$11(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$13(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "settings-container" }, [
       vue.createElementVNode("view", { class: "header" }, [
-        vue.createElementVNode("text", { class: "title" }, "系统设置")
+        vue.createElementVNode("text", { class: "title" }, "我的设置")
       ]),
       vue.createElementVNode("scroll-view", {
         "scroll-y": "",
@@ -34645,12 +34745,23 @@ ${o3}
               size: "18",
               color: "#999"
             })
+          ]),
+          vue.createElementVNode("view", {
+            class: "item",
+            onClick: _cache[4] || (_cache[4] = ($event) => $options.navTo("/subPackages/settings/loGout/loGout"))
+          }, [
+            vue.createElementVNode("text", null, "账户注销"),
+            vue.createVNode(_component_uni_icons, {
+              type: "right",
+              size: "18",
+              color: "#999"
+            })
           ])
         ]),
         vue.createElementVNode("view", { class: "section" }, [
           vue.createElementVNode("view", {
             class: "item",
-            onClick: _cache[4] || (_cache[4] = ($event) => $options.navTo("/subPackages/settings/aboutUs/aboutUs"))
+            onClick: _cache[5] || (_cache[5] = ($event) => $options.navTo("/subPackages/settings/aboutUs/aboutUs"))
           }, [
             vue.createElementVNode("text", null, "关于我们"),
             vue.createVNode(_component_uni_icons, {
@@ -34661,7 +34772,7 @@ ${o3}
           ]),
           vue.createElementVNode("view", {
             class: "item",
-            onClick: _cache[5] || (_cache[5] = ($event) => $options.navTo("/subPackages/settings/version/version"))
+            onClick: _cache[6] || (_cache[6] = ($event) => $options.navTo("/subPackages/settings/version/version"))
           }, [
             vue.createElementVNode("text", null, "版本更新"),
             vue.createVNode(_component_uni_icons, {
@@ -34673,14 +34784,14 @@ ${o3}
         ]),
         vue.createElementVNode("button", {
           type: "warn",
-          onClick: _cache[6] || (_cache[6] = (...args) => $options.logout && $options.logout(...args)),
+          onClick: _cache[7] || (_cache[7] = (...args) => $options.logout && $options.logout(...args)),
           style: { "width": "700rpx" }
         }, "退出登录")
       ])
     ]);
   }
-  const PagesSettingsSettings = /* @__PURE__ */ _export_sfc(_sfc_main$12, [["render", _sfc_render$11], ["__file", "E:/小程序转app/xcbapp/pages/settings/settings.vue"]]);
-  const _sfc_main$11 = {
+  const PagesSettingsSettings = /* @__PURE__ */ _export_sfc(_sfc_main$14, [["render", _sfc_render$13], ["__file", "E:/小程序转app/xcbapp/pages/settings/settings.vue"]]);
+  const _sfc_main$13 = {
     created() {
       this.cartStore = useCartStore();
     },
@@ -34806,7 +34917,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$10(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$12(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "product-detail-page" }, [
       vue.createElementVNode("view", { class: "product-images" }, [
         (vue.openBlock(), vue.createElementBlock("swiper", {
@@ -34941,8 +35052,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesCommodityDetailCommodityDetail = /* @__PURE__ */ _export_sfc(_sfc_main$11, [["render", _sfc_render$10], ["__scopeId", "data-v-7f9cd24e"], ["__file", "E:/小程序转app/xcbapp/pages/commodityDetail/commodityDetail.vue"]]);
-  const _sfc_main$10 = {
+  const PagesCommodityDetailCommodityDetail = /* @__PURE__ */ _export_sfc(_sfc_main$13, [["render", _sfc_render$12], ["__scopeId", "data-v-7f9cd24e"], ["__file", "E:/小程序转app/xcbapp/pages/commodityDetail/commodityDetail.vue"]]);
+  const _sfc_main$12 = {
     name: "uniCollapseItem",
     props: {
       // 列表标题
@@ -35112,7 +35223,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$$(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$11(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-collapse-item" }, [
       vue.createElementVNode(
@@ -35188,8 +35299,8 @@ ${o3}
       )
     ]);
   }
-  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$10, [["render", _sfc_render$$], ["__scopeId", "data-v-3d2dde9f"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue"]]);
-  const _sfc_main$$ = {
+  const __easycom_1$1 = /* @__PURE__ */ _export_sfc(_sfc_main$12, [["render", _sfc_render$11], ["__scopeId", "data-v-3d2dde9f"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue"]]);
+  const _sfc_main$11 = {
     name: "uniCollapse",
     emits: ["change", "activeItem", "input", "update:modelValue"],
     props: {
@@ -35300,13 +35411,13 @@ ${o3}
       }
     }
   };
-  function _sfc_render$_(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$10(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-collapse" }, [
       vue.renderSlot(_ctx.$slots, "default", {}, void 0, true)
     ]);
   }
-  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$$, [["render", _sfc_render$_], ["__scopeId", "data-v-3f050360"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue"]]);
-  const _sfc_main$_ = {
+  const __easycom_2 = /* @__PURE__ */ _export_sfc(_sfc_main$11, [["render", _sfc_render$10], ["__scopeId", "data-v-3f050360"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue"]]);
+  const _sfc_main$10 = {
     data() {
       return {
         scene: null,
@@ -35433,7 +35544,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$Z(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$$(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode(
         "canvas",
@@ -35452,8 +35563,8 @@ ${o3}
       }, " 保存图片到相册 ")
     ]);
   }
-  const posterVue = /* @__PURE__ */ _export_sfc(_sfc_main$_, [["render", _sfc_render$Z], ["__scopeId", "data-v-df1b4024"], ["__file", "E:/小程序转app/xcbapp/components/poster.vue"]]);
-  const _sfc_main$Z = {
+  const posterVue = /* @__PURE__ */ _export_sfc(_sfc_main$10, [["render", _sfc_render$$], ["__scopeId", "data-v-df1b4024"], ["__file", "E:/小程序转app/xcbapp/components/poster.vue"]]);
+  const _sfc_main$$ = {
     components: {
       posterVue
     },
@@ -35553,7 +35664,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$Y(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$_(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_collapse_item = resolveEasycom(vue.resolveDynamicComponent("uni-collapse-item"), __easycom_1$1);
     const _component_uni_collapse = resolveEasycom(vue.resolveDynamicComponent("uni-collapse"), __easycom_2);
@@ -35680,8 +35791,8 @@ ${o3}
       )
     ]);
   }
-  const PagesInvitationInvitation = /* @__PURE__ */ _export_sfc(_sfc_main$Z, [["render", _sfc_render$Y], ["__scopeId", "data-v-d9b3f790"], ["__file", "E:/小程序转app/xcbapp/pages/invitation/invitation.vue"]]);
-  const _sfc_main$Y = {
+  const PagesInvitationInvitation = /* @__PURE__ */ _export_sfc(_sfc_main$$, [["render", _sfc_render$_], ["__scopeId", "data-v-d9b3f790"], ["__file", "E:/小程序转app/xcbapp/pages/invitation/invitation.vue"]]);
+  const _sfc_main$_ = {
     mixins: [myMixin],
     data() {
       return {
@@ -35714,7 +35825,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$X(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$Z(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "reward-page" }, [
       vue.createElementVNode("view", { class: "overview-card" }, [
         vue.createElementVNode("view", { class: "overview-item" }, [
@@ -35784,8 +35895,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesEarningsRecordEarningsRecord = /* @__PURE__ */ _export_sfc(_sfc_main$Y, [["render", _sfc_render$X], ["__scopeId", "data-v-2fd53ada"], ["__file", "E:/小程序转app/xcbapp/pages/earningsRecord/earningsRecord.vue"]]);
-  const _sfc_main$X = {
+  const PagesEarningsRecordEarningsRecord = /* @__PURE__ */ _export_sfc(_sfc_main$_, [["render", _sfc_render$Z], ["__scopeId", "data-v-2fd53ada"], ["__file", "E:/小程序转app/xcbapp/pages/earningsRecord/earningsRecord.vue"]]);
+  const _sfc_main$Z = {
     data() {
       return {};
     },
@@ -35906,11 +36017,11 @@ ${o3}
       }
     }
   };
-  function _sfc_render$W(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$Y(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "core-verification-page" });
   }
-  const PagesCertificationCertification = /* @__PURE__ */ _export_sfc(_sfc_main$X, [["render", _sfc_render$W], ["__scopeId", "data-v-1ee499d8"], ["__file", "E:/小程序转app/xcbapp/pages/certification/certification.vue"]]);
-  const _sfc_main$W = {
+  const PagesCertificationCertification = /* @__PURE__ */ _export_sfc(_sfc_main$Z, [["render", _sfc_render$Y], ["__scopeId", "data-v-1ee499d8"], ["__file", "E:/小程序转app/xcbapp/pages/certification/certification.vue"]]);
+  const _sfc_main$Y = {
     mixins: [myMixin],
     data() {
       return {
@@ -35951,7 +36062,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$V(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$X(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "all" }, [
       vue.createElementVNode("view", { class: "me-container" }, [
@@ -35999,8 +36110,8 @@ ${o3}
       ])
     ]);
   }
-  const PagesAgentAgent = /* @__PURE__ */ _export_sfc(_sfc_main$W, [["render", _sfc_render$V], ["__file", "E:/小程序转app/xcbapp/pages/agent/agent.vue"]]);
-  const _sfc_main$V = {
+  const PagesAgentAgent = /* @__PURE__ */ _export_sfc(_sfc_main$Y, [["render", _sfc_render$X], ["__file", "E:/小程序转app/xcbapp/pages/agent/agent.vue"]]);
+  const _sfc_main$X = {
     data() {
       return {
         videoUrl: ""
@@ -36010,7 +36121,7 @@ ${o3}
       this.videoUrl = decodeURIComponent(options.videoUrl);
     }
   };
-  function _sfc_render$U(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$W(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "video-preview-container" }, [
       vue.createElementVNode("video", {
         src: $data.videoUrl,
@@ -36021,8 +36132,96 @@ ${o3}
       }, null, 8, ["src"])
     ]);
   }
-  const PagesVideoPreviewVideoPreview = /* @__PURE__ */ _export_sfc(_sfc_main$V, [["render", _sfc_render$U], ["__scopeId", "data-v-df99e0de"], ["__file", "E:/小程序转app/xcbapp/pages/videoPreview/videoPreview.vue"]]);
-  const _sfc_main$U = {
+  const PagesVideoPreviewVideoPreview = /* @__PURE__ */ _export_sfc(_sfc_main$X, [["render", _sfc_render$W], ["__scopeId", "data-v-df99e0de"], ["__file", "E:/小程序转app/xcbapp/pages/videoPreview/videoPreview.vue"]]);
+  const _sfc_main$W = {
+    name: "CancelAgreement",
+    head() {
+      return {
+        title: "农链天下 - 账号注销协议"
+      };
+    }
+  };
+  function _sfc_render$V(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("div", { class: "privacy-container" }, [
+      vue.createElementVNode("div", { class: "title" }, "【农链天下】账号注销协议"),
+      vue.createElementVNode("div", { class: "content" }, [
+        vue.createElementVNode("p", null, " 本账号注销协议由海南积分宝电子商务有限公司（以下简称“本公司”）与【农链天下】用户（以下简称“用户”）共同缔结。用户在申请注销账号前，应仔细阅读并完全同意本协议全部条款，提交注销申请即视为已充分理解并接受本协议所有内容。 "),
+        vue.createElementVNode("h2", null, "一、协议确认"),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 1. 用户在申请注销【农链天下】账号时，必须已阅读、理解并同意本协议全部内容。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 2. 用户提交注销申请的行为，即表示自愿承担账号注销带来的全部结果与责任。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 3. 本协议构成用户注销账号前不可撤销的法律约定。 ")
+        ]),
+        vue.createElementVNode("h2", null, "二、账号注销说明"),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 1. 账号注销申请提交后，平台将在规定时限内进行审核处理。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 2. 注销审核期间，请勿进行登录、修改密码、绑定信息等操作，否则可能导致注销失败。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 3. 账号一旦注销完成，将永久无法恢复、找回或重新激活。 ")
+        ]),
+        vue.createElementVNode("h2", null, "三、数据与信息处理"),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 1. 账号注销后，用户的个人信息将依据国家法律法规及平台隐私政策进行删除或匿名化处理。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 2. 平台无法为用户提供已注销账号的数据找回、信息恢复、历史记录查询等服务。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 3. 已绑定的手机号、第三方账号将自动解除绑定，且无法恢复关联关系。 ")
+        ]),
+        vue.createElementVNode("h2", null, "四、权益与资产处理"),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 1. 账号内所有积分、余额、优惠券、会员权益、成长值等将全部失效，不予退还、不予折现、不予补偿。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 2. 未完成订单、待结算金额、待售后订单需在注销前自行处理完毕。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 3. 因账号注销造成的权益损失，由用户自行承担全部责任。 ")
+        ]),
+        vue.createElementVNode("h2", null, "五、用户承诺"),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 1. 用户承诺申请注销的账号为本人所有，不存在被盗、冒用、违规等情况。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 2. 用户承诺账号无未结清费用、无未处理纠纷、无行政处罚或限制措施。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 3. 用户确认注销行为完全出于自愿，与平台无任何争议。 ")
+        ]),
+        vue.createElementVNode("h2", null, "六、平台权利"),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 1. 平台有权对用户的注销申请进行审核，对异常、违规、风险账号有权拒绝注销或终止注销流程。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 2. 平台有权根据国家法律法规要求保留必要的日志信息与记录。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 3. 平台有权在法律允许范围内修订本协议，并提前在平台内公示生效。 ")
+        ]),
+        vue.createElementVNode("h2", null, "七、责任声明"),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 1. 账号注销后产生的一切风险、损失、纠纷均由用户自行承担，平台不承担任何责任。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 2. 平台不对注销后的账号恢复、数据找回、权益返还承担任何义务。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 3. 因用户未阅读本协议导致的损失，由用户自行承担。 ")
+        ]),
+        vue.createElementVNode("h2", null, "八、其他条款"),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 1. 本协议适用中华人民共和国相关法律法规。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 2. 若本协议部分条款无效，不影响其余条款的法律效力。"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 3. 用户对本协议有疑问，可联系平台客服咨询。 ")
+        ]),
+        vue.createElementVNode("p", null, [
+          vue.createTextVNode(" 客服热线：68552337"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 客服邮箱：13707589182@163.com"),
+          vue.createElementVNode("br"),
+          vue.createTextVNode(" 公司名称：海南积分宝电子商务有限公司 ")
+        ])
+      ])
+    ]);
+  }
+  const PagesLogoutAgreementLogoutAgreement = /* @__PURE__ */ _export_sfc(_sfc_main$W, [["render", _sfc_render$V], ["__scopeId", "data-v-2ce2aaa7"], ["__file", "E:/小程序转app/xcbapp/pages/logoutAgreement/logoutAgreement.vue"]]);
+  const _sfc_main$V = {
     data() {
       return {
         playmenthodList: [
@@ -36048,7 +36247,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$T(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$U(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.createElementVNode("view", { class: "payCard" }, [
@@ -36148,8 +36347,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesPaymentModulePaymentMethodPaymentMethod = /* @__PURE__ */ _export_sfc(_sfc_main$U, [["render", _sfc_render$T], ["__file", "E:/小程序转app/xcbapp/subPackages/PaymentModule/PaymentMethod/PaymentMethod.vue"]]);
-  const _sfc_main$T = {
+  const SubPackagesPaymentModulePaymentMethodPaymentMethod = /* @__PURE__ */ _export_sfc(_sfc_main$V, [["render", _sfc_render$U], ["__file", "E:/小程序转app/xcbapp/subPackages/PaymentModule/PaymentMethod/PaymentMethod.vue"]]);
+  const _sfc_main$U = {
     data() {
       return {
         isPayment: false,
@@ -36401,7 +36600,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$S(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$T(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "order-detail-page" }, [
       vue.createElementVNode("view", { class: "header" }, [
@@ -36591,8 +36790,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesPaymentModuleCollectOnDeliveryCollectOnDelivery = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["render", _sfc_render$S], ["__file", "E:/小程序转app/xcbapp/subPackages/PaymentModule/collectOnDelivery/collectOnDelivery.vue"]]);
-  const _sfc_main$S = {
+  const SubPackagesPaymentModuleCollectOnDeliveryCollectOnDelivery = /* @__PURE__ */ _export_sfc(_sfc_main$U, [["render", _sfc_render$T], ["__file", "E:/小程序转app/xcbapp/subPackages/PaymentModule/collectOnDelivery/collectOnDelivery.vue"]]);
+  const _sfc_main$T = {
     mixins: [myMixin],
     data() {
       return {
@@ -36874,7 +37073,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$R(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$S(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "agent-apply-page" }, [
       vue.createElementVNode("view", { class: "form-container" }, [
@@ -37202,8 +37401,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesAgentCooperationCooperation = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["render", _sfc_render$R], ["__scopeId", "data-v-15a01c95"], ["__file", "E:/小程序转app/xcbapp/subPackages/agent/cooperation/cooperation.vue"]]);
-  const _sfc_main$R = {
+  const SubPackagesAgentCooperationCooperation = /* @__PURE__ */ _export_sfc(_sfc_main$T, [["render", _sfc_render$S], ["__scopeId", "data-v-15a01c95"], ["__file", "E:/小程序转app/xcbapp/subPackages/agent/cooperation/cooperation.vue"]]);
+  const _sfc_main$S = {
     data() {
       return {
         agentLevel: "PROVINCIAL",
@@ -37304,7 +37503,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$Q(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$R(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "agent-index-page" }, [
       vue.createElementVNode("view", { class: "page-header" }, [
@@ -37487,8 +37686,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesAgentDatacenterDatacenter = /* @__PURE__ */ _export_sfc(_sfc_main$R, [["render", _sfc_render$Q], ["__scopeId", "data-v-7170c164"], ["__file", "E:/小程序转app/xcbapp/subPackages/agent/datacenter/datacenter.vue"]]);
-  const _sfc_main$Q = {
+  const SubPackagesAgentDatacenterDatacenter = /* @__PURE__ */ _export_sfc(_sfc_main$S, [["render", _sfc_render$R], ["__scopeId", "data-v-7170c164"], ["__file", "E:/小程序转app/xcbapp/subPackages/agent/datacenter/datacenter.vue"]]);
+  const _sfc_main$R = {
     mixins: [myMixin],
     data() {
       return {
@@ -37567,7 +37766,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$P(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$Q(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "agent-profit-page" }, [
       vue.createElementVNode("view", { class: "overview-container" }, [
@@ -37659,8 +37858,8 @@ ${o3}
       )
     ]);
   }
-  const SubPackagesAgentAgentRevenueAgentRevenue = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["render", _sfc_render$P], ["__scopeId", "data-v-4acdbbc1"], ["__file", "E:/小程序转app/xcbapp/subPackages/agent/AgentRevenue/AgentRevenue.vue"]]);
-  const _sfc_main$P = {
+  const SubPackagesAgentAgentRevenueAgentRevenue = /* @__PURE__ */ _export_sfc(_sfc_main$R, [["render", _sfc_render$Q], ["__scopeId", "data-v-4acdbbc1"], ["__file", "E:/小程序转app/xcbapp/subPackages/agent/AgentRevenue/AgentRevenue.vue"]]);
+  const _sfc_main$Q = {
     data() {
       return {
         cityId: "",
@@ -37895,7 +38094,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$O(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$P(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "city-detail-page" }, [
       vue.createElementVNode("view", { class: "summary-card" }, [
@@ -37995,8 +38194,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesAgentCityDetailCityDetail = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["render", _sfc_render$O], ["__scopeId", "data-v-f8530dd0"], ["__file", "E:/小程序转app/xcbapp/subPackages/agent/cityDetail/cityDetail.vue"]]);
-  const _sfc_main$O = {
+  const SubPackagesAgentCityDetailCityDetail = /* @__PURE__ */ _export_sfc(_sfc_main$Q, [["render", _sfc_render$P], ["__scopeId", "data-v-f8530dd0"], ["__file", "E:/小程序转app/xcbapp/subPackages/agent/cityDetail/cityDetail.vue"]]);
+  const _sfc_main$P = {
     data() {
       return {
         districtId: "",
@@ -38076,7 +38275,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$N(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$O(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "district-detail-page" }, [
       vue.createElementVNode("view", { class: "summary-card" }, [
@@ -38216,8 +38415,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesAgentDistrictDetailDistrictDetail = /* @__PURE__ */ _export_sfc(_sfc_main$O, [["render", _sfc_render$N], ["__scopeId", "data-v-f7f3bbbe"], ["__file", "E:/小程序转app/xcbapp/subPackages/agent/districtDetail/districtDetail.vue"]]);
-  const _sfc_main$N = {
+  const SubPackagesAgentDistrictDetailDistrictDetail = /* @__PURE__ */ _export_sfc(_sfc_main$P, [["render", _sfc_render$O], ["__scopeId", "data-v-f7f3bbbe"], ["__file", "E:/小程序转app/xcbapp/subPackages/agent/districtDetail/districtDetail.vue"]]);
+  const _sfc_main$O = {
     mixins: [myMixin],
     data() {
       return {
@@ -38264,7 +38463,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$M(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$N(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "market-detail-page" }, [
       vue.createElementVNode("view", { class: "summary-card" }, [
         vue.createElementVNode("view", { class: "summary-highlight" }, [
@@ -38349,8 +38548,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesAgentMarketDetailMarketDetail = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render$M], ["__scopeId", "data-v-79a9e5c4"], ["__file", "E:/小程序转app/xcbapp/subPackages/agent/marketDetail/marketDetail.vue"]]);
-  const _sfc_main$M = {
+  const SubPackagesAgentMarketDetailMarketDetail = /* @__PURE__ */ _export_sfc(_sfc_main$O, [["render", _sfc_render$N], ["__scopeId", "data-v-79a9e5c4"], ["__file", "E:/小程序转app/xcbapp/subPackages/agent/marketDetail/marketDetail.vue"]]);
+  const _sfc_main$N = {
     data() {
       return {
         farmerList: [],
@@ -38390,7 +38589,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$L(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$M(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "farmer-list-page" }, [
       vue.createElementVNode("view", { class: "summary-card" }, [
@@ -38492,8 +38691,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesAgentFarmerListFarmerList = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["render", _sfc_render$L], ["__scopeId", "data-v-3d016291"], ["__file", "E:/小程序转app/xcbapp/subPackages/agent/farmerList/farmerList.vue"]]);
-  const _sfc_main$L = {
+  const SubPackagesAgentFarmerListFarmerList = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render$M], ["__scopeId", "data-v-3d016291"], ["__file", "E:/小程序转app/xcbapp/subPackages/agent/farmerList/farmerList.vue"]]);
+  const _sfc_main$M = {
     data() {
       return {
         districtId: "",
@@ -38555,7 +38754,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$K(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$L(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "supply-demand-page" }, [
       vue.createElementVNode("view", { class: "summary-card" }, [
         vue.createElementVNode(
@@ -38795,8 +38994,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesAgentSupplyInfoSupplyInfo = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["render", _sfc_render$K], ["__scopeId", "data-v-cc371561"], ["__file", "E:/小程序转app/xcbapp/subPackages/agent/supplyInfo/supplyInfo.vue"]]);
-  const _sfc_main$K = {
+  const SubPackagesAgentSupplyInfoSupplyInfo = /* @__PURE__ */ _export_sfc(_sfc_main$M, [["render", _sfc_render$L], ["__scopeId", "data-v-cc371561"], ["__file", "E:/小程序转app/xcbapp/subPackages/agent/supplyInfo/supplyInfo.vue"]]);
+  const _sfc_main$L = {
     data() {
       return {
         userinfo: {
@@ -38953,7 +39152,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$J(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$K(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$7);
     return vue.openBlock(), vue.createElementBlock("view", { class: "profile-page" }, [
@@ -39088,8 +39287,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesAHouseholderAdditionalInformationAdditionalInformation = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["render", _sfc_render$J], ["__scopeId", "data-v-f8b86b55"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/additionalInformation/additionalInformation.vue"]]);
-  const _sfc_main$J = {
+  const SubPackagesAHouseholderAdditionalInformationAdditionalInformation = /* @__PURE__ */ _export_sfc(_sfc_main$L, [["render", _sfc_render$K], ["__scopeId", "data-v-f8b86b55"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/additionalInformation/additionalInformation.vue"]]);
+  const _sfc_main$K = {
     data() {
       return {
         dish: {
@@ -39140,7 +39339,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$I(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$J(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "form-container" }, [
@@ -39209,8 +39408,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesAHouseholderPublishDishesPublishDishes = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["render", _sfc_render$I], ["__scopeId", "data-v-fa7cfa4d"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/publishDishes/publishDishes.vue"]]);
-  const _sfc_main$I = {
+  const SubPackagesAHouseholderPublishDishesPublishDishes = /* @__PURE__ */ _export_sfc(_sfc_main$K, [["render", _sfc_render$J], ["__scopeId", "data-v-fa7cfa4d"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/publishDishes/publishDishes.vue"]]);
+  const _sfc_main$J = {
     onLoad(option) {
       try {
         if (option.type) {
@@ -39356,7 +39555,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$H(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$I(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "traceability-tab-page" }, [
       vue.createElementVNode("view", { class: "tab-nav" }, [
@@ -39543,8 +39742,8 @@ ${o3}
       ])) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const SubPackagesAHouseholderTraceabilityTraceability = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["render", _sfc_render$H], ["__scopeId", "data-v-2be9784b"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/Traceability/Traceability.vue"]]);
-  const _sfc_main$H = {
+  const SubPackagesAHouseholderTraceabilityTraceability = /* @__PURE__ */ _export_sfc(_sfc_main$J, [["render", _sfc_render$I], ["__scopeId", "data-v-2be9784b"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/Traceability/Traceability.vue"]]);
+  const _sfc_main$I = {
     data() {
       return {
         productInfo: {},
@@ -39586,7 +39785,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$G(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$H(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "traceability-view-page" }, [
       !$data.dataIsNull ? (vue.openBlock(), vue.createElementBlock("view", {
         key: 0,
@@ -39708,7 +39907,7 @@ ${o3}
       ]))
     ]);
   }
-  const SubPackagesAHouseholderLookTraceabilityLookTraceability = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["render", _sfc_render$G], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/lookTraceability/lookTraceability.vue"]]);
+  const SubPackagesAHouseholderLookTraceabilityLookTraceability = /* @__PURE__ */ _export_sfc(_sfc_main$I, [["render", _sfc_render$H], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/lookTraceability/lookTraceability.vue"]]);
   const popup = {
     data() {
       return {};
@@ -39762,7 +39961,7 @@ ${o3}
   const {
     t
   } = initVueI18n(messages);
-  const _sfc_main$G = {
+  const _sfc_main$H = {
     name: "uniPopupDialog",
     mixins: [popup],
     emits: ["confirm", "close", "update:modelValue", "input"],
@@ -39898,7 +40097,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$F(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$G(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "uni-popup-dialog" }, [
       vue.createElementVNode("view", { class: "uni-dialog-title" }, [
         vue.createElementVNode(
@@ -39976,8 +40175,8 @@ ${o3}
       ])
     ]);
   }
-  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F], ["__scopeId", "data-v-d78c88b7"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-popup/components/uni-popup-dialog/uni-popup-dialog.vue"]]);
-  const _sfc_main$F = {
+  const __easycom_1 = /* @__PURE__ */ _export_sfc(_sfc_main$H, [["render", _sfc_render$G], ["__scopeId", "data-v-d78c88b7"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uni-popup/components/uni-popup-dialog/uni-popup-dialog.vue"]]);
+  const _sfc_main$G = {
     data() {
       return {
         activeNav: 0,
@@ -40069,7 +40268,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$E(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$F(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_popup_dialog = resolveEasycom(vue.resolveDynamicComponent("uni-popup-dialog"), __easycom_1);
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$4);
@@ -40233,8 +40432,8 @@ ${o3}
       )
     ]);
   }
-  const SubPackagesAHouseholderPreSoldDishesListPreSoldDishesList = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$E], ["__scopeId", "data-v-0ca9e5c2"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/PreSoldDishesList/PreSoldDishesList.vue"]]);
-  const _sfc_main$E = {
+  const SubPackagesAHouseholderPreSoldDishesListPreSoldDishesList = /* @__PURE__ */ _export_sfc(_sfc_main$G, [["render", _sfc_render$F], ["__scopeId", "data-v-0ca9e5c2"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/PreSoldDishesList/PreSoldDishesList.vue"]]);
+  const _sfc_main$F = {
     data() {
       return {
         formData: {},
@@ -40317,7 +40516,7 @@ ${o3}
       this.selectedCategoryIndex = this.currentItem.category_id - 1;
     }
   };
-  function _sfc_render$D(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$E(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "form-container" }, [
         vue.createElementVNode("view", { class: "form-item" }, [
@@ -40386,8 +40585,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesAHouseholderModifyPreSoldDishesModifyPreSoldDishes = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/modifyPreSoldDishes/modifyPreSoldDishes.vue"]]);
-  const _sfc_main$D = {
+  const SubPackagesAHouseholderModifyPreSoldDishesModifyPreSoldDishes = /* @__PURE__ */ _export_sfc(_sfc_main$F, [["render", _sfc_render$E], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/modifyPreSoldDishes/modifyPreSoldDishes.vue"]]);
+  const _sfc_main$E = {
     name: "one",
     mounted() {
       this.initializePicker();
@@ -40562,7 +40761,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$C(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$D(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
@@ -40851,8 +41050,8 @@ ${o3}
       ])
     ]);
   }
-  const oneVue = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C], ["__scopeId", "data-v-0d62553b"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/beListed/componment/one.vue"]]);
-  const _sfc_main$C = {
+  const oneVue = /* @__PURE__ */ _export_sfc(_sfc_main$E, [["render", _sfc_render$D], ["__scopeId", "data-v-0d62553b"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/beListed/componment/one.vue"]]);
+  const _sfc_main$D = {
     name: "two",
     data() {
       return {
@@ -41049,7 +41248,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$B(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$C(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
@@ -41299,8 +41498,8 @@ ${o3}
       ])
     ]);
   }
-  const twoVue = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__scopeId", "data-v-e7ae2778"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/beListed/componment/two.vue"]]);
-  const _sfc_main$B = {
+  const twoVue = /* @__PURE__ */ _export_sfc(_sfc_main$D, [["render", _sfc_render$C], ["__scopeId", "data-v-e7ae2778"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/beListed/componment/two.vue"]]);
+  const _sfc_main$C = {
     name: "three",
     data() {
       return {
@@ -41502,7 +41701,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$A(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$B(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_datetime_picker = resolveEasycom(vue.resolveDynamicComponent("uni-datetime-picker"), __easycom_4$1);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
@@ -41772,8 +41971,8 @@ ${o3}
       ])
     ]);
   }
-  const threeVue = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A], ["__scopeId", "data-v-4a9c480a"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/beListed/componment/three.vue"]]);
-  const _sfc_main$A = {
+  const threeVue = /* @__PURE__ */ _export_sfc(_sfc_main$C, [["render", _sfc_render$B], ["__scopeId", "data-v-4a9c480a"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/beListed/componment/three.vue"]]);
+  const _sfc_main$B = {
     props: {
       show: Boolean,
       title: {
@@ -41823,7 +42022,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$A(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", null, [
       vue.withDirectives(vue.createElementVNode(
@@ -41908,8 +42107,8 @@ ${o3}
       ])
     ]);
   }
-  const describeVue = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$z], ["__scopeId", "data-v-dbac7e05"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/beListed/componment/describe.vue"]]);
-  const _sfc_main$z = {
+  const describeVue = /* @__PURE__ */ _export_sfc(_sfc_main$B, [["render", _sfc_render$A], ["__scopeId", "data-v-dbac7e05"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/beListed/componment/describe.vue"]]);
+  const _sfc_main$A = {
     mixins: [myMixin],
     components: {
       oneVue,
@@ -42035,7 +42234,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$z(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_one_vue = vue.resolveComponent("one-vue");
     const _component_two_vue = vue.resolveComponent("two-vue");
     const _component_three_vue = vue.resolveComponent("three-vue");
@@ -42083,8 +42282,8 @@ ${o3}
       }, null, 8, ["show", "content", "onAgree", "onDisagree"])
     ]);
   }
-  const SubPackagesAHouseholderBeListedBeListed = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$y], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/beListed/beListed.vue"]]);
-  const _sfc_main$y = {
+  const SubPackagesAHouseholderBeListedBeListed = /* @__PURE__ */ _export_sfc(_sfc_main$A, [["render", _sfc_render$z], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/beListed/beListed.vue"]]);
+  const _sfc_main$z = {
     data() {
       return {
         activeCategory: 1,
@@ -42221,7 +42420,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$x(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$y(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("scroll-view", {
         class: "category-tabs",
@@ -42305,7 +42504,7 @@ ${o3}
           }, [
             vue.createElementVNode("image", {
               class: "empty-image",
-              src: _imports_0$4
+              src: _imports_0$5
             }),
             vue.createElementVNode("text", { class: "empty-text" }, "暂无上架商品")
           ])) : vue.createCommentVNode("v-if", true)
@@ -42315,8 +42514,8 @@ ${o3}
       )
     ]);
   }
-  const SubPackagesAHouseholderAlreadyListedAlreadyListed = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__scopeId", "data-v-8bd8dfff"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/alreadyListed/alreadyListed.vue"]]);
-  const _sfc_main$x = {
+  const SubPackagesAHouseholderAlreadyListedAlreadyListed = /* @__PURE__ */ _export_sfc(_sfc_main$z, [["render", _sfc_render$y], ["__scopeId", "data-v-8bd8dfff"], ["__file", "E:/小程序转app/xcbapp/subPackages/aHouseholder/alreadyListed/alreadyListed.vue"]]);
+  const _sfc_main$y = {
     components: {
       mButtonVue
     },
@@ -42434,7 +42633,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$x(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_mButtonVue = vue.resolveComponent("mButtonVue");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "supply-container" }, [
@@ -42600,8 +42799,8 @@ ${o3}
       )
     ]);
   }
-  const SubPackagesWholesaleSupplySupply = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/supply/supply.vue"]]);
-  const _sfc_main$w = {
+  const SubPackagesWholesaleSupplySupply = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$x], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/supply/supply.vue"]]);
+  const _sfc_main$x = {
     mixins: [myMixin],
     components: {
       mButtonVue
@@ -42755,7 +42954,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$w(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_mButtonVue = vue.resolveComponent("mButtonVue");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "purchase-container" }, [
@@ -42920,8 +43119,8 @@ ${o3}
       )
     ]);
   }
-  const SubPackagesWholesalePurchasePurchase = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v], ["__scopeId", "data-v-e4b2d046"], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/purchase/purchase.vue"]]);
-  const _sfc_main$v = {
+  const SubPackagesWholesalePurchasePurchase = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$w], ["__scopeId", "data-v-e4b2d046"], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/purchase/purchase.vue"]]);
+  const _sfc_main$w = {
     mixins: [myMixin],
     data() {
       return {
@@ -43165,7 +43364,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$v(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2$2);
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_3);
     const _component_uni_data_select = resolveEasycom(vue.resolveDynamicComponent("uni-data-select"), __easycom_3$1);
@@ -43394,8 +43593,8 @@ ${o3}
       }, 8, ["model", "rules"])
     ]);
   }
-  const SubPackagesWholesaleAddSupplyAddSupply = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/addSupply/addSupply.vue"]]);
-  const _sfc_main$u = {
+  const SubPackagesWholesaleAddSupplyAddSupply = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$v], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/addSupply/addSupply.vue"]]);
+  const _sfc_main$v = {
     mixins: [myMixin],
     data() {
       const today = Date.now();
@@ -43583,7 +43782,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$u(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_1$6);
     const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2$2);
     const _component_uni_forms_item = resolveEasycom(vue.resolveDynamicComponent("uni-forms-item"), __easycom_3);
@@ -43731,8 +43930,8 @@ ${o3}
       )
     ]);
   }
-  const SubPackagesWholesaleAddPurchaseAddPurchase = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$t], ["__scopeId", "data-v-c26dcea4"], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/addPurchase/addPurchase.vue"]]);
-  const _sfc_main$t = {
+  const SubPackagesWholesaleAddPurchaseAddPurchase = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$u], ["__scopeId", "data-v-c26dcea4"], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/addPurchase/addPurchase.vue"]]);
+  const _sfc_main$u = {
     data() {
       return {
         supplyCount: 15,
@@ -43754,7 +43953,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$s(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$t(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "header-bar" }, [
@@ -43807,9 +44006,9 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesWholesaleWholesaleNavigationWholesaleNavigation = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/wholesaleNavigation/wholesaleNavigation.vue"]]);
-  const _imports_0$2 = "/static/empty-supply.png";
-  const _sfc_main$s = {
+  const SubPackagesWholesaleWholesaleNavigationWholesaleNavigation = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$t], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/wholesaleNavigation/wholesaleNavigation.vue"]]);
+  const _imports_0$3 = "/static/empty-supply.png";
+  const _sfc_main$t = {
     components: {
       mButtonVue
     },
@@ -43848,7 +44047,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$r(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$s(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "supply-container" }, [
       vue.createElementVNode("view", { class: "header-bg" }, [
@@ -43955,7 +44154,7 @@ ${o3}
           class: "empty-state"
         }, [
           vue.createElementVNode("image", {
-            src: _imports_0$2,
+            src: _imports_0$3,
             class: "empty-img"
           }),
           vue.createElementVNode("text", { class: "empty-text" }, "暂无供应信息")
@@ -43963,8 +44162,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesWholesaleMySupplyMySupply = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$r], ["__scopeId", "data-v-4f55645d"], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/mySupply/mySupply.vue"]]);
-  const _sfc_main$r = {
+  const SubPackagesWholesaleMySupplyMySupply = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$s], ["__scopeId", "data-v-4f55645d"], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/mySupply/mySupply.vue"]]);
+  const _sfc_main$s = {
     mixins: [myMixin],
     data() {
       return {
@@ -44005,7 +44204,7 @@ ${o3}
       this.getData();
     }
   };
-  function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$r(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "purchase-list" }, [
       vue.createElementVNode("view", { class: "app-bar" }, [
@@ -44138,13 +44337,13 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesWholesaleMyProcurementMyProcurement = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__scopeId", "data-v-2a80d913"], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/myProcurement/myProcurement.vue"]]);
-  const _sfc_main$q = {};
-  function _sfc_render$p(_ctx, _cache) {
+  const SubPackagesWholesaleMyProcurementMyProcurement = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$r], ["__scopeId", "data-v-2a80d913"], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/myProcurement/myProcurement.vue"]]);
+  const _sfc_main$r = {};
+  function _sfc_render$q(_ctx, _cache) {
     return null;
   }
-  const SubPackagesWholesaleQuotationQuotation = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/quotation/quotation.vue"]]);
-  const _sfc_main$p = {
+  const SubPackagesWholesaleQuotationQuotation = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q], ["__file", "E:/小程序转app/xcbapp/subPackages/Wholesale/quotation/quotation.vue"]]);
+  const _sfc_main$q = {
     mixins: [myMixin],
     components: {
       mButtonVue
@@ -44291,7 +44490,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_mButtonVue = vue.resolveComponent("mButtonVue");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_load_more = resolveEasycom(vue.resolveDynamicComponent("uni-load-more"), __easycom_1$7);
@@ -44529,8 +44728,8 @@ ${o3}
       )
     ]);
   }
-  const SubPackagesShoppingPageListVillageZoneVillageZone = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-8ec1e1a2"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/villageZone/villageZone.vue"]]);
-  const _sfc_main$o = {
+  const SubPackagesShoppingPageListVillageZoneVillageZone = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p], ["__scopeId", "data-v-8ec1e1a2"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/villageZone/villageZone.vue"]]);
+  const _sfc_main$p = {
     name: "AreaPicker",
     props: {
       // 初始选中类型：china/overseas
@@ -44759,7 +44958,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "area-picker-container" }, [
       vue.createElementVNode("view", { class: "area" }, [
         vue.createElementVNode("picker", {
@@ -44781,8 +44980,8 @@ ${o3}
       ])
     ]);
   }
-  const fegionSelection = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-a4f39d15"], ["__file", "E:/小程序转app/xcbapp/components/fegionSelection/fegionSelection.vue"]]);
-  const _sfc_main$n = {
+  const fegionSelection = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o], ["__scopeId", "data-v-a4f39d15"], ["__file", "E:/小程序转app/xcbapp/components/fegionSelection/fegionSelection.vue"]]);
+  const _sfc_main$o = {
     components: {
       mButtonVue,
       fegionSelectionVue: fegionSelection
@@ -44882,7 +45081,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_mButtonVue = vue.resolveComponent("mButtonVue");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_fegionSelectionVue = vue.resolveComponent("fegionSelectionVue");
@@ -45072,8 +45271,8 @@ ${o3}
       ], 8, ["refresher-triggered"])
     ]);
   }
-  const SubPackagesShoppingPageListNearbyFarmersNearbyFarmers = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__scopeId", "data-v-5bacca68"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/nearbyFarmers/nearbyFarmers.vue"]]);
-  const _sfc_main$m = {
+  const SubPackagesShoppingPageListNearbyFarmersNearbyFarmers = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n], ["__scopeId", "data-v-5bacca68"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/nearbyFarmers/nearbyFarmers.vue"]]);
+  const _sfc_main$n = {
     data() {
       return {
         banners: [{
@@ -45100,7 +45299,7 @@ ${o3}
       };
     }
   };
-  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_u_tag = vue.resolveComponent("u-tag");
     const _component_u_line_progress = vue.resolveComponent("u-line-progress");
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
@@ -45249,8 +45448,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesShoppingPageListAgriculturalAssistanceZoneAgriculturalAssistanceZone = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__scopeId", "data-v-14ee270a"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/agriculturalAssistanceZone/agriculturalAssistanceZone.vue"]]);
-  const _sfc_main$l = {
+  const SubPackagesShoppingPageListAgriculturalAssistanceZoneAgriculturalAssistanceZone = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$m], ["__scopeId", "data-v-14ee270a"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/agriculturalAssistanceZone/agriculturalAssistanceZone.vue"]]);
+  const _sfc_main$m = {
     data() {
       return {
         activeNav: 0,
@@ -45291,7 +45490,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "search-bar" }, [
@@ -45413,8 +45612,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesShoppingPageListOfficialOfficial = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__scopeId", "data-v-8e4dba1e"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/official/official.vue"]]);
-  const _sfc_main$k = {
+  const SubPackagesShoppingPageListOfficialOfficial = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$l], ["__scopeId", "data-v-8e4dba1e"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/official/official.vue"]]);
+  const _sfc_main$l = {
     data() {
       return {
         shop: {
@@ -45482,7 +45681,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_section = resolveEasycom(vue.resolveDynamicComponent("uni-section"), __easycom_1$6);
     const _component_uni_easyinput = resolveEasycom(vue.resolveDynamicComponent("uni-easyinput"), __easycom_2$2);
@@ -45691,8 +45890,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesShoppingPageListRentalStorefrontRentalStorefront = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-c251ce5d"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/rentalStorefront/rentalStorefront.vue"]]);
-  const _sfc_main$j = {
+  const SubPackagesShoppingPageListRentalStorefrontRentalStorefront = /* @__PURE__ */ _export_sfc(_sfc_main$l, [["render", _sfc_render$k], ["__scopeId", "data-v-c251ce5d"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/rentalStorefront/rentalStorefront.vue"]]);
+  const _sfc_main$k = {
     data() {
       return {
         currentFilter: "all",
@@ -45789,7 +45988,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "market-header" }, [
@@ -45946,8 +46145,8 @@ ${o3}
       )
     ]);
   }
-  const SubPackagesShoppingPageListRentalStorefrontListRentalStorefrontList = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-0154dd3c"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/rentalStorefrontList/rentalStorefrontList.vue"]]);
-  const _sfc_main$i = {
+  const SubPackagesShoppingPageListRentalStorefrontListRentalStorefrontList = /* @__PURE__ */ _export_sfc(_sfc_main$k, [["render", _sfc_render$j], ["__scopeId", "data-v-0154dd3c"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/rentalStorefrontList/rentalStorefrontList.vue"]]);
+  const _sfc_main$j = {
     data() {
       return {
         activeStatus: "all",
@@ -46037,7 +46236,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "header" }, [
@@ -46200,10 +46399,10 @@ ${o3}
       )
     ]);
   }
-  const SubPackagesShoppingPageListPrePurchaseOrderPrePurchaseOrder = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-70c367a7"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/prePurchaseOrder/prePurchaseOrder.vue"]]);
-  const _imports_0$1 = "/static/images/trace-qrcode.png";
+  const SubPackagesShoppingPageListPrePurchaseOrderPrePurchaseOrder = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$i], ["__scopeId", "data-v-70c367a7"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/prePurchaseOrder/prePurchaseOrder.vue"]]);
+  const _imports_0$2 = "/static/images/trace-qrcode.png";
   const _imports_1$1 = "/static/images/farmer-avatar.png";
-  const _sfc_main$h = {
+  const _sfc_main$i = {
     // 4. 混入公共方法
     mixins: [myMixin],
     // 5. 数据定义
@@ -46504,7 +46703,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     const _component_uni_popup = resolveEasycom(vue.resolveDynamicComponent("uni-popup"), __easycom_1$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
@@ -46762,7 +46961,7 @@ ${o3}
           vue.createElementVNode("view", { class: "trace-detail" }, [
             vue.createElementVNode("view", { class: "trace-qrcode" }, [
               vue.createElementVNode("image", {
-                src: _imports_0$1,
+                src: _imports_0$2,
                 mode: "widthFix"
               }),
               vue.createElementVNode("text", null, "扫码查看完整溯源信息")
@@ -46888,8 +47087,8 @@ ${o3}
       }, 8, ["modelValue"])
     ]);
   }
-  const SubPackagesShoppingPageListPrePurchaseDepositPrePurchaseDeposit = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__scopeId", "data-v-45c8e94c"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/prePurchaseDeposit/prePurchaseDeposit.vue"]]);
-  const _sfc_main$g = {
+  const SubPackagesShoppingPageListPrePurchaseDepositPrePurchaseDeposit = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$h], ["__scopeId", "data-v-45c8e94c"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/prePurchaseDeposit/prePurchaseDeposit.vue"]]);
+  const _sfc_main$h = {
     mixins: [myMixin],
     data() {
       return {
@@ -46955,7 +47154,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "detail-panel" }, [
@@ -47158,8 +47357,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesShoppingPageListMerchantDetailsMerchantDetails = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/merchantDetails/merchantDetails.vue"]]);
-  const _sfc_main$f = {
+  const SubPackagesShoppingPageListMerchantDetailsMerchantDetails = /* @__PURE__ */ _export_sfc(_sfc_main$h, [["render", _sfc_render$g], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/merchantDetails/merchantDetails.vue"]]);
+  const _sfc_main$g = {
     mixins: [myMixin],
     components: {
       mButtonVue
@@ -47249,7 +47448,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_mButtonVue = vue.resolveComponent("mButtonVue");
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "news-container" }, [
@@ -47359,12 +47558,12 @@ ${o3}
       )
     ]);
   }
-  const SubPackagesShoppingPageListRealTimeInfoRealTimeInfo = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__scopeId", "data-v-ffc9b95d"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/realTimeInfo/realTimeInfo.vue"]]);
+  const SubPackagesShoppingPageListRealTimeInfoRealTimeInfo = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$f], ["__scopeId", "data-v-ffc9b95d"], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/realTimeInfo/realTimeInfo.vue"]]);
   const block0 = (Comp) => {
     (Comp.$wxs || (Comp.$wxs = [])).push("handler");
     (Comp.$wxsModules || (Comp.$wxsModules = {}))["handler"] = "812594ec";
   };
-  const _sfc_main$e = {
+  const _sfc_main$f = {
     name: "node",
     options: {},
     data() {
@@ -47570,7 +47769,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_node = vue.resolveComponent("node", true);
     return vue.openBlock(), vue.createElementBlock("view", {
       id: $props.attrs.id,
@@ -47801,8 +48000,8 @@ ${o3}
     ], 14, ["id"]);
   }
   if (typeof block0 === "function")
-    block0(_sfc_main$e);
-  const node = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__scopeId", "data-v-513852e0"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uv-parse/components/uv-parse/node/node.vue"]]);
+    block0(_sfc_main$f);
+  const node = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$e], ["__scopeId", "data-v-513852e0"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uv-parse/components/uv-parse/node/node.vue"]]);
   const config = {
     // 信任的标签（保持标签名不变）
     trustTags: makeMap("a,abbr,ad,audio,b,blockquote,br,code,col,colgroup,dd,del,dl,dt,div,em,fieldset,h1,h2,h3,h4,h5,h6,hr,i,img,ins,label,legend,li,ol,p,q,ruby,rt,source,span,strong,sub,sup,table,tbody,td,tfoot,th,thead,tr,title,ul,video"),
@@ -48761,7 +48960,7 @@ ${o3}
     }
   };
   const plugins = [];
-  const _sfc_main$d = {
+  const _sfc_main$e = {
     name: "uv-parse",
     data() {
       return {
@@ -49013,7 +49212,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_node = vue.resolveComponent("node");
     return vue.openBlock(), vue.createElementBlock(
       "view",
@@ -49034,8 +49233,8 @@ ${o3}
       /* CLASS, STYLE */
     );
   }
-  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__scopeId", "data-v-570b219a"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uv-parse/components/uv-parse/uv-parse.vue"]]);
-  const _sfc_main$c = {
+  const __easycom_0 = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_render$d], ["__scopeId", "data-v-570b219a"], ["__file", "E:/小程序转app/xcbapp/uni_modules/uv-parse/components/uv-parse/uv-parse.vue"]]);
+  const _sfc_main$d = {
     mixins: [myMixin],
     data() {
       return {
@@ -49051,7 +49250,7 @@ ${o3}
       this.detailData = decodeURIComponent(content);
     }
   };
-  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uv_parse = resolveEasycom(vue.resolveDynamicComponent("uv-parse"), __easycom_0);
     return vue.openBlock(), vue.createElementBlock("view", { class: "content" }, [
       vue.createElementVNode(
@@ -49064,13 +49263,13 @@ ${o3}
       vue.createVNode(_component_uv_parse, { content: $data.detailData }, null, 8, ["content"])
     ]);
   }
-  const SubPackagesShoppingPageListRealTimeInfoDetailRealTimeInfoDetail = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/realTimeInfoDetail/realTimeInfoDetail.vue"]]);
-  const _sfc_main$b = {
+  const SubPackagesShoppingPageListRealTimeInfoDetailRealTimeInfoDetail = /* @__PURE__ */ _export_sfc(_sfc_main$d, [["render", _sfc_render$c], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/realTimeInfoDetail/realTimeInfoDetail.vue"]]);
+  const _sfc_main$c = {
     data() {
       return {};
     }
   };
-  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "title" }, " 喜讯 "),
       vue.createElementVNode("view", { class: "content" }, [
@@ -49090,8 +49289,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesShoppingPageListFreeGroceryShoppingFreeGroceryShopping = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/freeGroceryShopping/freeGroceryShopping.vue"]]);
-  const _sfc_main$a = {
+  const SubPackagesShoppingPageListFreeGroceryShoppingFreeGroceryShopping = /* @__PURE__ */ _export_sfc(_sfc_main$c, [["render", _sfc_render$b], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/freeGroceryShopping/freeGroceryShopping.vue"]]);
+  const _sfc_main$b = {
     data() {
       return {
         markers: [],
@@ -49136,7 +49335,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { style: { "width": "100%", "height": "100vh" } }, [
       vue.createElementVNode("map", {
         style: { "width": "100%", "height": "100vh" },
@@ -49147,8 +49346,8 @@ ${o3}
       }, null, 8, ["markers", "latitude", "longitude"])
     ]);
   }
-  const SubPackagesShoppingPageListStatisticsMapStatisticsMap = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/statisticsMap/statisticsMap.vue"]]);
-  const _sfc_main$9 = {
+  const SubPackagesShoppingPageListStatisticsMapStatisticsMap = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$a], ["__file", "E:/小程序转app/xcbapp/subPackages/shoppingPageList/statisticsMap/statisticsMap.vue"]]);
+  const _sfc_main$a = {
     data() {
       return {
         applicationList: [
@@ -49206,7 +49405,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "header-card" }, [
         vue.createElementVNode("view", { class: "stat-item" }, [
@@ -49328,8 +49527,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesBoothOwnerSalesApplicationSalesApplication = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__scopeId", "data-v-9634f2da"], ["__file", "E:/小程序转app/xcbapp/subPackages/boothOwner/salesApplication/salesApplication.vue"]]);
-  const _sfc_main$8 = {
+  const SubPackagesBoothOwnerSalesApplicationSalesApplication = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$9], ["__scopeId", "data-v-9634f2da"], ["__file", "E:/小程序转app/xcbapp/subPackages/boothOwner/salesApplication/salesApplication.vue"]]);
+  const _sfc_main$9 = {
     mixins: [myMixin],
     data() {
       return {
@@ -49393,7 +49592,7 @@ ${o3}
       this.initMockData();
     }
   };
-  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "header" }, [
@@ -49484,8 +49683,8 @@ ${o3}
       )
     ]);
   }
-  const SubPackagesBoothOwnerBillRecordBillRecord = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__file", "E:/小程序转app/xcbapp/subPackages/boothOwner/billRecord/billRecord.vue"]]);
-  const _sfc_main$7 = {
+  const SubPackagesBoothOwnerBillRecordBillRecord = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$8], ["__file", "E:/小程序转app/xcbapp/subPackages/boothOwner/billRecord/billRecord.vue"]]);
+  const _sfc_main$8 = {
     data() {
       return {
         form: {
@@ -49549,7 +49748,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "settings-group" }, [
         vue.createElementVNode("text", { class: "group-title" }, "允许支付方式"),
@@ -49587,8 +49786,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesBoothOwnerStoreSettingsStoreSettings = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__scopeId", "data-v-746e0b01"], ["__file", "E:/小程序转app/xcbapp/subPackages/boothOwner/storeSettings/storeSettings.vue"]]);
-  const _sfc_main$6 = {
+  const SubPackagesBoothOwnerStoreSettingsStoreSettings = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$7], ["__scopeId", "data-v-746e0b01"], ["__file", "E:/小程序转app/xcbapp/subPackages/boothOwner/storeSettings/storeSettings.vue"]]);
+  const _sfc_main$7 = {
     data() {
       return {
         user: {
@@ -49691,7 +49890,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "me-container" }, [
       vue.createElementVNode("view", { class: "content" }, [
@@ -49782,8 +49981,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesSettingsUserEditUserEdit = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__file", "E:/小程序转app/xcbapp/subPackages/settings/user-edit/user-edit.vue"]]);
-  const _sfc_main$5 = {
+  const SubPackagesSettingsUserEditUserEdit = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$6], ["__file", "E:/小程序转app/xcbapp/subPackages/settings/user-edit/user-edit.vue"]]);
+  const _sfc_main$6 = {
     data() {
       return {
         formData: {
@@ -49905,7 +50104,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
       vue.createElementVNode("view", { class: "header" }, [
         vue.createElementVNode("text", { class: "title" }, "重置密码"),
@@ -50049,20 +50248,89 @@ ${o3}
       )) : vue.createCommentVNode("v-if", true)
     ]);
   }
-  const SubPackagesSettingsUpdatePwdUpdatePwd = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__scopeId", "data-v-b2b17cef"], ["__file", "E:/小程序转app/xcbapp/subPackages/settings/updatePwd/updatePwd.vue"]]);
-  const _sfc_main$4 = {
+  const SubPackagesSettingsUpdatePwdUpdatePwd = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$5], ["__scopeId", "data-v-b2b17cef"], ["__file", "E:/小程序转app/xcbapp/subPackages/settings/updatePwd/updatePwd.vue"]]);
+  const _imports_0$1 = "/static/logo.png";
+  const _sfc_main$5 = {
     data() {
       return {};
     },
-    methods: {}
+    methods: {
+      // 跳转隐私政策
+      goPrivacy() {
+        uni.navigateTo({
+          url: "/pages/privacyAgreement/privacyAgreement"
+        });
+      },
+      // 跳转服务协议
+      goService() {
+        uni.navigateTo({
+          url: "/pages/userServiceAgreement/userServiceAgreement"
+        });
+      }
+    }
   };
-  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
-    return vue.openBlock(), vue.createElementBlock("view", null, " 关于我们 ");
+  function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "about-page" }, [
+      vue.createElementVNode("view", { class: "card-top" }, [
+        vue.createElementVNode("view", { class: "logo-box" }, [
+          vue.createElementVNode("image", {
+            src: _imports_0$1,
+            class: "logo",
+            mode: "widthFix"
+          })
+        ]),
+        vue.createElementVNode("text", { class: "app-name" }, "农链天下"),
+        vue.createElementVNode("text", { class: "app-desc" }, "农产品交易服务平台")
+      ]),
+      vue.createElementVNode("view", { class: "card-info" }, [
+        vue.createElementVNode("view", { class: "info-item" }, [
+          vue.createElementVNode("text", { class: "label" }, "版本号"),
+          vue.createElementVNode("text", { class: "value" }, "V1.0.0")
+        ]),
+        vue.createElementVNode("view", { class: "info-item" }, [
+          vue.createElementVNode("text", { class: "label" }, "开发公司"),
+          vue.createElementVNode("text", { class: "value" }, "海南积分宝电子商务有限公司")
+        ]),
+        vue.createElementVNode("view", { class: "info-item" }, [
+          vue.createElementVNode("text", { class: "label" }, "客服热线"),
+          vue.createElementVNode("text", { class: "value" }, "68552337")
+        ]),
+        vue.createElementVNode("view", { class: "info-item" }, [
+          vue.createElementVNode("text", { class: "label" }, "联系邮箱"),
+          vue.createElementVNode("text", { class: "value" }, "13707081816@163.com")
+        ])
+      ]),
+      vue.createElementVNode("view", { class: "agreement-box" }, [
+        vue.createElementVNode("view", {
+          class: "agreement-item",
+          onClick: _cache[0] || (_cache[0] = (...args) => $options.goPrivacy && $options.goPrivacy(...args))
+        }, [
+          vue.createElementVNode("view", { class: "left" }, [
+            vue.createElementVNode("text", { class: "icon-text" }, "🔒"),
+            vue.createElementVNode("text", { class: "title" }, "隐私政策")
+          ]),
+          vue.createElementVNode("text", { class: "arrow" }, ">")
+        ]),
+        vue.createElementVNode("view", {
+          class: "agreement-item",
+          onClick: _cache[1] || (_cache[1] = (...args) => $options.goService && $options.goService(...args))
+        }, [
+          vue.createElementVNode("view", { class: "left" }, [
+            vue.createElementVNode("text", { class: "icon-text" }, "📜"),
+            vue.createElementVNode("text", { class: "title" }, "服务协议")
+          ]),
+          vue.createElementVNode("text", { class: "arrow" }, ">")
+        ])
+      ]),
+      vue.createElementVNode("view", { class: "footer" }, [
+        vue.createElementVNode("text", { class: "copyright" }, "© 2026 海南积分宝电子商务公司 版权所有")
+      ])
+    ]);
   }
-  const SubPackagesSettingsAboutUsAboutUs = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__file", "E:/小程序转app/xcbapp/subPackages/settings/aboutUs/aboutUs.vue"]]);
+  const SubPackagesSettingsAboutUsAboutUs = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$4], ["__scopeId", "data-v-a6e688b6"], ["__file", "E:/小程序转app/xcbapp/subPackages/settings/aboutUs/aboutUs.vue"]]);
   const _imports_0 = "/static/rocket.svg";
   const _imports_1 = "/static/check-circle.svg";
-  const _sfc_main$3 = {
+  const _sfc_main$4 = {
     data() {
       return {
         // buttonLabel:'更新版本',
@@ -50174,7 +50442,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "modern-update" }, [
       vue.createElementVNode("view", { class: "background-wave" }),
       vue.createElementVNode("view", { class: "update-card" }, [
@@ -50262,8 +50530,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesSettingsVersionVersion = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__scopeId", "data-v-70494371"], ["__file", "E:/小程序转app/xcbapp/subPackages/settings/version/version.vue"]]);
-  const _sfc_main$2 = {
+  const SubPackagesSettingsVersionVersion = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$3], ["__scopeId", "data-v-70494371"], ["__file", "E:/小程序转app/xcbapp/subPackages/settings/version/version.vue"]]);
+  const _sfc_main$3 = {
     data() {
       return {
         addressData: [],
@@ -50326,7 +50594,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     const _component_uni_icons = resolveEasycom(vue.resolveDynamicComponent("uni-icons"), __easycom_0$4);
     return vue.openBlock(), vue.createElementBlock("view", { class: "address-page" }, [
       vue.createElementVNode("view", { class: "app-bar" }, [
@@ -50441,8 +50709,8 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesSettingsMyAddressMyAddress = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__scopeId", "data-v-9e1740bb"], ["__file", "E:/小程序转app/xcbapp/subPackages/settings/myAddress/myAddress.vue"]]);
-  const _sfc_main$1 = {
+  const SubPackagesSettingsMyAddressMyAddress = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$2], ["__scopeId", "data-v-9e1740bb"], ["__file", "E:/小程序转app/xcbapp/subPackages/settings/myAddress/myAddress.vue"]]);
+  const _sfc_main$2 = {
     mixins: [myMixin],
     components: {
       fegionSelection
@@ -50717,7 +50985,7 @@ ${o3}
       }
     }
   };
-  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("view", { class: "address-edit-page" }, [
       $data.mapKey ? (vue.openBlock(), vue.createElementBlock("map", {
         key: 0,
@@ -50829,7 +51097,136 @@ ${o3}
       ])
     ]);
   }
-  const SubPackagesSettingsAddAddressAddAddress = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__scopeId", "data-v-9983c65f"], ["__file", "E:/小程序转app/xcbapp/subPackages/settings/addAddress/addAddress.vue"]]);
+  const SubPackagesSettingsAddAddressAddAddress = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render$1], ["__scopeId", "data-v-9983c65f"], ["__file", "E:/小程序转app/xcbapp/subPackages/settings/addAddress/addAddress.vue"]]);
+  const _sfc_main$1 = {
+    data() {
+      return {
+        password: "",
+        isAgree: false
+      };
+    },
+    computed: {
+      canSubmit() {
+        return this.isAgree && this.password.trim() !== "";
+      }
+    },
+    methods: {
+      agreeChange(e2) {
+        this.isAgree = e2.detail.value.length > 0;
+      },
+      goPrivacy() {
+        uni.navigateTo({
+          url: "/pages/logoutAgreement/logoutAgreement"
+        });
+      },
+      showConfirm() {
+        uni.showModal({
+          title: "确认注销账号",
+          content: "注销后数据无法恢复，确定继续吗？",
+          confirmText: "确认注销",
+          confirmColor: "#ff4444",
+          success: (res) => {
+            if (res.confirm)
+              this.submitCancel();
+          }
+        });
+      },
+      submitCancel() {
+        uni.showLoading({
+          title: "提交中..."
+        });
+        setTimeout(() => {
+          uni.hideLoading();
+          uni.showModal({
+            title: "注销申请已提交",
+            content: "审核完成后将自动注销账号",
+            showCancel: false,
+            success: () => {
+              uni.clearStorageSync();
+              uni.reLaunch({
+                url: "/pages/login/login"
+              });
+            }
+          });
+        }, 1500);
+      }
+    }
+  };
+  function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+    return vue.openBlock(), vue.createElementBlock("view", { class: "container" }, [
+      vue.createElementVNode("view", { class: "header-card" }, [
+        vue.createElementVNode("view", { class: "icon-box" }, [
+          vue.createElementVNode("text", { class: "icon" }, "⚠️")
+        ]),
+        vue.createElementVNode("view", { class: "title" }, "账号注销申请"),
+        vue.createElementVNode("view", { class: "subtitle" }, "注销后将无法恢复，请谨慎操作")
+      ]),
+      vue.createElementVNode("view", { class: "card" }, [
+        vue.createElementVNode("view", { class: "card-title" }, [
+          vue.createElementVNode("text", { class: "dot" }),
+          vue.createTextVNode("注销须知 ")
+        ]),
+        vue.createElementVNode("view", { class: "list" }, [
+          vue.createElementVNode("view", { class: "item" }, "账号注销后将无法登录，所有数据清空且不可恢复"),
+          vue.createElementVNode("view", { class: "item" }, "已绑定的手机号、第三方账号将自动解除绑定"),
+          vue.createElementVNode("view", { class: "item" }, "会员权益、资产、积分等全部失效，不予退还")
+        ])
+      ]),
+      vue.createElementVNode("view", { class: "card" }, [
+        vue.createElementVNode("view", { class: "card-title" }, [
+          vue.createElementVNode("text", { class: "dot" }),
+          vue.createTextVNode("身份验证 ")
+        ]),
+        vue.createElementVNode("view", { class: "input-wrapper" }, [
+          vue.withDirectives(vue.createElementVNode(
+            "input",
+            {
+              "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => $data.password = $event),
+              type: "password",
+              placeholder: "请输入登录密码",
+              "placeholder-class": "ph"
+            },
+            null,
+            512
+            /* NEED_PATCH */
+          ), [
+            [vue.vModelText, $data.password]
+          ])
+        ])
+      ]),
+      vue.createElementVNode("view", { class: "agree-card" }, [
+        vue.createElementVNode(
+          "checkbox-group",
+          {
+            onChange: _cache[2] || (_cache[2] = (...args) => $options.agreeChange && $options.agreeChange(...args))
+          },
+          [
+            vue.createElementVNode("label", { class: "agree-label" }, [
+              vue.createElementVNode("checkbox", {
+                checked: $data.isAgree,
+                color: "#1677FF"
+              }, null, 8, ["checked"]),
+              vue.createElementVNode("text", { class: "agree-text" }, "我已阅读并同意"),
+              vue.createElementVNode("text", {
+                class: "link",
+                onClick: _cache[1] || (_cache[1] = (...args) => $options.goPrivacy && $options.goPrivacy(...args))
+              }, "《账号注销协议》")
+            ])
+          ],
+          32
+          /* NEED_HYDRATION */
+        )
+      ]),
+      vue.createElementVNode("view", { class: "btn-box" }, [
+        vue.createElementVNode("button", {
+          class: vue.normalizeClass(["submit-btn", $options.canSubmit ? "active" : "disabled"]),
+          disabled: !$options.canSubmit,
+          onClick: _cache[3] || (_cache[3] = (...args) => $options.showConfirm && $options.showConfirm(...args))
+        }, " 确认注销账号 ", 10, ["disabled"])
+      ])
+    ]);
+  }
+  const SubPackagesSettingsLoGoutLoGout = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render], ["__scopeId", "data-v-695c4a7b"], ["__file", "E:/小程序转app/xcbapp/subPackages/settings/loGout/loGout.vue"]]);
   __definePage("pages/index1/index1", PagesIndex1Index1);
   __definePage("pages/index/index", PagesIndexIndex);
   __definePage("pages/login/login", PagesLoginLogin);
@@ -50888,6 +51285,7 @@ ${o3}
   __definePage("pages/certification/certification", PagesCertificationCertification);
   __definePage("pages/agent/agent", PagesAgentAgent);
   __definePage("pages/videoPreview/videoPreview", PagesVideoPreviewVideoPreview);
+  __definePage("pages/logoutAgreement/logoutAgreement", PagesLogoutAgreementLogoutAgreement);
   __definePage("subPackages/PaymentModule/PaymentMethod/PaymentMethod", SubPackagesPaymentModulePaymentMethodPaymentMethod);
   __definePage("subPackages/PaymentModule/collectOnDelivery/collectOnDelivery", SubPackagesPaymentModuleCollectOnDeliveryCollectOnDelivery);
   __definePage("subPackages/agent/cooperation/cooperation", SubPackagesAgentCooperationCooperation);
@@ -50936,6 +51334,7 @@ ${o3}
   __definePage("subPackages/settings/version/version", SubPackagesSettingsVersionVersion);
   __definePage("subPackages/settings/myAddress/myAddress", SubPackagesSettingsMyAddressMyAddress);
   __definePage("subPackages/settings/addAddress/addAddress", SubPackagesSettingsAddAddressAddAddress);
+  __definePage("subPackages/settings/loGout/loGout", SubPackagesSettingsLoGoutLoGout);
   function saveLog(...args) {
     const message = args.map(
       (arg) => typeof arg === "object" ? JSON.stringify(arg, null, 2) : String(arg)

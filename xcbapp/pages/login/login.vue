@@ -23,6 +23,25 @@
 					<uni-icons :type="showPassword ? 'eye' : 'eye-slash'" size="24" color="#999"
 						@click="showPassword = !showPassword" />
 				</view>
+				
+				<view class="agreement-group">
+					<view class="checkbox-item">
+						<uni-icons :type="agreements.service ? 'checkbox-filled' : 'circle'" size="24"
+							:color="agreements.service ? '#409EFF' : '#999'"
+							@click="agreements.service = !agreements.service" />
+						<text class="agreement-text">我已阅读并同意</text>
+						<text class="link" @click="goTouserServiceAgreement">《服务协议》</text>
+					</view>
+					<view class="checkbox-item">
+						<uni-icons :type="agreements.privacy ? 'checkbox-filled' : 'circle'" size="24"
+							:color="agreements.privacy ? '#409EFF' : '#999'"
+							@click="agreements.privacy = !agreements.privacy" />
+						<text class="agreement-text">我已阅读并同意</text>
+						<text class="link" @click="goToprivacyAgreement">《隐私政策》</text>
+					</view>
+				</view>
+				
+				
 				<button class="login-btn" :class="{ 'active': formValid}" @click="login">
 					<text v-if="!loading">登 录</text>
 					<uni-icons v-else type="spinner-cycle" size="24" color="#fff" class="loading-icon"></uni-icons>
@@ -43,6 +62,10 @@
 	export default {
 		data() {
 			return {
+				agreements: {
+					service: false,
+					privacy: false
+				},
 				form: {
 					username: '',
 					password: ''
@@ -53,10 +76,20 @@
 		},
 		computed: {
 			formValid() {
-				return /^1[3-9]\d{9}$/.test(this.form.username) && this.form.password.length >= 6
+				return /^1[3-9]\d{9}$/.test(this.form.username) && this.form.password.length >= 6 && agreements.service && agreements.privacy
 			}
 		},
 		methods: {
+			goTouserServiceAgreement() {
+				uni.navigateTo({
+					url: '/pages/userServiceAgreement/userServiceAgreement'
+				})
+			},
+			goToprivacyAgreement() {
+				uni.navigateTo({
+					url: '/pages/privacyAgreement/privacyAgreement'
+				})
+			},
 			togglePassword() {
 				this.showPassword = !this.showPassword
 			},
@@ -152,7 +185,29 @@
 	$gradient-end: #409EFF;
 	$text-dark: #2c3e50;
 	$text-light: #7f8c8d;
-
+	
+	
+	.agreement-group {
+		margin: 40rpx 0;
+	
+		.checkbox-item {
+			display: flex;
+			align-items: center;
+			margin-bottom: 24rpx;
+	
+			.agreement-text {
+				margin-left: 12rpx;
+				font-size: 26rpx;
+				color: #2c3e50;
+			}
+	
+			.link {
+				color: #409EFF;
+				margin-left: 8rpx;
+			}
+		}
+	}
+	
 	.login-container {
 		min-height: 100vh;
 		background: linear-gradient(135deg, #f5f9ff 0%, #ffffff 100%);

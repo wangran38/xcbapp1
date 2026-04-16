@@ -337,6 +337,12 @@
 					{
 						"navigationBarTitleText" : "地址"
 					}
+				},
+				{
+					"path": "loGout/loGout",
+					"style": {
+						"navigationBarTitleText": "用户注销"
+					}
 				}
 			]
 		}
@@ -723,6 +729,12 @@
 			"path": "pages/videoPreview/videoPreview",
 			"style": {
 				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/logoutAgreement/logoutAgreement",
+			"style": {
+				"navigationBarTitleText": "注销协议"
 			}
 		}
 	],
