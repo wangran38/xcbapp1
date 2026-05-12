@@ -4,8 +4,10 @@
 			<uni-icons type="search" size="18" color="#b2b2b2" />
 			<input v-model="value" class="search-input" :placeholder="placeholder"
 				placeholder-class="placeholder-style" />
-			<button class="search-btn" @click="btn1">{{buttonText1}}</button>
-			<button v-if="isShowbutton2" class="search-btn" @click="btn2" style="background-color: red;">{{buttonText2}}</button>
+			<view style="width: 42%;display: flex;justify-content: space-evenly;">
+				<button class="search-btn" @click="btn1">{{buttonText1}}</button>
+				<button v-if="isShowbutton2" class="search-btn" @click="btn2" style="background-color: red;">{{buttonText2}}</button>
+			</view>
 		</view>
 	</view>
 </template>

@@ -2,8 +2,12 @@
 const common_vendor = require("../../../common/vendor.js");
 const api_index = require("../../../api/index.js");
 const utils_public = require("../../../utils/public.js");
+const mButtonVue = () => "../../../components/public/mButton/mButton.js";
 const _sfc_main = {
   mixins: [utils_public.myMixin],
+  components: {
+    mButtonVue
+  },
   data() {
     return {
       activeCategory: 0,
@@ -51,8 +55,11 @@ const _sfc_main = {
             name: item
           };
         });
-        common_vendor.index.__f__("log", "at subPackages/shoppingPageList/realTimeInfo/realTimeInfo.vue:102", newList);
-        this.categories = [{ id: -1, name: "全部" }, ...newList];
+        common_vendor.index.__f__("log", "at subPackages/shoppingPageList/realTimeInfo/realTimeInfo.vue:107", newList);
+        this.categories = [{
+          id: -1,
+          name: "全部"
+        }, ...newList];
       }
     },
     async getData(lock = false) {
@@ -87,8 +94,9 @@ const _sfc_main = {
   }
 };
 if (!Array) {
+  const _component_mButtonVue = common_vendor.resolveComponent("mButtonVue");
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
-  _easycom_uni_icons2();
+  (_component_mButtonVue + _easycom_uni_icons2)();
 }
 const _easycom_uni_icons = () => "../../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
 if (!Math) {
@@ -96,13 +104,13 @@ if (!Math) {
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: common_vendor.p({
-      type: "search",
-      size: "18",
-      color: "#999"
+    a: common_vendor.o(_ctx.startSearch),
+    b: common_vendor.o(_ctx.stopSearch),
+    c: common_vendor.p({
+      isShowbutton2: true,
+      placeholder: "输入关键词搜索"
     }),
-    b: common_vendor.o((...args) => $options.onSearchInput && $options.onSearchInput(...args)),
-    c: common_vendor.f($data.categories, (item, index, i0) => {
+    d: common_vendor.f($data.categories, (item, index, i0) => {
       return common_vendor.e({
         a: common_vendor.t(item.name),
         b: $data.activeCategory === index
@@ -112,24 +120,23 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         e: common_vendor.o(($event) => $options.switchCategory(index), item.id)
       });
     }),
-    d: common_vendor.f($data.newsList, (news, k0, i0) => {
+    e: common_vendor.f($data.newsList, (news, k0, i0) => {
       return {
-        a: news.cover ? news.cover : "https://img0.baidu.com/it/u=3524251599,1183611687&fm=253&fmt=auto&app=138&f=GIF?w=285&h=285",
-        b: common_vendor.t(news.title),
-        c: common_vendor.t(news.description),
-        d: common_vendor.t(_ctx.initTime(news.createtime)),
-        e: "ffc9b95d-1-" + i0,
-        f: common_vendor.t(news.likeCount),
-        g: news.id,
-        h: common_vendor.o(($event) => $options.navigateToDetail(news), news.id)
+        a: common_vendor.t(news.title),
+        b: common_vendor.t(news.description),
+        c: common_vendor.t(_ctx.initTime(news.createtime)),
+        d: "ffc9b95d-1-" + i0,
+        e: common_vendor.t(news.likeCount),
+        f: news.id,
+        g: common_vendor.o(($event) => $options.navigateToDetail(news), news.id)
       };
     }),
-    e: common_vendor.p({
+    f: common_vendor.p({
       type: "hand-up",
       size: "14"
     }),
-    f: $data.scrollHeight + "px",
-    g: common_vendor.o((...args) => $options.changePage && $options.changePage(...args))
+    g: $data.scrollHeight + "px",
+    h: common_vendor.o((...args) => $options.changePage && $options.changePage(...args))
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-ffc9b95d"]]);

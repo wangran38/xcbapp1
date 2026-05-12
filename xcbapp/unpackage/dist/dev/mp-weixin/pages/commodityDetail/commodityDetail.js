@@ -1,7 +1,11 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const api_index = require("../../api/index.js");
+const store_cart = require("../../store/cart.js");
 const _sfc_main = {
+  created() {
+    this.cartStore = store_cart.useCartStore();
+  },
   async onLoad({
     query
   }) {
@@ -71,14 +75,11 @@ const _sfc_main = {
   },
   methods: {
     initCount() {
-      let oldCount = this.getTempCount()(this.product.id);
+      let oldCount = this.cartStore.getTempCount(this.product.id);
       if (oldCount > 1) {
         this.count = oldCount;
       }
     },
-    ...common_vendor.mapGetters("cart", ["getTempCount"]),
-    ...common_vendor.mapMutations("cart", ["addItem", "anyNumber", "subItem"]),
-    // 分享
     onShare() {
     },
     // 取消
@@ -93,7 +94,7 @@ const _sfc_main = {
     // 确定加入购物车
     confirmAddToCart() {
       this.product.count = this.count;
-      this.anyNumber(this.product);
+      this.cartStore.anyNumber(this.product);
       common_vendor.index.showToast({
         icon: "success",
         title: "已加入"

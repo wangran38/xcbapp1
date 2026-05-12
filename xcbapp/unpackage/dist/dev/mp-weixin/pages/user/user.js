@@ -7,12 +7,10 @@ const _sfc_main = {
       isLoggedIn: false,
       userName: "",
       userAvatar: "",
-      score: "",
-      // 添加你需要的数据属性
+      score: 0,
       totalnum: 0,
       signTotal: {},
       phone: null
-      // 用户手机号
     };
   },
   async onShow() {
@@ -56,9 +54,6 @@ const _sfc_main = {
         url: `/pages/updatePwd/updatePwd?phone=${this.phone}`
       });
     },
-    /**
-     * 检查登录状态
-     */
     checkLoginStatus() {
       const token = common_vendor.index.getStorageSync("token");
       if (token) {
@@ -67,9 +62,6 @@ const _sfc_main = {
         this.isLoggedIn = false;
       }
     },
-    /**
-     * 获取用户个人信息
-     */
     async fetchUserProfile() {
       try {
         const response = await api_index.api.getUserProfile();
@@ -91,7 +83,7 @@ const _sfc_main = {
           });
         }
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/user/user.vue:233", "Error fetching user profile:", error);
+        common_vendor.index.__f__("error", "at pages/user/user.vue:205", "Error fetching user profile:", error);
         common_vendor.index.showToast({
           title: "获取用户信息失败",
           icon: "none"
@@ -127,9 +119,8 @@ const _sfc_main = {
       try {
         common_vendor.index.removeStorageSync("token");
         common_vendor.index.removeStorageSync("nickname");
-        common_vendor.index.__f__("log", "at pages/user/user.vue:273", "Token and nickname removed from storage");
       } catch (e) {
-        common_vendor.index.__f__("error", "at pages/user/user.vue:275", "Failed to remove token or nickname from storage", e);
+        common_vendor.index.__f__("error", "at pages/user/user.vue:242", "Failed to remove token or nickname from storage", e);
       }
       this.isLoggedIn = false;
       this.nickname = "";
@@ -138,14 +129,13 @@ const _sfc_main = {
         url: "/pages/login/login"
       });
     },
-    // 绑定微信
     async bindingWechat() {
       let systemInfo = await common_vendor.index.getSystemInfo();
       if (systemInfo[1].host && systemInfo[1].host.env == "WeChat") {
         common_vendor.index.login({
           provider: "true",
           success: async (res) => {
-            common_vendor.index.__f__("log", "at pages/user/user.vue:294", res.code, "这是用户唯一标识");
+            common_vendor.index.__f__("log", "at pages/user/user.vue:257", res.code, "这是用户唯一标识");
             let data = await api_index.api.bindingOpenid({
               code: res.code
             });
@@ -161,10 +151,6 @@ const _sfc_main = {
                 icon: "error"
               });
             }
-          },
-          fail: () => {
-          },
-          complete: () => {
           }
         });
       } else {
@@ -200,101 +186,89 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     g: common_vendor.p({
       ["custom-prefix"]: "iconfont",
       type: "icon-shezhi",
-      size: "20"
+      size: "28"
     }),
     h: common_vendor.t($data.score),
     i: common_vendor.p({
-      type: "auth",
-      size: "30",
-      color: "#00C853"
-    }),
-    j: common_vendor.t($data.totalnum),
-    k: common_vendor.p({
-      type: "right",
-      size: "18",
-      color: "#999"
-    }),
-    l: common_vendor.o((...args) => $options.lottery && $options.lottery(...args)),
-    m: common_vendor.p({
       type: "vip",
       size: "30",
-      color: "#FFD600"
+      color: "#fff"
     }),
-    n: common_vendor.p({
+    j: common_vendor.p({
       type: "right",
-      size: "18",
-      color: "#999"
+      size: "20",
+      color: "#ccc"
     }),
-    o: common_vendor.o((...args) => $options.mypoints && $options.mypoints(...args)),
-    p: common_vendor.p({
+    k: common_vendor.o((...args) => $options.mypoints && $options.mypoints(...args)),
+    l: common_vendor.p({
       type: "shop-filled",
       size: "30",
-      color: "#2979FF"
+      color: "#fff"
     }),
-    q: common_vendor.p({
+    m: common_vendor.p({
       type: "right",
-      size: "18",
-      color: "#999"
+      size: "20",
+      color: "#ccc"
     }),
-    r: common_vendor.o((...args) => $options.goToprePurchaseOrder && $options.goToprePurchaseOrder(...args)),
-    s: common_vendor.p({
+    n: common_vendor.o((...args) => $options.goToprePurchaseOrder && $options.goToprePurchaseOrder(...args)),
+    o: common_vendor.p({
       type: "cart",
       size: "30",
-      color: "#2979FF"
+      color: "#fff"
     }),
-    t: common_vendor.p({
+    p: common_vendor.p({
       type: "right",
-      size: "18",
-      color: "#999"
+      size: "20",
+      color: "#ccc"
     }),
-    v: common_vendor.o((...args) => $options.toorders && $options.toorders(...args)),
-    w: common_vendor.p({
+    q: common_vendor.o((...args) => $options.toorders && $options.toorders(...args)),
+    r: common_vendor.p({
       type: "list",
       size: "30",
-      color: "#2979FF"
+      color: "#fff"
     }),
-    x: common_vendor.p({
+    s: common_vendor.p({
       type: "right",
-      size: "18",
-      color: "#999"
+      size: "20",
+      color: "#ccc"
     }),
-    y: common_vendor.o((...args) => $options.GotowholesaleNavigation && $options.GotowholesaleNavigation(...args)),
-    z: common_vendor.p({
+    t: common_vendor.o((...args) => $options.GotowholesaleNavigation && $options.GotowholesaleNavigation(...args)),
+    v: common_vendor.p({
       type: "gear",
       size: "30",
-      color: "#2979FF"
+      color: "#fff"
     }),
-    A: common_vendor.p({
+    w: common_vendor.p({
       type: "right",
-      size: "18",
-      color: "#999"
+      size: "20",
+      color: "#ccc"
     }),
-    B: common_vendor.o((...args) => $options.GoTOsettings && $options.GoTOsettings(...args)),
+    x: common_vendor.o((...args) => $options.GoTOsettings && $options.GoTOsettings(...args)),
+    y: common_vendor.p({
+      type: "medal-filled",
+      size: "30",
+      color: "#fff"
+    }),
+    z: common_vendor.p({
+      type: "right",
+      size: "20",
+      color: "#ccc"
+    }),
+    A: common_vendor.o(($event) => $options.routerPush("/pages/invitation/invitation")),
+    B: common_vendor.p({
+      type: "medal-filled",
+      size: "30",
+      color: "#fff"
+    }),
     C: common_vendor.p({
-      type: "medal-filled",
-      size: "30",
-      color: "#2979FF"
-    }),
-    D: common_vendor.p({
       type: "right",
-      size: "18",
-      color: "#999"
+      size: "20",
+      color: "#ccc"
     }),
-    E: common_vendor.o(($event) => $options.routerPush("/pages/invitation/invitation")),
-    F: common_vendor.p({
-      type: "medal-filled",
-      size: "30",
-      color: "#2979FF"
-    }),
-    G: common_vendor.p({
-      type: "right",
-      size: "18",
-      color: "#999"
-    }),
-    H: common_vendor.o(($event) => $options.routerPush("/pages/earningsRecord/earningsRecord")),
-    I: common_vendor.o((...args) => $options.logout && $options.logout(...args))
+    D: common_vendor.o(($event) => $options.routerPush("/pages/earningsRecord/earningsRecord")),
+    E: common_vendor.o((...args) => $options.logout && $options.logout(...args))
   });
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-0f7520f0"]]);
 wx.createPage(MiniProgramPage);
 //# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/user/user.js.map

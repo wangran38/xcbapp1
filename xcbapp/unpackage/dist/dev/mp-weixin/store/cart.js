@@ -5,19 +5,25 @@ const useCartStore = common_vendor.defineStore("cart", {
   state: () => ({
     carts: []
   }),
-  // Getters：相当于 Vuex 的 getters
   getters: {
-    // 计算指定店铺的总价
+    // 计算指定店铺的总价（用 Decimal 累加，避免精度偏差）
     cartTotalByShopId: (state) => (shopId) => {
-      const shopItems = shopId ? state.carts.filter((i) => i.shop_id == shopId) : state.carts;
-      return shopItems.reduce((sum, item) => {
-        return new common_vendor.Decimal(item.price).mul(item.tempCount).add(sum).toNumber();
-      }, 0);
+      let total = new common_vendor.Decimal(0);
+      state.carts.forEach((item) => {
+        if (item.shop_id == shopId) {
+          const price = new common_vendor.Decimal(item.price || 0);
+          const tempCount = new common_vendor.Decimal(item.tempCount || 0);
+          total = total.plus(price.mul(tempCount));
+        }
+      });
+      return total.toFixed(2);
     },
-    // 获取指定商品的数量
+    // 获取指定商品的数量（返回 Decimal 处理后的数值，避免精度偏差）
     getTempCount: (state) => (id) => {
       const item = state.carts.find((i) => i.id === id);
-      return item ? item.tempCount : 0;
+      if (!item)
+        return 0;
+      return new common_vendor.Decimal(item.tempCount || 0).toNumber();
     },
     // 计算指定店铺的商品数量
     cartsLengthByShopId: (state) => (shopId) => {
@@ -28,26 +34,29 @@ const useCartStore = common_vendor.defineStore("cart", {
       return shopId ? state.carts.filter((i) => i.shop_id == shopId) : state.carts;
     }
   },
-  // Actions：相当于 Vuex 的 mutations 和 actions 的结合
   actions: {
-    // 数量加1
+    // 数量加1（用 Decimal 精确计算）
     addItem(item) {
       const index = this.carts.findIndex((i) => i.id === item.id);
       if (index !== -1) {
-        this.carts[index].tempCount = new common_vendor.Decimal(this.carts[index].tempCount).add(new common_vendor.Decimal(1)).toNumber();
+        const currentCount = new common_vendor.Decimal(this.carts[index].tempCount || 0);
+        this.carts[index].tempCount = currentCount.plus(1).toFixed(2);
       } else {
         this.carts.push({
           ...item,
           tempCount: 1
+          // 首次添加为整数，无精度问题
         });
       }
     },
-    // 数量减一
+    // 数量减一（用 Decimal 精确计算）
     subItem(item) {
       const index = this.carts.findIndex((i) => i.id === item.id);
       if (index !== -1) {
-        if (this.carts[index].tempCount > 1) {
-          this.carts[index].tempCount = new common_vendor.Decimal(this.carts[index].tempCount).sub(new common_vendor.Decimal(1)).toNumber();
+        const currentCount = new common_vendor.Decimal(this.carts[index].tempCount || 0);
+        const newCount = currentCount.minus(1);
+        if (newCount.greaterThan(1)) {
+          this.carts[index].tempCount = newCount.toFixed(2);
         } else {
           this.carts.splice(index, 1);
         }
@@ -55,23 +64,24 @@ const useCartStore = common_vendor.defineStore("cart", {
     },
     // 清空购物车
     clearCart() {
-      common_vendor.index.__f__("log", "at store/cart.js:76", "clearCart action triggered");
+      common_vendor.index.__f__("log", "at store/cart.js:85", "clearCart action triggered");
       this.carts = [];
     },
-    // 任意输入数量
+    // 任意输入数量（用 Decimal 处理赋值和比较）
     anyNumber(item) {
       const index = this.carts.findIndex((i) => i.id === item.id);
+      const inputCount = new common_vendor.Decimal(item.count || 0);
       if (index !== -1) {
-        if (item.count < 0.1) {
+        if (inputCount.lessThan(0.1)) {
           this.carts.splice(index, 1);
         } else {
-          this.carts[index].tempCount = item.count;
+          this.carts[index].tempCount = inputCount.toFixed(2);
         }
       } else {
-        if (item.count >= 0.1) {
+        if (inputCount.greaterThanOrEqualTo(0.1)) {
           this.carts.push({
             ...item,
-            tempCount: item.count
+            tempCount: inputCount.toFixed(2)
           });
         }
       }

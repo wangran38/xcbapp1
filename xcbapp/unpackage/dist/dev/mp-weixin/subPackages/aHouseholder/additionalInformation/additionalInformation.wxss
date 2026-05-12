@@ -1,81 +1,83 @@
 
-/* 整体页面样式 */
+/* 完全延续之前的高颜值简约样式，无任何修改 */
 .profile-page.data-v-f8b86b55 {
-	padding: 40rpx 30rpx;
-	background: linear-gradient(135deg, #f9f9f9 0%, #eef2f5 100%);
+	padding: 60rpx 30rpx 80rpx;
+	background-color: #f7f8fa;
 	min-height: 100vh;
+	box-sizing: border-box;
 }
 .page-title.data-v-f8b86b55 {
 	display: block;
 	text-align: center;
-	font-size: 36rpx;
+	font-size: 38rpx;
 	font-weight: 600;
-	color: #2c3e50;
-	margin: 40rpx 0;
-	letter-spacing: 2rpx;
+	color: #2d3748;
+	margin-bottom: 60rpx;
+	letter-spacing: 3rpx;
 }
-
-/* 表单容器 */
 .form-container.data-v-f8b86b55 {
+	background: #ffffff;
 	border-radius: 24rpx;
-	background: rgba(255,255,255,0.95);
-	box-shadow: 0 8rpx 40rpx rgba(0,0,0,0.06);
-	padding: 20rpx 0;
+	box-shadow: 0 2rpx 16rpx rgba(0, 0, 0, 0.04);
+	padding: 40rpx 30rpx;
 }
-
-/* 表单项 */
 .form-item.data-v-f8b86b55 {
-	padding: 32rpx 40rpx;
 	display: flex;
-	align-items: center;
-	border-bottom: 2rpx solid #f1f3f6;
+	flex-direction: column;
+	margin-bottom: 40rpx;
 }
 .form-item.data-v-f8b86b55:last-child {
-	border-bottom: none;
+	margin-bottom: 0;
 }
-
-/* 标签样式 */
+.avatar-item.data-v-f8b86b55 {
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 0;
+}
 .form-label.data-v-f8b86b55 {
-	width: 180rpx;
-	font-size: 30rpx;
-	color: #5a6573;
-	font-weight: 500;
-	flex-shrink: 0;
-}
-
-/* 输入框样式 */
-.form-input.data-v-f8b86b55 {
-	flex: 1;
-	padding: 24rpx 32rpx;
-	border-radius: 16rpx;
-	background: #f8fafc;
-	border: 2rpx solid #e8eef3;
 	font-size: 28rpx;
-	color: #34495e;
-	transition: all 0.3s ease;
+	color: #4a5568;
+	font-weight: 500;
+	margin-bottom: 16rpx;
+}
+.avatar-item .form-label.data-v-f8b86b55 {
+	margin-bottom: 0;
+}
+.form-input.data-v-f8b86b55 {
+	font-size: 28rpx;
+	color: #2d3748;
+	padding: 16rpx 0;
+	border-bottom: 1rpx solid #e2e8f0;
+	transition: all 0.2s ease;
 }
 .form-input.data-v-f8b86b55:focus {
 	outline: none;
-	border-color: #4dabf7;
-	box-shadow: 0 0 12rpx rgba(77, 171, 247, 0.2);
+	border-bottom-color: #4299e1;
 }
-
-/* 头像上传区域 */
-.avatar-item.data-v-f8b86b55 {
-	position: relative;
-	padding: 40rpx;
+.form-input.data-v-f8b86b55::-webkit-input-placeholder {
+	color: #a0aec0;
+	font-size: 26rpx;
+}
+.form-input.data-v-f8b86b55::placeholder {
+	color: #a0aec0;
+	font-size: 26rpx;
 }
 .avatar-wrapper.data-v-f8b86b55 {
-	width: 160rpx;
-	height: 160rpx;
-	border-radius: 24rpx;
-	background: #f8fafc;
-	border: 4rpx dashed #e8eef3;
+	width: 140rpx;
+	height: 140rpx;
+	border-radius: 50%;
+	border: 2rpx dashed #e2e8f0;
+	background: #f7f8fa;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
 	transition: all 0.3s ease;
+}
+.avatar-wrapper.data-v-f8b86b55:active {
+	transform: scale(0.95);
+	border-color: #4299e1;
 }
 .avatar-image.data-v-f8b86b55 {
 	width: 100%;
@@ -83,31 +85,40 @@
 	object-fit: cover;
 }
 .avatar-placeholder.data-v-f8b86b55 {
-	color: #aeb8c4;
-	padding: 24rpx;
-	border-radius: 16rpx;
-	transition: transform 0.2s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
-.avatar-placeholder.data-v-f8b86b55:active {
-	transform: scale(0.95);
+.button-container.data-v-f8b86b55 {
+	margin-top: 60rpx;
+	padding: 0 10rpx;
 }
-
-/* 提交按钮 */
 .submit-btn.data-v-f8b86b55 {
-	background: linear-gradient(135deg, #4dabf7 0%, #339af0 100%);
-	color: white;
+	width: 100%;
+	height: 100rpx;
+	line-height: 100rpx;
+	background: linear-gradient(90deg, #4299e1 0%, #3182ce 100%);
+	color: #ffffff;
 	font-size: 32rpx;
 	font-weight: 500;
-	height: 96rpx;
-	line-height: 96rpx;
 	border-radius: 16rpx;
-	box-shadow: 0 8rpx 24rpx rgba(51, 154, 240, 0.3);
-	transition: all 0.3s ease;
+	border: none;
+	box-shadow: 0 4rpx 12rpx rgba(66, 153, 225, 0.25);
+	transition: all 0.2s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .submit-btn.data-v-f8b86b55:active {
 	transform: translateY(2rpx);
-	box-shadow: 0 4rpx 16rpx rgba(51, 154, 240, 0.3);
+	box-shadow: 0 2rpx 8rpx rgba(66, 153, 225, 0.25);
 }
-.button-container.data-v-f8b86b55 {
-	padding: 60rpx 40rpx 40rpx;
+.submit-btn.data-v-f8b86b55:disabled {
+	background: #e2e8f0;
+	color: #a0aec0;
+	box-shadow: none;
+	transform: none;
+}
+.btn-loading.data-v-f8b86b55 {
+	margin-right: 12rpx;
 }

@@ -4,107 +4,101 @@ const api_index = require("../../../api/index.js");
 const _sfc_main = {
   data() {
     return {
-      // 核心数据
-      coreData: {
-        totalSales: 0,
-        monthSales: 0,
-        totalOrders: 0,
-        monthOrders: 0,
-        totalCustomers: 0,
-        newCustomers: 0,
-        totalProfit: 0,
-        monthProfit: 0,
-        targetRate: 0,
-        targetAmount: 0,
-        completedAmount: 0
+      agentLevel: "PROVINCIAL",
+      // PROVINCIAL(省级) / MUNICIPAL(市级)
+      dataList: [],
+      countData: {
+        farmers_total: 0,
+        market_total: 0,
+        money_total: 0,
+        order_total: 0,
+        shop_total: 0
       },
-      // 近期订单
-      recentOrders: [],
-      // 趋势筛选
-      trendRange: ["近7天", "近30天", "近90天"],
-      selectedTrendRange: 1,
-      // 图表数据
-      trendData: {},
-      // 图表配置
-      chartOpts: {
-        color: ["#4285F4"],
-        padding: [15, 15, 0, 15],
-        legend: { show: false },
-        xAxis: {
-          type: "grid",
-          gridType: "dash",
-          dashLength: 2,
-          axisLine: false,
-          labelCount: 5,
-          fontSize: 11,
-          color: "#999"
-        },
-        yAxis: {
-          gridType: "dash",
-          dashLength: 2,
-          axisLine: false,
-          labelCount: 4,
-          fontSize: 11,
-          color: "#999"
-        },
-        extra: {
-          line: { width: 2, type: "curve" }
-        }
-      }
+      pageNum: 1,
+      pageSize: 5,
+      hasMore: true,
+      city: null
     };
   },
-  onLoad() {
+  async onLoad() {
+    this.checkUserInfo();
     this.loadData();
   },
   methods: {
-    // 加载数据
-    async loadData() {
-      try {
-        common_vendor.index.showLoading({ title: "加载中...", mask: true });
-        const [coreRes, orderRes, trendRes] = await Promise.all([
-          api_index.api.getAgentCoreData(),
-          api_index.api.getRecentOrders({ limit: 5 }),
-          api_index.api.getSalesTrend({ range: this.trendRange[this.selectedTrendRange] })
-        ]);
-        if (coreRes.code === 200) {
-          this.coreData = coreRes.data;
+    // 跳转到区县详情页
+    toDistrictDetail(district) {
+      let data = JSON.stringify(district);
+      common_vendor.index.navigateTo({
+        url: `/subPackages/agent/districtDetail/districtDetail?data=${data}`
+      });
+    },
+    async checkUserInfo() {
+      let data = await api_index.api.viewAgentInfo();
+      if (data.code == 200) {
+        if (data.data.listdata[0].type == 1) {
+          this.agentLevel = "PROVINCIAL";
+        } else {
+          this.agentLevel = "MUNICIPAL";
         }
-        if (orderRes.code === 200) {
-          this.recentOrders = orderRes.data;
-        }
-        if (trendRes.code === 200) {
-          this.trendData = trendRes.data;
-        }
-      } catch (error) {
-        common_vendor.index.__f__("error", "at subPackages/agent/datacenter/datacenter.vue:208", "数据加载失败:", error);
-        common_vendor.index.showToast({ title: "数据加载失败", icon: "none", duration: 2e3 });
-      } finally {
-        common_vendor.index.hideLoading();
       }
     },
-    // 切换趋势时间范围
-    changeTrendRange(e) {
-      this.selectedTrendRange = e.detail.value;
+    // 切换代理级别
+    switchAgentLevel() {
+      this.agentLevel = this.agentLevel === "PROVINCIAL" ? "MUNICIPAL" : "PROVINCIAL";
+      this.pageNum = 1;
+      this.hasMore = true;
       this.loadData();
     },
-    // 格式化日期
-    formatDate(dateStr) {
-      return formatDate(dateStr, "YYYY-MM-DD HH:mm");
+    // 加载数据
+    async loadData() {
+      let data = await api_index.api.getprogetsumall();
+      try {
+        common_vendor.index.showLoading({
+          title: "加载数据...",
+          mask: true
+        });
+        if (this.agentLevel === "PROVINCIAL") {
+          let cityList = data["data"]["city_list"].map((item, index) => {
+            return {
+              id: `city_${index}`,
+              name: item.name,
+              districtCount: 0,
+              marketCount: 0,
+              totalConsume: 0,
+              children: item.children
+            };
+          });
+          this.countData.farmers_total = data.data.farmers_total;
+          this.countData.market_total = data.data.market_total;
+          this.countData.money_total = data.data.money_total;
+          this.countData.order_total = data.data.order_total;
+          this.countData.shop_total = data.data.shop_total;
+          this.dataList = cityList;
+        } else {
+          this.dataList = districtList;
+        }
+        this.totalConsume = data.data.money_total;
+        this.orderCount = data.data.order_total;
+        this.totalMarketCount = data.data.market_total;
+        common_vendor.index.hideLoading();
+      } catch (error) {
+        common_vendor.index.showToast({
+          title: "数据加载失败",
+          icon: "none"
+        });
+      }
     },
-    // 订单状态文本
-    getStatusText(status) {
-      const statusMap = {
-        "PENDING": "待支付",
-        "PAID": "已支付",
-        "SHIPPED": "已发货",
-        "COMPLETED": "已完成",
-        "CANCELLED": "已取消"
-      };
-      return statusMap[status] || status;
+    // 加载更多
+    loadMore() {
+      this.pageNum++;
+      this.loadData();
     },
-    // 查看全部订单
-    viewAllOrders() {
-      common_vendor.index.navigateTo({ url: "/pages/agent/all-orders" });
+    // 跳转到市详情页（省级代理）
+    toCityDetail(city) {
+      let children = JSON.stringify(city);
+      common_vendor.index.navigateTo({
+        url: `/subPackages/agent/cityDetail/cityDetail?children=${children}`
+      });
     }
   }
 };
@@ -117,54 +111,43 @@ if (!Math) {
   _easycom_uni_icons();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {
-    a: common_vendor.p({
-      type: "chart",
-      size: "20",
-      color: "#4285F4"
-    }),
-    b: common_vendor.t($data.coreData.totalSales.toLocaleString()),
-    c: common_vendor.t($data.coreData.monthSales.toLocaleString()),
-    d: common_vendor.t($data.coreData.totalOrders.toLocaleString()),
-    e: common_vendor.t($data.coreData.monthOrders.toLocaleString()),
-    f: common_vendor.t($data.coreData.totalCustomers.toLocaleString()),
-    g: common_vendor.t($data.coreData.newCustomers.toLocaleString()),
-    h: common_vendor.t($data.coreData.totalProfit.toLocaleString()),
-    i: common_vendor.t($data.coreData.monthProfit.toLocaleString()),
-    j: common_vendor.t($data.coreData.targetRate),
-    k: $data.coreData.targetRate + "%",
-    l: common_vendor.t($data.coreData.targetAmount.toLocaleString()),
-    m: common_vendor.t($data.coreData.completedAmount.toLocaleString()),
-    n: common_vendor.p({
-      type: "orders-o",
-      size: "20",
-      color: "#34A853"
-    }),
-    o: common_vendor.f($data.recentOrders, (order, k0, i0) => {
+  return common_vendor.e({
+    a: common_vendor.t($data.agentLevel === "PROVINCIAL" ? "省级代理" : "市县区级代理"),
+    b: common_vendor.n($data.agentLevel === "PROVINCIAL" ? "provincial" : "municipal"),
+    c: common_vendor.t($data.countData.money_total.toFixed(2)),
+    d: common_vendor.t($data.countData.order_total),
+    e: common_vendor.t($data.countData.market_total),
+    f: common_vendor.t($data.countData.farmers_total),
+    g: common_vendor.t($data.countData.shop_total),
+    h: common_vendor.t(0),
+    i: common_vendor.t(0),
+    j: !$data.dataList.length
+  }, !$data.dataList.length ? {} : $data.agentLevel === "PROVINCIAL" ? {
+    l: common_vendor.f($data.dataList, (city, k0, i0) => {
       return {
-        a: common_vendor.t(order.orderNo),
-        b: common_vendor.t($options.formatDate(order.createTime)),
-        c: common_vendor.t(order.amount.toFixed(2)),
-        d: common_vendor.t($options.getStatusText(order.status)),
-        e: common_vendor.n("status-" + order.status),
-        f: order.id
+        a: common_vendor.t(city.name),
+        b: common_vendor.f(city.children, (item, index, i1) => {
+          return {
+            a: common_vendor.t(item.name),
+            b: common_vendor.t(item.market_count),
+            c: common_vendor.t(item.farmers_count),
+            d: common_vendor.t(item.shop_count),
+            e: "7170c164-0-" + i0 + "-" + i1,
+            f: index,
+            g: common_vendor.o(($event) => $options.toDistrictDetail(item), index)
+          };
+        }),
+        c: city.id
       };
     }),
-    p: common_vendor.o((...args) => $options.viewAllOrders && $options.viewAllOrders(...args)),
-    q: common_vendor.p({
-      type: "calendar",
-      size: "20",
-      color: "#EA4335"
-    }),
-    r: common_vendor.t($data.trendRange[$data.selectedTrendRange]),
-    s: common_vendor.p({
-      type: "down",
-      size: "14"
-    }),
-    t: $data.trendRange,
-    v: $data.selectedTrendRange,
-    w: common_vendor.o((...args) => $options.changeTrendRange && $options.changeTrendRange(...args))
-  };
+    m: common_vendor.p({
+      type: "arrowright",
+      size: "18",
+      color: "#999"
+    })
+  } : {}, {
+    k: $data.agentLevel === "PROVINCIAL"
+  });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-7170c164"]]);
 wx.createPage(MiniProgramPage);

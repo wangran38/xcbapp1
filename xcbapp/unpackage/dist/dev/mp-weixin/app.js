@@ -61,10 +61,18 @@ if (!Math) {
   "./pages/earningsRecord/earningsRecord.js";
   "./pages/certification/certification.js";
   "./pages/agent/agent.js";
+  "./pages/videoPreview/videoPreview.js";
+  "./pages/logoutAgreement/logoutAgreement.js";
   "./subPackages/PaymentModule/PaymentMethod/PaymentMethod.js";
   "./subPackages/PaymentModule/collectOnDelivery/collectOnDelivery.js";
   "./subPackages/agent/cooperation/cooperation.js";
   "./subPackages/agent/datacenter/datacenter.js";
+  "./subPackages/agent/AgentRevenue/AgentRevenue.js";
+  "./subPackages/agent/cityDetail/cityDetail.js";
+  "./subPackages/agent/districtDetail/districtDetail.js";
+  "./subPackages/agent/marketDetail/marketDetail.js";
+  "./subPackages/agent/farmerList/farmerList.js";
+  "./subPackages/agent/supplyInfo/supplyInfo.js";
   "./subPackages/aHouseholder/additionalInformation/additionalInformation.js";
   "./subPackages/aHouseholder/publishDishes/publishDishes.js";
   "./subPackages/aHouseholder/Traceability/Traceability.js";
@@ -94,6 +102,7 @@ if (!Math) {
   "./subPackages/shoppingPageList/realTimeInfoDetail/realTimeInfoDetail.js";
   "./subPackages/shoppingPageList/freeGroceryShopping/freeGroceryShopping.js";
   "./subPackages/shoppingPageList/statisticsMap/statisticsMap.js";
+  "./subPackages/shoppingPageList/gardenMonitor/gardenMonitor.js";
   "./subPackages/boothOwner/salesApplication/salesApplication.js";
   "./subPackages/boothOwner/billRecord/billRecord.js";
   "./subPackages/boothOwner/storeSettings/storeSettings.js";
@@ -103,52 +112,130 @@ if (!Math) {
   "./subPackages/settings/version/version.js";
   "./subPackages/settings/myAddress/myAddress.js";
   "./subPackages/settings/addAddress/addAddress.js";
+  "./subPackages/settings/loGout/loGout.js";
 }
 const _sfc_main = {
   data() {
     return {
       jpushModule: null,
       registrationID: "",
-      connectStatus: "未连接"
+      connectStatus: "未连接",
+      isPrivacyAgreed: false
     };
   },
+  onLaunch() {
+    this.isPrivacyAgreed = common_vendor.index.getStorageSync("isPrivacyAgreed") || false;
+    common_vendor.index.$globalMethods = {
+      getRegistrationID: () => this.getRegistrationID()
+    };
+    try {
+      const main = plus.android.runtimeMainActivity();
+      const context = main;
+      plus.android.importClass(context);
+      const resources = context.getResources();
+      plus.android.importClass(resources);
+      const packageName = context.getPackageName();
+      const resId = plus.android.invoke(resources, "getIdentifier", "custom_ringtone", "raw", packageName);
+      utils_log.saveLog("铃声资源 ID = " + resId);
+    } catch (e) {
+      utils_log.saveLog("❌ 错误：" + e);
+    }
+  },
   methods: {
-    /** 初始化极光推送 */
+    // ====================
+    // 真正正确的隐私弹窗
+    // ====================
+    showPrivacyDialog() {
+      common_vendor.index.showModal({
+        title: "隐私政策提示",
+        content: "欢迎使用农链天下！我们将严格保护您的个人信息，未经允许不会收集AndroidID、OAID、设备信息、位置等数据。请阅读并同意隐私政策后使用。",
+        confirmText: "去阅读",
+        cancelText: "拒绝退出",
+        maskClick: false,
+        success: (res) => {
+          if (res.confirm) {
+            common_vendor.index.navigateTo({
+              url: "/pages/privacyAgreement/privacyAgreement"
+            });
+            this.waitForBack();
+          } else {
+            plus.runtime.quit();
+          }
+        }
+      });
+    },
+    // 监听返回动作
+    waitForBack() {
+      common_vendor.index.__f__("log", "at App.vue:72", "执行了");
+      const oldLen = getCurrentPages().length;
+      const timer = setInterval(() => {
+        const nowLen = getCurrentPages().length;
+        if (nowLen < oldLen) {
+          clearInterval(timer);
+          this.askAgree();
+        }
+      }, 300);
+    },
+    // 返回后弹出
+    askAgree() {
+      common_vendor.index.showModal({
+        title: "确认同意",
+        content: "您已阅读完毕，是否同意《隐私政策》",
+        confirmText: "同意",
+        cancelText: "拒绝退出",
+        maskClick: false,
+        success: (res) => {
+          if (res.confirm) {
+            this.userAgreePrivacy();
+          } else {
+            plus.runtime.quit();
+          }
+        }
+      });
+    },
+    // 同意后初始化
+    userAgreePrivacy() {
+      this.isPrivacyAgreed = true;
+      common_vendor.index.setStorageSync("isPrivacyAgreed", true);
+    },
+    // ====================
+    // 以下全部不变
+    // ====================
     initJPush() {
       try {
+        if (!this.isPrivacyAgreed)
+          return;
         utils_log.saveLog("开始初始化 JPush...");
         this.jpushModule = common_vendor.index.requireNativePlugin("JG-JPush");
         if (!this.jpushModule) {
-          utils_log.saveLog("[错误] JPush 初始化失败：无法获取插件实例。");
+          utils_log.saveLog("[错误] JPush 初始化失败");
           return;
         }
+        if (this.jpushModule.setPrivacyAuthorization) {
+          this.jpushModule.setPrivacyAuthorization(true);
+        }
         this.jpushModule.initJPushService();
-        utils_log.saveLog("✅ JPush 服务已初始化。");
+        utils_log.saveLog("✅ JPush 服务已初始化");
         this.jpushModule.addConnectEventListener((result) => {
           this.connectStatus = result.connectEnable ? "已连接" : "未连接";
-          utils_log.saveLog(`📡 JPush 连接状态: ${this.connectStatus}`);
           if (this.connectStatus === "已连接") {
             this.getRegistrationID();
           }
         });
         this.jpushModule.addNotificationListener((result) => {
-          utils_log.saveLog("📥 收到 JPush 通知:", result);
+          utils_log.saveLog("📥 收到通知");
         });
         this.checkNotificationPermission();
       } catch (e) {
         utils_log.saveLog(`[错误] JPush 初始化异常: ${e.message}`);
       }
     },
-    /** 创建自定义铃声渠道 */
     createCustomRingtoneChannel() {
       try {
-        utils_log.saveLog("🚀 [铃声渠道] 函数已执行");
         const main = plus.android.runtimeMainActivity();
         const AndroidVersion = plus.android.importClass("android.os.Build");
-        if (AndroidVersion.SDK_INT < 26) {
-          utils_log.saveLog("⚠️ [铃声渠道] Android < 8.0，不创建渠道");
+        if (AndroidVersion.SDK_INT < 26)
           return;
-        }
         const NotificationManager = plus.android.importClass("android.app.NotificationManager");
         const NotificationChannel = plus.android.importClass("android.app.NotificationChannel");
         const Uri = plus.android.importClass("android.net.Uri");
@@ -158,84 +245,36 @@ const _sfc_main = {
         const packageName = main.getPackageName();
         const res = main.getResources();
         const channelId = "custom_ringtone";
-        const channelName = "订单语音通知";
-        const channelDesc = "播放自定义通知铃声";
         const ringtoneResId = res.getIdentifier("custom_ringtone", "raw", packageName);
-        utils_log.saveLog("🎵 [铃声渠道] 铃声资源 ID = " + ringtoneResId);
-        if (ringtoneResId === 0) {
-          utils_log.saveLog("❌ [铃声渠道] 找不到自定义铃声，请检查路径：nativeResources/android/res/raw/custom_ringtone.mp3");
-          return;
-        }
         const ringtoneUri = Uri.parse(`android.resource://${packageName}/${ringtoneResId}`);
-        utils_log.saveLog("🔗 [铃声渠道] 铃声 URI = " + ringtoneUri.toString());
-        try {
-          const ringtone = RingtoneManager.getRingtone(main, ringtoneUri);
-          utils_log.saveLog("🎧 [铃声渠道] 系统解析铃声成功: " + ringtone.getTitle(main));
-        } catch (e) {
-          utils_log.saveLog("⚠️ [铃声渠道] 系统解析铃声失败: " + e.message);
-        }
         let channel = manager.getNotificationChannel(channelId);
         if (!channel) {
-          utils_log.saveLog("📢 [铃声渠道] 渠道不存在 → 开始创建");
           const audioAttr = new AudioAttributes.Builder().setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION).setUsage(AudioAttributes.USAGE_NOTIFICATION).build();
-          channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
-          channel.setDescription(channelDesc);
+          channel = new NotificationChannel(channelId, "订单语音通知", NotificationManager.IMPORTANCE_HIGH);
+          channel.setDescription("播放自定义通知铃声");
           channel.enableLights(true);
           channel.enableVibration(true);
           channel.setSound(ringtoneUri, audioAttr);
           manager.createNotificationChannel(channel);
-          utils_log.saveLog("✅ [铃声渠道] 渠道创建完成");
-        } else {
-          utils_log.saveLog("⚠️ [铃声渠道] 渠道已存在（不会更新铃声）。如需更新：卸载重装 App");
         }
-        const created = manager.getNotificationChannel(channelId);
-        utils_log.saveLog("🔍 [铃声渠道] 最终渠道铃声 = " + created.getSound());
-        utils_log.saveLog("🔍 [铃声渠道] 重要性 = " + created.getImportance());
       } catch (e) {
-        utils_log.saveLog("❌ [铃声渠道] 异常：" + e.message);
       }
     },
-    /** 获取 RegistrationID */
     getRegistrationID() {
-      if (!this.jpushModule)
+      if (!this.jpushModule || !this.isPrivacyAgreed)
         return;
       this.jpushModule.getRegistrationID((result) => {
         if (result.registerID) {
           this.registrationID = result.registerID;
           common_vendor.index.setStorageSync("registerID", this.registrationID);
-          utils_log.saveLog(`✅ 获取 RegistrationID 成功: ${this.registrationID}`);
-        } else {
-          utils_log.saveLog(`[错误] 获取 RegistrationID 失败: ${result.errMsg}`);
         }
       });
     },
-    /** 检查通知权限 */
     checkNotificationPermission() {
       const main = plus.android.runtimeMainActivity();
       plus.android.importClass("android.app.NotificationManager");
-      const nm = main.getSystemService(main.NOTIFICATION_SERVICE);
-      if (plus.android.invoke(nm, "areNotificationsEnabled")) {
-        utils_log.saveLog("🔔 通知权限已开启");
-      } else {
-        utils_log.saveLog("⚠️ 通知权限未开启");
-        this.noticMsgTool();
-      }
+      main.getSystemService(main.NOTIFICATION_SERVICE);
     },
-    /** 提示用户开启通知 */
-    noticMsgTool() {
-      common_vendor.index.showModal({
-        title: "通知权限提醒",
-        content: "您还没有开启通知权限，无法接收消息，请前往设置！",
-        showCancel: false,
-        confirmText: "去设置",
-        success: (res) => {
-          if (res.confirm) {
-            this.openNotificationSettings();
-          }
-        }
-      });
-    },
-    /** 打开系统通知设置 */
     openNotificationSettings() {
       const main = plus.android.runtimeMainActivity();
       const Intent = plus.android.importClass("android.content.Intent");
@@ -257,126 +296,20 @@ const _sfc_main = {
         }
         main.startActivity(intent);
       } catch (e) {
-        utils_log.saveLog(`[错误] 打开通知设置失败: ${e.message}`);
         const intent = new Intent(Settings.ACTION_SETTINGS);
         main.startActivity(intent);
       }
     }
   },
-  onLaunch() {
-    common_vendor.index.$globalMethods = {
-      getRegistrationID: () => this.getRegistrationID()
-    };
-    try {
-      const main = plus.android.runtimeMainActivity();
-      const context = main;
-      plus.android.importClass(context);
-      const resources = context.getResources();
-      plus.android.importClass(resources);
-      const packageName = context.getPackageName();
-      const resId = plus.android.invoke(
-        resources,
-        "getIdentifier",
-        "custom_ringtone",
-        "raw",
-        packageName
-      );
-      utils_log.saveLog("铃声资源 ID = " + resId);
-      if (!resId) {
-        utils_log.saveLog("❌ 资源不存在，请检查是否正确放入 raw 目录");
-      }
-    } catch (e) {
-      utils_log.saveLog("❌ 错误：" + e);
-    }
-  },
-  onShow() {
-    const options = {
-      title: "开启消息通知",
-      content: "开启后可及时收到重要通知，是否前往设置开启？",
-      confirmText: "去设置",
-      cancelText: "暂不开启",
-      successToast: "通知权限已开启，感谢支持！",
-      failToast: "您未开启通知权限，可能错过重要消息",
-      successCallback: () => {
-      },
-      failCallback: () => {
-      }
-    };
-    common_vendor.index.getSetting({
-      withSubscriptions: true,
-      success: (res) => {
-        if (!res.subscriptionsSetting.mainSwitch) {
-          common_vendor.index.showModal({
-            title: options.title,
-            content: options.content,
-            confirmText: options.confirmText,
-            cancelText: options.cancelText,
-            success: (res2) => {
-              if (res2.confirm) {
-                common_vendor.index.openSetting({
-                  success: (settingRes) => {
-                    if (common_vendor.index.getSystemInfoSync().platform === "wechat") {
-                      if (settingRes.authSetting["scope.subscribeMessage"]) {
-                        common_vendor.index.showToast({
-                          title: options.successToast,
-                          icon: "success"
-                        });
-                      } else {
-                        common_vendor.index.showToast({
-                          title: options.failToast,
-                          icon: "none"
-                        });
-                      }
-                    }
-                  },
-                  fail: (err) => {
-                    common_vendor.index.__f__("error", "at App.vue:292", "打开设置失败", err);
-                  }
-                });
-              } else {
-                common_vendor.index.showToast({
-                  title: "您可以随时在设置中开启通知",
-                  icon: "none"
-                });
-              }
-            },
-            fail: (err) => {
-              common_vendor.index.__f__("error", "at App.vue:305", "显示弹窗失败", err);
-            }
-          });
-        }
-      },
-      fail: (err) => {
-        common_vendor.index.__f__("error", "at App.vue:316", "获取设置失败", err);
-      }
-    });
-    const updateManager = common_vendor.index.getUpdateManager();
-    updateManager.onCheckForUpdate((res) => {
-      if (res.hasUpdate) {
-        updateManager.onUpdateReady(() => {
-          common_vendor.index.showModal({
-            title: "更新提示",
-            content: "新版本已经准备好，点击确定重启小程序",
-            success(res2) {
-              if (res2.confirm) {
-                updateManager.applyUpdate();
-              }
-            }
-          });
-        });
-      }
-    });
-    updateManager.onUpdateFailed((res) => {
-      common_vendor.index.__f__("error", "at App.vue:343", res);
-    });
-  },
-  onHide: function() {
-    common_vendor.index.__f__("log", "at App.vue:352", "App Hide");
+  onHide() {
+    common_vendor.index.__f__("log", "at App.vue:230", "App Hide");
   }
 };
+const pinia = common_vendor.createPinia();
 function createApp() {
   const app = common_vendor.createSSRApp(_sfc_main);
   app.mixin(utils_Share.Share);
+  app.use(pinia);
   return {
     app
   };

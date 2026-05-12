@@ -1,0 +1,173 @@
+
+.city-detail-page.data-v-f8530dd0 {
+		background-color: #f8f9fa;
+		min-height: 100vh;
+		font-size: 14px;
+		padding-bottom: 40px;
+}
+.page-header.data-v-f8530dd0 {
+		padding: 15px 16px;
+		background-color: #fff;
+		display: flex;
+		align-items: center;
+		border-bottom: 1px solid #f5f5f5;
+}
+.back-btn.data-v-f8530dd0 {
+		font-size: 14px;
+		color: #4285F4;
+		margin-right: 15px;
+}
+.header-title.data-v-f8530dd0 {
+		font-size: 16px;
+		font-weight: 500;
+		color: #2d3748;
+}
+
+	/* 核心卡片容器 - 渐变背景+强立体感 */
+.summary-card.data-v-f8530dd0 {
+	  display: flex;
+	  flex-direction: column;
+	  /* 橙色调渐变背景，瞬间抓住注意力 */
+	  background: linear-gradient(135deg, #FFF8F0 0%, #FFFAF5 100%);
+	  /* 圆角优化，更圆润有质感 */
+	  border-radius: 12rpx;
+	  /* 增强阴影，提升立体感 */
+	  box-shadow: 0 4rpx 20rpx rgba(255, 125, 0, 0.12);
+	  /* 适度增加上下内边距，提升呼吸感 */
+	  padding: 25rpx 0;
+	  margin: 0 auto;
+	  margin-bottom: 10rpx;
+	  width: 90%;
+	  box-sizing: border-box;
+	  /* 边框点缀，强化卡片轮廓 */
+	  border: 1rpx solid #FFE8D0;
+}
+	
+	/* 单个数据项 - 优化间距和分隔 */
+.summary-item.data-v-f8530dd0 {
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	  /* 增加项内左右内边距，避免内容拥挤 */
+	  padding: 20rpx 25rpx;
+	  position: relative;
+}
+	
+	/* 分隔线 - 渐变细线条，更精致 */
+.summary-item.data-v-f8530dd0:not(:last-child)::after {
+	  content: '';
+	  position: absolute;
+	  left: 25rpx;
+	  bottom: 0;
+	  width: calc(100% - 50rpx);
+	  height: 1rpx;
+	  background: linear-gradient(90deg, transparent 0%, #FFE0C0 50%, transparent 100%);
+}
+	
+	/* 数据标签 - 强化视觉，加小图标点缀 */
+.summary-label.data-v-f8530dd0 {
+	  display: flex;
+	  align-items: center;
+	  font-size: 30rpx;
+	  color: #555555;
+	  font-weight: 600;
+	  /* 标签文字间距，提升可读性 */
+	  letter-spacing: 0.8rpx;
+}
+	
+	/* 标签前的小图标（可选，增强辨识度） */
+.summary-label .iconfont.data-v-f8530dd0 {
+	  color: #FF7D00;
+	  font-size: 28rpx;
+	  margin-right: 12rpx;
+}
+	
+	/* 数据数值 - 极致醒目，视觉焦点 */
+.summary-value.data-v-f8530dd0 {
+	  font-size: 42rpx; /* 大幅放大数值 */
+	  font-weight: 800; /* 超粗体，强化冲击感 */
+	  color: #FF7D00; /* 主色加深，更醒目 */
+	  text-align: right;
+	  white-space: nowrap;
+	  /* 数值轻微发光效果，提升焦点 */
+	  text-shadow: 0 0 8rpx rgba(255, 125, 0, 0.15);
+	  /* 数值位置微调，更贴合视觉中心 */
+	  transform: translateY(1rpx);
+}
+	
+	/* 可选：消费总额数值加特殊样式，突出核心数据 */
+.summary-item:last-child .summary-value.data-v-f8530dd0 {
+	  color: #E86800; /* 更深的橙色，突出核心数据 */
+	  font-size: 44rpx;
+}
+.content-container.data-v-f8530dd0 {
+		width: 92%;
+		margin: 0 auto;
+}
+.empty-tip.data-v-f8530dd0 {
+		text-align: center;
+		padding: 60px 0;
+		color: #999;
+}
+.card-list.data-v-f8530dd0 {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: 12px;
+		margin-bottom: 15px;
+}
+.district-card.data-v-f8530dd0 {
+		background-color: #fff;
+		border-radius: 12px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+		padding: 15px;
+		cursor: pointer;
+}
+.card-header.data-v-f8530dd0 {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 10px;
+		padding-bottom: 6px;
+		border-bottom: 1px solid #f5f5f5;
+}
+.card-title.data-v-f8530dd0 {
+		font-size: 15px;
+		font-weight: 500;
+		color: #2d3748;
+}
+.card-body.data-v-f8530dd0 {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 8px;
+}
+.card-item.data-v-f8530dd0 {
+		text-align: center;
+}
+.item-label.data-v-f8530dd0 {
+		font-size: 11px;
+		color: #718096;
+		margin-bottom: 4px;
+}
+.item-value.data-v-f8530dd0 {
+		font-size: 14px;
+		font-weight: 500;
+		color: #2d3748;
+}
+.load-more.data-v-f8530dd0 {
+		text-align: center;
+		padding: 15px 0;
+		font-size: 13px;
+		color: #4285F4;
+		cursor: pointer;
+}
+
+	/* 响应式适配 */
+@media (max-width: 767px) {
+.summary-card.data-v-f8530dd0 {
+			flex-direction: column;
+			gap: 10px;
+}
+.card-list.data-v-f8530dd0 {
+			grid-template-columns: 1fr;
+}
+}

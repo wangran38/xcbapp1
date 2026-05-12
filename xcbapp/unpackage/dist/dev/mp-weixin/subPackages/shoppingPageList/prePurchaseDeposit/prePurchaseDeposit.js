@@ -108,7 +108,7 @@ const _sfc_main = {
       this.productImages = [this.product.imglogo];
       data.data.listdata.forEach((item) => {
         if (item.imgs.split(",").length > 1 && this.productImages.length < 10) {
-          common_vendor.index.__f__("log", "at subPackages/shoppingPageList/prePurchaseDeposit/prePurchaseDeposit.vue:336", item.imgs.split(","));
+          common_vendor.index.__f__("log", "at subPackages/shoppingPageList/prePurchaseDeposit/prePurchaseDeposit.vue:335", item.imgs.split(","));
           this.productImages = [...this.productImages, ...item.imgs.split(",")];
         }
       });
@@ -198,7 +198,7 @@ const _sfc_main = {
           this.fromData.goods_arr = [];
         }
       } catch (err) {
-        common_vendor.index.__f__("error", "at subPackages/shoppingPageList/prePurchaseDeposit/prePurchaseDeposit.vue:439", "提交订单异常：", err);
+        common_vendor.index.__f__("error", "at subPackages/shoppingPageList/prePurchaseDeposit/prePurchaseDeposit.vue:438", "提交订单异常：", err);
         common_vendor.index.showToast({
           title: "网络异常，请稍后重试",
           icon: "error",
@@ -255,7 +255,7 @@ const _sfc_main = {
           });
         }
       } catch (err) {
-        common_vendor.index.__f__("error", "at subPackages/shoppingPageList/prePurchaseDeposit/prePurchaseDeposit.vue:504", "支付异常：", err);
+        common_vendor.index.__f__("error", "at subPackages/shoppingPageList/prePurchaseDeposit/prePurchaseDeposit.vue:503", "支付异常：", err);
         common_vendor.index.showToast({
           title: "支付服务异常",
           icon: "error",
@@ -294,7 +294,7 @@ const _sfc_main = {
           });
         }
       } catch (err) {
-        common_vendor.index.__f__("error", "at subPackages/shoppingPageList/prePurchaseDeposit/prePurchaseDeposit.vue:548", "绑定OpenID异常：", err);
+        common_vendor.index.__f__("error", "at subPackages/shoppingPageList/prePurchaseDeposit/prePurchaseDeposit.vue:547", "绑定OpenID异常：", err);
         common_vendor.index.showToast({
           title: "绑定服务异常",
           icon: "none",

@@ -120,45 +120,34 @@ if (!Math) {
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return common_vendor.e({
-    a: common_vendor.p({
-      type: "gift",
-      size: "24",
-      color: "#FF7A45"
-    }),
-    b: common_vendor.o((...args) => $options.showInvitePoster && $options.showInvitePoster(...args)),
-    c: $data.inviteRecords.length > 0
+    a: common_vendor.o((...args) => $options.showInvitePoster && $options.showInvitePoster(...args)),
+    b: $data.inviteRecords.length > 0
   }, $data.inviteRecords.length > 0 ? {
-    d: common_vendor.f($data.inviteRecords, (item, index, i0) => {
+    c: common_vendor.f($data.inviteRecords, (item, index, i0) => {
       return {
         a: common_vendor.t(_ctx.hidePhone(item.phone)),
         b: common_vendor.t(_ctx.initTime(item.Created)),
         c: index
       };
     }),
-    e: common_vendor.n("status-pending"),
-    f: common_vendor.o((...args) => $options.changePage && $options.changePage(...args))
+    d: common_vendor.n("status-pending"),
+    e: common_vendor.o((...args) => $options.changePage && $options.changePage(...args))
   } : {
-    g: common_vendor.p({
+    f: common_vendor.p({
       type: "empty",
       size: "48",
       color: "#ccc"
     })
   }, {
-    h: common_vendor.p({
-      type: "right",
-      size: "18",
-      color: "#999"
-    }),
-    i: common_vendor.o(($event) => $options.routePush("/pages/earningsRecord/earningsRecord")),
-    j: common_vendor.p({
+    g: common_vendor.p({
       title: "邀请规则说明",
       ["title-style"]: {
         fontSize: "24rpx",
         color: "#666"
       }
     }),
-    k: common_vendor.o($options.loadInviteCode),
-    l: common_vendor.sr("posterPopup", "d9b3f790-5")
+    h: common_vendor.o($options.loadInviteCode),
+    i: common_vendor.sr("posterPopup", "d9b3f790-3")
   });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-d9b3f790"]]);

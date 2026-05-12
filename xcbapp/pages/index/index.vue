@@ -174,7 +174,7 @@
 	.nav-scroll-view {
 		.nav-card-list {
 			display: flex;
-			padding: 10rpx 0 20rpx;
+			// padding: 10rpx 0 20rpx;
 			.nav-item-card {
 				flex-shrink: 0;
 				width: 240rpx;

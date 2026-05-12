@@ -66,7 +66,7 @@ const fetch = (url, method, data = {}, headers = {}) => {
       },
       fail: (err) => {
         reject(err);
-        common_vendor.index.__f__("log", "at api/index.js:131", "error", err);
+        common_vendor.index.__f__("log", "at api/index.js:133", "error", err);
       }
     });
   });
@@ -369,7 +369,7 @@ const api = {
   delMoments(data) {
     return fetch("/api/farmers/goodsinfo/del", "POST", data);
   },
-  // 删除列表
+  // 农户列表
   farmersList(data) {
     return fetch("/api/farmers/list", "POST", data);
   },
@@ -483,12 +483,50 @@ const api = {
     return fetch("/api/agentuser/add", "POST", data);
   },
   // 查看代理商信息
-  viewAgentInfo(data) {
-    return fetch("/api/agentuser/info", "POST", data);
+  viewAgentInfo() {
+    return fetch("/api/agentuser/info", "POST");
   },
-  // 邀请用户收益
+  // 用户推广收益
   userRevenue(data) {
     return fetch("/api/my/getusermoneylist", "POST", data);
+  },
+  // 商家推广收益
+  merchantRevenue(data) {
+    return fetch("/api/my/getshopusermoneylist", "POST", data);
+  },
+  // 市县代理商推广收益
+  cityAgentRevenue(data) {
+    return fetch("/api/my/getcitymoneylist", "POST", data);
+  },
+  /**
+   * 暂时不使用
+   */
+  appWeiXin(data) {
+    return fetch("/api/app/pay", "POST", data);
+  },
+  /**
+   *省级代理商收益接口
+   */
+  getpromoneylist(data) {
+    return fetch("/api/my/getpromoneylist", "POST", data);
+  },
+  /**
+   * 获取省级代理商的下辖市县统计
+   */
+  getprogetsumall() {
+    return fetch("/api/my/progetsumall", "POST");
+  },
+  /**
+   * 获取收益订单详细接口
+   */
+  getMoneyalllist(data) {
+    return fetch("/api/get/moneyalllist", "POST", data);
+  },
+  /**
+   * 求购批发统计
+   */
+  buysellTotal(data) {
+    return fetch("/api/buysell/total", "POST", data);
   }
 };
 const request = {

@@ -141,7 +141,7 @@ const _sfc_main = {
         ctx.drawImage(imgPath, qrX, qrY, qrSize, qrSize);
         ctx.draw();
       } catch (err) {
-        common_vendor.index.__f__("error", "at components/poster.vue:184", "绘制失败：", err);
+        common_vendor.index.__f__("error", "at components/poster.vue:186", "绘制失败：", err);
         common_vendor.index.showToast({ title: "绘制失败", icon: "none" });
       }
     }

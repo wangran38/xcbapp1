@@ -38,7 +38,7 @@
 /**
  * 请在全局下引入该文件，@import '/static/wxParse.css';
  */
-.wxParse {
+.wxParse.data-v-1390a306 {
   -webkit-user-select: none;
           user-select: none;
   width: 100%;
@@ -49,76 +49,76 @@
   text-align: justify;
   /* //左右两端对齐 */
 }
-.wxParse view, .wxParse uni-view {
+.wxParse view.data-v-1390a306, .wxParse uni-view.data-v-1390a306 {
   word-break: break-word;
 }
-.wxParse .p {
+.wxParse .p.data-v-1390a306 {
   padding-bottom: 0.5em;
   clear: both;
   /* letter-spacing: 0;//字间距 */
 }
-.wxParse .inline {
+.wxParse .inline.data-v-1390a306 {
   display: inline;
   margin: 0;
   padding: 0;
 }
-.wxParse .div {
+.wxParse .div.data-v-1390a306 {
   margin: 0;
   padding: 0;
   display: block;
 }
-.wxParse .h1 {
+.wxParse .h1.data-v-1390a306 {
   font-size: 2em;
   line-height: 1.2em;
   margin: 0.67em 0;
 }
-.wxParse .h2 {
+.wxParse .h2.data-v-1390a306 {
   font-size: 1.5em;
   margin: 0.83em 0;
 }
-.wxParse .h3 {
+.wxParse .h3.data-v-1390a306 {
   font-size: 1.17em;
   margin: 1em 0;
 }
-.wxParse .h4 {
+.wxParse .h4.data-v-1390a306 {
   margin: 1.33em 0;
 }
-.wxParse .h5 {
+.wxParse .h5.data-v-1390a306 {
   font-size: 0.83em;
   margin: 1.67em 0;
 }
-.wxParse .h6 {
+.wxParse .h6.data-v-1390a306 {
   font-size: 0.83em;
   margin: 1.67em 0;
 }
-.wxParse .h1,
-.wxParse .h2,
-.wxParse .h3,
-.wxParse .h4,
-.wxParse .h5,
-.wxParse .h6,
-.wxParse .b,
-.wxParse .strong {
+.wxParse .h1.data-v-1390a306,
+.wxParse .h2.data-v-1390a306,
+.wxParse .h3.data-v-1390a306,
+.wxParse .h4.data-v-1390a306,
+.wxParse .h5.data-v-1390a306,
+.wxParse .h6.data-v-1390a306,
+.wxParse .b.data-v-1390a306,
+.wxParse .strong.data-v-1390a306 {
   font-weight: bolder;
 }
-.wxParse .i,
-.wxParse .cite,
-.wxParse .em,
-.wxParse .var,
-.wxParse .address {
+.wxParse .i.data-v-1390a306,
+.wxParse .cite.data-v-1390a306,
+.wxParse .em.data-v-1390a306,
+.wxParse .var.data-v-1390a306,
+.wxParse .address.data-v-1390a306 {
   font-style: italic;
 }
-.wxParse .spaceshow {
+.wxParse .spaceshow.data-v-1390a306 {
   white-space: pre;
 }
-.wxParse .pre,
-.wxParse .tt,
-.wxParse .code,
-.wxParse .kbd,
-.wxParse .samp {
+.wxParse .pre.data-v-1390a306,
+.wxParse .tt.data-v-1390a306,
+.wxParse .code.data-v-1390a306,
+.wxParse .kbd.data-v-1390a306,
+.wxParse .samp.data-v-1390a306 {
   font-family: monospace;
 }
-.wxParse .pre {
+.wxParse .pre.data-v-1390a306 {
   overflow: auto;
   background: #f5f5f5;
   padding: 16rpx;
@@ -126,7 +126,7 @@
   margin: 1em 0rpx;
   font-size: 24rpx;
 }
-.wxParse .code {
+.wxParse .code.data-v-1390a306 {
   overflow: auto;
   padding: 16rpx;
   white-space: pre;
@@ -134,46 +134,46 @@
   background: #f5f5f5;
   font-size: 24rpx;
 }
-.wxParse .big {
+.wxParse .big.data-v-1390a306 {
   font-size: 1.17em;
 }
-.wxParse .small,
-.wxParse .sub,
-.wxParse .sup {
+.wxParse .small.data-v-1390a306,
+.wxParse .sub.data-v-1390a306,
+.wxParse .sup.data-v-1390a306 {
   font-size: 0.83em;
 }
-.wxParse .sub {
+.wxParse .sub.data-v-1390a306 {
   vertical-align: sub;
 }
-.wxParse .sup {
+.wxParse .sup.data-v-1390a306 {
   vertical-align: super;
 }
-.wxParse .s,
-.wxParse .strike,
-.wxParse .del {
+.wxParse .s.data-v-1390a306,
+.wxParse .strike.data-v-1390a306,
+.wxParse .del.data-v-1390a306 {
   text-decoration: line-through;
 }
-.wxParse .strong,
-.wxParse .text,
-.wxParse .span,
-.wxParse .s {
+.wxParse .strong.data-v-1390a306,
+.wxParse .text.data-v-1390a306,
+.wxParse .span.data-v-1390a306,
+.wxParse .s.data-v-1390a306 {
   display: inline;
 }
-.wxParse .a {
+.wxParse .a.data-v-1390a306 {
   color: deepskyblue;
 }
-.wxParse .video {
+.wxParse .video.data-v-1390a306 {
   text-align: center;
   margin: 22rpx 0;
 }
-.wxParse .video-video {
+.wxParse .video-video.data-v-1390a306 {
   width: 100%;
 }
-.wxParse .uni-image {
+.wxParse .uni-image.data-v-1390a306 {
   height: 100px !important;
   width: 100px !important;
 }
-.wxParse .img {
+.wxParse .img.data-v-1390a306 {
   height: 600rpx !important;
   display: block;
   height: 100rpx;
@@ -181,63 +181,63 @@
   /* //与p标签底部padding同时修改 */
   overflow: hidden;
 }
-.wxParse .blockquote {
+.wxParse .blockquote.data-v-1390a306 {
   margin: 10rpx 0;
   padding: 22rpx 0 22rpx 22rpx;
   font-family: Courier, Calibri, "宋体";
   background: #f5f5f5;
   border-left: 6rpx solid #dbdbdb;
 }
-.wxParse .blockquote .p {
+.wxParse .blockquote .p.data-v-1390a306 {
   margin: 0;
 }
-.wxParse .ul, .wxParse .ol {
+.wxParse .ul.data-v-1390a306, .wxParse .ol.data-v-1390a306 {
   display: block;
   margin: 1em 0;
   padding-left: 2em;
 }
-.wxParse .ol {
+.wxParse .ol.data-v-1390a306 {
   list-style-type: disc;
 }
-.wxParse .ol {
+.wxParse .ol.data-v-1390a306 {
   list-style-type: decimal;
 }
-.wxParse .ol > weixin-parse-template, .wxParse .ul > weixin-parse-template {
+.wxParse .ol > weixin-parse-template.data-v-1390a306, .wxParse .ul > weixin-parse-template.data-v-1390a306 {
   display: list-item;
   align-items: baseline;
   text-align: match-parent;
 }
-.wxParse .ol > .li, .wxParse .ul > .li {
+.wxParse .ol > .li.data-v-1390a306, .wxParse .ul > .li.data-v-1390a306 {
   display: list-item;
   align-items: baseline;
   text-align: match-parent;
 }
-.wxParse .ul .ul, .wxParse .ol .ul {
+.wxParse .ul .ul.data-v-1390a306, .wxParse .ol .ul.data-v-1390a306 {
   list-style-type: circle;
 }
-.wxParse .ol .ol .ul, .wxParse .ol .ul .ul, .wxParse .ul .ol .ul, .wxParse .ul .ul .ul {
+.wxParse .ol .ol .ul.data-v-1390a306, .wxParse .ol .ul .ul.data-v-1390a306, .wxParse .ul .ol .ul.data-v-1390a306, .wxParse .ul .ul .ul.data-v-1390a306 {
   list-style-type: square;
 }
-.wxParse .u {
+.wxParse .u.data-v-1390a306 {
   text-decoration: underline;
 }
-.wxParse .hide {
+.wxParse .hide.data-v-1390a306 {
   display: none;
 }
-.wxParse .del {
+.wxParse .del.data-v-1390a306 {
   display: inline;
 }
-.wxParse .figure {
+.wxParse .figure.data-v-1390a306 {
   overflow: hidden;
 }
-.wxParse .tablebox {
+.wxParse .tablebox.data-v-1390a306 {
   overflow: auto;
   background-color: #f5f5f5;
   background: #f5f5f5;
   font-size: 13px;
   padding: 8px;
 }
-.wxParse .table .table, .wxParse .table {
+.wxParse .table .table.data-v-1390a306, .wxParse .table.data-v-1390a306 {
   border-collapse: collapse;
   box-sizing: border-box;
   /* 内边框 */
@@ -245,200 +245,215 @@
   overflow: auto;
   white-space: pre;
 }
-.wxParse .tbody {
+.wxParse .tbody.data-v-1390a306 {
   border-collapse: collapse;
   box-sizing: border-box;
   /* 内边框 */
   border: 1px solid #dadada;
 }
-.wxParse .table .thead, .wxParse .table .tfoot, .wxParse .table .th {
+.wxParse .table .thead.data-v-1390a306, .wxParse .table .tfoot.data-v-1390a306, .wxParse .table .th.data-v-1390a306 {
   border-collapse: collapse;
   box-sizing: border-box;
   background: #ececec;
   font-weight: 40;
 }
-.wxParse .table .tr {
+.wxParse .table .tr.data-v-1390a306 {
   border-collapse: collapse;
   box-sizing: border-box;
   /* border: 2px solid #F0AD4E; */
   overflow: auto;
 }
-.wxParse .table .th,
-.wxParse .table .td {
+.wxParse .table .th.data-v-1390a306,
+.wxParse .table .td.data-v-1390a306 {
   border-collapse: collapse;
   box-sizing: border-box;
   border: 2rpx solid #dadada;
   overflow: auto;
 }
-.wxParse .audio, .wxParse .uni-audio-default {
+.wxParse .audio.data-v-1390a306, .wxParse .uni-audio-default.data-v-1390a306 {
   display: block;
 }
-.container {
-  background: #f8f9fa;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-.info-scroll {
-  flex: 1;
+.container.data-v-1390a306 {
+  background: #f7f8fa;
+  min-height: 100vh;
   padding: 20rpx;
+  box-sizing: border-box;
 }
-.license-card {
+
+/* 农户信息卡片 */
+.info-card.data-v-1390a306 {
   background: #fff;
-  border-radius: 16rpx;
-  padding: 24rpx;
-  margin-bottom: 24rpx;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.05);
 }
-.license-card .section-title {
-  font-size: 32rpx;
+.info-card .card-title.data-v-1390a306 {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  font-size: 30rpx;
+  font-weight: 600;
   color: #333;
   margin-bottom: 20rpx;
 }
-.license-card .license-image {
-  width: 100%;
-  border-radius: 8rpx;
-  margin-bottom: 20rpx;
-}
-.license-card .license-info {
-  font-size: 28rpx;
-  color: #666;
-  line-height: 1.6;
-}
-.info-card {
-  background: #fff;
-  border-radius: 16rpx;
-  padding: 24rpx;
-  margin-bottom: 24rpx;
-}
-.info-card .info-item {
+.info-card .info-item.data-v-1390a306 {
   display: flex;
   align-items: center;
-  padding: 20rpx 0;
-  border-bottom: 1rpx solid #eee;
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #f2f3f5;
+  font-size: 28rpx;
+  color: #333;
 }
-.info-card .info-item:last-child {
+.info-card .info-item.data-v-1390a306:last-child {
   border: none;
 }
-.info-card .info-item .label {
-  color: #666;
+.info-card .info-item .label.data-v-1390a306 {
   margin: 0 16rpx;
-}
-.cert-section {
-  background: #fff;
-  border-radius: 16rpx;
-  padding: 24rpx;
-  display: flex;
-  justify-content: space-around;
-}
-.cert-section .cert-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.cert-section .cert-item .cert-icon {
-  width: 80rpx;
-  height: 80rpx;
-  margin-bottom: 12rpx;
-}
-.cert-section .cert-item .cert-text {
-  font-size: 24rpx;
   color: #666;
 }
-.presale-section {
-  background: #fff;
-  border-radius: 24rpx 24rpx 0 0;
-  padding: 24rpx;
-  box-shadow: 0 -4rpx 12rpx rgba(0, 0, 0, 0.05);
+
+/* 地图 */
+.map-container.data-v-1390a306 {
+  border-radius: 24rpx;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.05);
 }
-.presale-section .section-header {
+
+/* 菜园监控入口 */
+.monitor-card.data-v-1390a306 {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.05);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24rpx;
 }
-.presale-section .section-header .title {
-  font-size: 34rpx;
-  font-weight: bold;
+.monitor-card .monitor-left.data-v-1390a306 {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
 }
-.presale-section .section-header .count {
+.monitor-card .monitor-title.data-v-1390a306 {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+}
+.monitor-card .monitor-desc.data-v-1390a306 {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 预售商品 */
+.presale-section.data-v-1390a306 {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 30rpx;
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.05);
+}
+.presale-section .section-header.data-v-1390a306 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+.presale-section .section-header .title.data-v-1390a306 {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+.presale-section .section-header .count.data-v-1390a306 {
   color: #999;
   font-size: 26rpx;
 }
-.presale-section .goods-grid {
+.presale-section .goods-grid.data-v-1390a306 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20rpx;
+  gap: 24rpx;
 }
-.presale-section .goods-item {
+.presale-section .goods-item.data-v-1390a306 {
   background: #fff;
-  border-radius: 12rpx;
+  border-radius: 16rpx;
   overflow: hidden;
   position: relative;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.06);
 }
-.presale-section .goods-item .presale-tag {
+.presale-section .goods-item .presale-tag.data-v-1390a306 {
   position: absolute;
   top: 10rpx;
   left: 10rpx;
-  background: #ff5a5f;
+  background: #00C26E;
   color: #fff;
-  padding: 4rpx 16rpx;
+  padding: 6rpx 12rpx;
   border-radius: 8rpx;
-  font-size: 24rpx;
+  font-size: 22rpx;
   z-index: 2;
 }
-.presale-section .goods-item .goods-image {
+.presale-section .goods-item .goods-image.data-v-1390a306 {
   width: 100%;
-  height: 300rpx;
+  height: 280rpx;
+  object-fit: cover;
 }
-.presale-section .goods-item .goods-info {
+.presale-section .goods-item .goods-info.data-v-1390a306 {
   padding: 20rpx;
 }
-.presale-section .goods-item .goods-info .goods-title {
-  font-size: 28rpx;
+.presale-section .goods-item .goods-info .goods-title.data-v-1390a306 {
+  font-size: 26rpx;
   color: #333;
   line-height: 1.4;
+  height: 72rpx;
+  overflow: hidden;
 }
-.presale-section .goods-item .goods-info .price-row {
-  margin: 16rpx 0;
+.presale-section .goods-item .goods-info .price-row.data-v-1390a306 {
+  margin: 12rpx 0;
   display: flex;
   align-items: baseline;
 }
-.presale-section .goods-item .goods-info .price-row .presale-price {
-  color: #ff5a5f;
-  font-size: 34rpx;
+.presale-section .goods-item .goods-info .price-row .presale-price.data-v-1390a306 {
+  color: #00C26E;
+  font-size: 30rpx;
   font-weight: bold;
-  margin-right: 16rpx;
 }
-.presale-section .goods-item .goods-info .price-row .original-price {
+.presale-section .goods-item .goods-info .price-row .original-price.data-v-1390a306 {
   color: #999;
-  font-size: 24rpx;
+  font-size: 22rpx;
   text-decoration: line-through;
+  margin-left: 8rpx;
 }
-.presale-section .goods-item .goods-info .progress-row {
-  margin-bottom: 16rpx;
+.presale-section .goods-item .goods-info .progress-row.data-v-1390a306 {
+  margin-bottom: 12rpx;
 }
-.presale-section .goods-item .goods-info .progress-row .progress-bar {
-  height: 8rpx;
-  background: #eee;
-  border-radius: 4rpx;
-  overflow: hidden;
-}
-.presale-section .goods-item .goods-info .progress-row .progress-bar .progress {
-  height: 100%;
-  background: #7A9D7E;
-  transition: width 0.3s;
-}
-.presale-section .goods-item .goods-info .progress-row .sold-text {
-  font-size: 24rpx;
+.presale-section .goods-item .goods-info .progress-row .sold-text.data-v-1390a306 {
+  font-size: 22rpx;
   color: #666;
-  margin-top: 8rpx;
+  margin-top: 6rpx;
 }
-.presale-section .goods-item .goods-info .countdown {
+.presale-section .goods-item .goods-info .countdown.data-v-1390a306 {
   display: flex;
   align-items: center;
   color: #999;
-  font-size: 24rpx;
+  font-size: 22rpx;
+  margin-bottom: 16rpx;
 }
-.presale-section .goods-item .goods-info .countdown uni-icons {
-  margin-right: 8rpx;
+.presale-section .buy-btn.data-v-1390a306 {
+  background-color: #3A7AFE;
+  text-align: center;
+  border-radius: 12rpx;
+  padding: 12rpx;
+  color: white;
+  font-weight: bold;
+  font-size: 26rpx;
+}
+.presale-section .empty.data-v-1390a306 {
+  grid-column: 1/3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60rpx 0;
+  color: #999;
+  font-size: 26rpx;
+  gap: 16rpx;
 }

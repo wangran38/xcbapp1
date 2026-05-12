@@ -1,21 +1,190 @@
 
+	/* 横向滚动容器：基础样式 */
+.preview-container.data-v-7e7c2362 {
+		white-space: nowrap;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 20rpx 10rpx;
+		overflow-x: auto;
+		overflow-y: hidden;
+		-webkit-overflow-scrolling: touch;
+		/* 开启弹性滚动，提升体验 */
+}
+
+	/* 媒体项：统一尺寸、圆角，inline-block保证横向排列 */
+.preview-item.data-v-7e7c2362 {
+		display: inline-block;
+		width: 200rpx;
+		height: 200rpx;
+		margin-right: 15rpx;
+		position: relative;
+		border-radius: 12rpx;
+		overflow: hidden;
+}
+
+	/* 媒体包裹层：占满容器 */
+.media-wrap.data-v-7e7c2362 {
+		width: 100%;
+		height: 100%;
+}
+
+	/* 图片/视频封面：铺满，不变形 */
 .media-content.data-v-7e7c2362 {
-	  width: 100%;
-	  height: 100%;
+		width: 100%;
+		height: 100%;
+		display: block;
+}
+
+	/* 视频包裹层：相对定位，用于放置播放图标 */
+.video-wrap.data-v-7e7c2362 {
+		position: relative;
+}
+
+	/* 视频播放图标：居中、半透明背景，提升辨识度 */
+.video-play-icon.data-v-7e7c2362 {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: rgba(0, 0, 0, 0.6);
+		border-radius: 50%;
+		padding: 15rpx;
+}
+
+	/* 隐藏备用video标签，仅保留路径 */
+.video-hide.data-v-7e7c2362 {
+		display: none;
+}
+
+	/* 删除按钮：悬浮在右上角，高层级不被覆盖 */
+.delete-icon.data-v-7e7c2362 {
+		position: absolute;
+		top: -10rpx;
+		right: -10rpx;
+		width: 40rpx;
+		height: 40rpx;
+		background: #ff3333;
+		color: #ffffff;
+		text-align: center;
+		line-height: 40rpx;
+		border-radius: 50%;
+		font-size: 28rpx;
+		z-index: 99;
+}
+
+	/* 按钮、输入框、悬浮按钮样式：统一美观 */
+.action-button.data-v-7e7c2362 {
+		background: #007aff;
+		color: #fff;
+		border: none;
+		padding: 15rpx 30rpx;
+		border-radius: 8rpx;
+		margin-bottom: 20rpx;
+}
+.record-textarea.data-v-7e7c2362 {
+		width: 100%;
+		height: 200rpx;
+		border: 1rpx solid #e5e5e5;
+		border-radius: 8rpx;
+		padding: 15rpx;
+		box-sizing: border-box;
+		margin-bottom: 20rpx;
+		font-size: 28rpx;
+}
+.confirm-button.data-v-7e7c2362 {
+		background: #007aff;
+		color: #fff;
+		border: none;
+		padding: 20rpx 0;
+		border-radius: 8rpx;
+		width: 100%;
+		font-size: 30rpx;
 }
 .float-btn.data-v-7e7c2362 {
-	  position: fixed;
-	  bottom: 100rpx;
-	  right: 40rpx;
-	  width: 100rpx;
-	  height: 100rpx;
-	  background: linear-gradient(45deg, #FF8E8E, #FF6B6B);
-	  border-radius: 50%;
-	  display: flex;
-	  align-items: center;
-	  justify-content: center;
-	  box-shadow: 0 12rpx 24rpx rgba(255,107,107,0.3);
-	  transition: transform 0.3s;
+		position: fixed;
+		bottom: 50rpx;
+		right: 30rpx;
+		width: 80rpx;
+		height: 80rpx;
+		background: #007aff;
+		border-radius: 50%;
+		text-align: center;
+		line-height: 80rpx;
+		box-shadow: 0 2rpx 10rpx rgba(0, 122, 255, 0.3);
+}
+
+	/* 时间线、空状态样式：保留原有即可，可根据项目调整 */
+.timeline-container.data-v-7e7c2362 {
+		padding: 20rpx;
+}
+.timeline-item.data-v-7e7c2362 {
+		display: flex;
+		margin-bottom: 30rpx;
+}
+.timeline-marker.data-v-7e7c2362 {
+		margin-right: 20rpx;
+}
+.marker-icon.data-v-7e7c2362 {
+		width: 50rpx;
+		height: 50rpx;
+		background: #007aff;
+		border-radius: 50%;
+		text-align: center;
+		line-height: 50rpx;
+}
+.timeline-connector.data-v-7e7c2362 {
+		width: 2rpx;
+		height: calc(100% + 30rpx);
+		background: #e5e5e5;
+		margin-left: 24rpx;
+}
+.nature-card.data-v-7e7c2362 {
+		flex: 1;
+		background: #fff;
+		border-radius: 12rpx;
+		padding: 20rpx;
+		box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+.date-label.data-v-7e7c2362 {
+		font-size: 30rpx;
+		font-weight: 500;
+		color: #333;
+}
+.content-text.data-v-7e7c2362 {
+		font-size: 28rpx;
+		color: #666;
+		margin: 10rpx 0;
+		display: block;
+}
+.status-tag.data-v-7e7c2362 {
+		font-size: 24rpx;
+		color: #00c853;
+}
+.empty-state.data-v-7e7c2362 {
+		text-align: center;
+		padding: 100rpx 0;
+		color: #999;
+		font-size: 28rpx;
+}
+
+
+.media-content.data-v-7e7c2362 {
+		width: 100%;
+		height: 100%;
+}
+.float-btn.data-v-7e7c2362 {
+		position: fixed;
+		bottom: 100rpx;
+		right: 40rpx;
+		width: 100rpx;
+		height: 100rpx;
+		background: linear-gradient(45deg, #FF8E8E, #FF6B6B);
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: 0 12rpx 24rpx rgba(255, 107, 107, 0.3);
+		transition: transform 0.3s;
 }
 .preview-container.data-v-7e7c2362 {
 		white-space: nowrap;

@@ -147,11 +147,11 @@ const _sfc_main = {
           this.cityList = response.data;
           return response.data;
         } else {
-          common_vendor.index.__f__("error", "at subPackages/Wholesale/addSupply/addSupply.vue:157", "No cities data found");
+          common_vendor.index.__f__("error", "at subPackages/Wholesale/addSupply/addSupply.vue:217", "No cities data found");
           return [];
         }
       } catch (error) {
-        common_vendor.index.__f__("error", "at subPackages/Wholesale/addSupply/addSupply.vue:161", "Failed to fetch cities:", error);
+        common_vendor.index.__f__("error", "at subPackages/Wholesale/addSupply/addSupply.vue:221", "Failed to fetch cities:", error);
         return [];
       }
     },
@@ -162,11 +162,11 @@ const _sfc_main = {
           this.districtList = response.data;
           return response.data;
         } else {
-          common_vendor.index.__f__("error", "at subPackages/Wholesale/addSupply/addSupply.vue:172", "No areas data found");
+          common_vendor.index.__f__("error", "at subPackages/Wholesale/addSupply/addSupply.vue:232", "No areas data found");
           return [];
         }
       } catch (error) {
-        common_vendor.index.__f__("error", "at subPackages/Wholesale/addSupply/addSupply.vue:176", "Failed to fetch areas:", error);
+        common_vendor.index.__f__("error", "at subPackages/Wholesale/addSupply/addSupply.vue:236", "Failed to fetch areas:", error);
         return [];
       }
     },
@@ -182,7 +182,7 @@ const _sfc_main = {
         }
         throw new Error("Failed to fetch provinces");
       } catch (error) {
-        common_vendor.index.__f__("error", "at subPackages/Wholesale/addSupply/addSupply.vue:193", "Failed to fetch provinces:", error);
+        common_vendor.index.__f__("error", "at subPackages/Wholesale/addSupply/addSupply.vue:253", "Failed to fetch provinces:", error);
         throw error;
       }
     },
@@ -196,7 +196,7 @@ const _sfc_main = {
         this.multiArray[2] = areas.map((item) => item.name);
         this.multiIndex = [0, 0, 0];
       } catch (error) {
-        common_vendor.index.__f__("log", "at subPackages/Wholesale/addSupply/addSupply.vue:207", error);
+        common_vendor.index.__f__("log", "at subPackages/Wholesale/addSupply/addSupply.vue:267", error);
       }
     },
     // 上传菜品图片
@@ -207,7 +207,7 @@ const _sfc_main = {
         sourceType: ["album", "camera"],
         success: async (res) => {
           const tempFilePaths = res.tempFilePaths;
-          common_vendor.index.__f__("log", "at subPackages/Wholesale/addSupply/addSupply.vue:219", res);
+          common_vendor.index.__f__("log", "at subPackages/Wholesale/addSupply/addSupply.vue:279", res);
           if (tempFilePaths.length > 0) {
             const {
               upload,
@@ -247,8 +247,153 @@ const _sfc_main = {
     }
   }
 };
+if (!Array) {
+  const _easycom_uni_easyinput2 = common_vendor.resolveComponent("uni-easyinput");
+  const _easycom_uni_forms_item2 = common_vendor.resolveComponent("uni-forms-item");
+  const _easycom_uni_data_select2 = common_vendor.resolveComponent("uni-data-select");
+  const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
+  const _easycom_uni_card2 = common_vendor.resolveComponent("uni-card");
+  const _easycom_uni_forms2 = common_vendor.resolveComponent("uni-forms");
+  (_easycom_uni_easyinput2 + _easycom_uni_forms_item2 + _easycom_uni_data_select2 + _easycom_uni_icons2 + _easycom_uni_card2 + _easycom_uni_forms2)();
+}
+const _easycom_uni_easyinput = () => "../../../uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.js";
+const _easycom_uni_forms_item = () => "../../../uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.js";
+const _easycom_uni_data_select = () => "../../../uni_modules/uni-data-select/components/uni-data-select/uni-data-select.js";
+const _easycom_uni_icons = () => "../../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
+const _easycom_uni_card = () => "../../../uni_modules/uni-card/components/uni-card/uni-card.js";
+const _easycom_uni_forms = () => "../../../uni_modules/uni-forms/components/uni-forms/uni-forms.js";
+if (!Math) {
+  (_easycom_uni_easyinput + _easycom_uni_forms_item + _easycom_uni_data_select + _easycom_uni_icons + _easycom_uni_card + _easycom_uni_forms)();
+}
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {};
+  return {
+    a: common_vendor.o(($event) => $data.formData.selltitle = $event),
+    b: common_vendor.p({
+      placeholder: "输入商品名称",
+      modelValue: $data.formData.selltitle
+    }),
+    c: common_vendor.p({
+      label: "供应商品",
+      required: true,
+      name: "selltitle",
+      labelWidth: "80px"
+    }),
+    d: common_vendor.o(($event) => $data.formData.category_id = $event),
+    e: common_vendor.p({
+      localdata: $data.categories,
+      modelValue: $data.formData.category_id
+    }),
+    f: common_vendor.p({
+      label: "产品类目",
+      required: true,
+      name: "category",
+      labelWidth: "80px"
+    }),
+    g: common_vendor.o(common_vendor.m(($event) => $data.formData.sellnumber = $event, {
+      number: true
+    }, true)),
+    h: common_vendor.p({
+      placeholder: "输入库存",
+      modelValue: $data.formData.sellnumber
+    }),
+    i: common_vendor.p({
+      label: "库存",
+      required: true,
+      name: "category",
+      labelWidth: "80px"
+    }),
+    j: common_vendor.o(($event) => $data.formData.unit = $event),
+    k: common_vendor.p({
+      placeholder: "输入单位",
+      modelValue: $data.formData.unit
+    }),
+    l: common_vendor.p({
+      label: "单位",
+      required: true,
+      name: "category",
+      labelWidth: "80px"
+    }),
+    m: common_vendor.p({
+      type: "help-filled"
+    }),
+    n: common_vendor.o(common_vendor.m(($event) => $data.formData.price = $event, {
+      number: true
+    }, true)),
+    o: common_vendor.p({
+      placeholder: "输入市场价",
+      modelValue: $data.formData.price
+    }),
+    p: common_vendor.p({
+      label: "市场价",
+      required: true,
+      name: "category",
+      labelWidth: "80px"
+    }),
+    q: common_vendor.o(common_vendor.m(($event) => $data.formData.marketprice = $event, {
+      number: true
+    }, true)),
+    r: common_vendor.p({
+      placeholder: "输入批发价",
+      modelValue: $data.formData.marketprice
+    }),
+    s: common_vendor.p({
+      label: "批发价",
+      required: true,
+      name: "category",
+      labelWidth: "80px"
+    }),
+    t: common_vendor.t($data.multiArray[0][$data.multiIndex[0]]),
+    v: common_vendor.t($data.multiArray[1][$data.multiIndex[1]]),
+    w: common_vendor.t($data.selectedCountry === "overseas" ? "" : $data.multiArray[2][$data.multiIndex[2]]),
+    x: $data.multiArray,
+    y: $data.multiIndex,
+    z: common_vendor.o((...args) => $options.bindMultiPickerChange && $options.bindMultiPickerChange(...args)),
+    A: common_vendor.o((...args) => $options.bindMultiPickerColumnChange && $options.bindMultiPickerColumnChange(...args)),
+    B: common_vendor.p({
+      label: "供应地区",
+      required: true,
+      name: "category",
+      labelWidth: "80px"
+    }),
+    C: common_vendor.o(($event) => $data.formData.selladdress = $event),
+    D: common_vendor.p({
+      placeholder: "输入详细地址",
+      modelValue: $data.formData.selladdress
+    }),
+    E: common_vendor.p({
+      label: "详细地址",
+      required: true,
+      name: "category",
+      labelWidth: "80px"
+    }),
+    F: common_vendor.p({
+      title: "基本信息"
+    }),
+    G: !$data.formData.selllogo,
+    H: common_vendor.p({
+      type: "plusempty",
+      size: "50"
+    }),
+    I: $data.formData.selllogo,
+    J: $data.formData.selllogo,
+    K: common_vendor.o((...args) => $options.uploadcuisine && $options.uploadcuisine(...args)),
+    L: common_vendor.p({
+      title: "产品图片"
+    }),
+    M: $data.formData.content,
+    N: common_vendor.o(($event) => $data.formData.content = $event.detail.value),
+    O: common_vendor.p({
+      title: "供应说明"
+    }),
+    P: common_vendor.t($data.submitting ? "提交中..." : "立即发布"),
+    Q: common_vendor.o((...args) => $options.handleSubmit && $options.handleSubmit(...args)),
+    R: $data.submitting,
+    S: common_vendor.sr("formRef", "619b709c-0"),
+    T: common_vendor.p({
+      model: $data.formData,
+      rules: $data.formRules
+    })
+  };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);
 wx.createPage(MiniProgramPage);

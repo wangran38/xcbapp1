@@ -263,6 +263,12 @@
 					{
 						"navigationBarTitleText" : ""
 					}
+				},
+				{
+					"path": "gardenMonitor/gardenMonitor",
+					"style": {
+						"navigationBarTitleText": ""
+					}
 				}
 
 			]

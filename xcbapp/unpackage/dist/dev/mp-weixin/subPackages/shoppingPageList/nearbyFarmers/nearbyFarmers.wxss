@@ -273,121 +273,167 @@
 .wxParse .audio.data-v-5bacca68, .wxParse .uni-audio-default.data-v-5bacca68 {
   display: block;
 }
+
+/* 全局容器 */
+.container.data-v-5bacca68 {
+  background-color: #f7f8fa;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* 搜索栏 */
+.search-bar.data-v-5bacca68 {
+  background: #fff;
+  padding: 20rpx 30rpx;
+  border-radius: 0 0 20rpx 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.04);
+}
+
+/* 筛选组 */
 .filter-group.data-v-5bacca68 {
-  margin: 10rpx;
+  margin-top: 20rpx;
   display: flex;
-  gap: 30rpx;
   align-items: center;
+  gap: 20rpx;
+  position: relative;
 }
 .filter-btn.data-v-5bacca68 {
   display: flex;
   align-items: center;
-  padding: 12rpx 24rpx;
-  border-radius: 40rpx;
+  gap: 8rpx;
+  padding: 16rpx 24rpx;
   background: #f5f7fa;
-  border: 1rpx solid #e4e7ed;
+  border-radius: 50rpx;
+  font-size: 26rpx;
+  color: #333;
+  border: 1rpx solid #eaeef5;
+  transition: all 0.2s;
 }
-.container.data-v-5bacca68 {
-  background: #f8f8f8;
-  min-height: 100vh;
+.filter-btn.data-v-5bacca68:active {
+  background: #eaf3ff;
+  transform: scale(0.96);
 }
-.search-bar.data-v-5bacca68 {
-  padding: 20rpx 30rpx;
-  background: #fff;
+.btn-text.data-v-5bacca68 {
+  font-size: 26rpx;
+  color: #333;
+}
+
+/* 地图按钮 */
+.map-btn.data-v-5bacca68 {
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  background-color: #3A7AFE;
+  padding: 14rpx 20rpx;
+  color: #fff;
+  border-radius: 50rpx;
+  font-size: 26rpx;
+  box-shadow: 0 4rpx 10rpx rgba(58, 122, 254, 0.2);
+}
+
+/* 列表容器 */
+.list-container.data-v-5bacca68 {
+  margin-top: 10rpx;
+  padding-bottom: 40rpx;
 }
 .farmer-list.data-v-5bacca68 {
   padding: 20rpx 30rpx;
 }
+
+/* 农户卡片 */
 .farmer-card.data-v-5bacca68 {
   background: #fff;
-  border-radius: 16rpx;
+  border-radius: 24rpx;
   margin-bottom: 24rpx;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.2s;
 }
-.farmer-card .card-header.data-v-5bacca68 {
-  display: flex;
-  align-items: center;
-  padding: 24rpx;
-  border-bottom: 1rpx solid #eee;
+.farmer-card.data-v-5bacca68:active {
+  transform: scale(0.98);
 }
-.farmer-card .card-header .avatar.data-v-5bacca68 {
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 50%;
-  margin-right: 24rpx;
+.card-header.data-v-5bacca68 {
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f2f3f5;
 }
-.farmer-card .card-header .header-info.data-v-5bacca68 {
-  display: flex;
-  flex-direction: column;
+.card-header .header-info .name.data-v-5bacca68 {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 10rpx;
 }
-.farmer-card .card-header .header-info .name.data-v-5bacca68 {
-  font-size: 32rpx;
-  color: #333;
-  font-weight: 500;
-  margin-bottom: 8rpx;
-}
-.farmer-card .card-header .header-info .location.data-v-5bacca68 {
+.card-header .header-info .location.data-v-5bacca68 {
   font-size: 26rpx;
-  color: #666;
+  color: #888;
   display: flex;
   align-items: center;
+  gap: 6rpx;
 }
-.farmer-card .card-body.data-v-5bacca68 {
+.card-body.data-v-5bacca68 {
   display: flex;
   justify-content: space-between;
-  padding: 24rpx;
+  padding: 30rpx;
+  align-items: flex-start;
 }
-.farmer-card .card-body .info-item.data-v-5bacca68 {
+.info-wrapper.data-v-5bacca68 {
+  flex: 1;
+}
+.info-item.data-v-5bacca68 {
   display: flex;
+  margin-bottom: 18rpx;
+  font-size: 27rpx;
   align-items: center;
-  margin-bottom: 16rpx;
-  font-size: 28rpx;
 }
-.farmer-card .card-body .info-item .label.data-v-5bacca68 {
+.info-item .label.data-v-5bacca68 {
+  width: 130rpx;
   color: #666;
-  min-width: 140rpx;
+  font-weight: 500;
 }
-.farmer-card .card-body .info-item .value.data-v-5bacca68 {
+.info-item .value.data-v-5bacca68 {
   color: #333;
   flex: 1;
 }
-.farmer-card .card-footer.data-v-5bacca68 {
-  display: flex;
-  padding: 24rpx;
-  border-top: 1rpx solid #eee;
+.farmer-logo.data-v-5bacca68 {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 16rpx;
+  object-fit: cover;
+  box-shadow: 0 4rpx 10rpx rgba(0, 0, 0, 0.1);
 }
-.farmer-card .card-footer button.data-v-5bacca68 {
-  flex: 1;
-  margin: 0 12rpx;
-  height: 72rpx;
-  line-height: 72rpx;
+.card-footer.data-v-5bacca68 {
+  padding: 0 30rpx 30rpx;
+}
+.detail-btn.data-v-5bacca68 {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 16rpx;
+  background: #f5f9ff;
+  color: #3A7AFE;
   font-size: 28rpx;
-  border-radius: 40rpx;
+  font-weight: 500;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
 }
-.farmer-card .card-footer button.data-v-5bacca68::after {
+.detail-btn.data-v-5bacca68::after {
   border: none;
 }
-.farmer-card .card-footer button.contact-btn.data-v-5bacca68 {
-  background: #7A9D7E;
-  color: #fff;
-}
-.farmer-card .card-footer button.detail-btn.data-v-5bacca68 {
-  background: #fff;
-  color: #7A9D7E;
-  border: 1rpx solid #7A9D7E;
-}
+
+/* 空状态 */
 .empty-container.data-v-5bacca68 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100rpx 0;
+  padding: 120rpx 0;
+  color: #ccc;
 }
-.empty-container .empty-image.data-v-5bacca68 {
-  width: 300rpx;
-  height: 300rpx;
-  margin-bottom: 40rpx;
-}
-.empty-container .empty-text.data-v-5bacca68 {
-  color: #999;
+.empty-text.data-v-5bacca68 {
+  margin-top: 20rpx;
   font-size: 28rpx;
+  color: #999;
 }

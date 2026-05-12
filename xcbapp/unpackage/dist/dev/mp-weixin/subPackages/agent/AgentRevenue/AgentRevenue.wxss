@@ -1,0 +1,186 @@
+
+	/* 页面容器 */
+.agent-profit-page.data-v-4acdbbc1 {
+		background-color: #f5f5f7;
+		min-height: 100vh;
+		font-size: 14px;
+}
+
+	/* 导航栏 */
+.navbar.data-v-4acdbbc1 {
+		height: 48px;
+		background-color: #409EFF;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+}
+.nav-title.data-v-4acdbbc1 {
+		color: #ffffff;
+		font-size: 18px;
+		font-weight: 500;
+}
+
+	/* 收益概览容器 */
+.overview-container.data-v-4acdbbc1 {
+		padding: 0 15px;
+		margin-top: 15px;
+}
+
+	/* 收益概览卡片 */
+.overview-card.data-v-4acdbbc1 {
+		background-color: #ffffff;
+		border-radius: 12px;
+		padding: 20px;
+		margin-bottom: 15px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.split-card.data-v-4acdbbc1 {
+		display: flex;
+		justify-content: space-between;
+}
+.overview-item.data-v-4acdbbc1 {
+		text-align: center;
+}
+.half-item.data-v-4acdbbc1 {
+		flex: 1;
+}
+
+	/* 为中间的分割线添加样式 */
+.split-card .overview-item.data-v-4acdbbc1:first-child {
+		border-right: 1px solid #f0f0f0;
+}
+.split-card .overview-item.data-v-4acdbbc1:last-child {
+		padding-left: 20px;
+}
+.overview-label.data-v-4acdbbc1 {
+		color: #666666;
+		font-size: 14px;
+		display: block;
+		margin-bottom: 8px;
+}
+.overview-value.data-v-4acdbbc1 {
+		color: #333333;
+		font-size: 24px;
+		font-weight: bold;
+}
+.pending-value.data-v-4acdbbc1 {
+		color: #fa8c16;
+		/* 橙色 - 待结算 */
+}
+.settled-value.data-v-4acdbbc1 {
+		color: #52c41a;
+		/* 绿色 - 已结算 */
+}
+
+	/* 说明文字 */
+.explanation.data-v-4acdbbc1 {
+		padding: 0 15px 10px;
+		color: #666666;
+		font-size: 13px;
+}
+.profit-list.data-v-4acdbbc1 {
+		/* margin: 10px 15px 0; */
+		height: calc(100vh - 48px - 220px);
+}
+.list-item.data-v-4acdbbc1 {
+		margin: 10rpx 0 10rpx 0;
+	  background-color: #ffffff;
+	  padding: 15px;
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	  border-bottom: 1px solid #f5f5f5;
+}
+.item-left.data-v-4acdbbc1 {
+		display: flex;
+		align-items: flex-start;
+		flex: 1;
+}
+.order-icon.data-v-4acdbbc1 {
+		width: 32px;
+		height: 32px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-right: 12px;
+		color: #ffffff;
+		font-weight: bold;
+		background-color: #409EFF;
+		font-size: 12px;
+}
+.item-info.data-v-4acdbbc1 {
+		flex: 1;
+}
+.item-order-no.data-v-4acdbbc1 {
+		color: #333333;
+		font-size: 15px;
+		font-weight: 500;
+		line-height: 1.4;
+}
+.item-product.data-v-4acdbbc1,
+	.item-time.data-v-4acdbbc1 {
+		color: #999999;
+		font-size: 12px;
+		line-height: 1.5;
+}
+.item-right.data-v-4acdbbc1 {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		justify-content: center;
+}
+.item-amount.data-v-4acdbbc1 {
+		color: #f5222d;
+		font-size: 16px;
+		font-weight: 500;
+}
+.amount-pending.data-v-4acdbbc1 {
+		color: #fa8c16;
+		/* 橙色 - 待结算 */
+}
+.amount-settled.data-v-4acdbbc1 {
+		color: #52c41a;
+		/* 绿色 - 已结算 */
+}
+.item-status.data-v-4acdbbc1 {
+		font-size: 12px;
+		margin-top: 4px;
+		padding: 2px 6px;
+		border-radius: 4px;
+}
+.status-pending.data-v-4acdbbc1 {
+		color: #fa8c16;
+		background-color: #fff7e6;
+}
+.status-settled.data-v-4acdbbc1 {
+		color: #52c41a;
+		background-color: #f6ffed;
+}
+
+	/* 空状态 */
+.empty-state.data-v-4acdbbc1 {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		height: 200px;
+		color: #999999;
+		padding: 0 20px;
+		text-align: center;
+}
+.empty-text.data-v-4acdbbc1 {
+		font-size: 15px;
+		margin-bottom: 8px;
+}
+.empty-hint.data-v-4acdbbc1 {
+		font-size: 13px;
+		line-height: 1.5;
+}
+
+	/* 加载状态 */
+.loading-state.data-v-4acdbbc1 {
+		padding: 15px;
+		text-align: center;
+}

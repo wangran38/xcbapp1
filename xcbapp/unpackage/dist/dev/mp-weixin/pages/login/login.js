@@ -4,6 +4,10 @@ const api_index = require("../../api/index.js");
 const _sfc_main = {
   data() {
     return {
+      agreements: {
+        service: false,
+        privacy: false
+      },
       form: {
         username: "",
         password: ""
@@ -14,10 +18,20 @@ const _sfc_main = {
   },
   computed: {
     formValid() {
-      return /^1[3-9]\d{9}$/.test(this.form.username) && this.form.password.length >= 6;
+      return /^1[3-9]\d{9}$/.test(this.form.username) && this.form.password.length >= 6 && this.agreements.service && this.agreements.privacy;
     }
   },
   methods: {
+    goTouserServiceAgreement() {
+      common_vendor.index.navigateTo({
+        url: "/pages/userServiceAgreement/userServiceAgreement"
+      });
+    },
+    goToprivacyAgreement() {
+      common_vendor.index.navigateTo({
+        url: "/pages/privacyAgreement/privacyAgreement"
+      });
+    },
     togglePassword() {
       this.showPassword = !this.showPassword;
     },
@@ -30,7 +44,7 @@ const _sfc_main = {
           let registerID = common_vendor.index.getStorageSync("registerID");
           if (registerID) {
             let res = await api_index.api.editUserProfile({ "registration_id": registerID });
-            common_vendor.index.__f__("log", "at pages/login/login.vue:75", "已覆盖设备id", res);
+            common_vendor.index.__f__("log", "at pages/login/login.vue:108", "已覆盖设备id", res);
           }
           let promise = new Promise((res, rej) => {
             if (this.form.password == "123456") {
@@ -78,7 +92,7 @@ const _sfc_main = {
           });
         }
       } catch (error) {
-        common_vendor.index.__f__("log", "at pages/login/login.vue:128", error);
+        common_vendor.index.__f__("log", "at pages/login/login.vue:161", error);
         common_vendor.index.showToast({
           title: `登录失败`,
           icon: "error"
@@ -131,18 +145,32 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       size: "24",
       color: "#999"
     }),
-    m: !$data.loading
-  }, !$data.loading ? {} : {
+    m: common_vendor.o(($event) => $data.agreements.service = !$data.agreements.service),
     n: common_vendor.p({
+      type: $data.agreements.service ? "checkbox-filled" : "circle",
+      size: "24",
+      color: $data.agreements.service ? "#409EFF" : "#999"
+    }),
+    o: common_vendor.o((...args) => $options.goTouserServiceAgreement && $options.goTouserServiceAgreement(...args)),
+    p: common_vendor.o(($event) => $data.agreements.privacy = !$data.agreements.privacy),
+    q: common_vendor.p({
+      type: $data.agreements.privacy ? "checkbox-filled" : "circle",
+      size: "24",
+      color: $data.agreements.privacy ? "#409EFF" : "#999"
+    }),
+    r: common_vendor.o((...args) => $options.goToprivacyAgreement && $options.goToprivacyAgreement(...args)),
+    s: !$data.loading
+  }, !$data.loading ? {} : {
+    t: common_vendor.p({
       type: "spinner-cycle",
       size: "24",
       color: "#fff"
     })
   }, {
-    o: $options.formValid ? 1 : "",
-    p: common_vendor.o((...args) => $options.login && $options.login(...args)),
-    q: common_vendor.o((...args) => $options.gotoRegster && $options.gotoRegster(...args)),
-    r: common_vendor.o((...args) => $options.gotoUptdatePwd && $options.gotoUptdatePwd(...args))
+    v: $options.formValid ? 1 : "",
+    w: common_vendor.o((...args) => $options.login && $options.login(...args)),
+    x: common_vendor.o((...args) => $options.gotoRegster && $options.gotoRegster(...args)),
+    y: common_vendor.o((...args) => $options.gotoUptdatePwd && $options.gotoUptdatePwd(...args))
   });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);

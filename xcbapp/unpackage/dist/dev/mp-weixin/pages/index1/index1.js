@@ -67,7 +67,7 @@ const _sfc_main = {
     },
     ...common_vendor.mapMutations("location", ["setStatus"]),
     goTorules(item) {
-      common_vendor.index.__f__("log", "at pages/index1/index1.vue:123", item);
+      common_vendor.index.__f__("log", "at pages/index1/index1.vue:327", item);
       switch (item) {
         case "赠送积分说明":
           common_vendor.index.navigateTo({
@@ -104,7 +104,7 @@ const _sfc_main = {
           this.multiIndex = [0, 0, 0];
         }
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/index1/index1.vue:171", "Failed to initialize picker:", error);
+        common_vendor.index.__f__("error", "at pages/index1/index1.vue:375", "Failed to initialize picker:", error);
       }
       this.fetchMarkets(2313);
       this.selectedMarketIndex = 1;
@@ -121,7 +121,7 @@ const _sfc_main = {
         }
         throw new Error("Failed to fetch provinces");
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/index1/index1.vue:195", "Failed to fetch provinces:", error);
+        common_vendor.index.__f__("error", "at pages/index1/index1.vue:399", "Failed to fetch provinces:", error);
         throw error;
       }
     },
@@ -132,11 +132,11 @@ const _sfc_main = {
           this.cityList = response.data;
           return response.data;
         } else {
-          common_vendor.index.__f__("error", "at pages/index1/index1.vue:206", "No cities data found");
+          common_vendor.index.__f__("error", "at pages/index1/index1.vue:410", "No cities data found");
           return [];
         }
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/index1/index1.vue:210", "Failed to fetch cities:", error);
+        common_vendor.index.__f__("error", "at pages/index1/index1.vue:414", "Failed to fetch cities:", error);
         return [];
       }
     },
@@ -147,11 +147,11 @@ const _sfc_main = {
           this.districtList = response.data;
           return response.data;
         } else {
-          common_vendor.index.__f__("error", "at pages/index1/index1.vue:221", "No areas data found");
+          common_vendor.index.__f__("error", "at pages/index1/index1.vue:425", "No areas data found");
           return [];
         }
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/index1/index1.vue:225", "Failed to fetch areas:", error);
+        common_vendor.index.__f__("error", "at pages/index1/index1.vue:429", "Failed to fetch areas:", error);
         return [];
       }
     },
@@ -169,7 +169,7 @@ const _sfc_main = {
           throw new Error("Failed to fetch overseas continents");
         }
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/index1/index1.vue:243", "Failed to fetch overseas continents:", error);
+        common_vendor.index.__f__("error", "at pages/index1/index1.vue:447", "Failed to fetch overseas continents:", error);
         throw error;
       }
     },
@@ -187,7 +187,7 @@ const _sfc_main = {
           throw new Error("Failed to fetch overseas countries");
         }
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/index1/index1.vue:261", "Failed to fetch overseas countries:", error);
+        common_vendor.index.__f__("error", "at pages/index1/index1.vue:465", "Failed to fetch overseas countries:", error);
         throw error;
       }
     },
@@ -285,12 +285,12 @@ const _sfc_main = {
             return map;
           }, {});
         } else {
-          common_vendor.index.__f__("error", "at pages/index1/index1.vue:362", "No market data found");
+          common_vendor.index.__f__("error", "at pages/index1/index1.vue:566", "No market data found");
           this.marketList = [];
           this.marketIdMap = {};
         }
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/index1/index1.vue:367", "Failed to fetch markets:", error);
+        common_vendor.index.__f__("error", "at pages/index1/index1.vue:571", "Failed to fetch markets:", error);
         this.marketList = [];
         this.marketIdMap = {};
       }
@@ -302,21 +302,21 @@ const _sfc_main = {
     },
     saveData() {
       const savedData = {
-        multiIndex: this.multiIndex,
         area_id: this.area_id,
-        market_id: this.marketIdMap[this.displayMarketList[this.selectedMarketIndex]],
-        selectedMarketIndex: this.selectedMarketIndex,
-        marketName: this.displayMarketList[this.selectedMarketIndex]
+        market_id: this.market_id,
+        marketName: this.displayMarketList[this.selectedMarketIndex],
+        country: this.selectedCountry
       };
-      this.setStatus();
       common_vendor.index.setStorageSync("userSelection", savedData);
       common_vendor.index.showToast({
-        title: "正在加载",
-        icon: "success"
+        title: "加载中",
+        icon: "loading"
       });
-      common_vendor.index.switchTab({
-        url: "/pages/index/index"
-      });
+      setTimeout(() => {
+        common_vendor.index.switchTab({
+          url: "/pages/index/index"
+        });
+      }, 500);
     },
     loadSavedData() {
       const savedData = common_vendor.index.getStorageSync("userSelection");
@@ -336,27 +336,65 @@ const _sfc_main = {
     }
   }
 };
+if (!Array) {
+  const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
+  _easycom_uni_icons2();
+}
+const _easycom_uni_icons = () => "../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
+if (!Math) {
+  _easycom_uni_icons();
+}
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {
+  return common_vendor.e({
     a: $data.selectedCountry === "china" ? 1 : "",
     b: common_vendor.o(($event) => $options.selectCountry("china")),
     c: $data.selectedCountry === "overseas" ? 1 : "",
     d: common_vendor.o(($event) => $options.selectCountry("overseas")),
-    e: common_vendor.t($data.multiArray[0][$data.multiIndex[0]]),
-    f: common_vendor.t($data.multiArray[1][$data.multiIndex[1]] ? $data.multiArray[1][$data.multiIndex[1]] : "暂无数据"),
-    g: common_vendor.t($data.selectedCountry === "overseas" ? "" : $data.multiArray[2][$data.multiIndex[2]]),
-    h: $data.multiArray,
-    i: $data.multiIndex,
-    j: common_vendor.o((...args) => $options.bindMultiPickerChange && $options.bindMultiPickerChange(...args)),
-    k: common_vendor.o((...args) => $options.bindMultiPickerColumnChange && $options.bindMultiPickerColumnChange(...args)),
-    l: common_vendor.t($options.displayMarketList[$data.selectedMarketIndex]),
-    m: $options.displayMarketList,
-    n: $data.selectedMarketIndex,
-    o: common_vendor.o((...args) => $options.bindMarketChange && $options.bindMarketChange(...args)),
-    p: common_vendor.o((...args) => $options.saveData && $options.saveData(...args)),
-    q: common_vendor.o((...args) => $options.goToJackpot && $options.goToJackpot(...args))
-  };
+    e: common_vendor.p({
+      type: "location-filled",
+      size: "18",
+      color: "#4a90e2;"
+    }),
+    f: common_vendor.t($data.multiArray[0][$data.multiIndex[0]] || "请选择"),
+    g: $data.multiArray[1][$data.multiIndex[1]]
+  }, $data.multiArray[1][$data.multiIndex[1]] ? {
+    h: common_vendor.t($data.multiArray[1][$data.multiIndex[1]])
+  } : {}, {
+    i: $data.selectedCountry !== "overseas" && $data.multiArray[2][$data.multiIndex[2]]
+  }, $data.selectedCountry !== "overseas" && $data.multiArray[2][$data.multiIndex[2]] ? {
+    j: common_vendor.t($data.multiArray[2][$data.multiIndex[2]])
+  } : {}, {
+    k: common_vendor.p({
+      type: "right",
+      size: "14",
+      color: "#ccc"
+    }),
+    l: $data.multiArray,
+    m: $data.multiIndex,
+    n: common_vendor.o((...args) => $options.bindMultiPickerChange && $options.bindMultiPickerChange(...args)),
+    o: common_vendor.o((...args) => $options.bindMultiPickerColumnChange && $options.bindMultiPickerColumnChange(...args)),
+    p: common_vendor.p({
+      type: "shop-filled",
+      size: "18",
+      color: "#4a90e2;"
+    }),
+    q: common_vendor.t($options.displayMarketList[$data.selectedMarketIndex] || "请选择菜市场"),
+    r: common_vendor.p({
+      type: "right",
+      size: "14",
+      color: "#ccc"
+    }),
+    s: $options.displayMarketList,
+    t: $data.selectedMarketIndex,
+    v: common_vendor.o((...args) => $options.bindMarketChange && $options.bindMarketChange(...args)),
+    w: common_vendor.o((...args) => $options.saveData && $options.saveData(...args)),
+    x: common_vendor.p({
+      type: "checkmark-circle",
+      size: "14",
+      color: "#52c41a"
+    })
+  });
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-3b59972f"]]);
 wx.createPage(MiniProgramPage);
 //# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/index1/index1.js.map

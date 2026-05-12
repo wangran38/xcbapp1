@@ -2,7 +2,11 @@
 const common_vendor = require("../../../common/vendor.js");
 const api_index = require("../../../api/index.js");
 const common_assets = require("../../../common/assets.js");
+const mButtonVue = () => "../../../components/public/mButton/mButton.js";
 const _sfc_main = {
+  components: {
+    mButtonVue
+  },
   data() {
     return {
       queryData: {
@@ -30,7 +34,7 @@ const _sfc_main = {
   methods: {
     async getData() {
       let data = await api_index.api.mySupplyData(this.queryData);
-      common_vendor.index.__f__("log", "at subPackages/Wholesale/mySupply/mySupply.vue:91", data);
+      common_vendor.index.__f__("log", "at subPackages/Wholesale/mySupply/mySupply.vue:95", data);
       if (data.code == 200) {
         this.dataTotal = data.data.totalnum;
         this.supplyData = [...this.supplyData, ...data.data.listdata];

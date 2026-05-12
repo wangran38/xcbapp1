@@ -30,18 +30,18 @@ const _sfc_main = {
       if (data.code == 200) {
         this.totalMoney = data.data.totalMoney;
         this.rewardRecords = [...this.rewardRecords, ...data.data.listdata];
-        common_vendor.index.__f__("log", "at pages/earningsRecord/earningsRecord.vue:81", data);
+        common_vendor.index.__f__("log", "at pages/earningsRecord/earningsRecord.vue:80", data);
       }
     }
   }
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return common_vendor.e({
-    a: common_vendor.t($data.totalMoney),
+    a: common_vendor.t($data.totalMoney.toFixed(2)),
     b: common_vendor.f($data.rewardRecords, (item, index, i0) => {
       return {
         a: common_vendor.t(_ctx.initTime(item.createtime)),
-        b: common_vendor.t(item.level6money),
+        b: common_vendor.t(item.level6money.toFixed(2)),
         c: index
       };
     }),

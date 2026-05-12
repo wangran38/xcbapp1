@@ -1,1 +1,1 @@
-<view><picker mode="multiSelector" value="{{d}}" range="{{e}}" bindcolumnchange="{{f}}"><view class="uni-input">{{a}}-{{b}}-{{c}}</view></picker></view>
+<view class="area-picker-container data-v-a4f39d15"><view class="area data-v-a4f39d15"><picker class="picker data-v-a4f39d15" mode="multiSelector" range="{{d}}" value="{{e}}" bindchange="{{f}}" bindcolumnchange="{{g}}"><view class="picker-text data-v-a4f39d15">{{a}} - {{b}} - {{c}}</view></picker></view></view>

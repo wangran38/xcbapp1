@@ -1,0 +1,193 @@
+
+.market-detail-page.data-v-79a9e5c4 {
+		background-color: #f8f9fa;
+		min-height: 100vh;
+		font-size: 14px;
+		padding-bottom: 40px;
+}
+.page-header.data-v-79a9e5c4 {
+		padding: 15px 16px;
+		background-color: #fff;
+		display: flex;
+		align-items: center;
+		border-bottom: 1px solid #f5f5f5;
+}
+.back-btn.data-v-79a9e5c4 {
+		font-size: 14px;
+		color: #4285F4;
+		margin-right: 15px;
+}
+.header-title.data-v-79a9e5c4 {
+		font-size: 16px;
+		font-weight: 500;
+		color: #2d3748;
+}
+
+
+	/* 核心卡片容器 */
+.summary-card.data-v-79a9e5c4 {
+		background-color: #ffffff;
+		border-radius: 12rpx;
+		box-shadow: 0 4rpx 20rpx rgba(255, 125, 0, 0.08);
+		padding: 30rpx 20rpx;
+		margin: 20rpx 0;
+		width: 100%;
+		box-sizing: border-box;
+		border: 1rpx solid #FFE8D0;
+		margin-bottom: 20rpx;
+}
+
+	/* 收益总额单独突出区 - 视觉核心 */
+.summary-highlight.data-v-79a9e5c4 {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 25rpx 0;
+		margin-bottom: 25rpx;
+		/* 渐变背景突出收益 */
+		background: linear-gradient(135deg, #FFF8F0 0%, #FFFAF5 100%);
+		border-radius: 10rpx;
+		position: relative;
+}
+
+	/* 收益标签 */
+.highlight-label.data-v-79a9e5c4 {
+		font-size: 28rpx;
+		color: #666;
+		margin-bottom: 10rpx;
+		display: flex;
+		align-items: center;
+}
+.highlight-label .iconfont.data-v-79a9e5c4 {
+		color: #FF7D00;
+		font-size: 26rpx;
+		margin-right: 10rpx;
+}
+
+	/* 收益数值 - 极致醒目 */
+.highlight-value.data-v-79a9e5c4 {
+		font-size: 48rpx;
+		font-weight: 800;
+		color: #E86800;
+		text-shadow: 0 0 10rpx rgba(255, 125, 0, 0.2);
+		letter-spacing: 1rpx;
+}
+
+	/* 5个小数据网格布局 - 规整排列 */
+.summary-grid.data-v-79a9e5c4 {
+		display: flex;
+		flex-wrap: wrap;
+		/* 自动换行，保证排列规则 */
+		justify-content: space-between;
+		gap: 15rpx 0;
+		/* 项之间的上下间距 */
+}
+
+	/* 小数据项 - 统一样式，2列/3列自适应 */
+.summary-item.data-v-79a9e5c4 {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		/* 每2个占一行，自动均分宽度（5个则2+2+1，视觉更规整） */
+		flex: 0 0 48%;
+		padding: 15rpx 0;
+		border-bottom: 1rpx solid #f8f8f8;
+}
+
+	/* 最后一行的项去掉下边框 */
+.summary-item.data-v-79a9e5c4:nth-last-child(1),
+	.summary-item.data-v-79a9e5c4:nth-last-child(2) {
+		border-bottom: none;
+}
+
+	/* 小数据标签 */
+.summary-label.data-v-79a9e5c4 {
+		font-size: 24rpx;
+		color: #555;
+		margin-bottom: 8rpx;
+		display: flex;
+		align-items: center;
+}
+.summary-label .iconfont.data-v-79a9e5c4 {
+		color: #FF9500;
+		font-size: 22rpx;
+		margin-right: 8rpx;
+}
+
+	/* 小数据数值 */
+.summary-value.data-v-79a9e5c4 {
+		font-size: 28rpx;
+		font-weight: 700;
+		color: #FF7D00;
+}
+.content-container.data-v-79a9e5c4 {
+		width: 92%;
+		margin: 0 auto;
+}
+.empty-tip.data-v-79a9e5c4 {
+		text-align: center;
+		padding: 60px 0;
+		color: #999;
+}
+.detail-container.data-v-79a9e5c4 {
+		background-color: #fff;
+		border-radius: 12px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+		overflow: hidden;
+}
+.detail-header.data-v-79a9e5c4 {
+		display: flex;
+		padding: 12px 15px;
+		background-color: #f0f0f0;
+		font-size: 12px;
+		color: #718096;
+		border-bottom: 1px solid #f5f5f5;
+}
+.detail-col.data-v-79a9e5c4 {
+		flex: 1;
+		text-align: center;
+		font-size: 25rpx;
+}
+.detail-item.data-v-79a9e5c4 {
+		display: flex;
+		padding: 12px 15px;
+		border-bottom: 1px solid #f5f5f5;
+		font-size: 13px;
+		color: #2d3748;
+}
+.detail-item.data-v-79a9e5c4:last-child {
+		border-bottom: none;
+}
+.detail-col.profit.data-v-79a9e5c4 {
+		color: #e53e3e;
+		font-weight: 500;
+}
+.load-more.data-v-79a9e5c4 {
+		text-align: center;
+		padding: 15px 0;
+		font-size: 13px;
+		color: #4285F4;
+		cursor: pointer;
+}
+
+	/* 响应式适配 */
+@media (max-width: 767px) {
+.summary-card.data-v-79a9e5c4 {
+			flex-direction: column;
+			gap: 10px;
+}
+.detail-header.data-v-79a9e5c4,
+		.detail-item.data-v-79a9e5c4 {
+			font-size: 11px;
+}
+.detail-col.data-v-79a9e5c4:nth-child(1) {
+			flex: 2;
+}
+.detail-col.data-v-79a9e5c4:nth-child(2),
+		.detail-col.data-v-79a9e5c4:nth-child(3),
+		.detail-col.data-v-79a9e5c4:nth-child(4) {
+			flex: 1;
+}
+}

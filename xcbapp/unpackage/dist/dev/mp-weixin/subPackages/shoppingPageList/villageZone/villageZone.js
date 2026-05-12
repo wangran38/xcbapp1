@@ -2,8 +2,12 @@
 const common_vendor = require("../../../common/vendor.js");
 const api_index = require("../../../api/index.js");
 const utils_public = require("../../../utils/public.js");
+const mButtonVue = () => "../../../components/public/mButton/mButton.js";
 const _sfc_main = {
   mixins: [utils_public.myMixin],
+  components: {
+    mButtonVue
+  },
   data() {
     return {
       distances: [
@@ -58,7 +62,8 @@ const _sfc_main = {
       };
     },
     // 开始搜索
-    startSearch() {
+    startSearch(value) {
+      this.queryData.goodsname = value;
       this.queryData.category_id = null;
       this.noMore = false;
       this.goodsData = [];
@@ -72,13 +77,13 @@ const _sfc_main = {
       this.getGoodsData();
     },
     goToDynamics(item) {
-      common_vendor.index.__f__("log", "at subPackages/shoppingPageList/villageZone/villageZone.vue:196", item);
+      common_vendor.index.__f__("log", "at subPackages/shoppingPageList/villageZone/villageZone.vue:204", item);
       common_vendor.index.navigateTo({
         url: `/pages/dynamics/dynamics?id=${item.id}`
       });
     },
     switchClass(index) {
-      common_vendor.index.__f__("log", "at subPackages/shoppingPageList/villageZone/villageZone.vue:202", index);
+      common_vendor.index.__f__("log", "at subPackages/shoppingPageList/villageZone/villageZone.vue:210", index);
       this.selectedCategoryId = index;
       this.goodsData = [];
       this.noMore = false;
@@ -88,7 +93,7 @@ const _sfc_main = {
     },
     async fetchCategories() {
       const response = await api_index.api.cglist();
-      common_vendor.index.__f__("log", "at subPackages/shoppingPageList/villageZone/villageZone.vue:212", response);
+      common_vendor.index.__f__("log", "at subPackages/shoppingPageList/villageZone/villageZone.vue:220", response);
       this.categories = [{ title: "全部" }, ...response.data.listdata];
     },
     async getGoodsData(isRefresh = false) {
@@ -146,9 +151,10 @@ const _sfc_main = {
   }
 };
 if (!Array) {
+  const _component_mButtonVue = common_vendor.resolveComponent("mButtonVue");
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
   const _easycom_uni_load_more2 = common_vendor.resolveComponent("uni-load-more");
-  (_easycom_uni_icons2 + _easycom_uni_load_more2)();
+  (_component_mButtonVue + _easycom_uni_icons2 + _easycom_uni_load_more2)();
 }
 const _easycom_uni_icons = () => "../../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
 const _easycom_uni_load_more = () => "../../../uni_modules/uni-load-more/components/uni-load-more/uni-load-more.js";
@@ -157,41 +163,38 @@ if (!Math) {
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: common_vendor.p({
-      color: "#999999",
-      size: "20",
-      type: "search"
+    a: common_vendor.o($options.startSearch),
+    b: common_vendor.o($options.stopSearch),
+    c: common_vendor.p({
+      isShowbutton2: true,
+      placeholder: "搜索菜品"
     }),
-    b: $data.queryData.goodsname,
-    c: common_vendor.o(($event) => $data.queryData.goodsname = $event.detail.value),
-    d: common_vendor.o((...args) => $options.startSearch && $options.startSearch(...args)),
-    e: common_vendor.o((...args) => $options.stopSearch && $options.stopSearch(...args)),
+    d: common_vendor.p({
+      type: "tags",
+      size: "16",
+      color: "#3a7afe"
+    }),
+    e: common_vendor.t($data.pricesort[$data.selectedCategoryIndex].label),
     f: common_vendor.p({
-      type: "tags",
-      size: "16",
-      color: "#3a7afe"
-    }),
-    g: common_vendor.t($data.pricesort[$data.selectedCategoryIndex].label),
-    h: common_vendor.p({
       type: "arrowdown",
       size: "14",
       color: "#3a7afe"
     }),
-    i: common_vendor.o((...args) => _ctx.categoryChange && _ctx.categoryChange(...args)),
-    j: $data.pricesort,
+    g: common_vendor.o((...args) => _ctx.categoryChange && _ctx.categoryChange(...args)),
+    h: $data.pricesort,
+    i: common_vendor.p({
+      type: "tags",
+      size: "16",
+      color: "#3a7afe"
+    }),
+    j: common_vendor.t($data.distances[$data.selectedCategoryIndex].label),
     k: common_vendor.p({
-      type: "tags",
-      size: "16",
-      color: "#3a7afe"
-    }),
-    l: common_vendor.t($data.distances[$data.selectedCategoryIndex].label),
-    m: common_vendor.p({
       type: "arrowdown",
       size: "14",
       color: "#3a7afe"
     }),
-    n: $data.distances,
-    o: common_vendor.f($data.categories, (item, index, i0) => {
+    l: $data.distances,
+    m: common_vendor.f($data.categories, (item, index, i0) => {
       return {
         a: common_vendor.t(item.title),
         b: common_vendor.n({
@@ -202,7 +205,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         e: common_vendor.n($data.selectedCategoryId === index ? "active" : "")
       };
     }),
-    p: common_vendor.f($data.goodsData, (item, index, i0) => {
+    n: common_vendor.f($data.goodsData, (item, index, i0) => {
       return common_vendor.e({
         a: item.imglogo,
         b: item.tag
@@ -233,7 +236,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         s: index % 10 * 0.1 + "s"
       });
     }),
-    q: common_vendor.p({
+    o: common_vendor.p({
       status: $data.isLoading ? "loading" : $data.noMore ? "noMore" : "more",
       contentText: {
         contentdown: "上拉显示更多",
@@ -241,7 +244,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         contentnomore: "没有更多了"
       }
     }),
-    r: common_vendor.o((...args) => $options.loadMore && $options.loadMore(...args))
+    p: common_vendor.o((...args) => $options.loadMore && $options.loadMore(...args))
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-8ec1e1a2"]]);

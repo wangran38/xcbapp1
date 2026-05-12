@@ -1765,7 +1765,6 @@
 /* 功能卡片 */
 .nav-scroll-view .nav-card-list[data-v-1cf27b2a] {
   display: flex;
-  padding: 0.3125rem 0 0.625rem;
 }
 .nav-scroll-view .nav-card-list .nav-item-card[data-v-1cf27b2a] {
   flex-shrink: 0;

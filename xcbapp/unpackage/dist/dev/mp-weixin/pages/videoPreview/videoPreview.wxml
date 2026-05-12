@@ -1,0 +1,1 @@
+<view class="video-preview-container data-v-df99e0de"><video class="data-v-df99e0de" src="{{a}}" controls autoplay fullscreen="true" objectFit="contain"></video></view>

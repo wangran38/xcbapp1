@@ -285,6 +285,8 @@
   border-radius: 15rpx;
 }
 .search .btn.data-v-e4b2d046 {
+  width: 130rpx;
+  font-size: 25rpx;
   height: 50%;
   text-align: center;
   margin: 0;

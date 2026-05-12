@@ -78,21 +78,39 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
     a: common_vendor.p({
       type: "staff-filled",
-      size: "60rpx"
+      size: "58",
+      color: "#fff"
     }),
-    b: common_vendor.o((...args) => $options.goToBoothOwner && $options.goToBoothOwner(...args)),
-    c: common_vendor.p({
+    b: common_vendor.p({
+      type: "right",
+      size: "24",
+      color: "#ccc"
+    }),
+    c: common_vendor.o((...args) => $options.goToBoothOwner && $options.goToBoothOwner(...args)),
+    d: common_vendor.p({
       type: "person-filled",
-      size: "60rpx"
+      size: "58",
+      color: "#fff"
     }),
-    d: common_vendor.o((...args) => $options.goToAhouseholder && $options.goToAhouseholder(...args)),
     e: common_vendor.p({
-      type: "auth",
-      size: "60rpx"
+      type: "right",
+      size: "24",
+      color: "#ccc"
     }),
-    f: common_vendor.o((...args) => $options.goToAgent && $options.goToAgent(...args))
+    f: common_vendor.o((...args) => $options.goToAhouseholder && $options.goToAhouseholder(...args)),
+    g: common_vendor.p({
+      type: "auth",
+      size: "58",
+      color: "#fff"
+    }),
+    h: common_vendor.p({
+      type: "right",
+      size: "24",
+      color: "#ccc"
+    }),
+    i: common_vendor.o((...args) => $options.goToAgent && $options.goToAgent(...args))
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-9c8f2f2f"]]);
 wx.createPage(MiniProgramPage);
 //# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/sVegetables/sVegetables.js.map

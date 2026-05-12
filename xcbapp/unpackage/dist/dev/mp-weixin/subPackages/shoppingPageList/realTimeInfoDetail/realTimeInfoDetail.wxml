@@ -1,1 +1,1 @@
-<view class="content"><text style="font-size:25rpx;font-weight:bold">发布时间:{{a}}</text></view>
+<view class="content"><text style="font-size:25rpx;font-weight:bold">发布时间:{{a}}</text><uv-parse wx:if="{{b}}" u-i="775f7ce9-0" bind:__l="__l" u-p="{{b}}"></uv-parse></view>

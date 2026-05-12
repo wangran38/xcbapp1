@@ -76,7 +76,7 @@
 		},
 		computed: {
 			formValid() {
-				return /^1[3-9]\d{9}$/.test(this.form.username) && this.form.password.length >= 6 && agreements.service && agreements.privacy
+				return /^1[3-9]\d{9}$/.test(this.form.username) && this.form.password.length >= 6 && this.agreements.service && this.agreements.privacy
 			}
 		},
 		methods: {

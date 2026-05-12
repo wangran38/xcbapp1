@@ -19,9 +19,9 @@
 
 		<scroll-view class="news-list" scroll-y :style="{ height: scrollHeight + 'px' }" @scrolltolower="changePage">
 			<view v-for="news in newsList" :key="news.id" class="news-item" @click="navigateToDetail(news)">
-				<image class="news-image"
+<!-- 				<image class="news-image"
 					:src="news.cover ? news.cover :'https://img0.baidu.com/it/u=3524251599,1183611687&fm=253&fmt=auto&app=138&f=GIF?w=285&h=285'"
-					mode="aspectFill" />
+					mode="aspectFill" /> -->
 				<view class="news-content">
 					<text class="news-title">{{ news.title }}</text>
 					<text class="news-summary">{{ news.description }}</text>

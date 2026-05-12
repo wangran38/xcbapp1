@@ -1,0 +1,215 @@
+
+.district-detail-page.data-v-f7f3bbbe {
+		background-color: #f8f9fa;
+		min-height: 100vh;
+		font-size: 14px;
+		padding-bottom: 40px;
+}
+.page-header.data-v-f7f3bbbe {
+		padding: 15px 16px;
+		background-color: #fff;
+		display: flex;
+		align-items: center;
+		border-bottom: 1px solid #f5f5f5;
+}
+.back-btn.data-v-f7f3bbbe {
+		font-size: 14px;
+		color: #4285F4;
+		margin-right: 15px;
+}
+.header-title.data-v-f7f3bbbe {
+		font-size: 16px;
+		font-weight: 500;
+		color: #2d3748;
+}
+
+	/* 核心卡片容器 */
+.summary-card.data-v-f7f3bbbe {
+		background-color: #ffffff;
+		border-radius: 12rpx;
+		box-shadow: 0 4rpx 20rpx rgba(255, 125, 0, 0.08);
+		padding: 30rpx 20rpx;
+		margin: 20rpx 0;
+		width: 100%;
+		box-sizing: border-box;
+		border: 1rpx solid #FFE8D0;
+		margin-bottom: 20rpx;
+}
+
+	/* 收益总额单独突出区 - 视觉核心 */
+.summary-highlight.data-v-f7f3bbbe {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 25rpx 0;
+		margin-bottom: 25rpx;
+		/* 渐变背景突出收益 */
+		background: linear-gradient(135deg, #FFF8F0 0%, #FFFAF5 100%);
+		border-radius: 10rpx;
+		position: relative;
+}
+
+	/* 收益标签 */
+.highlight-label.data-v-f7f3bbbe {
+		font-size: 28rpx;
+		color: #666;
+		margin-bottom: 10rpx;
+		display: flex;
+		align-items: center;
+}
+.highlight-label .iconfont.data-v-f7f3bbbe {
+		color: #FF7D00;
+		font-size: 26rpx;
+		margin-right: 10rpx;
+}
+
+	/* 收益数值 - 极致醒目 */
+.highlight-value.data-v-f7f3bbbe {
+		font-size: 48rpx;
+		font-weight: 800;
+		color: #E86800;
+		text-shadow: 0 0 10rpx rgba(255, 125, 0, 0.2);
+		letter-spacing: 1rpx;
+}
+
+	/* 5个小数据网格布局 - 规整排列 */
+.summary-grid.data-v-f7f3bbbe {
+		display: flex;
+		flex-wrap: wrap;
+		/* 自动换行，保证排列规则 */
+		justify-content: space-between;
+		gap: 15rpx 0;
+		/* 项之间的上下间距 */
+}
+
+	/* 小数据项 - 统一样式，2列/3列自适应 */
+.summary-item.data-v-f7f3bbbe {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		/* 每2个占一行，自动均分宽度（5个则2+2+1，视觉更规整） */
+		flex: 0 0 48%;
+		padding: 15rpx 0;
+		border-bottom: 1rpx solid #f8f8f8;
+}
+
+	/* 最后一行的项去掉下边框 */
+.summary-item.data-v-f7f3bbbe:nth-last-child(1),
+	.summary-item.data-v-f7f3bbbe:nth-last-child(2) {
+		border-bottom: none;
+}
+
+	/* 小数据标签 */
+.summary-label.data-v-f7f3bbbe {
+		font-size: 24rpx;
+		color: #555;
+		margin-bottom: 8rpx;
+		display: flex;
+		align-items: center;
+}
+.summary-label .iconfont.data-v-f7f3bbbe {
+		color: #FF9500;
+		font-size: 22rpx;
+		margin-right: 8rpx;
+}
+
+	/* 小数据数值 */
+.summary-value.data-v-f7f3bbbe {
+		font-size: 28rpx;
+		font-weight: 700;
+		color: #FF7D00;
+}
+
+	/* 新增：极简跳转入口样式 - 仅按钮，无多余装饰 */
+.jump-entrance.data-v-f7f3bbbe {
+		width: 92%;
+		margin: 0 auto 20rpx;
+		display: flex;
+		gap: 15rpx;
+}
+.jump-btn.data-v-f7f3bbbe {
+		flex: 1;
+		height: 80rpx;
+		line-height: 80rpx;
+		background-color: #FFF8F0;
+		color: #FF7D00;
+		border: 1rpx solid #FFE8D0;
+		border-radius: 8rpx;
+		font-size: 28rpx;
+		padding: 0;
+}
+.jump-btn.data-v-f7f3bbbe::after {
+		border: none;
+		/* 去掉uni-app按钮默认边框 */
+}
+.content-container.data-v-f7f3bbbe {
+		width: 92%;
+		margin: 0 auto;
+}
+.empty-tip.data-v-f7f3bbbe {
+		text-align: center;
+		padding: 60px 0;
+		color: #999;
+}
+.card-list.data-v-f7f3bbbe {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: 12px;
+		margin-bottom: 15px;
+}
+.market-card.data-v-f7f3bbbe {
+		background-color: #fff;
+		border-radius: 12px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+		padding: 15px;
+}
+.card-header.data-v-f7f3bbbe {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 10px;
+		padding-bottom: 6px;
+		border-bottom: 1px solid #f5f5f5;
+}
+.card-title.data-v-f7f3bbbe {
+		font-size: 15px;
+		font-weight: 500;
+		color: #2d3748;
+}
+.card-body.data-v-f7f3bbbe {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 8px;
+}
+.card-item.data-v-f7f3bbbe {
+		text-align: center;
+}
+.item-label.data-v-f7f3bbbe {
+		font-size: 11px;
+		color: #718096;
+		margin-bottom: 4px;
+}
+.item-value.data-v-f7f3bbbe {
+		font-size: 14px;
+		font-weight: 500;
+		color: #2d3748;
+}
+.load-more.data-v-f7f3bbbe {
+		text-align: center;
+		padding: 15px 0;
+		font-size: 13px;
+		color: #4285F4;
+}
+
+	/* 响应式适配 */
+@media (max-width: 767px) {
+.summary-card.data-v-f7f3bbbe {
+			flex-direction: column;
+			gap: 10px;
+}
+.card-list.data-v-f7f3bbbe {
+			grid-template-columns: 1fr;
+}
+}

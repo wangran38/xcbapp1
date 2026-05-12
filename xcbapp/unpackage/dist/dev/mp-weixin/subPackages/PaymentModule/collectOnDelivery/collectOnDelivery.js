@@ -124,11 +124,14 @@ const _sfc_main = {
     },
     // 调用微信支付方法
     async startPayment(out_trade_no) {
-      let data = await api_index.api.wechatpay({
+      let data = await api_index.api.appWeiXin({
         out_trade_no: this.out_trade_no
       });
+      common_vendor.index.__f__("log", "at subPackages/PaymentModule/collectOnDelivery/collectOnDelivery.vue:215", "订单号：", this.out_trade_no);
+      common_vendor.index.__f__("log", "at subPackages/PaymentModule/collectOnDelivery/collectOnDelivery.vue:216", data);
       if (data.code == 200) {
         data.data.timeStamp += "";
+        common_vendor.index.__f__("log", "at subPackages/PaymentModule/collectOnDelivery/collectOnDelivery.vue:221", "执行wx");
         common_vendor.index.requestPayment({
           ...data.data
         });
@@ -139,7 +142,7 @@ const _sfc_main = {
             let idReseponse = await api_index.api.bindingOpenid({
               code: res.code
             });
-            common_vendor.index.__f__("log", "at subPackages/PaymentModule/collectOnDelivery/collectOnDelivery.vue:224", idReseponse, data);
+            common_vendor.index.__f__("log", "at subPackages/PaymentModule/collectOnDelivery/collectOnDelivery.vue:256", idReseponse, data);
             if (idReseponse.code == 200) {
               let data2 = await api_index.api.wechatpay({
                 out_trade_no: this.out_trade_no
@@ -187,18 +190,18 @@ const _sfc_main = {
                     withSubscriptions: true,
                     // 这里设置为true，以便获取订阅消息的设置状态
                     success(res2) {
-                      common_vendor.index.__f__("log", "at subPackages/PaymentModule/collectOnDelivery/collectOnDelivery.vue:298", res2.subscriptionsSetting);
+                      common_vendor.index.__f__("log", "at subPackages/PaymentModule/collectOnDelivery/collectOnDelivery.vue:334", res2.subscriptionsSetting);
                     }
                   });
                 } else {
-                  common_vendor.index.__f__("log", "at subPackages/PaymentModule/collectOnDelivery/collectOnDelivery.vue:303", "用户已订阅");
+                  common_vendor.index.__f__("log", "at subPackages/PaymentModule/collectOnDelivery/collectOnDelivery.vue:339", "用户已订阅");
                 }
               }
             });
             let response = await api_index.api.payscore({
               out_trade_no: this.out_trade_no
             });
-            common_vendor.index.__f__("log", "at subPackages/PaymentModule/collectOnDelivery/collectOnDelivery.vue:314", response);
+            common_vendor.index.__f__("log", "at subPackages/PaymentModule/collectOnDelivery/collectOnDelivery.vue:350", response);
             if (response.code == 200) {
               common_vendor.index.showToast({
                 title: "支付成功",
@@ -218,7 +221,7 @@ const _sfc_main = {
             }
             break;
           case 3:
-            common_vendor.index.__f__("log", "at subPackages/PaymentModule/collectOnDelivery/collectOnDelivery.vue:338", "数字人民币");
+            common_vendor.index.__f__("log", "at subPackages/PaymentModule/collectOnDelivery/collectOnDelivery.vue:374", "数字人民币");
             break;
         }
       } else {
@@ -234,7 +237,7 @@ const _sfc_main = {
         if (totalSeconds <= 0) {
           this.isTimeOut = true;
           this.clearCountDown();
-          common_vendor.index.__f__("log", "at subPackages/PaymentModule/collectOnDelivery/collectOnDelivery.vue:356", "订单超时，已自动取消");
+          common_vendor.index.__f__("log", "at subPackages/PaymentModule/collectOnDelivery/collectOnDelivery.vue:392", "订单超时，已自动取消");
           return;
         }
         const minutes = Math.floor(totalSeconds / 60);

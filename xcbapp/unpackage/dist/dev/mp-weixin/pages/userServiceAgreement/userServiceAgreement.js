@@ -1,7 +1,12 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
-  name: "AgreementPage"
+  name: "Agreement",
+  head() {
+    return {
+      title: "农链天下 - 服务协议"
+    };
+  }
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {};

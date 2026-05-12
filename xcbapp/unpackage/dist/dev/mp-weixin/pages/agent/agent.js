@@ -12,7 +12,6 @@ const _sfc_main = {
   },
   async onLoad() {
     this.showStatus = await this.checkApplyStatus();
-    common_vendor.index.__f__("log", "at pages/agent/agent.vue:82", this.showStatus, "申请状态");
     if (this.showStatus == 1) {
       common_vendor.index.showModal({
         showCancel: false,

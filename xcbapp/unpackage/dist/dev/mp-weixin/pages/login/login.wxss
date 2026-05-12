@@ -273,6 +273,23 @@
 .wxParse .audio, .wxParse .uni-audio-default {
   display: block;
 }
+.agreement-group {
+  margin: 40rpx 0;
+}
+.agreement-group .checkbox-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+.agreement-group .checkbox-item .agreement-text {
+  margin-left: 12rpx;
+  font-size: 26rpx;
+  color: #2c3e50;
+}
+.agreement-group .checkbox-item .link {
+  color: #409EFF;
+  margin-left: 8rpx;
+}
 .login-container {
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f9ff 0%, #ffffff 100%);

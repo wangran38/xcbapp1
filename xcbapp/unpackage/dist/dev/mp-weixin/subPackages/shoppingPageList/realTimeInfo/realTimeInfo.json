@@ -2,6 +2,7 @@
   "navigationBarTitleText": "资讯",
   "disableScroll": true,
   "usingComponents": {
+    "m-button-vue": "../../../components/public/mButton/mButton",
     "uni-icons": "../../../uni_modules/uni-icons/components/uni-icons/uni-icons"
   }
 }

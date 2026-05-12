@@ -1,14 +1,32 @@
 "use strict";
 const common_vendor = require("../common/vendor.js");
+const store_cart = require("../store/cart.js");
 const _sfc_main = {
   name: "menuBarVue",
+  props: ["item"],
+  // 保留原有 props
   data() {
     return {
       show: false,
       count: "",
       OpenImg: false,
-      selectImgUrl: null
+      selectImgUrl: null,
+      cartStore: null
+      // 2. 初始化 Pinia 实例容器
     };
+  },
+  created() {
+    this.cartStore = store_cart.useCartStore();
+  },
+  computed: {
+    getTempCount() {
+      return (itemId) => {
+        const targetGoods = this.cartStore.carts.find(
+          (goods) => goods.id === itemId && goods.shop_id === this.item.shop_id
+        );
+        return targetGoods ? targetGoods.tempCount : 0;
+      };
+    }
   },
   methods: {
     viewDetail() {
@@ -16,35 +34,37 @@ const _sfc_main = {
         url: `/pages/commodityDetail/commodityDetail?query=${JSON.stringify(this.item)}`
       });
     },
-    // 放大图片
+    // 放大图片（保留原有逻辑）
     openBigImg(url) {
     },
     changeTextarea(e) {
     },
-    // 加一
     add() {
-      this.addItem(this.item);
+      this.cartStore.addItem(this.item);
       this.count = "";
     },
-    // 减一
     reduce() {
-      common_vendor.index.__f__("log", "at components/menuBar.vue:77", this.item);
-      this.subItem(this.item);
+      common_vendor.index.__f__("log", "at components/menuBar.vue:86", this.item);
+      this.cartStore.subItem({
+        id: this.item.id,
+        shop_id: this.item.shop_id
+        // 传递 shop_id 用于精准匹配
+      });
       this.count = "";
     },
-    // isNumeric(str) {
-    //     return /^\d+$/.test(str);
-    // },
-    // int float  校验
+    // 数值校验（保留原有逻辑）
     isNumeric(str) {
       return /^\d+(\.\d+)?$/.test(str);
     },
-    // 结束输入值
+    // 结束输入值：替换原 Vuex 的 anyNumber mutation
     overInput(e) {
       if (this.isNumeric(e.detail.value)) {
         let value = Number(Number(e.detail.value).toFixed(1));
-        this.item.count = value;
-        this.anyNumber(this.item);
+        this.cartStore.anyNumber({
+          ...this.item,
+          quantity: value
+          // 传入新数量
+        });
         this.count = value;
       } else {
         common_vendor.index.showToast({
@@ -55,7 +75,6 @@ const _sfc_main = {
       }
       this.show = false;
     },
-    // 弹出键盘
     showInput() {
       this.$emit("showKeyboard", this.item);
     },
@@ -63,13 +82,8 @@ const _sfc_main = {
       common_vendor.index.navigateTo({
         url: `/subPackages/aHouseholder/lookTraceability/lookTraceability?commodity_id=${item.id}`
       });
-    },
-    ...common_vendor.mapMutations("cart", ["addItem", "subItem", "anyNumber"])
-  },
-  props: ["item"],
-  computed: {
-    // ...mapState('cart', ['carts']),
-    // ...mapGetters('cart', ['getTempCount']),
+    }
+    // 5. 移除原 Vuex 的 mapMutations 扩展（已替换为 Pinia 直接调用）
   }
 };
 if (!Array) {
@@ -97,7 +111,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     i: common_vendor.o((...args) => $options.reduce && $options.reduce(...args)),
     j: !$data.show
   }, !$data.show ? {
-    k: common_vendor.t(_ctx.getTempCount($props.item.id))
+    k: common_vendor.t($options.getTempCount($props.item.id))
   } : {}, {
     l: $data.show
   }, $data.show ? {

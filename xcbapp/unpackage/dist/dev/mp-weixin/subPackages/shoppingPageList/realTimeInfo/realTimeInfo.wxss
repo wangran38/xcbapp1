@@ -298,6 +298,7 @@
   color: #999;
 }
 .category-nav.data-v-ffc9b95d {
+  margin-top: 10rpx;
   white-space: nowrap;
   background: #fff;
   padding: 20rpx 0;

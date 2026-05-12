@@ -1,40 +1,46 @@
 <template>
 	<view class="container">
-			<view class="detail-panel">
-				<view class="panel-content" v-if="showDetail">
-					<image :src="product.detailImage || '/static/images/detail-placeholder.png'" mode="widthFix" class="detail-image"></image>
-					<view class="detail-text">
-						<view class="detail-section" v-for="(section, index) in (product.details || [])" :key="index">
-							<text class="detail-section-title">{{ section.title || '商品说明' }}</text>
-							<text class="detail-section-content">{{ section.content || '暂无详细描述' }}</text>
-						</view>
-					</view>
-				</view>
+		<!-- 农户信息卡片 -->
+		<view class="info-card">
+			<view class="card-title">
+				<uni-icons type="info" size="20" color="#3A7AFE" />
+				<text>农户信息</text>
 			</view>
-			<view class="info-card">
-				<view class="info-item">
-					<uni-icons type="person" size="18" color="#7A9D7E" />
-					<text class="label">农户名称：</text>
-					<text>{{ merchantInfo.farmersname }}</text>
-				</view>
-
-				<view class="info-item">
-					<uni-icons type="phone" size="18" color="#7A9D7E" />
-					<text class="label">联系电话：</text>
-					<text>{{ isLogin? merchantInfo.phone:hidePhone(merchantInfo.phone) }}</text>
-				</view>
-				
-				
-				
-
-				<view class="info-item">
-					<uni-icons type="location" size="18" color="#7A9D7E" />
-					<text class="label">所在地址：</text>
-					<text>{{ merchantInfo.address }}</text>
-				</view>
-				
+			
+			<view class="info-item">
+				<uni-icons type="person" size="18" color="#3A7AFE" />
+				<text class="label">农户名称：</text>
+				<text>{{ merchantInfo.farmersname }}</text>
 			</view>
-			<map :latitude="merchantInfo.lat" :longitude="merchantInfo.lng" style="width: 100%;" :markers="merchantInfo.markers"></map>
+
+			<view class="info-item">
+				<uni-icons type="phone" size="18" color="#3A7AFE" />
+				<text class="label">联系电话：</text>
+				<text>{{ isLogin? merchantInfo.phone:hidePhone(merchantInfo.phone) }}</text>
+			</view>
+
+			<view class="info-item">
+				<uni-icons type="location" size="18" color="#3A7AFE" />
+				<text class="label">所在地址：</text>
+				<text>{{ merchantInfo.address }}</text>
+			</view>
+		</view>
+
+		<!-- 地图 -->
+		<view class="map-container">
+<!-- 			<map :latitude="merchantInfo.lat" :longitude="merchantInfo.lng"
+			 style="width: 100%; height: 320rpx;" :markers="merchantInfo.markers"></map> -->
+		</view>
+
+		<!-- 菜园监控 功能入口 -->
+		<view class="monitor-card" @click="goToMonitor">
+			<view class="monitor-left">
+				<uni-icons type="video" size="24" color="#00C26E" />
+				<text class="monitor-title">菜园实时监控</text>
+				<text class="monitor-desc">在线观看种植现场</text>
+			</view>
+			<uni-icons type="arrowright" size="20" color="#999" />
+		</view>
 
 		<!-- 预售商品 -->
 		<view class="presale-section">
@@ -44,7 +50,6 @@
 			</view>
 
 			<view class="goods-grid">
-				
 				<view class="goods-item" v-for="(item, index) in presaleList" :key="item.id"
 					@click="gotoGoods(item.id)">
 					<view class="presale-tag">预售中</view>
@@ -54,20 +59,16 @@
 						<text class="goods-title">{{ item.goodsname }}</text>
 
 						<view class="price-row">
-							<text class="presale-price">¥{{ item.price   }}</text>
+							<text class="presale-price">¥{{ item.price }}</text>
 							<text class="original-price">¥{{ item.presaleprice }}</text>
 						</view>
 
 						<view class="progress-row">
 							<view class="progress-bar">
-								<progress
-									:percent="(	item.goodstotal > 0 ? Math.min((item.selltotal / item.goodstotal) * 100, 100) : 0)"
-									stroke-width="4" activeColor="green" />
+								<progress :percent="(item.goodstotal > 0 ? Math.min((item.selltotal / item.goodstotal) * 100, 100) : 0)"
+								 stroke-width="4" activeColor="#00C26E" />
 							</view>
 							<text class="sold-text">已售{{ item.selltotal }}/{{ item.goodstotal }}</text>
-							<view class="countdown" style="color: red; font-weight: bold;">
-								<text>已有0人参与预购</text>
-							</view>
 						</view>
 
 						<view class="countdown">
@@ -75,82 +76,82 @@
 							<text>剩余{{ getChineseTimeDiff(Date.now(),item.sellendtime) }}</text>
 						</view>
 
-
-						<view style="background-color: #007aff; text-align: center; border-radius: 5%;
-			padding: 10rpx; margin: 20rpx; color: white; font-weight: bold;" @click.stop="goToBuy(item)">立即预购</view>
+						<view class="buy-btn" @click.stop="goToBuy(item)">立即预购</view>
 					</view>
 				</view>
-				
-				
+
+				<!-- 空状态 -->
+				<view v-if="presaleList.length==0" class="empty">
+					<uni-icons type="folder" size="60" color="#ddd" />
+					<text>该农户暂未上传菜品</text>
+				</view>
 			</view>
-			<view v-if="presaleList.length==0" style="position: absolute;left: 35%; top: 70%; font-size: 30rpx;">该农户暂未上传菜品</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	import {
-		api
-	} from '@/api/index.js'
-	import {myMixin} from '@/utils/public.js'
+	import { api } from '@/api/index.js'
+	import { myMixin } from '@/utils/public.js'
 	export default {
-		mixins:[myMixin],
+		mixins: [myMixin],
 		data() {
 			return {
-				merchantInfo: {
-					// license: null,
-					// company: null,
-					// owner: null,
-					// contact: null,
-					// phone: null,
-					// businessHours: null,
-					// address: null,
-					// lat:null,
-					// lng:null,
-					// markers:[]
-				},
+				merchantInfo: {},
 				presaleList: [],
-				queryData: {
-					page: 1,
-					limit: 10
-				},
-				isLogin:true,
-				showDetail:false
+				queryData: { page: 1, limit: 10 },
+				isLogin: true,
+				showDetail: false
 			}
 		},
 
-		onLoad({query}) {
-			try{
+		onLoad({ query }) {
+			try {
 				this.merchantInfo = JSON.parse(query)
-				this.merchantInfo.lat = this.merchantInfo.lat-0.1
-				this.merchantInfo.markers = [{id:1,longitude:this.merchantInfo.lng,latitude:this.merchantInfo.lat,iconPath:'../../../static/selectlocation.png',width:30,height:30}]
-				
-				this.queryData.farmers_id= parseInt(this.merchantInfo.id)
+				this.merchantInfo.lat = this.merchantInfo.lat - 0.1
+				this.merchantInfo.markers = [{
+					id: 1,
+					longitude: this.merchantInfo.lng,
+					latitude: this.merchantInfo.lat,
+					iconPath: '../../../static/selectlocation.png',
+					width: 30,
+					height: 30
+				}]
+
+				this.queryData.farmers_id = parseInt(this.merchantInfo.id)
 				this.getPresaleData()
-				
+
 				const token = uni.getStorageSync('token');
-				if (!token){
+				if (!token) {
 					this.isLogin = false
 				}
-			}catch(e){
+			} catch (e) {
 				console.error(e)
 			}
-			
 		},
+		
 		methods: {
-			// 展开/收起商品详情
+			// 进入菜园监控页面
+			goToMonitor() {
+				uni.navigateTo({
+					url: `/subPackages/shoppingPageList/gardenMonitor/gardenMonitor?query=${JSON.stringify(this.merchantInfo)}`
+				})
+			},
+			
 			toggleDetail() {
 				this.showDetail = !this.showDetail
 			},
-			gotoGoods(id){
+			
+			gotoGoods(id) {
 				uni.navigateTo({
-					url:`/pages/dynamics/dynamics?id=${id}`
+					url: `/pages/dynamics/dynamics?id=${id}`
 				})
 			},
+			
 			async getPresaleData() {
 				let data = await api.presaleList(this.queryData);
-				if (data.code == 200){
-					this.presaleList = [...this.presaleList,...data.data.listdata]
+				if (data.code == 200) {
+					this.presaleList = [...this.presaleList, ...data.data.listdata]
 				}
 			},
 
@@ -166,107 +167,105 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.container {
-		background: #f8f9fa;
-		display: flex;
-		flex-direction: column;
-		height: 100vh;
-	}
-
-	.info-scroll {
-		flex: 1;
+		background: #f7f8fa;
+		min-height: 100vh;
 		padding: 20rpx;
+		box-sizing: border-box;
 	}
 
-	.license-card {
+	/* 农户信息卡片 */
+	.info-card {
 		background: #fff;
-		border-radius: 16rpx;
-		padding: 24rpx;
-		margin-bottom: 24rpx;
+		border-radius: 24rpx;
+		padding: 30rpx;
+		margin-bottom: 20rpx;
+		box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.05);
 
-		.section-title {
-			font-size: 32rpx;
+		.card-title {
+			display: flex;
+			align-items: center;
+			gap: 10rpx;
+			font-size: 30rpx;
+			font-weight: 600;
 			color: #333;
 			margin-bottom: 20rpx;
 		}
 
-		.license-image {
-			width: 100%;
-			border-radius: 8rpx;
-			margin-bottom: 20rpx;
-		}
-
-		.license-info {
-			font-size: 28rpx;
-			color: #666;
-			line-height: 1.6;
-		}
-	}
-
-	.info-card {
-		background: #fff;
-		border-radius: 16rpx;
-		padding: 24rpx;
-		margin-bottom: 24rpx;
-
 		.info-item {
 			display: flex;
 			align-items: center;
-			padding: 20rpx 0;
-			border-bottom: 1rpx solid #eee;
+			padding: 24rpx 0;
+			border-bottom: 1rpx solid #f2f3f5;
+			font-size: 28rpx;
+			color: #333;
 
 			&:last-child {
 				border: none;
 			}
 
 			.label {
-				color: #666;
 				margin: 0 16rpx;
+				color: #666;
 			}
 		}
 	}
 
-	.cert-section {
-		background: #fff;
-		border-radius: 16rpx;
-		padding: 24rpx;
-		display: flex;
-		justify-content: space-around;
+	/* 地图 */
+	.map-container {
+		border-radius: 24rpx;
+		overflow: hidden;
+		margin-bottom: 20rpx;
+		box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.05);
+	}
 
-		.cert-item {
+	/* 菜园监控入口 */
+	.monitor-card {
+		background: #fff;
+		border-radius: 24rpx;
+		padding: 30rpx;
+		margin-bottom: 20rpx;
+		box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.05);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		.monitor-left {
 			display: flex;
 			flex-direction: column;
-			align-items: center;
+			gap: 8rpx;
+		}
 
-			.cert-icon {
-				width: 80rpx;
-				height: 80rpx;
-				margin-bottom: 12rpx;
-			}
+		.monitor-title {
+			font-size: 30rpx;
+			font-weight: 600;
+			color: #333;
+		}
 
-			.cert-text {
-				font-size: 24rpx;
-				color: #666;
-			}
+		.monitor-desc {
+			font-size: 24rpx;
+			color: #999;
 		}
 	}
 
+	/* 预售商品 */
 	.presale-section {
 		background: #fff;
-		border-radius: 24rpx 24rpx 0 0;
-		padding: 24rpx;
-		box-shadow: 0 -4rpx 12rpx rgba(0, 0, 0, 0.05);
+		border-radius: 24rpx;
+		padding: 30rpx;
+		box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.05);
 
 		.section-header {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			margin-bottom: 24rpx;
+			margin-bottom: 30rpx;
 
 			.title {
-				font-size: 34rpx;
-				font-weight: bold;
+				font-size: 32rpx;
+				font-weight: 600;
+				color: #333;
 			}
 
 			.count {
@@ -278,80 +277,71 @@
 		.goods-grid {
 			display: grid;
 			grid-template-columns: repeat(2, 1fr);
-			gap: 20rpx;
+			gap: 24rpx;
 		}
 
 		.goods-item {
 			background: #fff;
-			border-radius: 12rpx;
+			border-radius: 16rpx;
 			overflow: hidden;
 			position: relative;
+			box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.06);
 
 			.presale-tag {
 				position: absolute;
 				top: 10rpx;
 				left: 10rpx;
-				background: #ff5a5f;
+				background: #00C26E;
 				color: #fff;
-				padding: 4rpx 16rpx;
+				padding: 6rpx 12rpx;
 				border-radius: 8rpx;
-				font-size: 24rpx;
+				font-size: 22rpx;
 				z-index: 2;
 			}
 
 			.goods-image {
 				width: 100%;
-				height: 300rpx;
+				height: 280rpx;
+				object-fit: cover;
 			}
 
 			.goods-info {
 				padding: 20rpx;
 
 				.goods-title {
-					font-size: 28rpx;
+					font-size: 26rpx;
 					color: #333;
 					line-height: 1.4;
+					height: 72rpx;
+					overflow: hidden;
 				}
 
 				.price-row {
-					margin: 16rpx 0;
+					margin: 12rpx 0;
 					display: flex;
 					align-items: baseline;
 
 					.presale-price {
-						color: #ff5a5f;
-						font-size: 34rpx;
+						color: #00C26E;
+						font-size: 30rpx;
 						font-weight: bold;
-						margin-right: 16rpx;
 					}
 
 					.original-price {
 						color: #999;
-						font-size: 24rpx;
+						font-size: 22rpx;
 						text-decoration: line-through;
+						margin-left: 8rpx;
 					}
 				}
 
 				.progress-row {
-					margin-bottom: 16rpx;
-
-					.progress-bar {
-						height: 8rpx;
-						background: #eee;
-						border-radius: 4rpx;
-						overflow: hidden;
-
-						.progress {
-							height: 100%;
-							background: #7A9D7E;
-							transition: width 0.3s;
-						}
-					}
+					margin-bottom: 12rpx;
 
 					.sold-text {
-						font-size: 24rpx;
+						font-size: 22rpx;
 						color: #666;
-						margin-top: 8rpx;
+						margin-top: 6rpx;
 					}
 				}
 
@@ -359,13 +349,31 @@
 					display: flex;
 					align-items: center;
 					color: #999;
-					font-size: 24rpx;
-
-					uni-icons {
-						margin-right: 8rpx;
-					}
+					font-size: 22rpx;
+					margin-bottom: 16rpx;
 				}
 			}
+		}
+
+		.buy-btn {
+			background-color: #3A7AFE;
+			text-align: center;
+			border-radius: 12rpx;
+			padding: 12rpx;
+			color: white;
+			font-weight: bold;
+			font-size: 26rpx;
+		}
+
+		.empty {
+			grid-column: 1/3;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 60rpx 0;
+			color: #999;
+			font-size: 26rpx;
+			gap: 16rpx;
 		}
 	}
 </style>

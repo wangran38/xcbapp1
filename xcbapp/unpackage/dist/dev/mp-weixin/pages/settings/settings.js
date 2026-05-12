@@ -12,9 +12,9 @@ const _sfc_main = {
       try {
         common_vendor.index.removeStorageSync("token");
         common_vendor.index.removeStorageSync("nickname");
-        common_vendor.index.__f__("log", "at pages/settings/settings.vue:72", "Token and nickname removed from storage");
+        common_vendor.index.__f__("log", "at pages/settings/settings.vue:76", "Token and nickname removed from storage");
       } catch (e) {
-        common_vendor.index.__f__("error", "at pages/settings/settings.vue:74", "Failed to remove token or nickname from storage", e);
+        common_vendor.index.__f__("error", "at pages/settings/settings.vue:78", "Failed to remove token or nickname from storage", e);
       }
       this.isLoggedIn = false;
       this.nickname = "";
@@ -30,7 +30,7 @@ const _sfc_main = {
         common_vendor.index.login({
           provider: "true",
           success: async (res) => {
-            common_vendor.index.__f__("log", "at pages/settings/settings.vue:93", res.code, "这是用户唯一标识");
+            common_vendor.index.__f__("log", "at pages/settings/settings.vue:97", res.code, "这是用户唯一标识");
             let data = await api_index.api.bindingOpenid({
               code: res.code
             });
@@ -101,14 +101,20 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       size: "18",
       color: "#999"
     }),
-    j: common_vendor.o(($event) => $options.navTo("/subPackages/settings/aboutUs/aboutUs")),
+    j: common_vendor.o(($event) => $options.navTo("/subPackages/settings/loGout/loGout")),
     k: common_vendor.p({
       type: "right",
       size: "18",
       color: "#999"
     }),
-    l: common_vendor.o(($event) => $options.navTo("/subPackages/settings/version/version")),
-    m: common_vendor.o((...args) => $options.logout && $options.logout(...args))
+    l: common_vendor.o(($event) => $options.navTo("/subPackages/settings/aboutUs/aboutUs")),
+    m: common_vendor.p({
+      type: "right",
+      size: "18",
+      color: "#999"
+    }),
+    n: common_vendor.o(($event) => $options.navTo("/subPackages/settings/version/version")),
+    o: common_vendor.o((...args) => $options.logout && $options.logout(...args))
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);

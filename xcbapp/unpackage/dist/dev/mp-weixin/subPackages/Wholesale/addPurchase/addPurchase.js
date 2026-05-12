@@ -193,23 +193,20 @@ const _sfc_main = {
 if (!Array) {
   const _easycom_uni_section2 = common_vendor.resolveComponent("uni-section");
   const _easycom_uni_easyinput2 = common_vendor.resolveComponent("uni-easyinput");
-  const _component_goods_picker = common_vendor.resolveComponent("goods-picker");
-  const _easycom_uni_popup2 = common_vendor.resolveComponent("uni-popup");
   const _easycom_uni_forms_item2 = common_vendor.resolveComponent("uni-forms-item");
   const _easycom_uni_data_select2 = common_vendor.resolveComponent("uni-data-select");
   const _easycom_uni_datetime_picker2 = common_vendor.resolveComponent("uni-datetime-picker");
   const _easycom_uni_forms2 = common_vendor.resolveComponent("uni-forms");
-  (_easycom_uni_section2 + _easycom_uni_easyinput2 + _component_goods_picker + _easycom_uni_popup2 + _easycom_uni_forms_item2 + _easycom_uni_data_select2 + _easycom_uni_datetime_picker2 + _easycom_uni_forms2)();
+  (_easycom_uni_section2 + _easycom_uni_easyinput2 + _easycom_uni_forms_item2 + _easycom_uni_data_select2 + _easycom_uni_datetime_picker2 + _easycom_uni_forms2)();
 }
 const _easycom_uni_section = () => "../../../uni_modules/uni-section/components/uni-section/uni-section.js";
 const _easycom_uni_easyinput = () => "../../../uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.js";
-const _easycom_uni_popup = () => "../../../uni_modules/uni-popup/components/uni-popup/uni-popup.js";
 const _easycom_uni_forms_item = () => "../../../uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.js";
 const _easycom_uni_data_select = () => "../../../uni_modules/uni-data-select/components/uni-data-select/uni-data-select.js";
 const _easycom_uni_datetime_picker = () => "../../../uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker.js";
 const _easycom_uni_forms = () => "../../../uni_modules/uni-forms/components/uni-forms/uni-forms.js";
 if (!Math) {
-  (_easycom_uni_section + _easycom_uni_easyinput + _easycom_uni_popup + _easycom_uni_forms_item + _easycom_uni_data_select + _easycom_uni_datetime_picker + _easycom_uni_forms)();
+  (_easycom_uni_section + _easycom_uni_easyinput + _easycom_uni_forms_item + _easycom_uni_data_select + _easycom_uni_datetime_picker + _easycom_uni_forms)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
@@ -223,81 +220,76 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       placeholder: "请输入商品名称",
       modelValue: $data.formData.infotitle
     }),
-    e: common_vendor.o(_ctx.handleGoodsSelect),
-    f: common_vendor.sr("goodsPopup", "c26dcea4-4,c26dcea4-2"),
-    g: common_vendor.p({
-      type: "dialog"
-    }),
-    h: common_vendor.p({
+    e: common_vendor.p({
       label: "商品名称",
       required: true,
       name: "infotitle"
     }),
-    i: common_vendor.o(common_vendor.m(($event) => $data.formData.infonumber = $event, {
+    f: common_vendor.o(common_vendor.m(($event) => $data.formData.infonumber = $event, {
       number: true
     }, true)),
-    j: common_vendor.p({
+    g: common_vendor.p({
       type: "number",
       placeholder: "请输入数量",
       modelValue: $data.formData.infonumber
     }),
-    k: common_vendor.o(($event) => $data.formData.unit = $event),
-    l: common_vendor.p({
+    h: common_vendor.o(($event) => $data.formData.unit = $event),
+    i: common_vendor.p({
       localdata: $data.units,
       placeholder: "单位",
       modelValue: $data.formData.unit
     }),
-    m: common_vendor.p({
+    j: common_vendor.p({
       label: "采购量",
       required: true,
       name: "quantity"
     }),
-    n: common_vendor.o(($event) => $data.formData.content = $event),
-    o: common_vendor.p({
+    k: common_vendor.o(($event) => $data.formData.content = $event),
+    l: common_vendor.p({
       type: "textarea",
       placeholder: "请输入规格、材质等要求",
       maxlength: 500,
       modelValue: $data.formData.content
     }),
-    p: common_vendor.p({
+    m: common_vendor.p({
       label: "采购要求",
       name: "requirements"
     }),
-    q: common_vendor.t($data.multiArray[0][$data.multiIndex[0]]),
-    r: common_vendor.t($data.multiArray[1][$data.multiIndex[1]]),
-    s: common_vendor.t($data.selectedCountry === "overseas" ? "" : $data.multiArray[2][$data.multiIndex[2]]),
-    t: $data.multiArray,
-    v: $data.multiIndex,
-    w: common_vendor.o((...args) => $options.bindMultiPickerChange && $options.bindMultiPickerChange(...args)),
-    x: common_vendor.o((...args) => $options.bindMultiPickerColumnChange && $options.bindMultiPickerColumnChange(...args)),
-    y: common_vendor.p({
+    n: common_vendor.t($data.multiArray[0][$data.multiIndex[0]]),
+    o: common_vendor.t($data.multiArray[1][$data.multiIndex[1]]),
+    p: common_vendor.t($data.selectedCountry === "overseas" ? "" : $data.multiArray[2][$data.multiIndex[2]]),
+    q: $data.multiArray,
+    r: $data.multiIndex,
+    s: common_vendor.o((...args) => $options.bindMultiPickerChange && $options.bindMultiPickerChange(...args)),
+    t: common_vendor.o((...args) => $options.bindMultiPickerColumnChange && $options.bindMultiPickerColumnChange(...args)),
+    v: common_vendor.p({
       label: "收货地址",
       required: true,
       name: "deliveryAddress"
     }),
-    z: common_vendor.o(($event) => $data.formData.byaddress = $event),
-    A: common_vendor.p({
+    w: common_vendor.o(($event) => $data.formData.byaddress = $event),
+    x: common_vendor.p({
       placeholder: "请输入详细地址",
       modelValue: $data.formData.byaddress
     }),
-    B: common_vendor.p({
+    y: common_vendor.p({
       label: "详细地址",
       name: "byaddress"
     }),
-    C: common_vendor.o(($event) => $data.formData.stoptime = $event),
-    D: common_vendor.p({
+    z: common_vendor.o(($event) => $data.formData.stoptime = $event),
+    A: common_vendor.p({
       type: "date",
       start: $data.today,
       ["return-type"]: "timestamp",
       modelValue: $data.formData.stoptime
     }),
-    E: common_vendor.p({
+    B: common_vendor.p({
       label: "报价截止",
       required: true,
       name: "stoptime"
     }),
-    F: common_vendor.o((...args) => $options.submitForm && $options.submitForm(...args)),
-    G: common_vendor.sr("form", "c26dcea4-0")
+    C: common_vendor.o((...args) => $options.submitForm && $options.submitForm(...args)),
+    D: common_vendor.sr("form", "c26dcea4-0")
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-c26dcea4"]]);

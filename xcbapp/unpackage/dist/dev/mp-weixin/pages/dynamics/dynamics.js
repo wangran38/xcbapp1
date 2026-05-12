@@ -38,6 +38,7 @@ const _sfc_main = {
     },
     async getData() {
       let data = await api_index.api.dynamicsDataList(this.queryData);
+      common_vendor.index.__f__("log", "at pages/dynamics/dynamics.vue:104", "种养朋友圈数据", data);
       if (data.code == 200) {
         let newList = data.data.listdata.map((item) => {
           if (!item["imgs"])
